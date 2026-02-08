@@ -1,0 +1,198 @@
+.terminal-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background-color: var(--header-bg);
+  border-bottom: 1px solid var(--border-color);
+  user-select: none;
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-button.close {
+  background-color: #ff5f56;
+}
+
+.terminal-button.minimize {
+  background-color: #ffbd2e;
+}
+
+.terminal-button.maximize {
+  background-color: #27c93f;
+}
+
+.terminal-buttons-placeholder {
+  width: 52px;
+}
+
+.terminal-title {
+  color: var(--text-color);
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.terminal-body {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  cursor: text;
+}
+
+.terminal-line {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+  word-break: break-word;
+}
+
+.terminal-line.output {
+  white-space: pre-wrap;
+}
+
+.prompt {
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.prompt .user {
+  color: var(--success-color);
+}
+
+.prompt .at {
+  color: var(--text-color);
+}
+
+.prompt .host {
+  color: var(--prompt-color);
+}
+
+.prompt .colon {
+  color: var(--text-color);
+}
+
+.prompt .path {
+  color: var(--accent-color);
+}
+
+.prompt .dollar {
+  color: var(--text-color);
+  margin-left: 4px;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.input-line {
+  display: flex;
+  align-items: center;
+}
+
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: inherit;
+  caret-color: var(--success-color);
+}
+
+/* Output styling */
+.content .highlight {
+  color: var(--success-color);
+}
+
+.content .accent {
+  color: var(--accent-color);
+}
+
+.content .warning {
+  color: var(--warning-color);
+}
+
+.content .error {
+  color: var(--error-color);
+}
+
+.content .link {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.content .link:hover {
+  text-decoration: underline;
+}
+
+.content .dim {
+  opacity: 0.6;
+}
+
+.content .bold {
+  font-weight: 700;
+}
+
+/* ASCII art */
+.ascii-art {
+  color: var(--success-color);
+  line-height: 1.2;
+}
+
+/* Section headers */
+.section-header {
+  color: var(--accent-color);
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+/* Skill bars */
+.skill-bar {
+  display: inline-block;
+}
+
+.skill-bar .filled {
+  color: var(--success-color);
+}
+
+.skill-bar .empty {
+  color: var(--border-color);
+}
+
+/* Project cards */
+.project-item {
+  margin-bottom: 12px;
+  padding-left: 16px;
+  border-left: 2px solid var(--border-color);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .terminal-body {
+    padding: 12px;
+    font-size: 12px;
+  }
+
+  .terminal-header {
+    padding: 6px 10px;
+  }
+}
