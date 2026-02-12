@@ -201,6 +201,9 @@ export function executeCommand(input: string): string {
 
     case 'hello':
     case 'hi':
+      if (args.length > 0 && args[0].toLowerCase() === 'world') {
+        return `__EASTER_EGG_HELLO_WORLD__`
+      }
       return `  <span class="highlight">Hello! 👋</span> Welcome to my portfolio. Type 'help' for commands.`
 
     case '':

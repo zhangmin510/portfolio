@@ -185,6 +185,12 @@
   border-left: 2px solid var(--border-color);
 }
 
+/* Hello World easter egg */
+.hello-world-art {
+  color: var(--accent-color);
+  text-shadow: 0 0 8px rgba(188, 140, 255, 0.4);
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   .terminal-body {
