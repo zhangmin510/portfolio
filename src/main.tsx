@@ -5,7 +5,7 @@ import './styles/index.css'
 
 // Console Easter Egg
 const consoleStyles = {
-  logo: 'font-size: 12px; font-family: monospace; font-weight: bold;',
+  logo: "font-size: 12px; font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, 'Courier New', monospace; font-weight: bold;",
   title: 'font-size: 20px; font-weight: bold; color: #58a6ff;',
   subtitle: 'font-size: 14px; color: #8b949e;',
   highlight: 'font-size: 12px; color: #7ee787;',

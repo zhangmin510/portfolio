@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, KeyboardEvent } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { executeCommand, getWelcomeMessage } from '../commands'
 import { HistoryItem } from '../types'
 import './Terminal.css'
@@ -70,25 +70,58 @@ export default function Terminal() {
   ])
   const [input, setInput] = useState('')
   const [commandHistory, setCommandHistory] = useState<string[]>([])
-  const [historyIndex, setHistoryIndex] = useState(-1)
+  const [, setHistoryIndex] = useState(-1)
   const inputRef = useRef<HTMLInputElement>(null)
   const terminalRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const el = inputRef.current
-    if (!el) return
-    el.focus()
-    const focusInput = () => {
-      if (document.activeElement !== el) {
-        el.focus()
+    const handleGlobalKeyDown = (e: globalThis.KeyboardEvent) => {
+      if (e.metaKey || e.altKey) return
+      playKeySound()
+      if (e.key === 'Enter') {
+        handleSubmitRef.current()
+      } else if (e.key === 'Backspace') {
+        e.preventDefault()
+        setInput(prev => prev.slice(0, -1))
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault()
+        const cmds = commandHistoryRef.current
+        if (cmds.length > 0) {
+          setHistoryIndex(prev => {
+            const next = prev < cmds.length - 1 ? prev + 1 : prev
+            setInput(cmds[cmds.length - 1 - next] || '')
+            return next
+          })
+        }
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault()
+        setHistoryIndex(prev => {
+          if (prev > 0) {
+            const next = prev - 1
+            setInput(commandHistoryRef.current[commandHistoryRef.current.length - 1 - next] || '')
+            return next
+          } else if (prev === 0) {
+            setInput('')
+            return -1
+          }
+          return prev
+        })
+      } else if (e.key === 'Tab') {
+        e.preventDefault()
+        const commands = ['help', 'about', 'skills', 'projects', 'contact', 'clear', 'echo', 'whoami', 'date', 'neofetch']
+        setInput(prev => {
+          const matches = commands.filter(cmd => cmd.startsWith(prev.toLowerCase()))
+          return matches.length === 1 ? matches[0] : prev
+        })
+      } else if (e.key === 'l' && e.ctrlKey) {
+        e.preventDefault()
+        setHistory([])
+      } else if (e.key.length === 1 && !e.ctrlKey) {
+        setInput(prev => prev + e.key)
       }
     }
-    document.addEventListener('keydown', focusInput, true)
-    document.addEventListener('click', focusInput, true)
-    return () => {
-      document.removeEventListener('keydown', focusInput, true)
-      document.removeEventListener('click', focusInput, true)
-    }
+    window.addEventListener('keydown', handleGlobalKeyDown)
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown)
   }, [])
 
   useEffect(() => {
@@ -201,40 +234,11 @@ export default function Terminal() {
     setInput('')
   }
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    playKeySound()
-    if (e.key === 'Enter') {
-      handleSubmit()
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      if (commandHistory.length > 0) {
-        const newIndex = historyIndex < commandHistory.length - 1 ? historyIndex + 1 : historyIndex
-        setHistoryIndex(newIndex)
-        setInput(commandHistory[commandHistory.length - 1 - newIndex] || '')
-      }
-    } else if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      if (historyIndex > 0) {
-        const newIndex = historyIndex - 1
-        setHistoryIndex(newIndex)
-        setInput(commandHistory[commandHistory.length - 1 - newIndex] || '')
-      } else if (historyIndex === 0) {
-        setHistoryIndex(-1)
-        setInput('')
-      }
-    } else if (e.key === 'Tab') {
-      e.preventDefault()
-      // Simple tab completion
-      const commands = ['help', 'about', 'skills', 'projects', 'contact', 'clear', 'echo', 'whoami', 'date', 'neofetch']
-      const matches = commands.filter(cmd => cmd.startsWith(input.toLowerCase()))
-      if (matches.length === 1) {
-        setInput(matches[0])
-      }
-    } else if (e.key === 'l' && e.ctrlKey) {
-      e.preventDefault()
-      setHistory([])
-    }
-  }
+  const handleSubmitRef = useRef(handleSubmit)
+  handleSubmitRef.current = handleSubmit
+
+  const commandHistoryRef = useRef(commandHistory)
+  commandHistoryRef.current = commandHistory
 
   const focusInput = () => {
     inputRef.current?.focus()
@@ -289,11 +293,8 @@ export default function Terminal() {
               type="text"
               className="terminal-input"
               value={input}
-              onChange={e => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              spellCheck={false}
-              autoComplete="off"
-              autoFocus
+              readOnly
+              tabIndex={-1}
             />
           </div>
         </div>
