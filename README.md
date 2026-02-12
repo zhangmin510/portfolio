@@ -35,7 +35,38 @@ npm run dev
 
 # 构建生产版本
 npm run build
+
+# 预览生产构建
+npm run preview
 ```
+
+## 部署
+
+### Vercel 部署
+
+项目已配置 Vercel，支持一键部署：
+
+```bash
+# 安装 Vercel CLI（首次使用）
+npm i -g vercel
+
+# 部署到预览环境
+vercel
+
+# 部署到生产环境
+vercel --prod
+```
+
+或者直接推送代码到 Git 仓库，在 Vercel 控制台关联仓库后，每次推送会自动部署。
+
+**生产环境地址：** https://learn-iota-two.vercel.app
+
+### 其他平台
+
+项目构建产物在 `dist` 目录，可部署到任何静态托管平台：
+- Netlify：构建命令 `npm run build`，发布目录 `dist`
+- GitHub Pages：使用 `vite build` 构建后推送 `dist` 目录到 `gh-pages` 分支
+- 自建服务器：将 `dist` 目录内容部署到 Web 服务器
 
 ## 自定义内容
 
