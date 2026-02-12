@@ -75,7 +75,20 @@ export default function Terminal() {
   const terminalRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    inputRef.current?.focus()
+    const el = inputRef.current
+    if (!el) return
+    el.focus()
+    const focusInput = () => {
+      if (document.activeElement !== el) {
+        el.focus()
+      }
+    }
+    document.addEventListener('keydown', focusInput, true)
+    document.addEventListener('click', focusInput, true)
+    return () => {
+      document.removeEventListener('keydown', focusInput, true)
+      document.removeEventListener('click', focusInput, true)
+    }
   }, [])
 
   useEffect(() => {
@@ -266,16 +279,23 @@ export default function Terminal() {
             <span className="path">~</span>
             <span className="dollar">$</span>
           </span>
-          <input
-            ref={inputRef}
-            type="text"
-            className="terminal-input"
-            value={input}
-            onChange={e => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            spellCheck={false}
-            autoComplete="off"
-          />
+          <div className="input-area">
+            <span className="input-display">
+              <span className="input-text">{input}</span>
+              <span className="terminal-cursor" />
+            </span>
+            <input
+              ref={inputRef}
+              type="text"
+              className="terminal-input"
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              spellCheck={false}
+              autoComplete="off"
+              autoFocus
+            />
+          </div>
         </div>
       </div>
     </div>
