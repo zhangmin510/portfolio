@@ -1,0 +1,107 @@
+.input-visualizer {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 1000;
+  opacity: 0.35;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+}
+
+/* ── Keyboard ── */
+
+.iv-keyboard {
+  --key-unit: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.iv-row {
+  display: flex;
+  gap: 2px;
+}
+
+.iv-key {
+  width: calc(var(--key-width) * var(--key-unit));
+  height: var(--key-unit);
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  background: var(--header-bg);
+  color: var(--text-color);
+  font-size: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.05s, box-shadow 0.05s;
+  user-select: none;
+}
+
+.iv-key.active {
+  background: var(--success-color);
+  color: var(--bg-color);
+  box-shadow: 0 0 6px var(--success-color);
+}
+
+/* ── Mouse ── */
+
+.iv-mouse {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 48px;
+}
+
+.iv-mouse-buttons {
+  display: flex;
+  gap: 1px;
+  width: 100%;
+}
+
+.iv-mouse-btn {
+  height: 24px;
+  border: 1px solid var(--border-color);
+  background: var(--header-bg);
+  transition: background 0.05s, box-shadow 0.05s;
+}
+
+.iv-mouse-btn.left {
+  flex: 1;
+  border-radius: 8px 0 0 0;
+}
+
+.iv-mouse-btn.middle {
+  width: 10px;
+  border-radius: 0;
+}
+
+.iv-mouse-btn.right {
+  flex: 1;
+  border-radius: 0 8px 0 0;
+}
+
+.iv-mouse-btn.active {
+  background: var(--success-color);
+  box-shadow: 0 0 6px var(--success-color);
+}
+
+.iv-mouse-body {
+  width: 48px;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  border-top: none;
+  border-radius: 0 0 16px 16px;
+  background: var(--header-bg);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 600px) {
+  .input-visualizer {
+    display: none;
+  }
+}
