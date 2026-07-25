@@ -4,6 +4,9 @@ node_modules/
 # Build output
 dist/
 
+# Cloudflare local state
+.wrangler/
+
 # OS files
 .DS_Store
 
