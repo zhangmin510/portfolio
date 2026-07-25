@@ -99,6 +99,11 @@ const CONTACT = `
 
 const YEARLY_KEYWORDS = [
   { year: 2026, keywords: '认知 Agent MVP' },
+  { year: 2025, keywords: '沟通 成长 Agent' },
+  { year: 2024, keywords: '真行 传承 节奏' },
+  { year: 2022, keywords: '家 突破 而立' },
+  { year: 2021, keywords: '家 做时间的朋友 而立' },
+  { year: 2020, keywords: '家 7 而立' },
 ]
 
 const KEYWORDS = `
