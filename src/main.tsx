@@ -22,7 +22,7 @@ console.log(`
 `, consoleStyles.logo)
 
 console.log('%c👋 你好，我是 ZhangMin.name', consoleStyles.title)
-console.log('%c行胜于言 · Software Developer · AI Native Builder', consoleStyles.subtitle)
+console.log('%c勤思敏行，思行合一。· AI Engineer', consoleStyles.subtitle)
 console.log('')
 console.log('%c💡 可用命令: about, skills, projects, keyword, contact, help', consoleStyles.highlight)
 console.log('%c🔗 GitHub: https://github.com/zhangmin510', consoleStyles.link)

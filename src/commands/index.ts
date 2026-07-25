@@ -12,10 +12,10 @@ const NEOFETCH = `
 <span class="ascii-art">        .--.        </span>   <span class="highlight">zhangmin</span>@<span class="accent">portfolio</span>
 <span class="ascii-art">       |o_o |       </span>   ─────────────────
 <span class="ascii-art">       |:_/ |       </span>   <span class="highlight">Name:</span> ZhangMin.name
-<span class="ascii-art">      //   \\ \\      </span>   <span class="highlight">Role:</span> Software Developer
+<span class="ascii-art">      //   \\ \\      </span>   <span class="highlight">Role:</span> AI Engineer
 <span class="ascii-art">     (|     | )     </span>   <span class="highlight">Location:</span> Hangzhou
-<span class="ascii-art">    /'\\_   _/\`\\     </span>   <span class="highlight">Focus:</span> AI Native / LLM Evaluation
-<span class="ascii-art">    \\___)=(___/     </span>   <span class="highlight">Stack:</span> Go / Java / TypeScript / Swift
+<span class="ascii-art">    /'\\_   _/\`\\     </span>   <span class="highlight">Focus:</span> AI Application Evaluation
+<span class="ascii-art">    \\___)=(___/     </span>   <span class="highlight">Stack:</span> Java / TypeScript / Swift / Node.js
                        <span class="highlight">Motto:</span> 行胜于言
                        <span class="highlight">GitHub:</span> zhangmin510
                        <span class="highlight">Viewport:</span> ${window.innerWidth}x${window.innerHeight}
@@ -26,15 +26,15 @@ const ABOUT = `
 
   你好，我是 <span class="highlight">ZhangMin.name</span>。
 
-  🧑‍💻 软件开发者 / Software Developer
+  🧑‍💻 AI 工程师 / AI Engineer
   📍 杭州 / Hangzhou
-  🎯 大模型评测 · AI Native 工作流 · 后端与分布式系统
+  🎯 AI 应用评测 · AI Native 工作流 · 分布式系统开发
 
   我关注如何把认知、规范与工具沉淀为可执行的工作流，
   也持续通过开源项目，把想法做成真正可用的产品和 MVP。
 
-  I build practical software across AI-native workflows,
-  backend systems, developer tools, and product experiments.
+  I build practical AI systems, evaluation workflows,
+  agent tooling, and distributed system applications.
 
   <span class="dim">“行胜于言” / Actions speak louder than words.</span>
 `
@@ -43,19 +43,12 @@ const SKILLS = `
 <span class="section-header">能力方向 / Focus & Stack</span>
 
   <span class="accent">AI & Agent</span>
-    大模型评测 · AI Native Workflow · Agent · MCP
+    AI 应用评测 · AI Native Workflow · Agent · MCP
     Spec-Driven Development · 持久化上下文 · 可编排行动
 
   <span class="accent">Backend & Systems</span>
-    Go · Java · Node.js / NestJS
-    分布式系统 · 微服务 · IoT / OSGi · GitHub API
-
-  <span class="accent">Product & Client</span>
-    TypeScript · React · Taro · Electron · Swift / macOS
-    从原型验证到可运行 MVP
-
-  <span class="accent">Engineering</span>
-    Cloud & DevOps · 测试驱动开发 · 开源协作 · 知识分享
+    Java · TypeScript · Swift · Node.js
+    分布式系统开发 · 微服务 · IoT / OSGi · GitHub API
 
   <span class="dim">不使用虚构的技能百分比；这里展示的是持续实践的方向。</span>
 `
@@ -68,27 +61,17 @@ const PROJECTS = `
       <span class="accent">Tech:</span> Swift 6 · macOS 15 · Calendar
       <a class="link" href="https://github.com/zhangmin510/MeetingCopter" target="_blank" rel="noopener noreferrer">→ github.com/zhangmin510/MeetingCopter</a>
 
-  <span class="highlight">02.</span> <span class="bold">AutismScreener</span>
-      <span class="dim">面向儿童自闭症筛查的前后端一体化助手</span>
-      <span class="accent">Tech:</span> TypeScript · Taro · React · NestJS · Drizzle
-      <a class="link" href="https://github.com/zhangmin510/AutismScreener" target="_blank" rel="noopener noreferrer">→ github.com/zhangmin510/AutismScreener</a>
-
-  <span class="highlight">03.</span> <span class="bold">issue2md</span>
-      <span class="dim">将 GitHub Issues、PR 与 Discussions 转为带元数据的 Markdown</span>
-      <span class="accent">Tech:</span> Go · GitHub API · CLI · TDD
-      <a class="link" href="https://github.com/zhangmin510/my-issue2md-project" target="_blank" rel="noopener noreferrer">→ github.com/zhangmin510/my-issue2md-project</a>
-
-  <span class="highlight">04.</span> <span class="bold">AI Native Workflow</span>
+  <span class="highlight">02.</span> <span class="bold">AI Native Workflow</span>
       <span class="dim">围绕可执行规范、持久化上下文与可编排行动的工作流实践</span>
       <span class="accent">Focus:</span> Specs · Agent · MCP · Context Engineering
       <a class="link" href="https://github.com/zhangmin510/ai-workflow" target="_blank" rel="noopener noreferrer">→ github.com/zhangmin510/ai-workflow</a>
 
-  <span class="highlight">05.</span> <span class="bold">IoTGW</span>
+  <span class="highlight">03.</span> <span class="bold">IoTGW</span>
       <span class="dim">物联网应用网关原型：设备接入、应用管理与感知数据过滤</span>
       <span class="accent">Tech:</span> Java · OSGi · IoT
       <a class="link" href="https://github.com/zhangmin510/IoTGW" target="_blank" rel="noopener noreferrer">→ github.com/zhangmin510/IoTGW</a>
 
-  <span class="highlight">06.</span> <span class="bold">Fabric Console</span>
+  <span class="highlight">04.</span> <span class="bold">Fabric Console</span>
       <span class="dim">跨平台的轻量级 Hyperledger Fabric 桌面客户端</span>
       <span class="accent">Tech:</span> Electron · Node.js · Hyperledger Fabric
       <a class="link" href="https://github.com/zhangmin510/fabric-console" target="_blank" rel="noopener noreferrer">→ github.com/zhangmin510/fabric-console</a>
@@ -142,7 +125,7 @@ const HELP = `
 export function getWelcomeMessage(): string {
   return `${ASCII_LOGO}
   欢迎来到 <span class="highlight">ZhangMin.name</span> 的终端主页。
-  Software developer · AI-native builder · Open-source learner.
+  AI engineer · AI-native builder · Distributed systems practitioner.
 
   输入 <span class="highlight">help</span> 查看可用命令。
   Type <span class="highlight">help</span> to see available commands.
