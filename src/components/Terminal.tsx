@@ -256,7 +256,7 @@ export default function Terminal() {
           <span className="terminal-button minimize"></span>
           <span className="terminal-button maximize"></span>
         </div>
-        <div className="terminal-title">zhangmin.name@:~</div>
+        <div className="terminal-title">guest@zhangmin.name:~</div>
         <div className="terminal-buttons-placeholder"></div>
       </div>
       <div className="terminal-body" ref={terminalRef} onClick={focusInput}>
@@ -264,8 +264,9 @@ export default function Terminal() {
           <div key={index} className={`terminal-line ${item.type}`}>
             {item.type === 'command' && (
               <span className="prompt">
-                <span className="user">zhangmin.name</span>
+                <span className="user">guest</span>
                 <span className="at">@</span>
+                <span className="host">zhangmin.name</span>
                 <span className="colon">:</span>
                 <span className="path">~</span>
                 <span className="dollar">$</span>
@@ -279,8 +280,9 @@ export default function Terminal() {
         ))}
         <div className="terminal-line input-line">
           <span className="prompt">
-            <span className="user">zhangmin.name</span>
+            <span className="user">guest</span>
             <span className="at">@</span>
+            <span className="host">zhangmin.name</span>
             <span className="colon">:</span>
             <span className="path">~</span>
             <span className="dollar">$</span>

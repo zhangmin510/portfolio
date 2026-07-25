@@ -7,7 +7,7 @@ const BRAND_ART = `
 </span>`
 
 const NEOFETCH = `
-<span class="ascii-art">        .--.        </span>   <span class="highlight">zhangmin.name</span>@
+<span class="ascii-art">        .--.        </span>   <span class="highlight">guest</span>@<span class="accent">zhangmin.name</span>
 <span class="ascii-art">       |o_o |       </span>   ─────────────────
 <span class="ascii-art">       |:_/ |       </span>   <span class="highlight">Name:</span> ZhangMin.name
 <span class="ascii-art">      //   \\ \\      </span>   <span class="highlight">Role:</span> AI Engineer
@@ -35,6 +35,10 @@ const ABOUT = `
   agent tooling, and distributed system applications.
 
   <span class="dim">“行胜于言” / Actions speak louder than words.</span>
+`
+
+const WHOAMI = `
+  <span class="highlight">guest</span> <span class="dim">— visitor of ZhangMin.name</span>
 `
 
 const SKILLS = `
@@ -138,8 +142,10 @@ export function executeCommand(input: string): string {
       return HELP
 
     case 'about':
-    case 'whoami':
       return ABOUT
+
+    case 'whoami':
+      return WHOAMI
 
     case 'skills':
     case 'tech':
@@ -192,7 +198,7 @@ export function executeCommand(input: string): string {
       return `  <span class="warning">Permission denied: Cannot navigate away from ZhangMin.name</span>`
 
     case 'sudo':
-      return `  <span class="error">[sudo] password for zhangmin: Nice try! 😉</span>`
+      return `  <span class="error">[sudo] password for guest: Nice try! 😉</span>`
 
     case 'exit':
     case 'quit':
