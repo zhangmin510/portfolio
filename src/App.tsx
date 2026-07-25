@@ -1,13 +1,7 @@
 import Terminal from './components/Terminal'
-import InputVisualizer from './components/InputVisualizer'
 
 function App() {
-  return (
-    <>
-      <Terminal />
-      <InputVisualizer />
-    </>
-  )
+  return <Terminal />
 }
 
 export default App

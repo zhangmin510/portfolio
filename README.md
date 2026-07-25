@@ -15,14 +15,17 @@
 
 ## 功能特性
 
-- 命令行交互界面，页面加载后自动聚焦，直接输入即可
+- 语义化、可预渲染的个人介绍、代表项目与联系入口
+- 真实表单驱动的命令行交互，兼容键盘、触屏与屏幕阅读器
 - 命令历史 (↑/↓ 键)
 - Tab 自动补全
 - 支持多种命令：`about`、`skills`、`projects`、`contact`、`neofetch` 等
-- 机械键盘按键音效（Web Audio API）
+- 可关闭并记忆偏好的机械键盘按键音效（Web Audio API）
 - `hello world` 彩蛋：ASCII Art 逐行打字动画
-- 右下角半透明虚拟键盘 & 鼠标可视化，实时响应物理输入
-- 自定义块状闪烁光标，跟随输入内容移动
+- 可选的键盘 & 鼠标可视化，仅在精细指针桌面设备挂载
+- 支持 `prefers-reduced-motion`
+- 完整的 Open Graph、JSON-LD、robots、sitemap 与静态 404
+- CSP、安全响应头和哈希资源长期缓存
 
 ## 快速开始
 
@@ -35,6 +38,9 @@ npm run dev
 
 # 构建生产版本
 npm run build
+
+# 运行单元测试、类型检查与生产构建
+npm run check
 
 # 预览生产构建
 npm run preview
@@ -54,9 +60,8 @@ npm run preview:cloudflare
 - Node.js：`22.16.0`
 - Worker 名称：`terminal-portfolio`
 
-`wrangler.jsonc` 中的 `assets.directory` 指向 `dist`，
-`not_found_handling` 设置为 `single-page-application`。因此没有匹配到
-静态文件的页面请求会回退到 `index.html`，不需要额外的 `_redirects`。
+`wrangler.jsonc` 中的 Worker 为静态资源补充安全头与缓存策略。
+不存在的路径返回带自定义页面的真实 `404`，避免产生 soft 404。
 
 #### 方式一：连接 Git 仓库自动部署
 
@@ -102,18 +107,17 @@ npx vercel --prod
 
 ## 自定义内容
 
-编辑 `src/commands/index.ts` 中的常量来自定义个人信息：
-
-- `ABOUT` - 个人介绍
-- `SKILLS` - 技术栈
-- `PROJECTS` - 项目经历
-- `CONTACT` - 联系方式
+个人信息、能力方向和项目数据统一维护在
+`src/data/portfolio.ts`。命令名称、别名、帮助文本与快捷入口统一维护在
+`src/commands/index.ts`，避免多处定义产生偏差。
 
 ## 技术栈
 
 - React 18
 - TypeScript
-- Vite
+- Vite 8
+- Vitest
+- Cloudflare Workers Static Assets
 
 ## License
 

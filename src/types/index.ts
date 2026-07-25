@@ -1,10 +1,13 @@
-export interface HistoryItem {
-  type: 'command' | 'output'
-  content: string
-}
+import type { CommandResult } from '../commands'
 
-export interface Command {
-  name: string
-  description: string
-  execute: (args: string[]) => string
-}
+export type HistoryItem =
+  | {
+      id: number
+      type: 'command'
+      content: string
+    }
+  | {
+      id: number
+      type: 'output'
+      result: CommandResult
+    }

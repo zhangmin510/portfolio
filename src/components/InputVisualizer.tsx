@@ -82,7 +82,7 @@ export default function InputVisualizer() {
     codes.some(code => pressedKeys.has(code))
 
   return (
-    <div className="input-visualizer">
+    <div className="input-visualizer" aria-hidden="true">
       {/* Keyboard */}
       <div className="iv-keyboard">
         {KEYBOARD_LAYOUT.map((row, ri) => (

@@ -1,21 +1,28 @@
 .input-visualizer {
   position: fixed;
-  bottom: 16px;
-  right: 16px;
-  z-index: 1000;
-  opacity: 0.35;
+  right: 20px;
+  bottom: 20px;
+  z-index: 30;
+  padding: 10px;
+  opacity: 0.72;
   pointer-events: none;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 12px;
-  font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+  gap: 8px;
+  font-family:
+    ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
+  background: rgba(13, 17, 23, 0.82);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
 }
 
 /* ── Keyboard ── */
 
 .iv-keyboard {
-  --key-unit: 24px;
+  --key-unit: 20px;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -32,7 +39,7 @@
   border: 1px solid var(--border-color);
   border-radius: 3px;
   background: var(--header-bg);
-  color: var(--text-color);
+  color: #d6dde6;
   font-size: 7px;
   display: flex;
   align-items: center;
@@ -53,7 +60,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 48px;
+  width: 42px;
 }
 
 .iv-mouse-buttons {
@@ -63,7 +70,7 @@
 }
 
 .iv-mouse-btn {
-  height: 24px;
+  height: 20px;
   border: 1px solid var(--border-color);
   background: var(--header-bg);
   transition: background 0.05s, box-shadow 0.05s;
@@ -90,8 +97,8 @@
 }
 
 .iv-mouse-body {
-  width: 48px;
-  height: 40px;
+  width: 42px;
+  height: 34px;
   border: 1px solid var(--border-color);
   border-top: none;
   border-radius: 0 0 16px 16px;
@@ -100,7 +107,7 @@
 
 /* ── Responsive ── */
 
-@media (max-width: 600px) {
+@media (max-width: 1099px), (hover: none), (pointer: coarse) {
   .input-visualizer {
     display: none;
   }

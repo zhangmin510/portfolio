@@ -1,0 +1,33 @@
+:root {
+  color-scheme: dark;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: #0d1117;
+  color: #d6dde6;
+}
+
+body {
+  display: grid;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  place-items: center;
+}
+
+main {
+  width: min(86vw, 620px);
+  padding: 28px;
+  border: 1px solid #303b47;
+  border-radius: 14px;
+  background: #111821;
+}
+
+h1,
+a {
+  color: #79c0ff;
+}
+
+a {
+  display: inline-block;
+  min-height: 44px;
+  margin-top: 8px;
+}
