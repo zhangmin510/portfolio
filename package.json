@@ -1,11 +1,11 @@
 {
   "name": "terminal-portfolio",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "build": "node scripts/clean-build.mjs && tsc && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "build:sites": "npm run build && node scripts/prepare-sites-build.mjs",
     "test": "vitest run",
     "check": "npm run test && npm run build",

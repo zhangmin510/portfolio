@@ -1,6 +1,6 @@
 import { readFile, rm, writeFile } from 'node:fs/promises'
 
-const distIndexUrl = new URL('../dist/index.html', import.meta.url)
+const distIndexUrl = new URL('../dist/client/index.html', import.meta.url)
 const ssrDirectoryUrl = new URL('../dist-ssr/', import.meta.url)
 const ssrEntryUrl = new URL('../dist-ssr/entry-server.js', import.meta.url)
 
