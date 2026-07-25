@@ -97,12 +97,25 @@ const CONTACT = `
   <span class="dim">欢迎随时联系我！</span>
 `
 
+const YEARLY_KEYWORDS = [
+  { year: 2026, keywords: '认知 Agent MVP' },
+]
+
+const KEYWORDS = `
+<span class="section-header">年度关键字 / Yearly Keywords</span>
+
+${YEARLY_KEYWORDS
+    .map(({ year, keywords }) => `  <span class="accent">${year}</span>  <span class="highlight">${keywords}</span>`)
+    .join('\n')}
+`
+
 const HELP = `
 <span class="section-header">可用命令 / Available Commands</span>
 
   <span class="highlight">about</span>      - 关于我的介绍
   <span class="highlight">skills</span>     - 技术栈展示
   <span class="highlight">projects</span>   - 项目经历
+  <span class="highlight">keyword</span>    - 每年的关键字
   <span class="highlight">contact</span>    - 联系方式
   <span class="highlight">neofetch</span>   - 系统信息
   <span class="highlight">whoami</span>     - 当前用户
@@ -145,6 +158,10 @@ export function executeCommand(input: string): string {
     case 'projects':
     case 'work':
       return PROJECTS
+
+    case 'keyword':
+    case 'keywords':
+      return KEYWORDS
 
     case 'contact':
     case 'email':

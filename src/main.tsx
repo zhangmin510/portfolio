@@ -24,7 +24,7 @@ console.log(`
 console.log('%c👋 你好，开发者！', consoleStyles.title)
 console.log('%c欢迎查看我的终端风格个人主页源码', consoleStyles.subtitle)
 console.log('')
-console.log('%c💡 可用命令: about, skills, projects, contact, help', consoleStyles.highlight)
+console.log('%c💡 可用命令: about, skills, projects, keyword, contact, help', consoleStyles.highlight)
 console.log('%c🔗 GitHub: https://github.com/zhangmin510/portfolio', consoleStyles.link)
 console.log('')
 

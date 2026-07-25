@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:sites": "npm run build && node scripts/prepare-sites-build.mjs",
     "preview": "vite preview",
     "preview:cloudflare": "npm run build && wrangler dev",
     "deploy:cloudflare": "npm run build && wrangler deploy"

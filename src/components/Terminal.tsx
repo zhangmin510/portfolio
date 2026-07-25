@@ -108,7 +108,7 @@ export default function Terminal() {
         })
       } else if (e.key === 'Tab') {
         e.preventDefault()
-        const commands = ['help', 'about', 'skills', 'projects', 'contact', 'clear', 'echo', 'whoami', 'date', 'neofetch']
+        const commands = ['help', 'about', 'skills', 'projects', 'keyword', 'contact', 'clear', 'echo', 'whoami', 'date', 'neofetch']
         setInput(prev => {
           const matches = commands.filter(cmd => cmd.startsWith(prev.toLowerCase()))
           return matches.length === 1 ? matches[0] : prev
