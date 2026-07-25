@@ -1,5 +1,6 @@
 .terminal-container {
   height: 100vh;
+  height: 100dvh;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -193,6 +194,11 @@
   letter-spacing: 0;
 }
 
+.mobile-logo,
+.mobile-command-bar {
+  display: none;
+}
+
 /* Section headers */
 .section-header {
   color: var(--accent-color);
@@ -228,12 +234,89 @@
 
 /* Responsive */
 @media (max-width: 600px) {
+  .terminal-container {
+    min-height: 100svh;
+  }
+
   .terminal-body {
-    padding: 12px;
-    font-size: 12px;
+    padding: 12px 12px 8px;
+    font-size: 13px;
+    overscroll-behavior: contain;
   }
 
   .terminal-header {
-    padding: 6px 10px;
+    padding: max(6px, env(safe-area-inset-top)) 10px 6px;
+  }
+
+  .terminal-button {
+    width: 10px;
+    height: 10px;
+  }
+
+  .terminal-buttons {
+    gap: 6px;
+  }
+
+  .terminal-buttons-placeholder {
+    display: none;
+  }
+
+  .terminal-title {
+    margin-left: auto;
+    font-size: 11px;
+  }
+
+  .desktop-logo {
+    display: none;
+  }
+
+  .mobile-logo {
+    display: inline;
+    font-size: 12px;
+    line-height: 1.25;
+    white-space: pre;
+  }
+
+  .hello-world-art {
+    font-size: 7px;
+    letter-spacing: -0.35px;
+  }
+
+  .content .link {
+    overflow-wrap: anywhere;
+  }
+
+  .mobile-command-bar {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 8px 12px max(8px, env(safe-area-inset-bottom));
+    background: var(--header-bg);
+    border-top: 1px solid var(--border-color);
+    scrollbar-width: none;
+  }
+
+  .mobile-command-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-command-button {
+    min-height: 36px;
+    padding: 0 12px;
+    flex: 0 0 auto;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--bg-color);
+    color: var(--link-color);
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  .mobile-command-button:active {
+    border-color: var(--success-color);
+    color: var(--success-color);
   }
 }

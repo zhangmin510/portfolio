@@ -4,6 +4,7 @@ import { HistoryItem } from '../types'
 import './Terminal.css'
 
 const audioCtx = new AudioContext()
+const QUICK_COMMANDS = ['about', 'skills', 'projects', 'keyword', 'contact', 'help', 'clear']
 
 // 生成白噪声 buffer（复用）
 const noiseBuffer = (() => {
@@ -202,13 +203,7 @@ export default function Terminal() {
     })
   }
 
-  const handleSubmit = () => {
-    if (!input.trim()) {
-      setHistory(prev => [...prev, { type: 'command', content: '' }])
-      return
-    }
-
-    const cmd = input.trim()
+  const runCommand = (cmd: string) => {
     const output = executeCommand(cmd)
 
     if (output === '__EASTER_EGG_HELLO_WORLD__') {
@@ -232,6 +227,15 @@ export default function Terminal() {
     setCommandHistory(prev => [...prev, cmd])
     setHistoryIndex(-1)
     setInput('')
+  }
+
+  const handleSubmit = () => {
+    if (!input.trim()) {
+      setHistory(prev => [...prev, { type: 'command', content: '' }])
+      return
+    }
+
+    runCommand(input.trim())
   }
 
   const handleSubmitRef = useRef(handleSubmit)
@@ -299,6 +303,18 @@ export default function Terminal() {
           </div>
         </div>
       </div>
+      <nav className="mobile-command-bar" aria-label="快捷命令">
+        {QUICK_COMMANDS.map(command => (
+          <button
+            key={command}
+            type="button"
+            className="mobile-command-button"
+            onClick={() => runCommand(command)}
+          >
+            {command}
+          </button>
+        ))}
+      </nav>
     </div>
   )
 }
