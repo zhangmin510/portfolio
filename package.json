@@ -4,11 +4,11 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0",
     "build": "tsc && vite build",
     "build:sites": "npm run build && node scripts/prepare-sites-build.mjs",
-    "preview": "vite preview",
-    "preview:cloudflare": "npm run build && wrangler dev",
+    "preview": "vite preview --host 0.0.0.0",
+    "preview:cloudflare": "npm run build && wrangler dev --ip 0.0.0.0",
     "deploy:cloudflare": "npm run build && wrangler deploy"
   },
   "dependencies": {
