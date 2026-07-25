@@ -7,8 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "preview:cloudflare": "npm run build && wrangler pages dev",
-    "deploy:cloudflare": "npm run build && wrangler pages deploy"
+    "preview:cloudflare": "npm run build && wrangler dev",
+    "deploy:cloudflare": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "react": "^18.2.0",

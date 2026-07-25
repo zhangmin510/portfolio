@@ -39,64 +39,56 @@ npm run build
 # 预览生产构建
 npm run preview
 
-# 使用 Cloudflare Pages 的本地运行环境预览
+# 使用 Cloudflare Workers 本地运行环境预览
 npm run preview:cloudflare
 ```
 
 ## 部署
 
-### Cloudflare Pages（推荐）
+### Cloudflare Workers Static Assets（推荐）
 
-项目已经包含 Cloudflare Pages 配置：
+项目已迁移到 Cloudflare Workers Static Assets：
 
 - 构建命令：`npm run build`
-- 构建输出目录：`dist`
+- 部署命令：`npx wrangler deploy`
 - Node.js：`22.16.0`
-- Pages 项目名：`terminal-portfolio`
+- Worker 名称：`terminal-portfolio`
 
-Cloudflare Pages 会把没有匹配到静态文件的页面请求交给根目录的
-`index.html`，因此这个 React 单页应用不需要额外的 `_redirects` 规则。
+`wrangler.jsonc` 中的 `assets.directory` 指向 `dist`，
+`not_found_handling` 设置为 `single-page-application`。因此没有匹配到
+静态文件的页面请求会回退到 `index.html`，不需要额外的 `_redirects`。
 
 #### 方式一：连接 Git 仓库自动部署
 
 1. 在 Cloudflare 控制台进入 **Workers & Pages**。
-2. 选择 **Create application > Pages > Connect to Git**。
+2. 创建或打开 `terminal-portfolio` Worker，并连接当前 Git 仓库。
 3. 选择当前仓库，生产分支设置为 `main`。
-4. 项目名填写 `terminal-portfolio`，与 `wrangler.jsonc` 保持一致。
-5. Framework preset 选择 **React (Vite)**。
-6. Build command 填写 `npm run build`。
-7. Build output directory 填写 `dist`。
-8. 保存并部署。以后每次推送到 `main` 都会自动更新生产站点。
+4. Build command 填写 `npm run build`。
+5. Deploy command 填写 `npx wrangler deploy`。
+6. Root directory 保持为空（仓库根目录就是项目目录）。
+7. 保存并部署。以后每次推送到 `main` 都会自动更新生产站点。
 
 #### 方式二：从命令行直接部署
-
-首次部署：
 
 ```bash
 npm ci
 npx wrangler login
-npx wrangler pages project create terminal-portfolio --production-branch main
 npm run deploy:cloudflare
 ```
 
-之后更新站点只需：
+本地使用 Cloudflare 运行环境预览：
 
 ```bash
-npm run deploy:cloudflare
+npm run preview:cloudflare
 ```
-
-#### 方式三：在控制台直接上传
-
-运行 `npm run build`，然后在 Cloudflare Pages 中选择 **Direct Upload**，
-上传生成的 `dist` 文件夹。
 
 #### 绑定自己的域名
 
-部署完成后，打开 Pages 项目的 **Custom domains > Set up a domain**，
-添加根域名或子域名。域名已经由 Cloudflare 管理时，所需 DNS 记录和
-HTTPS 证书会自动配置。
+部署完成后，打开 Worker 的 **Settings > Domains & Routes**，添加
+Custom Domain。域名已经由 Cloudflare 管理时，所需 DNS 记录和 HTTPS
+证书会自动配置。
 
-如果 Cloudflare 中已经创建了其他名称的 Pages 项目，请同步修改
+如果 Cloudflare 中已经创建了其他名称的 Worker，请同步修改
 `wrangler.jsonc` 中的 `name`，再运行部署命令。
 
 ### Vercel（保留兼容）
