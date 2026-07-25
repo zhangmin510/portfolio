@@ -7,16 +7,12 @@
 - Name: ZhangMin.name
 - Role: AI Engineer
 - Location: Hangzhou, China
-- Website: https://zhangmin.name/
-- GitHub: https://github.com/zhangmin510
+- Website: [zhangmin.name](https://zhangmin.name/)
+- GitHub: [zhangmin510](https://github.com/zhangmin510)
 
 ## Selected projects
 
-- MeetingCopter: macOS meeting reminder MVP built with Swift 6.
-  https://github.com/zhangmin510/MeetingCopter
-- AI Native Workflow: executable specs, persistent context, agents, and MCP.
-  https://github.com/zhangmin510/ai-workflow
-- IoTGW: IoT application gateway prototype built with Java and OSGi.
-  https://github.com/zhangmin510/IoTGW
-- Fabric Console: lightweight Hyperledger Fabric desktop client.
-  https://github.com/zhangmin510/fabric-console
+- [MeetingCopter](https://github.com/zhangmin510/MeetingCopter): macOS meeting reminder MVP built with Swift 6.
+- [AI Native Workflow](https://github.com/zhangmin510/ai-workflow): executable specs, persistent context, agents, and MCP.
+- [IoTGW](https://github.com/zhangmin510/IoTGW): IoT application gateway prototype built with Java and OSGi.
+- [Fabric Console](https://github.com/zhangmin510/fabric-console): lightweight Hyperledger Fabric desktop client.
