@@ -194,9 +194,90 @@
   letter-spacing: 0;
 }
 
-.mobile-logo,
 .mobile-command-bar {
   display: none;
+}
+
+/* Branded terminal art */
+.brand-art {
+  display: block;
+  width: min(100%, 1120px);
+  margin: 8px 0 22px;
+  padding: clamp(16px, 2.5vw, 28px);
+  border: 1px solid rgba(88, 166, 255, 0.35);
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 78% 55%, rgba(63, 185, 80, 0.07), transparent 28%),
+    rgba(13, 17, 23, 0.72);
+  box-shadow: inset 0 0 32px rgba(88, 166, 255, 0.04);
+  white-space: normal;
+}
+
+.brand-art > span {
+  display: block;
+}
+
+.brand-command {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: clamp(8px, 1.5vw, 16px);
+  line-height: 1;
+}
+
+.brand-chevron {
+  color: var(--success-color);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+}
+
+.brand-cursor {
+  width: clamp(5px, 0.7vw, 9px);
+  height: clamp(24px, 3.4vw, 42px);
+  background: var(--link-color);
+  animation: blink 1s step-end infinite;
+}
+
+.brand-name {
+  color: #f0f6fc;
+  font-size: clamp(22px, 7vw, 76px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.055em;
+}
+
+.brand-domain {
+  display: inline;
+  color: var(--link-color);
+}
+
+.brand-motto {
+  margin-top: clamp(10px, 1.8vw, 18px);
+  color: var(--success-color);
+  font-size: clamp(20px, 4vw, 44px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.brand-focus {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35em 0.7em;
+  margin-top: clamp(10px, 1.5vw, 18px);
+  color: var(--link-color);
+  font-size: clamp(11px, 1.8vw, 20px);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.brand-focus b {
+  color: var(--success-color);
+}
+
+.brand-focus em {
+  color: var(--text-color);
+  font-style: normal;
 }
 
 /* Section headers */
@@ -266,15 +347,11 @@
     font-size: 11px;
   }
 
-  .desktop-logo {
-    display: none;
-  }
-
-  .mobile-logo {
-    display: inline;
-    font-size: 12px;
-    line-height: 1.25;
-    white-space: pre;
+  .brand-art {
+    margin-top: 2px;
+    margin-bottom: 16px;
+    padding: 14px;
+    border-radius: 12px;
   }
 
   .hello-world-art {

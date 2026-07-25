@@ -1,16 +1,9 @@
-const ASCII_LOGO = `
-<span class="ascii-art desktop-logo">
-  ████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗ ██╗
-  ╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗  ██║██╔══██╗██║
-     ██║   █████╗  ██████╔╝██╔████╔██║██║██╔██╗ ██║███████║██║
-     ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║██║╚██╗██║██╔══██║██║
-     ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚████║██║  ██║███████╗
-     ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝
-</span><span class="ascii-art mobile-logo">
-  ╭────────────────────╮
-  │  ZHANGMIN.NAME     │
-  │  AI ENGINEER       │
-  ╰────────────────────╯
+const BRAND_ART = `
+<span class="brand-art">
+  <span class="brand-command" aria-hidden="true"><span class="brand-chevron">&gt;</span><span class="brand-cursor"></span></span>
+  <span class="brand-name">ZhangMin<span class="brand-domain">.name</span></span>
+  <span class="brand-motto">行胜于言</span>
+  <span class="brand-focus"><span>AI Native</span><b>·</b><em>Backend</em><b>·</b><span>Distributed Systems</span></span>
 </span>`
 
 const NEOFETCH = `
@@ -128,10 +121,7 @@ const HELP = `
 `
 
 export function getWelcomeMessage(): string {
-  return `${ASCII_LOGO}
-  欢迎来到 <span class="highlight">ZhangMin.name</span> 的终端主页。
-  AI engineer · AI-native builder · Distributed systems practitioner.
-
+  return `${BRAND_ART}
   输入 <span class="highlight">help</span> 查看可用命令。
   Type <span class="highlight">help</span> to see available commands.
 `
