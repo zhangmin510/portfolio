@@ -9,92 +9,99 @@ const ASCII_LOGO = `
 </span>`
 
 const NEOFETCH = `
-<span class="ascii-art">        .--.        </span>   <span class="highlight">guest</span>@<span class="accent">portfolio</span>
+<span class="ascii-art">        .--.        </span>   <span class="highlight">zhangmin</span>@<span class="accent">portfolio</span>
 <span class="ascii-art">       |o_o |       </span>   ─────────────────
-<span class="ascii-art">       |:_/ |       </span>   <span class="highlight">OS:</span> WebOS 1.0.0
-<span class="ascii-art">      //   \\ \\      </span>   <span class="highlight">Host:</span> Browser Environment
-<span class="ascii-art">     (|     | )     </span>   <span class="highlight">Kernel:</span> JavaScript V8
-<span class="ascii-art">    /'\\_   _/\`\\     </span>   <span class="highlight">Uptime:</span> Since page load
-<span class="ascii-art">    \\___)=(___/     </span>   <span class="highlight">Shell:</span> ReactTerminal 1.0
-                       <span class="highlight">Resolution:</span> ${window.innerWidth}x${window.innerHeight}
-                       <span class="highlight">Theme:</span> GitHub Dark
-                       <span class="highlight">Terminal:</span> JetBrains Mono
+<span class="ascii-art">       |:_/ |       </span>   <span class="highlight">Name:</span> ZhangMin.name
+<span class="ascii-art">      //   \\ \\      </span>   <span class="highlight">Role:</span> Software Developer
+<span class="ascii-art">     (|     | )     </span>   <span class="highlight">Location:</span> Hangzhou
+<span class="ascii-art">    /'\\_   _/\`\\     </span>   <span class="highlight">Focus:</span> AI Native / LLM Evaluation
+<span class="ascii-art">    \\___)=(___/     </span>   <span class="highlight">Stack:</span> Go / Java / TypeScript / Swift
+                       <span class="highlight">Motto:</span> 行胜于言
+                       <span class="highlight">GitHub:</span> zhangmin510
+                       <span class="highlight">Viewport:</span> ${window.innerWidth}x${window.innerHeight}
 `
 
 const ABOUT = `
 <span class="section-header">关于我 / About Me</span>
 
-  你好！我是 <span class="highlight">张三 (Zhang San)</span>
+  你好，我是 <span class="highlight">ZhangMin.name</span>。
 
-  🚀 全栈开发工程师 / Full Stack Developer
-  📍 中国，北京 / Beijing, China
-  💼 5年开发经验 / 5 years of experience
+  🧑‍💻 软件开发者 / Software Developer
+  📍 杭州 / Hangzhou
+  🎯 大模型评测 · AI Native 工作流 · 后端与分布式系统
 
-  我热衷于构建优雅、高效的软件解决方案。
-  专注于 Web 开发、云原生架构和开源社区。
+  我关注如何把认知、规范与工具沉淀为可执行的工作流，
+  也持续通过开源项目，把想法做成真正可用的产品和 MVP。
 
-  <span class="dim">"代码如诗，架构如画"</span>
+  I build practical software across AI-native workflows,
+  backend systems, developer tools, and product experiments.
+
+  <span class="dim">“行胜于言” / Actions speak louder than words.</span>
 `
 
 const SKILLS = `
-<span class="section-header">技术栈 / Tech Stack</span>
+<span class="section-header">能力方向 / Focus & Stack</span>
 
-  <span class="accent">Languages:</span>
-    TypeScript   <span class="skill-bar"><span class="filled">████████████████████</span><span class="empty">░░░░</span></span> 90%
-    Go           <span class="skill-bar"><span class="filled">██████████████████</span><span class="empty">░░░░░░</span></span> 85%
-    Python       <span class="skill-bar"><span class="filled">████████████████</span><span class="empty">░░░░░░░░</span></span> 75%
-    Rust         <span class="skill-bar"><span class="filled">████████████</span><span class="empty">░░░░░░░░░░░░</span></span> 60%
+  <span class="accent">AI & Agent</span>
+    大模型评测 · AI Native Workflow · Agent · MCP
+    Spec-Driven Development · 持久化上下文 · 可编排行动
 
-  <span class="accent">Frontend:</span>
-    React        <span class="skill-bar"><span class="filled">████████████████████</span><span class="empty">░░░░</span></span> 90%
-    Vue.js       <span class="skill-bar"><span class="filled">██████████████████</span><span class="empty">░░░░░░</span></span> 85%
-    Next.js      <span class="skill-bar"><span class="filled">████████████████</span><span class="empty">░░░░░░░░</span></span> 80%
+  <span class="accent">Backend & Systems</span>
+    Go · Java · Node.js / NestJS
+    分布式系统 · 微服务 · IoT / OSGi · GitHub API
 
-  <span class="accent">Backend:</span>
-    Node.js      <span class="skill-bar"><span class="filled">██████████████████</span><span class="empty">░░░░░░</span></span> 85%
-    PostgreSQL   <span class="skill-bar"><span class="filled">████████████████</span><span class="empty">░░░░░░░░</span></span> 80%
-    Redis        <span class="skill-bar"><span class="filled">████████████████</span><span class="empty">░░░░░░░░</span></span> 75%
+  <span class="accent">Product & Client</span>
+    TypeScript · React · Taro · Electron · Swift / macOS
+    从原型验证到可运行 MVP
 
-  <span class="accent">DevOps:</span>
-    Docker       <span class="skill-bar"><span class="filled">████████████████████</span><span class="empty">░░░░</span></span> 90%
-    Kubernetes   <span class="skill-bar"><span class="filled">██████████████</span><span class="empty">░░░░░░░░░░</span></span> 70%
-    AWS          <span class="skill-bar"><span class="filled">████████████████</span><span class="empty">░░░░░░░░</span></span> 75%
+  <span class="accent">Engineering</span>
+    Cloud & DevOps · 测试驱动开发 · 开源协作 · 知识分享
+
+  <span class="dim">不使用虚构的技能百分比；这里展示的是持续实践的方向。</span>
 `
 
 const PROJECTS = `
-<span class="section-header">项目经历 / Projects</span>
+<span class="section-header">代表项目 / Selected Projects</span>
 
-  <span class="highlight">01.</span> <span class="bold">CloudNative Platform</span>
-      <span class="dim">企业级云原生开发平台</span>
-      <span class="accent">Tech:</span> Go, Kubernetes, React, gRPC
-      <a class="link" href="https://github.com" target="_blank">→ github.com/example/cloudnative</a>
+  <span class="highlight">01.</span> <span class="bold">MeetingCopter</span>
+      <span class="dim">macOS 菜单栏会议提醒：会前让红色直升机飞过屏幕</span>
+      <span class="accent">Tech:</span> Swift 6 · macOS 15 · Calendar
+      <a class="link" href="https://github.com/zhangmin510/MeetingCopter" target="_blank" rel="noopener noreferrer">→ github.com/zhangmin510/MeetingCopter</a>
 
-  <span class="highlight">02.</span> <span class="bold">AI Code Assistant</span>
-      <span class="dim">基于 LLM 的智能编程助手</span>
-      <span class="accent">Tech:</span> Python, FastAPI, OpenAI, Redis
-      <a class="link" href="https://github.com" target="_blank">→ github.com/example/ai-assistant</a>
+  <span class="highlight">02.</span> <span class="bold">AutismScreener</span>
+      <span class="dim">面向儿童自闭症筛查的前后端一体化助手</span>
+      <span class="accent">Tech:</span> TypeScript · Taro · React · NestJS · Drizzle
+      <a class="link" href="https://github.com/zhangmin510/AutismScreener" target="_blank" rel="noopener noreferrer">→ github.com/zhangmin510/AutismScreener</a>
 
-  <span class="highlight">03.</span> <span class="bold">Real-time Dashboard</span>
-      <span class="dim">实时数据可视化仪表板</span>
-      <span class="accent">Tech:</span> TypeScript, Next.js, WebSocket, D3.js
-      <a class="link" href="https://github.com" target="_blank">→ github.com/example/dashboard</a>
+  <span class="highlight">03.</span> <span class="bold">issue2md</span>
+      <span class="dim">将 GitHub Issues、PR 与 Discussions 转为带元数据的 Markdown</span>
+      <span class="accent">Tech:</span> Go · GitHub API · CLI · TDD
+      <a class="link" href="https://github.com/zhangmin510/my-issue2md-project" target="_blank" rel="noopener noreferrer">→ github.com/zhangmin510/my-issue2md-project</a>
 
-  <span class="highlight">04.</span> <span class="bold">Distributed Task Queue</span>
-      <span class="dim">高性能分布式任务队列</span>
-      <span class="accent">Tech:</span> Rust, Redis, PostgreSQL
-      <a class="link" href="https://github.com" target="_blank">→ github.com/example/taskqueue</a>
+  <span class="highlight">04.</span> <span class="bold">AI Native Workflow</span>
+      <span class="dim">围绕可执行规范、持久化上下文与可编排行动的工作流实践</span>
+      <span class="accent">Focus:</span> Specs · Agent · MCP · Context Engineering
+      <a class="link" href="https://github.com/zhangmin510/ai-workflow" target="_blank" rel="noopener noreferrer">→ github.com/zhangmin510/ai-workflow</a>
+
+  <span class="highlight">05.</span> <span class="bold">IoTGW</span>
+      <span class="dim">物联网应用网关原型：设备接入、应用管理与感知数据过滤</span>
+      <span class="accent">Tech:</span> Java · OSGi · IoT
+      <a class="link" href="https://github.com/zhangmin510/IoTGW" target="_blank" rel="noopener noreferrer">→ github.com/zhangmin510/IoTGW</a>
+
+  <span class="highlight">06.</span> <span class="bold">Fabric Console</span>
+      <span class="dim">跨平台的轻量级 Hyperledger Fabric 桌面客户端</span>
+      <span class="accent">Tech:</span> Electron · Node.js · Hyperledger Fabric
+      <a class="link" href="https://github.com/zhangmin510/fabric-console" target="_blank" rel="noopener noreferrer">→ github.com/zhangmin510/fabric-console</a>
 `
 
 const CONTACT = `
-<span class="section-header">联系方式 / Contact</span>
+<span class="section-header">找到我 / Find Me</span>
 
-  <span class="accent">📧 Email:</span>    <a class="link" href="mailto:zhangsan@example.com">zhangsan@example.com</a>
-  <span class="accent">🐙 GitHub:</span>   <a class="link" href="https://github.com" target="_blank">github.com/zhangsan</a>
-  <span class="accent">💼 LinkedIn:</span> <a class="link" href="https://linkedin.com" target="_blank">linkedin.com/in/zhangsan</a>
-  <span class="accent">🐦 Twitter:</span>  <a class="link" href="https://twitter.com" target="_blank">@zhangsan_dev</a>
-  <span class="accent">🌐 Blog:</span>     <a class="link" href="https://example.com" target="_blank">zhangsan.dev</a>
+  <span class="accent">🐙 GitHub:</span>  <a class="link" href="https://github.com/zhangmin510" target="_blank" rel="noopener noreferrer">github.com/zhangmin510</a>
+  <span class="accent">🌐 Blog:</span>    <a class="link" href="https://zhangmin.name" target="_blank" rel="noopener noreferrer">zhangmin.name</a>
+  <span class="accent">📍 Base:</span>    Hangzhou, China
 
-  <span class="dim">欢迎随时联系我！</span>
+  <span class="dim">开源项目、实践记录与新的 MVP 会持续更新。</span>
 `
 
 const YEARLY_KEYWORDS = [
@@ -134,8 +141,8 @@ const HELP = `
 
 export function getWelcomeMessage(): string {
   return `${ASCII_LOGO}
-  欢迎来到我的终端风格个人主页！
-  Welcome to my terminal-style portfolio!
+  欢迎来到 <span class="highlight">ZhangMin.name</span> 的终端主页。
+  Software developer · AI-native builder · Open-source learner.
 
   输入 <span class="highlight">help</span> 查看可用命令。
   Type <span class="highlight">help</span> to see available commands.
@@ -207,7 +214,7 @@ export function executeCommand(input: string): string {
       return `  <span class="warning">Permission denied: Cannot navigate away from portfolio</span>`
 
     case 'sudo':
-      return `  <span class="error">[sudo] password for guest: Nice try! 😉</span>`
+      return `  <span class="error">[sudo] password for zhangmin: Nice try! 😉</span>`
 
     case 'exit':
     case 'quit':
@@ -226,7 +233,7 @@ export function executeCommand(input: string): string {
       if (args.length > 0 && args[0].toLowerCase() === 'world') {
         return `__EASTER_EGG_HELLO_WORLD__`
       }
-      return `  <span class="highlight">Hello! 👋</span> Welcome to my portfolio. Type 'help' for commands.`
+      return `  <span class="highlight">Hello! 👋</span> Welcome to ZhangMin.name's portfolio. Type 'help' for commands.`
 
     case '':
       return ''
