@@ -7,7 +7,7 @@ const BRAND_ART = `
 </span>`
 
 const NEOFETCH = `
-<span class="ascii-art">        .--.        </span>   <span class="highlight">zhangmin</span>@<span class="accent">portfolio</span>
+<span class="ascii-art">        .--.        </span>   <span class="highlight">zhangmin.name</span>@
 <span class="ascii-art">       |o_o |       </span>   ─────────────────
 <span class="ascii-art">       |:_/ |       </span>   <span class="highlight">Name:</span> ZhangMin.name
 <span class="ascii-art">      //   \\ \\      </span>   <span class="highlight">Role:</span> AI Engineer
@@ -189,7 +189,7 @@ export function executeCommand(input: string): string {
       return `  <span class="error">cat: ${args[0] || '(no file)'}: No such file or directory</span>`
 
     case 'cd':
-      return `  <span class="warning">Permission denied: Cannot navigate away from portfolio</span>`
+      return `  <span class="warning">Permission denied: Cannot navigate away from ZhangMin.name</span>`
 
     case 'sudo':
       return `  <span class="error">[sudo] password for zhangmin: Nice try! 😉</span>`
@@ -211,7 +211,7 @@ export function executeCommand(input: string): string {
       if (args.length > 0 && args[0].toLowerCase() === 'world') {
         return `__EASTER_EGG_HELLO_WORLD__`
       }
-      return `  <span class="highlight">Hello! 👋</span> Welcome to ZhangMin.name's portfolio. Type 'help' for commands.`
+      return `  <span class="highlight">Hello! 👋</span> Welcome to ZhangMin.name. Type 'help' for commands.`
 
     case '':
       return ''
