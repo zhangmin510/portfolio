@@ -12,7 +12,7 @@
 
 ## Selected projects
 
+- [Frontier Benchmarks](https://github.com/zhangmin510/frontier-benchmarks): Chinese benchmark explorer covering 23 evaluations of frontier OpenAI and Anthropic models.
 - [MeetingCopter](https://github.com/zhangmin510/MeetingCopter): macOS meeting reminder MVP built with Swift 6.
-- [AI Native Workflow](https://github.com/zhangmin510/ai-workflow): executable specs, persistent context, agents, and MCP.
 - [IoTGW](https://github.com/zhangmin510/IoTGW): IoT application gateway prototype built with Java and OSGi.
 - [Fabric Console](https://github.com/zhangmin510/fabric-console): lightweight Hyperledger Fabric desktop client.

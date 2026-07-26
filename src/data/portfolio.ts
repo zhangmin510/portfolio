@@ -50,6 +50,16 @@ export const SKILL_GROUPS = [
 
 export const PROJECTS: Project[] = [
   {
+    name: 'Frontier Benchmarks',
+    tagline: '一站掌握前沿模型评测',
+    summary: '面向 OpenAI 与 Anthropic 前沿模型的中文 benchmark 聚合站。',
+    role: '独立研究、设计与实现',
+    outcome: '系统整理 23 个 benchmark，覆盖推理、软件工程、智能体、深度研究等七类能力。',
+    stack: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS'],
+    href: 'https://github.com/zhangmin510/frontier-benchmarks',
+    featured: true,
+  },
+  {
     name: 'MeetingCopter',
     tagline: '让会议提醒真正无法忽略',
     summary: 'macOS 菜单栏会议提醒：会前让红色直升机飞过屏幕。',
@@ -57,16 +67,6 @@ export const PROJECTS: Project[] = [
     outcome: '完成可运行的 macOS 15 MVP，并开放完整源码。',
     stack: ['Swift 6', 'macOS 15', 'Calendar'],
     href: 'https://github.com/zhangmin510/MeetingCopter',
-    featured: true,
-  },
-  {
-    name: 'AI Native Workflow',
-    tagline: '把 Agent 实践沉淀为可执行工作流',
-    summary: '围绕可执行规范、持久化上下文与可编排行动的工作流实践。',
-    role: '工作流设计与实现',
-    outcome: '将 Specs、Agent、MCP 与上下文工程整合为持续演进的实践仓库。',
-    stack: ['Specs', 'Agent', 'MCP', 'Context Engineering'],
-    href: 'https://github.com/zhangmin510/ai-workflow',
     featured: true,
   },
   {
