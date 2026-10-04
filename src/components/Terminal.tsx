@@ -426,8 +426,12 @@ export default function Terminal() {
             ))}
           </p>
           <p className="brand-intro">{PROFILE.intro}</p>
-          <div className="hero-actions">
-            <a className="primary-link" href="#selected-projects">
+          <nav className="hero-actions" aria-label="网站导航">
+            <a className="primary-link" href="/panoramas/">
+              全景图
+              <span aria-hidden="true"> ↗</span>
+            </a>
+            <a className="secondary-action" href="#selected-projects">
               查看代表项目
             </a>
             <button
@@ -437,7 +441,7 @@ export default function Terminal() {
             >
               在终端认识我
             </button>
-          </div>
+          </nav>
         </section>
 
         <div className="portfolio-grid">

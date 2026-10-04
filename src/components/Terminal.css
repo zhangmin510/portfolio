@@ -231,6 +231,7 @@
 
 .secondary-action {
   color: var(--link-color);
+  text-decoration: none;
   background: transparent;
   border: 1px solid var(--border-color);
   cursor: pointer;

@@ -1,0 +1,2971 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="theme-light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 公司全景图 · 2025—2026 | COMPANY ATLAS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- ADD LANGUAGE FONTS IF NEEDED: e.g. Noto Sans KR for Korean, Noto Sans JP for Japanese -->
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"> -->
+  <script src="/panoramas/vendor/chart.umd.min.js"></script>
+<script>if(typeof Chart!=="undefined"){Chart.defaults.animation=false;}</script>
+  <script src="/panoramas/vendor/html-to-image.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { interpolate-size: allow-keywords; } /* Enable smooth height:auto transitions (Chrome 129+) */
+
+    /* ===== THEMES (class-based ONLY — no @media prefers-color-scheme) ===== */
+    html.theme-dark {
+      --bg: #0A0A0A; --surface: #141414; --surface-hover: #1C1C1C;
+      --border: rgba(255,255,255,0.04);
+      --text: #EDEDED; --text-secondary: #888;
+      --accent: #3b82f6; --accent-secondary: #8b5cf6;
+      --positive: #10b981; --negative: #f43f5e; --warning: #f59e0b;
+    }
+    html.theme-light {
+      --bg: #FAFAF9; --surface: #FFFFFF; --surface-hover: #F5F5F4;
+      --border: rgba(0,0,0,0.06);
+      --text: #0f172a; --text-secondary: #64748b;
+      --accent: #2563eb; --accent-secondary: #7c3aed;
+      --positive: #059669; --negative: #e11d48; --warning: #d97706;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+      letter-spacing: -0.01em; font-feature-settings: 'cv11', 'ss01';
+      transition: background 0.3s, color 0.3s;
+      scrollbar-gutter: stable;
+    }
+    h1,h2,h3,h4,h5,h6 { 
+      color: var(--text); 
+      letter-spacing: -0.03em; 
+      line-height: 1.08;
+      text-wrap: balance;
+    }
+    h1 { font-weight: 700; }
+    h2 { font-weight: 600; }
+    body, p, li, td, th, span, label { font-weight: 400; }
+    p,li,td,th,span,label { color: var(--text); }
+    .text-secondary { color: var(--text-secondary); }
+
+    /* ===== CARD ===== */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 24px;
+      transition: box-shadow 0.2s ease;
+    }
+    .card:hover {
+      box-shadow: 0 0 0 1px var(--border), 0 8px 16px rgba(0,0,0,0.08);
+    }
+
+    /* ===== ANIMATIONS (CSS-first — always reliable) ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .animate { animation: fadeInUp 0.6s ease-out both; }
+    .animate.delay-1 { animation-delay: 0.1s; }
+    .animate.delay-2 { animation-delay: 0.2s; }
+    .animate.delay-3 { animation-delay: 0.3s; }
+    .animate.delay-4 { animation-delay: 0.4s; }
+    .animate.delay-5 { animation-delay: 0.5s; }
+    .animate.delay-6 { animation-delay: 0.6s; }
+
+    /* Scroll-triggered: JS adds .reveal, then .visible on scroll */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      body { background: white !important; color: black !important; }
+      .viz-menu, .reveal { display: revert; opacity: 1 !important; transform: none !important; }
+      .card { break-inside: avoid; border: 1px solid #ddd; box-shadow: none; }
+      * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
+    @page { margin: 1in; @bottom-center { content: "Page " counter(page); font-size: 9pt; color: #666; } }
+
+    /* ===== MENU ===== */
+    .viz-menu { position: fixed; top: 16px; right: 16px; z-index: 9999; }
+    .viz-menu-toggle {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(12px); transition: all 0.2s;
+    }
+    .viz-menu-toggle:hover { background: var(--surface-hover); }
+    .viz-menu-dropdown {
+      position: absolute; top: 52px; right: 0; min-width: 200px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 8px;
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: all 0.2s; backdrop-filter: blur(16px);
+    }
+    .viz-menu-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .viz-menu-dropdown button {
+      width: 100%; padding: 10px 14px; border: none; border-radius: 8px;
+      background: transparent; color: var(--text); font-size: 14px;
+      font-family: inherit; cursor: pointer; text-align: left;
+      display: flex; align-items: center; gap: 10px; transition: background 0.15s;
+    }
+    .viz-menu-dropdown button:hover { background: var(--surface-hover); }
+
+    /* ===== SKIP TO CONTENT (accessibility) ===== */
+    .skip-to-content {
+      position: absolute; top: -40px; left: 6px; background: var(--accent);
+      color: white; padding: 8px 12px; text-decoration: none;
+      border-radius: 4px; opacity: 0; pointer-events: none;
+      transition: all 0.2s; z-index: 10000;
+    }
+    .skip-to-content:focus { top: 6px; opacity: 1; pointer-events: auto; }
+
+    /* ===== DETAILS ACCORDION (Chrome 120+ exclusive, 131+ animated) ===== */
+    details { overflow: hidden; }
+    details summary { cursor: pointer; list-style: none; }
+    details summary::-webkit-details-marker { display: none; }
+    ::details-content {
+      transition: block-size 0.3s ease, opacity 0.3s ease;
+      block-size: 0; opacity: 0; overflow: hidden;
+    }
+    details[open]::details-content { block-size: auto; opacity: 1; }
+
+    /* ===== POPOVER (Chrome 114+, zero-JS tooltips/panels) ===== */
+    [popover] {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 16px; max-width: 320px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2); color: var(--text);
+    }
+    [popover]::backdrop { background: rgba(0,0,0,0.3); }
+
+    html.theme-light{--bg:#f7f5ef;--surface:#fffefb;--surface-hover:#efeee6;--border:#dfdfd2;--text:#25382f;--text-secondary:#727b70;--accent:#ab4b2f;--accent-secondary:#e7ecd9;--positive:#456747;--negative:#b14836;--warning:#9b702f}
+html.theme-dark{--bg:#17221c;--surface:#202e25;--surface-hover:#2b3b30;--border:#3a4b3c;--text:#edf0e5;--text-secondary:#a8b7a7;--accent:#efa886;--accent-secondary:#344733;--positive:#afd09e;--negative:#ffad95;--warning:#e9c280}
+body{font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;font-size:16px;line-height:1.65}button,input,select{font:inherit;color:inherit}button{background:none;border:0;cursor:pointer}a{color:var(--accent);text-underline-offset:3px}button,a,input,select{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}button:hover{color:var(--accent)}[hidden]{display:none!important}h1{font-size:clamp(3rem,4.3vw,4.4rem);font-weight:750;line-height:1.15;letter-spacing:-.05em}h2{font-size:2rem;font-weight:650;line-height:1.3}h3{font-size:1.5rem;font-weight:600;line-height:1.35}p{color:var(--text-secondary)}section{margin-bottom:48px}select{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:10px 30px 10px 12px;font-size:13px;max-width:100%}button:disabled{opacity:.5;cursor:default}.eyebrow{font-size:10px;font-weight:600;letter-spacing:2px;color:var(--text-secondary)}
+.sidebar{width:214px;position:fixed;inset:0 auto 0 0;padding:32px 22px 24px;border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:10;background:var(--bg)}.brand{display:flex;gap:13px;align-items:center;text-decoration:none;color:var(--text);margin-bottom:50px}.brand-mark{width:37px;height:49px;font-size:38px;line-height:1;color:var(--accent);display:grid;place-items:center}.brand b{font-weight:750;font-size:17px;line-height:1.12;display:block;letter-spacing:2px}.brand small{font-size:10px;letter-spacing:1px;color:var(--text-secondary);display:block;margin-top:10px}.nav-label{font-size:9px;letter-spacing:1.4px;color:var(--text-secondary);margin:0 8px 16px}.nav{display:flex;flex-direction:column;gap:7px}.nav button{display:flex;align-items:center;gap:11px;text-align:left;padding:11px 12px;font-size:13px;border-radius:6px;min-height:44px;color:var(--text-secondary)}.nav button>span{font-size:20px;width:22px;color:inherit}.nav button small{font-size:10px;margin-left:auto;opacity:.55}.nav button.active{background:var(--text);color:var(--bg)}.nav button:hover:not(.active){background:var(--surface-hover)}.sidebar-focus{margin-top:56px;padding:0 8px}.sidebar-focus .nav-label{margin-left:0}.sidebar-focus p{font-size:22px;font-weight:500;line-height:1.7;color:var(--text);letter-spacing:-1px}.sidebar-focus em{color:var(--accent);font-style:normal}.sidebar-focus small{color:var(--text-secondary);font-size:10px;line-height:1.9;display:block}.small-rule{display:block;width:26px;height:2px;background:var(--accent);margin:21px 0}.side-footer{margin-top:auto;padding:24px 8px 0;color:var(--text-secondary);font-size:10px}.side-footer small{display:block;font-size:9px;margin:6px 0 0 13px}.status-dot{display:inline-block;width:5px;height:5px;background:var(--positive);border-radius:50%;margin-right:6px}
+.shell{margin-left:214px;padding:26px 44px 24px;max-width:1810px}.topline{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;padding-right:37px;font-size:9px;letter-spacing:1.8px;color:var(--text-secondary)}.topline span{color:var(--text-secondary)}.topline i{font-style:normal;margin:0 10px;color:var(--border)}.hero{display:grid;grid-template-columns:1.22fr 1fr;gap:50px;margin-bottom:36px}.hero .eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:16px;letter-spacing:1.4px}.hero .eyebrow>span{width:5px;height:5px;background:var(--accent);border-radius:50%}.hero-intro{font-size:13px;line-height:1.9;margin-top:20px;max-width:430px}.hero-aside{border-top:1px solid var(--text);padding-top:13px;align-self:stretch;display:flex;flex-direction:column}.edition{font-size:10px;letter-spacing:2px;display:flex;justify-content:space-between}.edition>span{font-size:20px;line-height:1;color:var(--accent)}.hero-stats{display:grid;grid-template-columns:1.2fr 1fr 1fr;padding:22px 0 26px;gap:16px;border-bottom:1px solid var(--border)}.hero-stats strong{font-size:48px;line-height:1.2;font-weight:550;letter-spacing:-3px}.hero-stats div>span{display:block;font-size:10px;color:var(--text-secondary);margin-top:6px}.thesis{background:var(--accent-secondary);margin-top:19px;padding:16px 21px;position:relative;overflow:hidden}.thesis>span{font-size:8px;letter-spacing:2px;color:var(--text-secondary)}.thesis p{color:var(--text);font-size:19px;line-height:1.55;margin-top:7px;letter-spacing:-.5px}.thesis small{font-size:9px;color:var(--text-secondary);display:block;margin-top:10px}.thesis:after{content:'↗';position:absolute;right:22px;top:14px;font-size:70px;opacity:.14;line-height:1.3}
+.filter-section{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 17px 0;margin-bottom:45px}.search-row{display:flex;gap:10px;align-items:center}.searchbox{position:relative;display:flex;align-items:center;gap:10px;flex:1;min-width:0}.searchbox>span{font-size:25px;color:var(--text-secondary);line-height:1}.searchbox input{background:transparent;border:0;padding:9px 0;font-size:13px;outline:none;min-width:0;width:100%}.searchbox input::placeholder{color:var(--text-secondary);opacity:.8}.searchbox:focus-within{box-shadow:0 1px 0 var(--accent)}kbd{font:11px 'Inter',sans-serif;border:1px solid var(--border);color:var(--text-secondary);border-radius:4px;padding:0 6px}.reset{font-size:11px;color:var(--text-secondary);white-space:nowrap;padding:9px 3px}.search-row select{border:0;background:var(--surface-hover);font-size:11px;max-width:165px}.filter-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--border);margin-top:10px;padding:12px 0}.chips,.quick-filters{display:flex;gap:5px;align-items:center;flex-wrap:wrap}.chip{padding:6px 9px;border:1px solid transparent;border-radius:5px;font-size:10px;color:var(--text-secondary);display:flex;align-items:center;gap:6px}.chip.active{border-color:var(--text);color:var(--text);background:var(--surface-hover)}.dot{display:inline-block;width:5px;height:5px;flex-shrink:0;border-radius:50%;background:var(--text-secondary)}.dot.growth{background:var(--positive)}.dot.platform{background:var(--accent)}.dot.affiliate{background:var(--text-secondary)}.quick-filters{gap:13px;font-size:10px;color:var(--text-secondary)}.quick-filters label{color:var(--text-secondary);display:flex;gap:4px;align-items:center}.quick-filters input{accent-color:var(--accent)}.text-toggle{font-size:10px;color:var(--text-secondary)}.text-toggle.active{color:var(--accent)}.scope-row{display:flex;align-items:center;gap:10px;border-top:1px solid var(--border);padding:10px 0;font-size:10px;color:var(--text-secondary)}.scope-row label{color:var(--text-secondary)}.scope-row select{border:0;padding:4px 22px 4px 3px;font-size:10px;max-width:175px}.scope-row span{margin-left:auto;color:var(--text-secondary)}.scope-row .text-link{margin-left:8px}.text-link{font-size:10px;color:var(--accent);white-space:nowrap}
+.section-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:23px}.section-heading .eyebrow{margin-bottom:10px}.section-heading h2{font-size:28px}.section-note{font-size:10px;color:var(--text-secondary);text-align:right;line-height:1.8}.chain{display:flex;align-items:center;justify-content:space-between;padding:12px 0 20px;border-top:1px solid var(--border);gap:10px;font-size:9px;letter-spacing:1px;color:var(--text-secondary)}.chain span{color:var(--text-secondary)}.chain b{font-weight:400;color:var(--accent);font-size:17px}.map-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.sector-panel{background:var(--surface);border:1px solid var(--border);border-radius:7px;min-width:0;display:flex;flex-direction:column;min-height:252px;transition:box-shadow .2s}.sector-panel:hover{box-shadow:0 3px 16px #00000007}.sector-top{display:flex;align-items:center;gap:10px;padding:17px 16px 11px}.sector-icon{font-size:22px;line-height:1;color:var(--accent);width:24px}.sector-title{flex:1}.sector-title b{font-size:15px;font-weight:650}.sector-title small{display:block;font-size:7px;letter-spacing:1.5px;color:var(--text-secondary);margin-top:3px}.sector-count{font:13px 'Inter',sans-serif;color:var(--text-secondary);border:1px solid var(--border);border-radius:50%;width:26px;height:26px;display:grid;place-items:center}.sector-question{font-size:10px;color:var(--text-secondary);padding:0 16px 12px;border-bottom:1px solid var(--border)}.company-cloud{display:flex;flex-wrap:wrap;align-content:flex-start;gap:7px;padding:15px 15px 17px;flex:1}.company-pill{font-size:10px;border:1px solid var(--border);background:var(--bg);border-radius:4px;display:flex;align-items:center;gap:6px;padding:6px 8px;min-height:29px;text-align:left;line-height:1.35;max-width:100%;transition:background .15s,border-color .15s}.company-pill:hover{background:var(--accent-secondary);border-color:var(--positive);color:var(--text)}.company-pill.platform{background:var(--surface);border-color:color-mix(in srgb,var(--accent) 30%,var(--border))}.company-pill .star{color:var(--accent);font-size:9px}.sector-foot{padding:8px 16px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:9px;color:var(--text-secondary);gap:5px}.sector-foot span{color:inherit}.sector-foot button{color:var(--accent);font-size:10px;white-space:nowrap}.empty{border:1px dashed var(--border);padding:50px 20px;text-align:center;color:var(--text-secondary);font-size:14px;border-radius:8px}.empty button{color:var(--accent);margin-left:10px}.editorial{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:26px;padding-top:32px;border-top:1px solid var(--border)}.editorial h2{font-size:25px;margin-top:14px;line-height:1.5}.editorial>div p{font-size:11px;margin-top:14px}.editorial article{border-left:1px solid var(--border);padding-left:22px}.editorial article>span{font-size:10px;color:var(--accent);font-weight:650}.editorial h3{font-size:17px;margin:13px 0}.editorial article p{font-size:11px;line-height:1.9;min-height:64px}.editorial button{font-size:10px;color:var(--accent);margin-top:18px}
+.btn{border:1px solid var(--border);padding:9px 13px;border-radius:5px;font-size:11px;background:var(--surface);white-space:nowrap}.btn:hover{border-color:var(--accent)}.btn.solid{background:var(--text);color:var(--bg);border-color:var(--text)}.directory{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.company-card{border:1px solid var(--border);background:var(--surface);border-radius:7px;padding:19px;display:flex;flex-direction:column;min-width:0}.card-heading{display:flex;align-items:flex-start;gap:10px}.monogram{background:var(--accent-secondary);width:37px;height:37px;border-radius:6px;display:grid;place-items:center;font-weight:600;font-size:14px;flex-shrink:0;color:var(--text)}.card-name{min-width:0;flex:1}.card-name button{font-size:15px;font-weight:650;text-align:left;line-height:1.35}.card-name small{display:block;font-size:9px;color:var(--text-secondary);margin-top:3px;line-height:1.5}.favorite{font-size:19px;line-height:1;min-width:27px;min-height:30px;color:var(--text-secondary)}.favorite.selected{color:var(--accent)}.company-card>p{font-size:12px;margin-top:14px;line-height:1.8}.tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:12px}.tag{font-size:9px;padding:3px 7px;border-radius:3px;background:var(--surface-hover);color:var(--text-secondary)}.card-event{font-size:10px;color:var(--accent);padding-top:13px;margin-top:auto}.card-event.no-event{color:var(--text-secondary)}.card-actions{display:flex;justify-content:space-between;gap:8px;border-top:1px solid var(--border);padding-top:12px;margin-top:14px;font-size:10px}.card-actions button{color:var(--text-secondary)}.card-actions button:last-child{color:var(--accent)}.card-actions .selected{color:var(--accent)}.explain{font-size:12px;line-height:1.85;margin:-5px 0 22px;max-width:800px}.table-scroll{overflow:auto;border:1px solid var(--border);border-radius:7px;background:var(--surface)}table{border-collapse:collapse;width:100%}.matrix{min-width:840px;font-size:11px}.matrix th{font-size:10px;font-weight:500;text-align:center;background:var(--surface-hover);padding:15px 8px;line-height:1.6;color:var(--text-secondary)}.matrix th:first-child{width:182px;text-align:left;padding-left:19px}.matrix td{border-top:1px solid var(--border);text-align:center;padding:9px 8px}.matrix td:first-child{text-align:left;padding-left:19px}.matrix td:first-child button{font-weight:600;text-align:left;font-size:12px}.matrix td:first-child small{display:block;color:var(--text-secondary);font-size:8px;margin-top:3px}.matrix button.mark{color:var(--positive);font-size:19px;width:40px;height:34px;border-radius:5px}.matrix button.mark:hover{background:var(--accent-secondary)}.matrix .absent{color:var(--border)}.matrix tr:hover td{background:color-mix(in srgb,var(--surface-hover) 60%,transparent)}.footnote{font-size:10px;margin-top:14px}.month-nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:30px}.month-nav button{border:1px solid var(--border);font-size:10px;padding:6px 10px;border-radius:4px}.month-nav button.active{background:var(--text);border-color:var(--text);color:var(--bg)}.month-nav button small{font-size:8px;color:inherit;opacity:.6;margin-left:5px}.timeline-month{display:grid;grid-template-columns:95px 1fr;margin-bottom:28px}.month-label{font-size:17px;font-weight:550;padding-top:10px}.month-label small{display:block;font-size:9px;color:var(--text-secondary);font-weight:400;letter-spacing:1px}.event-list{border-left:1px solid var(--border);padding-left:26px;display:flex;flex-direction:column;gap:12px}.event{position:relative;border:1px solid var(--border);border-radius:6px;background:var(--surface);padding:17px 20px}.event:before{content:'';position:absolute;left:-31px;top:25px;width:7px;height:7px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}.event-meta{display:flex;gap:10px;align-items:center;font-size:9px;margin-bottom:8px}.event-meta time{color:var(--text-secondary)}.event-meta .tag{font-size:8px;padding:1px 5px}.event h3{font-size:17px;margin-bottom:8px}.event p{font-size:12px;line-height:1.9}.event-links{display:flex;justify-content:space-between;gap:12px;font-size:10px;margin-top:10px}.event-links button{color:var(--accent)}.event-links a{text-decoration:none;color:var(--text-secondary)}
+.method-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.method-grid article{border:1px solid var(--border);background:var(--surface);padding:24px;border-radius:7px}.method-grid h3{font-size:21px;margin:14px 0}.method-grid p{font-size:12px;line-height:1.85;margin-top:10px}.coverage-banner{padding:15px 19px;background:var(--accent-secondary);margin-top:18px;font-size:12px;color:var(--text);border-radius:6px}.chart-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:26px;margin-top:24px}.chart-box h3{font-size:21px}.chart-box p{font-size:11px;margin-top:7px}.chart-container{height:360px;position:relative;padding:25px 0 0}.fallback{font-size:12px;line-height:2;padding-top:12px}.source-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.source-item{border:1px solid var(--border);background:var(--surface);border-radius:6px;padding:17px 19px}.source-item summary{font-size:13px;display:flex;justify-content:space-between;align-items:center;gap:10px}.source-item summary small{font-size:9px;color:var(--text-secondary);white-space:nowrap}.source-item a{font-size:11px;display:block;line-height:1.8;margin-top:8px;overflow-wrap:anywhere}.source-item .source-domain{font-size:8px;color:var(--text-secondary);display:block}.source-note{font-size:10px;margin-top:12px;color:var(--warning)}
+.footer{padding:24px 0 15px;border-top:1px solid var(--border);display:flex;gap:20px;justify-content:space-between;align-items:center;color:var(--text-secondary);font-size:9px}.footer span{color:inherit}.footer span:first-child{font-size:9px;letter-spacing:1px}.footer b{color:var(--accent);margin:0 9px}.footer button{font-size:10px;color:var(--text-secondary)}.compare-tray{position:fixed;left:calc(214px + (100% - 214px)/2);transform:translateX(-50%);bottom:22px;z-index:50;background:var(--surface);box-shadow:0 8px 40px #0002;border:1px solid var(--text);border-radius:10px;display:flex;align-items:center;gap:20px;padding:13px 16px;max-width:calc(100% - 245px)}.compare-tray>div:first-child{white-space:nowrap}.compare-tray strong{font-size:15px;margin-right:9px}.compare-tray>div:first-child span{font-size:10px;color:var(--text-secondary)}#compareNames{display:flex;gap:6px;overflow:hidden}#compareNames button{white-space:nowrap;font-size:9px;border:1px solid var(--border);border-radius:4px;padding:5px 7px}.icon-button{width:33px;height:33px;font-size:25px;line-height:1;border-radius:5px;flex-shrink:0;display:grid;place-items:center}.icon-button:hover{background:var(--surface-hover)}dialog{background:var(--surface);color:var(--text);border:1px solid var(--border);padding:0;box-shadow:0 20px 90px #0003;max-height:90vh;max-height:90dvh;overscroll-behavior:contain}dialog::backdrop{background:#10231877;backdrop-filter:blur(3px)}.detail-dialog{width:620px;border-radius:12px;margin:auto}.dialog-header{padding:21px 27px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:2;background:var(--surface)}.dialog-header h2{font-size:25px;margin-top:7px}.profile-top{padding:27px 29px 22px}.profile-top h2{font-size:32px;margin:15px 0 6px;line-height:1.3}.profile-top .en{font-size:13px;color:var(--text-secondary)}.profile-top .desc{font-size:16px;color:var(--text);margin-top:19px;line-height:1.75}.profile-meta{display:flex;gap:7px;flex-wrap:wrap}.profile-meta .tag{font-size:10px}.profile-main{padding:0 29px 30px}.profile-main h3{font-size:18px;margin:24px 0 9px}.profile-main p{font-size:13px;line-height:1.85}.profile-note{border-left:3px solid var(--warning);background:var(--surface-hover);padding:12px 16px;margin:17px 0;font-size:12px;color:var(--text)}.profile-actions{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.profile-actions .btn{font-size:12px}.profile-products{display:flex;gap:7px;flex-wrap:wrap}.profile-products span{background:var(--accent-secondary);font-size:12px;padding:5px 9px;border-radius:4px}.profile-event{border-left:1px solid var(--border);padding:0 0 17px 17px;margin-top:14px}.profile-event time{color:var(--accent);font-size:10px}.profile-event b{font-weight:600;font-size:13px;display:block;margin:4px 0}.profile-event p{font-size:11px}.profile-event a{display:block;font-size:10px;margin-top:5px}.profile-sources a{font-size:11px;display:block;margin:8px 0;overflow-wrap:anywhere}.peer-list{display:flex;gap:7px;flex-wrap:wrap}.peer-list button{font-size:11px;border:1px solid var(--border);padding:5px 8px;border-radius:4px}.compare-dialog{width:1100px;border-radius:12px;margin:auto;max-width:94vw}.compare-body-scroll{overflow:auto;padding:22px}.compare-table{table-layout:fixed;min-width:650px;font-size:12px}.compare-table th,.compare-table td{padding:16px;vertical-align:top;text-align:left;border:1px solid var(--border);line-height:1.85;overflow-wrap:anywhere}.compare-table th:first-child{width:105px;font-weight:500;color:var(--text-secondary);background:var(--surface-hover)}.compare-table thead th:not(:first-child){font-size:16px;font-weight:600;background:var(--accent-secondary)}.compare-table small{display:block;font-size:10px;color:var(--text-secondary)}.compare-table .remove{display:block;font-size:9px;color:var(--accent);margin-top:7px}.toast{position:fixed;bottom:95px;left:50%;transform:translateX(-50%);z-index:10002;padding:10px 20px;border-radius:6px;background:var(--text);color:var(--bg);font-size:12px;pointer-events:none;opacity:0;transition:opacity .2s;max-width:90vw}.toast.show{opacity:1}.viz-menu{top:19px;right:21px;z-index:55}.viz-menu-toggle{width:32px;height:32px;border-radius:5px;background:transparent}.viz-menu-toggle svg{width:16px}.viz-menu-dropdown{top:40px}.viz-menu-dropdown button{font-size:12px}.view{animation:fadeIn .25s ease}.noscript{padding:20px;background:var(--warning);color:var(--bg)}
+@media(min-width:1550px){.shell{padding-left:60px;padding-right:60px}.sector-panel{min-height:260px}.company-pill{font-size:12px;padding:7px 9px}.sector-title b{font-size:17px}.hero{gap:90px}.hero-stats strong{font-size:56px}}
+@media(max-width:1200px){.sidebar{width:185px;padding:28px 17px}.shell{margin-left:185px;padding:25px 28px}.hero{gap:28px;grid-template-columns:1fr 1fr}.filter-bottom{flex-wrap:wrap}.quick-filters{margin-left:4px}.sector-top{padding:16px 12px 10px}.sector-question{padding-left:12px;padding-right:12px}.company-cloud{padding:12px;gap:5px}.sector-title b{font-size:13px}.sector-foot{padding-left:12px;padding-right:12px}.sector-foot>span{font-size:8px}.directory{grid-template-columns:repeat(2,minmax(0,1fr))}.compare-tray{left:calc(185px + (100% - 185px)/2);max-width:calc(100% - 210px)}.editorial{gap:18px}.editorial article{padding-left:16px}}
+@media(max-width:900px){.sidebar{position:relative;width:100%;padding:18px 24px 11px;border-right:0;border-bottom:1px solid var(--border)}.brand{margin-bottom:19px;gap:10px}.brand-mark{height:31px;width:29px;font-size:31px}.brand b{font-size:13px;line-height:1;display:flex;gap:6px}.brand b br{display:none}.brand small{font-size:8px;margin-top:5px}.sidebar>.nav-label,.sidebar-focus,.side-footer{display:none}.nav{flex-direction:row;overflow:auto;gap:7px}.nav button{font-size:11px;white-space:nowrap;padding:7px 12px;min-height:35px;gap:6px}.nav button>span{font-size:15px;width:16px}.nav button small{display:none}.shell{margin-left:0;padding:23px 25px}.topline{margin-bottom:26px;padding-right:0}.hero{gap:32px}.hero h1{font-size:48px}.hero-intro{font-size:12px}.hero-stats strong{font-size:42px}.thesis{padding:14px 18px}.thesis p{font-size:17px}.thesis small{font-size:8px}.hero-stats{padding-bottom:18px}.section-heading h2{font-size:25px}.section-heading{gap:13px}.compare-tray{left:50%;max-width:calc(100% - 30px)}.method-grid{grid-template-columns:1fr}.method-grid article{padding:24px}.footer{flex-wrap:wrap}.map-grid{gap:10px}.company-pill{padding:5px 7px;font-size:10px}.sector-panel{min-height:250px}.sector-foot>span{display:none}.sector-foot{justify-content:flex-end}.editorial{grid-template-columns:repeat(3,1fr)}.editorial>div{grid-column:1 / -1}.editorial>div p{margin-top:6px}.editorial article:first-of-type{border-left:0;padding-left:0}.source-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.sidebar{padding:18px 16px 10px}.nav button{padding:7px 10px}.nav button>span{display:none}.shell{padding:20px 16px 95px}.topline{font-size:8px;letter-spacing:1px;margin-bottom:26px}.top-caption{font-size:7px}.hero{grid-template-columns:1fr;gap:26px;margin-bottom:27px}.hero h1{font-size:48px}.hero-intro{font-size:12px;margin-top:15px}.hero-intro br{display:none}.hero .eyebrow{font-size:9px;margin-bottom:14px}.hero-aside{padding-top:10px}.hero-stats{padding:15px 0;border-bottom:0}.hero-stats strong{font-size:41px}.hero-stats div>span{font-size:9px;margin-top:3px}.edition{font-size:8px}.thesis{margin-top:0;padding:12px 15px}.thesis p{font-size:15px;line-height:1.65;margin-top:2px}.thesis p br{display:none}.thesis small{font-size:8px;margin-top:6px}.thesis:after{font-size:47px;top:10px;right:17px}.thesis>span{font-size:7px}.search-row{flex-wrap:wrap;gap:7px}.searchbox{min-width:100%}.searchbox input{font-size:12px}.searchbox kbd{display:none}.search-row select{margin-left:auto;flex:1;max-width:none;background:transparent;padding-top:3px;padding-bottom:3px}.filter-section{padding:11px 12px 0;margin-bottom:34px}.filter-bottom{padding:10px 0;gap:9px}.chips{gap:4px}.chip{font-size:9px;padding:5px 6px;gap:5px}.quick-filters{gap:15px;margin-left:0}.scope-row{gap:5px;flex-wrap:wrap;font-size:9px}.scope-row select{font-size:9px;max-width:142px;padding-right:19px}.scope-row .text-link{font-size:9px;margin-left:0}.scope-row span{font-size:9px}.map-grid{grid-template-columns:1fr}.sector-panel{min-height:0}.sector-top{padding:16px 16px 10px}.sector-title b{font-size:17px}.sector-title small{font-size:8px}.sector-question{padding-left:16px;padding-bottom:10px;font-size:11px}.sector-icon{font-size:24px}.company-cloud{padding:15px 16px;gap:7px}.company-pill{padding:7px 9px;font-size:12px;min-height:35px}.sector-foot{padding:8px 16px;justify-content:space-between}.sector-foot>span{display:block;font-size:9px}.chain{font-size:8px;letter-spacing:0;gap:6px;flex-wrap:wrap;padding-bottom:15px}.chain b{font-size:12px}.section-heading{align-items:flex-start;flex-wrap:wrap;margin-bottom:18px}.section-heading h2{font-size:24px;line-height:1.5}.section-heading .eyebrow{font-size:8px;margin-bottom:6px}.section-note{font-size:9px;text-align:left}.section-note br{display:none}.editorial{grid-template-columns:1fr;gap:22px}.editorial article,.editorial article:first-of-type{padding-left:16px;border-left:2px solid var(--border)}.editorial h3{font-size:19px;margin:8px 0}.editorial p,.editorial article p{font-size:12px;min-height:0}.editorial button{font-size:11px;margin-top:10px}.directory{grid-template-columns:1fr}.company-card{padding:20px}.card-name button{font-size:17px}.card-name small{font-size:10px}.company-card>p{font-size:13px}.tag{font-size:10px}.card-event{font-size:11px}.card-actions{font-size:11px}.compare-tray{gap:8px;padding:11px;bottom:10px;width:calc(100% - 20px);max-width:none;justify-content:space-between}.compare-tray>div:first-child span{font-size:9px}.compare-tray strong{font-size:13px;margin-right:5px}#compareNames{display:none}.compare-tray .btn{font-size:10px;padding:8px 10px}.detail-dialog{width:calc(100% - 20px);max-width:calc(100% - 20px);max-height:94dvh;border-radius:10px}.dialog-header{padding:16px 19px}.profile-top{padding:20px 21px}.profile-main{padding:0 21px 24px}.profile-top h2{font-size:28px}.profile-top .desc{font-size:14px}.profile-main h3{font-size:18px}.profile-main p{font-size:12px}.profile-event p{font-size:11px}.compare-dialog{max-width:calc(100% - 16px);max-height:94dvh}.dialog-header h2{font-size:20px}.compare-body-scroll{padding:12px}.compare-table{min-width:760px}.compare-table th,.compare-table td{padding:12px}.explain{font-size:11px}.timeline-month{grid-template-columns:1fr;margin-bottom:25px}.month-label{display:flex;gap:10px;align-items:center;margin-bottom:14px;padding-top:0;font-size:20px}.event-list{margin-left:4px;padding-left:18px}.event:before{left:-23px}.event{padding:15px}.event h3{font-size:16px}.event p{font-size:12px}.source-list{grid-template-columns:1fr}.source-item summary{font-size:13px}.coverage-banner{font-size:11px}.chart-box{padding:18px}.chart-container{height:370px}.method-grid h3{font-size:22px}.footer{gap:9px;font-size:8px}.footer span:first-child{font-size:8px}.footer button{font-size:9px}.viz-menu{top:15px;right:15px}.toast{font-size:11px;text-align:center}section{margin-bottom:48px}}
+@media(max-width:375px){body{overflow-x:hidden}.shell{padding-left:13px;padding-right:13px}.chip{font-size:8px;padding:5px}.hero h1{font-size:48px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media print{html.theme-dark,html.theme-light{--bg:#fff;--surface:#fff;--text:#1c3024;--text-secondary:#536050;--border:#d8ddcf;--accent:#984026;--accent-secondary:#f0f2e7}.sidebar,.topline,.viz-menu,.filter-section,.compare-tray,.toast,.footer button,.favorite,.card-actions,.profile-actions,.month-nav,.section-heading>.btn,.icon-button{display:none!important}.shell{margin:0;padding:0;max-width:none}.hero{grid-template-columns:1fr 1fr;gap:30px;margin-bottom:28px}.hero h1{font-size:42px}.hero-stats strong{font-size:35px}.hero-intro{font-size:11px}.thesis{padding:12px}.map-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.sector-panel{break-inside:avoid;min-height:0}.company-pill{font-size:9px;padding:4px 6px}.sector-title b{font-size:13px}.sector-question{font-size:9px}.sector-foot{display:none}.directory{grid-template-columns:repeat(2,minmax(0,1fr))}.company-card,.event,.method-grid article,.source-item{break-inside:avoid}.editorial{display:none}.table-scroll{overflow:visible}.matrix{min-width:0;font-size:8px}.matrix td:first-child button{font-size:9px}.matrix th{font-size:8px}.matrix td,.matrix th{padding:5px}.matrix button.mark{width:22px;height:25px;font-size:13px}.source-list{grid-template-columns:repeat(2,minmax(0,1fr))}.method-grid{grid-template-columns:1fr}.chart-box{break-inside:avoid}.event-list{border-left:0}.event:before{display:none}section{margin-bottom:28px}.view{animation:none}.footer{font-size:8px}.detail-dialog[open],.compare-dialog[open]{position:static;max-height:none;max-width:none;width:100%;box-shadow:none;border:0}.dialog-header{position:static}.compare-table{min-width:0}.compare-body-scroll{overflow:visible}body:has(dialog[open]) .shell{display:none}@page{margin:12mm}}
+
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:10000;padding:8px 16px;background:var(--accent);color:white;text-decoration:none;border-radius:4px;" onfocus="this.style.cssText='position:fixed;left:16px;top:16px;z-index:10000;padding:8px 16px;background:var(--accent);color:white;text-decoration:none;border-radius:4px;'" onblur="this.style.cssText='position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;'">跳转到内容</a>
+
+  <!-- MENU -->
+  <div class="viz-menu">
+    <button class="viz-menu-toggle" onclick="toggleMenu()" aria-label="页面工具菜单">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/>
+      </svg>
+    </button>
+    <div class="viz-menu-dropdown" id="vizMenuDropdown">
+      <button onclick="cycleTheme()"><span id="themeIcon">🌙</span><span id="themeLabel">Dark</span></button>
+      <button onclick="downloadImage()"><span>📥</span><span>导出当前视图 PNG</span></button>
+      <button onclick="window.print()"><span>🖨️</span><span>打印 / 保存 PDF</span></button>
+    </div>
+  </div>
+
+  <!-- SKIP TO CONTENT (accessibility) -->
+  <a href="#main-content" class="skip-to-content">跳转到内容</a>
+
+  <main id="main-content" role="main">
+    <aside class="sidebar" aria-label="主导航">
+  <a class="brand" href="#map" aria-label="回到全景"><span class="brand-mark">✳</span><span><b>COMPANY<br>ATLAS</b><small>AI 产业观察室</small></span></a>
+  <div class="nav-label">EXPLORE THE LANDSCAPE</div>
+  <nav class="nav">
+    <button data-view="map" class="active"><span>▦</span>产业全景<small>01</small></button>
+    <button data-view="directory"><span>⊞</span>公司目录<small>02</small></button>
+    <button data-view="matrix"><span>◫</span>巨头布局<small>03</small></button>
+    <button data-view="timeline"><span>↗</span>年度动态<small>04</small></button>
+    <button data-view="sources"><span>≡</span>资料与口径<small>05</small></button>
+  </nav>
+  <div class="sidebar-focus"><div class="nav-label">本期观察</div><p>智能的竞争，<br>正在延伸到<br><em>工作的每一层。</em></p><span class="small-rule"></span><small>从芯片、模型到应用与机器人，<br>看公司在哪里创造价值。</small></div>
+  <div class="side-footer"><span class="status-dot"></span> 2026.10.03 研究快照<br><small>全球视角 · 中文整理</small></div>
+</aside>
+<div class="shell">
+  <header class="topline"><span>FIELD NOTES <i>/</i> VOL. 03</span><span class="top-caption">THE COMPANIES SHAPING AI</span></header>
+  <section class="hero animate" aria-labelledby="hero-title">
+    <div><div class="eyebrow"><span></span> 2025.10.03 — 2026.10.03</div><h1 id="hero-title">AI 公司，<br>一图看清。</h1><p class="hero-intro">从算力底座到真实世界。<br>把创业公司、大公司和它们争夺的市场，放在同一张图上。</p></div>
+    <div class="hero-aside"><div class="edition">A YEAR IN AI <span>↗</span></div><div class="hero-stats"><div><strong>66</strong><span>公司与业务品牌</span></div><div><strong>09</strong><span>产业赛道</span></div><div><strong>32</strong><span>年内关键节点</span></div></div><div class="thesis"><span>READ THE MAP</span><p>巨头连接多个层级，<br>创业公司把一个问题做深。</p><small>编辑观察 · 点击公司，展开它的故事</small></div></div>
+  </section>
+  <section class="filter-section" aria-label="筛选公司">
+    <div class="search-row"><label class="searchbox"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="搜索公司、产品或方向，例如：Kimi、语音、机器人" aria-label="搜索公司、产品或方向"><kbd>/</kbd></label><select id="region" aria-label="地区筛选"><option value="all">所有地区</option><option>中国</option><option>美国</option><option>欧洲</option><option>加拿大</option><option>中国 / 新加坡</option></select><button id="reset" class="reset">重置 ↺</button></div>
+    <div class="filter-bottom"><div class="chips" id="kinds"><button class="chip active" data-kind="all" aria-pressed="true">全部公司</button><button class="chip" data-kind="growth" aria-pressed="false"><i class="dot growth"></i>创业 / 成长</button><button class="chip" data-kind="platform" aria-pressed="false"><i class="dot platform"></i>大公司 / 成熟平台</button><button class="chip" data-kind="affiliate" aria-pressed="false"><i class="dot affiliate"></i>集团旗下业务</button></div><div class="quick-filters"><button class="text-toggle" id="favoriteOnly" aria-pressed="false">☆ 仅看收藏</button><label><input type="checkbox" id="evidenceOnly"> 有年内动态</label></div></div>
+    <div class="scope-row"><label for="sectorFilter">赛道</label><select id="sectorFilter" aria-label="赛道筛选"><option value="all">全部赛道</option></select><span id="filterSummary" aria-live="polite"></span><button class="text-link" onclick="exportCSV()">导出筛选 CSV ↗</button></div>
+  </section>
+  <div id="view-map" class="view">
+    <section aria-labelledby="map-heading"><div class="section-heading"><div><div class="eyebrow">01 / THE LANDSCAPE</div><h2 id="map-heading">沿着价值链，认识玩家。</h2></div><span class="section-note">点击名称查看详情<br>按主要业务归类，每家只计一次</span></div><div class="chain"><span>01 计算供给</span><b>→</b><span>02 智能与数据</span><b>→</b><span>03 应用与工作</span><b>→</b><span>04 物理世界</span></div><div class="map-grid" id="mapGrid"></div><div class="empty" id="mapEmpty" hidden>没有找到匹配的公司。<button onclick="resetFilters()">清除筛选</button></div></section>
+    <section class="editorial" aria-label="研究线索"><div><div class="eyebrow">THREE LENSES</div><h2>看热闹，也看结构。</h2><p>以下是研究问题，不是市场份额排名。</p></div><article><span>01</span><h3>模型之外</h3><p>当模型随时可调用，用户入口、上下文和工作流在哪里积累？</p><button onclick="setSector('work')">看企业工作流 ↗</button></article><article><span>02</span><h3>交付，而非演示</h3><p>代码能否合并、内容能否编辑、任务能否重复完成？</p><button onclick="setSector('code')">看软件开发 ↗</button></article><article><span>03</span><h3>走向真实世界</h3><p>算力与数据之外，硬件成本和跨场景泛化如何解决？</p><button onclick="setSector('physical')">看具身智能 ↗</button></article></section>
+  </div>
+  <div id="view-directory" class="view" hidden><section><div class="section-heading"><div><div class="eyebrow">02 / COMPANY INDEX</div><h2>你的公司研究清单。</h2></div><select id="sort" aria-label="公司排序"><option value="sector">按产业顺序</option><option value="name">按英文名 A—Z</option><option value="recent">按已收录动态时间</option></select></div><div class="directory" id="directory"></div><div class="empty" id="directoryEmpty" hidden>没有匹配结果。<button onclick="resetFilters()">清除筛选</button></div></section></div>
+  <div id="view-matrix" class="view" hidden><section><div class="section-heading"><div><div class="eyebrow">03 / PLATFORM COVERAGE</div><h2>大公司的跨层布局。</h2></div><button class="btn" onclick="matrixAll=!matrixAll;renderMatrix()" id="matrixAll">也看创业 / 成长公司</button></div><p class="explain">实心圆表示本图已收录的代表业务，浅色横线表示本图未标注。它不衡量实力、份额或投入；集团内产品合并到公司一行。点击圆点查看对应产品。</p><div class="table-scroll" tabindex="0" aria-label="可横向滚动的公司布局表"><table class="matrix" id="matrix"></table></div><p class="footnote">按上方公司筛选联动。赛道归属为编辑整理，允许一家参与多个赛道，因此跨赛道数量不可相加。</p></section></div>
+  <div id="view-timeline" class="view" hidden><section><div class="section-heading"><div><div class="eyebrow">04 / A YEAR OF MOVEMENT</div><h2>这一年，发生了什么。</h2></div><select id="eventType" aria-label="动态类型"><option value="all">所有事件类型</option><option>产品</option><option>融资</option><option>组织</option><option>合作</option><option>战略</option><option>落地</option></select></div><p class="explain">精选已找到明确日期与一手来源的节点，不代表完整新闻清单。融资额是该次公告的历史记录；不把融资估值当成当前估值，也不汇总可能重复的轮次。</p><div class="month-nav" id="months" aria-label="月份筛选"></div><div id="timeline" class="timeline"></div></section></div>
+  <div id="view-sources" class="view" hidden><section><div class="section-heading"><div><div class="eyebrow">05 / RESEARCH NOTES</div><h2>数据可以追溯，判断留有边界。</h2></div><button class="btn" onclick="downloadJSON()">下载完整 JSON ↗</button></div><div class="method-grid"><article><span class="eyebrow">SCOPE</span><h3>收录口径</h3><p>时间窗为 2025-10-03 至 2026-10-03。收录在 AI 产业中具有代表性的公司和业务品牌，不限于这一年成立。公司画像依据当前公开资料，年内事件另行标注。</p><p>66 条记录包含公司及集团内品牌，不是 66 个独立法人；不是完整公司名录。没有收录事件，不表示这一年没有动态。</p></article><article><span class="eyebrow">TAXONOMY</span><h3>如何分类</h3><p>「创业 / 成长」包含 AI 实验室、专门化厂商及成长平台，也可能已经上市；「大公司 / 成熟平台」侧重既有分发、云或企业软件基础；两者不按估值机械划分。</p><p>地区按起源或主要经营背景概括，不是法律注册地核查。业务分类、商业化概括和研究问题属于编辑归纳。</p></article><article><span class="eyebrow">EVIDENCE</span><h3>来源与时效</h3><p>优先使用公司公告、产品文档和交易所披露。厂商自述不等于独立验证；融资只记录公告原文口径，不推算未披露数据。</p><p>这是 2026-10-03 的人工研究快照，不会自动更新。Tesla 官方资料抓取受限，已单独注明，未收录其未核实年内数据。</p></article></div><div class="coverage-banner" id="coverage"></div><div class="chart-box"><div><h3>这张图覆盖了哪里？</h3><p>按主赛道计数，仅描述收录结构。</p></div><div class="chart-container"><canvas id="coverageChart" role="img" aria-label="各主赛道收录公司数量柱状图"></canvas><div id="chartFallback" class="fallback" hidden></div></div></div></section><section><div class="section-heading"><div><div class="eyebrow">SOURCE REGISTER</div><h2>逐家公司，回到原始资料。</h2></div><span class="section-note" id="sourceCount"></span></div><div class="source-list" id="sources"></div></section></div>
+  <footer class="footer"><span>COMPANY ATLAS <b>✳</b> 2025 — 2026</span><span>研究快照 · 主要功能支持离线 · 收藏保存在当前浏览器</span><button onclick="showView('sources')">查看资料口径 ↗</button></footer>
+</div>
+<div class="compare-tray" id="compareTray" hidden><div><strong id="compareCount">0 / 4</strong><span>公司对比</span></div><div id="compareNames"></div><button class="btn solid" onclick="openCompare()">展开对比 ↗</button><button class="icon-button" onclick="clearCompare()" aria-label="清空对比">×</button></div>
+<dialog id="detail" class="detail-dialog" aria-labelledby="detailTitle"><div class="dialog-header"><span class="eyebrow">COMPANY PROFILE</span><button class="icon-button" onclick="closeDialog('detail')" aria-label="关闭公司详情">×</button></div><div id="detailBody"></div></dialog>
+<dialog id="compare" class="compare-dialog" aria-labelledby="compareTitle"><div class="dialog-header"><div><div class="eyebrow">SIDE BY SIDE</div><h2 id="compareTitle">放在一起，更容易看清。</h2></div><button class="icon-button" onclick="closeDialog('compare')" aria-label="关闭公司对比">×</button></div><div id="compareBody"></div></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<noscript><p class="noscript">请启用 JavaScript 以使用公司筛选、详情与对比。</p></noscript>
+
+  </main>
+
+  <!-- EXAMPLE: Exclusive accordion (only one open at a time, no JS needed) -->
+  <!--
+  <details name="faq" open>
+    <summary>Section 1</summary>
+    <div class="section-body"><p>Content</p></div>
+  </details>
+  <details name="faq">
+    <summary>Section 2</summary>
+    <div class="section-body"><p>Content</p></div>
+  </details>
+  -->
+
+  <!-- EXAMPLE: Popover (zero-JS tooltip/info panel) -->
+  <!--
+  <button popovertarget="info-panel">Details</button>
+  <div id="info-panel" popover>
+    <h3>More Information</h3>
+    <p>Content shown on click, no JS needed.</p>
+  </div>
+  -->
+
+  <script>
+    // === Menu ===
+    function toggleMenu() { 
+      var dropdown = document.getElementById('vizMenuDropdown') || document.getElementById('vizMenu');
+      if (dropdown) dropdown.classList.toggle('open'); 
+    }
+    document.addEventListener('click', e => { 
+      if (!e.target.closest('.viz-menu')) {
+        var dropdown = document.getElementById('vizMenuDropdown') || document.getElementById('vizMenu');
+        if (dropdown) dropdown.classList.remove('open');
+      }
+    });
+    document.addEventListener('keydown', e => { 
+      if (e.key === 'Escape') {
+        var dropdown = document.getElementById('vizMenuDropdown') || document.getElementById('vizMenu');
+        if (dropdown) dropdown.classList.remove('open');
+      }
+    });
+
+    // === Theme (class-based, OS detection on first visit) ===
+    var savedTheme=null;try{savedTheme=localStorage.getItem('company-atlas-theme')}catch(e){}
+    var currentTheme=['light','dark'].includes(savedTheme)?savedTheme:'light';
+    function applyTheme(t) {
+      document.documentElement.className = 'theme-' + t;
+      document.getElementById('themeIcon').textContent = t === 'dark' ? '🌙' : '☀️';
+      document.getElementById('themeLabel').textContent = t === 'dark' ? '切换为浅色' : '切换为深色';
+      try{localStorage.setItem('company-atlas-theme',t)}catch(e){}
+      currentTheme = t;
+      if (typeof onThemeChange === 'function') onThemeChange();
+    }
+    function cycleTheme() { applyTheme(currentTheme === 'dark' ? 'light' : 'dark'); }
+    applyTheme(currentTheme);
+
+    // === Scroll Reveal (adds .reveal then .visible — content visible without JS) ===
+    document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('reveal'));
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // === Number Counter (use data-count="77" data-suffix="%" on elements) ===
+    function animateCounters() {
+      document.querySelectorAll('[data-count]').forEach(function(el) {
+        if (el.dataset.counted) return;
+        el.dataset.counted = '1';
+        var target = parseFloat(el.dataset.count), prefix = el.dataset.prefix || '', suffix = el.dataset.suffix || '';
+        var start = performance.now(), duration = 1200;
+        (function tick(now) {
+          var p = Math.min((now - start) / duration, 1), eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = prefix + Math.round(target * eased).toLocaleString() + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        })(start);
+      });
+    }
+    var counterEl = document.querySelector('[data-count]');
+    if (counterEl) {
+      var cObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) { animateCounters(); cObs.disconnect(); } });
+      }, { threshold: 0.3 });
+      cObs.observe(counterEl);
+    }
+
+    // === 导出当前视图 PNG ===
+    async function downloadImage() {
+      var menu = document.querySelector('.viz-menu');
+      menu.style.display = 'none';
+      try {
+        if(typeof htmlToImage==='undefined'){toast('PNG 导出组件需要联网；可改用打印 / PDF。');return;}
+        var url = await htmlToImage.toPng(document.querySelector('.shell'), { quality: 1, pixelRatio: 2, filter: function(n) { return !n.classList || !n.classList.contains('viz-menu'); } });
+        var a = document.createElement('a'); a.href = url;
+        a.download = document.title.replace(/\s+/g, '-').toLowerCase() + '.png'; a.click();
+      } catch(e) { toast('PNG 导出失败，可尝试打印 / PDF。'); } finally { menu.style.display = ''; }
+    }
+
+    // === Chart.js Pattern (use when file has Chart.js) ===
+    // var chartsBuilt = false;
+    // function buildCharts() {
+    //   if (chartsBuilt || typeof Chart === 'undefined') return;
+    //   var isDark = document.documentElement.classList.contains('theme-dark');
+    //   var textColor = isDark ? '#EDEDED' : '#0f172a';
+    //   var borderColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+    //   // Create charts with theme-aware colors
+    //   chartsBuilt = true;
+    // }
+    // function onThemeChange() { chartsBuilt = false; buildCharts(); }
+    // window.addEventListener('load', buildCharts);
+
+    var DATA = {
+  "title": "AI 公司全景图",
+  "start": "2025-10-03",
+  "end": "2026-10-03",
+  "checked": "2026-10-03",
+  "companies": [
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "en": "OpenAI",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "model",
+      "sectors": [
+        "model",
+        "code",
+        "agent",
+        "media"
+      ],
+      "products": [
+        "ChatGPT",
+        "GPT",
+        "Codex"
+      ],
+      "desc": "从前沿模型走向个人与企业工作平台。",
+      "business": "订阅、API 用量、企业协议",
+      "lens": "研究能力能否持续转化为可交付的任务结果？",
+      "url": "https://openai.com/index/the-work-now-within-reach/",
+      "note": "",
+      "sources": [
+        {
+          "title": "OpenAI 强调研究与产品连接",
+          "url": "https://openai.com/index/the-work-now-within-reach/",
+          "date": "2026-09-08"
+        }
+      ],
+      "events": [
+        "e22"
+      ],
+      "lastEvent": "2026-09-08"
+    },
+    {
+      "id": "anthropic",
+      "name": "Anthropic",
+      "en": "Anthropic",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "model",
+      "sectors": [
+        "model",
+        "code",
+        "agent",
+        "work"
+      ],
+      "products": [
+        "Claude",
+        "Claude Code",
+        "Claude API"
+      ],
+      "desc": "以 Claude 连接知识工作、编程和企业任务。",
+      "business": "订阅、API 用量、企业协议",
+      "lens": "长任务可靠性与企业部署，是模型之外的关键。",
+      "url": "https://www.anthropic.com/news",
+      "note": "",
+      "sources": [
+        {
+          "title": "Claude Sonnet 5.5 发布",
+          "url": "https://www.anthropic.com/news",
+          "date": "2026-09-28"
+        }
+      ],
+      "events": [
+        "e30"
+      ],
+      "lastEvent": "2026-09-28"
+    },
+    {
+      "id": "deepseek",
+      "name": "DeepSeek 深度求索",
+      "en": "DeepSeek",
+      "region": "中国",
+      "kind": "growth",
+      "sector": "model",
+      "sectors": [
+        "model",
+        "code",
+        "agent"
+      ],
+      "products": [
+        "DeepSeek",
+        "API",
+        "Harness"
+      ],
+      "desc": "通过模型架构与推理效率创新服务开发者。",
+      "business": "API 用量与模型生态",
+      "lens": "模型、推理系统与低成本供给如何共同演进？",
+      "url": "https://www.deepseek.com/news/deepseek-v4-1-flash/",
+      "note": "",
+      "sources": [
+        {
+          "title": "DeepSeek V4.1 Flash 发布",
+          "url": "https://www.deepseek.com/news/deepseek-v4-1-flash/",
+          "date": "2026-09-10"
+        }
+      ],
+      "events": [
+        "e24"
+      ],
+      "lastEvent": "2026-09-10"
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral AI",
+      "en": "Mistral",
+      "region": "欧洲",
+      "kind": "growth",
+      "sector": "model",
+      "sectors": [
+        "model",
+        "compute",
+        "code",
+        "work"
+      ],
+      "products": [
+        "Mistral Models",
+        "Vibe",
+        "AI Cloud"
+      ],
+      "desc": "把模型、私有部署与算力结合为企业 AI 方案。",
+      "business": "API、企业部署、算力服务",
+      "lens": "主权部署需求能否形成长期企业客户关系？",
+      "url": "https://mistral.ai/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://mistral.ai/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "cohere",
+      "name": "Cohere",
+      "en": "Cohere",
+      "region": "加拿大",
+      "kind": "growth",
+      "sector": "model",
+      "sectors": [
+        "model",
+        "data",
+        "work"
+      ],
+      "products": [
+        "Command",
+        "Embed",
+        "Rerank",
+        "North"
+      ],
+      "desc": "围绕企业检索、私有部署与工作助手构建产品。",
+      "business": "API、企业协议与私有部署",
+      "lens": "企业检索质量与数据控制如何形成差异？",
+      "url": "https://cohere.com/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://cohere.com/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "moonshot",
+      "name": "月之暗面",
+      "en": "Moonshot AI · Kimi",
+      "region": "中国",
+      "kind": "growth",
+      "sector": "model",
+      "sectors": [
+        "model",
+        "code",
+        "agent"
+      ],
+      "products": [
+        "Kimi",
+        "Agent Swarm",
+        "Kimi API"
+      ],
+      "desc": "将模型能力带入研究、编程与办公交付。",
+      "business": "用户订阅、API 用量",
+      "lens": "复杂任务的并行执行与交付体验值得跟踪。",
+      "url": "https://www.moonshot.ai/en",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.moonshot.ai/en"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "zhipu",
+      "name": "智谱 Z.ai",
+      "en": "Zhipu · GLM",
+      "region": "中国",
+      "kind": "growth",
+      "sector": "model",
+      "sectors": [
+        "model",
+        "code",
+        "agent"
+      ],
+      "products": [
+        "GLM",
+        "Z.ai",
+        "BigModel"
+      ],
+      "desc": "通过 GLM 模型、开放平台和编码工具触达开发者。",
+      "business": "API、订阅、企业服务",
+      "lens": "开放模型与商业 API 如何互相促进？",
+      "url": "https://z.ai/blog/glm-5.2",
+      "note": "成长公司分类不等于未上市；本图不按上市状态划分。",
+      "sources": [
+        {
+          "title": "GLM-5.2 聚焦长任务",
+          "url": "https://z.ai/blog/glm-5.2",
+          "date": "2026-06-16"
+        }
+      ],
+      "events": [
+        "e13"
+      ],
+      "lastEvent": "2026-06-16"
+    },
+    {
+      "id": "minimax",
+      "name": "MiniMax 稀宇",
+      "en": "MiniMax",
+      "region": "中国",
+      "kind": "growth",
+      "sector": "model",
+      "sectors": [
+        "model",
+        "code",
+        "media"
+      ],
+      "products": [
+        "MiniMax M 系列",
+        "Code",
+        "Hailuo",
+        "Speech"
+      ],
+      "desc": "同时布局语言、视频、语音与消费产品。",
+      "business": "订阅、API、企业服务",
+      "lens": "多模态产品矩阵如何分配研发与获客成本？",
+      "url": "https://www.minimax.io/",
+      "note": "成长公司分类不等于未上市；本图不按上市状态划分。",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.minimax.io/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "stepfun",
+      "name": "阶跃星辰",
+      "en": "StepFun",
+      "region": "中国",
+      "kind": "growth",
+      "sector": "model",
+      "sectors": [
+        "model",
+        "code",
+        "agent"
+      ],
+      "products": [
+        "Step 系列",
+        "Step API"
+      ],
+      "desc": "面向推理、工具调用与编码的模型研发公司。",
+      "business": "API 与企业合作",
+      "lens": "轻量激活的模型能否降低长任务成本？",
+      "url": "https://static.stepfun.com/blog/step-3.5-flash/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://static.stepfun.com/blog/step-3.5-flash/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "xai",
+      "name": "SpaceXAI / xAI",
+      "en": "Grok · SpaceX",
+      "region": "美国",
+      "kind": "affiliate",
+      "sector": "model",
+      "sectors": [
+        "model",
+        "agent",
+        "media"
+      ],
+      "products": [
+        "Grok",
+        "Grok API"
+      ],
+      "desc": "SpaceX 体系中的模型与 AI 产品业务。",
+      "business": "订阅、API 用量",
+      "lens": "算力供给、实时信息与产品分发能否形成协同？",
+      "url": "https://x.ai/company",
+      "note": "2026-02-02 官方宣布 SpaceX 已收购 xAI；按集团旗下业务展示。",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://x.ai/company"
+        },
+        {
+          "title": "xAI 加入 SpaceX",
+          "url": "https://x.ai/news/xai-joins-spacex",
+          "date": "2026-02-02"
+        }
+      ],
+      "events": [
+        "e7"
+      ],
+      "lastEvent": "2026-02-02"
+    },
+    {
+      "id": "microsoft",
+      "name": "微软",
+      "en": "Microsoft",
+      "region": "美国",
+      "kind": "platform",
+      "sector": "work",
+      "sectors": [
+        "compute",
+        "model",
+        "code",
+        "agent",
+        "work"
+      ],
+      "products": [
+        "Azure",
+        "Copilot",
+        "GitHub Copilot"
+      ],
+      "desc": "云、办公和开发者工具共同构成 AI 分发入口。",
+      "business": "云消费、软件席位与企业协议",
+      "lens": "能否把 AI 嵌入企业每天使用的软件和权限体系？",
+      "url": "https://news.microsoft.com/source/emea/2026/09/new-microsoft-copilot-brings-home-code-and-autopilot-together/",
+      "note": "",
+      "sources": [
+        {
+          "title": "Copilot 整合 Home、Code 与 Autopilot",
+          "url": "https://news.microsoft.com/source/emea/2026/09/new-microsoft-copilot-brings-home-code-and-autopilot-together/",
+          "date": "2026-09-25"
+        }
+      ],
+      "events": [
+        "e29"
+      ],
+      "lastEvent": "2026-09-25"
+    },
+    {
+      "id": "google",
+      "name": "Google / Alphabet",
+      "en": "Google DeepMind",
+      "region": "美国",
+      "kind": "platform",
+      "sector": "model",
+      "sectors": [
+        "compute",
+        "model",
+        "code",
+        "agent",
+        "work",
+        "media",
+        "physical"
+      ],
+      "products": [
+        "Gemini",
+        "Google Cloud",
+        "Workspace",
+        "Veo"
+      ],
+      "desc": "覆盖算力、模型、搜索、办公与多模态创作。",
+      "business": "云、订阅、广告与企业软件",
+      "lens": "广泛入口怎样转化为持续的 AI 使用？",
+      "url": "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-september-2026/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-september-2026/"
+        },
+        {
+          "title": "Gemini 4 Argon 公布",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
+          "date": "2026-09-30"
+        }
+      ],
+      "events": [
+        "e32"
+      ],
+      "lastEvent": "2026-09-30"
+    },
+    {
+      "id": "meta",
+      "name": "Meta",
+      "en": "Meta · Muse",
+      "region": "美国",
+      "kind": "platform",
+      "sector": "agent",
+      "sectors": [
+        "model",
+        "agent",
+        "media"
+      ],
+      "products": [
+        "Muse",
+        "Meta AI",
+        "AI 眼镜"
+      ],
+      "desc": "把个人代理和内容能力连接到社交与商业账户。",
+      "business": "广告、商业工具与硬件生态",
+      "lens": "用户分发和商家数据如何转化为可执行任务？",
+      "url": "https://about.fb.com/news/2026/09/introducing-muse-small-business/",
+      "note": "Manus 已在 2026-09-01 宣布恢复独立运营，本图不将其列为 Meta 旗下。",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://about.fb.com/news/2026/09/introducing-muse-small-business/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "amazon",
+      "name": "亚马逊 AWS",
+      "en": "Amazon",
+      "region": "美国",
+      "kind": "platform",
+      "sector": "compute",
+      "sectors": [
+        "compute",
+        "model",
+        "agent",
+        "work"
+      ],
+      "products": [
+        "Bedrock",
+        "Nova",
+        "Trainium",
+        "Alexa"
+      ],
+      "desc": "提供从芯片、模型到云端 Agent 的基础设施。",
+      "business": "云资源、模型调用与企业服务",
+      "lens": "自研芯片与多模型平台如何改善部署经济性？",
+      "url": "https://aws.amazon.com/ai/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://aws.amazon.com/ai/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "alibaba",
+      "name": "阿里巴巴",
+      "en": "Alibaba · Qwen",
+      "region": "中国",
+      "kind": "platform",
+      "sector": "model",
+      "sectors": [
+        "compute",
+        "model",
+        "code",
+        "agent",
+        "work",
+        "media"
+      ],
+      "products": [
+        "Qwen",
+        "百炼",
+        "阿里云",
+        "QwenWork"
+      ],
+      "desc": "将云、模型、智能体和硬件纳入全栈 AI 布局。",
+      "business": "云资源、模型调用、企业与消费产品",
+      "lens": "开源生态、云客户和应用入口如何相互连接？",
+      "url": "https://www.alibabacloud.com/en/press-room/alibaba-unveils-roadmap-on-full-stack-ai-strategy",
+      "note": "2026-09-22 公告中的 Qwen 4 是训练中路线图，不能视为已经发布。",
+      "sources": [
+        {
+          "title": "阿里公布全栈 AI 路线图",
+          "url": "https://www.alibabacloud.com/en/press-room/alibaba-unveils-roadmap-on-full-stack-ai-strategy",
+          "date": "2026-09-22"
+        }
+      ],
+      "events": [
+        "e27"
+      ],
+      "lastEvent": "2026-09-22"
+    },
+    {
+      "id": "bytedance",
+      "name": "字节跳动",
+      "en": "ByteDance · Seed",
+      "region": "中国",
+      "kind": "platform",
+      "sector": "media",
+      "sectors": [
+        "compute",
+        "model",
+        "code",
+        "agent",
+        "media"
+      ],
+      "products": [
+        "豆包",
+        "Seed",
+        "Seedance",
+        "Seedream",
+        "火山方舟"
+      ],
+      "desc": "语言与多模态模型连接消费入口和企业开发平台。",
+      "business": "云与 API、内容及应用生态",
+      "lens": "生成能力如何进入高频内容生产流程？",
+      "url": "https://seed.bytedance.com/en/",
+      "note": "",
+      "sources": [
+        {
+          "title": "Seedance 2.5 发布",
+          "url": "https://seed.bytedance.com/en/",
+          "date": "2026-07-31"
+        }
+      ],
+      "events": [
+        "e15",
+        "e16"
+      ],
+      "lastEvent": "2026-07-31"
+    },
+    {
+      "id": "tencent",
+      "name": "腾讯",
+      "en": "Tencent · Hunyuan",
+      "region": "中国",
+      "kind": "platform",
+      "sector": "model",
+      "sectors": [
+        "compute",
+        "model",
+        "code",
+        "agent",
+        "media"
+      ],
+      "products": [
+        "混元",
+        "元宝",
+        "CodeBuddy",
+        "WorkBuddy"
+      ],
+      "desc": "以模型和工具连接社交、内容及开发者生态。",
+      "business": "云与 API、软件及平台生态",
+      "lens": "助手与开发工具能否融入既有业务系统？",
+      "url": "https://hunyuan.tencent.com/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://hunyuan.tencent.com/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "baidu",
+      "name": "百度",
+      "en": "Baidu · ERNIE",
+      "region": "中国",
+      "kind": "platform",
+      "sector": "agent",
+      "sectors": [
+        "compute",
+        "model",
+        "agent",
+        "work",
+        "physical"
+      ],
+      "products": [
+        "文心",
+        "千帆",
+        "百度搜索",
+        "Apollo"
+      ],
+      "desc": "将模型、企业 Agent 与搜索和自动驾驶连接。",
+      "business": "云、企业服务、搜索及自动驾驶业务",
+      "lens": "搜索场景与企业工作流能否共享模型投入？",
+      "url": "https://cloud.baidu.com/product/wenxinworkshop",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://cloud.baidu.com/product/wenxinworkshop"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "huawei",
+      "name": "华为",
+      "en": "Huawei",
+      "region": "中国",
+      "kind": "platform",
+      "sector": "compute",
+      "sectors": [
+        "compute",
+        "model",
+        "work"
+      ],
+      "products": [
+        "昇腾",
+        "盘古",
+        "华为云"
+      ],
+      "desc": "从 AI 算力到行业模型提供系统化方案。",
+      "business": "硬件、云与行业交付",
+      "lens": "软硬件协同与行业实施如何影响实际采用？",
+      "url": "https://www.huaweicloud.com/product/pangu.html",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.huaweicloud.com/product/pangu.html"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "nvidia",
+      "name": "NVIDIA 英伟达",
+      "en": "NVIDIA",
+      "region": "美国",
+      "kind": "platform",
+      "sector": "compute",
+      "sectors": [
+        "compute",
+        "model",
+        "data",
+        "physical"
+      ],
+      "products": [
+        "GPU",
+        "CUDA",
+        "Vera Rubin",
+        "Isaac"
+      ],
+      "desc": "以加速计算系统、软件和仿真支撑 AI 产业。",
+      "business": "芯片、系统、软件与企业方案",
+      "lens": "交付能力、推理效率和软件生态如何共同扩张？",
+      "url": "https://nvidianews.nvidia.com/news/vera-rubin-full-production-agentic-ai-factory",
+      "note": "",
+      "sources": [
+        {
+          "title": "Vera Rubin 扩大生产",
+          "url": "https://nvidianews.nvidia.com/news/vera-rubin-full-production-agentic-ai-factory",
+          "date": "2026-05-31"
+        }
+      ],
+      "events": [
+        "e12"
+      ],
+      "lastEvent": "2026-05-31"
+    },
+    {
+      "id": "amd",
+      "name": "AMD",
+      "en": "Advanced Micro Devices",
+      "region": "美国",
+      "kind": "platform",
+      "sector": "compute",
+      "sectors": [
+        "compute",
+        "physical"
+      ],
+      "products": [
+        "Instinct",
+        "ROCm",
+        "AI PC"
+      ],
+      "desc": "布局数据中心加速器、软件生态与终端 AI。",
+      "business": "芯片与系统生态",
+      "lens": "硬件、开放软件和研究能力如何互相补足？",
+      "url": "https://www.amd.com/en/solutions/ai.html",
+      "note": "World Labs 于 2026-09-28 宣布签署加入 AMD 的协议，预计年底前交割；本图不认定已完成。",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.amd.com/en/solutions/ai.html"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "apple",
+      "name": "苹果",
+      "en": "Apple",
+      "region": "美国",
+      "kind": "platform",
+      "sector": "agent",
+      "sectors": [
+        "compute",
+        "model",
+        "agent"
+      ],
+      "products": [
+        "Apple Intelligence",
+        "Siri",
+        "Apple Silicon"
+      ],
+      "desc": "把 AI 能力嵌入设备、操作系统和个人任务。",
+      "business": "设备销售、服务与平台生态",
+      "lens": "本地计算、隐私和个人上下文怎样结合？",
+      "url": "https://www.apple.com/apple-intelligence/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.apple.com/apple-intelligence/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "salesforce",
+      "name": "Salesforce",
+      "en": "Salesforce",
+      "region": "美国",
+      "kind": "platform",
+      "sector": "work",
+      "sectors": [
+        "data",
+        "agent",
+        "work"
+      ],
+      "products": [
+        "Agentforce",
+        "CRM",
+        "Data Cloud"
+      ],
+      "desc": "以客户数据和业务流程为基础部署企业 Agent。",
+      "business": "软件订阅、用量与企业协议",
+      "lens": "客户服务和销售任务的完成率如何衡量？",
+      "url": "https://www.salesforce.com/agentforce/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.salesforce.com/agentforce/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "adobe",
+      "name": "Adobe",
+      "en": "Adobe",
+      "region": "美国",
+      "kind": "platform",
+      "sector": "media",
+      "sectors": [
+        "media",
+        "work"
+      ],
+      "products": [
+        "Firefly",
+        "Photoshop",
+        "Premiere",
+        "Express"
+      ],
+      "desc": "把生成与编辑能力带入成熟创意工作流。",
+      "business": "软件订阅、生成额度与企业服务",
+      "lens": "编辑控制、版权安排和工具链整合如何影响采用？",
+      "url": "https://www.adobe.com/products/firefly.html",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.adobe.com/products/firefly.html"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "servicenow",
+      "name": "ServiceNow",
+      "en": "ServiceNow",
+      "region": "美国",
+      "kind": "platform",
+      "sector": "work",
+      "sectors": [
+        "data",
+        "agent",
+        "work"
+      ],
+      "products": [
+        "AI Platform",
+        "AI Agents",
+        "Action Fabric"
+      ],
+      "desc": "将智能体接入 IT、HR、客服等企业执行系统。",
+      "business": "企业订阅与平台协议",
+      "lens": "执行权限、系统集成和可审计结果是核心。",
+      "url": "https://www.servicenow.com/platform.html",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.servicenow.com/platform.html"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "coreweave",
+      "name": "CoreWeave",
+      "en": "CoreWeave",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "compute",
+      "sectors": [
+        "compute",
+        "data"
+      ],
+      "products": [
+        "AI Cloud",
+        "GPU Clusters",
+        "Forge"
+      ],
+      "desc": "围绕 AI 训练和推理运营专用云基础设施。",
+      "business": "算力消费与容量协议",
+      "lens": "资本投入、利用率和长期客户需求如何匹配？",
+      "url": "https://www.coreweave.com/",
+      "note": "成长公司分类也包含已上市的专门化平台。",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.coreweave.com/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "cerebras",
+      "name": "Cerebras",
+      "en": "Cerebras",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "compute",
+      "sectors": [
+        "compute"
+      ],
+      "products": [
+        "Wafer Scale Engine",
+        "CS-4",
+        "Inference"
+      ],
+      "desc": "以晶圆级架构和推理服务探索 GPU 之外的路径。",
+      "business": "硬件、推理用量与大客户协议",
+      "lens": "延迟优势能否覆盖足够多的模型和任务？",
+      "url": "https://www.cerebras.ai/cs4",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.cerebras.ai/cs4"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "groq",
+      "name": "Groq",
+      "en": "GroqCloud",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "compute",
+      "sectors": [
+        "compute"
+      ],
+      "products": [
+        "GroqCloud",
+        "LPU",
+        "LPX 云服务"
+      ],
+      "desc": "提供低延迟推理云，并与 NVIDIA 技术生态合作。",
+      "business": "推理用量与企业容量服务",
+      "lens": "实时推理的速度和经济性如何共同成立？",
+      "url": "https://groq.com/",
+      "note": "2025-12-24 协议为非独家技术授权及部分团队转移；官方明确公司继续独立运营，不标为整体收购。",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://groq.com/"
+        },
+        {
+          "title": "Groq 与 NVIDIA 达成技术授权",
+          "url": "https://groq.com/newsroom/groq-and-nvidia-enter-non-exclusive-inference-technology-licensing-agreement-to-accelerate-ai-inference-at-global-scale",
+          "date": "2025-12-24"
+        }
+      ],
+      "events": [
+        "e4"
+      ],
+      "lastEvent": "2025-12-24"
+    },
+    {
+      "id": "together",
+      "name": "Together AI",
+      "en": "Together",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "compute",
+      "sectors": [
+        "compute",
+        "model",
+        "data"
+      ],
+      "products": [
+        "Inference",
+        "GPU Clusters",
+        "Custom Training"
+      ],
+      "desc": "为模型训练、定制和推理提供一体化云平台。",
+      "business": "API 用量、GPU 与训练服务",
+      "lens": "从通用托管走向客户专属模型的价值有多大？",
+      "url": "https://www.together.ai/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.together.ai/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "fireworks",
+      "name": "Fireworks AI",
+      "en": "Fireworks",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "compute",
+      "sectors": [
+        "compute",
+        "model",
+        "data"
+      ],
+      "products": [
+        "Inference",
+        "Fine-tuning",
+        "Reinforcement Learning"
+      ],
+      "desc": "提供高效模型推理及专用智能训练平台。",
+      "business": "推理和训练用量、企业服务",
+      "lens": "服务成本与模型定制的持续改进如何闭环？",
+      "url": "https://fireworks.ai/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://fireworks.ai/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "en": "Anysphere · SpaceX",
+      "region": "美国",
+      "kind": "affiliate",
+      "sector": "code",
+      "sectors": [
+        "code",
+        "model"
+      ],
+      "products": [
+        "Cursor",
+        "Cloud Agents",
+        "Projects"
+      ],
+      "desc": "以编辑器和云端编码代理进入软件开发流程。",
+      "business": "订阅、用量与企业协议",
+      "lens": "模型研究与日常开发体验能否一起改善？",
+      "url": "https://cursor.com/blog/joining-spacex",
+      "note": "2026-08-14 官方宣布被 SpaceX 收购完成；不再列为独立创业公司。",
+      "sources": [
+        {
+          "title": "Cursor 收购交割完成",
+          "url": "https://cursor.com/blog/joining-spacex",
+          "date": "2026-08-14"
+        },
+        {
+          "title": "Cursor 披露 D 轮融资",
+          "url": "https://cursor.com/blog/series-d",
+          "date": "2025-11-13"
+        }
+      ],
+      "events": [
+        "e2",
+        "e18"
+      ],
+      "lastEvent": "2026-08-14"
+    },
+    {
+      "id": "cognition",
+      "name": "Cognition",
+      "en": "Devin · Windsurf",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "code",
+      "sectors": [
+        "code",
+        "model"
+      ],
+      "products": [
+        "Devin",
+        "Windsurf",
+        "SWE Models"
+      ],
+      "desc": "让编码代理在代码库中计划、编写、测试和交付。",
+      "business": "订阅、计算用量与企业协议",
+      "lens": "从生成代码到可合并、可维护交付的距离有多远？",
+      "url": "https://cognition.com/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://cognition.com/"
+        },
+        {
+          "title": "Cognition 宣布 E 轮",
+          "url": "https://cognition.com/blog/series-e",
+          "date": "2026-09-08"
+        }
+      ],
+      "events": [
+        "e21"
+      ],
+      "lastEvent": "2026-09-08"
+    },
+    {
+      "id": "replit",
+      "name": "Replit",
+      "en": "Replit",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "code",
+      "sectors": [
+        "code",
+        "compute",
+        "agent"
+      ],
+      "products": [
+        "Replit Agent",
+        "Design Canvas",
+        "Deployment"
+      ],
+      "desc": "通过对话把想法推进为可运行的应用。",
+      "business": "订阅、Agent 用量与部署消费",
+      "lens": "非开发者能否稳定维护已经生成的产品？",
+      "url": "https://replit.com/blog/replit-raises-400-million-dollars",
+      "note": "",
+      "sources": [
+        {
+          "title": "Replit 融资并推进 Agent 4",
+          "url": "https://replit.com/blog/replit-raises-400-million-dollars",
+          "date": "2026-03-11"
+        }
+      ],
+      "events": [
+        "e9"
+      ],
+      "lastEvent": "2026-03-11"
+    },
+    {
+      "id": "lovable",
+      "name": "Lovable",
+      "en": "Lovable",
+      "region": "欧洲",
+      "kind": "growth",
+      "sector": "code",
+      "sectors": [
+        "code",
+        "agent"
+      ],
+      "products": [
+        "Lovable",
+        "App Builder"
+      ],
+      "desc": "面向创业者与业务团队的自然语言应用构建平台。",
+      "business": "订阅、用量与团队服务",
+      "lens": "从原型到真实业务系统的留存如何形成？",
+      "url": "https://lovable.dev/blog/series-c",
+      "note": "",
+      "sources": [
+        {
+          "title": "Lovable 完成 C 轮",
+          "url": "https://lovable.dev/blog/series-c",
+          "date": "2026-08-12"
+        }
+      ],
+      "events": [
+        "e17"
+      ],
+      "lastEvent": "2026-08-12"
+    },
+    {
+      "id": "vercel",
+      "name": "Vercel",
+      "en": "Vercel · v0",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "code",
+      "sectors": [
+        "code",
+        "compute",
+        "data"
+      ],
+      "products": [
+        "v0",
+        "AI SDK",
+        "AI Gateway",
+        "Sandbox"
+      ],
+      "desc": "连接应用生成、AI 开发框架与生产部署。",
+      "business": "平台订阅、部署及 API 用量",
+      "lens": "开发入口如何转化为持续运行的基础设施需求？",
+      "url": "https://vercel.com/ai",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://vercel.com/ai"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "factory",
+      "name": "Factory",
+      "en": "Factory · Droid",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "code",
+      "sectors": [
+        "code",
+        "agent"
+      ],
+      "products": [
+        "Droid",
+        "Mission Control",
+        "Agent Readiness"
+      ],
+      "desc": "通过编码代理编排软件规划、构建、审核与交付。",
+      "business": "开发者订阅与企业协议",
+      "lens": "能否把零散 AI 工具连接成受控的软件交付流程？",
+      "url": "https://factory.com/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://factory.com/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "databricks",
+      "name": "Databricks",
+      "en": "Databricks",
+      "region": "美国",
+      "kind": "platform",
+      "sector": "data",
+      "sectors": [
+        "data",
+        "model",
+        "work"
+      ],
+      "products": [
+        "Data Intelligence Platform",
+        "Mosaic AI"
+      ],
+      "desc": "以数据平台为基础提供企业 AI 开发与治理。",
+      "business": "平台消费与企业协议",
+      "lens": "数据所在位置能否成为企业 AI 的部署入口？",
+      "url": "https://www.databricks.com/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.databricks.com/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "snowflake",
+      "name": "Snowflake",
+      "en": "Snowflake",
+      "region": "美国",
+      "kind": "platform",
+      "sector": "data",
+      "sectors": [
+        "data",
+        "model",
+        "work"
+      ],
+      "products": [
+        "AI Data Cloud",
+        "Cortex"
+      ],
+      "desc": "围绕企业数据提供分析、AI 与治理能力。",
+      "business": "平台消费与企业协议",
+      "lens": "模型能否在企业已有的数据权限内工作？",
+      "url": "https://www.snowflake.com/en/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.snowflake.com/en/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "huggingface",
+      "name": "Hugging Face",
+      "en": "Hugging Face",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "data",
+      "sectors": [
+        "data",
+        "model",
+        "compute",
+        "physical"
+      ],
+      "products": [
+        "Hub",
+        "Transformers",
+        "Inference",
+        "LeRobot"
+      ],
+      "desc": "把模型、数据集、工具与开发者社区连接起来。",
+      "business": "企业协作、托管与推理服务",
+      "lens": "社区分发如何与可靠的企业基础设施结合？",
+      "url": "https://huggingface.co/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://huggingface.co/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "langchain",
+      "name": "LangChain",
+      "en": "LangChain · LangSmith",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "data",
+      "sectors": [
+        "data",
+        "agent"
+      ],
+      "products": [
+        "LangChain",
+        "LangGraph",
+        "LangSmith"
+      ],
+      "desc": "覆盖 Agent 开发、编排、观测与评估。",
+      "business": "开源生态、平台用量和企业服务",
+      "lens": "生产可靠性与反馈循环如何形成付费需求？",
+      "url": "https://www.langchain.com/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.langchain.com/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "scale",
+      "name": "Scale AI",
+      "en": "Scale AI",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "data",
+      "sectors": [
+        "data",
+        "model",
+        "vertical"
+      ],
+      "products": [
+        "Data Engine",
+        "Evaluation",
+        "Enterprise AI"
+      ],
+      "desc": "提供训练数据、模型评估和高要求 AI 系统交付。",
+      "business": "数据项目、评估与企业服务",
+      "lens": "高质量数据和评估在模型迭代中的价值如何变化？",
+      "url": "https://scale.com/",
+      "note": "分类表示专门化 AI 公司，不作股权独立性判断；战略投资不自动视为控股或并购。",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://scale.com/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "perplexity",
+      "name": "Perplexity",
+      "en": "Perplexity",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "agent",
+      "sectors": [
+        "agent",
+        "code",
+        "work"
+      ],
+      "products": [
+        "Answer Engine",
+        "Computer",
+        "Comet",
+        "API"
+      ],
+      "desc": "从带引用的搜索回答扩展到多步骤任务执行。",
+      "business": "订阅、API 与企业方案",
+      "lens": "信息可信度与任务执行能否共享一个入口？",
+      "url": "https://www.perplexity.ai/hub",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.perplexity.ai/hub"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "manus",
+      "name": "Manus",
+      "en": "Manus",
+      "region": "中国 / 新加坡",
+      "kind": "growth",
+      "sector": "agent",
+      "sectors": [
+        "agent",
+        "code",
+        "work",
+        "media"
+      ],
+      "products": [
+        "Manus",
+        "Wide Research",
+        "Browser Operator"
+      ],
+      "desc": "围绕研究、网页、文档和创作提供通用任务代理。",
+      "business": "订阅、任务额度与团队方案",
+      "lens": "在复杂工具环境里能否稳定完成整件事？",
+      "url": "https://manus.im/blog/manus-resumes-independent-operations",
+      "note": "2026-09-01 官方宣布正式恢复独立运营；截至快照不归入 Meta。",
+      "sources": [
+        {
+          "title": "Manus 恢复独立运营",
+          "url": "https://manus.im/blog/manus-resumes-independent-operations",
+          "date": "2026-09-01"
+        }
+      ],
+      "events": [
+        "e19"
+      ],
+      "lastEvent": "2026-09-01"
+    },
+    {
+      "id": "glean",
+      "name": "Glean",
+      "en": "Glean",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "work",
+      "sectors": [
+        "data",
+        "agent",
+        "work"
+      ],
+      "products": [
+        "Enterprise Search",
+        "Assistant",
+        "Agents"
+      ],
+      "desc": "通过企业上下文、连接器与权限支撑知识工作。",
+      "business": "企业软件协议",
+      "lens": "正确的公司上下文能否改善任务结果？",
+      "url": "https://www.glean.com/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.glean.com/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "notion",
+      "name": "Notion",
+      "en": "Notion",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "work",
+      "sectors": [
+        "data",
+        "agent",
+        "work"
+      ],
+      "products": [
+        "Notion AI",
+        "Agents",
+        "Enterprise Search"
+      ],
+      "desc": "将文档、知识库、项目和 AI 团队放入同一工作空间。",
+      "business": "工作空间订阅与 AI 服务",
+      "lens": "知识沉淀能否自然转为持续执行的任务？",
+      "url": "https://www.notion.com/product/ai",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.notion.com/product/ai"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "sierra",
+      "name": "Sierra",
+      "en": "Sierra",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "work",
+      "sectors": [
+        "agent",
+        "work"
+      ],
+      "products": [
+        "AI Customer Agents",
+        "Ghostwriter"
+      ],
+      "desc": "为企业构建跨文字与语音渠道的客户代理。",
+      "business": "按结果与企业合同收费",
+      "lens": "解决问题的质量如何与结果计费对齐？",
+      "url": "https://sierra.ai/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://sierra.ai/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "intercom",
+      "name": "Intercom / Fin",
+      "en": "Fin AI",
+      "region": "美国",
+      "kind": "platform",
+      "sector": "work",
+      "sectors": [
+        "agent",
+        "work"
+      ],
+      "products": [
+        "Fin",
+        "Intercom Helpdesk",
+        "Apex"
+      ],
+      "desc": "将客服 AI 与工单、客户沟通和服务运营结合。",
+      "business": "软件订阅、AI 用量或结果计费",
+      "lens": "服务流程中的数据与反馈能否持续改善代理？",
+      "url": "https://fin.ai/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://fin.ai/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "runway",
+      "name": "Runway",
+      "en": "Runway",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "media",
+      "sectors": [
+        "media",
+        "model"
+      ],
+      "products": [
+        "Gen 系列",
+        "Aleph",
+        "Runway Dev"
+      ],
+      "desc": "面向视觉创作、视频编辑与制作流程的 AI 平台。",
+      "business": "订阅、生成额度与 API",
+      "lens": "镜头控制、可编辑性和交付质量如何提升？",
+      "url": "https://dev.runwayml.com/learn/build-with-comfyui",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://dev.runwayml.com/learn/build-with-comfyui"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "elevenlabs",
+      "name": "ElevenLabs",
+      "en": "ElevenLabs",
+      "region": "欧洲",
+      "kind": "growth",
+      "sector": "media",
+      "sectors": [
+        "media",
+        "model",
+        "work"
+      ],
+      "products": [
+        "ElevenCreative",
+        "ElevenAgents",
+        "ElevenAPI"
+      ],
+      "desc": "从声音生成延伸到多语言内容与语音代理。",
+      "business": "订阅、音频用量与企业协议",
+      "lens": "音频质量、实时交互和企业部署如何结合？",
+      "url": "https://elevenlabs.io/blog/series-d",
+      "note": "",
+      "sources": [
+        {
+          "title": "ElevenLabs 完成 D 轮",
+          "url": "https://elevenlabs.io/blog/series-d",
+          "date": "2026-02-04"
+        }
+      ],
+      "events": [
+        "e8"
+      ],
+      "lastEvent": "2026-02-04"
+    },
+    {
+      "id": "heygen",
+      "name": "HeyGen",
+      "en": "HeyGen",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "media",
+      "sectors": [
+        "media",
+        "work"
+      ],
+      "products": [
+        "AI Avatars",
+        "Video Translation",
+        "HyperFrames"
+      ],
+      "desc": "以数字人、翻译和视频工具服务企业与创作者。",
+      "business": "订阅、生成额度与企业服务",
+      "lens": "身份一致性和本地化如何缩短视频制作流程？",
+      "url": "https://www.heygen.com/en-gb",
+      "note": "",
+      "sources": [
+        {
+          "title": "HeyGen 推出 HyperFrames",
+          "url": "https://www.heygen.com/en-gb",
+          "date": "2026-04-28"
+        }
+      ],
+      "events": [
+        "e11"
+      ],
+      "lastEvent": "2026-04-28"
+    },
+    {
+      "id": "synthesia",
+      "name": "Synthesia",
+      "en": "Synthesia",
+      "region": "欧洲",
+      "kind": "growth",
+      "sector": "media",
+      "sectors": [
+        "media",
+        "work"
+      ],
+      "products": [
+        "AI Video",
+        "Avatars",
+        "Enterprise Training"
+      ],
+      "desc": "以 AI 视频服务企业培训、知识传递和本地化。",
+      "business": "订阅与企业协议",
+      "lens": "视频更新和多语言协作是否带来持续需求？",
+      "url": "https://www.synthesia.io/post/series-e-200-million-4-billion-valuation-future-work",
+      "note": "",
+      "sources": [
+        {
+          "title": "Synthesia 完成 E 轮",
+          "url": "https://www.synthesia.io/post/series-e-200-million-4-billion-valuation-future-work",
+          "date": "2026-01-26"
+        }
+      ],
+      "events": [
+        "e5"
+      ],
+      "lastEvent": "2026-01-26"
+    },
+    {
+      "id": "midjourney",
+      "name": "Midjourney",
+      "en": "Midjourney",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "media",
+      "sectors": [
+        "media",
+        "model"
+      ],
+      "products": [
+        "Image Models",
+        "Video Models"
+      ],
+      "desc": "围绕视觉美学和想象力构建生成模型与社区。",
+      "business": "用户订阅",
+      "lens": "创作体验、美学控制和用户社区如何共同演进？",
+      "url": "https://www.midjourney.com/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.midjourney.com/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "luma",
+      "name": "Luma AI",
+      "en": "Luma",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "media",
+      "sectors": [
+        "media",
+        "model"
+      ],
+      "products": [
+        "Dream Machine",
+        "Ray",
+        "Video API"
+      ],
+      "desc": "提供视频生成、关键帧控制和开发接口。",
+      "business": "订阅、生成额度与 API",
+      "lens": "生成与编辑能否进入持续的创意制作流程？",
+      "url": "https://docs.lumalabs.ai/ue/docs/video-generation",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://docs.lumalabs.ai/ue/docs/video-generation"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "harvey",
+      "name": "Harvey",
+      "en": "Harvey",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "vertical",
+      "sectors": [
+        "vertical",
+        "work",
+        "data"
+      ],
+      "products": [
+        "Legal AI",
+        "Harvey Agents",
+        "Tenet"
+      ],
+      "desc": "为律所与企业法务构建法律研究和文件工作流。",
+      "business": "企业软件与专业服务协议",
+      "lens": "专业准确性、引用与客户上下文如何构成壁垒？",
+      "url": "https://www.harvey.ai/blog/harvey-raises-dollar550m-at-a-dollar155b-valuation-to-help-legal-teams-own-their-intelligence",
+      "note": "",
+      "sources": [
+        {
+          "title": "Harvey 融资支持法律智能",
+          "url": "https://www.harvey.ai/blog/harvey-raises-dollar550m-at-a-dollar155b-valuation-to-help-legal-teams-own-their-intelligence",
+          "date": "2026-09-09"
+        },
+        {
+          "title": "Harvey 获 a16z 领投",
+          "url": "https://www.harvey.ai/blog/andreessen-horowitz-leads-dollar160m-investment-in-harvey",
+          "date": "2025-12-04"
+        },
+        {
+          "title": "Harvey 扩大法律 Agent 投入",
+          "url": "https://www.harvey.ai/blog/harvey-raises-at-dollar11-billion-valuation-to-scale-agents-across-law-firms-and-enterprises",
+          "date": "2026-03-25"
+        },
+        {
+          "title": "Harvey 本轮融资增至 6 亿美元",
+          "url": "https://www.harvey.ai/blog/harvey-announces-investment-from-ontario-teachers-pension-plan-and-deepens-its-commitment-to-canada",
+          "date": "2026-09-24"
+        }
+      ],
+      "events": [
+        "e3",
+        "e10",
+        "e23",
+        "e28"
+      ],
+      "lastEvent": "2026-09-24"
+    },
+    {
+      "id": "abridge",
+      "name": "Abridge",
+      "en": "Abridge",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "vertical",
+      "sectors": [
+        "vertical",
+        "work",
+        "media"
+      ],
+      "products": [
+        "Clinical Documentation",
+        "Ambient AI"
+      ],
+      "desc": "将临床对话转为结构化文档并连接医疗工作流。",
+      "business": "医疗机构企业协议",
+      "lens": "临床工作流整合、可核查性和医护采用是重点。",
+      "url": "https://www.abridge.com/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.abridge.com/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "hebbia",
+      "name": "Hebbia",
+      "en": "Hebbia",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "vertical",
+      "sectors": [
+        "vertical",
+        "data",
+        "work"
+      ],
+      "products": [
+        "Matrix",
+        "Max"
+      ],
+      "desc": "为金融和专业团队处理大量文档与分析任务。",
+      "business": "企业软件协议",
+      "lens": "大规模文档分析如何保持出处与审阅效率？",
+      "url": "https://www.hebbia.com/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.hebbia.com/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "figure",
+      "name": "Figure",
+      "en": "Figure AI",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "physical",
+      "sectors": [
+        "physical",
+        "model"
+      ],
+      "products": [
+        "Figure 03",
+        "Helix",
+        "Index"
+      ],
+      "desc": "把人形机器人、控制模型与真实世界数据结合。",
+      "business": "机器人与企业部署合作",
+      "lens": "从受控演示走向多场景稳定运行还需要什么？",
+      "url": "https://www.figure.ai/news/helix-2-5-zero-shot-30-home-generalization",
+      "note": "",
+      "sources": [
+        {
+          "title": "Helix 2.5 聚焦家庭泛化",
+          "url": "https://www.figure.ai/news/helix-2-5-zero-shot-30-home-generalization",
+          "date": "2026-09-17"
+        },
+        {
+          "title": "Figure 03 登场",
+          "url": "https://www.figure.ai/news",
+          "date": "2025-10-09"
+        },
+        {
+          "title": "Helix 02：全身自主控制",
+          "url": "https://www.figure.ai/news/helix-02",
+          "date": "2026-01-27"
+        },
+        {
+          "title": "Figure 03 进入 BMW 场景",
+          "url": "https://www.figure.ai/news/f-03-at-bmw",
+          "date": "2026-06-30"
+        },
+        {
+          "title": "Figure 与 Nscale 签算力合作",
+          "url": "https://www.figure.ai/news/figure-and-nscale-sign-strategic-partnership",
+          "date": "2026-09-03"
+        }
+      ],
+      "events": [
+        "e1",
+        "e6",
+        "e14",
+        "e20",
+        "e26"
+      ],
+      "lastEvent": "2026-09-17"
+    },
+    {
+      "id": "unitree",
+      "name": "宇树科技",
+      "en": "Unitree",
+      "region": "中国",
+      "kind": "growth",
+      "sector": "physical",
+      "sectors": [
+        "physical"
+      ],
+      "products": [
+        "G1",
+        "H 系列",
+        "Go 系列"
+      ],
+      "desc": "提供人形与四足机器人及开发平台。",
+      "business": "机器人硬件与解决方案",
+      "lens": "硬件可获得性如何转化为可复用的任务能力？",
+      "url": "https://www.unitree.com/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.unitree.com/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "pi",
+      "name": "Physical Intelligence",
+      "en": "Physical Intelligence · π",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "physical",
+      "sectors": [
+        "physical",
+        "model"
+      ],
+      "products": [
+        "π 系列",
+        "Vision-Language-Action"
+      ],
+      "desc": "研发跨机器人和任务的通用视觉语言动作模型。",
+      "business": "研发与产业合作；本图不估算收入",
+      "lens": "经验数据能否让机器人跨任务泛化？",
+      "url": "https://www.physicalintelligence.company/download/pistar06.pdf",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.physicalintelligence.company/download/pistar06.pdf"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "worldlabs",
+      "name": "World Labs",
+      "en": "World Labs · Marble",
+      "region": "美国",
+      "kind": "growth",
+      "sector": "physical",
+      "sectors": [
+        "physical",
+        "model",
+        "media"
+      ],
+      "products": [
+        "Marble",
+        "Spatial Models",
+        "Spark"
+      ],
+      "desc": "研发可感知、生成和交互的空间智能与世界模型。",
+      "business": "产品订阅、API 与产业合作",
+      "lens": "空间世界的一致性如何连接创作、仿真和机器人？",
+      "url": "https://www.worldlabs.ai/blog/amd-announcement",
+      "note": "2026-09-28 已签署加入 AMD 的协议，交易待审批，预计年底前交割；仍按成长公司列示，并明确待交割。",
+      "sources": [
+        {
+          "title": "World Labs 签约加入 AMD",
+          "url": "https://www.worldlabs.ai/blog/amd-announcement",
+          "date": "2026-09-28"
+        }
+      ],
+      "events": [
+        "e31"
+      ],
+      "lastEvent": "2026-09-28"
+    },
+    {
+      "id": "tesla",
+      "name": "特斯拉",
+      "en": "Tesla",
+      "region": "美国",
+      "kind": "platform",
+      "sector": "physical",
+      "sectors": [
+        "physical",
+        "compute"
+      ],
+      "products": [
+        "Optimus",
+        "FSD",
+        "AI Training"
+      ],
+      "desc": "以车辆和机器人为载体推进现实世界 AI。",
+      "business": "汽车、软件及机器人产业化探索",
+      "lens": "真实世界数据和工程能力如何迁移到机器人？",
+      "url": "https://www.tesla.com/AI",
+      "note": "此资料页本次抓取受限；仅作基础业务定位，不录入未经核实的年内发布或量产数据。",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.tesla.com/AI"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "agibot",
+      "name": "智元机器人",
+      "en": "AGIBOT",
+      "region": "中国",
+      "kind": "growth",
+      "sector": "physical",
+      "sectors": [
+        "physical",
+        "model"
+      ],
+      "products": [
+        "具身机器人",
+        "灵巧操作",
+        "具身模型"
+      ],
+      "desc": "围绕机器人本体、智能系统与产业场景构建产品。",
+      "business": "机器人硬件、方案与部署合作",
+      "lens": "本体、数据采集和商业场景能否形成循环？",
+      "url": "https://www.agibot.com/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.agibot.com/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "sensetime",
+      "name": "商汤科技",
+      "en": "SenseTime",
+      "region": "中国",
+      "kind": "growth",
+      "sector": "model",
+      "sectors": [
+        "model",
+        "compute",
+        "media",
+        "vertical"
+      ],
+      "products": [
+        "日日新",
+        "SenseNova",
+        "AI 行业方案"
+      ],
+      "desc": "布局多模态模型、生成内容和行业应用。",
+      "business": "模型服务、行业方案与算力服务",
+      "lens": "基础研发如何复用到具体商业场景？",
+      "url": "https://www.sensetime.com/en",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www.sensetime.com/en"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "shengshu",
+      "name": "生数科技",
+      "en": "ShengShu · Vidu",
+      "region": "中国",
+      "kind": "growth",
+      "sector": "media",
+      "sectors": [
+        "media",
+        "model",
+        "physical"
+      ],
+      "products": [
+        "Vidu",
+        "Vidu S"
+      ],
+      "desc": "围绕视频生成、交互式角色与实时编辑研发模型。",
+      "business": "订阅、API 与企业合作",
+      "lens": "实时可控的视频能否产生新的交互产品？",
+      "url": "https://www.prnewswire.com/news-releases/shengshu-technology-unveils-vidu-s2-bringing-real-time-interaction-and-editing-to-ai-video-302879976.html",
+      "note": "来源为公司通过 PR Newswire 发布的新闻稿。",
+      "sources": [
+        {
+          "title": "生数发布 Vidu S2",
+          "url": "https://www.prnewswire.com/news-releases/shengshu-technology-unveils-vidu-s2-bringing-real-time-interaction-and-editing-to-ai-video-302879976.html",
+          "date": "2026-09-15"
+        }
+      ],
+      "events": [
+        "e25"
+      ],
+      "lastEvent": "2026-09-15"
+    },
+    {
+      "id": "bfl",
+      "name": "Black Forest Labs",
+      "en": "BFL · FLUX",
+      "region": "欧洲",
+      "kind": "growth",
+      "sector": "media",
+      "sectors": [
+        "media",
+        "model"
+      ],
+      "products": [
+        "FLUX",
+        "API",
+        "Open Weights"
+      ],
+      "desc": "以视觉生成与编辑模型连接开发者和创作工具。",
+      "business": "API、模型授权与企业服务",
+      "lens": "模型质量、控制能力和生态分发如何平衡？",
+      "url": "https://bfl.ai/",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://bfl.ai/"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    },
+    {
+      "id": "kuaishou",
+      "name": "快手 / 可灵",
+      "en": "Kuaishou · Kling",
+      "region": "中国",
+      "kind": "platform",
+      "sector": "media",
+      "sectors": [
+        "media",
+        "model"
+      ],
+      "products": [
+        "可灵 Kling",
+        "可图"
+      ],
+      "desc": "以视频生成模型和创意产品延伸内容平台能力。",
+      "business": "生成额度、订阅与企业合作",
+      "lens": "视频技术如何进入专业制作并产生持续收入？",
+      "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0527/2026052700436.pdf",
+      "note": "",
+      "sources": [
+        {
+          "title": "官方产品 / 公司资料",
+          "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0527/2026052700436.pdf"
+        }
+      ],
+      "events": [],
+      "lastEvent": ""
+    }
+  ],
+  "sectors": [
+    {
+      "id": "compute",
+      "name": "算力与芯片",
+      "en": "COMPUTE",
+      "icon": "▦",
+      "question": "谁提供计算与推理？",
+      "desc": "芯片、AI 云、训练与推理服务",
+      "angle": "关注利用率、每任务成本与交付能力。"
+    },
+    {
+      "id": "model",
+      "name": "基础模型",
+      "en": "MODELS",
+      "icon": "✳",
+      "question": "谁生产通用智能？",
+      "desc": "语言、多模态、推理与模型平台",
+      "angle": "关注能力、成本、开放策略与分发。"
+    },
+    {
+      "id": "data",
+      "name": "数据与工程",
+      "en": "DATA & TOOLS",
+      "icon": "⌘",
+      "question": "谁让 AI 可以上线？",
+      "desc": "数据、框架、评估、观测与治理",
+      "angle": "关注上下文质量、可靠性与系统集成。"
+    },
+    {
+      "id": "code",
+      "name": "软件开发",
+      "en": "SOFTWARE",
+      "icon": "⌥",
+      "question": "谁改变软件生产？",
+      "desc": "编码代理、应用构建与交付",
+      "angle": "关注可合并成果、维护和生产稳定性。"
+    },
+    {
+      "id": "agent",
+      "name": "搜索与通用 Agent",
+      "en": "AGENTS",
+      "icon": "↗",
+      "question": "谁成为任务入口？",
+      "desc": "搜索、个人助手、浏览器与执行",
+      "angle": "关注用户频次、权限和任务完成质量。"
+    },
+    {
+      "id": "work",
+      "name": "企业工作流",
+      "en": "WORK",
+      "icon": "◫",
+      "question": "谁深入企业流程？",
+      "desc": "知识、办公、客服、销售与 IT",
+      "angle": "关注业务上下文、执行权限与结果计费。"
+    },
+    {
+      "id": "media",
+      "name": "内容与创意",
+      "en": "CREATIVE",
+      "icon": "◉",
+      "question": "谁重写内容生产？",
+      "desc": "图像、视频、语音与数字人",
+      "angle": "关注可控编辑、授权与工作流集成。"
+    },
+    {
+      "id": "vertical",
+      "name": "垂直行业",
+      "en": "VERTICAL AI",
+      "icon": "⊞",
+      "question": "谁解决专业问题？",
+      "desc": "法律、医疗、金融与专业分析",
+      "angle": "关注专业数据、可核查性与客户留存。"
+    },
+    {
+      "id": "physical",
+      "name": "机器人与世界模型",
+      "en": "PHYSICAL AI",
+      "icon": "◇",
+      "question": "谁连接物理世界？",
+      "desc": "机器人、VLA、空间与仿真",
+      "angle": "关注跨场景泛化、部署成本与真实运行。"
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "company": "figure",
+      "date": "2025-10-09",
+      "kind": "产品",
+      "title": "Figure 03 登场",
+      "text": "Figure 官方新闻目录记录 Figure 03 发布，构成年内机器人硬件迭代节点。",
+      "url": "https://www.figure.ai/news"
+    },
+    {
+      "id": "e2",
+      "company": "cursor",
+      "date": "2025-11-13",
+      "kind": "融资",
+      "title": "Cursor 披露 D 轮融资",
+      "text": "官方披露融资 23 亿美元、投后估值 293 亿美元；这是当时融资口径，不是当前独立估值。",
+      "url": "https://cursor.com/blog/series-d"
+    },
+    {
+      "id": "e3",
+      "company": "harvey",
+      "date": "2025-12-04",
+      "kind": "融资",
+      "title": "Harvey 获 a16z 领投",
+      "text": "官方披露 1.6 亿美元融资、80 亿美元估值；之后又有新轮次。",
+      "url": "https://www.harvey.ai/blog/andreessen-horowitz-leads-dollar160m-investment-in-harvey"
+    },
+    {
+      "id": "e4",
+      "company": "groq",
+      "date": "2025-12-24",
+      "kind": "合作",
+      "title": "Groq 与 NVIDIA 达成技术授权",
+      "text": "非独家推理技术授权、部分团队加入 NVIDIA；Groq 官方明确继续独立运营。",
+      "url": "https://groq.com/newsroom/groq-and-nvidia-enter-non-exclusive-inference-technology-licensing-agreement-to-accelerate-ai-inference-at-global-scale"
+    },
+    {
+      "id": "e5",
+      "company": "synthesia",
+      "date": "2026-01-26",
+      "kind": "融资",
+      "title": "Synthesia 完成 E 轮",
+      "text": "官方披露融资 2 亿美元、估值 40 亿美元，面向企业视频与培训。",
+      "url": "https://www.synthesia.io/post/series-e-200-million-4-billion-valuation-future-work"
+    },
+    {
+      "id": "e6",
+      "company": "figure",
+      "date": "2026-01-27",
+      "kind": "产品",
+      "title": "Helix 02：全身自主控制",
+      "text": "Figure 介绍将行走、操作与平衡整合进同一机器人控制模型。",
+      "url": "https://www.figure.ai/news/helix-02"
+    },
+    {
+      "id": "e7",
+      "company": "xai",
+      "date": "2026-02-02",
+      "kind": "组织",
+      "title": "xAI 加入 SpaceX",
+      "text": "xAI 官方确认 SpaceX 已完成收购；之后按集团旗下业务理解其产品布局。",
+      "url": "https://x.ai/news/xai-joins-spacex"
+    },
+    {
+      "id": "e8",
+      "company": "elevenlabs",
+      "date": "2026-02-04",
+      "kind": "融资",
+      "title": "ElevenLabs 完成 D 轮",
+      "text": "官方披露融资 5 亿美元、估值 110 亿美元，扩展语音与企业交互平台。",
+      "url": "https://elevenlabs.io/blog/series-d"
+    },
+    {
+      "id": "e9",
+      "company": "replit",
+      "date": "2026-03-11",
+      "kind": "融资",
+      "title": "Replit 融资并推进 Agent 4",
+      "text": "官方披露融资 4 亿美元、估值 90 亿美元，并提及 Agent 4 的推出。",
+      "url": "https://replit.com/blog/replit-raises-400-million-dollars"
+    },
+    {
+      "id": "e10",
+      "company": "harvey",
+      "date": "2026-03-25",
+      "kind": "融资",
+      "title": "Harvey 扩大法律 Agent 投入",
+      "text": "官方披露融资 2 亿美元、估值 110 亿美元，用于企业法律代理与交付团队。",
+      "url": "https://www.harvey.ai/blog/harvey-raises-at-dollar11-billion-valuation-to-scale-agents-across-law-firms-and-enterprises"
+    },
+    {
+      "id": "e11",
+      "company": "heygen",
+      "date": "2026-04-28",
+      "kind": "产品",
+      "title": "HeyGen 推出 HyperFrames",
+      "text": "官方产品动态介绍用 HTML、CSS 和 JavaScript 驱动的视频渲染框架。",
+      "url": "https://www.heygen.com/en-gb"
+    },
+    {
+      "id": "e12",
+      "company": "nvidia",
+      "date": "2026-05-31",
+      "kind": "产品",
+      "title": "Vera Rubin 扩大生产",
+      "text": "NVIDIA 宣布进入规模化生产爬坡；公告中的系统出货安排为当年秋季开始。",
+      "url": "https://nvidianews.nvidia.com/news/vera-rubin-full-production-agentic-ai-factory"
+    },
+    {
+      "id": "e13",
+      "company": "zhipu",
+      "date": "2026-06-16",
+      "kind": "产品",
+      "title": "GLM-5.2 聚焦长任务",
+      "text": "智谱发布面向长程任务的模型更新，为编码与 Agent 提供能力底座。",
+      "url": "https://z.ai/blog/glm-5.2"
+    },
+    {
+      "id": "e14",
+      "company": "figure",
+      "date": "2026-06-30",
+      "kind": "落地",
+      "title": "Figure 03 进入 BMW 场景",
+      "text": "官方介绍 Figure 03 与 Helix 02 在 BMW 工厂的应用，不能据此推断全行业量产普及。",
+      "url": "https://www.figure.ai/news/f-03-at-bmw"
+    },
+    {
+      "id": "e15",
+      "company": "bytedance",
+      "date": "2026-07-08",
+      "kind": "产品",
+      "title": "Seedream 5.0 Pro 发布",
+      "text": "Seed 官方目录记录图像与设计能力更新。",
+      "url": "https://seed.bytedance.com/en/"
+    },
+    {
+      "id": "e16",
+      "company": "bytedance",
+      "date": "2026-07-31",
+      "kind": "产品",
+      "title": "Seedance 2.5 发布",
+      "text": "Seed 官方目录记录视频生成与参考控制能力更新。",
+      "url": "https://seed.bytedance.com/en/"
+    },
+    {
+      "id": "e17",
+      "company": "lovable",
+      "date": "2026-08-12",
+      "kind": "融资",
+      "title": "Lovable 完成 C 轮",
+      "text": "官方披露融资 4 亿美元、估值 133 亿美元，继续扩展面向业务的应用构建平台。",
+      "url": "https://lovable.dev/blog/series-c"
+    },
+    {
+      "id": "e18",
+      "company": "cursor",
+      "date": "2026-08-14",
+      "kind": "组织",
+      "title": "Cursor 收购交割完成",
+      "text": "Cursor 官方宣布已经成为 SpaceX 的一部分，明确区别于此前的合作与收购选项。",
+      "url": "https://cursor.com/blog/joining-spacex"
+    },
+    {
+      "id": "e19",
+      "company": "manus",
+      "date": "2026-09-01",
+      "kind": "组织",
+      "title": "Manus 恢复独立运营",
+      "text": "官方宣布正式恢复独立运营，由创始团队继续领导。",
+      "url": "https://manus.im/blog/manus-resumes-independent-operations"
+    },
+    {
+      "id": "e20",
+      "company": "figure",
+      "date": "2026-09-03",
+      "kind": "合作",
+      "title": "Figure 与 Nscale 签算力合作",
+      "text": "合作指向 Vera Rubin 算力，初期部署目标为 2027 年下半年；属于未来建设计划。",
+      "url": "https://www.figure.ai/news/figure-and-nscale-sign-strategic-partnership"
+    },
+    {
+      "id": "e21",
+      "company": "cognition",
+      "date": "2026-09-08",
+      "kind": "融资",
+      "title": "Cognition 宣布 E 轮",
+      "text": "官方披露融资超过 20 亿美元、估值 480 亿美元，继续建设独立编码 Agent 实验室。",
+      "url": "https://cognition.com/blog/series-e"
+    },
+    {
+      "id": "e22",
+      "company": "openai",
+      "date": "2026-09-08",
+      "kind": "战略",
+      "title": "OpenAI 强调研究与产品连接",
+      "text": "官方文章将 GPT-6 Astra、消费与企业产品分发、全栈算力放入同一战略叙事。",
+      "url": "https://openai.com/index/the-work-now-within-reach/"
+    },
+    {
+      "id": "e23",
+      "company": "harvey",
+      "date": "2026-09-09",
+      "kind": "融资",
+      "title": "Harvey 融资支持法律智能",
+      "text": "官方披露融资 5.5 亿美元、估值 155 亿美元；本轮后续又获追加投资。",
+      "url": "https://www.harvey.ai/blog/harvey-raises-dollar550m-at-a-dollar155b-valuation-to-help-legal-teams-own-their-intelligence"
+    },
+    {
+      "id": "e24",
+      "company": "deepseek",
+      "date": "2026-09-10",
+      "kind": "产品",
+      "title": "DeepSeek V4.1 Flash 发布",
+      "text": "官方发布支持原生视觉理解的模型，并同步上线 API。",
+      "url": "https://www.deepseek.com/news/deepseek-v4-1-flash/"
+    },
+    {
+      "id": "e25",
+      "company": "shengshu",
+      "date": "2026-09-15",
+      "kind": "产品",
+      "title": "生数发布 Vidu S2",
+      "text": "公司新闻稿称在 9 月 15 日推出实时角色交互与视频编辑模型；稿件发表于次日。",
+      "url": "https://www.prnewswire.com/news-releases/shengshu-technology-unveils-vidu-s2-bringing-real-time-interaction-and-editing-to-ai-video-302879976.html"
+    },
+    {
+      "id": "e26",
+      "company": "figure",
+      "date": "2026-09-17",
+      "kind": "产品",
+      "title": "Helix 2.5 聚焦家庭泛化",
+      "text": "公司报告零样本跨家庭测试，属于厂商披露的研究结果，不代表消费级可用性。",
+      "url": "https://www.figure.ai/news/helix-2-5-zero-shot-30-home-generalization"
+    },
+    {
+      "id": "e27",
+      "company": "alibaba",
+      "date": "2026-09-22",
+      "kind": "战略",
+      "title": "阿里公布全栈 AI 路线图",
+      "text": "覆盖芯片、云、模型与 Agent；其中下一代 Qwen 4 当时仍在训练中。",
+      "url": "https://www.alibabacloud.com/en/press-room/alibaba-unveils-roadmap-on-full-stack-ai-strategy"
+    },
+    {
+      "id": "e28",
+      "company": "harvey",
+      "date": "2026-09-24",
+      "kind": "融资",
+      "title": "Harvey 本轮融资增至 6 亿美元",
+      "text": "Ontario Teachers’ 的 5000 万美元追加投资使该轮总额达到 6 亿美元；不与此前 5.5 亿重复相加。",
+      "url": "https://www.harvey.ai/blog/harvey-announces-investment-from-ontario-teachers-pension-plan-and-deepens-its-commitment-to-canada"
+    },
+    {
+      "id": "e29",
+      "company": "microsoft",
+      "date": "2026-09-25",
+      "kind": "产品",
+      "title": "Copilot 整合 Home、Code 与 Autopilot",
+      "text": "官方公布新界面与工作方式，其中包含逐步开放和私有预览，不能视为全部普遍可用。",
+      "url": "https://news.microsoft.com/source/emea/2026/09/new-microsoft-copilot-brings-home-code-and-autopilot-together/"
+    },
+    {
+      "id": "e30",
+      "company": "anthropic",
+      "date": "2026-09-28",
+      "kind": "产品",
+      "title": "Claude Sonnet 5.5 发布",
+      "text": "Anthropic 新闻目录记录 Sonnet 5.5 模型更新。",
+      "url": "https://www.anthropic.com/news"
+    },
+    {
+      "id": "e31",
+      "company": "worldlabs",
+      "date": "2026-09-28",
+      "kind": "组织",
+      "title": "World Labs 签约加入 AMD",
+      "text": "已签署最终协议，预计 2026 年底前完成，仍需监管批准及惯例条件；本图标为待交割。",
+      "url": "https://www.worldlabs.ai/blog/amd-announcement"
+    },
+    {
+      "id": "e32",
+      "company": "google",
+      "date": "2026-09-30",
+      "kind": "产品",
+      "title": "Gemini 4 Argon 公布",
+      "text": "Google 公布面向复杂长程任务的新模型，首批面向特定网络安全合作伙伴开放。",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/"
+    }
+  ]
+};
+var state={view:'map',q:'',kind:'all',region:'all',sector:'all',favorites:false,evidence:false,sort:'sector',month:'all',eventType:'all'};
+var favorites=readStore('ai-company-atlas-favorites',[]).filter(function(id){return DATA.companies.some(function(c){return c.id===id})});
+var selected=[];
+var matrixAll=false;
+var currentCompany=null;
+var toastTimer;
+var companyById=Object.fromEntries(DATA.companies.map(function(c){return [c.id,c]}));
+var sectorById=Object.fromEntries(DATA.sectors.map(function(s){return [s.id,s]}));
+var kindNames={growth:'创业 / 成长',platform:'大公司 / 成熟平台',affiliate:'集团旗下业务'};
+var chart=null;
+var ChartManager={charts:new Map(),safeInit:function(id,config){if(typeof Chart==='undefined')return null;try{if(this.charts.has(id))this.charts.get(id).destroy();var el=document.getElementById(id);if(!el)return null;var c=new Chart(el,config);this.charts.set(id,c);return c}catch(e){return null}}};
+function readStore(key,fallback){try{var value=JSON.parse(localStorage.getItem(key));return Array.isArray(value)?value:fallback}catch(e){return fallback}}
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]})}
+function el(id){return document.getElementById(id)}
+function domain(url){try{return new URL(url).hostname.replace(/^www\./,'')}catch(e){return url}}
+function sourceLink(url,title){return '<a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(title)+' ↗</a>'}
+function initials(c){return c.en.split(/[\s·/]+/).slice(0,2).map(function(w){return w[0]}).join('').toUpperCase()}
+function companyEvents(id){return DATA.events.filter(function(e){return e.company===id}).sort(function(a,b){return b.date.localeCompare(a.date)})}
+function filtered(){var words=state.q.toLowerCase().trim().split(/\s+/).filter(Boolean);return DATA.companies.filter(function(c){var hay=[c.name,c.en,c.region,c.desc,c.business,c.lens].concat(c.products,c.sectors.map(function(s){return sectorById[s].name})).join(' ').toLowerCase();return words.every(function(w){return hay.includes(w)})&&(state.kind==='all'||c.kind===state.kind)&&(state.region==='all'||c.region===state.region||(state.region==='中国'&&c.region.includes('中国')))&&(state.sector==='all'||c.sectors.includes(state.sector))&&(!state.favorites||favorites.includes(c.id))&&(!state.evidence||c.events.length>0)}).sort(function(a,b){if(state.sort==='name')return a.en.localeCompare(b.en);if(state.sort==='recent')return b.lastEvent.localeCompare(a.lastEvent)||a.en.localeCompare(b.en);return DATA.sectors.findIndex(function(s){return s.id===a.sector})-DATA.sectors.findIndex(function(s){return s.id===b.sector})})}
+function toast(msg){var t=el('toast');var active=document.querySelector('dialog[open]');if(active)active.appendChild(t);else document.body.appendChild(t);t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){t.classList.remove('show')},2700)}
+function syncControls(){el('search').value=state.q;el('region').value=state.region;el('sectorFilter').value=state.sector;el('evidenceOnly').checked=state.evidence;el('favoriteOnly').classList.toggle('active',state.favorites);el('favoriteOnly').setAttribute('aria-pressed',state.favorites);el('favoriteOnly').textContent=(state.favorites?'★':'☆')+' 仅看收藏'+(favorites.length?' · '+favorites.length:'');document.querySelectorAll('[data-kind]').forEach(function(b){b.classList.toggle('active',b.dataset.kind===state.kind);b.setAttribute('aria-pressed',b.dataset.kind===state.kind)});el('sort').value=state.sort;el('eventType').value=state.eventType}
+function render(){syncControls();var list=filtered();el('filterSummary').textContent=list.length+' / '+DATA.companies.length+' 条记录';renderMap(list);renderDirectory(list);renderMatrix(list);renderTimeline(list);renderSources(list);renderTray()}
+function renderMap(list){el('mapGrid').innerHTML=DATA.sectors.map(function(s,i){var companies=list.filter(function(c){return c.sector===s.id});if(!companies.length)return '';return '<article class="sector-panel"><div class="sector-top"><span class="sector-icon" aria-hidden="true">'+s.icon+'</span><div class="sector-title"><b>'+s.name+'</b><small>'+s.en+'</small></div><span class="sector-count">'+companies.length+'</span></div><p class="sector-question">'+s.question+'</p><div class="company-cloud">'+companies.map(function(c){return '<button class="company-pill '+c.kind+'" data-company="'+c.id+'" title="'+esc(c.desc)+'"><i class="dot '+c.kind+'"></i>'+esc(c.name)+(favorites.includes(c.id)?'<span class="star" aria-label="已收藏">★</span>':'')+'</button>'}).join('')+'</div><div class="sector-foot"><span>'+s.desc+'</span><button data-sector="'+s.id+'" aria-label="查看'+s.name+'的所有参与公司">探索 ↗</button></div></article>'}).join('');el('mapEmpty').hidden=list.length>0}
+function renderDirectory(list){el('directory').innerHTML=list.map(function(c){var recent=companyEvents(c.id)[0];return '<article class="company-card"><div class="card-heading"><span class="monogram">'+esc(initials(c))+'</span><div class="card-name"><button data-company="'+c.id+'">'+esc(c.name)+'</button><small>'+esc(c.en)+' · '+esc(c.region)+'</small></div><button class="favorite '+(favorites.includes(c.id)?'selected':'')+'" data-favorite="'+c.id+'" aria-label="'+(favorites.includes(c.id)?'取消收藏':'收藏')+esc(c.name)+'" aria-pressed="'+favorites.includes(c.id)+'">'+(favorites.includes(c.id)?'★':'☆')+'</button></div><p>'+esc(c.desc)+'</p><div class="tags"><span class="tag">'+kindNames[c.kind]+'</span><span class="tag">'+sectorById[c.sector].name+'</span></div><div class="card-event '+(recent?'':'no-event')+'">'+(recent?esc(recent.date)+' · '+esc(recent.title):'当前产品资料 · 未收录年内事件')+'</div><div class="card-actions"><button class="'+(selected.includes(c.id)?'selected':'')+'" data-compare="'+c.id+'" aria-pressed="'+selected.includes(c.id)+'">'+(selected.includes(c.id)?'✓ 已加入对比':'＋ 加入对比')+'</button><button data-company="'+c.id+'">公司详情 ↗</button></div></article>'}).join('');el('directoryEmpty').hidden=list.length>0}
+function renderMatrix(list){list=list||filtered();var rows=list.filter(function(c){return matrixAll||c.kind==='platform'});el('matrixAll').textContent=matrixAll?'只看大公司 / 成熟平台':'也看创业 / 成长公司';el('matrix').innerHTML='<caption class="sr-only">代表业务赛道矩阵；不表示市场份额或竞争力</caption><thead><tr><th scope="col">公司 / '+rows.length+' 条</th>'+DATA.sectors.map(function(s){return '<th scope="col">'+s.name.replace('与','<br>与')+'</th>'}).join('')+'</tr></thead><tbody>'+rows.map(function(c){return '<tr><td><button data-company="'+c.id+'">'+esc(c.name)+'</button><small>'+esc(c.region)+' · '+kindNames[c.kind]+'</small></td>'+DATA.sectors.map(function(s){return '<td>'+(c.sectors.includes(s.id)?'<button class="mark" data-company="'+c.id+'" title="'+esc(c.name)+' · '+s.name+'：点击查看代表产品" aria-label="'+esc(c.name)+'参与'+s.name+'，查看详情">●</button>':'<span class="absent" aria-label="本图未标注">—</span>')+'</td>'}).join('')+'</tr>'}).join('')+(rows.length?'':'<tr><td colspan="10"><div class="empty">当前筛选下没有大公司。可切换为「也看创业 / 成长公司」。</div></td></tr>')+'</tbody>'}
+function renderTimeline(list){list=list||filtered();var ids=list.map(function(c){return c.id});var events=DATA.events.filter(function(e){return ids.includes(e.company)&&(state.eventType==='all'||state.eventType===e.kind)});var months=Array.from(new Set(DATA.events.map(function(e){return e.date.slice(0,7)}))).sort();el('months').innerHTML='<button data-month="all" class="'+(state.month==='all'?'active':'')+'" aria-pressed="'+(state.month==='all')+'">全年<small>'+events.length+'</small></button>'+months.map(function(m){var n=events.filter(function(e){return e.date.startsWith(m)}).length;return '<button data-month="'+m+'" class="'+(state.month===m?'active':'')+'" aria-pressed="'+(state.month===m)+'">'+m.slice(2).replace('-','.')+'<small>'+n+'</small></button>'}).join('');if(state.month!=='all')events=events.filter(function(e){return e.date.startsWith(state.month)});events.sort(function(a,b){return b.date.localeCompare(a.date)});var groups=Array.from(new Set(events.map(function(e){return e.date.slice(0,7)})));el('timeline').innerHTML=groups.map(function(m){return '<div class="timeline-month"><div class="month-label">'+m.slice(5)+' 月<small>'+m.slice(0,4)+'</small></div><div class="event-list">'+events.filter(function(e){return e.date.startsWith(m)}).map(function(e){return '<article class="event"><div class="event-meta"><time datetime="'+e.date+'">'+e.date+'</time><span class="tag">'+e.kind+'</span></div><h3>'+esc(e.title)+'</h3><p>'+esc(e.text)+'</p><div class="event-links"><button data-company="'+e.company+'">'+esc(companyById[e.company].name)+' ↗</button>'+sourceLink(e.url,'官方依据')+'</div></article>'}).join('')+'</div></div>'}).join('')||( '<div class="empty">当前筛选下没有已收录事件。<button onclick="state.month=\'all\';state.eventType=\'all\';resetFilters()">重置全部筛选</button></div>')}
+function renderSources(list){list=list||filtered();el('sourceCount').textContent='当前筛选 '+list.length+' 家 · '+list.reduce(function(n,c){return n+c.sources.length},0)+' 条来源入口';el('sources').innerHTML=list.map(function(c){return '<details class="source-item"><summary>'+esc(c.name)+'<small>'+c.sources.length+' 来源 ＋</small></summary>'+c.sources.map(function(s){return sourceLink(s.url,(s.date?s.date+' · ':'')+s.title)+'<span class="source-domain">'+esc(domain(s.url))+'</span>'}).join('')+(c.note?'<p class="source-note">'+esc(c.note)+'</p>':'')+'</details>'}).join('')||'<div class="empty">当前筛选下没有资料。</div>';var withEvents=DATA.companies.filter(function(c){return c.events.length}).length;el('coverage').textContent='收录 '+DATA.companies.length+' 条公司 / 品牌记录，其中 '+withEvents+' 家有明确日期的年内事件，共 '+DATA.events.length+' 条；其余为当前公司画像。官方入口 '+new Set(DATA.companies.flatMap(function(c){return c.sources.map(function(s){return s.url})})).size+' 个（去重）。'}
+function showView(view){if(!['map','directory','matrix','timeline','sources'].includes(view))view='map';state.view=view;document.querySelectorAll('.view').forEach(function(v){v.hidden=v.id!=='view-'+view});document.querySelectorAll('[data-view]').forEach(function(b){b.classList.toggle('active',b.dataset.view===view);if(b.dataset.view===view)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});try{history.replaceState(null,'','#'+view)}catch(e){}if(view==='sources')requestAnimationFrame(buildCharts)}
+function setSector(id){state.sector=id;showView('directory');render();el('view-directory').scrollIntoView({behavior:'smooth',block:'start'})}
+function resetFilters(){state.q='';state.kind='all';state.region='all';state.sector='all';state.favorites=false;state.evidence=false;state.month='all';state.eventType='all';render()}
+function toggleFavorite(id){if(favorites.includes(id))favorites=favorites.filter(function(x){return x!==id});else favorites.push(id);try{localStorage.setItem('ai-company-atlas-favorites',JSON.stringify(favorites))}catch(e){toast('当前环境无法保存收藏；本次浏览仍可使用。')}render();syncDetailActions()}
+function toggleCompare(id){if(selected.includes(id))selected=selected.filter(function(x){return x!==id});else{if(selected.length>=4){toast('最多对比 4 家，请先移除一家。');return}selected.push(id)}render();syncDetailActions();if(el('compare').open){if(selected.length)renderCompare();else closeDialog('compare')}}
+function syncDetailActions(){if(!currentCompany)return;var n=el('detailCompareCount');if(n)n.textContent=selected.length;var f=el('detailFavorite');if(f){f.textContent=(favorites.includes(currentCompany)?'★ 已收藏':'☆ 收藏公司');f.setAttribute('aria-pressed',favorites.includes(currentCompany))}var c=el('detailCompare');if(c){c.textContent=selected.includes(currentCompany)?'✓ 已加入对比':'＋ 加入对比';c.setAttribute('aria-pressed',selected.includes(currentCompany))}}
+function renderTray(){el('compareTray').hidden=selected.length===0;el('compareCount').textContent=selected.length+' / 4';el('compareNames').innerHTML=selected.map(function(id){return '<button data-compare="'+id+'" title="移除 '+esc(companyById[id].name)+'">'+esc(companyById[id].name)+' ×</button>'}).join('')}
+function clearCompare(){selected=[];render();syncDetailActions();if(el('compare').open)closeDialog('compare')}
+function openCompany(id){var c=companyById[id];if(!c)return;currentCompany=id;var events=companyEvents(id);var peers=DATA.companies.filter(function(x){return x.id!==id&&x.sector===c.sector}).slice(0,6);el('detailBody').innerHTML='<div class="profile-top"><div class="profile-meta"><span class="tag">'+kindNames[c.kind]+'</span><span class="tag">'+esc(c.region)+'</span><span class="tag">'+sectorById[c.sector].name+'</span></div><h2 id="detailTitle">'+esc(c.name)+'</h2><p class="en">'+esc(c.en)+'</p><p class="desc">'+esc(c.desc)+'</p></div><div class="profile-main"><div class="profile-products">'+c.products.map(function(p){return '<span>'+esc(p)+'</span>'}).join('')+'</div><div class="profile-actions"><button class="btn" id="detailFavorite" data-favorite="'+c.id+'"></button><button class="btn" id="detailCompare" data-compare="'+c.id+'"></button><button class="btn" onclick="openCompare()">打开对比 <span id="detailCompareCount">'+selected.length+'</span> ↗</button></div>'+(c.note?'<div class="profile-note">'+esc(c.note)+'</div>':'')+'<h3>如何商业化</h3><p>'+esc(c.business)+'。</p><h3>研究视角 <small style="font-size:10px;color:var(--text-secondary);font-weight:400">编辑归纳</small></h3><p>'+esc(c.lens)+'</p><h3>参与赛道</h3><div class="tags">'+c.sectors.map(function(s){return '<span class="tag">'+sectorById[s].name+'</span>'}).join('')+'</div><h3>近一年已收录动态</h3>'+(events.length?events.map(function(e){return '<div class="profile-event"><time>'+e.date+' · '+e.kind+'</time><b>'+esc(e.title)+'</b><p>'+esc(e.text)+'</p>'+sourceLink(e.url,'查看原始公告')+'</div>'}).join(''):'<p>本次未收录可明确标注日期的年内事件。当前定位依据下方产品资料；不代表公司在本年度没有进展。</p>')+'<h3>来源</h3><div class="profile-sources">'+c.sources.map(function(s){return sourceLink(s.url,s.title)}).join('')+'</div><h3>同赛道继续探索</h3><div class="peer-list">'+peers.map(function(p){return '<button data-company="'+p.id+'">'+esc(p.name)+' ↗</button>'}).join('')+'</div><p class="footnote">资料快照：2026-10-03 · 产品名称不表示均已普遍可用。商业模式为概括，不是具体报价。</p></div>';syncDetailActions();if(!el('detail').open){el('detail').showModal();document.body.style.overflow='hidden'}el('detail').scrollTop=0}
+function closeDialog(id){el(id).close();document.body.appendChild(el('toast'));if(!document.querySelector('dialog[open]'))document.body.style.overflow=''}
+function openCompare(){if(!selected.length){toast('先在公司详情或目录中加入 1—4 家。');return}if(el('detail').open)closeDialog('detail');renderCompare();if(!el('compare').open){el('compare').showModal();document.body.style.overflow='hidden'}}
+function renderCompare(){var fields=[['类型 / 地区',function(c){return esc(kindNames[c.kind]+' · '+c.region)}],['定位',function(c){return esc(c.desc)}],['代表产品',function(c){return c.products.map(esc).join('<br>')}],['参与赛道',function(c){return c.sectors.map(function(s){return sectorById[s].name}).join('、')}],['商业化',function(c){return esc(c.business)}],['研究问题',function(c){return esc(c.lens)}],['已收录最新节点',function(c){var e=companyEvents(c.id)[0];return e?esc(e.date)+'<br>'+esc(e.title)+'<br>'+sourceLink(e.url,'原始公告'):'本次未收录年内事件'}],['组织与资料说明',function(c){return esc(c.note||'未额外标注组织变更；此处不代表完整股权审查。')}],['来源',function(c){return sourceLink(c.url,'官方资料')}]];el('compareBody').innerHTML='<div class="compare-body-scroll"><table class="compare-table"><thead><tr><th scope="col">比较维度</th>'+selected.map(function(id){var c=companyById[id];return '<th scope="col">'+esc(c.name)+'<small>'+esc(c.en)+'</small><button class="remove" data-compare="'+id+'">移除 ×</button></th>'}).join('')+'</tr></thead><tbody>'+fields.map(function(f){return '<tr><th scope="row">'+f[0]+'</th>'+selected.map(function(id){return '<td>'+f[1](companyById[id])+'</td>'}).join('')+'</tr>'}).join('')+'</tbody></table></div>'}
+function saveFile(name,text,type){var blob=new Blob([text],{type:type});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},2000)}
+function exportCSV(){var rows=[['公司','英文 / 品牌','地区','类型','主赛道','参与赛道','代表产品','定位','商业化概括','研究问题','最新已收录事件日期','组织 / 资料备注','来源']].concat(filtered().map(function(c){return [c.name,c.en,c.region,kindNames[c.kind],sectorById[c.sector].name,c.sectors.map(function(s){return sectorById[s].name}).join('；'),c.products.join('；'),c.desc,c.business,c.lens,c.lastEvent,c.note,c.sources.map(function(s){return s.url}).join('；')]}));var csv=rows.map(function(row){return row.map(function(v){var s=String(v);if(/^[=+@-]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"'}).join(',')}).join('\r\n');saveFile('ai-companies-'+DATA.checked+'.csv','\uFEFF'+csv,'text/csv;charset=utf-8');toast('已导出当前筛选的 '+(rows.length-1)+' 条记录。')}
+function downloadJSON(){saveFile('ai-company-atlas-'+DATA.checked+'.json',JSON.stringify(DATA,null,2),'application/json');toast('完整数据已导出。')}
+function buildCharts(){if(typeof Chart==='undefined'){el('coverageChart').hidden=true;el('chartFallback').hidden=false;el('chartFallback').textContent=DATA.sectors.map(function(s){return s.name+'：'+DATA.companies.filter(function(c){return c.sector===s.id}).length+' 家'}).join(' / ');return}if(state.view!=='sources')return;el('coverageChart').hidden=false;el('chartFallback').hidden=true;var css=getComputedStyle(document.documentElement);chart=ChartManager.safeInit('coverageChart',{type:'bar',data:{labels:DATA.sectors.map(function(s){return s.name}),datasets:[{label:'收录条目',data:DATA.sectors.map(function(s){return DATA.companies.filter(function(c){return c.sector===s.id}).length}),backgroundColor:css.getPropertyValue('--positive').trim(),borderRadius:3,barThickness:15}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,animation:false,layout:{padding:{top:5,right:18,bottom:5,left:0}},plugins:{legend:{display:false},tooltip:{enabled:true,padding:12,cornerRadius:8}},scales:{x:{beginAtZero:true,ticks:{precision:0,color:css.getPropertyValue('--text-secondary').trim(),font:{size:12}},grid:{color:css.getPropertyValue('--border').trim()}},y:{ticks:{color:css.getPropertyValue('--text').trim(),font:{size:12}},grid:{display:false}}},onClick:function(evt,elements){if(elements.length)setSector(DATA.sectors[elements[0].index].id)}}});}
+function onThemeChange(){if(typeof state!=='undefined'&&state&&state.view==='sources')requestAnimationFrame(buildCharts)}
+el('sectorFilter').insertAdjacentHTML('beforeend',DATA.sectors.map(function(s){return '<option value="'+s.id+'">'+s.name+'</option>'}).join(''));
+document.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;if(b.dataset.view){showView(b.dataset.view);window.scrollTo({top:0,behavior:'smooth'})}if(b.dataset.kind){state.kind=b.dataset.kind;render()}if(b.dataset.company)openCompany(b.dataset.company);if(b.dataset.favorite)toggleFavorite(b.dataset.favorite);if(b.dataset.compare)toggleCompare(b.dataset.compare);if(b.dataset.sector)setSector(b.dataset.sector);if(b.dataset.month){state.month=b.dataset.month;renderTimeline()}});
+el('search').addEventListener('input',function(e){state.q=e.target.value;render()});
+el('region').addEventListener('change',function(e){state.region=e.target.value;render()});
+el('sectorFilter').addEventListener('change',function(e){state.sector=e.target.value;render()});
+el('evidenceOnly').addEventListener('change',function(e){state.evidence=e.target.checked;render()});
+el('favoriteOnly').addEventListener('click',function(){state.favorites=!state.favorites;render()});
+el('reset').addEventListener('click',resetFilters);
+el('sort').addEventListener('change',function(e){state.sort=e.target.value;render()});
+el('eventType').addEventListener('change',function(e){state.eventType=e.target.value;renderTimeline()});
+document.addEventListener('keydown',function(e){if(e.key==='/'&&!/input|textarea|select/i.test(e.target.tagName)&&!document.querySelector('dialog[open]')){e.preventDefault();el('search').focus()}});
+['detail','compare'].forEach(function(id){el(id).addEventListener('click',function(e){if(e.target===el(id)){var r=el(id).getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeDialog(id)}});el(id).addEventListener('close',function(){document.body.appendChild(el('toast'));if(!document.querySelector('dialog[open]'))document.body.style.overflow=''})});
+render();showView(location.hash.slice(1)||'map');
+
+  </script>
+</body>
+</html>

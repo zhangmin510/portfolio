@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="theme-light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="通过十个交互实验，理解大模型的数据准备、分词、预训练、微调、偏好对齐、推理强化学习、评估验收、模型部署与生产优化。">
+  <meta name="theme-color" content="#f6f7f4">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 48 48%27%3E%3Crect width=%2748%27 height=%2748%27 rx=%2712%27 fill=%27%2330684b%27/%3E%3Cpath d=%27M12 14l12-6 12 6v20l-12 6-12-6zM12 14l12 7 12-7M24 21v19%27 stroke=%27%23eff5e9%27 fill=%27none%27 stroke-width=%272%27/%3E%3C/svg%3E">
+  <title>炼成 · 大模型训练交互图谱</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- ADD LANGUAGE FONTS IF NEEDED: e.g. Noto Sans KR for Korean, Noto Sans JP for Japanese -->
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"> -->
+  <!-- ADD CDN LIBRARIES HERE (Chart.js, Mermaid, etc.) -->
+  <script src="/panoramas/vendor/html-to-image.js" async></script>
+  <script src="/panoramas/vendor/chart.umd.min.js" async onload="Chart.defaults.animation = false;"></script>
+  <script>if (typeof Chart !== "undefined") Chart.defaults.animation = false;</script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { interpolate-size: allow-keywords; } /* Enable smooth height:auto transitions (Chrome 129+) */
+
+    /* ===== THEMES (class-based ONLY — no @media prefers-color-scheme) ===== */
+    html.theme-dark {
+      --bg: #0A0A0A; --surface: #141414; --surface-hover: #1C1C1C;
+      --border: rgba(255,255,255,0.04);
+      --text: #EDEDED; --text-secondary: #888;
+      --accent: #3b82f6; --accent-secondary: #8b5cf6;
+      --positive: #10b981; --negative: #f43f5e; --warning: #f59e0b;
+    }
+    html.theme-light {
+      --bg: #FAFAF9; --surface: #FFFFFF; --surface-hover: #F5F5F4;
+      --border: rgba(0,0,0,0.06);
+      --text: #0f172a; --text-secondary: #64748b;
+      --accent: #2563eb; --accent-secondary: #7c3aed;
+      --positive: #059669; --negative: #e11d48; --warning: #d97706;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+      letter-spacing: -0.01em; font-feature-settings: 'cv11', 'ss01';
+      transition: background 0.3s, color 0.3s;
+      scrollbar-gutter: stable;
+    }
+    h1,h2,h3,h4,h5,h6 { 
+      color: var(--text); 
+      letter-spacing: -0.03em; 
+      line-height: 1.08;
+      text-wrap: balance;
+    }
+    h1 { font-weight: 700; }
+    h2 { font-weight: 600; }
+    body, p, li, td, th, span, label { font-weight: 400; }
+    p,li,td,th,span,label { color: var(--text); }
+    .text-secondary { color: var(--text-secondary); }
+
+    /* ===== CARD ===== */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 24px;
+      transition: box-shadow 0.2s ease;
+    }
+    .card:hover {
+      box-shadow: 0 0 0 1px var(--border), 0 8px 16px rgba(0,0,0,0.08);
+    }
+
+    /* ===== ANIMATIONS (CSS-first — always reliable) ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .animate { animation: fadeInUp 0.6s ease-out both; }
+    .animate.delay-1 { animation-delay: 0.1s; }
+    .animate.delay-2 { animation-delay: 0.2s; }
+    .animate.delay-3 { animation-delay: 0.3s; }
+    .animate.delay-4 { animation-delay: 0.4s; }
+    .animate.delay-5 { animation-delay: 0.5s; }
+    .animate.delay-6 { animation-delay: 0.6s; }
+
+    /* Scroll-triggered: JS adds .reveal, then .visible on scroll */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      body { background: white !important; color: black !important; }
+      .viz-menu, .reveal { display: revert; opacity: 1 !important; transform: none !important; }
+      .card { break-inside: avoid; border: 1px solid #ddd; box-shadow: none; }
+      * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
+    @page { margin: 1in; @bottom-center { content: "Page " counter(page); font-size: 9pt; color: #666; } }
+
+    /* ===== MENU ===== */
+    .viz-menu { position: fixed; top: 16px; right: 16px; z-index: 9999; }
+    .viz-menu-toggle {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(12px); transition: all 0.2s;
+    }
+    .viz-menu-toggle:hover { background: var(--surface-hover); }
+    .viz-menu-dropdown {
+      position: absolute; top: 52px; right: 0; min-width: 200px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 8px;
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: all 0.2s; backdrop-filter: blur(16px);
+    }
+    .viz-menu-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .viz-menu-dropdown button {
+      width: 100%; padding: 10px 14px; border: none; border-radius: 8px;
+      background: transparent; color: var(--text); font-size: 14px;
+      font-family: inherit; cursor: pointer; text-align: left;
+      display: flex; align-items: center; gap: 10px; transition: background 0.15s;
+    }
+    .viz-menu-dropdown button:hover { background: var(--surface-hover); }
+
+    /* ===== SKIP TO CONTENT (accessibility) ===== */
+    .skip-to-content {
+      position: absolute; top: -40px; left: 6px; background: var(--accent);
+      color: white; padding: 8px 12px; text-decoration: none;
+      border-radius: 4px; opacity: 0; pointer-events: none;
+      transition: all 0.2s; z-index: 10000;
+    }
+    .skip-to-content:focus { top: 6px; opacity: 1; pointer-events: auto; }
+
+    /* ===== DETAILS ACCORDION (Chrome 120+ exclusive, 131+ animated) ===== */
+    details { overflow: hidden; }
+    details summary { cursor: pointer; list-style: none; }
+    details summary::-webkit-details-marker { display: none; }
+    ::details-content {
+      transition: block-size 0.3s ease, opacity 0.3s ease;
+      block-size: 0; opacity: 0; overflow: hidden;
+    }
+    details[open]::details-content { block-size: auto; opacity: 1; }
+
+    /* ===== POPOVER (Chrome 114+, zero-JS tooltips/panels) ===== */
+    [popover] {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 16px; max-width: 320px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2); color: var(--text);
+    }
+    [popover]::backdrop { background: rgba(0,0,0,0.3); }
+
+    /* Training Atlas — application styles */
+    html.theme-light { --bg:#f6f7f4; --surface:#fff; --surface-hover:#eef2ec; --border:#dfe5dc; --text:#23372e; --text-secondary:#6a786f; --accent:#30684b; --accent-secondary:#9cae5d; --positive:#387557; --negative:#ad5f50; --warning:#9d7934; color-scheme:light; }
+    html.theme-dark { --bg:#151d19; --surface:#1c2821; --surface-hover:#26382c; --border:#35453a; --text:#e4eade; --text-secondary:#a4b3a7; --accent:#b6d892; --accent-secondary:#d4c480; --positive:#a6cc91; --negative:#e0a096; --warning:#e1c37c; color-scheme:dark; }
+    html { scroll-behavior:smooth; scroll-padding-top:90px; }
+    body { font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif; font-size:16px; }
+    button,input,select { font:inherit; } button,a,input { -webkit-tap-highlight-color:transparent; }
+    button { cursor:pointer; } button:disabled { cursor:default; opacity:.4; }
+    button { color:var(--text); } a { color:var(--accent); }
+    :focus-visible { outline:3px solid var(--accent-secondary); outline-offset:4px; }
+    [hidden] { display:none!important; } h1 { font-size:clamp(42px,4.1vw,60px); line-height:1.18; letter-spacing:-.05em; } h2 { font-size:32px; font-weight:600; } h3 { font-size:24px; font-weight:600; }
+    .icon { width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.65; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; vertical-align:middle; }
+    .mono { font-family:'SFMono-Regular',Consolas,monospace; font-variant-numeric:tabular-nums; }
+    .eyebrow { font-size:11px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--text-secondary); }
+    .muted { color:var(--text-secondary); } .small { font-size:13px; } .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
+    .sidebar { position:fixed; inset:0 auto 0 0; width:232px; background:var(--surface); border-right:1px solid var(--border); z-index:50; display:flex; flex-direction:column; padding:30px 19px 22px; }
+    .brand { display:flex; align-items:center; gap:11px; padding:0 9px; text-decoration:none; color:var(--text); }
+    .brand-mark { display:grid; place-items:center; width:37px; height:37px; border-radius:10px; background:var(--accent); color:var(--surface); }
+    .brand-mark .icon { width:25px; height:25px; } .brand-name { font-size:17px; font-weight:650; letter-spacing:-.6px; } .brand-caption { color:var(--text-secondary); font-size:9px; letter-spacing:.19em; margin-top:1px; }
+    .side-heading { display:flex; justify-content:space-between; align-items:center; margin:48px 13px 16px; }
+    .side-heading span { color:var(--text-secondary); font-size:11px; letter-spacing:.13em; }
+    .stage-nav { display:flex; flex-direction:column; gap:4px; }
+    .stage-button { display:flex; align-items:center; width:100%; gap:12px; border:0; border-radius:8px; padding:13px 12px; background:transparent; text-align:left; position:relative; }
+    .stage-button:hover { background:var(--bg); } .stage-button.active { background:var(--surface-hover); }
+    .stage-index { color:var(--text-secondary); font-size:12px; width:21px; height:25px; display:grid; place-items:center; }
+    .stage-button.active .stage-index { color:var(--accent); font-weight:700; }
+    .stage-label { font-size:13px; font-weight:550; flex:1; } .stage-button.active .stage-label { color:var(--accent); }
+    .stage-button.active:after { content:''; width:5px; height:5px; border-radius:50%; background:var(--accent); }
+    .optional-mark { font-size:9px; padding:0 4px; color:var(--text-secondary); border:1px solid var(--border); border-radius:3px; }
+    .nav-separator { margin:14px 12px 8px; font-size:10px; color:var(--text-secondary); letter-spacing:.1em; }
+    .sidebar-bottom { margin-top:auto; padding:24px 11px 0; } .progress-label { display:flex; justify-content:space-between; font-size:11px; }
+    .progress-track { height:3px; border-radius:3px; background:var(--border); margin:12px 0; overflow:hidden; }
+    .progress-fill { height:100%; background:var(--accent); transition:width .4s; }
+    .reset-link { font-size:11px; background:none; border:0; color:var(--text-secondary); padding:6px 0; }
+    .workspace { margin-left:232px; }
+    .topbar { height:76px; display:flex; align-items:center; justify-content:space-between; padding:0 42px; border-bottom:1px solid var(--border); gap:18px; }
+    .breadcrumb { display:flex; align-items:center; gap:13px; font-size:12px; color:var(--text-secondary); } .breadcrumb .slash { color:var(--border); }
+    .top-actions { display:flex; align-items:center; gap:8px; padding-right:48px; }
+    .btn { border:1px solid var(--border); background:var(--surface); padding:10px 16px; border-radius:7px; display:inline-flex; align-items:center; justify-content:center; gap:8px; font-size:12px; font-weight:500; text-decoration:none; min-height:39px; transition:background .2s,border-color .2s; }
+    .btn:hover { background:var(--surface-hover); border-color:var(--text-secondary); } .btn.primary { background:var(--accent); color:var(--surface); border-color:var(--accent); } .btn.primary:hover { filter:brightness(1.08); } .btn.primary span { color:var(--surface); }
+    .btn.ghost { background:transparent; border-color:transparent; } .btn .icon { width:15px; height:15px; }
+    .viz-menu { top:19px; right:32px; } .viz-menu-toggle { width:38px; height:38px; border-radius:7px; background:transparent; }
+    .viz-menu-dropdown button { font-size:13px; }.viz-menu-dropdown { box-shadow:0 12px 40px #00000012; }
+    main { max-width:1360px; margin:auto; padding:42px 42px 24px; }
+    .intro { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:38px; }
+    .intro .eyebrow { margin-bottom:17px; color:var(--accent); display:flex; gap:9px; align-items:center; }
+    .tiny-square { width:6px; height:6px; background:var(--accent); display:inline-block; }
+    .intro h1 { font-size:clamp(40px,3.5vw,52px); } .intro h1 em { font-style:normal; color:var(--accent); }
+    .intro p { margin-top:17px; color:var(--text-secondary); font-size:13px; line-height:1.9; }
+    .intro-aside { width:212px; flex-shrink:0; border-left:1px solid var(--border); padding-left:25px; }
+    .intro-aside .big-number { font-size:47px; line-height:1.15; font-weight:400; letter-spacing:-3px; }.intro-aside .big-number span { font-size:12px; margin-left:10px; color:var(--text-secondary); letter-spacing:0; }
+    .intro-aside p { font-size:11px; margin-top:12px; line-height:1.9; }
+    .route-section { margin-bottom:32px; }
+    .route-labels { display:flex; gap:7px; justify-content:space-between; margin-bottom:13px; }.route-labels span { color:var(--text-secondary); font-size:10px; letter-spacing:.07em; }
+    .route { display:grid; grid-template-columns:repeat(8,minmax(0,1fr)); position:relative; }
+    .route:before { content:''; height:1px; background:var(--border); position:absolute; top:14px; left:6%; right:6%; }
+    .route-node { background:transparent; border:0; text-align:center; position:relative; display:flex; align-items:center; flex-direction:column; gap:9px; padding:0 0 6px; }
+    .route-dot { background:var(--bg); width:29px; height:29px; display:grid; place-items:center; border:1px solid var(--border); border-radius:50%; color:var(--text-secondary); font-size:10px; transition:all .25s; }
+    .route-node.optional .route-dot { border-style:dashed; }.route-node.active .route-dot { background:var(--accent); color:var(--surface); border-color:var(--accent); box-shadow:0 0 0 4px var(--surface-hover); }.route-node.visited:not(.active) .route-dot { color:var(--accent); border-color:var(--accent); }
+    .route-node .route-text { font-size:10px; color:var(--text-secondary); }.route-node.active .route-text { color:var(--accent); font-weight:650; }
+    .workbench { background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:48px; }
+    .workbench-header { display:flex; align-items:center; justify-content:space-between; padding:25px 30px 22px; gap:15px; border-bottom:1px solid var(--border); }
+    .stage-kicker { display:flex; align-items:center; gap:9px; margin-bottom:10px; font-size:10px; letter-spacing:.1em; color:var(--text-secondary); }
+    .badge { display:inline-flex; align-items:center; gap:5px; padding:3px 8px; font-size:10px; background:var(--surface-hover); color:var(--accent); border-radius:4px; letter-spacing:0; }
+    .workbench-header h2 { font-size:30px; }.workbench-header h2 span { font-size:12px; color:var(--text-secondary); font-weight:400; margin-left:13px; letter-spacing:0; }
+    .workbench-header p { color:var(--text-secondary); font-size:12px; margin-top:11px; line-height:1.8; }
+    .chapter-counter { align-self:flex-start; display:flex; align-items:center; gap:8px; flex-shrink:0; margin-top:6px; }.chapter-counter .mono { font-size:11px; color:var(--text-secondary); }.square-btn { padding:0; width:30px; height:30px; min-height:30px; }
+    .scene { position:relative; background:var(--bg); background-image:radial-gradient(var(--border) .8px,transparent .8px); background-size:18px 18px; min-height:282px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:44px 32px 28px; overflow:hidden; }
+    .scene-label { position:absolute; top:18px; left:25px; display:flex; gap:7px; align-items:center; color:var(--text-secondary); font-size:9px; letter-spacing:.12em; }.scene-label .live-dot { height:5px; width:5px; background:var(--accent); border-radius:50%; }
+    .scene-tag { position:absolute; top:17px; right:24px; font-size:9px; color:var(--text-secondary); }
+    .pipeline { width:100%; display:flex; align-items:center; justify-content:center; gap:0; margin:12px 0; }
+    .flow-node { background:var(--surface); border:1px solid var(--border); border-radius:9px; width:152px; min-height:99px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px 10px; gap:7px; text-align:center; position:relative; box-shadow:0 3px 8px #142d1910; flex-shrink:1; min-width:0; }
+    .flow-node .icon { width:25px; height:25px; color:var(--accent); }.flow-node strong { font-size:12px; font-weight:550; }.flow-node small { font-size:9px; color:var(--text-secondary); }
+    .flow-node.focus { background:var(--accent); border-color:var(--accent); }.flow-node.focus * { color:var(--surface); }.flow-node.focus small { opacity:.8; }.flow-node.optional { border-style:dashed; }
+    .flow-edge { width:clamp(22px,4.3vw,64px); flex-shrink:1; min-width:16px; height:1px; background:var(--accent-secondary); position:relative; }.flow-edge:after { content:''; border:solid var(--accent-secondary); border-width:0 1px 1px 0; padding:3px; position:absolute; right:0; top:-3px; transform:rotate(-45deg); }
+    .flow-edge em { position:absolute; left:0; right:0; top:-23px; text-align:center; font-size:8px; font-style:normal; color:var(--text-secondary); white-space:nowrap; }
+    .scene-caption { margin-top:25px; font-size:11px; text-align:center; color:var(--text-secondary); line-height:1.7; }
+    .scene-feedback { margin-top:16px; padding-top:8px; border-top:1px dashed var(--accent-secondary); font-size:10px; letter-spacing:.04em; color:var(--accent); width:65%; text-align:center; }
+    .lab { padding:25px 30px 28px; }.lab-heading { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:20px; }.lab-heading strong { font-size:13px; font-weight:600; display:flex; gap:8px; align-items:center; }.lab-heading .icon { width:15px; height:15px; color:var(--accent); }.lab-heading>span { font-size:10px; color:var(--text-secondary); }
+    .lab-grid { display:grid; grid-template-columns:1fr 1fr; gap:30px; }.field-label { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; font-size:12px; gap:10px; }.field-label output { color:var(--accent); font-weight:600; }
+    input[type=range] { width:100%; accent-color:var(--accent); cursor:ew-resize; height:5px; margin:13px 0; }
+    input[type=checkbox] { accent-color:var(--accent); width:15px; height:15px; cursor:pointer; flex-shrink:0; }
+    .choice-row { display:flex; flex-wrap:wrap; gap:8px; }.choice { display:inline-flex; align-items:center; gap:6px; background:var(--bg); padding:9px 11px; border:1px solid var(--border); border-radius:6px; font-size:11px; cursor:pointer; }.choice:has(input:checked) { border-color:var(--accent); color:var(--accent); }
+    .lab-note { font-size:11px; line-height:1.85; color:var(--text-secondary); margin-top:14px; }.status-line { min-height:36px; margin-top:15px; font-size:12px; line-height:1.8; color:var(--accent); }
+    .data-list { display:grid; grid-template-columns:1fr 1fr; gap:7px; }.data-item { display:flex; gap:9px; align-items:center; padding:9px 11px; border:1px solid var(--border); border-radius:5px; transition:opacity .25s,background .25s; min-width:0; }.data-item .icon { width:15px; height:15px; color:var(--text-secondary); }.data-item span { font-size:11px; }.data-item.filtered { opacity:.38; background:var(--bg); text-decoration:line-through; }.data-item .item-tag { margin-left:auto; font-size:9px; color:var(--text-secondary); }
+    .stats-inline { display:flex; align-items:baseline; gap:9px; }.stats-inline strong { font-size:38px; letter-spacing:-2px; font-weight:500; color:var(--accent); }.stats-inline span { font-size:12px; color:var(--text-secondary); }.microbar { height:6px; background:var(--border); border-radius:5px; margin:12px 0; overflow:hidden; }.microbar>div { height:100%; background:var(--accent); transition:width .3s; }
+    .segmented { display:inline-flex; padding:3px; background:var(--bg); border-radius:7px; border:1px solid var(--border); gap:2px; max-width:100%; flex-wrap:wrap; }.segmented button { border:0; background:transparent; padding:7px 13px; border-radius:4px; color:var(--text-secondary); font-size:11px; }.segmented button[aria-pressed=true] { background:var(--surface); color:var(--accent); box-shadow:0 1px 4px #00000010; }
+    .token-row { display:flex; flex-wrap:wrap; gap:8px; margin:22px 0; align-items:center; }.token { display:flex; flex-direction:column; align-items:center; min-width:48px; padding:9px 12px; border:1px solid var(--accent-secondary); border-radius:6px; background:var(--surface-hover); font-size:17px; }.token small { color:var(--text-secondary); font-size:8px; margin-top:7px; }.token.reveal-token { background:var(--accent); color:var(--surface); }.token.reveal-token small { color:var(--surface); }
+    .context-line { font-size:24px; letter-spacing:2px; text-align:center; margin:16px 0 27px; }.mask { background:var(--surface); border:1px dashed var(--accent); color:var(--accent); padding:5px 14px; border-radius:5px; display:inline-block; min-width:65px; }
+    .prediction { width:min(440px,100%); display:grid; gap:10px; }.prediction-row { display:grid; grid-template-columns:35px 1fr 42px; align-items:center; gap:12px; font-size:11px; }.prediction-bar { background:var(--border); height:7px; border-radius:6px; overflow:hidden; }.prediction-bar i { background:var(--accent); display:block; height:100%; transition:width .35s; }.prediction-row:not(:first-child) .prediction-bar i { background:var(--accent-secondary); }.prediction-row output { color:var(--text-secondary); font-size:10px; text-align:right; }
+    .training-steps { display:flex; gap:6px; justify-content:space-between; margin-top:19px; }.training-steps span { font-size:9px; color:var(--text-secondary); background:var(--bg); padding:6px 8px; border-radius:4px; }.training-steps span.on { background:var(--surface-hover); color:var(--accent); }
+    .chatbox { background:var(--bg); border:1px solid var(--border); border-radius:7px; padding:16px; font-size:12px; line-height:1.9; }.chatbox .chat-role { font-size:9px; text-transform:uppercase; color:var(--text-secondary); letter-spacing:.1em; margin-bottom:5px; }.chatbox .answer { margin-top:14px; padding-top:12px; border-top:1px solid var(--border); }.chatbox .answer p { color:var(--accent); }
+    .answer-options { display:grid; grid-template-columns:1fr 1fr; gap:12px; }.answer-option { text-align:left; border:1px solid var(--border); padding:15px; background:var(--bg); border-radius:7px; min-height:113px; }.answer-option:hover { border-color:var(--accent); }.answer-option[aria-pressed=true] { background:var(--surface-hover); border-color:var(--accent); }.answer-option strong { font-size:10px; color:var(--text-secondary); display:block; margin-bottom:8px; }.answer-option span { font-size:12px; line-height:1.9; }.answer-option .vote-label { display:block; font-size:10px; color:var(--accent); margin-top:11px; }
+    .reward-row { display:flex; align-items:center; gap:20px; }.reward-score { font-size:42px; font-weight:500; letter-spacing:-2px; color:var(--accent); }.reward-text { font-size:12px; color:var(--text-secondary); line-height:1.9; }
+    .eval-list { display:grid; gap:8px; }.eval-row { display:flex; align-items:center; justify-content:space-between; gap:12px; border-bottom:1px solid var(--border); padding:9px 0; font-size:12px; }.eval-row label { display:flex; align-items:center; gap:8px; cursor:pointer; }.eval-result { font-size:10px; color:var(--text-secondary); }.eval-result.pass { color:var(--positive); }.eval-result.fail { color:var(--negative); }
+    .takeaways { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0; border-top:1px solid var(--border); background:var(--bg); padding:24px 30px; }.takeaway { padding:0 22px; border-left:1px solid var(--border); }.takeaway:first-child { padding-left:0; border:0; }.takeaway:last-child { padding-right:0; }.takeaway .eyebrow { font-size:9px; letter-spacing:.1em; }.takeaway strong { display:block; margin:8px 0; font-size:12px; font-weight:550; }.takeaway p { font-size:11px; color:var(--text-secondary); line-height:1.8; }
+    .insights { display:grid; grid-template-columns:1.15fr 1fr; gap:36px; margin-bottom:48px; }.section-head { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:20px; }.section-head h3 { font-size:24px; }.section-head .eyebrow { font-size:9px; }
+    .insight-copy { font-size:12px; color:var(--text-secondary); line-height:1.9; margin-bottom:20px; }
+    .signal-line { padding:15px 0; display:grid; grid-template-columns:70px 1fr; align-items:start; border-top:1px solid var(--border); gap:15px; }.signal-line strong { font-size:12px; font-weight:550; color:var(--accent); }.signal-line p { font-size:11px; color:var(--text-secondary); line-height:1.8; }
+    details { border-bottom:1px solid var(--border); padding:15px 0; } details:first-of-type { border-top:1px solid var(--border); } summary { display:flex; justify-content:space-between; gap:14px; font-size:12px; font-weight:500; } summary:after { content:'+'; color:var(--text-secondary); } details[open] summary:after { content:'−'; } details p { font-size:11px; line-height:1.9; color:var(--text-secondary); padding-top:12px; }
+    footer { padding-top:22px; border-top:1px solid var(--border); display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap; } footer p { font-size:10px; color:var(--text-secondary); } .source-links { display:flex; gap:13px; flex-wrap:wrap; } .source-links a { font-size:10px; color:var(--text-secondary); text-decoration:none; } .source-links a:hover { color:var(--accent); }
+    dialog { margin:auto; padding:0; background:var(--surface); color:var(--text); border:1px solid var(--border); border-radius:13px; width:min(960px,94vw); max-height:88vh; box-shadow:0 20px 80px #0003; } dialog::backdrop { background:#15281c80; backdrop-filter:blur(4px); }.dialog-head { padding:26px 30px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border); }.dialog-head h2 { font-size:27px; }.dialog-body { padding:26px 30px; }.overview-grid { display:grid; grid-template-columns:1fr 1fr; gap:0 26px; margin:18px 0; }.overview-item { padding:18px 0; border-bottom:1px solid var(--border); text-align:left; background:transparent; border-top:0; border-left:0; border-right:0; display:grid; grid-template-columns:30px 1fr; gap:7px; }.overview-item:hover strong { color:var(--accent); }.overview-item .mono { font-size:12px; color:var(--text-secondary); }.overview-item strong { display:block; font-size:15px; }.overview-item small { display:block; color:var(--text-secondary); margin-top:8px; font-size:11px; line-height:1.8; }.overview-note { font-size:12px; color:var(--text-secondary); line-height:1.9; }
+    .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); max-width:calc(100% - 32px); padding:12px 20px; border-radius:8px; background:var(--text); color:var(--surface); z-index:10001; box-shadow:0 4px 25px #0002; font-size:12px; text-align:center; }
+    .print-atlas { display:none; }
+    @media(min-width:1550px) { main { padding-top:55px; }.intro { margin-bottom:48px; }.scene { min-height:310px; } }
+    @media(max-width:1150px) { .sidebar{width:205px;padding-inline:13px}.workspace{margin-left:205px}main{padding-inline:28px}.topbar{padding-inline:28px}.intro-aside{width:164px}.intro h1{font-size:40px}.lab-grid{gap:20px}.flow-node{width:135px}.workbench-header{padding-inline:24px}.lab{padding-inline:24px}.takeaways{padding-inline:24px}.workbench-header h2 span{display:block;margin:8px 0 0}.scene{padding-inline:24px}.data-list{grid-template-columns:1fr} }
+    @media(max-width:900px) { .sidebar{width:176px;padding-inline:9px}.workspace{margin-left:176px}.brand{gap:8px;padding:0 5px}.brand-name{font-size:14px}.brand-caption{font-size:8px}.brand-mark{width:31px;height:31px}.stage-button{padding:12px 9px;gap:7px}.stage-label{font-size:12px}.optional-mark{font-size:8px}.intro-aside{display:none}.topbar{padding-inline:22px}.breadcrumb .breadcrumb-end{display:none}.intro h1{font-size:40px}.insights{grid-template-columns:1fr;gap:38px}.route-text{font-size:9px!important}.lab-grid{grid-template-columns:1fr}.data-list{grid-template-columns:1fr 1fr}.lab-grid>.lab-controls{order:0}.lab-grid>.lab-output{order:1}.takeaways{gap:18px;grid-template-columns:1fr}.takeaway,.takeaway:first-child,.takeaway:last-child{border:0;border-top:1px solid var(--border);padding:14px 0 0}.takeaway:first-child{border:0;padding-top:0}.takeaway strong{margin:5px 0}.top-actions{gap:4px}.btn{padding:9px 11px}.scene{min-height:260px}.flow-node{min-height:92px;padding:12px 7px}.flow-node strong{font-size:10px}.flow-node small{font-size:8px}.flow-edge em{font-size:7px}.route-labels{margin-top:4px} }
+    @media(max-width:640px) { .sidebar{display:none}.workspace{margin-left:0}.topbar{height:65px;padding:0 18px}.breadcrumb{font-size:11px;gap:8px}.breadcrumb .icon{width:17px}.top-actions{padding-right:29px}.top-actions .btn{font-size:10px;padding:7px 9px;min-height:33px}.top-actions .btn .icon{width:12px;height:12px}.viz-menu{right:12px;top:16px}.viz-menu-toggle{width:30px;height:33px;border:0}.viz-menu-toggle svg{width:16px}.viz-menu-dropdown{top:44px}.top-actions #overviewButton{display:none}main{padding:30px 18px 25px}.intro{margin-bottom:28px}.intro .eyebrow{font-size:9px;margin-bottom:15px}.intro h1{font-size:39px;line-height:1.25}.intro p{font-size:12px;max-width:32em}.route{grid-template-columns:repeat(4,1fr);row-gap:12px}.route:before{display:none}.route-node{gap:7px}.route-node .route-text{font-size:10px!important}.route-labels span{font-size:9px}.route-labels span:last-child{display:none}.route-section{margin-bottom:23px}.workbench-header{padding:21px 19px;align-items:flex-start}.workbench-header h2{font-size:26px}.workbench-header h2 span{font-size:10px}.workbench-header p{font-size:11px}.stage-kicker{font-size:9px}.chapter-counter{gap:4px;flex-wrap:wrap;justify-content:flex-end;max-width:74px}.chapter-counter .mono{width:100%;text-align:center;margin-bottom:4px}.square-btn{width:28px;min-height:28px;height:28px;padding:0!important}.scene{min-height:250px;padding:43px 16px 25px}.scene-label{left:17px;font-size:8px}.scene-tag{right:16px;font-size:8px}.flow-node{width:88px;min-height:90px;padding:10px 4px;gap:6px;border-radius:6px}.flow-node .icon{width:21px;height:21px}.flow-node strong{font-size:9px}.flow-node small{font-size:7px;line-height:1.5}.flow-edge{min-width:14px;width:22px}.flow-edge em{display:none}.scene-caption{font-size:10px;margin-top:20px}.pipeline.four-nodes .flow-node{width:69px;min-height:92px}.pipeline.four-nodes .flow-node strong{font-size:8px}.pipeline.four-nodes .flow-node small{font-size:7px}.lab{padding:22px 19px}.lab-heading{margin-bottom:18px;align-items:flex-start}.lab-heading>span{font-size:9px;max-width:100px;text-align:right}.lab-heading strong{font-size:12px}.choice{padding:8px;font-size:10px}.data-list{gap:6px}.data-item{padding:8px}.data-item span{font-size:10px}.data-item .item-tag{display:none}.answer-options{gap:8px}.answer-option{padding:11px}.answer-option span{font-size:11px}.lab-note{font-size:10px}.takeaways{padding:22px 19px}.workbench{margin-bottom:38px}.insights{margin-bottom:38px}.section-head h3{font-size:23px}.context-line{font-size:20px;letter-spacing:1px}.token{min-width:40px;padding:7px 9px;font-size:15px}.token-row{gap:6px}.segmented button{padding:6px 9px}.training-steps span{font-size:8px;padding:6px 5px}.dialog-head{padding:22px}.dialog-head h2{font-size:24px}.dialog-body{padding:20px 22px}.overview-grid{grid-template-columns:1fr}footer{gap:13px}.flow-node.focus small{font-size:8px}.btn{font-size:11px}.route-node:focus-visible{outline-offset:0} }
+    @media(max-width:375px) { body{overflow-x:hidden}.intro h1{font-size:36px}main{padding-inline:14px}.topbar{padding-left:14px}.breadcrumb .slash{display:none}.data-item .icon{display:none}.flow-node{width:81px}.pipeline.four-nodes .flow-node{width:63px}.scene{padding-inline:13px}.prediction-row{gap:8px} }
+    @media(prefers-reduced-motion:reduce) { html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important} }
+    @media print { html.theme-light,html.theme-dark { --bg:#fff; --surface:#fff; --text:#222; --text-secondary:#555; --accent:#30684b; --border:#ccc; } .sidebar,.topbar,.viz-menu,.route-section,.workbench,.insights,.intro-aside,.toast,dialog,footer{display:none!important}.workspace{margin:0}main{padding:0;max-width:none}.intro{margin:0 0 24px}.intro h1{font-size:30px}.intro p{font-size:11px}.print-atlas{display:block}.print-stage{break-inside:avoid;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid #ccc}.print-stage h3{font-size:17px;margin-bottom:9px}.print-stage p{font-size:11px;margin:5px 0;color:#222}.print-source{font-size:10px;overflow-wrap:anywhere}body{background:#fff!important;color:#222!important} }
+
+    /* Deployment and operations extend the same learning surface. */
+    .sidebar { overflow-y:auto; }
+    .stage-nav { flex-shrink:0; }
+    .side-heading { margin-top:30px; }
+    .stage-button { padding-block:10px; }
+    .sidebar-bottom { padding-top:22px; }
+    .route { grid-template-columns:repeat(10,minmax(0,1fr)); }
+    .control-stack { display:grid; gap:20px; }
+    .ops-select { width:100%; border:1px solid var(--border); background:var(--bg); color:var(--text); padding:10px 12px; border-radius:6px; font-size:12px; }
+    .memory-summary { display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; margin:10px 0 15px; }
+    .memory-summary strong { font-size:37px; font-weight:500; color:var(--accent); letter-spacing:-1.5px; }
+    .memory-summary span { color:var(--text-secondary); font-size:12px; }
+    .memory-chart { position:relative; margin-bottom:12px; }
+    .memory-track { display:flex; background:var(--bg); height:20px; border-radius:5px; overflow:hidden; border:1px solid var(--border); }
+    .memory-track span { height:100%; transition:width .2s; }
+    .memory-track .weights { background:var(--accent); }
+    .memory-track .cache { background:var(--accent-secondary); }
+    .memory-track .runtime { background:var(--text-secondary); }
+    .budget-marker { position:absolute; top:-4px; bottom:-4px; width:0; left:90%; border-left:2px dashed var(--negative); }
+    .memory-legend { display:grid; gap:7px; margin:18px 0; }
+    .memory-legend div { display:flex; justify-content:space-between; gap:16px; font-size:11px; }
+    .memory-legend span { display:flex; gap:7px; align-items:center; }
+    .legend-dot { width:8px; height:8px; background:var(--accent); display:inline-block; }
+    .legend-dot.cache { background:var(--accent-secondary); border-radius:50%; }
+    .legend-dot.runtime { background:var(--text-secondary); transform:rotate(45deg); }
+    .memory-legend output { color:var(--text-secondary); }
+    .capacity-result { padding:12px 14px; border-left:3px solid var(--accent); background:var(--bg); color:var(--accent); font-size:12px; line-height:1.85; }
+    .capacity-result.over { border-color:var(--negative); color:var(--negative); }
+    .lab-divider { border:0; border-top:1px solid var(--border); margin:26px 0; }
+    .deploy-checks { display:grid; gap:10px; margin:17px 0 20px; }
+    .deploy-checks label { display:flex; align-items:center; gap:9px; font-size:12px; cursor:pointer; }
+    .release-state { display:flex; gap:8px; flex-wrap:wrap; margin:16px 0; }
+    .release-state span { font-size:10px; padding:7px 10px; background:var(--bg); color:var(--text-secondary); border-radius:4px; }
+    .release-state span.active { background:var(--surface-hover); color:var(--accent); outline:1px solid var(--accent); }
+    .lab-source { color:var(--text-secondary); font-size:10px; margin-top:16px; line-height:1.9; }
+    .lab-source a { color:var(--accent); text-underline-offset:3px; }
+    .metric-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:22px 0; }
+    .ops-metric { border-right:1px solid var(--border); padding-right:16px; }
+    .ops-metric:last-child { border:0;padding:0; }
+    .ops-metric small { display:block; font-size:10px; color:var(--text-secondary); line-height:1.8; }
+    .ops-metric strong { display:block; font-size:30px; font-weight:500; letter-spacing:-1px; color:var(--accent); margin:8px 0; line-height:1.3; }
+    .ops-metric .metric-unit { font-size:10px; color:var(--text-secondary); }
+    .ops-equation { font-size:11px; line-height:1.9; color:var(--text-secondary); overflow-wrap:anywhere; }
+    .ops-toolbox { margin-top:24px; }
+    .ops-toolbox summary { font-size:12px; }
+    .ops-toolbox p { font-size:11px; }
+    .control-stack .choice-row { margin-top:0; }
+    .ops-load-track { width:min(560px,100%); margin:18px 0 0; }
+    .ops-load-track .field-label { font-size:10px; }
+    .ops-load-track .microbar { height:8px; }
+    .ops-load-track .microbar div.over { background:var(--negative); }
+    @media(max-width:1150px) { .route { grid-template-columns:repeat(5,minmax(0,1fr));row-gap:15px; }.route:before { display:none; } }
+    @media(max-width:640px) { .route { grid-template-columns:repeat(5,minmax(0,1fr));row-gap:14px; }.route-node .route-text { font-size:9px!important; }.metric-grid { gap:12px; }.ops-metric { padding-right:10px; }.ops-metric strong { font-size:24px; }.ops-metric small { font-size:9px; }.memory-summary strong { font-size:31px; }.deploy-checks label { font-size:11px; }.release-state { gap:6px; }.release-state span { font-size:9px;padding:6px 8px; } }
+
+  </style>
+</head>
+<body>
+<a href="#main-content" class="skip-to-content">跳到主要内容</a>
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="i-network" viewBox="0 0 24 24"><path d="M5 6l7-3 7 3v12l-7 3-7-3zM5 6l7 4 7-4M12 10v11M5 12l7 4 7-4"/></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+<symbol id="i-data" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 4 16 4 16 0V5M4 12v7c0 4 16 4 16 0v-7"/></symbol>
+<symbol id="i-filter" viewBox="0 0 24 24"><path d="M3 4h18l-7 8v7l-4 2v-9z"/></symbol>
+<symbol id="i-document" viewBox="0 0 24 24"><path d="M14 3H5v18h14V8zM14 3v5h5M8 12h8M8 16h6"/></symbol>
+<symbol id="i-token" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="8" y="15" width="8" height="6" rx="1"/><path d="M6.5 11v3l5.5 1M17.5 11v3L12 15"/></symbol>
+<symbol id="i-model" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="3"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11a8 8 0 0 1-8 8H8l-5 3V11a9 9 0 0 1 18 0zM7 9h10M7 13h7"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-8 10-8 10S4 17 4 12V6zM8 12l3 3 5-6"/></symbol>
+<symbol id="i-lab" viewBox="0 0 24 24"><path d="M9 3h6M10 3v7l-6 9q-1 2 2 2h12q3 0 2-2l-6-9V3M7 15h10"/></symbol>
+<symbol id="i-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 4l12 8-12 8z"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+<symbol id="i-loop" viewBox="0 0 24 24"><path d="M20 7a9 9 0 0 0-16 5M20 3v4h-4M4 17a9 9 0 0 0 16-5M4 21v-4h4"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 15A9 9 0 0 1 9 4a9 9 0 1 0 11 11z"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 15v6h16v-6"/></symbol>
+<symbol id="i-print" viewBox="0 0 24 24"><path d="M7 8V3h10v5M7 17H3V8h18v9h-4M7 13h10v8H7z"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M6 18L18 6"/></symbol>
+</defs></svg>
+<aside class="sidebar" aria-label="训练阶段导航">
+  <a class="brand" href="#stage-1" aria-label="炼成 · 大模型训练图谱首页"><span class="brand-mark"><svg class="icon"><use href="#i-network"/></svg></span><div><div class="brand-name">炼成 · LLM Atlas</div><div class="brand-caption">AN INTERACTIVE FIELD GUIDE</div></div></a>
+  <div class="side-heading"><span>一 个 模 型 的 诞 生</span><span class="mono">10</span></div>
+  <nav class="stage-nav" id="stageNav"></nav>
+  <div class="sidebar-bottom"><div class="progress-label"><span class="muted">已探索阶段</span><span id="visitedCount" class="mono">1 / 10</span></div><div class="progress-track"><div class="progress-fill" id="visitedFill" style="width:10%"></div></div><button class="reset-link" id="resetProgress">↺ 重新探索</button><p class="eyebrow" style="margin-top:22px;font-size:8px">FROM RAW DATA TO PRODUCTION</p></div>
+</aside>
+<div class="workspace">
+<header class="topbar"><div class="breadcrumb"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg><span>模型训练图谱</span><span class="slash">/</span><span class="breadcrumb-end">交互式探索</span></div><div class="top-actions"><button class="btn ghost" id="overviewButton"><svg class="icon" aria-hidden="true"><use href="#i-network"/></svg>全景路线</button><button class="btn" id="tourButton" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span>自动导览</span></button></div></header>
+<div class="viz-menu"><button class="viz-menu-toggle" onclick="toggleMenu()" aria-label="页面工具" aria-expanded="false" aria-controls="vizMenuDropdown"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 6h14M5 12h14M5 18h14"/></svg></button><div class="viz-menu-dropdown" id="vizMenuDropdown"><button onclick="cycleTheme()"><svg class="icon" aria-hidden="true"><use href="#i-moon"/></svg><span id="themeLabel">切换深色模式</span></button><button onclick="openOverview()"><svg class="icon" aria-hidden="true"><use href="#i-network"/></svg>查看全景路线</button><button onclick="downloadImage()"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>保存当前阶段图片</button><button onclick="window.print()"><svg class="icon" aria-hidden="true"><use href="#i-print"/></svg>打印完整训练图谱</button></div></div>
+<main id="main-content">
+<section class="intro animate" aria-labelledby="pageTitle"><div><div class="eyebrow"><span class="tiny-square"></span> THE MAKING OF A LANGUAGE MODEL</div><h1 id="pageTitle">大模型，<em>是怎样炼成的？</em></h1><p>从一段原始文本，到一个能理解、对话和推理的模型。<br>沿着训练与上线的路线，探索它如何成为稳定的生产服务。</p></div><div class="intro-aside"><div class="big-number mono">10<span>个关键阶段</span></div><p>搭建知识底座 → 学会遵循指令<br>模型部署 → 生产优化与迭代</p></div></section>
+<section class="route-section animate delay-1" aria-label="训练路线"><div class="route-labels"><span>MODEL LIFECYCLE / 点击任意节点探索</span><span>虚线节点为可选阶段 · 评估贯穿全程</span></div><div class="route" id="routeNav"></div></section>
+<section class="workbench animate delay-2" id="workbench" aria-labelledby="stageTitle"><header class="workbench-header"><div><div class="stage-kicker"><span id="stageKicker">01 / FOUNDATION</span><span class="badge" id="stageBadge">训练准备</span></div><h2 id="stageTitle">数据准备<span>Data preparation</span></h2><p id="stageSubtitle">让模型学到什么，首先取决于你让它看到什么。</p></div><div class="chapter-counter"><span class="mono" id="chapterCounter">01 / 10</span><button class="btn square-btn" id="prevStage" aria-label="上一阶段"><svg class="icon"><use href="#i-left"/></svg></button><button class="btn square-btn" id="nextStage" aria-label="下一阶段"><svg class="icon"><use href="#i-right"/></svg></button></div></header>
+<div class="scene" id="scene"></div><div class="lab" id="lab"></div><div class="takeaways" id="takeaways"></div></section>
+<section class="insights" aria-label="理解训练的关键"><article><div class="section-head"><h3>从能力，到稳定的服务。</h3><span class="eyebrow">THE BIG PICTURE</span></div><p class="insight-copy">训练时，不同阶段的“学习信号”改变模型行为；部署和生产优化则让能力稳定地服务于真实用户。</p><div class="signal-line"><strong>预训练</strong><p>用文本本身提供答案，学习下一个 Token 的概率。</p></div><div class="signal-line"><strong>监督微调</strong><p>模仿高质量示范，学习怎样遵循指令完成任务。</p></div><div class="signal-line"><strong>偏好与奖励</strong><p>比较回答的好坏，或验证任务结果，调整生成策略。</p></div><div class="signal-line"><strong>部署与优化</strong><p>把权重变成服务，再用监控与压测改善容量、延迟、成本和稳定性。</p></div></article><article><div class="section-head"><h3>几个常见的误解</h3><span class="eyebrow">GOOD TO KNOW</span></div><details name="faq" open><summary>这 10 个阶段都属于模型训练吗？</summary><p>不是。前半程描述训练，后半程包括评估、服务部署和生产优化。继续预训练与推理强化学习可选；偏好对齐有不同路线。上线配置通常不更新模型权重，实际流程也可能多轮迭代。</p></details><details name="faq"><summary>SFT、LoRA 和 RAG 是同一类东西吗？</summary><p>SFT 是利用示范数据进行监督微调的训练方式；LoRA 是减少需要训练的参数量的一种技术，可用于微调；RAG 是推理时检索资料再回答，通常不更新模型权重。</p></details><details name="faq"><summary>训练 Loss 越低，模型就越好用吗？</summary><p>训练 Loss 只描述拟合训练目标的程度。还需要在独立数据上验证泛化、指令遵循、事实准确性和安全性。数据泄漏、过拟合和奖励投机都可能让指标看起来很好。</p></details><details name="faq"><summary>模型上线之后，还会自动学习吗？</summary><p>普通推理只读取模型参数，不会因为一次对话自动更新权重。收集反馈、筛选数据、重新训练和验证，是后续版本迭代的独立流程。</p></details></article></section>
+<div class="print-atlas" id="printAtlas"></div>
+<footer><p>炼成 · LLM Atlas &nbsp; / &nbsp; 交互均为教学模拟，非真实训练或生产基准</p><div class="source-links"><span class="small muted" style="font-size:10px">参考阅读</span><a href="https://arxiv.org/abs/2307.09288" target="_blank" rel="noopener noreferrer">Llama 2 ↗</a><a href="https://arxiv.org/abs/2305.18290" target="_blank" rel="noopener noreferrer">DPO ↗</a><a href="https://arxiv.org/abs/2501.12948" target="_blank" rel="noopener noreferrer">DeepSeek-R1 ↗</a><a href="https://docs.vllm.ai/en/latest/configuration/optimization/" target="_blank" rel="noopener noreferrer">vLLM 优化 ↗</a></div></footer>
+</main></div>
+<dialog id="overviewDialog" aria-labelledby="overviewTitle"><div class="dialog-head"><h2 id="overviewTitle">一眼看懂训练与上线</h2><button class="btn square-btn" id="closeOverview" aria-label="关闭全景路线"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="dialog-body"><p class="overview-note">从通用能力到任务行为：数据 → 表征 → 预训练 → 后训练 → 评估 → 部署 → 生产优化。<br>下列顺序是一条教学路线，可选阶段和方法分支应按目标选用。</p><div class="overview-grid" id="overviewGrid"></div><p class="overview-note">↺ 评估贯穿所有训练阶段；上线后通过质量与服务指标改进配置，再通过数据反馈形成下一轮训练。</p></div></dialog>
+<div class="toast" id="toast" role="status" hidden></div><div class="sr-only" id="liveStatus" aria-live="polite" aria-atomic="true"></div>
+<noscript><p style="padding:30px">此页面需要启用 JavaScript 才能操作交互实验。页面下方保留了训练阶段的基本说明。</p></noscript>
+
+<script>
+/* All experiments are deterministic teaching examples; no model or external API is called. */
+var stages = [
+ {name:'数据准备',short:'数据准备',en:'Data preparation',group:'FOUNDATION',badge:'训练准备',subtitle:'让模型学到什么，首先取决于你让它看到什么。',input:'网页、书籍、代码与授权语料',process:'去重、质量过滤、隐私处理，隔离评测集。',output:'可追溯的高质量训练语料',signal:'先提高数据质量，再谈数据规模。',pitfall:'重复内容、低质量文本与评测泄漏会扭曲模型能力。',artifact:'语料库 + 数据配比',summary:'把原始文本整理为干净、可信且分布合理的语料。'},
+ {name:'分词与模型构建',short:'分词建模',en:'Tokenization & architecture',group:'FOUNDATION',badge:'训练准备',subtitle:'把语言变成数字，再为学习搭建一张可训练的网络。',input:'清洗后的语料 + 模型配置',process:'训练或选择分词器，将 Token ID 映射为向量；配置 Transformer。',output:'Token 序列 + 初始化参数',signal:'Token 不等于一个汉字，也不一定是一个单词。',pitfall:'词表、上下文长度、网络层数与参数量共同影响训练成本。',artifact:'分词器 + 模型结构',summary:'选择分词器与网络结构，让文本可以进入计算图。'},
+ {name:'预训练',short:'预训练',en:'Pre-training',group:'FOUNDATION',badge:'自监督学习',subtitle:'通过预测下一个 Token，从大量文本中积累语言与世界知识。',input:'海量 Token 序列',process:'前向预测 → 计算交叉熵 → 反向传播 → 优化器更新参数。',output:'基础模型 · Base model',signal:'目标答案来自原文，不需要逐条人工标注。',pitfall:'Loss 降低不代表事实永远正确，也不等于已经会遵循指令。',artifact:'基础模型权重',summary:'用下一个 Token 预测目标，学习通用表征与生成能力。'},
+ {name:'继续预训练',short:'继续预训练',en:'Continued pre-training',group:'SPECIALIZATION',badge:'可选 · 领域适配',optional:true,subtitle:'在已有基础模型之上，继续学习特定领域或新分布的文本。',input:'基础模型 + 领域语料',process:'保持语言建模目标，混合领域与通用语料继续训练。',output:'领域适配后的基础模型',signal:'改变看到的文本分布，不等同于教授对话格式。',pitfall:'只喂单一领域可能损害通用能力，需要保留数据混合与回归评估。',artifact:'领域模型权重',summary:'用代码、科研等领域文本延伸已有能力，按任务需要选择。'},
+ {name:'监督微调',short:'监督微调',en:'Supervised fine-tuning · SFT',group:'POST-TRAINING',badge:'学习示范',subtitle:'从“继续写下去”到“按你的要求完成任务”。',input:'基础模型 + 指令与优质回答',process:'对示范回答进行监督学习；常见实现仅在回答 Token 上计算损失。',output:'可遵循指令的模型',signal:'学习“问题 → 好回答”的示范，而不是简单记住问答库。',pitfall:'覆盖不足或质量差的示范，会带来格式问题、泛化不足与错误模仿。',artifact:'指令模型权重',summary:'通过高质量任务示范，让模型学习指令、角色和输出格式。'},
+ {name:'偏好对齐',short:'偏好对齐',en:'Preference alignment',group:'POST-TRAINING',badge:'DPO / RLHF',subtitle:'不只学会回答，还要更倾向于有帮助、可信且合适的回答。',input:'同一问题下的回答偏好对',process:'DPO 直接使用偏好对；典型 PPO-RLHF 先训练奖励模型，再做策略优化。',output:'更符合目标偏好的模型',signal:'DPO 与 PPO-RLHF 是不同路线，不是必须连续执行的两步。',pitfall:'偏好标签有噪声，模型可能迎合用户或迎合奖励，需要独立验证。',artifact:'对齐后的模型权重',summary:'比较回答，利用相对偏好塑造模型的行为倾向。'},
+ {name:'推理强化学习',short:'推理强化',en:'Reasoning reinforcement learning',group:'POST-TRAINING',badge:'可选 · 可验证奖励',optional:true,subtitle:'让模型尝试多种解法，用可验证的任务结果提供反馈。',input:'模型 + 可验证问题与判分器',process:'采样解答、验证结果，使用 GRPO 等方法优化策略。',output:'在目标任务上改进的策略',signal:'答案可验证时，可以用规则或测试作为奖励来源。',pitfall:'奖励只约束所测量的东西。答对不等于过程可靠，更不保证跨领域泛化。',artifact:'推理能力强化后的权重',summary:'通过结果验证学习，常用于数学、代码等可判分任务。'},
+ {name:'评估与验收',short:'评估验收',en:'Evaluation & acceptance',group:'VALIDATION',badge:'持续验证',subtitle:'在没见过的数据和真实约束下，检验模型是否达到发布门槛。',input:'候选模型 + 独立评测集',process:'检查能力、安全、鲁棒性与效率；量化或蒸馏后重新评估。',output:'验收结论 + 评估报告 + 模型卡',signal:'评估贯穿训练、部署与生产优化，配置变更也要回归测试。',pitfall:'单一总分不能代替分项评测；测试集必须与训练数据严格隔离。',artifact:'可追溯的发布候选版本',summary:'通过独立测试和回归检查，确认质量与部署约束。'},
+ {name:'模型部署',short:'模型部署',en:'Model deployment',group:'PRODUCTION',badge:'从权重到服务',subtitle:'把通过验收的模型，变成可调用、可观测、可回滚的推理服务。',input:'模型权重 + 分词器 + 对话模板',process:'锁定版本 → 选择兼容引擎与硬件 → 预热和健康检查 → 灰度发布。',output:'带鉴权、限流与版本路由的 API',signal:'显存不仅装权重，还要容纳 KV Cache 和运行时开销。',pitfall:'量化与引擎必须兼容；能装入显存并不代表满足延迟、质量或发布门槛。',artifact:'推理服务 + 发布与回滚方案',summary:'规划容量、封装服务并灰度验证，把模型交给真实应用。'},
+ {name:'生产优化',short:'生产优化',en:'Production optimization',group:'PRODUCTION',badge:'质量 · 延迟 · 成本',subtitle:'在真实流量下，持续平衡回答质量、响应速度、稳定性与资源成本。',input:'请求分布 + 服务指标 + 质量基线',process:'压测定位瓶颈，调整批处理、缓存与副本数；观察服务目标并持续回归。',output:'满足服务目标的推理配置与监控',signal:'总吞吐提高，不代表每个用户都更快收到回答。',pitfall:'前缀缓存需要命中；扩容有加载与预热时间；低比特量化和推测解码都要实测。',artifact:'压测报告 + 容量与告警策略',summary:'用批处理、缓存、扩缩容与监控，持续改进服务表现。'}
+];
+var state = { stage:0, visited:new Set(), tour:false, clean:{duplicate:true,quality:true,privacy:true}, tokenExample:0, tokenMode:'subword', trainStep:0, trainTimer:null, mix:60, domain:'代码', sft:true, preference:null, method:'dpo', rlChoice:null, evalSelected:[true,true,true,true], evalRun:false, deploy:{bits:16,memory:24,context:4096,concurrent:4,checks:[false,false,false],release:'draft'}, ops:{qps:2,replicas:2,batching:true,prefix:false,workload:'shared'} };
+var tourTimer=null, toastTimer=null, currentTheme='light';
+var icon = function(name){var symbol=document.getElementById('i-'+name);return '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">'+(symbol?symbol.innerHTML:'')+'</svg>';};
+var el = function(id){return document.getElementById(id);};
+var safeRead = function(key){try{return localStorage.getItem(key);}catch(e){return null;}};
+var safeWrite = function(key,value){try{localStorage.setItem(key,value);}catch(e){/* Private/local-file storage may be unavailable. */}};
+function closeMenu(){el('vizMenuDropdown').classList.remove('open');document.querySelector('.viz-menu-toggle').setAttribute('aria-expanded','false');}
+function toggleMenu(){var open=el('vizMenuDropdown').classList.toggle('open');document.querySelector('.viz-menu-toggle').setAttribute('aria-expanded',String(open));}
+function applyTheme(theme){currentTheme=theme;document.documentElement.className='theme-'+theme;el('themeLabel').textContent=theme==='light'?'切换深色模式':'切换浅色模式';safeWrite('llm-atlas-theme',theme);}
+function cycleTheme(){applyTheme(currentTheme==='light'?'dark':'light');closeMenu();}
+function toast(message){clearTimeout(toastTimer);el('toast').textContent=message;el('toast').hidden=false;toastTimer=setTimeout(function(){el('toast').hidden=true;},3500);}
+async function downloadImage(){
+ closeMenu();
+ if(typeof htmlToImage==='undefined'){toast('图片导出组件未加载；请联网重试，或使用打印保存 PDF。');return;}
+ var button=document.querySelector('[onclick="downloadImage()"]');button.disabled=true;
+ try{var data=await htmlToImage.toPng(el('workbench'),{pixelRatio:2,cacheBust:false,backgroundColor:getComputedStyle(document.documentElement).getPropertyValue('--surface').trim()});var a=document.createElement('a');a.href=data;a.download='llm-atlas-stage-'+(state.stage+1)+'.png';a.click();toast('当前阶段图片已生成。');}catch(e){toast('图片导出失败，请尝试打印保存完整图谱。');}finally{button.disabled=false;}
+}
+function openOverview(){stopTour();closeMenu();el('overviewDialog').showModal();}
+function updateNavigation(){
+ document.querySelectorAll('[data-stage]').forEach(function(button){var i=Number(button.dataset.stage);button.classList.toggle('active',i===state.stage);button.classList.toggle('visited',state.visited.has(i));if(i===state.stage){button.setAttribute('aria-current','step');}else{button.removeAttribute('aria-current');}});
+ el('visitedCount').textContent=state.visited.size+' / '+stages.length;el('visitedFill').style.width=(state.visited.size/stages.length*100)+'%';
+ safeWrite('llm-atlas-visited',JSON.stringify(Array.from(state.visited)));
+ el('prevStage').disabled=state.stage===0;el('nextStage').disabled=state.stage===stages.length-1;
+}
+function setStage(index,options){
+ options=options||{};if(index<0||index>=stages.length)return;if(!options.tour)stopTour();stopTraining();
+ state.stage=index;state.visited.add(index);var s=stages[index];
+ el('stageKicker').textContent=String(index+1).padStart(2,'0')+' / '+s.group;
+ el('stageBadge').textContent=s.badge;el('stageTitle').innerHTML=s.name+'<span>'+s.en+'</span>';el('stageSubtitle').textContent=s.subtitle;
+ el('chapterCounter').textContent=String(index+1).padStart(2,'0')+' / '+String(stages.length).padStart(2,'0');
+ el('takeaways').innerHTML='<div class="takeaway"><div class="eyebrow">01 / INPUT · 输入</div><strong>'+s.input+'</strong><p>'+s.process+'</p></div><div class="takeaway"><div class="eyebrow">02 / OUTPUT · 产出</div><strong>'+s.artifact+'</strong><p>'+s.output+'</p></div><div class="takeaway"><div class="eyebrow">03 / KEY IDEA · 关键</div><strong>'+s.signal+'</strong><p>'+s.pitfall+'</p></div>';
+ renderExperiment();updateNavigation();
+ var hash='#stage-'+(index+1);if(location.hash!==hash){try{history.replaceState(null,'',hash);}catch(e){/* Navigation works without history access. */}}
+ el('liveStatus').textContent='第 '+(index+1)+' 阶段：'+s.name+'。'+s.subtitle;
+}
+function buildNavigation(){
+ el('stageNav').innerHTML=stages.map(function(s,i){return (i===4?'<div class="nav-separator">后训练 · POST-TRAINING</div>':'')+(i===7?'<div class="nav-separator">验收与上线</div>':'')+'<button class="stage-button" data-stage="'+i+'"><span class="stage-index mono">'+String(i+1).padStart(2,'0')+'</span><span class="stage-label">'+s.name+'</span>'+(s.optional?'<span class="optional-mark">可选</span>':'')+'</button>';}).join('');
+ el('routeNav').innerHTML=stages.map(function(s,i){return '<button class="route-node '+(s.optional?'optional':'')+'" data-stage="'+i+'" aria-label="第'+(i+1)+'阶段：'+s.name+(s.optional?'，可选':'')+'"><span class="route-dot mono">'+String(i+1).padStart(2,'0')+'</span><span class="route-text">'+s.short+'</span></button>';}).join('');
+ el('overviewGrid').innerHTML=stages.map(function(s,i){return '<button class="overview-item" data-overview-stage="'+i+'"><span class="mono">'+String(i+1).padStart(2,'0')+'</span><div><strong>'+s.name+(s.optional?' · 可选':'')+'</strong><small>'+s.summary+'</small></div></button>';}).join('');
+ el('printAtlas').innerHTML=stages.map(function(s,i){return '<article class="print-stage"><h3>'+String(i+1).padStart(2,'0')+' '+s.name+(s.optional?'（可选）':'')+'</h3><p>'+s.summary+'</p><p>输入：'+s.input+'。流程：'+s.process+'</p><p>产出：'+s.output+'。关键：'+s.signal+'</p><p>注意：'+s.pitfall+'</p></article>';}).join('')+'<p class="print-source">本图谱为教学路线，评估贯穿全过程。参考：arxiv.org/abs/2307.09288 · arxiv.org/abs/2305.18290 · arxiv.org/abs/2501.12948 · docs.vllm.ai/en/latest/configuration/optimization/ · docs.vllm.ai/en/latest/usage/metrics/</p>';
+}
+function sceneFrame(content,caption,feedback){return '<div class="scene-label"><span class="live-dot"></span> INSIDE THE PROCESS</div><span class="scene-tag">概念示意 / 可交互</span>'+content+'<p class="scene-caption">'+caption+'</p>'+(feedback?'<div class="scene-feedback">↶ '+feedback+'</div>':'');}
+function flowNode(name,label,sub,focus,optional){return '<div class="flow-node '+(focus?'focus ':'')+(optional?'optional':'')+'">'+icon(name)+'<strong>'+label+'</strong><small>'+sub+'</small></div>';}
+function edge(label){return '<div class="flow-edge"><em>'+(label||'')+'</em></div>';}
+function pipeline(nodes,labels){return '<div class="pipeline '+(nodes.length>3?'four-nodes':'')+'">'+nodes.map(function(n,i){return (i?edge(labels&&labels[i-1]):'')+flowNode.apply(null,n);}).join('')+'</div>';}
+function labHeader(title,note){return '<div class="lab-heading"><strong>'+icon('lab')+title+'</strong><span>'+(note||'动手试试看')+'</span></div>';}
+function segmented(items,key,value){return '<div class="segmented" role="group" aria-label="'+key+'">'+items.map(function(item){return '<button data-action="'+key+'" data-value="'+item[0]+'" aria-pressed="'+(String(value)===String(item[0]))+'">'+item[1]+'</button>';}).join('')+'</div>';}
+function renderExperiment(){[renderData,renderTokens,renderPretrain,renderContinued,renderSFT,renderAlignment,renderRL,renderEval,renderDeployment,renderProduction][state.stage]();}
+
+/* 01 — A bounded dataset makes each filter's effect inspectable. */
+var sampleDocuments=[{text:'百科：光合作用',type:'知识',icon:'document'}, {text:'代码：排序函数',type:'代码',icon:'document'}, {text:'百科：光合作用',type:'重复',icon:'document',filter:'duplicate'}, {text:'推广：点击领取...',type:'低质',icon:'document',filter:'quality'}, {text:'记录：个人联系方式',type:'隐私',icon:'document',filter:'privacy'}, {text:'书籍：语言与思维',type:'书籍',icon:'document'}];
+function renderData(){
+ el('scene').innerHTML=sceneFrame(pipeline([['data','原始语料','网页 / 书籍 / 代码'],['filter','清洗与筛选','质量 · 去重 · 隐私',true],['data','训练语料','独立保留评测集']],['收集','整理']),'原始数据不是越多越好，保留什么同样重要。');
+ el('lab').innerHTML=labHeader('亲手清洗一小批语料','6 条教学样本')+'<div class="lab-grid"><div class="lab-controls"><div class="field-label"><span>开启数据处理规则</span></div><div class="choice-row">'+[['duplicate','重复去除'],['quality','质量过滤'],['privacy','隐私过滤']].map(function(x){return '<label class="choice"><input type="checkbox" data-clean="'+x[0]+'" '+(state.clean[x[0]]?'checked':'')+'>'+x[1]+'</label>';}).join('')+'</div><div class="stats-inline" style="margin-top:18px"><strong id="retainedCount">3</strong><span>/ 6 条保留</span></div><div class="microbar"><div id="retainedBar"></div></div><p class="lab-note">试着关闭某项规则，观察哪些文本重新进入训练集。真实数据还需要授权核验、语言识别与评测集去污染。</p></div><div class="data-list">'+sampleDocuments.map(function(d,i){return '<div class="data-item" id="doc-'+i+'">'+icon(d.icon)+'<span>'+d.text+'</span><span class="item-tag">'+d.type+'</span></div>';}).join('')+'</div></div>';updateData();
+}
+function updateData(){var kept=0;sampleDocuments.forEach(function(d,i){var filtered=d.filter&&state.clean[d.filter];el('doc-'+i).classList.toggle('filtered',!!filtered);el('doc-'+i).setAttribute('aria-label',d.text+'：'+(filtered?'已过滤':'保留'));if(!filtered)kept++;});el('retainedCount').textContent=kept;el('retainedBar').style.width=(kept/6*100)+'%';}
+
+/* 02 — Deliberately hand-authored tokenization, never presented as a real tokenizer. */
+var tokenSamples=[{text:'大模型正在学习。',tokens:['大','模型','正在','学习','。']},{text:'Learning is amazing.',tokens:['Learn','ing',' is',' amazing','.']},{text:'print("Hello")',tokens:['print','("','Hello','")']}];
+function renderTokens(){
+ var sample=tokenSamples[state.tokenExample],tokens=state.tokenMode==='char'?Array.from(sample.text):sample.tokens;
+ el('scene').innerHTML=sceneFrame('<div class="small muted" style="margin:10px 0 0">'+escapeHTML(sample.text)+'</div><div class="token-row">'+tokens.map(function(t,i){return '<div class="token">'+escapeHTML(t).replace(/ /g,'␣')+'<small class="mono">ID '+(100+i*137)+'</small></div>';}).join('')+'</div><div class="small muted">'+tokens.length+' 个 Token → 向量嵌入 → Transformer</div>','拆分规则与 ID 均为教学示意；实际结果由具体分词器决定。');
+ el('lab').innerHTML=labHeader('同一段文字，可以怎样拆？','␣ 代表空格')+'<div class="lab-grid"><div><div class="field-label"><span>选择示例文本</span><output>'+tokens.length+' tokens</output></div>'+segmented([[0,'中文'],[1,'英文'],[2,'代码']],'token-example',state.tokenExample)+'<p class="lab-note">分词器先建立词表，再把文本映射成 ID。嵌入层把离散 ID 转换为可以训练的连续向量。</p></div><div><div class="field-label"><span>比较两种拆分粒度</span></div>'+segmented([['subword','子词示意'],['char','逐字符']],'token-mode',state.tokenMode)+'<p class="lab-note">逐字符通常让序列更长；较大的词表也有存储和泛化代价。Token 数影响上下文占用与计算量。</p></div></div>';
+}
+function escapeHTML(value){return String(value).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+
+/* 03 — A fixed probability trajectory illustrates next-token prediction. */
+var trainProbabilities=[[18,42,26,14],[28,35,24,13],[41,27,21,11],[55,21,15,9],[66,15,12,7],[75,10,9,6],[83,7,6,4]];
+function renderPretrain(){
+ el('scene').innerHTML=sceneFrame('<div class="context-line">太阳从东方 <span class="mask">?</span></div><div class="prediction">'+['升起','落下','出发','其他'].map(function(word,i){return '<div class="prediction-row"><span>'+word+'</span><div class="prediction-bar"><i id="prob-bar-'+i+'"></i></div><output id="prob-'+i+'"></output></div>';}).join('')+'</div>','目标 Token：「升起」 · 下方概率随演示步数变化','预测 → 计算 Loss → 反向传播 → 更新参数');
+ el('lab').innerHTML=labHeader('看一次参数更新会发生什么','概率与步数均为示意')+'<div class="lab-grid"><div><div class="field-label"><label for="trainProgress">演示训练进度</label><output id="trainProgressValue"></output></div><input type="range" id="trainProgress" min="0" max="6" step="1" value="'+state.trainStep+'"><div class="training-steps"><span>前向预测</span><span>计算损失</span><span>反向传播</span><span>更新权重</span></div><p class="lab-note">拖动滑杆或运行演示，观察目标 Token 的概率上升。真实训练会并行处理批量序列，曲线也会波动。</p></div><div><div class="field-label"><span>目标 Token 的交叉熵</span><span class="mono small">−ln P(升起)</span></div><div class="stats-inline"><strong id="lossValue" class="mono"></strong><span>nats / token</span></div><div class="choice-row" style="margin-top:13px"><button class="btn primary" data-action="train-toggle" id="trainButton">'+icon('play')+'<span>运行演示</span></button><button class="btn" data-action="train-reset">重置</button></div></div></div>';updatePretrain();
+}
+function updatePretrain(){var values=trainProbabilities[state.trainStep];values.forEach(function(v,i){el('prob-bar-'+i).style.width=v+'%';el('prob-'+i).textContent=v+'%';});el('trainProgress').value=state.trainStep;el('trainProgressValue').textContent=state.trainStep+' / 6 次更新';el('lossValue').textContent=(-Math.log(values[0]/100)).toFixed(3);document.querySelectorAll('.training-steps span').forEach(function(node,i){node.classList.toggle('on',state.trainStep>0&&i===(state.trainStep-1)%4);});}
+function stopTraining(){if(state.trainTimer){clearInterval(state.trainTimer);state.trainTimer=null;}if(el('trainButton'))el('trainButton').innerHTML=icon('play')+'<span>运行演示</span>';}
+function toggleTraining(){if(state.trainTimer){stopTraining();return;}stopTour();if(state.trainStep>=6)state.trainStep=0;updatePretrain();el('trainButton').innerHTML=icon('pause')+'<span>暂停演示</span>';state.trainTimer=setInterval(function(){state.trainStep++;updatePretrain();if(state.trainStep>=6){stopTraining();el('liveStatus').textContent='预训练演示完成，目标 Token 的概率上升，交叉熵降低。';}},850);}
+
+/* 04 — Mixture is an input choice, not a fabricated performance estimate. */
+function renderContinued(){
+ el('scene').innerHTML=sceneFrame(pipeline([['model','基础模型','通用语言能力'],['document',state.domain+'语料','混合通用语料',true,true],['model','领域适配模型','继续预测下一 Token']],['继续学习','更新参数']),'可选分支：已有合适的基础模型时，可以跳过本阶段。');
+ el('lab').innerHTML=labHeader('给模型调整一份“阅读配方”','数据配比，不代表能力分数')+'<div class="lab-grid"><div><div class="field-label"><span>选择侧重领域</span></div>'+segmented([['代码','代码'],['科研','科研'],['中文','中文']],'domain',state.domain)+'<p class="lab-note" id="domainNote"></p></div><div><div class="field-label"><label for="domainMix">领域语料占比</label><output id="mixValue"></output></div><input id="domainMix" type="range" min="10" max="100" step="10" value="'+state.mix+'"><div class="microbar"><div id="mixBar"></div></div><p class="lab-note" id="mixNote"></p></div></div>';updateMix();
+}
+function updateMix(){el('mixValue').textContent=state.mix+'% 领域 / '+(100-state.mix)+'% 通用';el('mixBar').style.width=state.mix+'%';el('domainNote').textContent={代码:'阅读代码仓库、说明文档和测试样例，拓展代码分布的覆盖。',科研:'阅读论文与专业文本，增加对领域术语和表达方式的熟悉度。',中文:'增加中文文本覆盖，改善目标语言分布的适配。'}[state.domain];el('mixNote').textContent=state.mix>=90?'领域占比很高：应重点检查通用能力遗忘与分布偏移，配比不存在通用最优值。':'混合通用语料可以帮助保留原有分布；仍需通过独立评估确定合适配比。';}
+
+/* 05 — Fixed examples contrast continuation with an instruction-following demonstration. */
+function renderSFT(){
+ el('scene').innerHTML=sceneFrame(pipeline([['chat','指令与示范','Prompt + Response'],['model','监督微调','模仿高质量答案',true],['chat','指令模型','按要求完成任务']],['示范数据','更新参数']),'常见训练方式：输入作为上下文，只对回答部分计算损失。');
+ el('lab').innerHTML=labHeader('同一个提示，观察两种行为','人工编写的对比示例')+'<div class="lab-grid"><div><div class="field-label"><span>切换模型阶段</span></div>'+segmented([['base','基础模型'],['sft','SFT 后']],'sft-model',state.sft?'sft':'base')+'<p class="lab-note">基础模型以续写为目标，可能继续提问或模仿文档。SFT 用规范示范提高指令遵循能力；两种行为并非绝对分界。</p></div><div class="chatbox"><div class="chat-role">USER</div><p>用一句话向小朋友解释什么是引力。</p><div class="answer"><div class="chat-role">'+(state.sft?'ASSISTANT · SFT 后':'BASE MODEL · 可能的续写')+'</div><p>'+(state.sft?'引力就像一只看不见的手，让你跳起来后又回到地面。':'再用一个生活中的例子解释摩擦力。最后，讨论力和运动的关系。')+'</p></div></div></div>';
+}
+
+/* 06 — User labels a preference pair; switching methods alters the conceptual pipeline. */
+function renderAlignment(){
+ var nodes=state.method==='dpo'?[['chat','回答偏好对','Chosen / Rejected'],['model','DPO 优化','直接比较相对概率',true],['shield','对齐模型','提高偏好一致性']]:[['chat','回答偏好对','人工或 AI 标注'],['model','奖励模型','学习偏好打分'],['loop','PPO 优化','采样 · 评分 · 更新',true],['shield','对齐模型','验证目标行为']];
+ el('scene').innerHTML=sceneFrame(pipeline(nodes,state.method==='dpo'?['偏好数据','策略更新']:['训练','给出奖励','策略更新']),state.method==='dpo'?'DPO：无需单独训练显式奖励模型，直接从偏好对优化策略。':'典型 PPO-RLHF：用学到的奖励评分引导策略，并约束偏离参考模型。');
+ el('lab').innerHTML=labHeader('你来给两个回答标注偏好','提示：怎样提高学习效率？')+'<div style="margin-bottom:16px">'+segmented([['dpo','DPO 路线'],['ppo','PPO-RLHF 路线']],'alignment-method',state.method)+'</div><div class="answer-options">'+[['a','回答 A','每天只睡 3 小时，剩下的时间全部用来学习。'],['b','回答 B','先确定一个小目标，分段专注学习，再通过休息和复习巩固。']].map(function(x){return '<button class="answer-option" data-action="preference" data-value="'+x[0]+'" aria-pressed="'+(state.preference===x[0])+'"><strong>'+x[1]+'</strong><span>'+x[2]+'</span><span class="vote-label">'+(state.preference===x[0]?'✓ 已标为更偏好的回答':'选择这个回答 →')+'</span></button>';}).join('')+'</div><p class="status-line" id="preferenceFeedback" role="status">'+preferenceFeedback()+'</p>';
+}
+function preferenceFeedback(){if(!state.preference)return '选择后，会形成一条「更偏好 / 更不偏好」训练样本。';var letter=state.preference.toUpperCase(),other=state.preference==='a'?'B':'A';return '偏好样本已标注：'+letter+' ≻ '+other+'。'+(state.preference==='a'?'该示例说明：错误偏好也会成为学习信号，所以标注质量很重要。':(state.method==='dpo'?'DPO 会推动相对参考模型的偏好回答概率比提高。':'这对回答先用于训练奖励模型，再由奖励引导策略优化。'));}
+
+/* 07 — Rule-based scoring verifies only the answer in a tiny arithmetic task. */
+function renderRL(){
+ el('scene').innerHTML=sceneFrame(pipeline([['model','策略模型','生成多条候选解答'],['check','结果验证','规则 / 单元测试',true],['loop','策略更新','利用奖励信号']],['采样','奖励']),'数学、代码等任务常能提供可验证反馈；GRPO 是一种可用的优化方法。','更新后再次采样，持续迭代');
+ el('lab').innerHTML=labHeader('让验证器检查，而不是让人逐条示范','教学任务：17 × 6 = ?')+'<div class="answer-options">'+[['wrong','候选解答 A','17 × 6 = 17 × 5 + 6 = 91'],['right','候选解答 B','17 × 6 = 10 × 6 + 7 × 6 = 102']].map(function(x){return '<button class="answer-option" data-action="rl-verify" data-value="'+x[0]+'" aria-pressed="'+(state.rlChoice===x[0])+'"><strong>'+x[1]+'</strong><span>'+x[2]+'</span><span class="vote-label">'+(state.rlChoice===x[0]?'✓ 已验证':'验证这条解答 →')+'</span></button>';}).join('')+'</div><div class="reward-row" style="margin-top:16px"><div class="reward-score mono">'+(state.rlChoice?(state.rlChoice==='right'?'+1':'0'):'—')+'</div><div class="reward-text">'+(state.rlChoice?(state.rlChoice==='right'?'结果正确，获得示意奖励。':'结果错误，未获得奖励。'):'点击一条解答，运行结果验证。')+'<br><span class="small muted" style="font-size:10px">这里只验证最终数值；真实系统还要处理奖励投机和泛化问题。</span></div></div>';
+}
+
+/* 08 — Explicitly simulated test findings, no invented model leaderboard scores. */
+var evalCases=[{name:'指令与格式',pass:true,detail:'通过：4 / 4 条格式样例'}, {name:'事实与推理',pass:false,detail:'需改进：2 / 4 条事实样例'}, {name:'安全与边界',pass:true,detail:'通过：4 / 4 条边界样例'}, {name:'延迟与资源',pass:true,detail:'通过：符合示例预算'}];
+function renderEval(){
+ el('scene').innerHTML=sceneFrame(pipeline([['model','候选版本','冻结权重与配置'],['shield','独立评估','能力 · 安全 · 效率',true],['document','验收报告','质量门槛 · 发布候选']],['留出数据','通过门槛后']),'量化、蒸馏与部署优化可能改变表现，变更后需要重新评估。','反馈 → 数据改进 → 下一轮训练；推理本身不更新权重');
+ el('lab').innerHTML=labHeader('交付之前，检查哪些维度？','固定示例评测，不是真实模型分数')+'<div class="lab-grid"><div class="eval-list">'+evalCases.map(function(c,i){return '<div class="eval-row"><label><input type="checkbox" data-eval="'+i+'" '+(state.evalSelected[i]?'checked':'')+'>'+c.name+'</label><span class="eval-result '+(state.evalRun&&state.evalSelected[i]?(c.pass?'pass':'fail'):'')+'">'+(state.evalRun&&state.evalSelected[i]?c.detail:(state.evalSelected[i]?'待运行':'未覆盖'))+'</span></div>';}).join('')+'</div><div><button class="btn primary" data-action="run-eval" '+(!state.evalSelected.some(Boolean)?'disabled':'')+'>'+icon('play')+'运行示例评估</button><p class="status-line" role="status">'+evalSummary()+'</p><p class="lab-note">“不测某项”并不代表该项通过。应按实际风险设置发布门槛，并保存各版本的回归结果。</p></div></div>';
+}
+function evalSummary(){if(!state.evalRun)return '勾选评估维度后运行，观察发布判断。';var selected=state.evalSelected.filter(Boolean).length,fail=state.evalSelected[1];if(fail)return '需继续改进：事实与推理未通过示例门槛。';if(selected<4)return '已测项通过，但覆盖不足：'+(4-selected)+' 个维度未检查，不能据此批准发布。';return '所有维度已完成检查。';}
+
+/* 09 — Memory planning uses explicit toy architecture and decimal GB. */
+var deployChecklist=['锁定权重、分词器、对话模板与引擎版本','完成服务预热、健康检查、鉴权与限流','独立完成质量回归，并准备旧版本回滚'];
+function deploymentBudget(){
+ var d=state.deploy;
+ var weights=7*d.bits/8; // 7 billion parameters, ideal packed weights, decimal GB.
+ var cache=2*32*8*128*2*d.context*d.concurrent/1e9; // K,V × layers × KV heads × head dim × BF16 bytes.
+ var runtime=2,total=weights+cache+runtime,budget=d.memory*.9;
+ return {weights:weights,cache:cache,runtime:runtime,total:total,budget:budget,fits:total<=budget};
+}
+function renderDeployment(){
+ el('scene').innerHTML=sceneFrame(pipeline([['document','版本产物','权重 · 模板 · 分词器'],['model','推理引擎','加载 · 预热 · 健康检查',true],['shield','网关与路由','鉴权 · 限流 · 灰度'],['chat','应用调用','流式响应 · 日志']],['打包','提供 API','接入']),'从一份权重到一个服务，还需要配置、容量、发布机制与运行监控。','真实上线前确认验收；本页灰度流程只在浏览器内模拟');
+ var d=state.deploy;
+ el('lab').innerHTML=labHeader('一张显卡，能装下怎样的服务？','7B 模型 · 理想化显存预算')+
+ '<div class="lab-grid"><div class="control-stack"><div><div class="field-label"><span>权重存储精度</span></div>'+segmented([[16,'BF16 · 16 bit'],[8,'8 bit'],[4,'4 bit']],'deploy-bits',d.bits)+'</div>'+
+ '<div><div class="field-label"><label for="deployMemory">单卡显存容量</label></div><select class="ops-select" id="deployMemory">'+[24,48,80].map(function(n){return '<option value="'+n+'" '+(d.memory===n?'selected':'')+'>'+n+' GB · 教学容量</option>';}).join('')+'</select></div>'+
+ '<div><div class="field-label"><label for="deployContext">每请求预留上下文（含输出）</label><output id="deployContextValue"></output></div><input id="deployContext" type="range" min="1" max="32" step="1" value="'+(d.context/1024)+'"></div>'+
+ '<div><div class="field-label"><label for="deployConcurrent">同时驻留的请求数</label><output id="deployConcurrentValue"></output></div><input id="deployConcurrent" type="range" min="1" max="32" step="1" value="'+d.concurrent+'"></div></div>'+
+ '<div><div class="field-label"><span>预计占用 / 示例容量</span><span class="badge">预留 10% 余量</span></div><div class="memory-summary"><strong class="mono" id="deployTotal"></strong><span id="deployCapacity"></span></div>'+
+ '<div class="memory-chart" role="img" id="memoryChart" aria-label="显存分解"><div class="memory-track"><span class="weights" id="memoryWeights"></span><span class="cache" id="memoryCache"></span><span class="runtime" id="memoryRuntime"></span></div><div class="budget-marker" aria-hidden="true"></div></div>'+
+ '<div class="memory-legend"><div><span><i class="legend-dot"></i>权重理想占用</span><output id="weightsValue"></output></div><div><span><i class="legend-dot cache"></i>KV Cache · BF16</span><output id="cacheValue"></output></div><div><span><i class="legend-dot runtime"></i>固定运行时假设</span><output>2.00 GB</output></div></div><p class="capacity-result" id="capacityResult" role="status"></p>'+
+ '<p class="lab-note">权重量化不会在这里自动压缩 KV Cache。实际还受量化元数据、算子、激活与碎片影响；本计算不构成硬件适配结论。</p></div></div>'+
+ '<details style="margin-top:18px"><summary>查看预算假设与计算方式</summary><p>假设 7B 参数、32 层、8 个 KV 头、每头 128 维，KV 使用 BF16（2 字节）。每 Token 的 KV 占用为 2 × 32 × 8 × 128 × 2 = 131,072 字节。权重 = 7 × bit ÷ 8 GB；KV = 每 Token 占用 × 上下文 × 驻留请求数。GB 使用 10⁹ 字节。另加固定 2 GB 运行时开销，仅用于说明显存组成；真实架构、量化比例和运行时需独立测量。</p></details>'+
+ '<hr class="lab-divider"><div class="lab-heading"><strong>'+icon('shield')+'把版本送到真实流量之前</strong><span>独立发布实验 · 不启动真实服务</span></div><div class="deploy-checks">'+deployChecklist.map(function(label,i){return '<label><input type="checkbox" data-deploy-check="'+i+'" '+(d.checks[i]?'checked':'')+'>'+label+'</label>';}).join('')+'</div>'+
+ '<div class="release-state" id="releaseStages"><span data-release="draft">01 · 待发布</span><span data-release="canary">02 · 10% 灰度</span><span data-release="live">03 · 全量服务</span></div>'+
+ '<div class="choice-row"><button class="btn primary" data-action="deploy-canary" id="canaryButton">模拟灰度发布</button><button class="btn" data-action="deploy-promote" id="promoteButton">模拟扩大到 100%</button><button class="btn" data-action="deploy-rollback" id="rollbackButton">模拟回滚</button></div><p class="status-line" id="releaseFeedback" role="status"></p>'+
+ '<p class="lab-source">量化格式须匹配引擎与硬件，效果需回归验证。参考 <a href="https://docs.vllm.ai/en/latest/features/quantization/" target="_blank" rel="noopener noreferrer">vLLM 量化文档 ↗</a>。灰度时应比较新旧版本的错误率、延迟与质量，再决定扩大流量或回滚。</p>';
+ updateDeployment();
+}
+function invalidateDeployment(){state.deploy.release='draft';}
+function updateDeployment(){
+ var d=state.deploy,b=deploymentBudget();
+ el('deployContextValue').textContent=d.context.toLocaleString()+' tokens';el('deployConcurrentValue').textContent=d.concurrent+' 个请求';
+ el('deployTotal').textContent=b.total.toFixed(2);el('deployCapacity').textContent='/ '+d.memory+' GB';
+ el('weightsValue').textContent=b.weights.toFixed(2)+' GB';el('cacheValue').textContent=b.cache.toFixed(2)+' GB';
+ // Normalize on overload so labels and the threshold marker remain truthful.
+ var scale=Math.max(d.memory,b.total);el('memoryWeights').style.width=b.weights/scale*100+'%';el('memoryCache').style.width=b.cache/scale*100+'%';el('memoryRuntime').style.width=b.runtime/scale*100+'%';document.querySelector('.budget-marker').style.left=b.budget/scale*100+'%';
+ el('memoryChart').setAttribute('aria-label','权重 '+b.weights.toFixed(2)+' GB，KV Cache '+b.cache.toFixed(2)+' GB，运行时 2 GB；总计 '+b.total.toFixed(2)+' GB，预算 '+b.budget.toFixed(2)+' GB。');
+ el('capacityResult').classList.toggle('over',!b.fits);el('capacityResult').textContent=b.fits?'容量预算内：距 '+b.budget.toFixed(1)+' GB 示例预算还剩 '+(b.budget-b.total).toFixed(2)+' GB。仍需检查硬件兼容与实际负载。':'超过示例预算 '+(b.total-b.budget).toFixed(2)+' GB。可降低权重精度、缩短上下文、降低驻留并发，或换用更大显存。';
+ var ready=b.fits&&d.checks.every(Boolean);el('canaryButton').disabled=!ready||d.release!=='draft';el('promoteButton').disabled=!ready||d.release!=='canary';el('rollbackButton').disabled=d.release==='draft';
+ document.querySelectorAll('[data-release]').forEach(function(n){n.classList.toggle('active',n.dataset.release===d.release);});
+ el('releaseFeedback').textContent=d.release==='canary'?'模拟状态：10% 请求进入候选版本，90% 保持旧版本。观察指标后再扩大流量。':d.release==='live'?'模拟状态：候选版本接收 100% 流量，旧版本保留用于回滚。':!b.fits?'暂不能开始模拟发布：先调整容量配置。':!ready?'完成上方三项发布准备，再进行灰度模拟。':'发布准备已完成，可模拟 10% 灰度。配置或检查项改变时需重新发布。';
+}
+function releaseDeployment(action){
+ var d=state.deploy,b=deploymentBudget();
+ if(action==='deploy-rollback')d.release='draft';
+ else if(b.fits&&d.checks.every(Boolean)){if(action==='deploy-canary'&&d.release==='draft')d.release='canary';else if(action==='deploy-promote'&&d.release==='canary')d.release='live';}
+ updateDeployment();el('liveStatus').textContent=el('releaseFeedback').textContent;
+ var next=el(d.release==='canary'?'promoteButton':d.release==='live'?'rollbackButton':'canaryButton');if(!next.disabled)next.focus({preventScroll:true});
+}
+
+/* 10 — A disclosed aggregate queue toy, not a vLLM benchmark or a p95 estimate. */
+function productionMetrics(){
+ var o=state.ops,hit=o.prefix&&o.workload==='shared',prefill=hit ? 0.32 : 0.8,decode=2;
+ var slots=o.batching?4:1,capacity=slots*o.replicas/(prefill+decode),rho=o.qps/capacity;
+ var overloaded=rho>=1,wait=overloaded?null:rho/(capacity-o.qps);
+ return {hit:hit,prefill:prefill,decode:decode,slots:slots,capacity:capacity,rho:rho,overloaded:overloaded,wait:wait,ttft:overloaded?null:(wait+prefill+decode/256)*1000,tokens:Math.min(o.qps,capacity)*256};
+}
+function renderProduction(){
+ el('scene').innerHTML=sceneFrame(pipeline([['chat','真实流量','短问答 / 长文档'],['loop','调度与缓存','连续批处理 · 前缀复用',true],['model','推理副本','资源池 · 弹性扩缩容'],['shield','观测与回归','延迟 · 错误 · 质量']],['进入队列','分发','反馈']),
+ 'Prefill 处理输入上下文；Decode 逐个生成输出。前缀缓存主要减少可复用输入的计算。','先定位瓶颈，再调整配置；优化后重测质量与服务目标');
+ el('scene').insertAdjacentHTML('beforeend','<div class="ops-load-track"><div class="field-label"><span>流量 / 理想处理容量</span><output id="opsCapacity"></output></div><div class="microbar"><div id="opsLoadBar"></div></div></div>');
+ var o=state.ops;
+ el('lab').innerHTML=labHeader('吞吐更高，等待就一定更短吗？','简化模型 · 非真实硬件基准')+
+ '<div class="lab-grid"><div class="control-stack"><div><div class="field-label"><label for="opsQps">到达流量</label><output id="opsQpsValue"></output></div><input id="opsQps" type="range" min="1" max="12" step="1" value="'+o.qps+'"></div><div><div class="field-label"><span>已预热的独立服务副本</span></div>'+segmented([[1,'1 副本'],[2,'2 副本'],[4,'4 副本']],'ops-replicas',o.replicas)+'</div></div>'+
+ '<div class="control-stack"><div><div class="field-label"><span>请求的前缀特征</span></div>'+segmented([['shared','共享长前缀'],['unique','无重复前缀']],'ops-workload',o.workload)+'</div><div><div class="field-label"><span>调度与缓存优化</span></div><div class="choice-row"><label class="choice"><input type="checkbox" id="opsBatching" '+(o.batching?'checked':'')+'>连续批处理</label><label class="choice"><input type="checkbox" id="opsPrefix" '+(o.prefix?'checked':'')+'>前缀缓存</label></div></div></div></div>'+
+ '<div class="metric-grid"><div class="ops-metric"><small>平均首 Token 等待 · TTFT</small><strong id="opsTtft" class="mono"></strong><span class="metric-unit" id="opsTtftUnit">ms · 包含示意排队</span></div><div class="ops-metric"><small>总输出吞吐 · 理想上限内</small><strong id="opsTokens" class="mono"></strong><span class="metric-unit">tokens / s · 各副本合计</span></div><div class="ops-metric"><small>流量 / 处理容量 · ρ</small><strong id="opsUtilization" class="mono"></strong><span class="metric-unit">达到 100% 后无稳态</span></div></div>'+
+ '<p class="capacity-result" id="opsFinding" role="status"></p><p class="lab-note" id="opsCacheNote"></p>'+
+ '<details style="margin-top:18px"><summary>查看教学模型假设，避免把数字当作实测</summary><p class="ops-equation" id="opsAssumptions"></p></details>'+
+ '<div class="ops-toolbox"><details name="ops-tools"><summary>调度与缓存：连续批处理、KV Cache 与前缀复用</summary><p>连续批处理在解码迭代间调度请求，完成的请求离开，新请求补入；真实收益受显存、序列长度和调度策略限制。KV Cache 保留历史 Token 的中间状态；分页管理改善显存利用。前缀缓存跨请求复用相同前缀的 KV，命中时节省 Prefill，不能直接减少新输出的 Decode 步数。</p></details><details name="ops-tools"><summary>计算与压缩：量化、优化算子、推测解码</summary><p>低比特量化可减少存储，但内核支持、反量化成本和质量变化要实测。优化注意力算子可减少访存；推测解码由草稿模型提议、目标模型验证，是否加速取决于接受率和额外开销。改变这些配置之后，必须回归验证任务质量。</p></details><details name="ops-tools"><summary>并行与扩容：切模型、加副本、分离 Prefill / Decode</summary><p>张量或流水线并行把一个模型分到多张卡上，存在通信开销；增加独立服务副本则用于分担请求。Prefill / Decode 分离可按两类负载分别配置资源，但有 KV 传输与调度成本。自动扩缩容要计入下载、加载、预热和连接排空时间。</p></details><details name="ops-tools"><summary>线上保障：服务目标、监控、成本与回滚</summary><p>同时观测 p95/p99 TTFT、输出 Token 间隔（TPOT/ITL）、端到端延迟、排队长度、错误率、缓存命中率与显存占用。设置超时、限流、背压和告警。跟踪每次成功请求或每百万 Token 成本，保留质量回归与用户反馈；异常时降级或回滚，不能只盯 tokens/s。</p></details></div>'+
+ '<p class="lab-source">官方参考：<a href="https://docs.vllm.ai/en/latest/features/automatic_prefix_caching/" target="_blank" rel="noopener noreferrer">前缀缓存及边界 ↗</a> · <a href="https://docs.vllm.ai/en/latest/configuration/optimization/" target="_blank" rel="noopener noreferrer">优化与调优 ↗</a> · <a href="https://docs.vllm.ai/en/latest/usage/metrics/" target="_blank" rel="noopener noreferrer">生产指标 ↗</a></p>';
+ updateProduction();
+}
+function updateProduction(){
+ var o=state.ops,m=productionMetrics();
+ el('opsQpsValue').textContent=o.qps+' requests / s';el('opsCapacity').textContent=o.qps+' / '+m.capacity.toFixed(2)+' req/s';
+ el('opsLoadBar').style.width=Math.min(m.rho,1)*100+'%';el('opsLoadBar').classList.toggle('over',m.overloaded);
+ el('opsTtft').textContent=m.overloaded?'无稳态':Math.round(m.ttft).toLocaleString();el('opsTtftUnit').textContent=m.overloaded?'到达率 ≥ 处理率，队列增长':'ms · 包含示意排队';
+ el('opsTokens').textContent=Math.round(m.tokens).toLocaleString();el('opsUtilization').textContent=Math.round(m.rho*100)+'%';
+ el('opsFinding').classList.toggle('over',m.overloaded);
+ el('opsFinding').textContent=m.overloaded?'流量超过或等于理想容量：吞吐已经封顶，队列无法稳定。试着增加副本、开启批处理，或降低到达流量。':m.rho>.8?'接近容量上限：总吞吐仍能跟上流量，但模型中的平均排队时间已经明显放大。生产上还要实测尾部延迟。':'处于理想容量内：此时吞吐受需求限制，加副本不会自动产生更多 Token；它增加余量，也增加资源成本。';
+ el('opsCacheNote').textContent=o.prefix?(m.hit?'前缀命中示意：60% 的 Prefill 计算被复用，Prefill 从 800 ms 降为 320 ms；2,000 ms 的 Decode 假设保持不变。':'缓存已开启，但当前无重复前缀：命中为零，此模型中的处理时间不变。'):'前缀缓存关闭：此模型中每次 Prefill 为 800 ms；可对比有无共享前缀时的收益。';
+ el('opsAssumptions').textContent='每请求固定输出 256 tokens，Prefill 为 0.8 秒，Decode 为 2 秒；有共享前缀且命中时，Prefill 减少 60%。每副本处理槽设为 '+m.slots+'（批处理关为 1、开为 4，仅为演示假设，不是实际加速倍数）。理想容量 μ = 副本数 × 处理槽 ÷（Prefill + Decode）= '+m.capacity.toFixed(2)+' req/s。输出吞吐 = min(λ, μ) × 256。把服务集群简化为一个 M/M/1 队列，ρ = λ/μ；ρ < 1 时，平均等待 Wq = ρ/(μ−λ)，TTFT = Wq + Prefill + 2/256 秒。ρ ≥ 1 无稳态，不展示有限延迟。该近似不描述真实多服务器调度，不包含网络、KV 容量、波动、故障和扩容预热，也不估计 p95/p99。';
+}
+
+document.addEventListener('input',function(event){
+ var t=event.target;
+ if(t.id==='deployContext'||t.id==='deployConcurrent'){stopTour();if(t.id==='deployContext')state.deploy.context=Number(t.value)*1024;else state.deploy.concurrent=Number(t.value);invalidateDeployment();updateDeployment();}
+ if(t.id==='opsQps'){stopTour();state.ops.qps=Number(t.value);updateProduction();}
+});
+document.addEventListener('change',function(event){
+ var t=event.target;
+ if(t.id==='deployMemory'){stopTour();state.deploy.memory=Number(t.value);invalidateDeployment();updateDeployment();}
+ if(t.dataset.deployCheck!==undefined){stopTour();state.deploy.checks[Number(t.dataset.deployCheck)]=t.checked;invalidateDeployment();updateDeployment();}
+ if(t.id==='opsBatching'||t.id==='opsPrefix'){stopTour();state.ops[t.id==='opsBatching'?'batching':'prefix']=t.checked;updateProduction();}
+});
+
+/* Guided navigation is opt-in, stops on manual interaction, and ends at the last stage. */
+function updateTourButton(){el('tourButton').setAttribute('aria-pressed',String(state.tour));el('tourButton').innerHTML=icon(state.tour?'pause':'play')+'<span>'+(state.tour?'暂停导览':'自动导览')+'</span>';}
+function stopTour(){if(tourTimer){clearInterval(tourTimer);tourTimer=null;}state.tour=false;updateTourButton();}
+function toggleTour(){if(state.tour){stopTour();return;}stopTraining();if(state.stage===stages.length-1)setStage(0);state.tour=true;updateTourButton();toast('导览已开始：每 10 秒切换阶段，可随时暂停或点击操作。');tourTimer=setInterval(function(){if(state.stage>=stages.length-1){stopTour();toast('导览完成，可以返回任意阶段继续实验。');return;}setStage(state.stage+1,{tour:true});if(state.stage===stages.length-1)stopTour();},10000);}
+function resetProgress(){stopTour();state.visited.clear();state.trainStep=0;state.preference=null;state.rlChoice=null;state.evalRun=false;state.deploy.release='draft';setStage(0);toast('探索进度已重置。');}
+function refreshKeepingFocus(action,value){var parent=document.activeElement&&document.activeElement.closest('#lab');renderExperiment();if(parent){var target=Array.from(el('lab').querySelectorAll('[data-action]')).find(function(n){return n.dataset.action===action&&n.dataset.value===String(value);});if(target)target.focus({preventScroll:true});}}
+function handleAction(action,value){
+ stopTour();
+ if(action==='deploy-bits'){state.deploy.bits=Number(value);invalidateDeployment();refreshKeepingFocus(action,value);}
+ if(['deploy-canary','deploy-promote','deploy-rollback'].includes(action))releaseDeployment(action);
+ if(action==='ops-replicas'){state.ops.replicas=Number(value);refreshKeepingFocus(action,value);}
+ if(action==='ops-workload'){state.ops.workload=value;refreshKeepingFocus(action,value);}
+
+ if(action==='token-example'){state.tokenExample=Number(value);refreshKeepingFocus(action,value);}
+ if(action==='token-mode'){state.tokenMode=value;refreshKeepingFocus(action,value);}
+ if(action==='train-toggle')toggleTraining();
+ if(action==='train-reset'){stopTraining();state.trainStep=0;updatePretrain();}
+ if(action==='domain'){state.domain=value;refreshKeepingFocus(action,value);}
+ if(action==='sft-model'){state.sft=value==='sft';refreshKeepingFocus(action,value);}
+ if(action==='alignment-method'){state.method=value;refreshKeepingFocus(action,value);}
+ if(action==='preference'){state.preference=value;refreshKeepingFocus(action,value);el('liveStatus').textContent=preferenceFeedback();}
+ if(action==='rl-verify'){state.rlChoice=value;refreshKeepingFocus(action,value);el('liveStatus').textContent=value==='right'?'结果正确，奖励加一。':'结果错误，奖励为零。';}
+ if(action==='run-eval'){state.evalRun=true;refreshKeepingFocus(action,value);var run=el('lab').querySelector('[data-action="run-eval"]');run.focus({preventScroll:true});el('liveStatus').textContent=evalSummary();}
+}
+document.addEventListener('click',function(event){
+ var stageButton=event.target.closest('[data-stage]');if(stageButton){setStage(Number(stageButton.dataset.stage));return;}
+ var overviewButton=event.target.closest('[data-overview-stage]');if(overviewButton){el('overviewDialog').close();setStage(Number(overviewButton.dataset.overviewStage));return;}
+ var action=event.target.closest('[data-action]');if(action){handleAction(action.dataset.action,action.dataset.value);return;}
+ if(!event.target.closest('.viz-menu'))closeMenu();
+});
+document.addEventListener('input',function(event){var t=event.target;if(t.id==='trainProgress'){stopTour();stopTraining();state.trainStep=Number(t.value);updatePretrain();}if(t.id==='domainMix'){stopTour();state.mix=Number(t.value);updateMix();}});
+document.addEventListener('change',function(event){var t=event.target;if(t.dataset.clean){stopTour();state.clean[t.dataset.clean]=t.checked;updateData();}if(t.dataset.eval!==undefined){stopTour();state.evalSelected[Number(t.dataset.eval)]=t.checked;state.evalRun=false;renderEval();el('lab').querySelector('[data-eval="'+t.dataset.eval+'"]').focus({preventScroll:true});}});
+document.addEventListener('keydown',function(event){
+ if(event.key==='Escape'){var wasOpen=el('vizMenuDropdown').classList.contains('open');closeMenu();stopTour();stopTraining();if(wasOpen)document.querySelector('.viz-menu-toggle').focus();return;}
+ if(event.altKey||event.ctrlKey||event.metaKey||el('overviewDialog').open)return;
+ if(/INPUT|TEXTAREA|SELECT|BUTTON|A|SUMMARY/.test(event.target.tagName)||event.target.isContentEditable)return;
+ if(event.key==='ArrowRight'){event.preventDefault();setStage(Math.min(stages.length-1,state.stage+1));}
+ if(event.key==='ArrowLeft'){event.preventDefault();setStage(Math.max(0,state.stage-1));}
+});
+el('prevStage').addEventListener('click',function(){setStage(state.stage-1);});el('nextStage').addEventListener('click',function(){setStage(state.stage+1);});
+el('overviewButton').addEventListener('click',openOverview);el('closeOverview').addEventListener('click',function(){el('overviewDialog').close();});
+el('overviewDialog').addEventListener('click',function(event){if(event.target===el('overviewDialog')){var r=el('overviewDialog').getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)el('overviewDialog').close();}});
+el('tourButton').addEventListener('click',toggleTour);el('resetProgress').addEventListener('click',resetProgress);
+window.addEventListener('hashchange',function(){var match=location.hash.match(/^#stage-([1-9]\d*)$/);if(match&&Number(match[1])<=stages.length)setStage(Number(match[1])-1);});
+document.addEventListener('visibilitychange',function(){if(document.hidden){stopTour();stopTraining();}});
+try{var savedVisited=JSON.parse(safeRead('llm-atlas-visited')||'[]');if(Array.isArray(savedVisited))savedVisited.forEach(function(n){if(Number.isInteger(n)&&n>=0&&n<stages.length)state.visited.add(n);});}catch(e){/* Ignore invalid progress data. */}
+var savedTheme=safeRead('llm-atlas-theme');applyTheme(savedTheme==='dark'?'dark':'light');
+document.querySelectorAll('svg use').forEach(function(use){var symbol=document.querySelector(use.getAttribute('href'));if(symbol){var svg=use.closest('svg');svg.setAttribute('viewBox',symbol.getAttribute('viewBox'));svg.innerHTML=symbol.innerHTML;}});
+buildNavigation();var initialHash=location.hash.match(/^#stage-([1-9]\d*)$/);setStage(initialHash&&Number(initialHash[1])<=stages.length?Number(initialHash[1])-1:0);
+
+</script>
+</body>
+</html>

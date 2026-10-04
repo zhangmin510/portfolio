@@ -1,6 +1,10 @@
 const CSP =
   "default-src 'self'; script-src 'self' 'sha256-e1gd6rpNLMb1G1uBIFiAcNDOig3kPEnsOG6uXJQPB6U='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
 
+// Standalone panoramas include their application scripts, styles, and export tools.
+const PANORAMA_CSP =
+  "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' data: blob: https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.jsdelivr.net; frame-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+
 const SECURITY_HEADERS = {
   'Content-Security-Policy': CSP,
   'Cross-Origin-Opener-Policy': 'same-origin',
@@ -53,6 +57,14 @@ const worker = {
     Object.entries(SECURITY_HEADERS).forEach(([name, value]) => {
       headers.set(name, value)
     })
+    if (
+      url.pathname.startsWith('/panoramas/') &&
+      (response.status === 304 ||
+        (response.status === 200 &&
+          headers.get('Content-Type')?.includes('text/html')))
+    ) {
+      headers.set('Content-Security-Policy', PANORAMA_CSP)
+    }
 
     return new Response(response.body, {
       status: response.status,

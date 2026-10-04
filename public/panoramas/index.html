@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>全景图 · ZhangMin.name</title>
+  <meta name="description" content="张敏的交互式全景图合集：大模型、训练、Agent、联网搜索、AI 评测、算力、产业与成长观察。">
+  <link rel="canonical" href="https://zhangmin.name/panoramas/">
+  <link rel="icon" href="/favicon-32.png" type="image/png">
+  <meta property="og:title" content="全景图 · ZhangMin.name">
+  <meta property="og:description" content="15 张交互式全景图，把知识展开来看。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zhangmin.name/panoramas/">
+  <style>
+    :root{color-scheme:dark;--bg:#0d1117;--surface:#141b23;--text:#e4eaf1;--muted:#97a7b8;--line:#283441;--mint:#81d5b8;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--mint);outline-offset:5px}::selection{background:var(--mint);color:var(--bg)}.wrap{width:min(1180px,calc(100% - 64px));margin:auto}
+    .masthead{display:flex;align-items:center;justify-content:space-between;padding:27px 0;border-bottom:1px solid var(--line);font:13px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace}.brand{font-weight:700;letter-spacing:.03em}.brand i{font-style:normal;color:var(--mint)}.home{color:var(--muted);transition:color .2s}.home:hover{color:var(--text)}.home span{margin-right:8px}
+    .hero{position:relative;display:grid;grid-template-columns:1.4fr 1fr;align-items:end;gap:50px;padding:76px 0 59px}.hero:before{content:"";position:absolute;pointer-events:none;right:5%;top:22px;width:250px;height:250px;background:radial-gradient(circle,rgba(129,213,184,.09),transparent 70%)}.eyebrow{display:flex;align-items:center;gap:10px;font:11px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.18em;color:var(--mint);margin:0 0 21px}.eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--mint)}h1{font-size:clamp(48px,6.5vw,78px);line-height:1.16;letter-spacing:-.055em;margin:0;font-weight:700}h1 span{display:block;color:var(--mint);font-size:.52em;letter-spacing:-.02em;margin-top:13px}.intro{max-width:390px;justify-self:end;margin-bottom:3px}.intro p{color:var(--muted);margin:0;font-size:15px;line-height:1.95}.stats{display:flex;gap:28px;margin-top:25px}.stat{display:flex;align-items:baseline;gap:7px}.stat strong{font:26px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--text)}.stat span{font-size:12px;color:var(--muted)}
+    .tools{border-top:1px solid var(--line);padding:26px 0 23px;display:grid;grid-template-columns:1fr 265px;gap:20px;align-items:start}.filters{display:flex;flex-wrap:wrap;gap:8px}.filter{border:1px solid var(--line);padding:8px 13px;border-radius:7px;background:transparent;color:var(--muted);font-size:12px;line-height:1.5;white-space:nowrap;transition:border-color .2s,background .2s,color .2s}.filter:hover{border-color:#526574;color:var(--text)}.filter[aria-pressed="true"]{color:var(--bg);background:var(--mint);border-color:var(--mint);font-weight:600}.filter small{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;margin-left:5px;opacity:.68}.searchbox{position:relative;display:block}.searchbox svg{position:absolute;width:16px;height:16px;top:13px;left:13px;color:var(--muted);pointer-events:none}.searchbox input{width:100%;padding:10px 35px 10px 38px;background:var(--surface);border:1px solid var(--line);border-radius:7px;color:var(--text);font-size:12px;line-height:1.5}.searchbox input::placeholder{color:#8292a3}.searchbox input:focus{border-color:var(--mint);outline:2px solid rgba(129,213,184,.3);outline-offset:2px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.result-line{display:flex;justify-content:space-between;align-items:center;margin:0 0 20px;color:var(--muted);font:11px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}.result-line span:last-child{color:#6f8496}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}.card{display:flex;flex-direction:column;min-height:319px;padding:24px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(160deg,#161e28,var(--surface) 75%);transition:transform .2s,border-color .2s,background .2s}.card:hover{transform:translateY(-4px);border-color:var(--card-accent);background:linear-gradient(160deg,#1b2732,var(--surface) 75%)}.card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:24px}.card-category{font-size:11px;color:var(--card-accent)}.card-number{font:11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#647587}.card h2{font-size:21px;line-height:1.35;letter-spacing:-.035em;margin:0 0 7px;font-weight:650}.card-subtitle{font-size:12px;line-height:1.6;color:var(--card-accent);margin:0 0 16px}.card-description{font-size:13px;line-height:1.9;color:var(--muted);margin:0 0 19px}.tags{display:flex;flex-wrap:wrap;gap:6px;margin:auto 0 20px}.tags span{font-size:10px;line-height:1.5;color:#a0afbf;padding:4px 7px;border:1px solid #2a3541;border-radius:4px}.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:15px;border-top:1px solid var(--line)}.card-bottom time{font:10px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#728497}.card-link{font-size:11px;color:var(--text)}.card-link span{display:inline-block;margin-left:6px;color:var(--card-accent);transition:transform .2s}.card:hover .card-link span{transform:translate(2px,-2px)}[hidden]{display:none!important}.empty{text-align:center;padding:80px 20px;border:1px dashed var(--line);border-radius:12px;color:var(--muted)}.empty h2{font-size:21px;color:var(--text);margin:0 0 9px}.empty p{margin:0 0 20px;font-size:13px}.reset{background:var(--mint);border:0;border-radius:6px;padding:10px 16px;color:var(--bg);font-size:12px}.footer{display:flex;justify-content:space-between;gap:20px;align-items:center;border-top:1px solid var(--line);margin-top:45px;padding:25px 0 32px;color:#728497;font-size:11px}.footer a{color:var(--muted)}.footer a:hover{color:var(--mint)}
+    @media(max-width:1050px){.tools{grid-template-columns:1fr}.searchbox{max-width:400px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{gap:30px}.intro p{font-size:14px}}
+    @media(max-width:650px){.wrap{width:calc(100% - 36px)}.masthead{padding:21px 0;font-size:12px}.hero{grid-template-columns:1fr;padding:45px 0 35px;gap:24px}.hero:before{right:-15px;top:15px;width:180px;height:180px}h1{font-size:53px}.eyebrow{margin-bottom:17px;font-size:10px}.intro{justify-self:start;max-width:100%}.intro p{max-width:410px}.stats{margin-top:18px;gap:24px}.stat strong{font-size:22px}.tools{padding:21px 0 18px;gap:15px}.filter{padding:8px 11px;font-size:11px}.searchbox{max-width:none}.result-line{font-size:10px;margin-bottom:15px}.grid{grid-template-columns:1fr;gap:13px}.card{min-height:300px;padding:23px}.card-top{margin-bottom:21px}.card h2{font-size:23px}.card-description{font-size:13px}.footer{margin-top:32px;align-items:start;flex-direction:column;gap:6px}.empty{padding:60px 20px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}.card:hover{transform:none}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="masthead"><a class="brand" href="/">ZhangMin<i>.name</i></a><a class="home" href="/"><span aria-hidden="true">←</span>返回个人主页</a></header>
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div><p class="eyebrow">THE PANORAMA COLLECTION</p><h1 id="page-title">全景图<span>把知识，展开来看。</span></h1></div>
+        <div class="intro"><p>从模型训练到 Agent，从产业版图到成长观察。<br>用可探索的图谱，梳理复杂主题中的脉络与联系。</p><div class="stats"><div class="stat"><strong>15</strong><span>交互图谱</span></div><div class="stat"><strong>5</strong><span>主题方向</span></div></div></div>
+      </section>
+      <section aria-label="全景图目录">
+        <div class="tools">
+          <div class="filters" aria-label="按主题筛选"><button class="filter" type="button" data-category="" aria-pressed="true">全部<small>15</small></button><button class="filter" type="button" data-category="模型与训练" aria-pressed="false">模型与训练<small>6</small></button><button class="filter" type="button" data-category="生活与成长" aria-pressed="false">生活与成长<small>1</small></button><button class="filter" type="button" data-category="Agent 与搜索" aria-pressed="false">Agent 与搜索<small>4</small></button><button class="filter" type="button" data-category="评测与可靠性" aria-pressed="false">评测与可靠性<small>2</small></button><button class="filter" type="button" data-category="行业与基础设施" aria-pressed="false">行业与基础设施<small>2</small></button></div>
+          <label class="searchbox"><span class="sr-only">搜索全景图</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg><input id="search" type="search" placeholder="搜索标题、主题或关键词" autocomplete="off"></label>
+        </div>
+        <p class="result-line"><span id="result-count" role="status" aria-live="polite">展示 15 / 15 张全景图</span><span>最近更新 2026.10.05</span></p>
+        <div class="grid" id="gallery">
+          <a class="card" href="/panoramas/minimind-nanochat-panorama/" data-category="模型与训练" data-search="MiniMind × nanochat 从零训练大模型的两条路径 对照两个开源项目的架构、数据、训练流程与工程取舍，沿着完整链路理解小型大模型。 模型与训练 MiniMind nanochat 从零训练 minimind-nanochat-panorama" style="--card-accent:#81d5b8">
+      <div class="card-top"><span class="card-category">模型与训练</span><span class="card-number">01</span></div>
+      <h2>MiniMind × nanochat</h2>
+      <p class="card-subtitle">从零训练大模型的两条路径</p>
+      <p class="card-description">对照两个开源项目的架构、数据、训练流程与工程取舍，沿着完整链路理解小型大模型。</p>
+      <div class="tags"><span>MiniMind</span><span>nanochat</span><span>从零训练</span></div>
+      <div class="card-bottom"><time datetime="2026-10-05">2026.10.05</time><span class="card-link">打开全景 <span aria-hidden="true">↗</span></span></div>
+    </a>
+<a class="card" href="/panoramas/girl-growth-1-7/" data-category="生活与成长" data-search="成长花园 1—7 岁女孩成长全景 按 84 个月龄节点，展开发展观察、亲子话术与活动建议，在日常陪伴中读懂成长。 生活与成长 亲子陪伴 84 个月龄 成长观察 girl-growth-1-7" style="--card-accent:#e9c384">
+      <div class="card-top"><span class="card-category">生活与成长</span><span class="card-number">02</span></div>
+      <h2>成长花园</h2>
+      <p class="card-subtitle">1—7 岁女孩成长全景</p>
+      <p class="card-description">按 84 个月龄节点，展开发展观察、亲子话术与活动建议，在日常陪伴中读懂成长。</p>
+      <div class="tags"><span>亲子陪伴</span><span>84 个月龄</span><span>成长观察</span></div>
+      <div class="card-bottom"><time datetime="2026-10-04">2026.10.04</time><span class="card-link">打开全景 <span aria-hidden="true">↗</span></span></div>
+    </a>
+<a class="card" href="/panoramas/video-generation-atlas/" data-category="模型与训练" data-search="视频生成模型全景图 从 2016 到 2026，十年技术演进 沿时间线探索视频生成模型、技术路线与开源生态，比较国内外代表模型的发展。 模型与训练 视频生成 技术演进 模型生态 video-generation-atlas" style="--card-accent:#81d5b8">
+      <div class="card-top"><span class="card-category">模型与训练</span><span class="card-number">03</span></div>
+      <h2>视频生成模型全景图</h2>
+      <p class="card-subtitle">从 2016 到 2026，十年技术演进</p>
+      <p class="card-description">沿时间线探索视频生成模型、技术路线与开源生态，比较国内外代表模型的发展。</p>
+      <div class="tags"><span>视频生成</span><span>技术演进</span><span>模型生态</span></div>
+      <div class="card-bottom"><time datetime="2026-10-04">2026.10.04</time><span class="card-link">打开全景 <span aria-hidden="true">↗</span></span></div>
+    </a>
+<a class="card" href="/panoramas/search-panorama/" data-category="Agent 与搜索" data-search="联网搜索全景 从检索文档，到完成研究 串起搜索技术、AI 搜索与评测方法，理解检索系统如何走向回答问题与完成研究。 Agent 与搜索 联网搜索 AI 搜索 技术与评测 search-panorama" style="--card-accent:#a7bafa">
+      <div class="card-top"><span class="card-category">Agent 与搜索</span><span class="card-number">04</span></div>
+      <h2>联网搜索全景</h2>
+      <p class="card-subtitle">从检索文档，到完成研究</p>
+      <p class="card-description">串起搜索技术、AI 搜索与评测方法，理解检索系统如何走向回答问题与完成研究。</p>
+      <div class="tags"><span>联网搜索</span><span>AI 搜索</span><span>技术与评测</span></div>
+      <div class="card-bottom"><time datetime="2026-10-04">2026.10.04</time><span class="card-link">打开全景 <span aria-hidden="true">↗</span></span></div>
+    </a>
+<a class="card" href="/panoramas/search-technology/" data-category="Agent 与搜索" data-search="联网搜索技术图谱 搜索系统的技术脉络 通过交互式图谱梳理搜索技术节点及其联系，从基础检索深入到知识与智能搜索。 Agent 与搜索 搜索技术 交互图谱 技术节点 search-technology" style="--card-accent:#a7bafa">
+      <div class="card-top"><span class="card-category">Agent 与搜索</span><span class="card-number">05</span></div>
+      <h2>联网搜索技术图谱</h2>
+      <p class="card-subtitle">搜索系统的技术脉络</p>
+      <p class="card-description">通过交互式图谱梳理搜索技术节点及其联系，从基础检索深入到知识与智能搜索。</p>
+      <div class="tags"><span>搜索技术</span><span>交互图谱</span><span>技术节点</span></div>
+      <div class="card-bottom"><time datetime="2026-10-04">2026.10.04</time><span class="card-link">打开全景 <span aria-hidden="true">↗</span></span></div>
+    </a>
+<a class="card" href="/panoramas/search-evaluation/" data-category="Agent 与搜索" data-search="联网搜索评测图谱 如何判断一次搜索是否有效 沿评测节点探索搜索质量、回答效果与研究能力的衡量方法，以及它们之间的联系。 Agent 与搜索 搜索评测 质量衡量 交互图谱 search-evaluation" style="--card-accent:#a7bafa">
+      <div class="card-top"><span class="card-category">Agent 与搜索</span><span class="card-number">06</span></div>
+      <h2>联网搜索评测图谱</h2>
+      <p class="card-subtitle">如何判断一次搜索是否有效</p>
+      <p class="card-description">沿评测节点探索搜索质量、回答效果与研究能力的衡量方法，以及它们之间的联系。</p>
+      <div class="tags"><span>搜索评测</span><span>质量衡量</span><span>交互图谱</span></div>
+      <div class="card-bottom"><time datetime="2026-10-04">2026.10.04</time><span class="card-link">打开全景 <span aria-hidden="true">↗</span></span></div>
+    </a>
+<a class="card" href="/panoramas/agent-evolution-atlas/" data-category="Agent 与搜索" data-search="Agent 开发历史与趋势 智能体如何走到今天 回看 Agent 的发展历史、架构与工具生态，探索开发范式和未来趋势。 Agent 与搜索 Agent 开发架构 历史与趋势 agent-evolution-atlas" style="--card-accent:#a7bafa">
+      <div class="card-top"><span class="card-category">Agent 与搜索</span><span class="card-number">07</span></div>
+      <h2>Agent 开发历史与趋势</h2>
+      <p class="card-subtitle">智能体如何走到今天</p>
+      <p class="card-description">回看 Agent 的发展历史、架构与工具生态，探索开发范式和未来趋势。</p>
+      <div class="tags"><span>Agent</span><span>开发架构</span><span>历史与趋势</span></div>
+      <div class="card-bottom"><time datetime="2026-10-03">2026.10.03</time><span class="card-link">打开全景 <span aria-hidden="true">↗</span></span></div>
+    </a>
+<a class="card" href="/panoramas/open-model-finetuning-atlas/" data-category="模型与训练" data-search="开源模型微调全景 让通用模型适配具体任务 理解微调方法、数据准备与训练工具，将开源模型适配到自己的任务和应用。 模型与训练 模型微调 开源模型 数据与训练 open-model-finetuning-atlas" style="--card-accent:#81d5b8">
+      <div class="card-top"><span class="card-category">模型与训练</span><span class="card-number">08</span></div>
+      <h2>开源模型微调全景</h2>
+      <p class="card-subtitle">让通用模型适配具体任务</p>
+      <p class="card-description">理解微调方法、数据准备与训练工具，将开源模型适配到自己的任务和应用。</p>
+      <div class="tags"><span>模型微调</span><span>开源模型</span><span>数据与训练</span></div>
+      <div class="card-bottom"><time datetime="2026-10-03">2026.10.03</time><span class="card-link">打开全景 <span aria-hidden="true">↗</span></span></div>
+    </a>
+<a class="card" href="/panoramas/llm-distillation-atlas/" data-category="模型与训练" data-search="大模型蒸馏全景图 萃知：将能力传递给更小的模型 梳理知识蒸馏的原理、方法与训练过程，探索大模型能力迁移的路线。 模型与训练 知识蒸馏 能力迁移 训练方法 llm-distillation-atlas" style="--card-accent:#81d5b8">
+      <div class="card-top"><span class="card-category">模型与训练</span><span class="card-number">09</span></div>
+      <h2>大模型蒸馏全景图</h2>
+      <p class="card-subtitle">萃知：将能力传递给更小的模型</p>
+      <p class="card-description">梳理知识蒸馏的原理、方法与训练过程，探索大模型能力迁移的路线。</p>
+      <div class="tags"><span>知识蒸馏</span><span>能力迁移</span><span>训练方法</span></div>
+      <div class="card-bottom"><time datetime="2026-10-03">2026.10.03</time><span class="card-link">打开全景 <span aria-hidden="true">↗</span></span></div>
+    </a>
+<a class="card" href="/panoramas/ai-evaluation-panorama/" data-category="评测与可靠性" data-search="AI 评测历史与趋势 能力衡量方式的演进 回顾 AI 评测的发展历程，探索基准、能力维度与前沿评测趋势。 评测与可靠性 AI 评测 发展历史 前沿趋势 ai-evaluation-panorama" style="--card-accent:#d5aeec">
+      <div class="card-top"><span class="card-category">评测与可靠性</span><span class="card-number">10</span></div>
+      <h2>AI 评测历史与趋势</h2>
+      <p class="card-subtitle">能力衡量方式的演进</p>
+      <p class="card-description">回顾 AI 评测的发展历程，探索基准、能力维度与前沿评测趋势。</p>
+      <div class="tags"><span>AI 评测</span><span>发展历史</span><span>前沿趋势</span></div>
+      <div class="card-bottom"><time datetime="2026-10-03">2026.10.03</time><span class="card-link">打开全景 <span aria-hidden="true">↗</span></span></div>
+    </a>
+<a class="card" href="/panoramas/ai-compute-atlas/" data-category="行业与基础设施" data-search="全球 AI 算力中心全景 在地图上理解算力基础设施 浏览全球 AI 算力项目的地理分布、建设状态与项目资料，通过地图与筛选探索。 行业与基础设施 AI 算力 全球地图 数据中心 ai-compute-atlas" style="--card-accent:#ebaabd">
+      <div class="card-top"><span class="card-category">行业与基础设施</span><span class="card-number">11</span></div>
+      <h2>全球 AI 算力中心全景</h2>
+      <p class="card-subtitle">在地图上理解算力基础设施</p>
+      <p class="card-description">浏览全球 AI 算力项目的地理分布、建设状态与项目资料，通过地图与筛选探索。</p>
+      <div class="tags"><span>AI 算力</span><span>全球地图</span><span>数据中心</span></div>
+      <div class="card-bottom"><time datetime="2026-10-03">2026.10.03</time><span class="card-link">打开全景 <span aria-hidden="true">↗</span></span></div>
+    </a>
+<a class="card" href="/panoramas/ai-company-atlas/" data-category="行业与基础设施" data-search="AI 公司全景图 2025—2026 年的产业版图 探索 AI 公司的分布、定位与业务方向，在同一张图谱中理解行业格局。 行业与基础设施 AI 公司 产业版图 2025—2026 ai-company-atlas" style="--card-accent:#ebaabd">
+      <div class="card-top"><span class="card-category">行业与基础设施</span><span class="card-number">12</span></div>
+      <h2>AI 公司全景图</h2>
+      <p class="card-subtitle">2025—2026 年的产业版图</p>
+      <p class="card-description">探索 AI 公司的分布、定位与业务方向，在同一张图谱中理解行业格局。</p>
+      <div class="tags"><span>AI 公司</span><span>产业版图</span><span>2025—2026</span></div>
+      <div class="card-bottom"><time datetime="2026-10-03">2026.10.03</time><span class="card-link">打开全景 <span aria-hidden="true">↗</span></span></div>
+    </a>
+<a class="card" href="/panoramas/llm-landscape-atlas/" data-category="模型与训练" data-search="大模型全景图 2025—2026 年的模型生态 比较大模型、模型家族与生态位置，建立理解当下模型格局的整体视角。 模型与训练 大模型 模型生态 2025—2026 llm-landscape-atlas" style="--card-accent:#81d5b8">
+      <div class="card-top"><span class="card-category">模型与训练</span><span class="card-number">13</span></div>
+      <h2>大模型全景图</h2>
+      <p class="card-subtitle">2025—2026 年的模型生态</p>
+      <p class="card-description">比较大模型、模型家族与生态位置，建立理解当下模型格局的整体视角。</p>
+      <div class="tags"><span>大模型</span><span>模型生态</span><span>2025—2026</span></div>
+      <div class="card-bottom"><time datetime="2026-10-03">2026.10.03</time><span class="card-link">打开全景 <span aria-hidden="true">↗</span></span></div>
+    </a>
+<a class="card" href="/panoramas/llm-training-atlas/" data-category="模型与训练" data-search="大模型训练交互图谱 炼成：模型能力如何形成 沿训练流程理解数据、模型与训练阶段之间的关系，探索大模型训练的关键环节。 模型与训练 模型训练 训练流程 交互图谱 llm-training-atlas" style="--card-accent:#81d5b8">
+      <div class="card-top"><span class="card-category">模型与训练</span><span class="card-number">14</span></div>
+      <h2>大模型训练交互图谱</h2>
+      <p class="card-subtitle">炼成：模型能力如何形成</p>
+      <p class="card-description">沿训练流程理解数据、模型与训练阶段之间的关系，探索大模型训练的关键环节。</p>
+      <div class="tags"><span>模型训练</span><span>训练流程</span><span>交互图谱</span></div>
+      <div class="card-bottom"><time datetime="2026-10-03">2026.10.03</time><span class="card-link">打开全景 <span aria-hidden="true">↗</span></span></div>
+    </a>
+<a class="card" href="/panoramas/ai-evaluation-atlas/" data-category="评测与可靠性" data-search="AI 评测行业全景 评测生态、方法与参与者 梳理 AI 评测行业的参与者、方法与能力维度，建立评测生态的整体认识。 评测与可靠性 评测行业 评测生态 能力维度 ai-evaluation-atlas" style="--card-accent:#d5aeec">
+      <div class="card-top"><span class="card-category">评测与可靠性</span><span class="card-number">15</span></div>
+      <h2>AI 评测行业全景</h2>
+      <p class="card-subtitle">评测生态、方法与参与者</p>
+      <p class="card-description">梳理 AI 评测行业的参与者、方法与能力维度，建立评测生态的整体认识。</p>
+      <div class="tags"><span>评测行业</span><span>评测生态</span><span>能力维度</span></div>
+      <div class="card-bottom"><time datetime="2026-10-03">2026.10.03</time><span class="card-link">打开全景 <span aria-hidden="true">↗</span></span></div>
+    </a>
+        </div>
+        <div class="empty" id="empty" hidden><h2>没有找到匹配的全景图</h2><p>试试其他关键词，或浏览全部主题。</p><button type="button" class="reset" id="reset">查看全部全景图</button></div>
+        <noscript><p>所有全景图已列于上方。开启 JavaScript 后可使用搜索和主题筛选。</p></noscript>
+      </section>
+    </main>
+    <footer class="footer"><span>© 2026 ZhangMin.name · 持续记录与探索</span><a href="/">回到首页 <span aria-hidden="true">↗</span></a></footer>
+  </div>
+  <script>
+    (() => {
+      const input = document.getElementById('search');
+      const filters = [...document.querySelectorAll('.filter')];
+      const cards = [...document.querySelectorAll('.card')];
+      const status = document.getElementById('result-count');
+      const empty = document.getElementById('empty');
+      let selectedCategory = '';
+      function update() {
+        const terms = input.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+        let visible = 0;
+        cards.forEach(card => {
+          const text = card.dataset.search.toLocaleLowerCase();
+          const matches = (!selectedCategory || card.dataset.category === selectedCategory) && terms.every(term => text.includes(term));
+          card.hidden = !matches;
+          if (matches) visible += 1;
+        });
+        filters.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.category === selectedCategory)));
+        status.textContent = '展示 ' + visible + ' / ' + cards.length + ' 张全景图';
+        empty.hidden = visible !== 0;
+      }
+      input.addEventListener('input', update);
+      filters.forEach(button => button.addEventListener('click', () => { selectedCategory = button.dataset.category; update(); }));
+      document.getElementById('reset').addEventListener('click', () => { input.value = ''; selectedCategory = ''; update(); input.focus(); });
+    })();
+  </script>
+</body>
+</html>

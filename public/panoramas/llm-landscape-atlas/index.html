@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="theme-light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大模型全景图 · 2025—2026 | MODEL ATLAS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- ADD LANGUAGE FONTS IF NEEDED: e.g. Noto Sans KR for Korean, Noto Sans JP for Japanese -->
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"> -->
+  <script src="/panoramas/vendor/chart.umd.min.js"></script>
+<script>if (typeof Chart !== "undefined") { Chart.defaults.animation = false; }</script>
+  <script src="/panoramas/vendor/html-to-image.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { interpolate-size: allow-keywords; } /* Enable smooth height:auto transitions (Chrome 129+) */
+
+    /* ===== THEMES (class-based ONLY — no @media prefers-color-scheme) ===== */
+    html.theme-dark {
+      --bg: #0A0A0A; --surface: #141414; --surface-hover: #1C1C1C;
+      --border: rgba(255,255,255,0.04);
+      --text: #EDEDED; --text-secondary: #888;
+      --accent: #3b82f6; --accent-secondary: #8b5cf6;
+      --positive: #10b981; --negative: #f43f5e; --warning: #f59e0b;
+    }
+    html.theme-light {
+      --bg: #FAFAF9; --surface: #FFFFFF; --surface-hover: #F5F5F4;
+      --border: rgba(0,0,0,0.06);
+      --text: #0f172a; --text-secondary: #64748b;
+      --accent: #2563eb; --accent-secondary: #7c3aed;
+      --positive: #059669; --negative: #e11d48; --warning: #d97706;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+      letter-spacing: -0.01em; font-feature-settings: 'cv11', 'ss01';
+      transition: background 0.3s, color 0.3s;
+      scrollbar-gutter: stable;
+    }
+    h1,h2,h3,h4,h5,h6 { 
+      color: var(--text); 
+      letter-spacing: -0.03em; 
+      line-height: 1.08;
+      text-wrap: balance;
+    }
+    h1 { font-weight: 700; }
+    h2 { font-weight: 600; }
+    body, p, li, td, th, span, label { font-weight: 400; }
+    p,li,td,th,span,label { color: var(--text); }
+    .text-secondary { color: var(--text-secondary); }
+
+    /* ===== CARD ===== */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 24px;
+      transition: box-shadow 0.2s ease;
+    }
+    .card:hover {
+      box-shadow: 0 0 0 1px var(--border), 0 8px 16px rgba(0,0,0,0.08);
+    }
+
+    /* ===== ANIMATIONS (CSS-first — always reliable) ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .animate { animation: fadeInUp 0.6s ease-out both; }
+    .animate.delay-1 { animation-delay: 0.1s; }
+    .animate.delay-2 { animation-delay: 0.2s; }
+    .animate.delay-3 { animation-delay: 0.3s; }
+    .animate.delay-4 { animation-delay: 0.4s; }
+    .animate.delay-5 { animation-delay: 0.5s; }
+    .animate.delay-6 { animation-delay: 0.6s; }
+
+    /* Scroll-triggered: JS adds .reveal, then .visible on scroll */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      body { background: white !important; color: black !important; }
+      .viz-menu, .reveal { display: revert; opacity: 1 !important; transform: none !important; }
+      .card { break-inside: avoid; border: 1px solid #ddd; box-shadow: none; }
+      * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
+    @page { margin: 1in; @bottom-center { content: "Page " counter(page); font-size: 9pt; color: #666; } }
+
+    /* ===== MENU ===== */
+    .viz-menu { position: fixed; top: 16px; right: 16px; z-index: 9999; }
+    .viz-menu-toggle {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(12px); transition: all 0.2s;
+    }
+    .viz-menu-toggle:hover { background: var(--surface-hover); }
+    .viz-menu-dropdown {
+      position: absolute; top: 52px; right: 0; min-width: 200px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 8px;
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: all 0.2s; backdrop-filter: blur(16px);
+    }
+    .viz-menu-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .viz-menu-dropdown button {
+      width: 100%; padding: 10px 14px; border: none; border-radius: 8px;
+      background: transparent; color: var(--text); font-size: 14px;
+      font-family: inherit; cursor: pointer; text-align: left;
+      display: flex; align-items: center; gap: 10px; transition: background 0.15s;
+    }
+    .viz-menu-dropdown button:hover { background: var(--surface-hover); }
+
+    /* ===== SKIP TO CONTENT (accessibility) ===== */
+    .skip-to-content {
+      position: absolute; top: -40px; left: 6px; background: var(--accent);
+      color: white; padding: 8px 12px; text-decoration: none;
+      border-radius: 4px; opacity: 0; pointer-events: none;
+      transition: all 0.2s; z-index: 10000;
+    }
+    .skip-to-content:focus { top: 6px; opacity: 1; pointer-events: auto; }
+
+    /* ===== DETAILS ACCORDION (Chrome 120+ exclusive, 131+ animated) ===== */
+    details { overflow: hidden; }
+    details summary { cursor: pointer; list-style: none; }
+    details summary::-webkit-details-marker { display: none; }
+    ::details-content {
+      transition: block-size 0.3s ease, opacity 0.3s ease;
+      block-size: 0; opacity: 0; overflow: hidden;
+    }
+    details[open]::details-content { block-size: auto; opacity: 1; }
+
+    /* ===== POPOVER (Chrome 114+, zero-JS tooltips/panels) ===== */
+    [popover] {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 16px; max-width: 320px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2); color: var(--text);
+    }
+    [popover]::backdrop { background: rgba(0,0,0,0.3); }
+
+    /* Atlas additions to the visualize skeleton. */
+html.theme-light {--bg:#f6f7f3;--surface:#fff;--surface-hover:#eff3ec;--border:#e0e5dc;--text:#20352e;--text-secondary:#6c7b73;--accent:#236a54;--accent-secondary:#c7e59b;--positive:#277555;--negative:#b9584f;--warning:#916629}
+html.theme-dark {--bg:#141c18;--surface:#1d2822;--surface-hover:#29382f;--border:#35483c;--text:#e7eee5;--text-secondary:#adbcaf;--accent:#98cba4;--accent-secondary:#46603e;--positive:#95cea4;--negative:#f3a090;--warning:#e2ba7e}
+body {font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;font-size:16px;line-height:1.55}
+button,input,select {font:inherit;color:inherit}button,a,input,select {touch-action:manipulation}button {cursor:pointer}button:disabled{cursor:default;opacity:.5}button{background:transparent;border:0}a{color:var(--accent);text-underline-offset:3px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:4px}button:hover{color:var(--accent)}svg{flex-shrink:0}h1{font-size:clamp(2.5rem,4.2vw,4.15rem);font-weight:750;line-height:1.14}h2{font-size:2rem;font-weight:650}h3{font-size:1.5rem;font-weight:600}small{font-size:.78rem} [hidden]{display:none!important}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:220px;padding:30px 22px 24px;border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--bg);z-index:20}.brand{display:flex;gap:12px;align-items:center;margin-bottom:46px}.brand-mark{height:38px;width:38px;background:var(--accent);color:var(--surface);display:grid;place-items:center;border-radius:9px;font-size:21px}.brand strong{display:block;font-size:16px;letter-spacing:1.5px}.brand small{font-size:10px;letter-spacing:2px;color:var(--text-secondary)}.navlabel{color:var(--text-secondary);font-size:10px;letter-spacing:2px;margin:0 12px 15px}.nav{display:flex;flex-direction:column;gap:6px}.nav button{min-height:44px;display:flex;align-items:center;gap:12px;text-align:left;border-radius:7px;padding:10px 12px;font-size:14px;color:var(--text-secondary)}.nav button.active{background:var(--accent);color:var(--bg)}.nav button span{color:inherit}.nav .num{margin-left:auto;font-size:10px;opacity:.65}.nav .ico{width:18px;font-size:19px;text-align:center}.side-note{margin-top:auto;border-top:1px solid var(--border);padding:20px 9px 0;font-size:12px;color:var(--text-secondary)}.side-note strong{font-size:11px;letter-spacing:1px;display:block;color:var(--text);margin-bottom:8px}.side-note p{color:var(--text-secondary);font-size:11px;line-height:1.8}.main-shell{margin-left:220px;padding:28px 40px 110px;max-width:1880px}.topline{display:flex;justify-content:space-between;align-items:center;margin-bottom:36px;gap:16px;padding-right:40px}.eyebrow{font-size:10px;letter-spacing:2px;font-weight:600;color:var(--text-secondary)}.top-status{font-size:11px;color:var(--text-secondary);display:flex;align-items:center;gap:8px}.live-dot{width:6px;height:6px;background:var(--positive);border-radius:50%}.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:end;margin-bottom:40px}.hero .kicker{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:1px;color:var(--accent);margin-bottom:20px}.kicker:before{content:'';height:1px;width:20px;background:var(--accent)}.hero p{color:var(--text-secondary);margin-top:18px;font-size:14px;line-height:1.8;max-width:520px}.hero h1 em{font-style:normal;color:var(--accent)}.hero-right{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:22px 25px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.stat{border-right:1px solid var(--border)}.stat:last-child{border:0}.stat strong{display:block;font-size:34px;line-height:1.2;letter-spacing:-1.7px;font-weight:600}.stat span{display:block;font-size:11px;color:var(--text-secondary);margin-top:6px}.sparkline{display:flex;align-items:end;gap:7px;height:40px;margin-top:24px;border-bottom:1px solid var(--border)}.sparkline div{flex:1;min-height:3px;background:var(--accent-secondary);border-radius:2px 2px 0 0}.sparkline div:last-child{background:var(--accent)}.sparklegend{display:flex;justify-content:space-between;font-size:9px;color:var(--text-secondary);margin-top:7px}.sparklegend span{color:inherit}.toolbar{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:15px 18px;margin-bottom:30px}.search-row{display:flex;align-items:center;gap:12px}.search{position:relative;flex:1;min-width:180px}.search:before{content:'⌕';position:absolute;left:0;top:4px;font-size:24px;color:var(--text-secondary)}.search input{padding:11px 12px 11px 29px;border:0;background:transparent;width:100%;font-size:13px;outline-offset:0}select{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:9px 28px 9px 10px;font-size:12px;max-width:100%}.filter-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;border-top:1px solid var(--border);padding-top:13px;margin-top:8px}.filter-caption{color:var(--text-secondary);font-size:11px;margin-right:4px}.chip{border:1px solid var(--border);padding:5px 12px;border-radius:5px;font-size:11px;line-height:1.5}.chip.active{background:var(--surface-hover);color:var(--accent);border-color:var(--accent)}.reset{font-size:11px;color:var(--text-secondary);margin-left:auto;padding:7px}.result-head{display:flex;justify-content:space-between;align-items:center;margin:0 0 20px;gap:15px}.result-head h2{font-size:20px;letter-spacing:-.4px}.result-head p{font-size:11px;color:var(--text-secondary);margin-top:5px}.result-head .right{display:flex;gap:12px;align-items:center}.tiny-label{font-size:10px;letter-spacing:.8px;color:var(--text-secondary)}.view{margin-top:0;animation:fadeIn .25s}.provider-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}.provider-card{background:var(--surface);border:1px solid var(--border);border-radius:9px;overflow:hidden;transition:box-shadow .15s}.provider-card:hover{box-shadow:0 5px 18px #00000008}.provider-top{display:flex;align-items:center;gap:11px;padding:19px 18px 12px}.monogram{height:38px;width:38px;display:grid;place-items:center;background:color-mix(in srgb,var(--org) 12%,var(--surface));border:1px solid color-mix(in srgb,var(--org) 22%,var(--border));border-radius:9px;color:var(--org);font-weight:700;font-size:16px}.provider-name{font-size:16px;font-weight:650;letter-spacing:-.3px;line-height:1.3}.provider-sub{font-size:10px;color:var(--text-secondary);margin-top:4px}.provider-num{margin-left:auto;color:var(--text-secondary);font-size:10px}.provider-focus{font-size:11px;color:var(--text-secondary);padding:0 18px 15px;border-bottom:1px solid var(--border)}.model-list{padding:3px 0}.model-row{display:flex;align-items:center;padding:10px 16px;gap:9px;min-height:57px}.model-row+.model-row{border-top:1px solid color-mix(in srgb,var(--border) 60%,transparent)}.model-row:hover{background:var(--surface-hover)}.pick{height:15px;width:15px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}.model-btn{text-align:left;flex:1;min-width:0}.model-title{display:block;font-size:12px;font-weight:550;line-height:1.5;word-break:break-word}.model-meta{display:flex;gap:7px;align-items:center;color:var(--text-secondary);font-size:9px;margin-top:3px}.model-meta span{color:inherit}.price-mini{font-size:11px;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--text-secondary);text-align:right}.price-mini small{display:block;color:var(--text-secondary);font-size:8px;letter-spacing:.5px;margin-top:3px}.status-dot{height:4px;width:4px;background:var(--positive);border-radius:50%;display:inline-block}.provider-bottom{background:color-mix(in srgb,var(--bg) 60%,var(--surface));border-top:1px solid var(--border);padding:10px 18px;display:flex;justify-content:space-between;gap:10px;align-items:center}.provider-bottom span,.provider-bottom button{font-size:10px;color:var(--text-secondary)}.provider-bottom button{color:var(--accent)}.footnote{font-size:11px;color:var(--text-secondary);margin-top:22px;line-height:1.8}.empty{padding:64px 20px;text-align:center;border:1px dashed var(--border);border-radius:8px}.empty h3{font-size:20px}.empty p{font-size:13px;color:var(--text-secondary);margin-top:12px}.empty button{margin-top:20px}.btn{padding:10px 16px;border:1px solid var(--border);border-radius:6px;font-size:12px;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:38px}.btn.primary{background:var(--accent);color:var(--bg);border-color:var(--accent)}.badge{display:inline-block;font-size:9px;border:1px solid var(--border);padding:2px 6px;border-radius:4px;color:var(--text-secondary)}.badge.open{color:var(--accent);background:var(--surface-hover)}.badge.preview,.badge.restricted{color:var(--warning)}.badge.retired{color:var(--negative)}.table-wrap{overflow:auto;background:var(--surface);border:1px solid var(--border);border-radius:9px}.catalog{width:100%;border-collapse:collapse;min-width:850px;text-align:left}.catalog th{font-size:10px;color:var(--text-secondary);letter-spacing:.7px;font-weight:500;background:var(--surface-hover);padding:14px 16px;white-space:nowrap}.catalog td{padding:13px 16px;border-top:1px solid var(--border);font-size:12px;vertical-align:middle}.catalog td:first-child{width:42px}.catalog .t-name{font-size:12px;font-weight:600}.catalog .t-sub{display:block;font-size:10px;color:var(--text-secondary);margin-top:3px}.catalog tr:hover td{background:var(--surface-hover)}.nowrap{white-space:nowrap}.tags{display:flex;flex-wrap:wrap;gap:5px}.tags span{font-size:9px;padding:3px 6px;background:var(--surface-hover);border-radius:4px;color:var(--text-secondary)}.lab-grid{display:grid;grid-template-columns:300px 1fr;gap:24px}.controls-card{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:24px;height:max-content;position:sticky;top:20px}.controls-card h3{font-size:18px}.controls-card>p{font-size:11px;color:var(--text-secondary);margin:9px 0 24px}.field{display:block;margin:19px 0}.field>span{font-size:12px;color:var(--text-secondary);display:flex;justify-content:space-between;margin-bottom:8px}.field input[type=number]{border:1px solid var(--border);background:var(--bg);width:100%;border-radius:6px;padding:10px;font-size:17px;font-variant-numeric:tabular-nums}.field small{display:block;color:var(--text-secondary);font-size:10px;margin-top:6px}.presets{display:flex;gap:5px;flex-wrap:wrap}.presets .chip{font-size:10px;padding:5px 8px}.cost-summary{padding:20px 24px;background:var(--accent);border-radius:8px;margin-bottom:20px}.cost-summary span{color:var(--bg);font-size:12px}.cost-summary strong{display:block;color:var(--bg);font-size:28px;letter-spacing:-.8px;margin:3px 0}.cost-summary p{color:var(--bg);font-size:10px;opacity:.8}.cost-list{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:8px 22px}.cost-item{display:grid;grid-template-columns:30px 190px 1fr 90px;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)}.cost-item:last-child{border:0}.cost-index{font-size:11px;color:var(--text-secondary)}.cost-name{font-size:12px;font-weight:550;text-align:left}.cost-name small{display:block;font-size:9px;font-weight:400;color:var(--text-secondary);margin-top:3px}.cost-track{height:7px;background:var(--surface-hover);border-radius:2px;overflow:hidden;display:flex}.cost-input{background:var(--accent);min-width:1px}.cost-output{background:var(--accent-secondary);min-width:1px}.cost-number{font-size:14px;text-align:right;font-variant-numeric:tabular-nums}.chart-legend{display:flex;gap:20px;color:var(--text-secondary);font-size:10px;margin:10px 0}.chart-legend span{display:flex;align-items:center;gap:6px;color:inherit}.legend-swatch{height:7px;width:12px;background:var(--accent);display:inline-block}.legend-swatch.out{background:var(--accent-secondary)}.callout{border:1px solid var(--border);border-left:3px solid var(--accent);background:var(--surface);padding:17px 20px;border-radius:6px;font-size:12px;line-height:1.8;color:var(--text-secondary);margin:0 0 24px}.timeline-scroll{overflow:auto;border:1px solid var(--border);border-radius:9px;background:var(--surface)}.timeline-inner{min-width:890px;padding:22px}.axis{display:grid;grid-template-columns:150px 1fr;margin-bottom:20px}.axis-months{display:flex;justify-content:space-between;font-size:9px;color:var(--text-secondary)}.axis-months span{color:inherit}.timeline-row{display:grid;grid-template-columns:150px 1fr;align-items:center;min-height:68px;border-top:1px solid var(--border)}.timeline-org{font-size:12px;font-weight:600}.timeline-org small{font-size:9px;display:block;color:var(--text-secondary);font-weight:400;margin-top:4px}.timeline-track{position:relative;height:68px;background:repeating-linear-gradient(90deg,transparent,transparent calc(100% / 12 - 1px),var(--border) calc(100% / 12 - 1px),var(--border) calc(100% / 12))}.timeline-track:after{content:'';position:absolute;left:0;right:0;top:34px;height:1px;background:var(--border);pointer-events:none}.event{position:absolute;height:14px;width:14px;border:3px solid var(--surface);background:var(--org);border-radius:50%;top:27px;transform:translateX(-50%);z-index:1;box-shadow:0 0 0 1px var(--org)}.event:hover,.event:focus-visible{box-shadow:0 0 0 4px color-mix(in srgb,var(--org) 25%,transparent);z-index:10}.event-label{position:absolute;font-size:9px;color:var(--text-secondary);top:6px;transform:translateX(-50%);white-space:nowrap;pointer-events:none}.cadence-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:24px}.cadence-card{padding:18px;border:1px solid var(--border);background:var(--surface);border-radius:8px}.cadence-card h3{font-size:14px}.cadence-card strong{font-size:28px;letter-spacing:-1px;display:block;margin:12px 0 4px}.cadence-card strong span{font-size:12px;color:var(--text-secondary)}.cadence-card p{font-size:10px;color:var(--text-secondary);line-height:1.8}.org-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.org-card{border:1px solid var(--border);background:var(--surface);border-radius:9px;padding:22px}.org-card header{display:flex;gap:12px;align-items:center}.org-card header h3{font-size:18px}.org-tree{border-left:1px solid var(--border);margin:22px 0 0 17px;padding-left:26px}.org-node{position:relative;margin:17px 0}.org-node:before{content:'';position:absolute;left:-27px;top:15px;width:18px;height:1px;background:var(--border)}.org-node small{font-size:9px;color:var(--text-secondary);display:block}.org-node strong{font-size:12px;font-weight:500}.org-models{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.org-models button{font-size:10px;border:1px solid var(--border);padding:5px 7px;border-radius:4px}.notes-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.note-card{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:24px}.note-card h3{font-size:17px;margin-bottom:14px}.note-card p,.note-card li{font-size:12px;color:var(--text-secondary);line-height:1.9}.note-card ul{padding-left:17px}.source-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:20px}.source-list a{display:block;font-size:11px;background:var(--surface);padding:13px;border:1px solid var(--border);border-radius:5px;text-decoration:none}.section-space{margin-top:48px}.footer{display:flex;justify-content:space-between;border-top:1px solid var(--border);padding-top:18px;margin-top:40px;font-size:9px;color:var(--text-secondary);gap:12px}.footer span{color:inherit}.compare-tray{position:fixed;bottom:20px;left:calc(220px + (100% - 220px)/2);transform:translateX(-50%);padding:12px 16px;background:var(--text);color:var(--bg);border-radius:9px;display:flex;align-items:center;gap:20px;box-shadow:0 12px 40px #0003;z-index:60;width:max-content;max-width:calc(100% - 260px)}.compare-tray span,.compare-tray button{color:var(--bg)}.compare-tray .btn{border-color:var(--text-secondary);white-space:nowrap}.compare-tray .primary{background:var(--accent-secondary);color:#20352e;border-color:var(--accent-secondary)}.tray-models{display:flex;gap:8px;font-size:10px;max-width:510px;flex-wrap:wrap}.tray-models button{font-size:10px;border:1px solid var(--text-secondary);border-radius:4px;padding:5px}.tray-count{font-size:11px;white-space:nowrap}.dialog{border:1px solid var(--border);background:var(--surface);color:var(--text);padding:0;max-height:90vh;max-width:95vw;border-radius:12px;box-shadow:0 25px 80px #0003;margin:auto}.dialog::backdrop{background:#0b1b1680;backdrop-filter:blur(4px)}.drawer{width:640px}.dialog-head{padding:22px 28px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:15px;position:sticky;top:0;background:var(--surface);z-index:5}.dialog-head .close{margin-left:auto;font-size:24px;line-height:1;width:30px;height:30px}.dialog-head h2{font-size:25px;line-height:1.3;margin-top:7px}.dialog-head small{color:var(--text-secondary)}.dialog-body{padding:26px 28px}.detail-summary{font-size:16px;line-height:1.85;margin-bottom:24px}.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}.detail-stat{border:1px solid var(--border);border-radius:6px;padding:15px}.detail-stat span{font-size:10px;color:var(--text-secondary);display:block}.detail-stat strong{font-size:18px;display:block;margin-top:8px}.detail-stat small{font-size:10px;color:var(--text-secondary)}.detail-section{margin-top:25px}.detail-section h3{font-size:14px;margin-bottom:10px}.detail-section p{font-size:12px;line-height:1.9;color:var(--text-secondary)}.detail-price{font-size:32px;font-weight:600;letter-spacing:-1px;margin:5px 0 10px}.detail-price small{font-size:11px;letter-spacing:0;color:var(--text-secondary)}.sources-links{display:flex;gap:10px;flex-wrap:wrap}.sources-links a{font-size:11px;padding:8px 10px;border:1px solid var(--border);border-radius:5px}.detail-actions{display:flex;gap:10px;margin-top:28px}.compare-dialog{width:1150px}.compare-dialog .dialog-body{overflow:auto}.compare-table{border-collapse:collapse;min-width:600px;width:100%;table-layout:fixed}.compare-table th,.compare-table td{text-align:left;vertical-align:top;padding:15px;font-size:12px;border:1px solid var(--border);overflow-wrap:anywhere}.compare-table th:first-child{width:110px;color:var(--text-secondary);background:var(--surface-hover);font-weight:400}.compare-table td strong{font-size:15px}.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--text);color:var(--bg);border-radius:7px;padding:12px 20px;font-size:12px;z-index:10000;max-width:90vw}.viz-menu{top:22px;right:22px}.viz-menu-toggle{width:34px;height:34px;border-radius:7px;background:transparent}.viz-menu-dropdown{box-shadow:0 8px 30px #0001}.viz-menu-dropdown button{font-size:12px}.cost-extra{display:flex;align-items:center;gap:7px;font-size:11px;margin:14px 0;color:var(--text-secondary)}.cost-extra input{accent-color:var(--accent)}.plot-card{margin-top:24px;padding:22px;border:1px solid var(--border);border-radius:9px;background:var(--surface)}.plot-card h3{font-size:16px}.plot-container{height:330px;position:relative;margin-top:15px}.mobile-title{display:none}.sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0)}
+@media(min-width:1650px){.provider-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:1250px){.sidebar{width:186px;padding:26px 16px}.main-shell{margin-left:186px;padding:26px 26px 110px}.provider-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1.1fr 1fr;gap:20px}.hero-right{padding:18px}.stat strong{font-size:29px}.compare-tray{left:calc(186px + (100% - 186px)/2);max-width:calc(100% - 220px)}.tray-models{max-width:250px}.lab-grid{grid-template-columns:270px 1fr}.cost-item{grid-template-columns:22px 150px 1fr 70px;gap:8px}.cadence-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:900px){.sidebar{position:relative;inset:auto;width:100%;padding:18px 22px 12px;border-right:0;border-bottom:1px solid var(--border)}.brand{margin-bottom:14px}.brand-mark{height:31px;width:31px}.nav{flex-direction:row;overflow:auto;gap:7px}.nav button{white-space:nowrap;font-size:12px;padding:8px 12px;min-height:36px}.nav .num,.navlabel,.side-note{display:none}.nav .ico{font-size:15px;width:14px}.main-shell{margin-left:0;padding:23px 24px 105px}.topline{margin-bottom:25px;padding-right:0}.hero{grid-template-columns:1fr 1fr}.hero h1{font-size:38px}.hero p{font-size:12px}.compare-tray{left:50%;max-width:calc(100% - 32px)}.lab-grid{grid-template-columns:250px 1fr}.cost-item{grid-template-columns:20px 1fr 70px}.cost-track{grid-column:2 / 4;grid-row:2}.cost-number{grid-column:3;grid-row:1}.source-list{grid-template-columns:repeat(2,minmax(0,1fr))}.org-grid{grid-template-columns:1fr}.search-row{flex-wrap:wrap}.search{min-width:100%}.search-row select{flex:1}.viz-menu{top:18px}}
+@media(max-width:600px){.sidebar{padding:17px 16px 10px}.brand strong{font-size:14px}.nav button{padding:7px 9px}.nav .ico{display:none}.main-shell{padding:24px 16px 120px}.topline{margin-bottom:26px;align-items:flex-start}.eyebrow{font-size:8px;letter-spacing:1px}.top-status{font-size:9px}.hero{grid-template-columns:1fr;gap:24px;margin-bottom:26px}.hero .kicker{margin-bottom:12px;font-size:10px}.hero h1{font-size:40px}.hero p{max-width:100%;margin-top:12px}.hero-right{padding:18px 21px}.sparkline{height:25px;margin-top:14px}.stat strong{font-size:30px}.stat span{font-size:10px}.toolbar{padding:10px 13px;margin-bottom:26px}.search-row{gap:6px}.search-row select{width:calc(50% - 3px);flex:auto;padding-right:15px;font-size:11px}.filter-row{gap:6px}.filter-caption{display:none}.chip{padding:5px 9px;font-size:10px}.provider-grid{grid-template-columns:1fr}.result-head{align-items:flex-start}.result-head h2{font-size:19px}.result-head .tiny-label{display:none}.result-head .right{gap:4px}.result-head select{max-width:123px;font-size:10px}.result-head .btn{font-size:10px;padding:8px}.provider-name{font-size:17px}.model-title{font-size:13px}.model-meta{font-size:10px}.model-row{min-height:61px}.price-mini{font-size:12px}.lab-grid{grid-template-columns:1fr}.controls-card{position:static;padding:20px}.fields-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 15px}.field{margin:12px 0}.cost-item{grid-template-columns:20px 1fr 75px}.cost-list{padding:7px 16px}.cost-name{font-size:12px}.cost-summary strong{font-size:25px}.cadence-grid,.notes-grid{grid-template-columns:1fr}.compare-tray{gap:10px;padding:11px;width:calc(100% - 22px);max-width:none;justify-content:space-between;bottom:10px}.tray-models{display:none}.compare-tray .btn{padding:8px 10px;font-size:11px}.compare-tray .tray-count{font-size:10px}.dialog{max-width:calc(100vw - 20px);max-height:92vh}.dialog-head{padding:20px}.dialog-body{padding:22px 20px}.dialog-head h2{font-size:23px}.detail-summary{font-size:14px}.detail-price{font-size:28px}.detail-stat strong{font-size:16px}.source-list{grid-template-columns:1fr}.footer{flex-direction:column;gap:5px}.callout{font-size:11px;padding:14px}.plot-card{padding:16px}.compare-table th,.compare-table td{padding:12px}.detail-actions{flex-wrap:wrap}}
+@media(max-width:375px){body{overflow-x:hidden}.hero h1{font-size:40px}.main-shell{padding-left:13px;padding-right:13px}}
+@media(prefers-reduced-motion:reduce){.animate{animation:none!important}.view{animation:none!important}}
+@media print{.sidebar,.toolbar,.viz-menu,.compare-tray,.toast,.topline,.detail-actions,.reset,.pick{display:none!important}.main-shell{margin:0;padding:0;max-width:none}.hero{grid-template-columns:1fr 1fr}.provider-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.provider-card,.note-card,.org-card,.cadence-card{break-inside:avoid}.view[hidden]{display:none!important}.result-head{margin-top:20px}.model-row{padding:8px 13px}.table-wrap,.timeline-scroll{overflow:visible}.catalog{min-width:0}.dialog[open]{position:static;max-height:none;max-width:none;width:100%;box-shadow:none}.dialog-head{position:static}.controls-card{position:static}.footer{margin-top:20px}.plot-card{break-inside:avoid}.hero-right{break-inside:avoid}.animate{animation:none!important}.lab-grid{grid-template-columns:1fr}.cost-track{print-color-adjust:exact}.cost-list{break-inside:auto}@page{margin:12mm}}
+
+.provider-card{display:flex;flex-direction:column}.model-list{flex:1}
+
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:10000;padding:8px 16px;background:var(--accent);color:white;text-decoration:none;border-radius:4px;" onfocus="this.style.cssText='position:fixed;left:16px;top:16px;z-index:10000;padding:8px 16px;background:var(--accent);color:white;text-decoration:none;border-radius:4px;'" onblur="this.style.cssText='position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;'">跳转到内容</a>
+
+  <!-- MENU -->
+  <div class="viz-menu">
+    <button class="viz-menu-toggle" onclick="toggleMenu()" aria-label="页面工具菜单">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/>
+      </svg>
+    </button>
+    <div class="viz-menu-dropdown" id="vizMenuDropdown">
+      <button onclick="cycleTheme()"><span id="themeIcon">🌙</span><span id="themeLabel">Dark</span></button>
+      <button onclick="downloadImage()"><span>📥</span><span>导出当前视图 PNG</span></button>
+      <button onclick="window.print()"><span>🖨️</span><span>打印 / 保存 PDF</span></button>
+    </div>
+  </div>
+
+  <!-- SKIP TO CONTENT (accessibility) -->
+  <a href="#main-content" class="skip-to-content">跳转到内容</a>
+
+  <main id="main-content" role="main">
+    <aside class="sidebar" aria-label="主导航">
+  <div class="brand"><div class="brand-mark">◈</div><div><strong>模型观测站</strong><small>MODEL ATLAS</small></div></div>
+  <div class="navlabel">EXPLORER / 探索</div>
+  <nav class="nav" id="nav">
+    <button class="active" data-view="atlas"><span class="ico">▦</span><span>厂商全景</span><span class="num">01</span></button>
+    <button data-view="catalog"><span class="ico">☷</span><span>模型目录</span><span class="num">02</span></button>
+    <button data-view="cost"><span class="ico">◴</span><span>成本实验室</span><span class="num">03</span></button>
+    <button data-view="timeline"><span class="ico">⌁</span><span>发布节奏</span><span class="num">04</span></button>
+    <button data-view="org"><span class="ico">⑂</span><span>组织关系</span><span class="num">05</span></button>
+    <button data-view="notes"><span class="ico">ⓘ</span><span>数据与口径</span><span class="num">06</span></button>
+  </nav>
+  <div class="side-note"><strong>一年，一张模型地图。</strong><p>2025.10.03 — 2026.10.03<br>聚焦通用语言、多模态理解与编程模型。</p><div style="margin-top:16px"><span class="live-dot" style="display:inline-block;margin-right:7px"></span><small style="font-size:10px">官方来源 · 手动核验快照</small></div></div>
+</aside>
+<div class="main-shell">
+  <header class="topline"><span class="eyebrow">THE INTELLIGENCE LANDSCAPE / VOL. 01</span><span class="top-status"><i class="live-dot"></i>资料核验于 2026.10.03</span></header>
+  <section class="hero animate" aria-label="大模型全景图概览">
+    <div><div class="kicker">过去一年的大模型全景图</div><h1>模型万千，<br><em>一图看清。</em></h1><p>从厂商到模型，从能力到成本。<br>沿着一年的发布轨迹，找到适合你的那一款。</p></div>
+    <div class="hero-right"><div class="stats"><div class="stat"><strong id="orgCount">14</strong><span>主要厂商与组织</span></div><div class="stat"><strong id="modelCount">56</strong><span>年内代表模型版本</span></div><div class="stat"><strong id="priceCount">37</strong><span>有官方报价依据</span></div></div><div class="sparkline" id="sparkline" aria-label="按月份统计本页收录的发布数量"></div><div class="sparklegend"><span>2025.10</span><span>收录发布节点 / 月</span><span>2026.09</span></div></div>
+  </section>
+  <section class="toolbar" id="toolbar" aria-label="筛选模型">
+    <div class="search-row"><label class="search"><span class="sr-only">搜索厂商、模型或特点</span><input type="search" id="search" placeholder="搜索模型、厂商或特点…" autocomplete="off"></label>
+      <select id="providerFilter" aria-label="筛选厂商"><option value="all">全部厂商</option></select>
+      <select id="regionFilter" aria-label="筛选地区"><option value="all">全部地区</option><option value="中国">中国</option><option value="美国">美国</option><option value="法国">法国</option></select>
+      <select id="openFilter" aria-label="筛选开放方式"><option value="all">全部开放方式</option><option value="open">已确认开放权重</option><option value="closed">闭源服务</option><option value="unknown">权重状态待核</option></select>
+      <select id="periodFilter" aria-label="筛选发布时间"><option value="year">近一年发布</option><option value="half">近六个月</option><option value="quarter">近三个月</option><option value="2025">2025 年内</option></select>
+    </div>
+    <div class="filter-row" id="capFilters"><span class="filter-caption">关注能力</span><button class="chip active" data-tag="all">全部</button><button class="chip" data-tag="编程">编程</button><button class="chip" data-tag="推理">深度推理</button><button class="chip" data-tag="Agent">Agent</button><button class="chip" data-tag="多模态">多模态</button><button class="chip" data-tag="低成本">低成本定位</button><button class="chip" data-tag="自部署">自部署</button><button class="reset" id="reset">↻ 重置筛选</button></div>
+  </section>
+  <section class="view" id="view-atlas" aria-labelledby="atlas-title"><div class="result-head"><div><h2 id="atlas-title">厂商全景</h2><p id="atlasCount"></p></div><div class="right"><span class="tiny-label">模型行价格：原币 / 百万 Token</span><button class="btn" id="toCatalog">查看全部模型 ↗</button></div></div><div class="provider-grid" id="providerGrid"></div><p class="footnote">默认展示每家最近 3 个收录版本，可展开历史版本。勾选模型即可并排比较；点击模型名称查看特点、计费条件和官方来源。价格顺序为输入 / 输出。收录代表版本，不等同于完整产品清单。</p></section>
+  <section class="view" id="view-catalog" hidden aria-labelledby="catalog-title"><div class="result-head"><div><h2 id="catalog-title">模型目录</h2><p id="catalogCount"></p></div><div class="right"><select id="sort" aria-label="排序模型"><option value="date">最新发布优先</option><option value="cost">试算成本从低到高</option><option value="name">模型名称</option></select><button class="btn" id="exportCsv">导出 CSV ↓</button></div></div><div class="table-wrap"><table class="catalog"><thead><tr><th>对比</th><th>模型 / 厂商</th><th>特点</th><th>发布日期</th><th>开放 / 状态</th><th>输入 / 输出价<br><small>原币 / 百万 Token</small></th></tr></thead><tbody id="catalogBody"></tbody></table></div><p class="footnote">成本排序使用“成本实验室”当前设置；缺失报价、仅发布报价与不可用接口放在末尾。模型特点为基于官方资料的编辑性归纳，标签不是性能排名。</p></section>
+  <section class="view" id="view-cost" hidden aria-labelledby="cost-title"><div class="result-head"><div><h2 id="cost-title">成本实验室</h2><p>把同样的 Token 用量，放到不同模型上。</p></div><span class="tiny-label">TEXT TOKENS · STANDARD SPEED</span></div>
+    <div class="lab-grid"><div class="controls-card"><h3>设定你的工作量</h3><p>按每次请求的计费 Token 估算；推理 Token 计入输出。</p><div class="presets"><button class="chip" data-preset="chat">日常问答</button><button class="chip" data-preset="code">编程助手</button><button class="chip" data-preset="docs">文档分析</button></div><div class="fields-grid"><label class="field"><span>每月请求数</span><input id="calls" type="number" min="0" max="1000000000" step="100" value="10000"></label><label class="field"><span>每次输入 Token</span><input id="inputTokens" type="number" min="0" max="32000" step="500" value="2000"></label><label class="field"><span>每次输出 Token</span><input id="outputTokens" type="number" min="0" max="32000" step="100" value="500"></label><label class="field"><span>显示币种</span><select id="currency" style="width:100%"><option value="USD">美元 USD</option><option value="CNY">人民币 CNY</option></select></label></div><label class="field"><span>换算假设：1 USD = CNY</span><input id="fx" type="number" min="0.01" max="1000" step="0.1" value="7.2"><small>手动假设，非实时汇率。原始报价保持原币。</small></label><label class="cost-extra"><input type="checkbox" id="offpeak">使用 DeepSeek 非高峰价</label><p class="footnote">默认无缓存、非批量、标准速度。仅估算文本 Token 费用；不含工具、搜索、税费、存储和自部署硬件。输入上限 32K，避免套用长上下文费率。</p></div>
+    <div><div class="cost-summary" id="costSummary"></div><div class="chart-legend"><span><i class="legend-swatch"></i>输入费用</span><span><i class="legend-swatch out"></i>输出费用</span></div><div class="cost-list" id="costList"></div><p class="footnote" id="costNote"></p><div class="plot-card" id="plotCard"><h3>输入与输出单价分布</h3><p class="footnote" style="margin:6px 0">对数坐标；悬停查看模型，点击打开详情。下方坐标使用当前换算币种。</p><div class="plot-container"><canvas id="priceScatter" role="img" aria-label="当前筛选模型的每百万输入与输出 Token 价格散点图"></canvas></div><p class="sr-only" id="chartAlternative"></p></div></div></div>
+  </section>
+  <section class="view" id="view-timeline" hidden aria-labelledby="timeline-title"><div class="result-head"><div><h2 id="timeline-title">一年，模型如何迭代</h2><p>2025.10.03 — 2026.10.03 · 每一个圆点都是一次收录的发布。</p></div></div><div class="callout">“发布周期”在这里表示<strong>本页收录的同系列版本之间的历史间隔</strong>。样本未穷尽所有小版本，系列大小档位也可能不同；不代表厂商固定周期，更不预测下一次发布。点击节点查看具体日期口径。</div><div class="timeline-scroll"><div class="timeline-inner" id="timelineGrid"></div></div><div class="section-space"><div class="result-head"><div><h2 style="font-size:20px">已观察到的版本间隔</h2><p>按完整收录窗口计算；显示当前筛选涉及的系列，至少需两个不同发布日期。</p></div></div><div class="cadence-grid" id="cadenceGrid"></div></div></section>
+  <section class="view" id="view-org" hidden aria-labelledby="org-title"><div class="result-head"><div><h2 id="org-title">组织 → 研发 → 模型 → 接入</h2><p>按公开品牌与产品体系整理，帮助分清谁研发、从哪里使用。</p></div></div><div class="callout">这是产品与研发归属关系图，并非法律股权穿透图。云平台接入和第三方分发，不等同于模型研发归属。</div><div class="org-grid" id="orgGrid"></div></section>
+  <section class="view" id="view-notes" hidden aria-labelledby="notes-title"><div class="result-head"><div><h2 id="notes-title">数据与口径</h2><p>能追溯，比看起来完整更重要。</p></div><button class="btn" id="exportJson">下载数据 JSON ↓</button></div><div class="notes-grid">
+    <article class="note-card"><h3>01 / 收录边界</h3><p>固定窗口为 2025-10-03 至 2026-10-03（含首尾）。收录 14 家主要厂商的 56 个代表发布版本，侧重通用语言、编程和多模态理解；不穷尽所有厂商、参数尺寸、微调与快照，也未纳入专门的视频、生图、语音及向量模型。</p></article>
+    <article class="note-card"><h3>02 / 价格可比性</h3><p>优先使用厂商现行价目与模型文档，单位统一为每百万 Token，分输入与输出，保留原始币种。37 个版本有报价依据，其中 36 个采用现行价目、1 个仅有发布报价。报价在 2026-10-03 核验；页面不会自动更新。</p></article>
+    <article class="note-card"><h3>03 / 成本如何计算</h3><p>月成本 = 月请求数 ×（每次输入 Token × 输入单价 + 每次计费输出 Token × 输出单价）÷ 1,000,000。不同 Tokenizer、思考长度、质量、重试次数会影响实际花费；本页比较相同计费数量，不代表同等质量下的成本。</p></article>
+    <article class="note-card"><h3>04 / 特殊费率</h3><p>试算默认短上下文、非缓存、非 Batch、标准速度。DeepSeek 默认高峰，可切换非高峰；Gemini Flash 的限时价附有到期日；MiniMax M3 使用当前折后价；腾讯 HY4 的发布报价仅供查看，不进入现价试算。</p></article>
+    <article class="note-card"><h3>05 / 时间与状态</h3><p>优先采用官方首次发布日；GA 更新、产品与 API 分批发布、版本后缀日期均在详情说明。“官方发布”只证明历史发布事件，不保证旧版今天仍可调用。窗口之外的经典版本不参与统计。间隔按 UTC 日期计算，不外推下一次发布日期。</p></article>
+    <article class="note-card"><h3>06 / 开放性与组织</h3><p>“开放权重”不等于所有代码与训练数据开源，也不等于无条件商用。每个模型应按自己的许可证判断。未完成权重状态核验时明确标注；自部署仍有算力与运维成本。地区按研发厂商品牌归类，不代表数据驻留区域。</p></article>
+  </div><div class="section-space"><h2 style="font-size:20px">官方来源入口</h2><p class="footnote" style="margin-top:8px">每个模型详情均附直接来源；以下按厂商聚合。模型特点是资料归纳，不使用跨榜单拼接的综合评分。</p><div class="source-list" id="sourceList"></div></div></section>
+  <footer class="footer"><span>MODEL ATLAS / 2026 · 近一年模型观察</span><span>官方来源 · 独立 HTML · 核心交互可离线使用</span></footer>
+</div>
+<div class="compare-tray" id="compareTray" hidden><span class="tray-count" id="compareCount"></span><div class="tray-models" id="trayModels"></div><button id="clearCompare" style="font-size:11px;white-space:nowrap">清空</button><button class="btn primary" id="compareNow">并排比较 →</button></div>
+<dialog class="dialog drawer" id="detailDialog" aria-labelledby="detailTitle"><div id="detailContent"></div></dialog>
+<dialog class="dialog compare-dialog" id="compareDialog" aria-labelledby="compareTitle"><header class="dialog-head"><div><small>MODEL COMPARISON</small><h2 id="compareTitle">模型并排比较</h2></div><button class="close" data-close="compareDialog" aria-label="关闭对比">×</button></header><div class="dialog-body" id="compareContent"></div></dialog>
+<div class="toast" role="status" id="toast" hidden></div>
+<noscript><p style="padding:30px">启用 JavaScript 后可浏览、筛选和对比完整模型数据。</p></noscript>
+
+  </main>
+
+  <!-- EXAMPLE: Exclusive accordion (only one open at a time, no JS needed) -->
+  <!--
+  <details name="faq" open>
+    <summary>Section 1</summary>
+    <div class="section-body"><p>Content</p></div>
+  </details>
+  <details name="faq">
+    <summary>Section 2</summary>
+    <div class="section-body"><p>Content</p></div>
+  </details>
+  -->
+
+  <!-- EXAMPLE: Popover (zero-JS tooltip/info panel) -->
+  <!--
+  <button popovertarget="info-panel">Details</button>
+  <div id="info-panel" popover>
+    <h3>More Information</h3>
+    <p>Content shown on click, no JS needed.</p>
+  </div>
+  -->
+
+  <script>
+    // === Menu ===
+    function toggleMenu() { 
+      var dropdown = document.getElementById('vizMenuDropdown') || document.getElementById('vizMenu');
+      if (dropdown) dropdown.classList.toggle('open'); 
+    }
+    document.addEventListener('click', e => { 
+      if (!e.target.closest('.viz-menu')) {
+        var dropdown = document.getElementById('vizMenuDropdown') || document.getElementById('vizMenu');
+        if (dropdown) dropdown.classList.remove('open');
+      }
+    });
+    document.addEventListener('keydown', e => { 
+      if (e.key === 'Escape') {
+        var dropdown = document.getElementById('vizMenuDropdown') || document.getElementById('vizMenu');
+        if (dropdown) dropdown.classList.remove('open');
+      }
+    });
+
+    // === Theme (class-based, OS detection on first visit) ===
+    var savedTheme = null; try { savedTheme = localStorage.getItem('model-atlas-theme'); } catch(e) {}
+    var currentTheme = ['light','dark'].includes(savedTheme) ? savedTheme : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    function applyTheme(t) {
+      document.documentElement.className = 'theme-' + t;
+      document.getElementById('themeIcon').textContent = t === 'dark' ? '🌙' : '☀️';
+      document.getElementById('themeLabel').textContent = t === 'dark' ? '切换为浅色' : '切换为深色';
+      try { localStorage.setItem('model-atlas-theme', t); } catch(e) {}
+      currentTheme = t;
+      if (typeof onThemeChange === 'function') onThemeChange();
+    }
+    function cycleTheme() { applyTheme(currentTheme === 'dark' ? 'light' : 'dark'); }
+    applyTheme(currentTheme);
+
+    // === Scroll Reveal (adds .reveal then .visible — content visible without JS) ===
+    document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('reveal'));
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // === Number Counter (use data-count="77" data-suffix="%" on elements) ===
+    function animateCounters() {
+      document.querySelectorAll('[data-count]').forEach(function(el) {
+        if (el.dataset.counted) return;
+        el.dataset.counted = '1';
+        var target = parseFloat(el.dataset.count), prefix = el.dataset.prefix || '', suffix = el.dataset.suffix || '';
+        var start = performance.now(), duration = 1200;
+        (function tick(now) {
+          var p = Math.min((now - start) / duration, 1), eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = prefix + Math.round(target * eased).toLocaleString() + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        })(start);
+      });
+    }
+    var counterEl = document.querySelector('[data-count]');
+    if (counterEl) {
+      var cObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) { animateCounters(); cObs.disconnect(); } });
+      }, { threshold: 0.3 });
+      cObs.observe(counterEl);
+    }
+
+    // === 导出当前视图 PNG ===
+    async function downloadImage() {
+      var menu = document.querySelector('.viz-menu');
+      menu.style.display = 'none';
+      try {
+        if (typeof htmlToImage === 'undefined') { toast('图片导出组件需要联网；仍可使用打印 / PDF。'); return; }
+        var url = await htmlToImage.toPng(document.querySelector('.main-shell'), { quality: 1, pixelRatio: 2, filter: function(n) { return !n.classList || !n.classList.contains('viz-menu'); } });
+        var a = document.createElement('a'); a.href = url;
+        a.download = document.title.replace(/\s+/g, '-').toLowerCase() + '.png'; a.click();
+      } catch(e) { toast('图片导出失败，可尝试打印 / PDF。'); }
+      finally { menu.style.display = ''; }
+    }
+
+    // === Chart.js Pattern (use when file has Chart.js) ===
+    // var chartsBuilt = false;
+    // function buildCharts() {
+    //   if (chartsBuilt || typeof Chart === 'undefined') return;
+    //   var isDark = document.documentElement.classList.contains('theme-dark');
+    //   var textColor = isDark ? '#EDEDED' : '#0f172a';
+    //   var borderColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+    //   // Create charts with theme-aware colors
+    //   chartsBuilt = true;
+    // }
+    // function onThemeChange() { chartsBuilt = false; buildCharts(); }
+    // window.addEventListener('load', buildCharts);
+
+    var DATA = {
+  "title": "大模型全景图",
+  "start": "2025-10-03",
+  "end": "2026-10-03",
+  "verified": "2026-10-03",
+  "providers": [
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "family": "GPT",
+      "region": "美国",
+      "type": "AI 公司",
+      "parent": "OpenAI",
+      "lab": "OpenAI 模型研发",
+      "platform": "OpenAI API · ChatGPT · Codex",
+      "focus": "通用推理、软件工程与电脑操作",
+      "mark": "OA",
+      "color": "#21685a"
+    },
+    {
+      "id": "anthropic",
+      "name": "Anthropic",
+      "family": "Claude",
+      "region": "美国",
+      "type": "AI 公司",
+      "parent": "Anthropic",
+      "lab": "Claude 模型研发",
+      "platform": "Claude API · Claude Code",
+      "focus": "长任务、编程与知识工作",
+      "mark": "A",
+      "color": "#bb765a"
+    },
+    {
+      "id": "google",
+      "name": "Google DeepMind",
+      "family": "Gemini",
+      "region": "美国",
+      "type": "科技集团",
+      "parent": "Alphabet / Google",
+      "lab": "Google DeepMind",
+      "platform": "Gemini API · Google Cloud",
+      "focus": "多模态、长上下文与分层产品线",
+      "mark": "G",
+      "color": "#5379c0"
+    },
+    {
+      "id": "deepseek",
+      "name": "深度求索",
+      "family": "DeepSeek",
+      "region": "中国",
+      "type": "AI 公司",
+      "parent": "DeepSeek",
+      "lab": "DeepSeek 研究团队",
+      "platform": "DeepSeek API",
+      "focus": "推理效率、Agent 与成本控制",
+      "mark": "D",
+      "color": "#5469d4"
+    },
+    {
+      "id": "qwen",
+      "name": "阿里巴巴",
+      "family": "Qwen / 通义千问",
+      "region": "中国",
+      "type": "科技集团",
+      "parent": "阿里巴巴",
+      "lab": "Qwen 团队",
+      "platform": "阿里云百炼 / Model Studio",
+      "focus": "中文、多模态与开放权重生态",
+      "mark": "Q",
+      "color": "#8270bc"
+    },
+    {
+      "id": "moonshot",
+      "name": "月之暗面",
+      "family": "Kimi",
+      "region": "中国",
+      "type": "AI 公司",
+      "parent": "Moonshot AI",
+      "lab": "Kimi 研究团队",
+      "platform": "Kimi API · Kimi Code",
+      "focus": "长上下文、编程与多步交付",
+      "mark": "K",
+      "color": "#4d5a78"
+    },
+    {
+      "id": "minimax",
+      "name": "MiniMax",
+      "family": "MiniMax M 系列",
+      "region": "中国",
+      "type": "AI 公司",
+      "parent": "MiniMax",
+      "lab": "MiniMax 研究团队",
+      "platform": "MiniMax API · MiniMax Agent",
+      "focus": "Agent 工程、效率与多模态",
+      "mark": "M",
+      "color": "#bd657c"
+    },
+    {
+      "id": "zai",
+      "name": "智谱 / Z.ai",
+      "family": "GLM",
+      "region": "中国",
+      "type": "AI 公司",
+      "parent": "智谱",
+      "lab": "GLM 团队",
+      "platform": "BigModel · Z.ai API",
+      "focus": "代码工程与长程任务",
+      "mark": "Z",
+      "color": "#567b85"
+    },
+    {
+      "id": "bytedance",
+      "name": "字节跳动",
+      "family": "豆包 / Seed",
+      "region": "中国",
+      "type": "科技集团",
+      "parent": "字节跳动",
+      "lab": "Seed 团队",
+      "platform": "火山方舟 · 豆包 · TRAE",
+      "focus": "办公、视觉理解与工程交付",
+      "mark": "S",
+      "color": "#348797"
+    },
+    {
+      "id": "tencent",
+      "name": "腾讯",
+      "family": "混元 / HY",
+      "region": "中国",
+      "type": "科技集团",
+      "parent": "腾讯",
+      "lab": "混元团队",
+      "platform": "腾讯云 TokenHub",
+      "focus": "办公智能体、编程与开放权重",
+      "mark": "T",
+      "color": "#467eb8"
+    },
+    {
+      "id": "baidu",
+      "name": "百度",
+      "family": "文心 / ERNIE",
+      "region": "中国",
+      "type": "科技集团",
+      "parent": "百度",
+      "lab": "文心团队",
+      "platform": "百度智能云千帆",
+      "focus": "中文创作、指令遵循与智能体",
+      "mark": "B",
+      "color": "#6960bd"
+    },
+    {
+      "id": "meta",
+      "name": "Meta",
+      "family": "Muse Spark",
+      "region": "美国",
+      "type": "科技集团",
+      "parent": "Meta",
+      "lab": "Meta Superintelligence Labs",
+      "platform": "Meta Model API · Muse Code",
+      "focus": "个人助手、编程与多任务协作",
+      "mark": "∞",
+      "color": "#327cbd"
+    },
+    {
+      "id": "xai",
+      "name": "SpaceXAI / xAI",
+      "family": "Grok",
+      "region": "美国",
+      "type": "AI 业务",
+      "parent": "SpaceXAI",
+      "lab": "Grok 团队",
+      "platform": "Grok API · Grok Build",
+      "focus": "代码、知识工作与长任务",
+      "mark": "X",
+      "color": "#535764"
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral AI",
+      "family": "Mistral",
+      "region": "法国",
+      "type": "AI 公司",
+      "parent": "Mistral AI",
+      "lab": "Mistral 研究团队",
+      "platform": "Mistral API · Le Chat · Vibe",
+      "focus": "开放权重、企业部署与多语言",
+      "mark": "Mi",
+      "color": "#c07e45"
+    }
+  ],
+  "models": [
+    {
+      "id": "g61",
+      "org": "openai",
+      "name": "GPT-6.1 Sol",
+      "date": "2026-09-29",
+      "family": "GPT 通用",
+      "tags": [
+        "编程",
+        "Agent",
+        "办公"
+      ],
+      "summary": "在成本与复杂任务能力之间取平衡；强化软件工程、电脑操作和多步骤办公。",
+      "release": "https://openai.com/index/introducing-gpt-6-1-sol/",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "currency": "USD",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": null,
+      "openness": "closed",
+      "status": "api",
+      "note": "官网的能力优势来自厂商评测；任务总价仍取决于工具调用与推理长度。",
+      "priceNote": "Standard 短上下文；长上下文输入 $4、输出 $15。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "g6a",
+      "org": "openai",
+      "name": "GPT-6 Astra",
+      "date": "2026-09-03",
+      "family": "GPT 通用",
+      "tags": [
+        "推理",
+        "编程",
+        "Agent"
+      ],
+      "summary": "面向困难科研、软件工程与电脑操作的高能力模型；单价高于 Sol。",
+      "release": "https://openai.com/index/gpt-6-astra/",
+      "price": {
+        "input": 10,
+        "output": 50,
+        "currency": "USD",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": null,
+      "openness": "closed",
+      "status": "api",
+      "note": "",
+      "priceNote": "Standard 短上下文；长上下文输入 $20、输出 $75。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "g6l",
+      "org": "openai",
+      "name": "GPT-6 Luna",
+      "date": "2026-09-22",
+      "family": "GPT 轻量",
+      "tags": [
+        "低成本",
+        "Agent"
+      ],
+      "summary": "GPT-6 家族的轻量层，适合对吞吐和预算敏感的日常工作。",
+      "release": "https://openai.com/index/introducing-gpt-6-sol-and-luna/",
+      "price": {
+        "input": 0.1,
+        "output": 0.5,
+        "currency": "USD",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": null,
+      "openness": "closed",
+      "status": "api",
+      "note": "轻量定位不等于复杂科研或长任务的同等质量。",
+      "priceNote": "Standard 短上下文；长上下文输入 $0.20、输出 $0.75。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "g56",
+      "org": "openai",
+      "name": "GPT-5.6 Sol",
+      "date": "2026-07-09",
+      "family": "GPT 通用",
+      "tags": [
+        "编程",
+        "Agent",
+        "办公"
+      ],
+      "summary": "以真实专业工作、编程和长上下文任务为重点的上一代主力模型。",
+      "release": "https://openai.com/index/gpt-5-6/",
+      "price": null,
+      "context": null,
+      "openness": "closed",
+      "status": "released",
+      "note": "保留为年内迭代节点；当前 API 单价与可用性未在本次核验。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "g55",
+      "org": "openai",
+      "name": "GPT-5.5",
+      "date": "2026-04-23",
+      "family": "GPT 通用",
+      "tags": [
+        "编程",
+        "Agent",
+        "办公"
+      ],
+      "summary": "强调端到端工作交付，可结合工具完成研究、分析、文档和编程任务。",
+      "release": "https://openai.com/index/introducing-gpt-5-5/",
+      "price": null,
+      "context": null,
+      "openness": "closed",
+      "status": "released",
+      "note": "当前单价未核验；发布节点与 API 开放日分别注明。",
+      "priceNote": "",
+      "dateNote": "产品发布 4 月 23 日；API 于 4 月 24 日开放。",
+      "weightSource": null
+    },
+    {
+      "id": "g54",
+      "org": "openai",
+      "name": "GPT-5.4",
+      "date": "2026-03-05",
+      "family": "GPT 通用",
+      "tags": [
+        "编程",
+        "Agent",
+        "办公"
+      ],
+      "summary": "将原生电脑操作整合进通用模型，面向跨应用工作流。",
+      "release": "https://openai.com/index/introducing-gpt-5-4/",
+      "price": null,
+      "context": null,
+      "openness": "closed",
+      "status": "released",
+      "note": "年内历史节点；不据发布时价格推断现价。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "s55",
+      "org": "anthropic",
+      "name": "Claude Sonnet 5.5",
+      "date": "2026-09-28",
+      "family": "Claude Sonnet",
+      "tags": [
+        "编程",
+        "Agent",
+        "办公"
+      ],
+      "summary": "兼顾速度与任务质量的日常主力，面向代码与知识工作。",
+      "release": "https://www.anthropic.com/claude-sonnet-5-5",
+      "price": {
+        "input": 2,
+        "output": 10,
+        "currency": "USD",
+        "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": null,
+      "openness": "closed",
+      "status": "api",
+      "note": "",
+      "priceNote": "全球路由、标准速度；不含 Fast、缓存写入及工具费用。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "o55",
+      "org": "anthropic",
+      "name": "Claude Opus 5.5",
+      "date": "2026-09-22",
+      "family": "Claude Opus",
+      "tags": [
+        "推理",
+        "编程",
+        "Agent"
+      ],
+      "summary": "面向长期运行的编程与知识任务，更强调复杂任务的持续执行。",
+      "release": "https://www.anthropic.com/claude-opus-5-5",
+      "price": {
+        "input": 4,
+        "output": 20,
+        "currency": "USD",
+        "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "1M",
+      "openness": "closed",
+      "status": "api",
+      "note": "",
+      "priceNote": "标准速度；Fast 为 $8 / $40。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "f51",
+      "org": "anthropic",
+      "name": "Claude Fable 5.1",
+      "date": "2026-09-01",
+      "family": "Claude Fable",
+      "tags": [
+        "推理",
+        "编程",
+        "Agent"
+      ],
+      "summary": "高难推理、科研与长程 Agent 工作；缓存复用可显著影响实际成本。",
+      "release": "https://www.anthropic.com/claude-fable-and-mythos-5-1",
+      "price": {
+        "input": 10,
+        "output": 50,
+        "currency": "USD",
+        "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": null,
+      "openness": "closed",
+      "status": "api",
+      "note": "",
+      "priceNote": "基础输入 / 输出价；缓存命中价须单独计费。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "ha45",
+      "org": "anthropic",
+      "name": "Claude Haiku 4.5",
+      "date": "2025-10-15",
+      "family": "Claude Haiku",
+      "tags": [
+        "低成本",
+        "编程",
+        "Agent"
+      ],
+      "summary": "Claude 家族的快速小模型，适合高频任务、并行子任务与交互式应用。",
+      "release": "https://www.anthropic.com/news/claude-haiku-4-5",
+      "price": {
+        "input": 1,
+        "output": 5,
+        "currency": "USD",
+        "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": null,
+      "openness": "closed",
+      "status": "api",
+      "note": "“低成本”是相对 Claude 家族的产品定位。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "o46",
+      "org": "anthropic",
+      "name": "Claude Opus 4.6",
+      "date": "2026-02-05",
+      "family": "Claude Opus",
+      "tags": [
+        "推理",
+        "编程",
+        "办公"
+      ],
+      "summary": "强化复杂代码、长文档与专业任务，引入自适应思考能力。",
+      "release": "https://www.anthropic.com/news/claude-opus-4-6",
+      "price": {
+        "input": 5,
+        "output": 25,
+        "currency": "USD",
+        "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "1M",
+      "openness": "closed",
+      "status": "api",
+      "note": "",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "g4",
+      "org": "google",
+      "name": "Gemini 4 Argon",
+      "date": "2026-09-30",
+      "family": "Gemini 高能力",
+      "tags": [
+        "推理",
+        "编程",
+        "Agent"
+      ],
+      "summary": "专注复杂软件工程、专业知识与网络防御中的长任务。",
+      "release": "https://blog.google/intl/fr-ca/produits/explorez-obtenez-des-reponses/gemini-4-argon/",
+      "price": null,
+      "context": null,
+      "openness": "closed",
+      "status": "restricted",
+      "note": "仅向 Fairwind 项目中的可信网络安全专家开放；没有可供本页比较的公开通用 API 报价。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "gf38",
+      "org": "google",
+      "name": "Gemini 3.8 Flash",
+      "date": "2026-09-02",
+      "family": "Gemini Flash",
+      "tags": [
+        "编程",
+        "Agent",
+        "多模态"
+      ],
+      "summary": "在 Flash 定位下强化长程软件工程、多步骤推理与企业工作流。",
+      "release": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/",
+      "price": {
+        "input": 0.75,
+        "output": 3.75,
+        "currency": "USD",
+        "source": "https://ai.google.dev/gemini-api/docs/pricing",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": null,
+      "openness": "closed",
+      "status": "api",
+      "note": "复杂任务可能使用更多推理 Token，低单价不保证每任务最低成本。",
+      "priceNote": "限时价至 2026-12-31；2027-01-01 起 $1.50 / $7.50。输出含思考 Token。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "gf37",
+      "org": "google",
+      "name": "Gemini 3.7 Flash",
+      "date": "2026-08-13",
+      "family": "Gemini Flash",
+      "tags": [
+        "Agent",
+        "多模态"
+      ],
+      "summary": "Flash 系列的效率向版本，可作为成本与推理长度的对照。",
+      "release": "https://ai.google.dev/gemini-api/docs/deprecations",
+      "price": {
+        "input": 0.75,
+        "output": 3.75,
+        "currency": "USD",
+        "source": "https://ai.google.dev/gemini-api/docs/pricing",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": null,
+      "openness": "closed",
+      "status": "api",
+      "note": "",
+      "priceNote": "限时价至 2026-12-31；后续标准价 $1.50 / $7.50。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "gl35",
+      "org": "google",
+      "name": "Gemini 3.5 Flash-Lite",
+      "date": "2026-07-21",
+      "family": "Gemini Flash-Lite",
+      "tags": [
+        "低成本",
+        "多模态"
+      ],
+      "summary": "针对大量翻译、简单数据处理和高吞吐 Agent 子任务。",
+      "release": "https://ai.google.dev/gemini-api/docs/deprecations",
+      "price": {
+        "input": 0.3,
+        "output": 2.5,
+        "currency": "USD",
+        "source": "https://ai.google.dev/gemini-api/docs/pricing",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": null,
+      "openness": "closed",
+      "status": "api",
+      "note": "",
+      "priceNote": "文本输入、标准付费层；输出含思考 Token。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "gp31",
+      "org": "google",
+      "name": "Gemini 3.1 Pro Preview",
+      "date": "2026-02-19",
+      "family": "Gemini 高能力",
+      "tags": [
+        "推理",
+        "多模态"
+      ],
+      "summary": "Gemini Pro 路线的预览版本，面向较复杂的推理与多模态工作。",
+      "release": "https://ai.google.dev/gemini-api/docs/deprecations",
+      "price": null,
+      "context": null,
+      "openness": "closed",
+      "status": "preview",
+      "note": "预览版；本次未提取到可确认的当前标准价格。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "gp3",
+      "org": "google",
+      "name": "Gemini 3 Pro Preview",
+      "date": "2025-11-18",
+      "family": "Gemini 高能力",
+      "tags": [
+        "推理",
+        "多模态"
+      ],
+      "summary": "Gemini 3 代际节点，提升推理、视觉理解与 Agent 编程。",
+      "release": "https://blog.google/products-and-platforms/products/gemini/gemini-3/",
+      "price": null,
+      "context": null,
+      "openness": "closed",
+      "status": "retired",
+      "note": "官方 Gemini API 弃用表列出 2026-03-09 停用；用于观察历史发布节奏。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": "https://ai.google.dev/gemini-api/docs/deprecations"
+    },
+    {
+      "id": "d41",
+      "org": "deepseek",
+      "name": "DeepSeek V4.1 Flash",
+      "date": "2026-09-10",
+      "family": "DeepSeek V",
+      "tags": [
+        "编程",
+        "Agent",
+        "多模态"
+      ],
+      "summary": "新架构的小型模型，加入原生视觉理解，兼顾推理速度与吞吐。",
+      "release": "https://api-docs.deepseek.com/updates/",
+      "price": {
+        "input": 0.3,
+        "output": 1.2,
+        "currency": "USD",
+        "source": "https://api-docs.deepseek.com/quick_start/pricing/",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "1M",
+      "openness": "unknown",
+      "status": "api",
+      "note": "API 名为 deepseek-flash；旧 V4 Flash 别名已路由至本模型。权重状态本次未核验。",
+      "priceNote": "按高峰、未命中缓存计；非高峰 $0.15 / $0.60。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "d4p",
+      "org": "deepseek",
+      "name": "DeepSeek V4 Pro · GA",
+      "date": "2026-08-13",
+      "family": "DeepSeek V",
+      "tags": [
+        "推理",
+        "编程",
+        "Agent"
+      ],
+      "summary": "正式版强化生产环境 Agent 能力，支持 Responses API 与多档思考。",
+      "release": "https://api-docs.deepseek.com/updates/",
+      "price": {
+        "input": 1.32,
+        "output": 3.96,
+        "currency": "USD",
+        "source": "https://api-docs.deepseek.com/quick_start/pricing/",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "1M",
+      "openness": "unknown",
+      "status": "api",
+      "note": "纯文本路线，官方现行表不支持视觉输入；权重状态本次未核验。",
+      "priceNote": "按高峰、未命中缓存计；非高峰 $0.66 / $1.98。",
+      "dateNote": "收录 8 月 13 日 GA 更新；家族最初预览发布为 4 月 24 日。",
+      "weightSource": null
+    },
+    {
+      "id": "d32",
+      "org": "deepseek",
+      "name": "DeepSeek V3.2",
+      "date": "2025-12-01",
+      "family": "DeepSeek V",
+      "tags": [
+        "推理",
+        "Agent"
+      ],
+      "summary": "将思考与非思考模式整合进同一模型版本，作为年内代际起点。",
+      "release": "https://api-docs.deepseek.com/updates/",
+      "price": null,
+      "context": null,
+      "openness": "unknown",
+      "status": "retired",
+      "note": "旧 deepseek-chat / deepseek-reasoner API 名已进入停用迁移流程；不使用旧价参与现价试算。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "q38",
+      "org": "qwen",
+      "name": "Qwen3.8-Max",
+      "date": "2026-08-03",
+      "family": "Qwen 主线",
+      "tags": [
+        "编程",
+        "Agent",
+        "多模态"
+      ],
+      "summary": "大规模 MoE 旗舰，覆盖编程、办公、科研与长程任务。",
+      "release": "https://www.alibabacloud.com/en/press-room/alibaba-unveils-qwen3-8-max",
+      "price": {
+        "input": 12,
+        "output": 36,
+        "currency": "CNY",
+        "source": "https://help.aliyun.com/zh/model-studio/qwen3-8-max",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "1M",
+      "openness": "open",
+      "status": "api",
+      "note": "其他地区与部署范围可能使用不同价格；权重开放不代表托管推理免费。",
+      "priceNote": "北京区域刊例价；qwen3.8-max 为滚动别名，当前文档列出 0902 快照。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "q36",
+      "org": "qwen",
+      "name": "Qwen3.6-Plus",
+      "date": "2026-04-02",
+      "family": "Qwen 主线",
+      "tags": [
+        "编程",
+        "Agent",
+        "多模态"
+      ],
+      "summary": "强化仓库级代码任务与视觉推理，面向实际企业 Agent 部署。",
+      "release": "https://www.alibabacloud.com/en/press-room/alibaba-unveils-qwen3-6-plus-to-accelerate-agentic",
+      "price": {
+        "input": 2,
+        "output": 12,
+        "currency": "CNY",
+        "source": "https://help.aliyun.com/zh/model-studio/qwen3-6-plus",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "1M",
+      "openness": "closed",
+      "status": "api",
+      "note": "",
+      "priceNote": "北京区域、输入 ≤256K；超出后按 ¥8 / ¥48。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "q36s",
+      "org": "qwen",
+      "name": "Qwen3.6-35B-A3B",
+      "date": "2026-04-17",
+      "family": "Qwen 开放小模型",
+      "tags": [
+        "编程",
+        "多模态",
+        "自部署"
+      ],
+      "summary": "35B 总参数、约 3B 激活的稀疏模型，将 Agent 编程能力带到更小规模。",
+      "release": "https://www.alibabacloud.com/blog/qwen3-6-35b-a3b-thinking-open-weights-uncompromised-agentic-coding_603043",
+      "price": null,
+      "context": null,
+      "openness": "open",
+      "status": "weights",
+      "note": "自部署成本取决于 GPU、量化、并发与利用率；没有可直接换成零的 API 单价。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "k3",
+      "org": "moonshot",
+      "name": "Kimi K3",
+      "date": "2026-07-16",
+      "family": "Kimi 通用",
+      "tags": [
+        "编程",
+        "Agent",
+        "多模态"
+      ],
+      "summary": "强调大型代码工程、原生视觉与长上下文，支持复杂任务交付。",
+      "release": "https://www.kimi.com/code/docs/en/kimi-code/whats-new.html",
+      "price": {
+        "input": 3,
+        "output": 15,
+        "currency": "USD",
+        "source": "https://platform.moonshot.ai/docs/pricing/chat",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "1M",
+      "openness": "open",
+      "status": "api",
+      "note": "模型发布日期按 7 月 16 日；权重发布与 API 供给节奏可能不同。",
+      "priceNote": "标准 K3；缓存写入与命中单独收费。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "k27",
+      "org": "moonshot",
+      "name": "Kimi K2.7 Code",
+      "date": "2026-06-12",
+      "family": "Kimi Code",
+      "tags": [
+        "编程",
+        "Agent"
+      ],
+      "summary": "针对代码与 Agent 任务优化的开放模型，另提供高速服务。",
+      "release": "https://www.kimi.com/code/docs/en/kimi-code/whats-new.html",
+      "price": {
+        "input": 0.95,
+        "output": 4,
+        "currency": "USD",
+        "source": "https://platform.moonshot.ai/docs/pricing/chat",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "256K",
+      "openness": "open",
+      "status": "api",
+      "note": "",
+      "priceNote": "标准速度；highspeed 为 $1.90 / $8。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "k26",
+      "org": "moonshot",
+      "name": "Kimi K2.6",
+      "date": "2026-04-20",
+      "family": "Kimi 通用",
+      "tags": [
+        "编程",
+        "Agent",
+        "多模态"
+      ],
+      "summary": "K2 系列的多模态与代码工程版本，用于观察通用路线的演进。",
+      "release": "https://www.kimi.com/en/help/agent/agent-swarm",
+      "price": {
+        "input": 0.95,
+        "output": 4,
+        "currency": "USD",
+        "source": "https://platform.moonshot.ai/docs/pricing/chat",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "256K",
+      "openness": "open",
+      "status": "api",
+      "note": "本页不把模型别名直接视为固定快照。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "k28",
+      "org": "moonshot",
+      "name": "Kimi K2.8 Preview",
+      "date": "2026-09-11",
+      "family": "Kimi Code",
+      "tags": [
+        "编程",
+        "Agent"
+      ],
+      "summary": "在 Kimi Code 中提供更高效思考与 1M 上下文，支持可调思考档位。",
+      "release": "https://www.kimi.com/code/docs/en/kimi-code/whats-new.html",
+      "price": null,
+      "context": "1M",
+      "openness": "unknown",
+      "status": "preview",
+      "note": "已在 Kimi Code 推出；会员服务价格不能换算成通用 API 的每百万 Token 单价。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "m3",
+      "org": "minimax",
+      "name": "MiniMax M3",
+      "date": "2026-06-01",
+      "family": "MiniMax M",
+      "tags": [
+        "编程",
+        "Agent",
+        "多模态"
+      ],
+      "summary": "融合长上下文、原生多模态与代码能力，适合长文档和大型代码库。",
+      "release": "https://www.minimax.io/blog/minimax-m3",
+      "price": {
+        "input": 0.3,
+        "output": 1.2,
+        "currency": "USD",
+        "source": "https://platform.minimax.io/docs/pricing/overview",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "1M",
+      "openness": "open",
+      "status": "api",
+      "note": "",
+      "priceNote": "标准速度、输入 ≤512K，采用官网永久五折后的现价；长输入 $0.60 / $2.40。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "m27",
+      "org": "minimax",
+      "name": "MiniMax M2.7",
+      "date": "2026-03-18",
+      "family": "MiniMax M",
+      "tags": [
+        "编程",
+        "Agent",
+        "办公"
+      ],
+      "summary": "强调 Agent Teams、复杂技能和动态工具搜索，参与自身研发流程。",
+      "release": "https://www.minimax.io/news/minimax-m27-en",
+      "price": {
+        "input": 0.3,
+        "output": 1.2,
+        "currency": "USD",
+        "source": "https://platform.minimax.io/docs/pricing/overview",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": null,
+      "openness": "unknown",
+      "status": "api",
+      "note": "“自我演进”是厂商对研发方式的描述，不代表无需人类监督。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "m25",
+      "org": "minimax",
+      "name": "MiniMax M2.5",
+      "date": "2026-02-12",
+      "family": "MiniMax M",
+      "tags": [
+        "编程",
+        "Agent",
+        "低成本"
+      ],
+      "summary": "通过真实任务环境强化学习，优化代码、搜索和办公的推理效率。",
+      "release": "https://www.minimax.io/news/minimax-m25",
+      "price": {
+        "input": 0.3,
+        "output": 1.2,
+        "currency": "USD",
+        "source": "https://platform.minimax.io/docs/pricing/overview",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": null,
+      "openness": "unknown",
+      "status": "api",
+      "note": "",
+      "priceNote": "标准速度；不含高速服务与缓存写入。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "m2",
+      "org": "minimax",
+      "name": "MiniMax M2",
+      "date": "2025-10-27",
+      "family": "MiniMax M",
+      "tags": [
+        "编程",
+        "Agent",
+        "自部署"
+      ],
+      "summary": "面向端到端开发与多工具协作的开放模型，是 M2 路线的起点。",
+      "release": "https://www.minimax.io/news/minimax-m2",
+      "price": {
+        "input": 0.3,
+        "output": 1.2,
+        "currency": "USD",
+        "source": "https://platform.minimax.io/docs/pricing/overview",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": null,
+      "openness": "open",
+      "status": "api",
+      "note": "",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "z53",
+      "org": "zai",
+      "name": "GLM-5.3",
+      "date": "2026-08-14",
+      "family": "GLM 主线",
+      "tags": [
+        "编程",
+        "Agent",
+        "自部署"
+      ],
+      "summary": "沿用 GLM-5.2 基座，扩大后训练以加强复杂代码与长程任务。",
+      "release": "https://z.ai/blog/glm-5.3",
+      "price": {
+        "input": 1.4,
+        "output": 4.4,
+        "currency": "USD",
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": null,
+      "openness": "open",
+      "status": "api",
+      "note": "权重已见官方仓库；许可证为 GLM-5.3，使用前应核对具体条款。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": "https://huggingface.co/zai-org/GLM-5.3"
+    },
+    {
+      "id": "z52",
+      "org": "zai",
+      "name": "GLM-5.2",
+      "date": "2026-06-16",
+      "family": "GLM 主线",
+      "tags": [
+        "编程",
+        "Agent"
+      ],
+      "summary": "面向长程任务，重点优化长上下文处理和 Agent 强化学习。",
+      "release": "https://z.ai/blog/glm-5.2",
+      "price": {
+        "input": 1.4,
+        "output": 4.4,
+        "currency": "USD",
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": null,
+      "openness": "unknown",
+      "status": "api",
+      "note": "",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "z5",
+      "org": "zai",
+      "name": "GLM-5",
+      "date": "2026-02-12",
+      "family": "GLM 主线",
+      "tags": [
+        "编程",
+        "Agent",
+        "自部署"
+      ],
+      "summary": "从交互式写代码扩展到较长的软件工程任务，强调工程级交付。",
+      "release": "https://z.ai/blog/glm-5",
+      "price": {
+        "input": 1,
+        "output": 3.2,
+        "currency": "USD",
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": null,
+      "openness": "open",
+      "status": "api",
+      "note": "",
+      "priceNote": "",
+      "dateNote": "按英文官方博客 2 月 12 日；跨时区媒体日期可能为 2 月 11 日。",
+      "weightSource": null
+    },
+    {
+      "id": "b21p",
+      "org": "bytedance",
+      "name": "Doubao Seed 2.1 Pro",
+      "date": "2026-06-23",
+      "family": "Seed Pro",
+      "tags": [
+        "编程",
+        "Agent",
+        "多模态"
+      ],
+      "summary": "面向真实生产力场景，改善跨工具工作、办公产物与代码交付。",
+      "release": "https://seed.bytedance.com/zh/blog/seed2-1-officially-released-advancing-ai-productivity",
+      "price": {
+        "input": 6,
+        "output": 30,
+        "currency": "CNY",
+        "source": "https://www.volcengine.com/docs/82379/1544106",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "1M",
+      "openness": "closed",
+      "status": "api",
+      "note": "",
+      "priceNote": "火山方舟常规在线推理，非音频输入；不含缓存存储。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "b21t",
+      "org": "bytedance",
+      "name": "Doubao Seed 2.1 Turbo",
+      "date": "2026-06-23",
+      "family": "Seed Turbo",
+      "tags": [
+        "编程",
+        "Agent",
+        "多模态"
+      ],
+      "summary": "与 Pro 同期提供的较低价服务层，可用于生产力工作流的成本对照。",
+      "release": "https://seed.bytedance.com/zh/blog/seed2-1-officially-released-advancing-ai-productivity",
+      "price": {
+        "input": 3,
+        "output": 15,
+        "currency": "CNY",
+        "source": "https://www.volcengine.com/docs/82379/1544106",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "256K",
+      "openness": "closed",
+      "status": "api",
+      "note": "",
+      "priceNote": "火山方舟常规在线推理，非音频输入。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "b20p",
+      "org": "bytedance",
+      "name": "Doubao Seed 2.0 Pro",
+      "date": "2026-02-14",
+      "family": "Seed Pro",
+      "tags": [
+        "推理",
+        "Agent",
+        "多模态"
+      ],
+      "summary": "增强文档、图表与视频理解，提升复杂指令和多步骤任务执行。",
+      "release": "https://seed.bytedance.com/en/blog/seed-2-0-official-launch",
+      "price": {
+        "input": 3.2,
+        "output": 16,
+        "currency": "CNY",
+        "source": "https://www.volcengine.com/docs/82379/1544106",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "256K",
+      "openness": "closed",
+      "status": "api",
+      "note": "",
+      "priceNote": "输入 ≤32K；32–128K 为 ¥4.8 / ¥24，128–256K 为 ¥9.6 / ¥48。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "hy4",
+      "org": "tencent",
+      "name": "Tencent HY4 Preview",
+      "date": "2026-08-28",
+      "family": "HY 主线",
+      "tags": [
+        "编程",
+        "Agent",
+        "自部署"
+      ],
+      "summary": "770B 总参数、49B 激活，面向代码、办公与科学任务，支持 1M 长上下文。",
+      "release": "https://www.tencent.com/zh-cn/tencent-releases-and-open-sources-tencent-hy4-preview/",
+      "price": {
+        "input": 6,
+        "output": 18,
+        "currency": "CNY",
+        "source": "https://www.tencent.com/zh-cn/tencent-releases-and-open-sources-tencent-hy4-preview/",
+        "verified": "2026-10-03",
+        "note": "发布报价；未独立复核当前 TokenHub 价目"
+      },
+      "context": "1M",
+      "openness": "open",
+      "status": "preview",
+      "note": "",
+      "priceNote": "腾讯公告的发布报价，单独标注；默认不参加现价排名。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "hy3",
+      "org": "tencent",
+      "name": "Tencent HY3",
+      "date": "2026-07-06",
+      "family": "HY 主线",
+      "tags": [
+        "编程",
+        "Agent",
+        "自部署"
+      ],
+      "summary": "295B 总参数、21B 激活，快慢思考融合，并与腾讯办公和编程产品深度集成。",
+      "release": "https://www.tencent.com/zh-hk/tencent-hunyuan-officially-releases-hy3-advancing-agent-capabilities-and-deeper-product-integration/",
+      "price": null,
+      "context": "256K",
+      "openness": "open",
+      "status": "api",
+      "note": "Apache 2.0；当前 TokenHub 单价未核验。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "e51",
+      "org": "baidu",
+      "name": "ERNIE 5.1",
+      "date": "2026-05-09",
+      "family": "ERNIE 主线",
+      "tags": [
+        "中文",
+        "创作",
+        "Agent"
+      ],
+      "summary": "重点提升中文表达、创作与复杂指令遵循，并优化 Agent 后训练效率。",
+      "release": "https://ernie.baidu.com/blog/posts/ernie-5.1-0508-release/",
+      "price": null,
+      "context": null,
+      "openness": "unknown",
+      "status": "api",
+      "note": "依据官方发布博文日期；0508 是版本标识。现价与权重状态未核验。",
+      "priceNote": "",
+      "dateNote": "官方发布博文为 5 月 9 日；版本名包含 0508。",
+      "weightSource": null
+    },
+    {
+      "id": "ms13",
+      "org": "meta",
+      "name": "Muse Spark 1.3",
+      "date": "2026-09-02",
+      "family": "Muse Spark",
+      "tags": [
+        "编程",
+        "Agent",
+        "办公"
+      ],
+      "summary": "加强长程协作、多工作流管理与复杂指令遵循，面向真实代码和办公环境。",
+      "release": "https://research.meta.ai/blog/introducing-muse-spark-1-3",
+      "price": null,
+      "context": null,
+      "openness": "closed",
+      "status": "api",
+      "note": "官方仍将开放权重列在路线图；本页未核验 Meta Model API 当前报价。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "ms11",
+      "org": "meta",
+      "name": "Muse Spark 1.1",
+      "date": "2026-07-09",
+      "family": "Muse Spark",
+      "tags": [
+        "编程",
+        "Agent"
+      ],
+      "summary": "升级编程与长任务，并首次向开发者提供 Meta Model API 接入。",
+      "release": "https://research.meta.ai/blog/introducing-muse-spark-meta-model-api",
+      "price": null,
+      "context": null,
+      "openness": "closed",
+      "status": "api",
+      "note": "与开放权重 Llama 路线分开，不能直接沿用 Llama 的开放性描述。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "ms1",
+      "org": "meta",
+      "name": "Muse Spark",
+      "date": "2026-04-08",
+      "family": "Muse Spark",
+      "tags": [
+        "推理",
+        "多模态"
+      ],
+      "summary": "Meta Superintelligence Labs 的 Muse 首发模型，用于 Meta AI 助手。",
+      "release": "https://ai.meta.com/blog/introducing-muse-spark-msl",
+      "price": null,
+      "context": null,
+      "openness": "closed",
+      "status": "released",
+      "note": "首发产品节点；不将免费助手体验视为 API 免费。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "x47",
+      "org": "xai",
+      "name": "Grok 4.7",
+      "date": "2026-09-21",
+      "family": "Grok 主线",
+      "tags": [
+        "编程",
+        "Agent",
+        "办公"
+      ],
+      "summary": "更大的基座与更长强化学习训练，增强自我检查、代码和专业知识工作。",
+      "release": "https://x.ai/news/grok-4-7",
+      "price": {
+        "input": 2,
+        "output": 6,
+        "currency": "USD",
+        "source": "https://docs.x.ai/developers/models/grok-4.7",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "500K",
+      "openness": "closed",
+      "status": "api",
+      "note": "",
+      "priceNote": "标准速度、短上下文；超过 200K 上下文另有费率。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "x46",
+      "org": "xai",
+      "name": "Grok 4.6",
+      "date": "2026-08-12",
+      "family": "Grok 主线",
+      "tags": [
+        "编程",
+        "Agent",
+        "多模态"
+      ],
+      "summary": "面向长期运行 Agent 与交互式应用创作，可输入文字和图像。",
+      "release": "https://x.ai/news/grok-4-6",
+      "price": {
+        "input": 2,
+        "output": 6,
+        "currency": "USD",
+        "source": "https://docs.x.ai/developers/models/grok-4.6",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "500K",
+      "openness": "closed",
+      "status": "api",
+      "note": "",
+      "priceNote": "标准速度、短上下文；更长上下文另有费率。",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "mi35",
+      "org": "mistral",
+      "name": "Mistral Medium 3.5",
+      "date": "2026-04-28",
+      "family": "Mistral 通用",
+      "tags": [
+        "编程",
+        "Agent",
+        "自部署"
+      ],
+      "summary": "128B 开放权重多模态模型，重点优化编程与长程生产力任务。",
+      "release": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+      "price": {
+        "input": 1.5,
+        "output": 7.5,
+        "currency": "USD",
+        "source": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "256K",
+      "openness": "open",
+      "status": "api",
+      "note": "Modified MIT 许可证；日期按官方模型页与 changelog，5 月 22 日是后续产品发布文章。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "mi4",
+      "org": "mistral",
+      "name": "Mistral Small 4",
+      "date": "2026-03-16",
+      "family": "Mistral 通用",
+      "tags": [
+        "编程",
+        "推理",
+        "自部署"
+      ],
+      "summary": "将指令、推理与编程整合进一个混合模型，119B 总参数、6.5B 激活。",
+      "release": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+      "price": {
+        "input": 0.15,
+        "output": 0.6,
+        "currency": "USD",
+        "source": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "256K",
+      "openness": "open",
+      "status": "api",
+      "note": "Apache 2.0；支持自部署，但硬件成本需另算。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "mil3",
+      "org": "mistral",
+      "name": "Mistral Large 3",
+      "date": "2025-12-02",
+      "family": "Mistral 通用",
+      "tags": [
+        "多模态",
+        "自部署"
+      ],
+      "summary": "675B 总参数、41B 激活的多模态 MoE，提供基础与指令版本。",
+      "release": "https://mistral.ai/news/mistral-3/",
+      "price": {
+        "input": 0.5,
+        "output": 1.5,
+        "currency": "USD",
+        "source": "https://docs.mistral.ai/fr/models/mistral-large-3-25-12",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "256K",
+      "openness": "open",
+      "status": "api",
+      "note": "Apache 2.0；这里收录 API 对应的指令模型。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "g51",
+      "org": "openai",
+      "name": "GPT-5.1 Thinking",
+      "date": "2025-11-12",
+      "family": "GPT 通用",
+      "tags": [
+        "推理",
+        "编程"
+      ],
+      "summary": "根据任务难度调整思考时间，改善复杂问题的解释与指令遵循。",
+      "release": "https://openai.com/index/gpt-5-1/",
+      "price": null,
+      "context": null,
+      "openness": "closed",
+      "status": "released",
+      "note": "年内历史发布节点；当前接口状态与单价未核验。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "g52",
+      "org": "openai",
+      "name": "GPT-5.2",
+      "date": "2025-12-11",
+      "family": "GPT 通用",
+      "tags": [
+        "推理",
+        "Agent",
+        "办公"
+      ],
+      "summary": "面向专业知识工作、表格、演示文稿及较长的 Agent 任务。",
+      "release": "https://openai.com/index/introducing-gpt-5-2/",
+      "price": null,
+      "context": null,
+      "openness": "closed",
+      "status": "released",
+      "note": "年内历史发布节点；当前单价未核验。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "o45",
+      "org": "anthropic",
+      "name": "Claude Opus 4.5",
+      "date": "2025-11-24",
+      "family": "Claude Opus",
+      "tags": [
+        "编程",
+        "Agent",
+        "办公"
+      ],
+      "summary": "面向代码、电脑操作和日常专业任务，兼顾质量与推理效率。",
+      "release": "https://www.anthropic.com/news/claude-opus-4-5",
+      "price": {
+        "input": 5,
+        "output": 25,
+        "currency": "USD",
+        "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": null,
+      "openness": "closed",
+      "status": "api",
+      "note": "",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "s46",
+      "org": "anthropic",
+      "name": "Claude Sonnet 4.6",
+      "date": "2026-02-17",
+      "family": "Claude Sonnet",
+      "tags": [
+        "编程",
+        "Agent",
+        "办公"
+      ],
+      "summary": "升级代码、电脑操作、长上下文推理和设计能力。",
+      "release": "https://www.anthropic.com/news/claude-sonnet-4-6",
+      "price": {
+        "input": 3,
+        "output": 15,
+        "currency": "USD",
+        "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": "1M",
+      "openness": "closed",
+      "status": "api",
+      "note": "",
+      "priceNote": "",
+      "dateNote": "发布时 1M 上下文为 beta；现行价格文档按标准价覆盖。",
+      "weightSource": null
+    },
+    {
+      "id": "k25",
+      "org": "moonshot",
+      "name": "Kimi K2.5",
+      "date": "2026-01-27",
+      "family": "Kimi 通用",
+      "tags": [
+        "多模态",
+        "Agent",
+        "办公"
+      ],
+      "summary": "引入 Agent Swarm，多智能体协作覆盖调研、编程与 Office 产物。",
+      "release": "https://www.kimi.com/en/help/agent/agent-overview",
+      "price": null,
+      "context": null,
+      "openness": "open",
+      "status": "released",
+      "note": "保留为年内发布节点；不使用旧价格推断当前 Kimi API 费用。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "k2t",
+      "org": "moonshot",
+      "name": "Kimi K2 Thinking",
+      "date": "2025-11-06",
+      "family": "Kimi 通用",
+      "tags": [
+        "推理",
+        "Agent"
+      ],
+      "summary": "在 K2 路线上引入深度思考与多步工具调用，面向复杂 Agent 工作。",
+      "release": "https://www.kimi.com/en/blog/",
+      "price": null,
+      "context": null,
+      "openness": "unknown",
+      "status": "released",
+      "note": "官方研究索引确认发布日期；当前价格及权重状态本次未核验。",
+      "priceNote": "",
+      "dateNote": "官方首次发布日",
+      "weightSource": null
+    },
+    {
+      "id": "m21",
+      "org": "minimax",
+      "name": "MiniMax M2.1",
+      "date": "2025-12-23",
+      "family": "MiniMax M",
+      "tags": [
+        "编程",
+        "Agent",
+        "自部署"
+      ],
+      "summary": "增强 Rust、Java、Go、C++ 等多语言编程，改善移动开发与跨 Agent 框架泛化。",
+      "release": "https://www.minimax.io/blog/minimax-m21",
+      "price": {
+        "input": 0.3,
+        "output": 1.2,
+        "currency": "USD",
+        "source": "https://platform.minimax.io/docs/pricing/overview",
+        "verified": "2026-10-03",
+        "note": ""
+      },
+      "context": null,
+      "openness": "open",
+      "status": "api",
+      "note": "",
+      "priceNote": "",
+      "dateNote": "按官方发布文章 12 月 23 日；索引页可能按时区显示前一天。",
+      "weightSource": null
+    },
+    {
+      "id": "q35",
+      "org": "qwen",
+      "name": "Qwen3.5-397B-A17B",
+      "date": "2026-02-15",
+      "family": "Qwen 主线",
+      "tags": [
+        "多模态",
+        "Agent",
+        "自部署"
+      ],
+      "summary": "原生视觉语言 MoE，397B 总参数、17B 激活，面向多模态 Agent。",
+      "release": "https://qwen.ai/blog?id=qwen3.5",
+      "price": null,
+      "context": null,
+      "openness": "open",
+      "status": "weights",
+      "note": "这是开放权重版本；不要把同名家族的 Plus 托管报价直接移植到这个模型。",
+      "priceNote": "",
+      "dateNote": "按 Qwen 官方英文博客显示日期 2 月 15 日；跨时区报道可能为 2 月 16 日。",
+      "weightSource": null
+    }
+  ]
+};
+var state = {expanded:{},view:'atlas',q:'',provider:'all',region:'all',open:'all',period:'year',tag:'all',sort:'date',selected:[],calls:10000,input:2000,output:500,currency:'USD',fx:7.2,offpeak:false};
+var modelById = Object.fromEntries(DATA.models.map(function(m){return [m.id,m]}));
+var orgById = Object.fromEntries(DATA.providers.map(function(o){return [o.id,o]}));
+var statusNames={api:'API 可用',released:'官方发布',preview:'预览版',restricted:'受限开放',retired:'旧接口停用',weights:'权重可用'};
+var openNames={open:'开放权重',closed:'闭源服务',unknown:'权重待核'};
+var toastTimer;
+var ChartManager={charts:new Map(),safeInit:function(id,config){if(typeof Chart==='undefined'){console.error('Chart.js not loaded');return null}try{if(this.charts.has(id)){this.charts.get(id).destroy();this.charts.delete(id)}var el=document.getElementById(id);if(!el)return null;var chart=new Chart(el,config);this.charts.set(id,chart);return chart}catch(e){document.getElementById('plotCard').hidden=true;return null}}};
+function el(id){return document.getElementById(id)}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function dateLabel(d){return d.replaceAll('-','.')}
+function nfmt(v,dp){return Number(v).toLocaleString('en-US',{maximumFractionDigits:dp===undefined?2:dp,minimumFractionDigits:0})}
+function curr(c){return c==='CNY'?'¥':'$'}
+function money(v){if(v===null)return '未核价';return curr(state.currency)+Number(v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function rawPrice(m){return m.price?curr(m.price.currency)+nfmt(m.price.input)+' / '+nfmt(m.price.output):'未核价'}
+function currentPrice(m){return !!(m.price&&!m.price.note&&!['retired','restricted','weights'].includes(m.status))}
+function converted(v,c){return c===state.currency?v:c==='CNY'?v/state.fx:v*state.fx}
+function rates(m){if(!currentPrice(m))return null;var f=state.offpeak&&m.org==='deepseek'?.5:1;return {i:converted(m.price.input,m.price.currency)*f,o:converted(m.price.output,m.price.currency)*f}}
+function costs(m){var p=rates(m);if(!p)return null;var a=state.calls*state.input*p.i/1000000,b=state.calls*state.output*p.o/1000000;return {i:a,o:b,total:a+b}}
+function days(a,b){return Math.round((Date.parse(b+'T00:00:00Z')-Date.parse(a+'T00:00:00Z'))/86400000)}
+function previous(m){return DATA.models.filter(function(x){return x.org===m.org&&x.family===m.family&&x.date<m.date}).sort(function(a,b){return b.date.localeCompare(a.date)})[0]}
+function filtered(){return DATA.models.filter(function(m){var o=orgById[m.org];var text=[m.name,o.name,o.family,m.summary,m.tags.join(' '),m.family,o.lab].join(' ').toLowerCase();return (!state.q||text.includes(state.q.toLowerCase()))&&(state.provider==='all'||m.org===state.provider)&&(state.region==='all'||o.region===state.region)&&(state.open==='all'||m.openness===state.open)&&(state.tag==='all'||m.tags.includes(state.tag))&&(state.period==='year'||state.period==='half'&&m.date>='2026-04-03'||state.period==='quarter'&&m.date>='2026-07-03'||state.period==='2025'&&m.date<'2026-01-01')})}
+function ordered(list){return list.slice().sort(function(a,b){if(state.sort==='name')return a.name.localeCompare(b.name);if(state.sort==='cost'){var ac=costs(a),bc=costs(b);return (ac?ac.total:Infinity)-(bc?bc.total:Infinity)||b.date.localeCompare(a.date)}return b.date.localeCompare(a.date)})}
+function badge(m){return '<span class="badge '+m.status+'">'+statusNames[m.status]+'</span>'}
+function openBadge(m){return '<span class="badge '+(m.openness==='open'?'open':'')+'">'+openNames[m.openness]+'</span>'}
+function pick(m){return '<input class="pick" type="checkbox" data-pick="'+m.id+'" aria-label="对比 '+esc(m.name)+'" '+(state.selected.includes(m.id)?'checked':'')+'>'}
+function empty(){return '<div class="empty"><h3>没有符合条件的模型</h3><p>换个关键词或减少筛选条件，继续探索。</p><button class="btn" data-reset>重置筛选</button></div>'}
+function stats(){el('orgCount').textContent=DATA.providers.length;el('modelCount').textContent=DATA.models.length;el('priceCount').textContent=DATA.models.filter(function(m){return m.price}).length;var months=Array.from({length:12},function(_,i){var d=new Date(Date.UTC(2025,9+i,3));return d.toISOString().slice(0,7)});var counts=months.map(function(d){return DATA.models.filter(function(m){return m.date.startsWith(d)}).length});var max=Math.max(...counts);el('sparkline').innerHTML=counts.map(function(n,i){return '<div style="height:'+Math.max(7,n/max*100)+'%" title="'+months[i]+'：'+n+' 个收录节点"></div>'}).join('')}
+function renderAtlas(list){var groups=DATA.providers.map(function(o){return {o:o,models:list.filter(function(m){return m.org===o.id}).sort(function(a,b){return b.date.localeCompare(a.date)})}}).filter(function(g){return g.models.length});el('atlasCount').textContent='显示 '+groups.length+' 家厂商 · '+list.length+' 个模型版本';el('providerGrid').innerHTML=groups.length?groups.map(function(g){var o=g.o;return '<article class="provider-card" style="--org:'+o.color+'"><header class="provider-top"><div class="monogram">'+o.mark+'</div><div><div class="provider-name">'+o.name+'</div><div class="provider-sub">'+o.family+' · '+o.region+'</div></div><span class="provider-num">'+g.models.length+' MODELS</span></header><p class="provider-focus">'+o.focus+'</p><div class="model-list">'+(state.expanded[o.id]?g.models:g.models.slice(0,3)).map(function(m){return '<div class="model-row">'+pick(m)+'<button class="model-btn" data-detail="'+m.id+'"><span class="model-title">'+m.name+'</span><span class="model-meta"><span>'+dateLabel(m.date)+'</span><span>·</span><span>'+statusNames[m.status]+'</span></span></button><div class="price-mini">'+rawPrice(m)+'<small>'+(m.price?(m.price.note?'发布报价':m.price.currency+' / 1M TOKENS'):'查看详情')+'</small></div></div>'}).join('')+'</div><footer class="provider-bottom"><button data-org="'+o.id+'">'+o.type+' · 组织 ↗</button>'+(g.models.length>3?'<button data-expand="'+o.id+'">'+(state.expanded[o.id]?'收起历史版本 ↑':'展开全部 '+g.models.length+' 个版本 ↓')+'</button>':'<span>'+g.models.filter(function(m){return m.openness==='open'}).length+' 个已核开放权重</span>')+'</footer></article>'}).join(''):empty()}
+function renderCatalog(list){el('catalogCount').textContent='显示 '+list.length+' 个版本 · 勾选最多 4 个并排比较';el('catalogBody').innerHTML=ordered(list).map(function(m){return '<tr><td>'+pick(m)+'</td><td><button class="t-name" data-detail="'+m.id+'">'+m.name+'</button><span class="t-sub">'+orgById[m.org].name+'</span></td><td><div class="tags">'+m.tags.map(function(t){return '<span>'+t+'</span>'}).join('')+'</div></td><td class="nowrap">'+dateLabel(m.date)+'</td><td>'+openBadge(m)+'<br>'+badge(m)+'</td><td class="nowrap">'+rawPrice(m)+'<span class="t-sub">'+(m.price?(m.price.note?'发布报价':m.price.currency+' / 百万 Token'):'未核实当前单价')+'</span></td></tr>'}).join('')||'<tr><td colspan="6">'+empty()+'</td></tr>'}
+function renderCost(list){var ms=list.filter(currentPrice).sort(function(a,b){return costs(a).total-costs(b).total});var totalInput=state.calls*state.input/1e6,totalOutput=state.calls*state.output/1e6;el('costSummary').innerHTML='<span>每月计费总量</span><strong>'+nfmt(totalInput,3)+'M 输入 + '+nfmt(totalOutput,3)+'M 输出</strong><p>'+nfmt(state.calls,0)+' 次请求 · '+ms.length+' 个已核现价版本 · 仅 Token 费用估算</p>';var max=Math.max(1,...ms.map(function(m){return costs(m).total}));el('costList').innerHTML=ms.map(function(m,i){var c=costs(m);return '<div class="cost-item"><span class="cost-index">'+String(i+1).padStart(2,'0')+'</span><button class="cost-name" data-detail="'+m.id+'">'+m.name+'<small>'+orgById[m.org].name+' · '+rawPrice(m)+' '+m.price.currency+'</small></button><div class="cost-track" aria-hidden="true" title="输入 '+money(c.i)+'，输出 '+money(c.o)+'"><span class="cost-input" style="width:'+c.i/max*100+'%"></span><span class="cost-output" style="width:'+c.o/max*100+'%"></span></div><strong class="cost-number">'+money(c.total)+'</strong></div>'}).join('')||empty();el('costNote').textContent='当前筛选中 '+(list.length-ms.length)+' 个版本因现价缺失、仅发布报价或接口状态不适用，未进入试算。条形长度按本次最大费用线性缩放；排序仅代表价格，不代表能力。';el('chartAlternative').textContent=ms.map(function(m){var p=rates(m);return m.name+': 输入 '+nfmt(p.i,4)+'，输出 '+nfmt(p.o,4)}).join('；');if(typeof Chart!=='undefined'){el('plotCard').hidden=!ms.length;buildScatter(ms)}else{el('plotCard').hidden=true}}
+function buildScatter(ms){if(typeof Chart==='undefined'){console.error('Chart.js not loaded');return}var styles=getComputedStyle(document.documentElement),tc=styles.getPropertyValue('--text-secondary').trim(),bc=styles.getPropertyValue('--border').trim();var sets=DATA.providers.map(function(o){return {label:o.name,backgroundColor:o.color,borderColor:o.color,pointRadius:5,pointHoverRadius:8,data:ms.filter(function(m){return m.org===o.id}).map(function(m){var p=rates(m);return {x:p.i,y:p.o,name:m.name,id:m.id}})}}).filter(function(d){return d.data.length});ChartManager.safeInit('priceScatter',{type:'scatter',data:{datasets:sets},options:{animation:false,responsive:true,maintainAspectRatio:false,layout:{padding:12},plugins:{legend:{display:false},tooltip:{enabled:true,callbacks:{label:function(c){return c.raw.name+' · 输入 '+nfmt(c.raw.x,3)+' / 输出 '+nfmt(c.raw.y,3)+' '+state.currency}}}},scales:{x:{type:'logarithmic',title:{display:true,text:'输入单价 · '+state.currency+' / 百万 Token',color:tc},ticks:{color:tc},grid:{color:bc}},y:{type:'logarithmic',title:{display:true,text:'输出单价',color:tc},ticks:{color:tc},grid:{color:bc}}},onClick:function(e,items,chart){if(items.length){var t=items[0];openDetail(chart.data.datasets[t.datasetIndex].data[t.index].id)}}}})}
+function renderTimeline(list){var labels=['25.10','11','12','26.01','02','03','04','05','06','07','08','09','10.03'];var groups=DATA.providers.filter(function(o){return list.some(function(m){return m.org===o.id})});el('timelineGrid').innerHTML='<div class="axis"><span class="tiny-label">厂商 / 发布节点</span><div class="axis-months">'+labels.map(function(s){return '<span>'+s+'</span>'}).join('')+'</div></div>'+groups.map(function(o){var ms=list.filter(function(m){return m.org===o.id}).sort(function(a,b){return a.date.localeCompare(b.date)});var positions=[];return '<div class="timeline-row"><div class="timeline-org">'+o.name+'<small>'+ms.length+' 个收录版本</small></div><div class="timeline-track" style="--org:'+o.color+'">'+ms.map(function(m,i){var x=days(DATA.start,m.date)/days(DATA.start,DATA.end)*100;var lane=positions.filter(function(p){return Math.abs(p-x)<2}).length%3;positions.push(x);var short=m.name.replace(/Claude |Gemini |DeepSeek |MiniMax |Doubao Seed |Tencent |Muse Spark |Mistral /g,'');return '<button class="event" data-detail="'+m.id+'" style="left:'+x+'%;top:'+(27+lane*16)+'px" title="'+esc(m.name+' · '+m.date)+'" aria-label="'+esc(m.name+'，'+m.date)+'"></button>'+(ms.length<=3&&i%2===0?'<span class="event-label" style="left:'+Math.min(91,Math.max(8,x))+'%">'+esc(short)+'</span>':'')}).join('')+'</div></div>'}).join('');if(!groups.length)el('timelineGrid').innerHTML=empty();var families=[...new Set(list.map(function(m){return m.org+'|'+m.family}))];el('cadenceGrid').innerHTML=families.map(function(key){var a=key.split('|'),ms=DATA.models.filter(function(m){return m.org===a[0]&&m.family===a[1]}).sort(function(x,y){return x.date.localeCompare(y.date)}),ds=[...new Set(ms.map(function(m){return m.date}))];if(ds.length<2)return '';var gaps=ds.slice(1).map(function(d,i){return days(ds[i],d)}),sorted=gaps.slice().sort(function(x,y){return x-y}),med=sorted.length%2?sorted[(sorted.length-1)/2]:(sorted[sorted.length/2-1]+sorted[sorted.length/2])/2;return '<article class="cadence-card"><h3>'+a[1]+'</h3><strong>'+nfmt(med,1)+' <span>天 / 收录间隔中位数</span></strong><p>'+orgById[a[0]].name+' · '+ds.length+' 个日期 · '+gaps.length+' 段间隔<br>范围 '+Math.min(...gaps)+'–'+Math.max(...gaps)+' 天；最近 '+gaps[gaps.length-1]+' 天<br>'+ds.map(dateLabel).join(' → ')+'</p></article>'}).join('')||'<p class="footnote">当前筛选没有足够的同系列发布日期；不估算周期。</p>'}
+function renderOrg(list){el('orgGrid').innerHTML=DATA.providers.filter(function(o){return list.some(function(m){return m.org===o.id})}).map(function(o){var ms=list.filter(function(m){return m.org===o.id});return '<article class="org-card" style="--org:'+o.color+'"><header><div class="monogram">'+o.mark+'</div><div><h3>'+o.name+'</h3><small class="text-secondary">'+o.region+' · '+o.type+'</small></div></header><div class="org-tree"><div class="org-node"><small>厂商 / 集团</small><strong>'+o.parent+'</strong></div><div class="org-node"><small>研发组织</small><strong>'+o.lab+'</strong></div><div class="org-node"><small>模型家族与收录版本</small><strong>'+o.family+'</strong><div class="org-models">'+ms.map(function(m){return '<button data-detail="'+m.id+'">'+m.name+'</button>'}).join('')+'</div></div><div class="org-node"><small>主要接入与产品</small><strong>'+o.platform+'</strong></div></div></article>'}).join('')||empty()}
+function renderSources(){el('sourceList').innerHTML=DATA.providers.map(function(o){var ms=DATA.models.filter(function(m){return m.org===o.id}),m=ms.find(function(m){return currentPrice(m)})||ms[0];return '<a href="'+esc(m.price?m.price.source:m.release)+'" target="_blank" rel="noopener noreferrer">'+o.name+' · '+(m.price?'官方价格 / 模型文档':'官方模型发布')+' ↗</a>'}).join('')}
+function render(){var list=filtered();el('toolbar').hidden=state.view==='notes';document.querySelectorAll('.view').forEach(function(v){v.hidden=v.id!=='view-'+state.view});document.querySelectorAll('#nav button').forEach(function(b){var a=b.dataset.view===state.view;b.classList.toggle('active',a);b.setAttribute('aria-current',a?'page':'false')});document.querySelectorAll('[data-tag]').forEach(function(b){b.classList.toggle('active',b.dataset.tag===state.tag);b.setAttribute('aria-pressed',b.dataset.tag===state.tag)});if(state.view==='atlas')renderAtlas(list);if(state.view==='catalog')renderCatalog(list);if(state.view==='cost')renderCost(list);if(state.view==='timeline')renderTimeline(list);if(state.view==='org')renderOrg(list);renderTray()}
+function go(view){state.view=view;render();try{history.replaceState(null,'','#'+view)}catch(e){}window.scrollTo({top:0,behavior:'instant'})}
+function resetFilters(){state.q='';state.provider='all';state.region='all';state.open='all';state.period='year';state.tag='all';el('search').value='';el('providerFilter').value='all';el('regionFilter').value='all';el('openFilter').value='all';el('periodFilter').value='year';render()}
+function renderTray(){el('compareTray').hidden=!state.selected.length;el('compareCount').textContent=state.selected.length+' / 4 个模型';el('compareNow').disabled=state.selected.length<2;el('trayModels').innerHTML=state.selected.map(function(id){return '<button data-remove="'+id+'" aria-label="移除 '+esc(modelById[id].name)+'">'+modelById[id].name+' ×</button>'}).join('');document.querySelectorAll('[data-pick]').forEach(function(p){p.checked=state.selected.includes(p.dataset.pick)})}
+function togglePick(id){if(state.selected.includes(id)){state.selected=state.selected.filter(function(x){return x!==id})}else if(state.selected.length===4){toast('最多比较 4 个模型，请先移除一个。')}else{state.selected.push(id)}renderTray();if(el('detailDialog').open&&el('detailDialog').dataset.model===id){var b=el('detailPick');if(b)b.textContent=state.selected.includes(id)?'已加入对比 ✓':'加入对比 ＋'}}
+function toast(message){el('toast').textContent=message;el('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(function(){el('toast').hidden=true},3500)}
+function openDetail(id){var m=modelById[id],o=orgById[m.org],prev=previous(m),c=costs(m);el('detailDialog').dataset.model=id;el('detailContent').innerHTML='<header class="dialog-head"><div><small>'+o.name+' / '+m.family+'</small><h2 id="detailTitle">'+m.name+'</h2></div><button class="close" data-close="detailDialog" aria-label="关闭模型详情">×</button></header><div class="dialog-body"><div class="tags" style="margin-bottom:15px">'+m.tags.map(function(t){return '<span>'+t+'</span>'}).join('')+'</div><p class="detail-summary">'+m.summary+'</p><div style="display:flex;gap:7px">'+badge(m)+openBadge(m)+'</div><div class="detail-grid"><div class="detail-stat"><span>发布日期 / 收录事件</span><strong>'+dateLabel(m.date)+'</strong><small>'+m.dateNote+'</small></div><div class="detail-stat"><span>上下文窗口</span><strong>'+(m.context||'未单独核验')+'</strong><small>'+(m.context?'最大标称 Token 容量；并非输入可全部占满。':'以对应官方模型文档为准。')+'</small></div><div class="detail-stat"><span>距上一收录同系列版本</span><strong>'+(prev?days(prev.date,m.date)+' 天':'窗口内首个节点')+'</strong><small>'+(prev?prev.name+' · '+dateLabel(prev.date):'样本不足，不估算发布周期。')+'</small></div><div class="detail-stat"><span>按当前工作量估算 / 月</span><strong>'+(c?money(c.total):'不纳入试算')+'</strong><small>'+nfmt(state.calls)+' 次 × '+nfmt(state.input)+' 入 / '+nfmt(state.output)+' 出</small></div></div><div class="detail-section"><h3>成本与计费条件</h3><div class="detail-price">'+rawPrice(m)+' <small>'+(m.price?m.price.currency+' / 每百万 Token':'')+'</small></div><p>'+(m.price?'输入 / 输出；'+(m.price.note?m.price.note:'官方价目核验于 '+m.price.verified)+'。':'没有经过本次核验的当前每 Token 报价；未核价不表示免费。')+' '+m.priceNote+'</p></div><div class="detail-section"><h3>使用时要知道</h3><p>'+(m.note||'以上特点为官方材料归纳，实际能力应以你的任务集验证。服务区域、速率限制和可用性以接入平台为准。')+'</p></div><div class="detail-section"><h3>官方依据</h3><div class="sources-links"><a href="'+esc(m.release)+'" target="_blank" rel="noopener noreferrer">发布 / 模型文档 ↗</a>'+(m.price?'<a href="'+esc(m.price.source)+'" target="_blank" rel="noopener noreferrer">价格依据 ↗</a>':'')+(m.weightSource?'<a href="'+esc(m.weightSource)+'" target="_blank" rel="noopener noreferrer">补充依据 ↗</a>':'')+'</div></div><div class="detail-actions"><button class="btn primary" data-toggle-pick="'+m.id+'" id="detailPick">'+(state.selected.includes(id)?'已加入对比 ✓':'加入对比 ＋')+'</button><button class="btn" data-cost-for="'+m.id+'">打开成本实验室 ↗</button></div></div>';if(!el('detailDialog').open)el('detailDialog').showModal()}
+function showCompare(){if(state.selected.length<2){toast('请至少选择 2 个模型。');return}var ms=state.selected.map(function(id){return modelById[id]});var rows=[['模型',function(m){return '<strong>'+m.name+'</strong><br><small>'+orgById[m.org].name+'</small>'}],['发布日期',function(m){return dateLabel(m.date)}],['特点',function(m){return m.summary}],['开放 / 状态',function(m){return openNames[m.openness]+'<br>'+statusNames[m.status]}],['上下文',function(m){return m.context||'未单独核验'}],['输入 / 输出',function(m){return rawPrice(m)+(m.price?' '+m.price.currency+' / 1M':'')}],['月费用估算',function(m){var c=costs(m);return c?'<strong>'+money(c.total)+'</strong>':'未纳入试算'}],['计费条件',function(m){return (m.price&&m.price.note?m.price.note+'。':'')+(m.priceNote||'见官方价格文档')}],['收录版本间隔',function(m){var p=previous(m);return p?days(p.date,m.date)+' 天<br>自 '+p.name:'当前窗口样本不足'}],['注意事项',function(m){return m.note||'需用实际任务验证；规格以平台为准。'}],['来源',function(m){return '<a href="'+esc(m.release)+'" target="_blank" rel="noopener noreferrer">官方发布 ↗</a>'+(m.price?'<br><a href="'+esc(m.price.source)+'" target="_blank" rel="noopener noreferrer">价格依据 ↗</a>':'')}]];el('compareContent').innerHTML='<p class="footnote" style="margin:0 0 18px">统一试算：每月 '+nfmt(state.calls)+' 次 × 每次 '+nfmt(state.input)+' 输入 / '+nfmt(state.output)+' 输出 Token；1 USD = '+state.fx+' CNY（手动假设）。不代表同等任务质量。</p><table class="compare-table">'+rows.map(function(row){return '<tr><th scope="row">'+row[0]+'</th>'+ms.map(function(m){return '<td>'+row[1](m)+'</td>'}).join('')+'</tr>'}).join('')+'</table>';el('compareDialog').showModal()}
+function downloadFile(name,content,type){var url=URL.createObjectURL(new Blob([content],{type:type})),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},10000)}
+function exportCSV(){var rows=[['厂商','模型','日期','系列','特点','状态','权重','上下文','输入价','输出价','币种','价格类型','计费条件','官方发布','价格来源']];ordered(filtered()).forEach(function(m){rows.push([orgById[m.org].name,m.name,m.date,m.family,m.summary,statusNames[m.status],openNames[m.openness],m.context||'',m.price?m.price.input:'',m.price?m.price.output:'',m.price?m.price.currency:'',m.price?(m.price.note?'发布报价':'当前价目'):'未核验',m.priceNote,m.release,m.price?m.price.source:''])});downloadFile('model-atlas-2025-2026.csv','\uFEFF'+rows.map(function(r){return r.map(function(v){return '"'+String(v).replaceAll('"','""')+'"'}).join(',')}).join('\r\n'),'text/csv;charset=utf-8');toast('已导出当前筛选的模型数据。')}
+function onThemeChange(){if(typeof state!=='undefined'&&state&&state.view==='cost')renderCost(filtered())}
+function saveScenario(){try{localStorage.setItem('model-atlas-scenario',JSON.stringify({calls:state.calls,input:state.input,output:state.output,currency:state.currency,fx:state.fx,offpeak:state.offpeak}))}catch(e){}}
+function syncCost(){[['calls','calls',1e9],['inputTokens','input',32000],['outputTokens','output',32000],['fx','fx',1000]].forEach(function(x){var value=Number(el(x[0]).value),min=x[1]==='fx'?.01:0;state[x[1]]=Number.isFinite(value)?Math.min(x[2],Math.max(min,value)):min});state.currency=el('currency').value;state.offpeak=el('offpeak').checked;saveScenario();renderCost(filtered())}
+function init(){stats();renderSources();el('providerFilter').innerHTML+='<option disabled>──────────</option>'+DATA.providers.map(function(o){return '<option value="'+o.id+'">'+o.name+'</option>'}).join('');try{var saved=JSON.parse(localStorage.getItem('model-atlas-scenario')||'null');if(saved){['calls','input','output','fx'].forEach(function(k){if(Number.isFinite(saved[k]))state[k]=saved[k]});if(['USD','CNY'].includes(saved.currency))state.currency=saved.currency;state.offpeak=saved.offpeak===true}}catch(e){}[['calls','calls'],['inputTokens','input'],['outputTokens','output'],['fx','fx'],['currency','currency']].forEach(function(x){el(x[0]).value=state[x[1]]});el('offpeak').checked=state.offpeak;var initial=location.hash.slice(1);if(['atlas','catalog','cost','timeline','org','notes'].includes(initial))state.view=initial;render();el('search').addEventListener('input',function(){state.q=this.value;render()});[['providerFilter','provider'],['regionFilter','region'],['openFilter','open'],['periodFilter','period'],['sort','sort']].forEach(function(x){el(x[0]).addEventListener('change',function(){state[x[1]]=this.value;render()})});['calls','inputTokens','outputTokens','fx'].forEach(function(id){el(id).addEventListener('input',syncCost);el(id).addEventListener('blur',function(){var key={calls:'calls',inputTokens:'input',outputTokens:'output',fx:'fx'}[id];this.value=state[key]})});['currency','offpeak'].forEach(function(id){el(id).addEventListener('change',syncCost)});el('reset').onclick=resetFilters;el('toCatalog').onclick=function(){go('catalog')};el('exportCsv').onclick=exportCSV;el('exportJson').onclick=function(){downloadFile('model-atlas-data.json',JSON.stringify(DATA,null,2),'application/json')};el('clearCompare').onclick=function(){state.selected=[];renderTray()};el('compareNow').onclick=showCompare;document.addEventListener('change',function(e){if(e.target.dataset.pick)togglePick(e.target.dataset.pick)});document.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;if(b.dataset.view)go(b.dataset.view);if(b.dataset.tag){state.tag=b.dataset.tag;render()}if(b.hasAttribute('data-reset'))resetFilters();if(b.dataset.detail)openDetail(b.dataset.detail);if(b.dataset.expand){state.expanded[b.dataset.expand]=!state.expanded[b.dataset.expand];render()}if(b.dataset.close)el(b.dataset.close).close();if(b.dataset.togglePick)togglePick(b.dataset.togglePick);if(b.dataset.remove)togglePick(b.dataset.remove);if(b.dataset.org){resetFilters();state.provider=b.dataset.org;el('providerFilter').value=state.provider;go('org')}if(b.dataset.costFor){el('detailDialog').close();go('cost')}if(b.dataset.preset){var preset={chat:[10000,2000,500],code:[10000,8000,2000],docs:[10000,16000,1200]}[b.dataset.preset];el('calls').value=preset[0];el('inputTokens').value=preset[1];el('outputTokens').value=preset[2];syncCost()}});document.querySelectorAll('dialog').forEach(function(d){d.addEventListener('click',function(e){if(e.target===d){var r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close()}})});window.addEventListener('hashchange',function(){var v=location.hash.slice(1);if(['atlas','catalog','cost','timeline','org','notes'].includes(v)){state.view=v;render()}})}
+document.addEventListener('DOMContentLoaded',init);
+
+  </script>
+</body>
+</html>

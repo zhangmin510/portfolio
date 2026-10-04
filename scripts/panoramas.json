@@ -1,0 +1,245 @@
+{
+  "version": 1,
+  "basePath": "/panoramas/",
+  "updatedAt": "2026-10-05",
+  "vendors": [
+    {
+      "file": "chart.umd.min.js",
+      "url": "https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js",
+      "sha256": "206b6e8bb00fc7bba2c7ee80ca41db3e9e05ba7be0aa35abeba9cfd5357f5d0e"
+    },
+    {
+      "file": "html-to-image.js",
+      "url": "https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js",
+      "source": "../html/open-model-finetuning-atlas/html-to-image.min.js",
+      "sha256": "0181b9a4ea3351540751b2e72b6baecb5c2297093fcb0bd2af94fc531cb0fbda"
+    }
+  ],
+  "pages": [
+    {
+      "slug": "minimind-nanochat-panorama",
+      "title": "MiniMind × nanochat",
+      "subtitle": "从零训练大模型的两条路径",
+      "description": "对照两个开源项目的架构、数据、训练流程与工程取舍，沿着完整链路理解小型大模型。",
+      "category": "模型与训练",
+      "tags": [
+        "MiniMind",
+        "nanochat",
+        "从零训练"
+      ],
+      "source": "../html/minimind-nanochat-panorama.html",
+      "updatedAt": "2026-10-05",
+      "sourceSha256": "edeb19a81f4baf472fb8abe51ccc4126d6c4a6652cf1153280c8d815bc789a51"
+    },
+    {
+      "slug": "girl-growth-1-7",
+      "title": "成长花园",
+      "subtitle": "1—7 岁女孩成长全景",
+      "description": "按 84 个月龄节点，展开发展观察、亲子话术与活动建议，在日常陪伴中读懂成长。",
+      "category": "生活与成长",
+      "tags": [
+        "亲子陪伴",
+        "84 个月龄",
+        "成长观察"
+      ],
+      "source": "../girl-growth-1-7/index.html",
+      "updatedAt": "2026-10-04",
+      "sourceSha256": "5b7b6a0a0f66e248f85adcc1c047b015f497eb464d6223362e21a413e6e50ad3"
+    },
+    {
+      "slug": "video-generation-atlas",
+      "title": "视频生成模型全景图",
+      "subtitle": "从 2016 到 2026，十年技术演进",
+      "description": "沿时间线探索视频生成模型、技术路线与开源生态，比较国内外代表模型的发展。",
+      "category": "模型与训练",
+      "tags": [
+        "视频生成",
+        "技术演进",
+        "模型生态"
+      ],
+      "source": "../html/video-generation-atlas.html",
+      "updatedAt": "2026-10-04",
+      "sourceSha256": "086df80d4333198104ae6595c8c7b5b8d0eb6e66ab1058c816f64d0300bba23b"
+    },
+    {
+      "slug": "search-panorama",
+      "title": "联网搜索全景",
+      "subtitle": "从检索文档，到完成研究",
+      "description": "串起搜索技术、AI 搜索与评测方法，理解检索系统如何走向回答问题与完成研究。",
+      "category": "Agent 与搜索",
+      "tags": [
+        "联网搜索",
+        "AI 搜索",
+        "技术与评测"
+      ],
+      "source": "../html/search-panorama.html",
+      "updatedAt": "2026-10-04",
+      "sourceSha256": "6e1621a4fa75fdcf688fc53254fff129a22a95e080538b516569a42a751c0c82"
+    },
+    {
+      "slug": "search-technology",
+      "title": "联网搜索技术图谱",
+      "subtitle": "搜索系统的技术脉络",
+      "description": "通过交互式图谱梳理搜索技术节点及其联系，从基础检索深入到知识与智能搜索。",
+      "category": "Agent 与搜索",
+      "tags": [
+        "搜索技术",
+        "交互图谱",
+        "技术节点"
+      ],
+      "source": "../html/search-technology.html",
+      "updatedAt": "2026-10-04",
+      "sourceSha256": "336a5d64fe3c5e008370c6fa699394cbfd44635f6cc84c005b9133c97365b24e"
+    },
+    {
+      "slug": "search-evaluation",
+      "title": "联网搜索评测图谱",
+      "subtitle": "如何判断一次搜索是否有效",
+      "description": "沿评测节点探索搜索质量、回答效果与研究能力的衡量方法，以及它们之间的联系。",
+      "category": "Agent 与搜索",
+      "tags": [
+        "搜索评测",
+        "质量衡量",
+        "交互图谱"
+      ],
+      "source": "../html/search-evaluation.html",
+      "updatedAt": "2026-10-04",
+      "sourceSha256": "adca01d325e58da9176824967007a24244cc820f4d81294cd0f0ff3c7062717f"
+    },
+    {
+      "slug": "agent-evolution-atlas",
+      "title": "Agent 开发历史与趋势",
+      "subtitle": "智能体如何走到今天",
+      "description": "回看 Agent 的发展历史、架构与工具生态，探索开发范式和未来趋势。",
+      "category": "Agent 与搜索",
+      "tags": [
+        "Agent",
+        "开发架构",
+        "历史与趋势"
+      ],
+      "source": "../html/agent-evolution-atlas.html",
+      "updatedAt": "2026-10-03",
+      "sourceSha256": "6ca7cbac9b22912c2cf37f7ca4ca5470392bbe99e19b1060466cb8ded10e14ec"
+    },
+    {
+      "slug": "open-model-finetuning-atlas",
+      "title": "开源模型微调全景",
+      "subtitle": "让通用模型适配具体任务",
+      "description": "理解微调方法、数据准备与训练工具，将开源模型适配到自己的任务和应用。",
+      "category": "模型与训练",
+      "tags": [
+        "模型微调",
+        "开源模型",
+        "数据与训练"
+      ],
+      "source": "../html/open-model-finetuning-atlas.html",
+      "updatedAt": "2026-10-03",
+      "sourceSha256": "83f3681346624f280298dc284ee84f0e372e61f3e2dbc5adfb4532add3371758"
+    },
+    {
+      "slug": "llm-distillation-atlas",
+      "title": "大模型蒸馏全景图",
+      "subtitle": "萃知：将能力传递给更小的模型",
+      "description": "梳理知识蒸馏的原理、方法与训练过程，探索大模型能力迁移的路线。",
+      "category": "模型与训练",
+      "tags": [
+        "知识蒸馏",
+        "能力迁移",
+        "训练方法"
+      ],
+      "source": "../html/llm-distillation-atlas.html",
+      "updatedAt": "2026-10-03",
+      "sourceSha256": "53c12299db7f1e2382fafbf89cad4e43b43e7a8d1b151c583c76624490b5a9a8"
+    },
+    {
+      "slug": "ai-evaluation-panorama",
+      "title": "AI 评测历史与趋势",
+      "subtitle": "能力衡量方式的演进",
+      "description": "回顾 AI 评测的发展历程，探索基准、能力维度与前沿评测趋势。",
+      "category": "评测与可靠性",
+      "tags": [
+        "AI 评测",
+        "发展历史",
+        "前沿趋势"
+      ],
+      "source": "../html/ai-evaluation-panorama.html",
+      "updatedAt": "2026-10-03",
+      "sourceSha256": "ee6299b3a84162a79cd0f522f3064aea59aad51c8177097f00f390779192c996"
+    },
+    {
+      "slug": "ai-compute-atlas",
+      "title": "全球 AI 算力中心全景",
+      "subtitle": "在地图上理解算力基础设施",
+      "description": "浏览全球 AI 算力项目的地理分布、建设状态与项目资料，通过地图与筛选探索。",
+      "category": "行业与基础设施",
+      "tags": [
+        "AI 算力",
+        "全球地图",
+        "数据中心"
+      ],
+      "source": "../html/ai-compute-atlas.html",
+      "updatedAt": "2026-10-03",
+      "sourceSha256": "ff569d0d324d07e04d8c24ab042db05ab6e473e649494d44cd5ed6d3b48b0add"
+    },
+    {
+      "slug": "ai-company-atlas",
+      "title": "AI 公司全景图",
+      "subtitle": "2025—2026 年的产业版图",
+      "description": "探索 AI 公司的分布、定位与业务方向，在同一张图谱中理解行业格局。",
+      "category": "行业与基础设施",
+      "tags": [
+        "AI 公司",
+        "产业版图",
+        "2025—2026"
+      ],
+      "source": "../html/ai-company-atlas.html",
+      "updatedAt": "2026-10-03",
+      "sourceSha256": "09385abe6959887bae1c271e426e3af3924e75ce818f9462eedc3ec3926f37d0"
+    },
+    {
+      "slug": "llm-landscape-atlas",
+      "title": "大模型全景图",
+      "subtitle": "2025—2026 年的模型生态",
+      "description": "比较大模型、模型家族与生态位置，建立理解当下模型格局的整体视角。",
+      "category": "模型与训练",
+      "tags": [
+        "大模型",
+        "模型生态",
+        "2025—2026"
+      ],
+      "source": "../html/llm-landscape-atlas.html",
+      "updatedAt": "2026-10-03",
+      "sourceSha256": "a805c5473f51c2490083928b52ffc0fab1289bd083dc527d25e3d317770846d1"
+    },
+    {
+      "slug": "llm-training-atlas",
+      "title": "大模型训练交互图谱",
+      "subtitle": "炼成：模型能力如何形成",
+      "description": "沿训练流程理解数据、模型与训练阶段之间的关系，探索大模型训练的关键环节。",
+      "category": "模型与训练",
+      "tags": [
+        "模型训练",
+        "训练流程",
+        "交互图谱"
+      ],
+      "source": "../html/llm-training-atlas.html",
+      "updatedAt": "2026-10-03",
+      "sourceSha256": "53effa3e482903e0688d2813430dd6747972bdb872b6c05b967a01bb8550cd94"
+    },
+    {
+      "slug": "ai-evaluation-atlas",
+      "title": "AI 评测行业全景",
+      "subtitle": "评测生态、方法与参与者",
+      "description": "梳理 AI 评测行业的参与者、方法与能力维度，建立评测生态的整体认识。",
+      "category": "评测与可靠性",
+      "tags": [
+        "评测行业",
+        "评测生态",
+        "能力维度"
+      ],
+      "source": "../html/ai-evaluation-atlas.html",
+      "updatedAt": "2026-10-03",
+      "sourceSha256": "e364abc232411097f7653295d7f6990d32a5d982a0400bcd78fc8af31a51baeb"
+    }
+  ]
+}

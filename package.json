@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "node scripts/clean-build.mjs && tsc && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "build:sites": "npm run build && node scripts/prepare-sites-build.mjs",
+    "sync:panoramas": "node scripts/sync-panoramas.mjs",
     "test": "vitest run",
     "check": "npm run test && npm run build",
     "preview": "vite preview",
