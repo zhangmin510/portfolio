@@ -1,14 +1,28 @@
+import {
+  CONTENT_DIRECTORIES,
+  HOME_DIRECTORY,
+  getContentNode,
+  listContentDirectory,
+  resolveContentPath,
+  type FileEntry,
+} from './filesystem'
+
+export { HOME_DIRECTORY } from './filesystem'
+
 export type MessageTone = 'normal' | 'success' | 'warning' | 'error' | 'dim'
 
 export type CommandResult =
   | { kind: 'about' }
   | { kind: 'skills' }
   | { kind: 'projects' }
+  | { kind: 'project'; slug: string }
+  | { kind: 'panoramas' }
+  | { kind: 'panorama'; slug: string }
   | { kind: 'contact' }
   | { kind: 'keywords' }
   | { kind: 'help' }
   | { kind: 'neofetch' }
-  | { kind: 'file-list' }
+  | { kind: 'file-list'; path?: string; entries?: FileEntry[] }
   | { kind: 'easter-egg'; lines: string[] }
   | {
       kind: 'message'
@@ -22,19 +36,57 @@ export type CommandExecution =
   | { kind: 'clear' }
   | { kind: 'noop' }
   | { kind: 'easter-egg' }
+  | { kind: 'change-directory'; cwd: string }
+
+export interface CommandContext {
+  cwd: string
+  previousCwd?: string
+  history?: string[]
+}
 
 export interface CommandDefinition {
   name: string
   aliases?: string[]
   description?: string
   quick?: boolean
-  execute: (args: string[], now: Date) => CommandExecution
+  execute: (args: string[], now: Date, context: CommandContext) => CommandExecution
 }
 
 const output = (result: CommandResult): CommandExecution => ({
   kind: 'output',
   result,
 })
+
+const error = (text: string) => output({ kind: 'message', text, tone: 'error' })
+
+function pathTarget(command: string, input: string, cwd: string) {
+  if (!input) return { execution: error(`${command}: ${input}: No such file or directory`) }
+  const path = resolveContentPath(input, cwd)
+  if (path !== HOME_DIRECTORY && !path.startsWith(`${HOME_DIRECTORY}/`)) {
+    return { execution: error(`${command}: ${input}: Permission denied`) }
+  }
+  const expanded = input === '~' ? HOME_DIRECTORY : input.startsWith('~/')
+    ? `${HOME_DIRECTORY}/${input.slice(2)}` : input
+  const parts = (expanded.startsWith('/') ? expanded : `${cwd}/${expanded}`).split('/').filter(Boolean)
+  const walked: string[] = []
+  for (let index = 0; index < parts.length; index += 1) {
+    if (parts[index] === '..') walked.pop()
+    else if (parts[index] !== '.') walked.push(parts[index])
+    const current = `/${walked.join('/')}`
+    if (HOME_DIRECTORY.startsWith(`${current}/`) || current === '/') continue
+    const entry = getContentNode(current)
+    if (!entry) return { execution: error(`${command}: ${input}: No such file or directory`) }
+    if (entry.type !== 'directory' && index < parts.length - 1) {
+      return { execution: error(`${command}: ${input}: Not a directory`) }
+    }
+  }
+  const node = getContentNode(path)
+  if (!node) return { execution: error(`${command}: ${input}: No such file or directory`) }
+  if (input.endsWith('/') && node.type !== 'directory') {
+    return { execution: error(`${command}: ${input}: Not a directory`) }
+  }
+  return { node }
+}
 
 export const COMMANDS: CommandDefinition[] = [
   {
@@ -69,6 +121,12 @@ export const COMMANDS: CommandDefinition[] = [
     aliases: ['keywords'],
     description: '每年的关键字',
     execute: () => output({ kind: 'keywords' }),
+  },
+  {
+    name: 'panoramas',
+    description: '浏览全部交互式全景图',
+    quick: true,
+    execute: () => output({ kind: 'panoramas' }),
   },
   {
     name: 'neofetch',
@@ -125,19 +183,37 @@ export const COMMANDS: CommandDefinition[] = [
   },
   {
     name: 'ls',
-    execute: () => output({ kind: 'file-list' }),
+    description: '列出当前目录或指定路径：ls [路径]',
+    execute: (args, _now, context) => {
+      const paths = args.filter((arg) => !/^-[al]+$/.test(arg))
+      const invalidOption = paths.find((arg) => arg.startsWith('-'))
+      if (invalidOption) return error(`ls: invalid option: ${invalidOption}`)
+      if (paths.length > 1) return error('ls: too many arguments')
+      const target = pathTarget('ls', paths[0] ?? '.', context.cwd)
+      if (target.execution) return target.execution
+      const node = target.node!
+      return output({
+        kind: 'file-list',
+        path: node.path,
+        entries: node.type === 'directory' ? listContentDirectory(node.path)
+          : [{ name: node.name, type: 'file', href: node.href }],
+      })
+    },
   },
   {
     name: 'cat',
-    execute: (args) => {
-      if (args[0] === 'about.txt') return output({ kind: 'about' })
-      if (args[0] === 'skills.md') return output({ kind: 'skills' })
-      if (args[0] === 'contact.json') return output({ kind: 'contact' })
-      return output({
-        kind: 'message',
-        text: `cat: ${args[0] || '(no file)'}: No such file or directory`,
-        tone: 'error',
-      })
+    description: '阅读文件：cat <路径>',
+    execute: (args, _now, context) => {
+      if (!args.length) return error('cat: missing operand')
+      if (args.length > 1) return error('cat: too many arguments')
+      const target = pathTarget('cat', args[0], context.cwd)
+      if (target.execution) return target.execution
+      const node = target.node!
+      if (node.type === 'directory') return error(`cat: ${args[0]}: Is a directory`)
+      if (node.content === 'project' || node.content === 'panorama') {
+        return output({ kind: node.content, slug: node.slug! })
+      }
+      return output({ kind: node.content })
     },
   },
   {
@@ -154,12 +230,29 @@ export const COMMANDS: CommandDefinition[] = [
   },
   {
     name: 'cd',
-    execute: () =>
-      output({
-        kind: 'message',
-        text: 'Permission denied: Cannot navigate away from ZhangMin.name',
-        tone: 'warning',
-      }),
+    description: '切换内容目录：cd [路径]；cd - 返回上次目录',
+    execute: (args, _now, context) => {
+      if (args.length > 1) return error('cd: too many arguments')
+      if (args[0] === '-' && !context.previousCwd) return error('cd: OLDPWD not set')
+      const input = args[0] === '-' ? context.previousCwd! : args[0] ?? '~'
+      const target = pathTarget('cd', input, context.cwd)
+      if (target.execution) return target.execution
+      if (target.node!.type !== 'directory') return error(`cd: ${input}: Not a directory`)
+      return { kind: 'change-directory', cwd: target.node!.path }
+    },
+  },
+  {
+    name: 'pwd',
+    description: '显示当前目录',
+    execute: (_args, _now, context) => output({ kind: 'message', text: context.cwd }),
+  },
+  {
+    name: 'history',
+    description: '显示本次终端会话的命令历史',
+    execute: (_args, _now, context) => output({
+      kind: 'message',
+      text: (context.history ?? []).map((line, index) => `${String(index + 1).padStart(4, ' ')}  ${line}`).join('\n'),
+    }),
   },
   {
     name: 'sudo',
@@ -218,11 +311,14 @@ export const HELP_COMMANDS = COMMANDS.filter(
 export function executeCommand(
   input: string,
   now: Date = new Date(),
+  context: CommandContext = { cwd: HOME_DIRECTORY },
 ): CommandExecution {
   const normalized = input.trim()
   if (!normalized) return { kind: 'noop' }
 
-  const [rawCommand, ...args] = normalized.split(/\s+/)
+  const parsed = parseWords(normalized)
+  if (parsed.incomplete) return error('parse: unmatched quote or trailing escape')
+  const [rawCommand, ...args] = parsed.words.map((word) => word.value)
   const commandName = rawCommand.toLowerCase()
   const definition = COMMANDS.find(
     (command) =>
@@ -238,15 +334,79 @@ export function executeCommand(
     })
   }
 
-  return definition.execute(args, now)
+  return definition.execute(args, now, context)
 }
 
-export function autocompleteCommand(input: string): string {
-  const normalized = input.trim().toLowerCase()
-  if (!normalized || normalized.includes(' ')) return input
+function parseWords(input: string) {
+  const words: { value: string; start: number }[] = []
+  let value = ''
+  let start = -1
+  let quote = ''
+  let escaped = false
+  for (let index = 0; index < input.length; index += 1) {
+    const char = input[index]
+    if (escaped) { value += char; escaped = false; continue }
+    if (char === '\\' && quote !== "'") {
+      if (start === -1) start = index
+      escaped = true
+    } else if (quote) {
+      if (char === quote) quote = ''
+      else value += char
+    } else if (char === '"' || char === "'") {
+      if (start === -1) start = index
+      quote = char
+    } else if (/\s/.test(char)) {
+      if (start !== -1) { words.push({ value, start }); value = ''; start = -1 }
+    } else {
+      if (start === -1) start = index
+      value += char
+    }
+  }
+  if (start !== -1) words.push({ value, start })
+  return { words, incomplete: Boolean(quote || escaped), trailingSpace: start === -1 }
+}
 
-  const matches = AUTOCOMPLETE_COMMANDS.filter((command) =>
-    command.startsWith(normalized),
-  )
-  return matches.length === 1 ? matches[0] : input
+export function getCompletionCandidates(input: string, cwd = HOME_DIRECTORY): string[] {
+  const { words, trailingSpace } = parseWords(input)
+  if (words.length === 0 || (words.length === 1 && !trailingSpace)) {
+    const word = words[0]
+    const prefix = word?.value.toLowerCase() ?? ''
+    return AUTOCOMPLETE_COMMANDS.filter((command) => command.startsWith(prefix))
+      .map((command) => `${input.slice(0, word?.start ?? input.length)}${command}`)
+  }
+  if (!['cd', 'ls', 'cat'].includes(words[0].value.toLowerCase())) return []
+  const current = trailingSpace ? { value: '', start: input.length } : words[words.length - 1]
+  const partial = current.value
+  let candidates: string[]
+  if (partial.startsWith('/') && !partial.startsWith(`${HOME_DIRECTORY}/`)) {
+    candidates = CONTENT_DIRECTORIES.map((directory) => `${directory.path}/`).filter((path) => path.startsWith(partial))
+  } else if (partial === '~') {
+    candidates = ['~/']
+  } else {
+    const slash = partial.lastIndexOf('/')
+    const parent = partial.slice(0, slash + 1)
+    const prefix = partial.slice(slash + 1)
+    candidates = listContentDirectory(resolveContentPath(parent || '.', cwd))
+      .filter((entry) => (words[0].value.toLowerCase() !== 'cd' || entry.type === 'directory') && entry.name.startsWith(prefix))
+      .map((entry) => `${parent}${entry.name}${entry.type === 'directory' ? '/' : ''}`)
+    if (words[0].value.toLowerCase() === 'cd' && partial === '.') candidates.push('./', '../')
+  }
+  return [...new Set(candidates)].map((candidate) => {
+    const openingQuote = input[current.start]
+    const token = openingQuote === '"' || openingQuote === "'"
+      ? `${openingQuote}${candidate}${openingQuote}` : candidate.replace(/ /g, '\\ ')
+    return `${input.slice(0, current.start)}${token}`
+  })
+}
+
+export function autocompleteCommand(input: string, cwd = HOME_DIRECTORY): string {
+  const candidates = getCompletionCandidates(input, cwd)
+  if (candidates.length === 0) return input
+  let common = candidates[0]
+  for (const candidate of candidates.slice(1)) {
+    let length = 0
+    while (length < common.length && common[length] === candidate[length]) length += 1
+    common = common.slice(0, length)
+  }
+  return common.length > input.length || candidates.length === 1 ? common : input
 }

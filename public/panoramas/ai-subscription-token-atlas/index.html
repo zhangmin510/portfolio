@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="theme-light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 订阅与 Token Plan 全景图 · 重度编程与 Agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"> -->
+  <script async src="/panoramas/vendor/chart.umd.min.js"></script><script>if (typeof Chart !== "undefined") { Chart.defaults.animation = false; }</script>
+  <script async src="/panoramas/vendor/html-to-image.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { interpolate-size: allow-keywords; } /* Enable smooth height:auto transitions (Chrome 129+) */
+
+    /* ===== THEMES (class-based ONLY — no @media prefers-color-scheme) ===== */
+    html.theme-dark {
+      --bg: #0A0A0A; --surface: #141414; --surface-hover: #1C1C1C;
+      --border: rgba(255,255,255,0.04);
+      --text: #EDEDED; --text-secondary: #888;
+      --accent: #3b82f6; --accent-secondary: #8b5cf6;
+      --positive: #10b981; --negative: #f43f5e; --warning: #f59e0b;
+    }
+    html.theme-light {
+      --bg: #FAFAF9; --surface: #FFFFFF; --surface-hover: #F5F5F4;
+      --border: rgba(0,0,0,0.06);
+      --text: #0f172a; --text-secondary: #64748b;
+      --accent: #2563eb; --accent-secondary: #7c3aed;
+      --positive: #059669; --negative: #e11d48; --warning: #d97706;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+      letter-spacing: -0.01em; font-feature-settings: 'cv11', 'ss01';
+      transition: background 0.3s, color 0.3s;
+      scrollbar-gutter: stable;
+    }
+    h1,h2,h3,h4,h5,h6 { 
+      color: var(--text); 
+      letter-spacing: -0.03em; 
+      line-height: 1.08;
+      text-wrap: balance;
+    }
+    h1 { font-weight: 700; }
+    h2 { font-weight: 600; }
+    body, p, li, td, th, span, label { font-weight: 400; }
+    p,li,td,th,span,label { color: var(--text); }
+    .text-secondary { color: var(--text-secondary); }
+
+    /* ===== CARD ===== */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 24px;
+      transition: box-shadow 0.2s ease;
+    }
+    .card:hover {
+      box-shadow: 0 0 0 1px var(--border), 0 8px 16px rgba(0,0,0,0.08);
+    }
+
+    /* ===== ANIMATIONS (CSS-first — always reliable) ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .animate { animation: fadeInUp 0.6s ease-out both; }
+    .animate.delay-1 { animation-delay: 0.1s; }
+    .animate.delay-2 { animation-delay: 0.2s; }
+    .animate.delay-3 { animation-delay: 0.3s; }
+    .animate.delay-4 { animation-delay: 0.4s; }
+    .animate.delay-5 { animation-delay: 0.5s; }
+    .animate.delay-6 { animation-delay: 0.6s; }
+
+    /* Scroll-triggered: JS adds .reveal, then .visible on scroll */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      body { background: white !important; color: black !important; }
+      .viz-menu, .reveal { display: revert; opacity: 1 !important; transform: none !important; }
+      .card { break-inside: avoid; border: 1px solid #ddd; box-shadow: none; }
+      * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
+    @page { margin: 1in; @bottom-center { content: "Page " counter(page); font-size: 9pt; color: #666; } }
+
+    /* ===== MENU ===== */
+    .viz-menu { position: fixed; top: 16px; right: 16px; z-index: 9999; }
+    .viz-menu-toggle {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(12px); transition: all 0.2s;
+    }
+    .viz-menu-toggle:hover { background: var(--surface-hover); }
+    .viz-menu-dropdown {
+      position: absolute; top: 52px; right: 0; min-width: 200px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 8px;
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: all 0.2s; backdrop-filter: blur(16px);
+    }
+    .viz-menu-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .viz-menu-dropdown button {
+      width: 100%; padding: 10px 14px; border: none; border-radius: 8px;
+      background: transparent; color: var(--text); font-size: 14px;
+      font-family: inherit; cursor: pointer; text-align: left;
+      display: flex; align-items: center; gap: 10px; transition: background 0.15s;
+    }
+    .viz-menu-dropdown button:hover { background: var(--surface-hover); }
+
+    /* ===== SKIP TO CONTENT (accessibility) ===== */
+    .skip-to-content {
+      position: absolute; top: -40px; left: 6px; background: var(--accent);
+      color: white; padding: 8px 12px; text-decoration: none;
+      border-radius: 4px; opacity: 0; pointer-events: none;
+      transition: all 0.2s; z-index: 10000;
+    }
+    .skip-to-content:focus { top: 6px; opacity: 1; pointer-events: auto; }
+
+    /* ===== DETAILS ACCORDION (Chrome 120+ exclusive, 131+ animated) ===== */
+    details { overflow: hidden; }
+    details summary { cursor: pointer; list-style: none; }
+    details summary::-webkit-details-marker { display: none; }
+    ::details-content {
+      transition: block-size 0.3s ease, opacity 0.3s ease;
+      block-size: 0; opacity: 0; overflow: hidden;
+    }
+    details[open]::details-content { block-size: auto; opacity: 1; }
+
+    /* ===== POPOVER (Chrome 114+, zero-JS tooltips/panels) ===== */
+    [popover] {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 16px; max-width: 320px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2); color: var(--text);
+    }
+    [popover]::backdrop { background: rgba(0,0,0,0.3); }
+
+    /* Atlas styles */
+html.theme-light{--bg:#f5f5ef;--surface:#fff;--surface-hover:#f0f3ef;--border:#dce3db;--text:#1b2b22;--text-secondary:#65746b;--accent:#146b4a;--accent-secondary:#376dcb;--positive:#146b4a;--negative:#b24835;--warning:#a46a16}html.theme-dark{--bg:#111b15;--surface:#19261e;--surface-hover:#223328;--border:#34483b;--text:#e6eee7;--text-secondary:#a4b7a9;--accent:#9dd7b0;--accent-secondary:#96b5ef;--positive:#9dd7b0;--negative:#efa38f;--warning:#e5c181}html{scroll-behavior:smooth;scroll-padding-top:30px}body{font-size:1rem;font-family:Inter,'Noto Sans SC',-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;line-height:1.7;background-image:radial-gradient(var(--border) .65px,transparent .65px);background-size:18px 18px}h1{font-size:clamp(2.5rem,5.5vw,5rem);line-height:1.18;font-weight:700;letter-spacing:-.045em}h2{font-size:clamp(2rem,2.75vw,2.7rem);line-height:1.3;font-weight:600}h3{font-size:1.5rem;line-height:1.35;font-weight:600}small{font-size:.75rem}a{color:var(--accent);text-decoration:none}button,input,select{font:inherit}button,a,input,select{touch-action:manipulation}button{cursor:pointer;border:0}button,select{min-height:44px}button:disabled{opacity:.5}input[type=number],input[type=search],select{width:100%;min-width:0;max-width:100%;padding:10px 12px;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:6px;font-variant-numeric:tabular-nums}input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer;min-height:30px}input[type=checkbox]{accent-color:var(--accent);width:18px;height:18px;flex-shrink:0}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--accent-secondary);outline-offset:3px}.sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0)}[hidden]{display:none!important}#main-content{max-width:1440px;margin:auto;padding:0 48px}section{margin-bottom:64px;min-width:0}.topbar{display:flex;gap:32px;align-items:center;border-bottom:1px solid var(--border);padding:26px 0}.brand{display:flex;align-items:center;gap:12px;color:var(--text);font-size:.875rem;letter-spacing:.04em;flex-shrink:0}.brand>b{font-size:1.75rem;font-weight:600;letter-spacing:-.07em;border:1px solid var(--text);height:44px;width:62px;display:flex;align-items:center;justify-content:center}.brand>b>span{color:var(--accent)}.brand>div{font-weight:600;line-height:1.4}.brand small{display:block;font-size:.7rem;color:var(--text-secondary);letter-spacing:0;margin-top:3px}.topbar nav{display:flex;gap:24px;margin-left:auto;flex-wrap:wrap}.topbar nav a{font-size:.875rem;color:var(--text-secondary);white-space:nowrap}.topbar nav a:hover{color:var(--accent)}.edition{font-size:.7rem;color:var(--text-secondary);white-space:nowrap;padding-right:30px}.viz-menu{top:26px;right:18px}.viz-menu-toggle{border-radius:6px}.viz-menu-dropdown{box-shadow:0 8px 30px #0002}.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:64px;align-items:center;padding-top:72px;padding-bottom:20px}.eyebrow{font-family:Inter,sans-serif;display:flex;align-items:center;gap:9px;font-size:.72rem;font-weight:600;letter-spacing:.13em;color:var(--accent)}.dot{width:7px;height:7px;background:var(--accent);border-radius:50%}.hero h1{margin:24px 0}.hero p{font-size:1.125rem;color:var(--text-secondary)}.actions{display:flex;align-items:center;gap:24px;margin-top:32px}.button{display:inline-flex;align-items:center;justify-content:center;gap:30px;padding:12px 20px;border:1px solid var(--border);border-radius:6px;min-height:48px;font-size:.875rem;font-weight:500}.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}.primary span{color:inherit;font-size:1.25rem}.secondary{color:var(--text);background:var(--surface)}.button:hover{filter:brightness(.95)}.text-link{color:var(--accent);background:transparent;font-size:.875rem}.hero-foot{font-size:.7rem;color:var(--text-secondary);margin-top:28px}.flow-panel{padding:28px;border:1px solid var(--border);background:var(--surface);border-radius:8px;box-shadow:8px 8px 0 color-mix(in srgb,var(--border),transparent 30%)}.flow-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:26px}.flow-heading>span:first-child{font-size:.65rem;letter-spacing:.13em;color:var(--text-secondary);font-weight:600}.tag{font-size:.7rem;padding:4px 9px;border:1px solid var(--border);border-radius:4px;color:var(--text-secondary);white-space:nowrap}.flow-node{display:flex;align-items:center;gap:16px;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:18px}.flow-node>i{font-size:.75rem;font-style:normal;font-family:monospace;color:var(--text-secondary)}.flow-node b{font-size:1.125rem;font-weight:600}.flow-node small{display:block;color:var(--text-secondary);margin-top:4px}.flow-node>span{margin-left:auto;font-size:.7rem;color:var(--text-secondary)}.flow-node.blue{background:color-mix(in srgb,var(--accent-secondary),var(--surface) 94%);border-color:color-mix(in srgb,var(--accent-secondary),var(--border) 60%)}.flow-node.blue b{color:var(--accent-secondary)}.connector{font-size:.7rem;color:var(--text-secondary);padding:12px 24px;margin-left:28px;border-left:1px dashed var(--border)}.token-flow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px}.token-flow b{display:block;font-size:1.5rem;font-weight:600;letter-spacing:-.05em}.token-flow small{color:var(--text-secondary);font-size:.7rem}.token-flow>span{color:var(--text-secondary)}.token-flow>div:last-child b{color:var(--accent)}.flow-foot{border-top:1px dashed var(--border);text-align:center;margin-top:24px;padding-top:18px;font-size:.875rem;color:var(--text-secondary)}.routes{display:grid;grid-template-columns:repeat(3,1fr);background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.routes article{padding:26px 28px;border-right:1px solid var(--border)}.routes article:last-child{border:0}.routes h3{margin:12px 0}.routes p,.routes small{font-size:.75rem;color:var(--text-secondary)}.routes small{display:block;margin-top:14px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:28px;margin-bottom:32px}.section-head .eyebrow{margin-bottom:12px}.muted{font-size:.75rem;color:var(--text-secondary)}.segmented{display:flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:7px;background:var(--surface);border:1px solid var(--border);flex-shrink:0}.segmented button{padding:6px 13px;border-radius:4px;background:transparent;font-size:.8rem;color:var(--text-secondary);white-space:nowrap}.segmented button.active{background:var(--text);color:var(--surface)}.presets{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:20px}.presets>span{font-size:.8rem;color:var(--text-secondary);margin-right:12px}.presets button{background:transparent;border:1px solid var(--border);padding:8px 16px;border-radius:6px;font-size:.8rem;color:var(--text-secondary)}.presets button.active{color:var(--accent);border-color:var(--accent);background:color-mix(in srgb,var(--accent),var(--surface) 92%)}.presets .reset{margin-left:auto;border-color:transparent;color:var(--accent)}.panel{padding:28px;background:var(--surface);border:1px solid var(--border);border-radius:8px;min-width:0}.panel:hover{box-shadow:0 4px 16px #00000004}.panel-title{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}.panel-title>span{font-size:.7rem;color:var(--text-secondary)}.lab-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:24px}.control-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px 28px}.control label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.8rem}.control output{color:var(--accent);font-weight:600;font-variant-numeric:tabular-nums}.range-label{display:flex;justify-content:space-between;font-size:.65rem}.range-label span{color:var(--text-secondary)}.compact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;border-top:1px solid var(--border);margin-top:20px;padding-top:20px}.compact-grid label,.advanced .control-grid>label{font-size:.7rem;color:var(--text-secondary)}.compact-grid input,.advanced .control-grid input{margin-top:7px}.advanced{margin-top:20px;border-top:1px solid var(--border);padding-top:12px}.advanced summary{display:flex;align-items:center;justify-content:space-between;font-size:.8rem;min-height:40px;color:var(--accent)}.advanced .control-grid{margin-top:16px}.advanced p,.help{font-size:.72rem;color:var(--text-secondary);line-height:1.8;margin-top:16px}.check{display:flex;align-items:center;gap:8px;font-size:.75rem;color:var(--text-secondary);margin:14px 0}.bill{font-size:clamp(2.8rem,4.8vw,4.5rem);font-weight:600;letter-spacing:-.065em;color:var(--accent);line-height:1.2;margin-top:28px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.bill-caption{font-size:.8rem;color:var(--text-secondary);margin:8px 0 24px}.stack{display:flex;height:10px;gap:3px;border-radius:3px;overflow:hidden}.stack>span{min-width:0}.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;font-size:.7rem}.legend span{color:var(--text-secondary)}.legend i{width:8px;height:8px;display:inline-block;margin-right:6px}.monthly-stats{display:grid;grid-template-columns:1fr 1fr;gap:24px;border-top:1px solid var(--border);padding-top:26px;margin-top:26px}.monthly-stats small{display:block;color:var(--text-secondary)}.monthly-stats b{font-size:1.5rem;font-weight:500;letter-spacing:-.04em;font-variant-numeric:tabular-nums}.model-note{font-size:.75rem;color:var(--text-secondary);background:var(--bg);border-radius:4px;margin-top:22px;padding:14px}.source-link{display:inline-block;font-size:.75rem;margin-top:14px}.quota-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:24px;margin-top:24px}.quota-grid label:not(.check){display:block;font-size:.8rem;margin:16px 0 8px}.quota-grid .compact-grid label{font-size:.7rem;margin:0}.unit-input{display:flex;align-items:center;gap:14px}.unit-input input{flex:1;min-width:0}.unit-input span{font-size:.7rem;color:var(--text-secondary);white-space:nowrap}.quota-grid .button{margin-top:16px;font-size:.75rem}.quota-note{font-size:.8rem;color:var(--text-secondary);line-height:1.8}.small-note{font-size:.72rem;line-height:1.8;color:var(--text-secondary);border-top:1px solid var(--border);padding-top:16px;margin-top:20px}.quota-row{margin:24px 0}.quota-row-head{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:.8rem;margin-bottom:8px}.quota-row-head small{color:var(--text-secondary);font-size:.7rem}.meter{height:7px;background:var(--bg);border-radius:3px;overflow:hidden}.meter span{height:100%;display:block;background:var(--accent)}.quota-row.over .meter span{background:var(--negative)}.quota-row.over small{color:var(--negative)}.quota-blank{padding:20px 0 30px;color:var(--text-secondary);font-size:.875rem}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:20px}.search-tools{display:flex;gap:10px;min-width:0}.search-tools input{max-width:270px}.search-tools select{max-width:160px}.atlas-meta{display:flex;align-items:center;justify-content:space-between;gap:24px;margin:16px 0 24px}.atlas-meta p{font-size:.7rem;color:var(--text-secondary)}.atlas-meta .check{margin:0;white-space:nowrap}.plan-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.plan-card{padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:8px;display:flex;flex-direction:column;min-width:0}.plan-card:hover{box-shadow:0 4px 16px #00000008}.plan-card.selected{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}.plan-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}.provider{font-size:.7rem;color:var(--text-secondary);text-transform:uppercase;font-weight:600;letter-spacing:.07em}.plan-top label{display:flex;align-items:center;gap:7px;font-size:.7rem;cursor:pointer;min-height:28px;color:var(--text-secondary)}.plan-card h3{font-size:1.5rem;line-height:1.35;overflow-wrap:anywhere;letter-spacing:-.035em}.tags{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 18px}.tags span{font-size:.65rem;background:var(--bg);color:var(--text-secondary);padding:2px 7px;border-radius:3px}.price{font-size:2rem;font-weight:600;line-height:1.3;letter-spacing:-.04em;font-variant-numeric:tabular-nums}.price small{font-size:.7rem;font-weight:400;letter-spacing:0;margin-left:7px;color:var(--text-secondary)}.native-price{font-size:.7rem;color:var(--text-secondary);margin-top:6px}.plan-rule{padding-top:16px;margin-top:20px;border-top:1px solid var(--border);font-size:.8rem;color:var(--text-secondary);line-height:1.8}.plan-bottom{margin-top:auto;padding-top:22px;display:flex;align-items:center;justify-content:space-between;gap:10px}.rule-btn{background:transparent;color:var(--accent);font-size:.72rem;text-align:left;min-height:36px}.plan-bottom a{font-size:.7rem;color:var(--text-secondary)}.empty{padding:60px;text-align:center;color:var(--text-secondary)}.compare-box{padding:24px;border:1px solid var(--accent);border-radius:8px;background:var(--surface);margin-top:24px}.compare-grid{display:grid;gap:16px}.compare-item{padding:20px;background:var(--bg);border:1px solid var(--border);border-radius:6px;min-width:0}.compare-item h4{font-size:1.125rem;line-height:1.5;margin:6px 0 16px}.compare-item .price{font-size:1.75rem}.compare-item dt{font-size:.7rem;color:var(--text-secondary);margin:18px 0 5px}.compare-item dd{font-size:.8rem;line-height:1.8}.callout{display:flex;align-items:center;gap:24px;border-top:1px solid var(--border);padding-top:24px;margin-top:30px}.callout>b{font-size:2.5rem;font-weight:300;color:var(--text-secondary)}.callout p{font-size:.8rem;color:var(--text-secondary)}.callout strong{font-weight:500;color:var(--text)}.curve-grid{display:grid;grid-template-columns:1.65fr 1fr;gap:24px}.chart-heading{display:flex;align-items:center;justify-content:space-between;gap:20px}.chart-heading select{max-width:260px}.chart-container{width:100%;position:relative;margin-top:20px;min-width:0}.chart-container svg{width:100%;height:100%;display:block}.chart-container svg text{font-family:Inter,'Noto Sans SC',sans-serif;fill:var(--text-secondary);font-size:13px}.chart-container .chart-data:hover{stroke-width:4}.chart-container .grid{stroke:var(--border);stroke-dasharray:3 5}.legend .api-line,.legend .plan-line{width:20px;height:2px;vertical-align:middle}.api-line{background:var(--accent-secondary)}.plan-line{background:var(--accent)}.big-number{font-size:3.5rem;font-weight:600;letter-spacing:-.05em;line-height:1.2;color:var(--accent);margin-top:26px}.intersection>p{font-size:.8rem;color:var(--text-secondary);margin-top:14px}.tips{display:flex;flex-direction:column;gap:8px;margin-top:24px}.tips b{font-size:.875rem;font-weight:500;margin-bottom:4px}.tips span{font-size:.75rem;color:var(--text-secondary)}.rate-panel{margin-top:24px}.table-wrap{overflow-x:auto;max-width:100%}table{width:100%;border-collapse:collapse;text-align:left;white-space:nowrap;font-size:.8rem}th,td{padding:14px 12px;border-bottom:1px solid var(--border);font-weight:400}th{font-size:.7rem;color:var(--text-secondary)}td:first-child{font-weight:500}td:last-child{color:var(--accent);font-weight:500}.rate-panel>p{font-size:.7rem;color:var(--text-secondary);margin-top:16px}.eff-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:24px}.eff-grid>.panel>label{display:flex;align-items:center;justify-content:space-between;gap:14px;font-size:.8rem;margin:22px 0 8px}.eff-grid>.panel>label>output{color:var(--accent)}.eff-results{display:flex;flex-direction:column;gap:20px}.eff-hero{background:color-mix(in srgb,var(--accent),var(--surface) 94%);border-color:color-mix(in srgb,var(--accent),var(--border) 75%)}.eff-hero>small{font-size:.8rem;color:var(--text-secondary)}.eff-hero>div{display:flex;align-items:baseline;gap:16px;margin:8px 0}.eff-hero b{font-size:3.5rem;font-weight:600;letter-spacing:-.05em;line-height:1.3;color:var(--accent)}.eff-hero p{font-size:.8rem;color:var(--text-secondary)}.eff-kpis{display:grid;grid-template-columns:1fr 1fr;gap:20px}.eff-kpis small{display:block;font-size:.7rem;color:var(--text-secondary)}.eff-kpis b{display:block;font-size:1.75rem;font-weight:500;letter-spacing:-.04em;margin:8px 0}.eff-kpis p{font-size:.7rem;color:var(--text-secondary)}.decisions{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;border-top:1px solid var(--border);padding-top:32px;margin-top:32px}.decisions article>span{font-size:.7rem;color:var(--accent)}.decisions h3{margin:10px 0}.decisions p{font-size:.8rem;color:var(--text-secondary)}.method{padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-radius:6px;margin-top:12px}.method summary{display:flex;justify-content:space-between;align-items:center;min-height:30px;font-size:1rem}.method p{font-size:.8rem;color:var(--text-secondary);margin-top:16px;line-height:1.9}.source-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.source-item{padding:18px;background:var(--surface);border:1px solid var(--border);border-radius:6px;min-width:0}.source-item a{font-size:.8rem;font-weight:500}.source-item p{font-size:.7rem;color:var(--text-secondary);margin-top:8px;overflow-wrap:anywhere}.source-tail{font-size:.75rem;color:var(--text-secondary);margin-top:24px}footer{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:28px 0 40px;border-top:1px solid var(--border)}footer p,footer>span{font-size:.7rem;color:var(--text-secondary)}dialog{margin:auto;width:min(680px,calc(100% - 32px));max-height:85vh;overflow:auto;padding:28px;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:8px;box-shadow:0 20px 70px #0004}dialog::backdrop{background:#08170da6;backdrop-filter:blur(3px)}.dialog-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}.dialog-head button{width:40px;font-size:1.5rem;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:6px}#dialogBody h2{font-size:2rem;margin:10px 0 24px}#dialogBody h4{font-size:1rem;margin:24px 0 8px}#dialogBody p,#dialogBody li{font-size:.875rem;line-height:1.9;color:var(--text-secondary)}#dialogBody ul{padding-left:20px}#dialogBody a{font-size:.8rem}.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);max-width:calc(100% - 32px);width:max-content;background:var(--text);color:var(--surface);padding:12px 20px;border-radius:6px;font-size:.8rem;opacity:0;pointer-events:none;z-index:10001;transition:opacity .2s}.toast.show{opacity:1}
+@media(max-width:1150px){#main-content{padding:0 32px}.topbar nav{gap:16px}.edition{display:none}.topbar{padding-right:40px}.hero{gap:32px}.toolbar{flex-wrap:wrap}.search-tools{width:100%}.search-tools input{max-width:none}.chart-heading{flex-wrap:wrap}.plan-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:800px){#main-content{padding:0 20px}.topbar{flex-wrap:wrap;gap:20px;padding:20px 0}.topbar nav{order:3;width:100%;margin:0;gap:20px}.hero{grid-template-columns:1fr;padding-top:40px;gap:36px}.hero h1{font-size:3.3rem}.hero p br{display:none}.flow-panel{max-width:600px}.routes{grid-template-columns:1fr}.routes article{border-right:0;border-bottom:1px solid var(--border);padding:22px 24px}.section-head{flex-wrap:wrap;align-items:flex-start;gap:16px}.lab-grid,.quota-grid,.curve-grid,.eff-grid{grid-template-columns:1fr}.panel-title{flex-wrap:wrap}.source-grid{grid-template-columns:1fr 1fr}.decisions{grid-template-columns:1fr;gap:24px}.compare-grid{grid-template-columns:1fr 1fr!important}.chart-heading select{max-width:none}.atlas-meta{flex-wrap:wrap;gap:16px}.presets .reset{margin-left:0}footer{flex-wrap:wrap}footer p{width:100%}}
+@media(max-width:520px){.hero h1{font-size:2.65rem}.hero p{font-size:1rem}.topbar nav{gap:12px}.topbar nav a{font-size:.7rem}.actions{flex-wrap:wrap;gap:16px}.flow-panel{padding:20px;box-shadow:5px 5px 0 var(--border)}.flow-node{padding:14px;gap:12px}.flow-node>span{display:none}.token-flow{gap:7px}.token-flow b{font-size:1.25rem}.token-flow small{font-size:.65rem}.flow-heading .tag{font-size:.6rem}.panel{padding:22px}.control-grid{grid-template-columns:1fr;gap:18px}.compact-grid{gap:8px}.compact-grid input{padding:8px}.plan-grid,.source-grid{grid-template-columns:1fr}.segmented button{padding:6px 9px;font-size:.72rem}.presets button{font-size:.7rem;padding:7px 12px}.search-tools{flex-wrap:wrap}.search-tools select{max-width:none}.compare-grid{grid-template-columns:1fr!important}.eff-kpis{gap:12px}.eff-kpis .panel{padding:16px}.eff-kpis b{font-size:1.4rem}.chart-container{height:300px!important}.curve-grid>.panel{padding:18px}.section-head h2{font-size:2rem}.callout{gap:14px}.source-item{padding:16px}}
+@media(max-width:375px){body{overflow-x:hidden}#main-content{padding:0 16px}.hero h1{font-size:2.5rem}.flow-panel{padding:16px}.panel{padding:18px}.compact-grid label{font-size:.65rem}.token-flow small{font-size:.6rem}}
+@media print{body{background:white!important}.viz-menu,.presets,.toolbar,.segmented,.actions,#export,#toast,dialog{display:none!important}#main-content{max-width:none;padding:0}.topbar nav{display:none}.hero{padding-top:30px;gap:24px}.hero h1{font-size:2.8rem}section{margin-bottom:36px}.panel,.plan-card,.source-item{break-inside:avoid}.plan-grid{grid-template-columns:repeat(2,1fr)}.plan-top label{display:none}.flow-panel{box-shadow:none}html.theme-dark{--bg:#fff;--surface:#fff;--surface-hover:#f8f8f8;--border:#ccc;--text:#18261f;--text-secondary:#555;--accent:#146b4a;--accent-secondary:#376dcb}a{color:#146b4a!important}}
+
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:10000;padding:8px 16px;background:var(--accent);color:white;text-decoration:none;border-radius:4px;" onfocus="this.style.cssText='position:fixed;left:16px;top:16px;z-index:10000;padding:8px 16px;background:var(--accent);color:white;text-decoration:none;border-radius:4px;'" onblur="this.style.cssText='position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;'">Skip to content</a>
+
+  <!-- MENU -->
+  <div class="viz-menu">
+    <button class="viz-menu-toggle" onclick="toggleMenu()" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/>
+      </svg>
+    </button>
+    <div class="viz-menu-dropdown" id="vizMenuDropdown">
+      <button onclick="cycleTheme()"><span id="themeIcon">◐</span><span id="themeLabel">切换主题</span></button>
+      <button onclick="downloadImage()"><span>↓</span><span>导出账单摘要 PNG</span></button>
+      <button onclick="window.print()"><span>↗</span><span>打印 / PDF</span></button>
+    </div>
+  </div>
+
+  <!-- SKIP TO CONTENT (accessibility) -->
+  <a href="#main-content" class="skip-to-content">Skip to content</a>
+
+  <main id="main-content" role="main">
+    <header class="topbar"><a class="brand" href="#"><b>A<span>/</span>I</b><div>COST ATLAS<small>订阅与 Token 全景图</small></div></a><nav aria-label="主导航"><a href="#lab">用量实验室</a><a href="#atlas">套餐地图</a><a href="#curve">成本曲线</a><a href="#efficiency">效率账本</a><a href="#sources">来源</a></nav><span class="edition">2026.10.23 · 编程版</span></header>
+<section class="hero animate"><div><div class="eyebrow"><i class="dot"></i> FOR BUILDERS / 重度编程与 AGENT</div><h1>把 AI 预算，<br>花在完成任务上。</h1><p>从一次代码修改，到整晚运行的 Agent。<br>看清订阅额度、Token 消耗，以及真正节省的时间。</p><div class="actions"><a class="button primary" href="#lab">模拟我的用量 <span>↗</span></a><a href="#atlas" class="text-link">浏览套餐地图 →</a></div><div class="hero-foot">官方公开信息快照 · 人民币 / 美元 · 本地计算 · 核心功能可离线</div></div><div class="flow-panel"><div class="flow-heading"><span>ONE TASK, MANY CALLS</span><span class="tag">Agent 消耗链路</span></div><div class="flow-node"><i>01</i><div><b>一个开发任务</b><small>修复、实现、审查、重构</small></div><span>任务</span></div><div class="connector">规划 → 调工具 → 校验 → 返工</div><div class="flow-node blue"><i>02</i><div><b id="heroCalls">12 次模型请求</b><small>每一轮都需要计费上下文</small></div><span>调用</span></div><div class="connector">输入 + 缓存 + 输出 / 推理</div><div class="token-flow"><div><b id="heroInput">300K</b><small>计费输入</small></div><span>+</span><div><b id="heroOutput">24K</b><small>计费输出</small></div><span>=</span><div><b id="heroCost">—</b><small>每任务 API 费用</small></div></div><div class="flow-foot">任务数 ≠ 请求数 ≠ Token 额度</div></div></section>
+<section class="routes animate delay-1" aria-label="三种计费模式"><article><div class="eyebrow">01 / 原生工具</div><h3>订阅与 IDE</h3><p>Codex · Claude Code · Cursor · Copilot</p><small>固定月费 + 动态额度 / 产品内 Credits</small></article><article><div class="eyebrow">02 / 编程套餐</div><h3>Coding / Agent Plan</h3><p>百炼 · 方舟 · Z.ai · MiniMax · Kimi</p><small>保留 request、AFP、Credits 原生单位</small></article><article><div class="eyebrow">03 / 自由调用</div><h3>Token 按量计费</h3><p>选模型 · 控上下文 · 调缓存 · 分层路由</p><small>计费输入、缓存读写与输出分别核算</small></article></section>
+<section id="lab"><div class="section-head"><div><div class="eyebrow">01 / WORKLOAD LAB</div><h2>你的 Agent，每月吃掉多少？</h2></div><div class="segmented" aria-label="显示货币"><button class="active" data-currency="CNY" aria-pressed="true">¥ CNY</button><button data-currency="USD" aria-pressed="false">$ USD</button></div></div><div class="presets"><span>使用场景</span><button data-preset="assist">轻量协作</button><button data-preset="daily" class="active">全天编程</button><button data-preset="agent">多 Agent 重构</button><button data-preset="batch">批处理</button><button class="reset" id="reset">重置参数 ↺</button></div><div class="lab-grid"><div class="panel"><div class="panel-title"><h3>调节使用强度</h3><span id="scenarioLabel">全天编程 · 示例参数</span></div><div class="control-grid"><div class="control"><label for="tasks">每天尝试任务<output id="tasksValue">12</output></label><input id="tasks" type="range" min="0" max="100" step="1" value="12"><div class="range-label"><span>0</span><span>100 个 / 日</span></div></div><div class="control"><label for="calls">基础模型请求 / 任务<output id="callsValue">10</output></label><input id="calls" type="range" min="1" max="100" step="1" value="10"><div class="range-label"><span>1</span><span>100 轮</span></div></div><div class="control"><label for="input">完整输入 / 请求<output id="inputValue">25000</output></label><input id="input" type="range" min="1000" max="600000" step="1000" value="25000"><div class="range-label"><span>1K</span><span>600K tokens</span></div></div><div class="control"><label for="output">输出 / 请求（含推理）<output id="outputValue">2000</output></label><input id="output" type="range" min="100" max="30000" step="100" value="2000"><div class="range-label"><span>100</span><span>30K tokens</span></div></div><div class="control"><label for="cache">输入 Token 缓存命中<output id="cacheValue">70</output></label><input id="cache" type="range" min="0" max="100" step="1" value="70"><div class="range-label"><span>无缓存</span><span>全部命中</span></div></div><div class="control"><label for="retry">额外请求（重试 / 返工）<output id="retryValue">20</output></label><input id="retry" type="range" min="0" max="200" step="5" value="20"><div class="range-label"><span>0%</span><span>额外 2 倍请求</span></div></div></div><div class="compact-grid"><label>月活跃天数<input id="days" type="number" min="1" max="31" value="22"></label><label>每周活跃天数<input id="weekDays" type="number" min="1" max="7" value="5"></label><label>每天活跃小时<input id="hours" type="number" min="1" max="24" value="8"></label></div><details class="advanced"><summary>高级计费参数 <span>＋</span></summary><div class="control-grid"><label>未命中输入中缓存写入的比例 (%)<input id="writePct" type="number" min="0" max="100" value="30"></label><label>工具 / 环境附加费 ($ / 月)<input id="extras" type="number" min="0" max="100000" value="0"></label><label>Google 缓存存储 (M token·h / 月)<input id="storage" type="number" min="0" max="1000000" value="0"></label><label>汇率假设：1 USD = CNY<input id="fx" type="number" min="0.1" max="100" value="7" step="0.01"></label></div><label class="check"><input type="checkbox" id="offpeak">DeepSeek 全部在非峰时调用（半价）</label><p>缓存写入：OpenAI 用 30m 档，Claude 用 5m 档。汇率 7.00 是计算假设，可自行修改。</p></details><p class="help">完整输入包含代码、历史与工具返回；输出包含计费推理。额外调用已含返工，不再按成功率重复放大。</p></div><div class="panel bill-panel"><div class="panel-title"><h3>API 月账单预估</h3><span class="tag">实时计算</span></div><label class="sr-only" for="model">API 模型</label><select id="model"></select><div class="bill" id="apiTotal">—</div><div class="bill-caption" id="billCaption">—</div><div class="stack" id="costStack"></div><div class="legend" id="costLegend"></div><div class="monthly-stats"><div><small>尝试任务 / 月</small><b id="monthTasks">—</b></div><div><small>模型请求 / 月</small><b id="monthRequests">—</b></div><div><small>计费输入 Token</small><b id="monthInput">—</b></div><div><small>输出 / 推理 Token</small><b id="monthOutput">—</b></div></div><p class="model-note" id="modelNote"></p><a id="modelSource" class="source-link" target="_blank" rel="noopener">官方费率 ↗</a></div></div>
+<div class="quota-grid"><div class="panel"><div class="panel-title"><h3>额度够撑住高峰吗？</h3><span class="tag">原生单位</span></div><label for="quotaPlan">包月套餐</label><select id="quotaPlan"></select><div id="glmOptions" hidden><label for="glmModel">Z.ai 使用的模型</label><select id="glmModel"><option value="glm">GLM-5.3</option><option value="flash">GLM-5.3-Flash</option></select><label class="check"><input id="glmOffpeak" type="checkbox">按常规非峰时 0.5× 抵扣</label></div><label for="units">每任务额度消耗（含返工）</label><div class="unit-input"><input id="units" type="number" min="0" max="10000000" value="0" step="0.1"><span id="unitName">模型请求</span></div><p class="help" id="unitsHelp">优先用后台日志校准；各家的 Credits、AFP 不能直接互换。</p><button id="estimate" class="button secondary">采用模型请求数估算</button><details class="advanced"><summary>填入账号实测窗口额度 <span>＋</span></summary><div class="compact-grid"><label>5h 总额度<input id="cap5" type="number" min="0" placeholder="公开值"></label><label>周总额度<input id="capWeek" type="number" min="0" placeholder="公开值"></label><label>月总额度<input id="capMonth" type="number" min="0" placeholder="公开值"></label></div><p>留空采用公开额度；填入数字后为你的账号情景。0 表示该窗口容量为零，未知额度不会当作免费或无限。</p></details></div><div class="panel"><div class="panel-title"><h3>窗口压力测试</h3><span class="tag" id="quotaStatus">—</span></div><div id="quotaBars"></div><p class="quota-note" id="quotaNote"></p><div class="small-note">5h 需求按每天活跃时长均匀分摊，周 / 月分别核算。连续运行、并行 Agent 和突发任务可能更早触顶；不把 5 小时额度乘成虚构月容量。</div></div></div></section>
+<section id="atlas"><div class="section-head"><div><div class="eyebrow">02 / PLAN LANDSCAPE</div><h2>套餐地图，先看规则再比价格。</h2></div><span id="catalogCount" class="muted">—</span></div><div class="toolbar"><div class="segmented" aria-label="套餐类别"><button data-kind="all">全部</button><button data-kind="sub">订阅 / IDE</button><button data-kind="coding" class="active">Coding / Agent</button><button data-kind="api">API 模型</button></div><div class="search-tools"><label class="sr-only" for="search">搜索方案</label><input id="search" type="search" placeholder="搜索产品、模型或额度…"><label class="sr-only" for="sort">排序</label><select id="sort"><option value="brand">按产品分组</option><option value="cost">按当前月费用</option></select></div></div><div class="atlas-meta"><p>勾选最多 4 个方案并排对比。API 显示当前场景账单，包月显示固定月费。</p><label class="check"><input id="showLegacy" type="checkbox">显示旧订阅档位</label></div><div id="planGrid" class="plan-grid"></div><div id="empty" class="empty" hidden>没有匹配项，请换个关键词或分类。</div><div id="compareBox" class="compare-box" hidden><div class="panel-title"><h3>并排看清差异</h3><button id="clearCompare" class="text-link">清空选择 ×</button></div><div id="compareTable" class="compare-grid"></div></div><div class="callout"><b>≠</b><p>专用套餐 Key、应用内 Credits、通用 API 余额和附赠 API 抵扣各有范围。<strong>例如 Claude Max 新增可领取 API Credits，但它不抵 Claude Code 或应用超额。</strong></p></div></section>
+<section id="curve"><div class="section-head"><div><div class="eyebrow">03 / COST FRONTIER</div><h2>包月与按量，在哪个用量相遇？</h2></div><span class="muted">账单金额比较 · 不等同能力排名</span></div><div class="curve-grid"><div class="panel"><div class="chart-heading"><h3>月任务数 → 费用</h3><select id="curvePlan" aria-label="曲线对照套餐"></select></div><div id="curveChart" class="chart-container" style="height:360px"></div><div class="legend"><span><i class="api-line"></i>当前 API 模型</span><span><i class="plan-line"></i>包月固定月费</span></div></div><div class="panel intersection"><div class="eyebrow">BILLING INTERSECTION</div><div id="intersection" class="big-number">—</div><p>个尝试任务 / 月<br>两种账单金额相同</p><p id="intersectionNote"></p><div class="small-note">交点仅比较支出。包月线是月费基线，未保证能覆盖该任务量。附赠 API 抵扣不自动从独立 API 成本中扣除；应核对提供商、产品与领取资格。</div><div class="tips"><b>三个省钱杠杆</b><span>① 缩短每轮重复上下文</span><span>② 稳定前缀，提升缓存复用</span><span>③ 简单与复杂任务分层路由</span></div></div></div><div class="panel rate-panel"><div class="panel-title"><h3>API 单价速查</h3><span>USD / 1M tokens · 标准短上下文</span></div><div class="table-wrap"><table><thead><tr><th>模型</th><th>普通输入</th><th>缓存读取</th><th>缓存写入*</th><th>输出 / 推理</th><th>当前场景 / 月</th></tr></thead><tbody id="rateTable"></tbody></table></div><p>*写入价替代对应部分普通输入费；未单列写入价时按普通输入处理。模型 Tokenizer 不同，同 Token 量只是归一化假设。</p></div></section>
+<section id="efficiency"><div class="section-head"><div><div class="eyebrow">04 / PRODUCTIVITY LEDGER</div><h2>把节省的时间，也记进账本。</h2></div><span class="tag">用户情景 · 非性能实测</span></div><div class="eff-grid"><div class="panel"><h3>定义你的效率</h3><label for="effPlan">评估方案</label><select id="effPlan"></select><label for="saving">每尝试任务净节省分钟（已含返工）</label><input id="saving" type="number" min="-120" max="1000" value="8"><label for="timeValue">时间价值（<span id="timeCurrency">CNY</span> / 小时）</label><input id="timeValue" type="number" min="0" max="100000" value="150"><label for="accepted">最终可接受任务比例（自评）<output id="acceptedValue">80%</output></label><input id="accepted" type="range" min="0" max="100" value="80"><p class="help">切换方案不会自动生成模型能力分数；请依据自己的测试填写。订阅估算以实际能覆盖该工作量为前提。</p></div><div class="eff-results"><div class="panel eff-hero"><small>每月净节省时间</small><div><b id="savedHours">—</b><span>小时</span></div><p id="effNote"></p></div><div class="eff-kpis"><div class="panel"><small>每个可接受任务的费用</small><b id="acceptedCost">—</b><p>月费用 ÷ 可接受任务数</p></div><div class="panel"><small>回本需净节省</small><b id="payback">—</b><p>月费用 ÷ 你的小时价值</p></div><div class="panel"><small>每节省一小时的费用</small><b id="costPerHour">—</b><p>月费用 ÷ 净节省小时</p></div><div class="panel"><small>按时间价值估算净收益</small><b id="netValue">—</b><p>节省时间价值 − 月费用</p></div></div></div></div><div class="decisions"><article><span>全天开发</span><h3>看窗口</h3><p>月额度有余量，5h 或周窗口也可能先耗尽。用后台记录校准每任务用量。</p></article><article><span>复杂长任务</span><h3>看返工</h3><p>上下文重送、推理输出、额外轮数共同决定成本。单价低不等于完成任务更便宜。</p></article><article><span>无人值守</span><h3>看持续供给</h3><p>核对套餐是否允许你的工具与场景，以及耗尽后等待、停止还是继续扣费。</p></article></div></section>
+<section id="sources"><div class="section-head"><div><div class="eyebrow">05 / DATA & METHODOLOGY</div><h2>每一笔价格，都能回到来源。</h2></div><button id="export" class="button secondary">导出我的场景 JSON ↓</button></div><details class="method" open><summary>价格口径与日期 <span>−</span></summary><p>核对日期：2026-10-23（Asia/Singapore）。本文件是静态快照，不会自动更新。主价格采用可确认的标准月付 / 续费价，年付、旧订阅与优惠单列。无法从官方可读正文确认的新价保留“未核实”，不沿用旧价。税费、汇兑、加购与第三方加价未自动计入。</p></details><details class="method"><summary>计算公式与边界 <span>＋</span></summary><p>月任务 N = 日任务 × 活跃天数。请求 Q = N × 请求/任务 × (1+额外请求比例)。总输入 I = Q × 每请求完整输入，缓存命中 H = I × 命中率，未命中 U = I−H，写入 W = U × 写入比例。API 费用 = [(U−W)×输入单价 + W×写入单价 + H×缓存读取单价 + 输出×输出单价] / 1M + 存储 + 附加费用。输出含计费推理。</p><p>每请求输入触发长上下文阶梯。窗口需求：5h = 日任务 × 每任务原生额度 × min(5/每日小时,1)，周 / 月各自乘活跃天数。不同原生单位不直接换算。未知窗口不视作无限。</p></details><details class="method"><summary>效率如何计算 <span>＋</span></summary><p>可接受任务 = 尝试任务 × 自评可接受率；净节省小时 = 尝试任务 × 每任务净节省分钟 / 60。净收益 = 净节省小时 × 时间价值 − 月成本。已填写返工后，不再按成功率扩大请求；零任务、零成功率、非正节省时间的单位指标显示“—”。本页没有伪造模型性能 / 延迟得分。</p></details><div id="sourceGrid" class="source-grid"></div><div class="source-tail">覆盖主要个人编程方案，企业定制、其他地区 SKU 与全部历史套餐不在同一价格口径内。MiniMax 与 Kimi 的新档位未核实价格已明确标出，不能当作免费。</div></section>
+<footer><a class="brand" href="#"><b>A<span>/</span>I</b><div>COST ATLAS</div></a><p>把价格看明白，把额度用明白，把时间算明白。</p><span>Snapshot 2026.10.23</span></footer><dialog id="detailDialog"><div class="dialog-head"><span class="eyebrow">PLAN DETAILS</span><button id="closeDialog" aria-label="关闭详情">×</button></div><div id="dialogBody"></div></dialog><div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  </main>
+
+  <!-- EXAMPLE: Exclusive accordion (only one open at a time, no JS needed) -->
+  <!--
+  <details name="faq" open>
+    <summary>Section 1</summary>
+    <div class="section-body"><p>Content</p></div>
+  </details>
+  <details name="faq">
+    <summary>Section 2</summary>
+    <div class="section-body"><p>Content</p></div>
+  </details>
+  -->
+
+  <!-- EXAMPLE: Popover (zero-JS tooltip/info panel) -->
+  <!--
+  <button popovertarget="info-panel">Details</button>
+  <div id="info-panel" popover>
+    <h3>More Information</h3>
+    <p>Content shown on click, no JS needed.</p>
+  </div>
+  -->
+
+  <script>
+    // === Menu ===
+    function toggleMenu() { 
+      var dropdown = document.getElementById('vizMenuDropdown') || document.getElementById('vizMenu');
+      if (dropdown) dropdown.classList.toggle('open'); 
+    }
+    document.addEventListener('click', e => { 
+      if (!e.target.closest('.viz-menu')) {
+        var dropdown = document.getElementById('vizMenuDropdown') || document.getElementById('vizMenu');
+        if (dropdown) dropdown.classList.remove('open');
+      }
+    });
+    document.addEventListener('keydown', e => { 
+      if (e.key === 'Escape') {
+        var dropdown = document.getElementById('vizMenuDropdown') || document.getElementById('vizMenu');
+        if (dropdown) dropdown.classList.remove('open');
+      }
+    });
+
+    // === Theme (class-based, OS detection on first visit) ===
+    var savedTheme = null; try { savedTheme = localStorage.getItem('ai-atlas-theme'); } catch(e) {}
+    var currentTheme = savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    function applyTheme(t) {
+      document.documentElement.className = 'theme-' + t;
+      document.getElementById('themeIcon').textContent = t === 'dark' ? '◑' : '◐';
+      document.getElementById('themeLabel').textContent = t === 'dark' ? '切换为浅色' : '切换为深色';
+      try { localStorage.setItem('ai-atlas-theme', t); } catch(e) {}
+      currentTheme = t;
+      if (typeof onThemeChange === 'function') onThemeChange();
+    }
+    function cycleTheme() { applyTheme(currentTheme === 'dark' ? 'light' : 'dark'); }
+    applyTheme(currentTheme);
+
+    // === Scroll Reveal (adds .reveal then .visible — content visible without JS) ===
+    document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('reveal'));
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // === Number Counter (use data-count="77" data-suffix="%" on elements) ===
+    function animateCounters() {
+      document.querySelectorAll('[data-count]').forEach(function(el) {
+        if (el.dataset.counted) return;
+        el.dataset.counted = '1';
+        var target = parseFloat(el.dataset.count), prefix = el.dataset.prefix || '', suffix = el.dataset.suffix || '';
+        var start = performance.now(), duration = 1200;
+        (function tick(now) {
+          var p = Math.min((now - start) / duration, 1), eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = prefix + Math.round(target * eased).toLocaleString() + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        })(start);
+      });
+    }
+    var counterEl = document.querySelector('[data-count]');
+    if (counterEl) {
+      var cObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) { animateCounters(); cObs.disconnect(); } });
+      }, { threshold: 0.3 });
+      cObs.observe(counterEl);
+    }
+
+    // === Download PNG ===
+    async function downloadImage() {
+      var menu = document.querySelector('.viz-menu');
+      menu.style.display = 'none';
+      try {
+        var url = await htmlToImage.toPng(document.body, { quality: 1, pixelRatio: 2, filter: function(n) { return !n.classList || !n.classList.contains('viz-menu'); } });
+        var a = document.createElement('a'); a.href = url;
+        a.download = document.title.replace(/\s+/g, '-').toLowerCase() + '.png'; a.click();
+      } catch(e) { console.error('Download failed:', e); }
+      menu.style.display = '';
+    }
+
+    // === Chart.js Pattern (use when file has Chart.js) ===
+    // var chartsBuilt = false;
+    // function buildCharts() {
+    //   if (chartsBuilt || typeof Chart === 'undefined') return;
+    //   var isDark = document.documentElement.classList.contains('theme-dark');
+    //   var textColor = isDark ? '#EDEDED' : '#0f172a';
+    //   var borderColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+    //   // Create charts with theme-aware colors
+    //   chartsBuilt = true;
+    // }
+    // function onThemeChange() { chartsBuilt = false; buildCharts(); }
+    // window.addEventListener('load', buildCharts);
+
+    // === YOUR SCRIPTS BELOW (use var for top-level variables, define onThemeChange for chart re-renders) ===
+  </script>
+<script type="application/json" id="planData">{
+  "date": "2026-10-23",
+  "sources": {
+    "openai": {
+      "title": "ChatGPT / Codex 定价",
+      "url": "https://learn.chatgpt.com/docs/pricing"
+    },
+    "claude": {
+      "title": "Claude 订阅定价",
+      "url": "https://claude.com/pricing"
+    },
+    "claude-api-credit": {
+      "title": "Claude Max API Credits 规则",
+      "url": "https://platform.claude.com/docs/en/about-claude/api-credits-for-subscribers"
+    },
+    "cursor": {
+      "title": "Cursor 新购与旧订阅",
+      "url": "https://cursor.com/help/account-and-billing/pricing"
+    },
+    "copilot": {
+      "title": "GitHub Copilot 计费",
+      "url": "https://docs.github.com/en/copilot/concepts/billing-and-usage/individuals/billing"
+    },
+    "bailian": {
+      "title": "百炼 Coding Plan",
+      "url": "https://help.aliyun.com/zh/model-studio/coding-plan"
+    },
+    "ark": {
+      "title": "方舟 Agent Plan",
+      "url": "https://docs.volcengine.com/docs/ark/agent-plan-personal-plan-overview?lang=zh"
+    },
+    "zai": {
+      "title": "Z.ai Credits 与窗口",
+      "url": "https://docs.z.ai/devpack/overview"
+    },
+    "zai-price": {
+      "title": "ZCode GLM 计划价格",
+      "url": "https://zcode.z.ai/en"
+    },
+    "mini": {
+      "title": "MiniMax 中国站 M Plan",
+      "url": "https://platform.minimax.cn/docs/m-plan/intro"
+    },
+    "mini-intl": {
+      "title": "MiniMax 国际站 M Plan",
+      "url": "https://platform.minimax.io/docs/m-plan/intro"
+    },
+    "kimi": {
+      "title": "Kimi Code 新旧会员权益",
+      "url": "https://www.kimi.com/code/docs/en/kimi-code/membership.html"
+    },
+    "openai-api": {
+      "title": "OpenAI API 费率",
+      "url": "https://developers.openai.com/api/docs/pricing"
+    },
+    "sol-spec": {
+      "title": "GPT-6.1 Sol 长上下文规则",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+    },
+    "opus": {
+      "title": "Claude Opus 5.5 API",
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/overview"
+    },
+    "sonnet": {
+      "title": "Claude Sonnet 5.5 API",
+      "url": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview"
+    },
+    "gemini": {
+      "title": "Gemini Developer API 价格",
+      "url": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    "ds": {
+      "title": "DeepSeek API 峰谷费率",
+      "url": "https://api-docs.deepseek.com/quick_start/pricing/"
+    },
+    "mini-api": {
+      "title": "MiniMax API 费率",
+      "url": "https://platform.minimax.io/docs/pricing/overview"
+    }
+  },
+  "plans": [
+    {
+      "id": "codex-20",
+      "brand": "OpenAI",
+      "name": "ChatGPT Plus / Codex",
+      "kind": "sub",
+      "price": 20,
+      "currency": "USD",
+      "quota": "动态额度；Sol 本地消息约 15–160 / 5h（估计）",
+      "scope": "Codex 应用、CLI、IDE 与云端；通用 API Key 另计",
+      "reset": "Plus 有 5h 窗口；所有档位可能有周额度",
+      "sources": [
+        "openai"
+      ],
+      "notes": [
+        "固定可完成任务数未披露；额外 Credits 可另购。"
+      ],
+      "unit": "原生额度",
+      "q5": null,
+      "qw": null,
+      "qm": null
+    },
+    {
+      "id": "codex-100",
+      "brand": "OpenAI",
+      "name": "ChatGPT Pro 100 / Codex",
+      "kind": "sub",
+      "price": 100,
+      "currency": "USD",
+      "quota": "当前无 5h 限额；周容量以账号后台为准",
+      "scope": "Codex 应用、CLI、IDE 与云端；通用 API Key 另计",
+      "reset": "Plus 有 5h 窗口；所有档位可能有周额度",
+      "sources": [
+        "openai"
+      ],
+      "notes": [
+        "固定可完成任务数未披露；额外 Credits 可另购。"
+      ],
+      "unit": "原生额度",
+      "q5": null,
+      "qw": null,
+      "qm": null
+    },
+    {
+      "id": "codex-200",
+      "brand": "OpenAI",
+      "name": "ChatGPT Pro 200 / Codex",
+      "kind": "sub",
+      "price": 200,
+      "currency": "USD",
+      "quota": "当前无 5h 限额；周容量以账号后台为准",
+      "scope": "Codex 应用、CLI、IDE 与云端；通用 API Key 另计",
+      "reset": "Plus 有 5h 窗口；所有档位可能有周额度",
+      "sources": [
+        "openai"
+      ],
+      "notes": [
+        "固定可完成任务数未披露；额外 Credits 可另购。"
+      ],
+      "unit": "原生额度",
+      "q5": null,
+      "qw": null,
+      "qm": null
+    },
+    {
+      "id": "codex-500",
+      "brand": "OpenAI",
+      "name": "ChatGPT Pro 500 / Codex",
+      "kind": "sub",
+      "price": 500,
+      "currency": "USD",
+      "quota": "当前无 5h 限额；周容量以账号后台为准",
+      "scope": "Codex 应用、CLI、IDE 与云端；通用 API Key 另计",
+      "reset": "Plus 有 5h 窗口；所有档位可能有周额度",
+      "sources": [
+        "openai"
+      ],
+      "notes": [
+        "模型、上下文与速度模式影响消耗；这里不把消息区间当固定任务容量。",
+        "Pro 500 可用 Ultrafast；速度模式的额度消耗倍率不能当速度提升。"
+      ],
+      "unit": "原生额度",
+      "q5": null,
+      "qw": null,
+      "qm": null
+    },
+    {
+      "id": "claude-pro",
+      "brand": "Anthropic",
+      "name": "Claude Pro / Claude Code",
+      "kind": "sub",
+      "price": 20,
+      "currency": "USD",
+      "quota": "5h 会话 + 周窗口，实际容量动态",
+      "scope": "应用与 Claude Code 共享；不含通用 API Credits",
+      "reset": "5h 滚动，另有周额度",
+      "sources": [
+        "claude"
+      ],
+      "notes": [
+        "年付 $200，月均约 $16.67，需一次付全年。"
+      ],
+      "unit": "原生额度",
+      "q5": null,
+      "qw": null,
+      "qm": null
+    },
+    {
+      "id": "claude-max-5",
+      "brand": "Anthropic",
+      "name": "Claude Max 5x",
+      "kind": "sub",
+      "price": 100,
+      "currency": "USD",
+      "quota": "每会话约为 Pro 的 5×；仍有周额度",
+      "scope": "Claude Code 订阅池；另可领取 $100/月 Claude API Credits",
+      "reset": "5h 滚动 + 周额度；API 抵扣随账期刷新",
+      "sources": [
+        "claude",
+        "claude-api-credit"
+      ],
+      "notes": [
+        "API Credits 须绑定 Console；新用户订阅满 7 天后可领取。",
+        "这笔抵扣适用 Claude API / Managed Agents / SDK，不抵 Claude Code 或应用超额；到期不结转。"
+      ],
+      "unit": "原生额度",
+      "q5": null,
+      "qw": null,
+      "qm": null,
+      "apiCredit": 100
+    },
+    {
+      "id": "claude-max-20",
+      "brand": "Anthropic",
+      "name": "Claude Max 20x",
+      "kind": "sub",
+      "price": 200,
+      "currency": "USD",
+      "quota": "每会话约为 Pro 的 20×；仍有周额度",
+      "scope": "Claude Code 订阅池；另可领取 $200/月 Claude API Credits",
+      "reset": "5h 滚动 + 周额度；API 抵扣随账期刷新",
+      "sources": [
+        "claude",
+        "claude-api-credit"
+      ],
+      "notes": [
+        "API Credits 须绑定 Console；新用户订阅满 7 天后可领取。",
+        "这笔抵扣适用 Claude API / Managed Agents / SDK，不抵 Claude Code 或应用超额；到期不结转。"
+      ],
+      "unit": "原生额度",
+      "q5": null,
+      "qw": null,
+      "qm": null,
+      "apiCredit": 200
+    },
+    {
+      "id": "cursor-plus",
+      "brand": "Cursor / X",
+      "name": "The X Subscription Plus",
+      "kind": "sub",
+      "price": 8,
+      "currency": "USD",
+      "quota": "Cursor / Grok 每周共享模型池，约 Plus 的 1×",
+      "scope": "Plus 限 Cursor 模型固定设置；Premium 起可用更多 Agent 功能及第三方模型",
+      "reset": "内含池按周；第三方模型消耗另购预付余额",
+      "sources": [
+        "cursor"
+      ],
+      "notes": [
+        "第三方模型按 API 目录价消耗预付余额，不视作无限包含。",
+        "Plus 不含 Auto、Cloud Agents、Automations、Bugbot 等进阶功能。"
+      ],
+      "unit": "原生额度",
+      "q5": null,
+      "qw": null,
+      "qm": null
+    },
+    {
+      "id": "cursor-premium",
+      "brand": "Cursor / X",
+      "name": "The X Subscription Premium",
+      "kind": "sub",
+      "price": 30,
+      "currency": "USD",
+      "quota": "Cursor / Grok 每周共享模型池，约 Plus 的 4×",
+      "scope": "Plus 限 Cursor 模型固定设置；Premium 起可用更多 Agent 功能及第三方模型",
+      "reset": "内含池按周；第三方模型消耗另购预付余额",
+      "sources": [
+        "cursor"
+      ],
+      "notes": [
+        "周池为相对容量，未公开固定 Token 保底。",
+        "第三方模型需另购预付余额；此处月费没有包含该追加成本。"
+      ],
+      "unit": "原生额度",
+      "q5": null,
+      "qw": null,
+      "qm": null
+    },
+    {
+      "id": "cursor-super",
+      "brand": "Cursor / X",
+      "name": "The X Subscription Super",
+      "kind": "sub",
+      "price": 100,
+      "currency": "USD",
+      "quota": "Cursor / Grok 每周共享模型池，约 Plus 的 15×",
+      "scope": "Plus 限 Cursor 模型固定设置；Premium 起可用更多 Agent 功能及第三方模型",
+      "reset": "内含池按周；第三方模型消耗另购预付余额",
+      "sources": [
+        "cursor"
+      ],
+      "notes": [
+        "周池为相对容量，未公开固定 Token 保底。",
+        "第三方模型需另购预付余额；此处月费没有包含该追加成本。"
+      ],
+      "unit": "原生额度",
+      "q5": null,
+      "qw": null,
+      "qm": null
+    },
+    {
+      "id": "cursor-ultra",
+      "brand": "Cursor / X",
+      "name": "The X Subscription Ultra",
+      "kind": "sub",
+      "price": 200,
+      "currency": "USD",
+      "quota": "Cursor / Grok 每周共享模型池，约 Plus 的 50×",
+      "scope": "Plus 限 Cursor 模型固定设置；Premium 起可用更多 Agent 功能及第三方模型",
+      "reset": "内含池按周；第三方模型消耗另购预付余额",
+      "sources": [
+        "cursor"
+      ],
+      "notes": [
+        "周池为相对容量，未公开固定 Token 保底。",
+        "第三方模型需另购预付余额；此处月费没有包含该追加成本。"
+      ],
+      "unit": "原生额度",
+      "q5": null,
+      "qw": null,
+      "qm": null
+    },
+    {
+      "id": "cursor-legacy-20",
+      "brand": "Cursor",
+      "name": "Legacy Pro",
+      "kind": "sub",
+      "price": 20,
+      "currency": "USD",
+      "quota": "Cursor Models / Other Models 两个月度用量池",
+      "scope": "既有订阅可保留；新客户使用 X Subscription",
+      "reset": "每月账期重置，超量可另付",
+      "sources": [
+        "cursor"
+      ],
+      "notes": [
+        "仅供已有订阅者对照；不可作为新购档位。"
+      ],
+      "unit": "原生额度",
+      "q5": null,
+      "qw": null,
+      "qm": null,
+      "legacy": true
+    },
+    {
+      "id": "cursor-legacy-60",
+      "brand": "Cursor",
+      "name": "Legacy Pro+",
+      "kind": "sub",
+      "price": 60,
+      "currency": "USD",
+      "quota": "Cursor Models / Other Models 两个月度用量池",
+      "scope": "既有订阅可保留；新客户使用 X Subscription",
+      "reset": "每月账期重置，超量可另付",
+      "sources": [
+        "cursor"
+      ],
+      "notes": [
+        "仅供已有订阅者对照；不可作为新购档位。"
+      ],
+      "unit": "原生额度",
+      "q5": null,
+      "qw": null,
+      "qm": null,
+      "legacy": true
+    },
+    {
+      "id": "cursor-legacy-200",
+      "brand": "Cursor",
+      "name": "Legacy Ultra",
+      "kind": "sub",
+      "price": 200,
+      "currency": "USD",
+      "quota": "Cursor Models / Other Models 两个月度用量池",
+      "scope": "既有订阅可保留；新客户使用 X Subscription",
+      "reset": "每月账期重置，超量可另付",
+      "sources": [
+        "cursor"
+      ],
+      "notes": [
+        "仅供已有订阅者对照；不可作为新购档位。"
+      ],
+      "unit": "原生额度",
+      "q5": null,
+      "qw": null,
+      "qm": null,
+      "legacy": true
+    },
+    {
+      "id": "copilot-pro",
+      "brand": "GitHub",
+      "name": "Copilot Pro",
+      "kind": "sub",
+      "price": 10,
+      "currency": "USD",
+      "quota": "1,500 AI Credits / 月，含 500 可变 flex",
+      "scope": "Chat、CLI、cloud agent 等产品内共享；不是通用 API 余额",
+      "reset": "每月 1 日 UTC 00:00（新加坡 08:00）；不结转",
+      "sources": [
+        "copilot"
+      ],
+      "notes": [
+        "1 credit = $0.01，按 Copilot 对应模型费率扣除。",
+        "付费计划代码补全不扣 Credits；flex 额度可以变化。"
+      ],
+      "unit": "GitHub AI Credits",
+      "q5": null,
+      "qw": null,
+      "qm": 1500
+    },
+    {
+      "id": "copilot-proplus",
+      "brand": "GitHub",
+      "name": "Copilot Pro+",
+      "kind": "sub",
+      "price": 39,
+      "currency": "USD",
+      "quota": "7,000 AI Credits / 月，含 3,100 可变 flex",
+      "scope": "Chat、CLI、cloud agent 等产品内共享；不是通用 API 余额",
+      "reset": "每月 1 日 UTC 00:00（新加坡 08:00）；不结转",
+      "sources": [
+        "copilot"
+      ],
+      "notes": [
+        "1 credit = $0.01，按 Copilot 对应模型费率扣除。",
+        "付费计划代码补全不扣 Credits；flex 额度可以变化。"
+      ],
+      "unit": "GitHub AI Credits",
+      "q5": null,
+      "qw": null,
+      "qm": 7000
+    },
+    {
+      "id": "copilot-max",
+      "brand": "GitHub",
+      "name": "Copilot Max",
+      "kind": "sub",
+      "price": 100,
+      "currency": "USD",
+      "quota": "20,000 AI Credits / 月，含 10,000 可变 flex",
+      "scope": "Chat、CLI、cloud agent 等产品内共享；不是通用 API 余额",
+      "reset": "每月 1 日 UTC 00:00（新加坡 08:00）；不结转",
+      "sources": [
+        "copilot"
+      ],
+      "notes": [
+        "1 credit = $0.01，按 Copilot 对应模型费率扣除。",
+        "付费计划代码补全不扣 Credits；flex 额度可以变化。"
+      ],
+      "unit": "GitHub AI Credits",
+      "q5": null,
+      "qw": null,
+      "qm": 20000
+    },
+    {
+      "id": "bailian",
+      "brand": "阿里百炼",
+      "name": "Coding Plan Pro",
+      "kind": "coding",
+      "price": 200,
+      "currency": "CNY",
+      "quota": "6,000 请求 / 5h · 45,000 / 周 · 90,000 / 月",
+      "scope": "专用 Coding Key，仅限允许的交互式编程工具；不用于脚本 / 自定义后端批调用",
+      "reset": "5h 滚动恢复；周一 00:00；月订阅日 00:00 UTC+8",
+      "sources": [
+        "bailian"
+      ],
+      "notes": [
+        "Lite 已停止新购 / 续费。",
+        "首月限量 ¥39.90 是新客优惠，续费 ¥200；本图采用续费价。",
+        "一次 Agent 任务通常需要多次模型调用，请求不是任务。"
+      ],
+      "unit": "模型请求",
+      "q5": 6000,
+      "qw": 45000,
+      "qm": 90000,
+      "estimate": "requests"
+    },
+    {
+      "id": "ark-small",
+      "brand": "火山方舟",
+      "name": "Agent Plan Small",
+      "kind": "coding",
+      "price": 40,
+      "currency": "CNY",
+      "quota": "20,000 AFP / 月 · 7,000 / 周 · 2,000 / 5h",
+      "scope": "支持的 Agent 工具、模型与 Harness；部分模型 / 视频依档位开放",
+      "reset": "文本受 5h、周、月窗口约束；以后台重置时间为准",
+      "sources": [
+        "ark"
+      ],
+      "notes": [
+        "AFP 是平台积分，不直接等于 Token 或其他厂商 Credits。",
+        "图片 / 视频 / 语音 / Harness 另受日及月限制；这里的窗口测试针对文本。",
+        "可选超额后付费；模型折扣有截止日，不写作永久额度。"
+      ],
+      "unit": "AFP",
+      "q5": 2000,
+      "qw": 7000,
+      "qm": 20000
+    },
+    {
+      "id": "ark-medium",
+      "brand": "火山方舟",
+      "name": "Agent Plan Medium",
+      "kind": "coding",
+      "price": 200,
+      "currency": "CNY",
+      "quota": "100,000 AFP / 月 · 35,000 / 周 · 10,000 / 5h",
+      "scope": "支持的 Agent 工具、模型与 Harness；部分模型 / 视频依档位开放",
+      "reset": "文本受 5h、周、月窗口约束；以后台重置时间为准",
+      "sources": [
+        "ark"
+      ],
+      "notes": [
+        "AFP 是平台积分，不直接等于 Token 或其他厂商 Credits。",
+        "图片 / 视频 / 语音 / Harness 另受日及月限制；这里的窗口测试针对文本。",
+        "可选超额后付费；模型折扣有截止日，不写作永久额度。"
+      ],
+      "unit": "AFP",
+      "q5": 10000,
+      "qw": 35000,
+      "qm": 100000
+    },
+    {
+      "id": "ark-large",
+      "brand": "火山方舟",
+      "name": "Agent Plan Large",
+      "kind": "coding",
+      "price": 500,
+      "currency": "CNY",
+      "quota": "250,000 AFP / 月 · 87,500 / 周 · 25,000 / 5h",
+      "scope": "支持的 Agent 工具、模型与 Harness；部分模型 / 视频依档位开放",
+      "reset": "文本受 5h、周、月窗口约束；以后台重置时间为准",
+      "sources": [
+        "ark"
+      ],
+      "notes": [
+        "AFP 是平台积分，不直接等于 Token 或其他厂商 Credits。",
+        "图片 / 视频 / 语音 / Harness 另受日及月限制；这里的窗口测试针对文本。",
+        "可选超额后付费；模型折扣有截止日，不写作永久额度。"
+      ],
+      "unit": "AFP",
+      "q5": 25000,
+      "qw": 87500,
+      "qm": 250000
+    },
+    {
+      "id": "ark-max",
+      "brand": "火山方舟",
+      "name": "Agent Plan Max",
+      "kind": "coding",
+      "price": 1000,
+      "currency": "CNY",
+      "quota": "500,000 AFP / 月 · 175,000 / 周 · 50,000 / 5h",
+      "scope": "支持的 Agent 工具、模型与 Harness；部分模型 / 视频依档位开放",
+      "reset": "文本受 5h、周、月窗口约束；以后台重置时间为准",
+      "sources": [
+        "ark"
+      ],
+      "notes": [
+        "AFP 是平台积分，不直接等于 Token 或其他厂商 Credits。",
+        "图片 / 视频 / 语音 / Harness 另受日及月限制；这里的窗口测试针对文本。",
+        "可选超额后付费；模型折扣有截止日，不写作永久额度。"
+      ],
+      "unit": "AFP",
+      "q5": 50000,
+      "qw": 175000,
+      "qm": 500000
+    },
+    {
+      "id": "zai-lite",
+      "brand": "Z.ai",
+      "name": "GLM Coding Plan Lite",
+      "kind": "coding",
+      "price": 18,
+      "currency": "USD",
+      "quota": "2,000 credits / 5h · 10,000 / 周",
+      "scope": "支持 ZCode、Claude Code、Codex 等 Agent 工具，按各模型倍率扣 Credits",
+      "reset": "消费后 5h 恢复；每 7 天重置周额度",
+      "sources": [
+        "zai",
+        "zai-price"
+      ],
+      "notes": [
+        "主价格为目录月费；ZCode 同页显示 7 折 $12.6 / $56 / $117.6，最终资格与续费看结账页。",
+        "非峰时模型扣费 0.5×，常规峰时为工作日 14:00–18:00 UTC+8。",
+        "工具调用另扣 Credits；不沿用旧 prompts 数作为额度。"
+      ],
+      "unit": "Z.ai credits",
+      "q5": 2000,
+      "qw": 10000,
+      "qm": null,
+      "estimate": "zai"
+    },
+    {
+      "id": "zai-pro",
+      "brand": "Z.ai",
+      "name": "GLM Coding Plan Pro",
+      "kind": "coding",
+      "price": 80,
+      "currency": "USD",
+      "quota": "12,000 credits / 5h · 60,000 / 周",
+      "scope": "支持 ZCode、Claude Code、Codex 等 Agent 工具，按各模型倍率扣 Credits",
+      "reset": "消费后 5h 恢复；每 7 天重置周额度",
+      "sources": [
+        "zai",
+        "zai-price"
+      ],
+      "notes": [
+        "主价格为目录月费；ZCode 同页显示 7 折 $12.6 / $56 / $117.6，最终资格与续费看结账页。",
+        "非峰时模型扣费 0.5×，常规峰时为工作日 14:00–18:00 UTC+8。",
+        "工具调用另扣 Credits；不沿用旧 prompts 数作为额度。"
+      ],
+      "unit": "Z.ai credits",
+      "q5": 12000,
+      "qw": 60000,
+      "qm": null,
+      "estimate": "zai"
+    },
+    {
+      "id": "zai-max",
+      "brand": "Z.ai",
+      "name": "GLM Coding Plan Max",
+      "kind": "coding",
+      "price": 168,
+      "currency": "USD",
+      "quota": "28,000 credits / 5h · 140,000 / 周",
+      "scope": "支持 ZCode、Claude Code、Codex 等 Agent 工具，按各模型倍率扣 Credits",
+      "reset": "消费后 5h 恢复；每 7 天重置周额度",
+      "sources": [
+        "zai",
+        "zai-price"
+      ],
+      "notes": [
+        "主价格为目录月费；ZCode 同页显示 7 折 $12.6 / $56 / $117.6，最终资格与续费看结账页。",
+        "非峰时模型扣费 0.5×，常规峰时为工作日 14:00–18:00 UTC+8。",
+        "工具调用另扣 Credits；不沿用旧 prompts 数作为额度。"
+      ],
+      "unit": "Z.ai credits",
+      "q5": 28000,
+      "qw": 140000,
+      "qm": null,
+      "estimate": "zai"
+    },
+    {
+      "id": "minimax-mplan",
+      "brand": "MiniMax",
+      "name": "M Plan · Go / Explore / Build",
+      "kind": "coding",
+      "price": null,
+      "currency": "CNY",
+      "quota": "中国站 Explore 约 Go 的 3×，Build 12×；固定 Token 容量未披露",
+      "scope": "MiniMax Code 与专用 M Plan Key 接入的 AI 工具；当前模型 M3.1 Flash",
+      "reset": "精确额度与恢复规则以当前账号后台为准",
+      "sources": [
+        "mini",
+        "mini-intl"
+      ],
+      "notes": [
+        "当前文档已从 Token Plan 改为 M Plan；不继续沿用旧档 ¥49 / ¥119 / ¥469。",
+        "国际站 Build 相对 Go 为 7.5×，与中国站 12× 不同，不能当同一 SKU。",
+        "新档具体月费未从可读官方正文确认，价格保持未知。"
+      ],
+      "unit": "原生额度",
+      "q5": null,
+      "qw": null,
+      "qm": null
+    },
+    {
+      "id": "kimi-code",
+      "brand": "Kimi",
+      "name": "Kimi Code · Plus / Pro 及以上",
+      "kind": "coding",
+      "price": null,
+      "currency": "CNY",
+      "quota": "新会员无周窗口；仍有滚动 5h 和月总额度",
+      "scope": "与 Kimi 会员共用；Go 不含编程额度；Plus 起支持 Code",
+      "reset": "新档：5h + 月；旧档仍保留周窗口",
+      "sources": [
+        "kimi"
+      ],
+      "notes": [
+        "新旧档位名称与规则不同；当前价格未从可读官方正文确认。",
+        "Pro 起可用 K3 1M / HighSpeed；额外用量钱包与订阅额度分开。"
+      ],
+      "unit": "原生额度",
+      "q5": null,
+      "qw": null,
+      "qm": null
+    }
+  ],
+  "models": [
+    {
+      "id": "sol",
+      "brand": "OpenAI",
+      "name": "GPT-6.1 Sol",
+      "input": 2,
+      "cached": 0.1,
+      "write": 2.5,
+      "output": 10,
+      "source": "openai-api",
+      "context": 1050000,
+      "threshold": 272000,
+      "im": 2,
+      "om": 1.5,
+      "offpeak": false,
+      "storage": 0,
+      "note": "Standard；输入超过 272K 时整条请求采用长上下文价格。",
+      "ttl": "30m"
+    },
+    {
+      "id": "astra",
+      "brand": "OpenAI",
+      "name": "GPT-6 Astra",
+      "input": 10,
+      "cached": 1,
+      "write": 12.5,
+      "output": 50,
+      "source": "openai-api",
+      "context": 1050000,
+      "threshold": 272000,
+      "im": 2,
+      "om": 1.5,
+      "offpeak": false,
+      "storage": 0,
+      "note": "Standard；超过 272K 的输入与缓存单价 2×，输出 1.5×。",
+      "ttl": "30m"
+    },
+    {
+      "id": "luna",
+      "brand": "OpenAI",
+      "name": "GPT-6 Luna",
+      "input": 0.1,
+      "cached": 0.01,
+      "write": 0.125,
+      "output": 0.5,
+      "source": "openai-api",
+      "context": 1050000,
+      "threshold": 272000,
+      "im": 2,
+      "om": 1.5,
+      "offpeak": false,
+      "storage": 0,
+      "note": "Standard；统一 Token 假设不表示与旗舰模型相同任务能力。",
+      "ttl": "30m"
+    },
+    {
+      "id": "sonnet",
+      "brand": "Anthropic",
+      "name": "Claude Sonnet 5.5",
+      "input": 2,
+      "cached": 0.1,
+      "write": 2.5,
+      "output": 10,
+      "source": "sonnet",
+      "context": 1000000,
+      "threshold": null,
+      "im": 1,
+      "om": 1,
+      "offpeak": false,
+      "storage": 0,
+      "note": "标准模式；缓存写入为 5m 档；1h 写入单价另查。",
+      "ttl": "5m"
+    },
+    {
+      "id": "opus",
+      "brand": "Anthropic",
+      "name": "Claude Opus 5.5",
+      "input": 4,
+      "cached": 0.2,
+      "write": 5,
+      "output": 20,
+      "source": "opus",
+      "context": 1000000,
+      "threshold": null,
+      "im": 1,
+      "om": 1,
+      "offpeak": false,
+      "storage": 0,
+      "note": "标准模式；5m 写入 $5/M，1h 写入 $8/M。",
+      "ttl": "5m"
+    },
+    {
+      "id": "gemini",
+      "brand": "Google",
+      "name": "Gemini 3.8 Flash",
+      "input": 0.75,
+      "cached": 0.075,
+      "write": 0.75,
+      "output": 3.75,
+      "source": "gemini",
+      "context": 1000000,
+      "threshold": null,
+      "im": 1,
+      "om": 1,
+      "offpeak": false,
+      "storage": 0.5,
+      "note": "介绍价至 2026-12-31；此后输入 $1.50/M、输出 $7.50/M。缓存存储当前 $0.50/M token·h。",
+      "ttl": "未单列"
+    },
+    {
+      "id": "ds-flash",
+      "brand": "DeepSeek",
+      "name": "DeepSeek V4.1 Flash",
+      "input": 0.3,
+      "cached": 0.006,
+      "write": 0.3,
+      "output": 1.2,
+      "source": "ds",
+      "context": 1000000,
+      "threshold": null,
+      "im": 1,
+      "om": 1,
+      "offpeak": true,
+      "storage": 0,
+      "note": "Flash-1017；默认采用峰时价格，非峰时半价。工作日 UTC 01–04/06–10 为峰时，中国节假日除外。",
+      "ttl": "未单列"
+    },
+    {
+      "id": "ds-pro",
+      "brand": "DeepSeek",
+      "name": "DeepSeek V4 Pro",
+      "input": 1.32,
+      "cached": 0.044,
+      "write": 1.32,
+      "output": 3.96,
+      "source": "ds",
+      "context": 1000000,
+      "threshold": null,
+      "im": 1,
+      "om": 1,
+      "offpeak": true,
+      "storage": 0,
+      "note": "Pro-0813；默认采用峰时价格。Search / Fetch 自 2026-11-01 起另收费，请填入附加费用。",
+      "ttl": "未单列"
+    },
+    {
+      "id": "m31",
+      "brand": "MiniMax",
+      "name": "MiniMax M3.1 Flash",
+      "input": 0.15,
+      "cached": 0.015,
+      "write": 0.15,
+      "output": 0.6,
+      "source": "mini-api",
+      "context": 1000000,
+      "threshold": null,
+      "im": 1,
+      "om": 1,
+      "offpeak": false,
+      "storage": 0,
+      "note": "当前标准 API 费率；未独立列出缓存写入单价。",
+      "ttl": "未单列"
+    },
+    {
+      "id": "m3",
+      "brand": "MiniMax",
+      "name": "MiniMax M3",
+      "input": 0.3,
+      "cached": 0.06,
+      "write": 0.3,
+      "output": 1.2,
+      "source": "mini-api",
+      "context": 1000000,
+      "threshold": 512000,
+      "im": 2,
+      "om": 2,
+      "offpeak": false,
+      "storage": 0,
+      "note": "Standard，官方标注永久 50% 价；输入 >512K 的费率翻倍。",
+      "ttl": "未单列"
+    }
+  ]
+}</script>
+<script>
+var DATA=JSON.parse(document.getElementById('planData').textContent);
+var catalog=DATA.plans.concat(DATA.models.map(function(m){return Object.assign({},m,{kind:'api',price:null,currency:'USD',sources:[m.source],quota:'输入 $'+m.input+' / 读取 $'+m.cached+' / 输出 $'+m.output+'，每 1M tokens',unit:'tokens',scope:'通用 API 按实际用量计费，模型与限速取决于提供商',reset:'按量付费，无包月固定额度',notes:[m.note]});}));
+var state={currency:'CNY',kind:'coding',selected:[],autoQuota:true,preset:'daily'};
+var workIds=['tasks','calls','input','output','cache','retry','days','weekDays','hours','writePct','extras','storage','fx'];
+var presets={assist:{tasks:6,calls:3,input:8000,output:800,cache:35,retry:10,days:22,weekDays:5,hours:4,writePct:30},daily:{tasks:12,calls:10,input:25000,output:2000,cache:70,retry:20,days:22,weekDays:5,hours:8,writePct:30},agent:{tasks:8,calls:45,input:90000,output:4000,cache:80,retry:35,days:26,weekDays:6,hours:10,writePct:30},batch:{tasks:60,calls:3,input:12000,output:1000,cache:20,retry:10,days:30,weekDays:7,hours:16,writePct:30}};
+function $(id){return document.getElementById(id);}function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function n(v,d){return Number(v).toLocaleString('zh-CN',{maximumFractionDigits:d==null?1:d});}function tok(v){return v>=1e6?n(v/1e6,2)+'M':v>=1000?n(v/1000,1)+'K':n(v,0);}function value(id){var x=Number($(id).value);return Number.isFinite(x)?x:0;}function plan(id){return catalog.find(function(p){return p.id===id;});}function source(p){return DATA.sources[p.sources[0]].url;}
+function read(){return {tasks:value('tasks'),calls:value('calls'),input:value('input'),output:value('output'),cache:value('cache')/100,retry:value('retry')/100,days:value('days'),weekDays:value('weekDays'),hours:Math.max(1,value('hours')),writePct:value('writePct')/100,extras:value('extras'),storage:value('storage'),fx:Math.max(.1,value('fx')),offpeak:$('offpeak').checked};}
+function totals(w){var tasks=w.tasks*w.days,requests=tasks*w.calls*(1+w.retry);return {tasks:tasks,requests:requests,input:requests*w.input,output:requests*w.output};}
+function money(usd,w,d){if(usd==null||!Number.isFinite(usd))return '—';var amount=state.currency==='CNY'?usd*w.fx:usd;return (state.currency==='CNY'?'¥':'$')+n(amount,d==null?(Math.abs(amount)<10?2:1):d);}
+function priceUsd(p,w){return p.price==null?null:p.currency==='CNY'?p.price/w.fx:p.price;}
+function apiCost(m,w,taskCount){var task=taskCount==null?w.tasks*w.days:taskCount,requests=task*w.calls*(1+w.retry),input=requests*w.input,output=requests*w.output,hit=input*w.cache,miss=input-hit,write=miss*w.writePct;var long=Boolean(m.threshold&&w.input>m.threshold),im=long?m.im:1,om=long?m.om:1,off=m.offpeak&&w.offpeak?.5:1;var parts=[(miss-write)*m.input*im*off/1e6,hit*m.cached*im*off/1e6,write*m.write*im*off/1e6,output*m.output*om*off/1e6],storage=m.storage*w.storage;return {total:parts.reduce(function(a,b){return a+b;},0)+storage+w.extras,parts:parts,input:input,output:output,requests:requests,long:long,storage:storage,valid:w.input+w.output<=m.context};}
+function cost(p,w){if(p.kind!=='api')return priceUsd(p,w);var r=apiCost(p,w);return r.valid?r.total:null;}
+function toast(s){$('toast').textContent=s;$('toast').classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(function(){$('toast').classList.remove('show');},3200);}
+function selectOptions(id,ps,defaultId){$(id).innerHTML=ps.map(function(p){return '<option value="'+esc(p.id)+'">'+esc(p.brand+' · '+p.name)+'</option>';}).join('');if(defaultId)$(id).value=defaultId;}
+function renderBill(w){var m=plan($('model').value),r=apiCost(m,w),t=totals(w);['tasks','calls','retry','cache'].forEach(function(id){$(id+'Value').textContent=n(value(id),0)+(id==='retry'||id==='cache'?'%':'');});$('inputValue').textContent=tok(w.input);$('outputValue').textContent=tok(w.output);$('heroCalls').textContent=n(w.calls*(1+w.retry),1)+' 次模型请求';$('heroInput').textContent=tok(w.calls*(1+w.retry)*w.input);$('heroOutput').textContent=tok(w.calls*(1+w.retry)*w.output);$('heroCost').textContent=r.valid?money(apiCost(m,Object.assign({},w,{extras:0,storage:0}),1).total,w,2):'超出上下文';$('apiTotal').textContent=r.valid?money(r.total,w):'不可用';$('billCaption').textContent=!r.valid?'输入 + 输出超过该模型上下文，请调整 Token 或换模型。':t.tasks?'每尝试任务约 '+money(r.total/t.tasks,w,2)+' · '+n(w.days,0)+' 个活跃日':'0 个任务；仅保留已填写的附加 / 存储费用';
+ var colors=['var(--accent)','var(--accent-secondary)','var(--warning)','var(--text-secondary)'],names=['普通输入','缓存读取','缓存写入','输出 / 推理'],sum=r.parts.reduce(function(a,b){return a+b;},0);$('costStack').innerHTML=r.parts.map(function(v,i){return '<span title="'+names[i]+' '+money(v,w)+'" style="width:'+(sum?v/sum*100:25)+'%;background:'+colors[i]+'"></span>';}).join('');$('costLegend').innerHTML=r.parts.map(function(v,i){return '<span><i style="background:'+colors[i]+'"></i>'+names[i]+' '+money(v,w)+'</span>';}).join('');$('monthTasks').textContent=n(t.tasks,0);$('monthRequests').textContent=n(t.requests,0);$('monthInput').textContent=tok(t.input);$('monthOutput').textContent=tok(t.output);$('modelNote').textContent=m.note+(r.long?' 已触发长上下文阶梯。':'')+(m.offpeak&&w.offpeak?' 当前按非峰时费率。':'')+' 手动附加 '+money(w.extras,w)+'；存储 '+money(r.storage,w)+'。';$('modelSource').href=source(m);}
+function configureQuota(){var p=plan($('quotaPlan').value);state.autoQuota=p.estimate==='requests';$('units').value='0';['cap5','capWeek','capMonth'].forEach(function(id){$(id).value='';});$('unitName').textContent=p.unit;$('glmOptions').hidden=p.estimate!=='zai';$('estimate').hidden=!p.estimate;$('estimate').textContent=p.estimate==='zai'?'按官方 GLM 模型倍率估算':'采用模型请求数估算';$('unitsHelp').textContent='优先用该产品后台实测的每任务消耗校准；各家 Credits / AFP 不互换。未知窗口请从账号后台填写。';}
+function estimateQuota(w){var p=plan($('quotaPlan').value),q=w.calls*(1+w.retry),u=0;if(p.estimate==='requests')u=q;else if(p.estimate==='zai'){var m=$('glmModel').value==='glm'?{i:6.9,c:1.7,o:24}:{i:2.3,c:.56,o:8};u=q*(w.input*(1-w.cache)*m.i+w.input*w.cache*m.c+w.output*m.o)/10000*($('glmOffpeak').checked?.5:1);}return u;}
+function quotaWindows(p,w,u,overrides){return [['5 小时',p.q5,w.tasks*u*Math.min(5/w.hours,1),'cap5'],['每周',p.qw,w.tasks*u*w.weekDays,'capWeek'],['每月',p.qm,w.tasks*u*w.days,'capMonth']].map(function(a){var manual=overrides&&overrides[a[3]]!==''&&overrides[a[3]]!=null,cap=manual?Number(overrides[a[3]]):a[1];return {label:a[0],cap:cap==null?null:cap,manual:manual,demand:a[2],ratio:cap==null?null:cap===0?(a[2]>0?Infinity:0):a[2]/cap};});}
+function renderQuota(w){var p=plan($('quotaPlan').value);if(state.autoQuota)$('units').value=Math.round(estimateQuota(w)*10000)/10000;var u=Math.max(0,value('units')),overrides={cap5:$('cap5').value,capWeek:$('capWeek').value,capMonth:$('capMonth').value},windows=quotaWindows(p,w,u,overrides),known=windows.filter(function(x){return x.cap!=null;}),over=known.filter(function(x){return x.ratio>1;});$('quotaStatus').textContent=u<=0?'等待实测':!known.length?'需填窗口总额':over.length?'有窗口超额':'已知窗口内';$('quotaStatus').style.color=over.length?'var(--negative)':'var(--text-secondary)';$('quotaBars').innerHTML=u<=0?'<div class="quota-blank">尚未填写每任务原生额度。<br>公开信息：'+esc(p.quota)+'</div>':windows.map(function(x){return '<div class="quota-row '+(x.ratio>1?'over':'')+'"><div class="quota-row-head"><span>'+x.label+(x.manual?' · 自填':'')+'</span><small>'+n(x.demand,1)+' / '+(x.cap==null?'未披露':n(x.cap,0))+' '+esc(p.unit)+'</small></div><div class="meter"><span style="width:'+(x.ratio==null?0:Math.min(x.ratio*100,100))+'%"></span></div></div>';}).join('');$('quotaNote').textContent=(u>0?(over.length?'瓶颈：'+over.map(function(x){return x.label;}).join('、')+'。':'未披露窗口仍需确认。'):'')+p.reset+(state.autoQuota&&p.estimate==='zai'?' 模型估算未包含 Web Search / Reader / Zread 的 1.2 credits/次工具费用。':'');}
+function costLabel(p,w){if(p.kind==='api'&&!apiCost(p,w).valid)return '超出上下文';return p.kind!=='api'&&p.price==null?'价格未核实':money(cost(p,w),w);}
+function card(p,w){var selected=state.selected.includes(p.id);return '<article class="plan-card '+(selected?'selected':'')+'" data-id="'+p.id+'"><div class="plan-top"><span class="provider">'+esc(p.brand)+'</span><label><input type="checkbox" class="compare-check" data-id="'+p.id+'" '+(selected?'checked':'')+'>对比</label></div><h3>'+esc(p.name)+'</h3><div class="tags"><span>'+esc(p.kind==='api'?'API 按量':p.kind==='coding'?'Coding / Agent':'原生工具 / IDE')+'</span><span>'+esc(p.legacy?'旧订阅':p.kind==='api'?'相同 Token 假设':p.price==null?'新价待核实':'月付快照')+'</span></div><div class="price">'+costLabel(p,w)+(cost(p,w)==null?'':'<small>'+(p.kind==='api'?'当前场景 / 月':'固定 / 月')+'</small>')+'</div><div class="native-price">'+(p.kind==='api'?'单价 USD · 标准模式':p.price==null?'未知价格不作为 0 元参与排序或计算':(p.currency==='CNY'?'¥':'$')+n(p.price,2)+' / 月 · 原币标价')+'</div><div class="plan-rule">'+esc(p.quota)+'</div><div class="plan-bottom"><button class="rule-btn" data-detail="'+p.id+'">额度规则与范围 ↗</button><a target="_blank" rel="noopener" href="'+esc(source(p))+'">官方来源</a></div></article>';}
+function renderCatalog(w){var query=$('search').value.trim().toLowerCase(),ps=catalog.filter(function(p){return (state.kind==='all'||state.kind===p.kind)&&($('showLegacy').checked||!p.legacy)&&(!query||[p.name,p.brand,p.quota,p.scope].join(' ').toLowerCase().includes(query));});ps.sort($('sort').value==='cost'?function(a,b){var ca=cost(a,w),cb=cost(b,w);return (ca==null?Infinity:ca)-(cb==null?Infinity:cb);}:function(a,b){return a.brand.localeCompare(b.brand,'zh-CN')||(priceUsd(a,w)||0)-(priceUsd(b,w)||0);});$('planGrid').innerHTML=ps.map(function(p){return card(p,w);}).join('');$('catalogCount').textContent=ps.length+' 个当前匹配 · '+catalog.length+' 个方案含旧订阅';$('empty').hidden=ps.length>0;document.querySelectorAll('[data-kind]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.kind===state.kind));});}
+function renderCompare(w){$('compareBox').hidden=!state.selected.length;$('compareTable').style.gridTemplateColumns='repeat('+Math.max(1,state.selected.length)+',minmax(0,1fr))';$('compareTable').innerHTML=state.selected.map(function(id){var p=plan(id);return '<article class="compare-item"><div class="provider">'+esc(p.brand)+'</div><h4>'+esc(p.name)+'</h4><div class="price">'+costLabel(p,w)+'</div><dl><dt>用量 / 额度</dt><dd>'+esc(p.quota)+'</dd><dt>使用范围</dt><dd>'+esc(p.scope)+'</dd><dt>重置方式</dt><dd>'+esc(p.reset)+'</dd></dl><button class="rule-btn" data-detail="'+p.id+'">完整说明 ↗</button></article>';}).join('');}
+function openDetail(id){var p=plan(id),w=read();$('dialogBody').innerHTML='<div class="provider">'+esc(p.brand)+'</div><h2>'+esc(p.name)+'</h2><div class="price">'+costLabel(p,w)+'</div><h4>公开额度</h4><p>'+esc(p.quota)+'</p><h4>使用范围</h4><p>'+esc(p.scope)+'</p><h4>额度恢复</h4><p>'+esc(p.reset)+'</p><h4>需要一起看的说明</h4><ul>'+p.notes.map(function(note){return '<li>'+esc(note)+'</li>';}).join('')+'</ul><h4>官方来源 · '+DATA.date+'</h4>'+p.sources.map(function(id){var s=DATA.sources[id];return '<p><a target="_blank" rel="noopener" href="'+esc(s.url)+'">'+esc(s.title)+' ↗</a></p>';}).join('');$('detailDialog').showModal();}
+function renderCurve(w){var m=plan($('model').value),p=plan($('curvePlan').value),fixed=priceUsd(p,w),r=apiCost(m,w),variable=apiCost(m,Object.assign({},w,{extras:0,storage:0}),1).total,overhead=w.extras+r.storage,intersection=variable>0?(fixed-overhead)/variable:null;$('intersection').textContent=!r.valid?'不可用':intersection==null?'—':n(Math.max(0,intersection),0);$('intersectionNote').textContent=!r.valid?'请先调低输入 / 输出至模型上下文范围。':intersection==null?'当前每任务 Token 成本不可计算。':intersection<0?'附加固定费用已超过所选月费，零任务时按量侧账单也更高。':p.name+' 固定月费 '+money(fixed,w)+'；API 模型 '+m.name+'。';var maxX=Math.max(100,Math.min(20000,Math.max(w.tasks*w.days*1.5,(intersection||0)*1.35))),maxY=Math.max(fixed*1.3,variable*maxX+overhead,1),x=function(v){return 74+v/maxX*580;},y=function(v){return 286-v/maxY*258;};var s='<svg viewBox="0 0 710 340" role="img" aria-label="API 月成本随任务数增长，包月显示固定月费基线"><title>包月和按量的账单金额交点</title>';for(var i=0;i<=4;i++){var v=maxY*i/4;s+='<line class="grid" x1="74" x2="654" y1="'+y(v)+'" y2="'+y(v)+'"/><text x="64" y="'+(y(v)+4)+'" text-anchor="end">'+money(v,w,0)+'</text><text x="'+x(maxX*i/4)+'" y="315" text-anchor="middle">'+n(maxX*i/4,0)+'</text>';}s+='<text x="364" y="338" text-anchor="middle">月尝试任务数</text><path class="chart-data" d="M74 '+y(fixed)+' L654 '+y(fixed)+'" stroke="var(--accent)" fill="none" stroke-width="2" stroke-dasharray="7 5"><title>'+esc(p.name)+' 月费 '+money(fixed,w)+'</title></path>';if(r.valid){s+='<path class="chart-data" d="M74 '+y(overhead)+' L654 '+y(variable*maxX+overhead)+'" fill="none" stroke="var(--accent-secondary)" stroke-width="3"><title>'+esc(m.name)+' 每任务 '+money(variable,w,3)+'</title></path>';if(w.tasks*w.days<=maxX)s+='<circle cx="'+x(w.tasks*w.days)+'" cy="'+y(r.total)+'" r="6" fill="var(--accent-secondary)"><title>当前 '+n(w.tasks*w.days,0)+' 任务，'+money(r.total,w)+'</title></circle>';if(intersection>=0&&intersection<=maxX)s+='<circle cx="'+x(intersection)+'" cy="'+y(fixed)+'" r="5" fill="var(--surface)" stroke="var(--text)" stroke-width="2"><title>交点 '+n(intersection,0)+' 任务/月</title></circle>';}s+='</svg>';$('curveChart').innerHTML=s;}
+function renderRates(w){$('rateTable').innerHTML=DATA.models.map(function(m){return '<tr><td><a target="_blank" rel="noopener" href="'+esc(DATA.sources[m.source].url)+'">'+esc(m.name)+'</a></td><td>$'+n(m.input,3)+'</td><td>$'+n(m.cached,3)+'</td><td>$'+n(m.write,3)+' <small>'+esc(m.ttl)+'</small></td><td>$'+n(m.output,3)+'</td><td>'+costLabel(plan(m.id),w)+'</td></tr>';}).join('');}
+function renderEfficiency(w){var p=plan($('effPlan').value),amount=cost(p,w),tasks=totals(w).tasks,accepted=value('accepted')/100,hours=tasks*value('saving')/60,v=state.currency==='CNY'?value('timeValue')/w.fx:value('timeValue');$('timeCurrency').textContent=state.currency;$('acceptedValue').textContent=n(accepted*100,0)+'%';$('savedHours').textContent=n(hours,1);$('effNote').textContent=n(tasks,0)+' 次尝试 × '+n(value('saving'),0)+' 分钟；约 '+n(tasks*accepted,0)+' 个最终可接受任务。'+(p.kind==='api'?'':'需确认实际套餐容量能覆盖。');$('acceptedCost').textContent=amount!=null&&tasks*accepted>0?money(amount/(tasks*accepted),w,2):'—';$('payback').textContent=amount!=null&&v>0&&hours>0?n(amount/v,2)+' 小时':'—';$('costPerHour').textContent=amount!=null&&hours>0?money(amount/hours,w,2):'—';$('netValue').textContent=amount==null?'—':money(hours*v-amount,w);$('netValue').style.color=hours*v-amount>=0?'var(--positive)':'var(--negative)';}
+function renderSources(){$('sourceGrid').innerHTML=Object.values(DATA.sources).map(function(s){return '<article class="source-item"><a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.title)+' ↗</a><p>'+esc(new URL(s.url).hostname)+' · '+DATA.date+'</p></article>';}).join('');}
+function snapshot(){var fields={};workIds.concat(['model','quotaPlan','units','glmModel','cap5','capWeek','capMonth','curvePlan','effPlan','saving','timeValue','accepted']).forEach(function(id){fields[id]=$(id).value;});return {date:DATA.date,fields:fields,currency:state.currency,offpeak:$('offpeak').checked,glmOffpeak:$('glmOffpeak').checked,autoQuota:state.autoQuota,comparison:state.selected,preset:state.preset};}
+function save(){try{localStorage.setItem('ai-cost-atlas-v1',JSON.stringify(snapshot()));}catch(e){}}
+function update(){var w=read();renderBill(w);renderQuota(w);renderCatalog(w);renderCompare(w);renderCurve(w);renderRates(w);renderEfficiency(w);save();}
+function markCustom(){state.preset='custom';$('scenarioLabel').textContent='自定义 · 你的使用情景';document.querySelectorAll('[data-preset]').forEach(function(b){b.classList.remove('active');});}
+function applyPreset(key){Object.entries(presets[key]).forEach(function(pair){$(pair[0]).value=pair[1];});state.preset=key;$('scenarioLabel').textContent={assist:'轻量协作',daily:'全天编程',agent:'多 Agent 重构',batch:'批处理'}[key]+' · 示例参数';document.querySelectorAll('[data-preset]').forEach(function(b){b.classList.toggle('active',b.dataset.preset===key);});update();if(key==='batch')toast('部分 Coding Plan 限交互式工具；批处理请核对使用范围。');}
+function setCurrency(next){if(next!==state.currency){$('timeValue').value=Math.round(value('timeValue')*(next==='CNY'?value('fx'):1/value('fx'))*100)/100;}state.currency=next;document.querySelectorAll('[data-currency]').forEach(function(b){b.classList.toggle('active',b.dataset.currency===next);b.setAttribute('aria-pressed',String(b.dataset.currency===next));});update();}
+function exportScenario(){var s=snapshot();s.workload=read();s.apiCalculation=apiCost(plan($('model').value),read());s.efficiencyNote='自评参数，不是模型实测效率';var a=document.createElement('a'),url=URL.createObjectURL(new Blob([JSON.stringify(s,null,2)],{type:'application/json'}));a.href=url;a.download='ai-cost-scenario-'+DATA.date+'.json';a.click();setTimeout(function(){URL.revokeObjectURL(url);},1000);toast('已导出当前场景 JSON。');}
+function downloadImage(){var w=read(),m=plan($('model').value),r=apiCost(m,w),t=totals(w),canvas=document.createElement('canvas');canvas.width=1440;canvas.height=960;var c=canvas.getContext('2d');c.fillStyle='#f5f5ef';c.fillRect(0,0,1440,960);c.fillStyle='#146b4a';c.font='600 24px sans-serif';c.fillText('A/I COST ATLAS · '+DATA.date,70,74);c.fillStyle='#1b2b22';c.font='600 56px sans-serif';c.fillText('我的 Agent 用量与成本',70,160);c.fillStyle='#65746b';c.font='28px sans-serif';c.fillText(m.name+' · 参数估算 / 非模型性能实测',70,216);c.fillStyle='#fff';c.fillRect(70,266,1300,236);c.fillStyle='#146b4a';c.font='600 82px sans-serif';c.fillText(r.valid?money(r.total,w):'超出模型上下文',100,377);c.fillStyle='#65746b';c.font='26px sans-serif';c.fillText('API 预估月账单',100,435);[['尝试任务 / 月',n(t.tasks,0)],['模型请求 / 月',n(t.requests,0)],['计费输入 tokens',tok(t.input)],['输出 / 推理 tokens',tok(t.output)]].forEach(function(v,i){var x=80+i%2*670,y=568+Math.floor(i/2)*140;c.fillStyle='#65746b';c.font='24px sans-serif';c.fillText(v[0],x,y);c.fillStyle='#1b2b22';c.font='600 44px sans-serif';c.fillText(v[1],x,y+55);});c.fillStyle='#65746b';c.font='22px sans-serif';c.fillText('缓存 '+n(w.cache*100,0)+'% · 额外请求 '+n(w.retry*100,0)+'% · '+n(w.days,0)+' 活跃天 · 汇率假设 '+n(w.fx,2),80,872);c.fillText('普通输入、缓存读写、计费推理与附加费用分别计算；来源与假设见 HTML。',80,917);var a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download='ai-agent-cost-summary.png';a.click();toast('账单摘要 PNG 已导出。');}
+function onThemeChange(){/* SVG colors follow CSS variables, with no network dependency. */}
+function resetAll(){workIds.forEach(function(id){$(id).value=presets.daily[id]!=null?presets.daily[id]:id==='fx'?7:0;});$('model').value='sol';$('quotaPlan').value='bailian';$('curvePlan').value='bailian';$('effPlan').value='sol';$('saving').value=8;$('accepted').value=80;$('timeValue').value=150;state.currency='CNY';state.selected=[];$('offpeak').checked=false;$('glmOffpeak').checked=false;configureQuota();applyPreset('daily');setCurrency('CNY');toast('已恢复全天编程示例。');}
+function restore(){try{var s=JSON.parse(localStorage.getItem('ai-cost-atlas-v1'));if(!s)return;Object.entries(s.fields||{}).forEach(function(pair){var node=$(pair[0]);if(!node)return;if(node.tagName==='SELECT'){if(Array.from(node.options).some(function(o){return o.value===pair[1];}))node.value=pair[1];}else if(pair[1]!==''&&Number.isFinite(Number(pair[1]))){node.value=Math.max(Number(node.min)||0,Math.min(node.max?Number(node.max):Infinity,Number(pair[1])));} });state.currency=s.currency==='USD'?'USD':'CNY';$('offpeak').checked=Boolean(s.offpeak);$('glmOffpeak').checked=Boolean(s.glmOffpeak);state.autoQuota=Boolean(s.autoQuota);state.selected=(s.comparison||[]).filter(function(id){return catalog.some(function(p){return p.id===id;});}).slice(0,4);state.preset='custom';$('scenarioLabel').textContent='已恢复上次场景';document.querySelectorAll('[data-preset]').forEach(function(b){b.classList.remove('active');});var p=plan($('quotaPlan').value);$('unitName').textContent=p.unit;$('glmOptions').hidden=p.estimate!=='zai';$('estimate').hidden=!p.estimate;$('estimate').textContent=p.estimate==='zai'?'按官方 GLM 模型倍率估算':'采用模型请求数估算';document.querySelectorAll('[data-currency]').forEach(function(b){b.classList.toggle('active',b.dataset.currency===state.currency);b.setAttribute('aria-pressed',String(b.dataset.currency===state.currency));});}catch(e){}}
+function setup(){selectOptions('model',DATA.models,'sol');selectOptions('quotaPlan',DATA.plans.filter(function(p){return !p.legacy;}),'bailian');selectOptions('curvePlan',DATA.plans.filter(function(p){return !p.legacy&&p.price!=null;}),'bailian');selectOptions('effPlan',catalog.filter(function(p){return !p.legacy&&(p.price!=null||p.kind==='api');}),'sol');configureQuota();renderSources();restore();
+ workIds.forEach(function(id){$(id).addEventListener('input',function(){if($(id).value==='')return;$(id).value=Math.min(Number($(id).max),Math.max(Number($(id).min),value(id)));markCustom();update();});$(id).addEventListener('change',function(){if($(id).value===''){$(id).value=$(id).min||0;update();}});});
+ ['model','curvePlan','effPlan','offpeak','glmModel','glmOffpeak','showLegacy','sort'].forEach(function(id){$(id).addEventListener('change',update);});
+ ['saving','timeValue','accepted'].forEach(function(id){$(id).addEventListener('input',function(){if($(id).value==='')return;$(id).value=Math.min(Number($(id).max),Math.max(Number($(id).min),value(id)));update();});});
+ $('quotaPlan').addEventListener('change',function(){configureQuota();update();});$('units').addEventListener('input',function(){if(value('units')<0)$('units').value=0;state.autoQuota=false;update();});['cap5','capWeek','capMonth'].forEach(function(id){$(id).addEventListener('input',function(){if(value(id)<0)$(id).value=0;update();});});$('estimate').addEventListener('click',function(){state.autoQuota=true;update();toast('已按公开规则估算，仍需真实任务日志校准。');});
+ $('search').addEventListener('input',function(){renderCatalog(read());});document.querySelectorAll('[data-currency]').forEach(function(b){b.addEventListener('click',function(){setCurrency(b.dataset.currency);});});document.querySelectorAll('[data-preset]').forEach(function(b){b.addEventListener('click',function(){applyPreset(b.dataset.preset);});});document.querySelectorAll('[data-kind]').forEach(function(b){b.addEventListener('click',function(){state.kind=b.dataset.kind;document.querySelectorAll('[data-kind]').forEach(function(a){a.classList.toggle('active',a===b);});renderCatalog(read());});});document.addEventListener('click',function(e){var b=e.target.closest('[data-detail]');if(b)openDetail(b.dataset.detail);});$('planGrid').addEventListener('change',function(e){if(!e.target.matches('.compare-check'))return;var id=e.target.dataset.id;if(e.target.checked){if(state.selected.length>=4){e.target.checked=false;toast('最多同时比较 4 个方案。');return;}state.selected.push(id);}else state.selected=state.selected.filter(function(x){return x!==id;});update();});$('clearCompare').addEventListener('click',function(){state.selected=[];update();});$('closeDialog').addEventListener('click',function(){$('detailDialog').close();});$('detailDialog').addEventListener('click',function(e){var r=$('detailDialog').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)$('detailDialog').close();});$('export').addEventListener('click',exportScenario);$('reset').addEventListener('click',resetAll);update();}
+document.addEventListener('DOMContentLoaded',setup);
+
+</script>
+</body>
+</html>

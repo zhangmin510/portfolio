@@ -2,6 +2,7 @@ import {
   Suspense,
   type FormEvent,
   type KeyboardEvent as ReactKeyboardEvent,
+  type MouseEvent as ReactMouseEvent,
   lazy,
   useCallback,
   useEffect,
@@ -9,12 +10,13 @@ import {
   useState,
 } from 'react'
 import {
-  QUICK_COMMANDS,
+  HOME_DIRECTORY,
   autocompleteCommand,
+  getCompletionCandidates,
   executeCommand,
   type CommandResult,
 } from '../commands'
-import { PROFILE, PROJECTS } from '../data/portfolio'
+import { PROFILE } from '../data/portfolio'
 import type { HistoryItem } from '../types'
 import CommandOutput from './CommandOutput'
 import './Terminal.css'
@@ -101,51 +103,24 @@ function playKeySound() {
   source.stop(now + 0.04)
 }
 
-function ProjectShowcase() {
+function displayDirectory(cwd = HOME_DIRECTORY) {
+  return cwd === HOME_DIRECTORY
+    ? '~'
+    : cwd.startsWith(`${HOME_DIRECTORY}/`)
+      ? `~${cwd.slice(HOME_DIRECTORY.length)}`
+      : cwd
+}
+
+function Prompt({ cwd = HOME_DIRECTORY }: { cwd?: string }) {
   return (
-    <aside className="project-showcase" aria-labelledby="selected-projects">
-      <div className="section-eyebrow">SELECTED WORK</div>
-      <h2 id="selected-projects">代表项目</h2>
-      <div className="showcase-list">
-        {PROJECTS.filter((project) => project.featured).map(
-          (project, index) => (
-            <article className="showcase-card" key={project.name}>
-              <div className="showcase-index" aria-hidden="true">
-                {String(index + 1).padStart(2, '0')}
-              </div>
-              <div>
-                <h3>{project.name}</h3>
-                <p className="showcase-tagline">{project.tagline}</p>
-                <p>{project.outcome}</p>
-                <p className="showcase-stack">{project.stack.join(' · ')}</p>
-                <a
-                  href={project.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  查看源码
-                  <span aria-hidden="true"> ↗</span>
-                </a>
-              </div>
-            </article>
-          ),
-        )}
-      </div>
-      <div className="contact-card">
-        <p className="section-eyebrow">LET&apos;S BUILD</p>
-        <h2>一起把想法做成可用的产品</h2>
-        <p>欢迎交流开源项目、AI Native 工作流和新的 MVP。</p>
-        <a
-          className="primary-link"
-          href={PROFILE.github}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          在 GitHub 找到我
-          <span aria-hidden="true"> ↗</span>
-        </a>
-      </div>
-    </aside>
+    <span className="prompt" aria-hidden="true">
+      <span className="user">guest</span>
+      <span>@</span>
+      <span className="host">zhangmin.name</span>
+      <span>:</span>
+      <span className="path">{displayDirectory(cwd)}</span>
+      <span className="dollar">$</span>
+    </span>
   )
 }
 
@@ -154,13 +129,17 @@ export default function Terminal() {
   const [input, setInput] = useState('')
   const [commandHistory, setCommandHistory] = useState<string[]>([])
   const [historyIndex, setHistoryIndex] = useState(0)
+  const [cwd, setCwd] = useState(HOME_DIRECTORY)
+  const [previousCwd, setPreviousCwd] = useState<string>()
+  const [showWelcome, setShowWelcome] = useState(true)
+  const draftInput = useRef('')
+  const composing = useRef(false)
   const [soundEnabled, setSoundEnabled] = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
   const [finePointer, setFinePointer] = useState(false)
   const [visualizerEnabled, setVisualizerEnabled] = useState(false)
   const [viewport, setViewport] = useState({ width: 0, height: 0 })
   const inputRef = useRef<HTMLInputElement>(null)
-  const historyRef = useRef<HTMLDivElement>(null)
   const nextHistoryId = useRef(1)
   const latestCommandId = useRef<number | null>(null)
   const eggTimer = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -181,7 +160,7 @@ export default function Terminal() {
   useEffect(() => {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
     const pointerQuery = window.matchMedia(
-      '(min-width: 1100px) and (hover: hover) and (pointer: fine)',
+      '(min-width: 760px) and (hover: hover) and (pointer: fine)',
     )
 
     const updatePreferences = () => {
@@ -200,11 +179,14 @@ export default function Terminal() {
 
     try {
       setSoundEnabled(window.localStorage.getItem('terminal-sound') === 'on')
-      setVisualizerEnabled(
-        window.localStorage.getItem('input-visualizer') === 'on',
-      )
+      const storedVisualizer = window.localStorage.getItem('input-visualizer')
+      setVisualizerEnabled(storedVisualizer === null || storedVisualizer === 'on')
     } catch {
-      // Privacy modes can make localStorage unavailable; defaults remain safe.
+      setVisualizerEnabled(true)
+    }
+
+    if (pointerQuery.matches && document.activeElement === document.body) {
+      inputRef.current?.focus({ preventScroll: true })
     }
 
     return () => {
@@ -217,12 +199,9 @@ export default function Terminal() {
   useEffect(() => cancelEasterEgg, [cancelEasterEgg])
 
   useEffect(() => {
-    if (latestCommandId.current === null || !historyRef.current) return
-    const element = historyRef.current.querySelector(
-      `[data-history-id="${latestCommandId.current}"]`,
-    )
-    element?.scrollIntoView({
-      block: 'start',
+    if (latestCommandId.current === null) return
+    inputRef.current?.scrollIntoView({
+      block: 'nearest',
       behavior: reducedMotion ? 'auto' : 'smooth',
     })
   }, [history, reducedMotion])
@@ -234,10 +213,10 @@ export default function Terminal() {
   }, [])
 
   const startEasterEgg = useCallback(
-    (commandId: number, outputId: number) => {
+    (commandId: number, outputId: number, command: string, commandCwd: string) => {
       latestCommandId.current = commandId
       appendHistory([
-        { id: commandId, type: 'command', content: 'hello world' },
+        { id: commandId, type: 'command', content: command, cwd: commandCwd },
         {
           id: outputId,
           type: 'output',
@@ -273,52 +252,122 @@ export default function Terminal() {
     [appendHistory, cancelEasterEgg, reducedMotion],
   )
 
+  const clearScreen = useCallback(() => {
+    cancelEasterEgg()
+    setHistory([])
+    setShowWelcome(false)
+    latestCommandId.current = null
+  }, [cancelEasterEgg])
+
+  const editInput = (value: string, caret = value.length) => {
+    setInput(value)
+    draftInput.current = value
+    setHistoryIndex(commandHistory.length)
+    window.requestAnimationFrame(() => {
+      inputRef.current?.setSelectionRange(caret, caret)
+    })
+  }
+
   const runCommand = useCallback(
     (rawCommand: string) => {
       const command = rawCommand.trim()
-      if (!command) return
-
       cancelEasterEgg()
-      const execution = executeCommand(command)
       const commandId = getHistoryId()
       latestCommandId.current = commandId
+      const commandEntry: HistoryItem = {
+        id: commandId,
+        type: 'command',
+        content: rawCommand,
+        cwd,
+      }
+      const nextCommandHistory = !command || commandHistory[commandHistory.length - 1] === command
+        ? commandHistory
+        : [...commandHistory, command].slice(-MAX_COMMAND_HISTORY)
+      const execution = executeCommand(command, new Date(), {
+        cwd,
+        previousCwd,
+        history: nextCommandHistory,
+      })
 
       if (execution.kind === 'clear') {
-        setHistory([])
-        latestCommandId.current = null
+        clearScreen()
       } else if (execution.kind === 'easter-egg') {
-        startEasterEgg(commandId, getHistoryId())
-      } else if (execution.kind === 'output') {
-        appendHistory([
-          { id: commandId, type: 'command', content: command },
-          { id: getHistoryId(), type: 'output', result: execution.result },
-        ])
+        startEasterEgg(commandId, getHistoryId(), rawCommand, cwd)
+      } else {
+        const entries: HistoryItem[] = [commandEntry]
+        if (execution.kind === 'change-directory') {
+          setPreviousCwd(cwd)
+          setCwd(execution.cwd)
+        } else if (execution.kind === 'output') {
+          entries.push({ id: getHistoryId(), type: 'output', result: execution.result })
+        }
+        appendHistory(entries)
       }
 
-      setCommandHistory((previous) =>
-        [...previous, command].slice(-MAX_COMMAND_HISTORY),
-      )
-      setHistoryIndex(commandHistory.length + 1)
+      setCommandHistory(nextCommandHistory)
+      setHistoryIndex(nextCommandHistory.length)
+      draftInput.current = ''
       setInput('')
-      window.requestAnimationFrame(() => inputRef.current?.focus())
+      window.requestAnimationFrame(() => inputRef.current?.focus({ preventScroll: true }))
     },
-    [
-      appendHistory,
-      cancelEasterEgg,
-      commandHistory.length,
-      startEasterEgg,
-    ],
+    [appendHistory, cancelEasterEgg, clearScreen, commandHistory, cwd, previousCwd, startEasterEgg],
   )
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    runCommand(input)
+    if (!composing.current) runCommand(input)
   }
 
   const handleInputKeyDown = (
     event: ReactKeyboardEvent<HTMLInputElement>,
   ) => {
+    if (event.nativeEvent.isComposing || composing.current || event.keyCode === 229) return
     if (soundEnabled && !event.repeat) playKeySound()
+
+    if (event.ctrlKey && !event.metaKey && !event.altKey) {
+      const key = event.key.toLowerCase()
+      const field = event.currentTarget
+      const start = field.selectionStart ?? input.length
+      const end = field.selectionEnd ?? start
+
+      if (key === 'c') {
+        if (start !== end || window.getSelection()?.toString()) return
+        event.preventDefault()
+        cancelEasterEgg()
+        const id = getHistoryId()
+        latestCommandId.current = id
+        appendHistory([{ id, type: 'command', content: `${input}^C`, cwd }])
+        editInput('')
+        return
+      }
+      if (key === 'l') {
+        event.preventDefault()
+        clearScreen()
+        return
+      }
+      if (key === 'a' || key === 'e') {
+        event.preventDefault()
+        const caret = key === 'a' ? 0 : input.length
+        field.setSelectionRange(caret, caret)
+        return
+      }
+      if (key === 'u' || key === 'k' || key === 'w') {
+        event.preventDefault()
+        if (key === 'u') {
+          editInput(input.slice(end), 0)
+        } else if (key === 'k') {
+          editInput(input.slice(0, start), start)
+        } else {
+          const prefix = start !== end
+            ? input.slice(0, start)
+            : input.slice(0, start).replace(/\s+$/, '').replace(/\S+$/, '')
+          editInput(prefix + input.slice(end), prefix.length)
+        }
+        return
+      }
+    }
+
+    if (event.metaKey || event.altKey || event.ctrlKey) return
 
     if (event.key === 'Enter') {
       event.preventDefault()
@@ -327,10 +376,21 @@ export default function Terminal() {
     }
 
     if (event.key === 'Tab') {
-      const completed = autocompleteCommand(input)
-      if (completed !== input) {
-        event.preventDefault()
-        setInput(completed)
+      if (event.shiftKey) return
+      event.preventDefault()
+      const position = event.currentTarget.selectionStart ?? input.length
+      const end = event.currentTarget.selectionEnd ?? position
+      const prefix = input.slice(0, position)
+      const candidates = getCompletionCandidates(prefix, cwd)
+      const completed = autocompleteCommand(prefix, cwd)
+      editInput(completed + input.slice(end), completed.length)
+      if (candidates.length > 1) {
+        const id = getHistoryId()
+        latestCommandId.current = id
+        appendHistory([
+          { id, type: 'command', content: input, cwd },
+          { id: getHistoryId(), type: 'completion', candidates },
+        ])
       }
       return
     }
@@ -338,18 +398,34 @@ export default function Terminal() {
     if (event.key === 'ArrowUp') {
       event.preventDefault()
       if (!commandHistory.length) return
+      if (historyIndex === commandHistory.length) draftInput.current = input
       const nextIndex = Math.max(0, historyIndex - 1)
+      const value = commandHistory[nextIndex] ?? ''
       setHistoryIndex(nextIndex)
-      setInput(commandHistory[nextIndex] ?? '')
+      setInput(value)
+      window.requestAnimationFrame(() => inputRef.current?.setSelectionRange(value.length, value.length))
       return
     }
 
     if (event.key === 'ArrowDown') {
       event.preventDefault()
+      if (historyIndex === commandHistory.length) return
       const nextIndex = Math.min(commandHistory.length, historyIndex + 1)
+      const value = nextIndex === commandHistory.length
+        ? draftInput.current
+        : commandHistory[nextIndex] ?? ''
       setHistoryIndex(nextIndex)
-      setInput(commandHistory[nextIndex] ?? '')
+      setInput(value)
+      window.requestAnimationFrame(() => inputRef.current?.setSelectionRange(value.length, value.length))
     }
+  }
+
+  const focusTerminal = (event: ReactMouseEvent<HTMLElement>) => {
+    const target = event.target
+    if (!(target instanceof Element) ||
+      target.closest('a, button, input, textarea, select, summary, [contenteditable]') ||
+      window.getSelection()?.toString()) return
+    inputRef.current?.focus({ preventScroll: true })
   }
 
   const toggleSound = () => {
@@ -377,14 +453,16 @@ export default function Terminal() {
   }
 
   return (
-    <div className="terminal-container">
+    <div className={`terminal-container${finePointer && visualizerEnabled ? ' has-visualizer' : ''}`}>
       <header className="terminal-header">
         <div className="terminal-buttons" aria-hidden="true">
           <span className="terminal-button close" />
           <span className="terminal-button minimize" />
           <span className="terminal-button maximize" />
         </div>
-        <div className="terminal-title">guest@zhangmin.name:~</div>
+        <div className="terminal-title" title={`guest@zhangmin.name:${displayDirectory(cwd)}`}>
+          guest@zhangmin.name:{displayDirectory(cwd)}
+        </div>
         <div className="terminal-controls">
           <button
             type="button"
@@ -407,166 +485,76 @@ export default function Terminal() {
         </div>
       </header>
 
-      <main className="terminal-body">
-        <section className="brand-art" aria-labelledby="site-title">
-          <div className="brand-command" aria-hidden="true">
-            <span className="brand-chevron">&gt;</span>
-            <span className="brand-cursor" />
+      <main className="terminal-body" aria-label="交互式终端" onClick={focusTerminal}>
+        <h1 className="sr-only">{PROFILE.name} 个人终端</h1>
+        {showWelcome && (
+          <div className="terminal-welcome">
+            <p>{PROFILE.name} · {PROFILE.title}</p>
+            <p className="dim">{PROFILE.motto}</p>
+            <p className="dim">输入 <span className="accent">help</span> 查看命令，<span className="accent">projects</span> 查看项目，<span className="accent">panoramas</span> 浏览全景图。</p>
           </div>
-          <h1 id="site-title">
-            ZhangMin<span>.name</span>
-          </h1>
-          <p className="brand-motto">{PROFILE.motto}</p>
-          <p className="brand-focus">
-            {PROFILE.focus.map((item, index) => (
-              <span key={item}>
-                {index > 0 && <b aria-hidden="true">·</b>}
-                {item}
-              </span>
-            ))}
-          </p>
-          <p className="brand-intro">{PROFILE.intro}</p>
-          <nav className="hero-actions" aria-label="网站导航">
-            <a className="primary-link" href="/panoramas/">
-              全景图
-              <span aria-hidden="true"> ↗</span>
-            </a>
-            <a className="secondary-action" href="#selected-projects">
-              查看代表项目
-            </a>
-            <button
-              type="button"
-              className="secondary-action"
-              onClick={() => runCommand('about')}
-            >
-              在终端认识我
-            </button>
-          </nav>
-        </section>
+        )}
 
-        <div className="portfolio-grid">
-          <section className="terminal-session" aria-labelledby="terminal-title">
-            <div className="session-heading">
-              <div>
-                <p className="section-eyebrow">INTERACTIVE MODE</p>
-                <h2 id="terminal-title">终端探索</h2>
-              </div>
-              <button
-                type="button"
-                className="help-action"
-                onClick={() => runCommand('help')}
-              >
-                命令帮助
-              </button>
-            </div>
-
-            <p className="terminal-hint">
-              输入命令，或直接选择快捷入口。试试{' '}
-              <button type="button" onClick={() => runCommand('projects')}>
-                projects
-              </button>
-              。
-            </p>
-
+        <div
+          className="terminal-history"
+          role="log"
+          aria-live="polite"
+          aria-relevant="additions text"
+        >
+          {history.map((item) => (
             <div
-              className="quick-command-list"
-              aria-label="快捷命令"
+              key={item.id}
+              className={`terminal-line ${item.type}`}
+              data-history-id={item.id}
             >
-              {QUICK_COMMANDS.map((command) => (
-                <button
-                  key={command}
-                  type="button"
-                  onClick={() => runCommand(command)}
-                >
-                  {command}
-                </button>
-              ))}
-            </div>
-
-            <div
-              className="terminal-history"
-              ref={historyRef}
-              role="log"
-              aria-live="polite"
-              aria-relevant="additions text"
-            >
-              {history.map((item) => (
-                <div
-                  key={item.id}
-                  className={`terminal-line ${item.type}`}
-                  data-history-id={item.id}
-                >
-                  {item.type === 'command' ? (
-                    <>
-                      <span className="prompt" aria-hidden="true">
-                        <span className="user">guest</span>
-                        <span>@</span>
-                        <span className="host">zhangmin.name</span>
-                        <span>:</span>
-                        <span className="path">~</span>
-                        <span className="dollar">$</span>
-                      </span>
-                      <span>{item.content}</span>
-                    </>
-                  ) : (
-                    <CommandOutput result={item.result} viewport={viewport} />
-                  )}
+              {item.type === 'command' ? (
+                <>
+                  <Prompt cwd={item.cwd} />
+                  <span className="command-input">{item.content}</span>
+                </>
+              ) : item.type === 'completion' ? (
+                <div className="completion-list">
+                  {item.candidates.map((candidate) => <span key={candidate}>{candidate}</span>)}
                 </div>
-              ))}
+              ) : (
+                <CommandOutput result={item.result} viewport={viewport} />
+              )}
             </div>
-
-            <form className="terminal-form" onSubmit={handleSubmit}>
-              <label className="sr-only" htmlFor="terminal-command">
-                输入终端命令
-              </label>
-              <span className="prompt" aria-hidden="true">
-                <span className="user">guest</span>
-                <span>@</span>
-                <span className="host">zhangmin.name</span>
-                <span>:</span>
-                <span className="path">~</span>
-                <span className="dollar">$</span>
-              </span>
-              <input
-                ref={inputRef}
-                id="terminal-command"
-                type="text"
-                value={input}
-                onChange={(event) => {
-                  setInput(event.target.value)
-                  setHistoryIndex(commandHistory.length)
-                }}
-                onKeyDown={handleInputKeyDown}
-                autoComplete="off"
-                autoCapitalize="none"
-                spellCheck={false}
-                inputMode="text"
-                aria-describedby="terminal-input-hint"
-              />
-              <span id="terminal-input-hint" className="sr-only">
-                使用 Tab 补全命令，使用上下方向键浏览历史。
-              </span>
-              <button type="submit" className="sr-only">
-                执行命令
-              </button>
-            </form>
-          </section>
-
-          <ProjectShowcase />
+          ))}
         </div>
-      </main>
 
-      <nav className="mobile-command-bar" aria-label="移动端快捷命令">
-        {QUICK_COMMANDS.map((command) => (
-          <button
-            key={command}
-            type="button"
-            onClick={() => runCommand(command)}
-          >
-            {command}
+        <form className="terminal-form" onSubmit={handleSubmit}>
+          <label className="sr-only" htmlFor="terminal-command">
+            输入终端命令
+          </label>
+          <Prompt cwd={cwd} />
+          <input
+            ref={inputRef}
+            id="terminal-command"
+            type="text"
+            value={input}
+            onChange={(event) => {
+              setInput(event.target.value)
+              draftInput.current = event.target.value
+              setHistoryIndex(commandHistory.length)
+            }}
+            onKeyDown={handleInputKeyDown}
+            onCompositionStart={() => { composing.current = true }}
+            onCompositionEnd={() => { composing.current = false }}
+            autoComplete="off"
+            autoCapitalize="none"
+            spellCheck={false}
+            inputMode="text"
+            aria-describedby="terminal-input-hint"
+          />
+          <button type="submit" className="sr-only">
+            执行命令
           </button>
-        ))}
-      </nav>
+        </form>
+        <p id="terminal-input-hint" className="sr-only">
+          输入 help 查看命令。Tab 补全，Shift+Tab 离开输入框，上下方向键浏览历史，Ctrl+C 取消，Ctrl+L 清屏。
+        </p>
+      </main>
 
       {finePointer && visualizerEnabled && (
         <Suspense fallback={null}>

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "basePath": "/panoramas/",
-  "updatedAt": "2026-10-05",
+  "updatedAt": "2026-11-04",
   "vendors": [
     {
       "file": "chart.umd.min.js",
@@ -16,6 +16,21 @@
     }
   ],
   "pages": [
+    {
+      "slug": "ai-subscription-token-atlas",
+      "title": "AI 订阅与 Token Plan 全景图",
+      "subtitle": "重度编程与 Agent 的月度成本",
+      "description": "对照 27 个订阅和 Token Plan 与 10 个 API 模型，按任务、缓存和重试估算月度成本。价格快照：2026-10-23。",
+      "category": "行业与基础设施",
+      "tags": [
+        "AI 订阅",
+        "Token Plan",
+        "成本测算"
+      ],
+      "source": "../html/ai-subscription-token-atlas.html",
+      "updatedAt": "2026-10-23",
+      "sourceSha256": "45e1171dc65c64eba417781ff6e846d294aef95423c78de4ac94584cde5f5a72"
+    },
     {
       "slug": "minimind-nanochat-panorama",
       "title": "MiniMind × nanochat",

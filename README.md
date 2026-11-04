@@ -7,19 +7,38 @@
 
 ## 功能特性
 
-- 语义化、可预渲染的个人介绍、代表项目与联系入口
-- 首页「全景图」导航，连接 15 张独立目录发布的交互图谱
+- 简洁的单栏终端主页，保留个人介绍、命令输入和轻量导航
+- `panoramas` 命令与全景图入口，连接 16 张独立目录发布的交互图谱
 - 全景图目录支持主题筛选、关键词搜索与手机浏览
 - 真实表单驱动的命令行交互，兼容键盘、触屏与屏幕阅读器
 - 命令历史 (↑/↓ 键)
 - Tab 自动补全
+- 支持目录切换、路径补全及 `pwd`、`ls`、`cat`、`history` 等内容浏览命令
+- 支持 Ctrl+C 中断、Ctrl+L 清屏和常用终端行编辑快捷键
 - 支持多种命令：`about`、`skills`、`projects`、`contact`、`neofetch` 等
 - 可关闭并记忆偏好的机械键盘按键音效（Web Audio API）
 - `hello world` 彩蛋：ASCII Art 逐行打字动画
-- 可选的键盘 & 鼠标可视化，仅在精细指针桌面设备挂载
+- 键盘 & 鼠标可视化在桌面端默认显示，可通过 `keys:on/off` 开关并记住偏好
 - 支持 `prefers-reduced-motion`
 - 完整的 Open Graph、JSON-LD、robots、sitemap 与静态 404
 - CSP、安全响应头和哈希资源长期缓存
+
+## 终端交互
+
+点击终端空白处开始输入，使用 `help` 查看命令。`projects` 显示三个精选项目，
+`panoramas` 显示全景图与访问链接，也可以按目录浏览：
+
+```text
+ls
+cd projects
+cat obsidian-podium.md
+cd ../panoramas
+cat ai-subscription-token-atlas.html
+cd ~
+```
+
+↑ / ↓ 浏览命令历史，Tab 补全命令或路径；Ctrl+C 取消当前输入，
+Ctrl+L 清屏，Ctrl+A / E 移动到行首 / 行尾。页面内容以终端输出形式展示。
 
 ## 全景图目录
 
@@ -28,6 +47,7 @@
 
 | 全景图 | 目录链接 |
 | --- | --- |
+| AI 订阅与 Token Plan 全景图 | [ai-subscription-token-atlas/](https://zhangmin.name/panoramas/ai-subscription-token-atlas/) |
 | MiniMind × nanochat | [minimind-nanochat-panorama/](https://zhangmin.name/panoramas/minimind-nanochat-panorama/) |
 | 成长花园：1—7 岁女孩成长全景 | [girl-growth-1-7/](https://zhangmin.name/panoramas/girl-growth-1-7/) |
 | 视频生成模型全景图 | [video-generation-atlas/](https://zhangmin.name/panoramas/video-generation-atlas/) |
@@ -133,7 +153,7 @@ npx vercel --prod
 ```text
 public/panoramas/
   index.html                 # 可搜索、可筛选的目录页
-  <主题>/index.html          # 15 个独立页面的发布快照
+  <主题>/index.html          # 16 个独立页面的发布快照
   vendor/                    # 固定版本的 Chart.js 与 html-to-image
 scripts/panoramas.json       # 标题、分类、原始文件映射与校验值
 scripts/sync-panoramas.mjs    # 同步原始页面、生成目录并校验快照

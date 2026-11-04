@@ -1,7 +1,12 @@
 import { HELP_COMMANDS, type CommandResult } from '../commands'
 import {
+  HOME_DIRECTORY,
+  PANORAMA_FILES,
+  PROJECT_FILES,
+  listContentDirectory,
+} from '../commands/filesystem'
+import {
   PROFILE,
-  PROJECTS,
   SKILL_GROUPS,
   YEARLY_KEYWORDS,
 } from '../data/portfolio'
@@ -14,10 +19,10 @@ interface CommandOutputProps {
   }
 }
 
-function ProjectList({ compact = false }: { compact?: boolean }) {
+function ProjectList({ compact = false, slug }: { compact?: boolean; slug?: string }) {
   return (
     <div className={`command-projects${compact ? ' compact' : ''}`}>
-      {PROJECTS.map((project, index) => (
+      {PROJECT_FILES.filter((entry) => !slug || entry.slug === slug).map(({ project }, index) => (
         <article className="command-project" key={project.name}>
           <p className="command-project-name">
             <span aria-hidden="true">
@@ -42,6 +47,22 @@ function ProjectList({ compact = false }: { compact?: boolean }) {
             查看 GitHub 源码
             <span aria-hidden="true"> ↗</span>
           </a>
+        </article>
+      ))}
+    </div>
+  )
+}
+
+function PanoramaList({ slug }: { slug?: string }) {
+  return (
+    <div className="command-projects">
+      {PANORAMA_FILES.filter((page) => !slug || page.slug === slug).map((page) => (
+        <article className="command-project" key={page.slug}>
+          <p className="command-project-name">
+            <a className="terminal-link" href={page.href}>{page.title} ↗</a>
+          </p>
+          <p>{page.description}</p>
+          <p className="dim">{page.category} · {page.updatedAt}</p>
         </article>
       ))}
     </div>
@@ -88,10 +109,21 @@ export default function CommandOutput({
       )
 
     case 'projects':
+    case 'project':
       return (
         <section className="command-section">
           <h3>代表项目 / Selected Projects</h3>
-          <ProjectList />
+          <ProjectList slug={result.kind === 'project' ? result.slug : undefined} />
+        </section>
+      )
+
+    case 'panoramas':
+    case 'panorama':
+      return (
+        <section className="command-section">
+          <h3>全景图 / Panoramas</h3>
+          <PanoramaList slug={result.kind === 'panorama' ? result.slug : undefined} />
+          <p><a className="terminal-link" href="/panoramas/">打开全景图目录 ↗</a></p>
         </section>
       )
 
@@ -153,7 +185,7 @@ export default function CommandOutput({
             ))}
           </dl>
           <p className="dim">
-            使用 ↑/↓ 浏览历史，Tab 自动补全。彩蛋：hello world
+            使用 ↑/↓ 浏览历史，Tab 补全命令与路径。试试 cd projects、ls、cat frontier-benchmarks.md。彩蛋：hello world
           </p>
         </section>
       )
@@ -198,10 +230,14 @@ export default function CommandOutput({
     case 'file-list':
       return (
         <p className="file-list">
-          <span>about.txt</span>
-          <span>skills.md</span>
-          <span>projects/</span>
-          <span>contact.json</span>
+          {(result.entries ?? listContentDirectory(HOME_DIRECTORY)).map((entry) => (
+            <span key={entry.name} className={entry.type === 'directory' ? 'accent' : undefined}>
+              {entry.href ? <a className="terminal-link" href={entry.href}
+                {...(entry.href.startsWith('https:') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              >{entry.name}</a> : entry.name}
+              {entry.type === 'directory' ? '/' : ''}
+            </span>
+          ))}
         </p>
       )
 

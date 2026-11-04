@@ -17,7 +17,7 @@ Terminal-style portfolio built with React + TypeScript + Vite.
 ### Key Files
 
 - `src/data/portfolio.ts` - Single source of truth for profile, skills, projects, and yearly keywords
-- `src/components/Terminal.tsx` - Semantic portfolio shell plus scoped terminal input, history, sound preference, and hello world easter egg
+- `src/components/Terminal.tsx` - Single-column terminal shell with compact navigation, command input, history, sound preference, and hello world easter egg
 - `src/components/CommandOutput.tsx` - Safe React rendering for rich command results; user input must never use `dangerouslySetInnerHTML`
 - `src/components/Terminal.css` - Responsive portfolio and terminal styling
 - `src/commands/index.ts` - Single command registry used for execution, help, shortcuts, and completion
