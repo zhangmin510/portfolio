@@ -7,7 +7,7 @@
     "dev": "vite --host 127.0.0.1 --port 5178",
     "build": "tsc -b && vite build && node scripts/create-standalone.mjs",
     "preview": "vite preview --host 127.0.0.1 --port 5178",
-    "test": "vitest run",
+    "test": "vitest run && node --test worker/feedback.test.mjs",
     "check": "npm run test && npm run build"
   },
   "dependencies": {

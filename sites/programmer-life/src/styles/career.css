@@ -14,6 +14,13 @@
 .career-current .event-choices { margin-top: 13px; }
 .career-current .event-choices p { color: #516a54; }
 .career-current .event-choices small { color: #497454; }
+.career-meeting-discussion { margin-top: 12px; }
+.career-meeting-dialogue { margin-top: 8px; padding: 11px 13px; border-radius: 10px; background: #edf4eb; color: #315338; }
+.career-meeting-dialogue > strong { font-size: 12px; }
+.career-meeting-dialogue > p { margin-top: 3px; font-size: 13px; line-height: 1.7; }
+.career-meeting-controls { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.career-meeting-controls > button { min-height: 34px; color: #315c42; }
+.career-meeting-controls > button:last-child { margin-left: auto; }
 .career-history { margin-top: 16px; color: #43644c; font-size: 13px; }
 .career-history summary { cursor: pointer; padding: 6px 0; }
 .career-history ol { padding-left: 20px; }

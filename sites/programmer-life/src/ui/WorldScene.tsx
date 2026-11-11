@@ -5,7 +5,9 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import type { ActionId, LocationId } from '../domain/types';
 import { createRoomModel } from '../world/room';
 import type { WorldHotspot, WorldModel } from '../world/room';
-import { createCityModel } from '../world/city';
+import type { ActionPerformance, RoomPerformanceFrame } from '../world/roomPerformance';
+import { createCityModel, getCityPlayerPosition } from '../world/city';
+import { createCityPerformance } from '../world/cityPerformance';
 import { createTravelStage } from '../world/travelVehicle';
 import type { WorldTravel } from '../world/travelVehicle';
 import { CityScene, RoomScene } from './Scenes';
@@ -19,6 +21,7 @@ export interface WorldSceneProps {
   minute: number;
   locationId: LocationId;
   activity: ActionId | null;
+  performance?: ActionPerformance;
   revision: number;
   onAction: (id: ActionId) => void;
   onLocation: (id: LocationId) => void;
@@ -33,6 +36,52 @@ export interface WorldSceneProps {
 
 type CameraRig = { camera: THREE.OrthographicCamera; controls: OrbitControls; reset: () => void };
 
+function createActionCamera(camera: THREE.OrthographicCamera, controls: OrbitControls, host: HTMLDivElement, outdoors: boolean) {
+  const originalTarget = new THREE.Vector3();
+  const originalPosition = new THREE.Vector3();
+  const focusTarget = new THREE.Vector3();
+  const focusPosition = new THREE.Vector3();
+  const offset = outdoors ? new THREE.Vector3(9, 19, 15) : new THREE.Vector3(13, 12, 19);
+  const horizontal = new THREE.Vector3().crossVectors(camera.up, offset).normalize();
+  const up = new THREE.Vector3().crossVectors(offset, horizontal).normalize();
+  let active = false;
+  let originalZoom = 1;
+  let restoredFor = 0;
+  const maximumZoom = controls.maxZoom;
+  return (focus: RoomPerformanceFrame | undefined, delta: number, still: boolean) => {
+    if (focus) {
+      if (!active) {
+        originalTarget.copy(controls.target);
+        originalPosition.copy(camera.position);
+        originalZoom = camera.zoom;
+        active = true;
+      }
+      restoredFor = 0;
+      controls.enabled = false;
+      const aspect = host.clientWidth / Math.max(1, host.clientHeight);
+      const zoom = focus.zoom * (1 + Math.max(0, .82 - aspect) * 1.24);
+      controls.maxZoom = Math.max(maximumZoom, zoom);
+      const verticalBias = Math.min(.16, 84 / Math.max(1, host.clientHeight));
+      focusTarget.copy(focus.center).addScaledVector(up, -verticalBias * (camera.top - camera.bottom) / zoom);
+      focusPosition.copy(focusTarget).add(offset);
+      const mix = still ? 1 : 1 - Math.exp(-delta * 8);
+      controls.target.lerp(focusTarget, mix);
+      camera.position.lerp(focusPosition, mix);
+      camera.zoom = THREE.MathUtils.lerp(camera.zoom, zoom, mix);
+      camera.updateProjectionMatrix();
+    } else if (active) {
+      restoredFor += delta;
+      const done = still || restoredFor >= .35;
+      const mix = done ? 1 : 1 - Math.exp(-delta * 13);
+      controls.target.lerp(originalTarget, mix);
+      camera.position.lerp(originalPosition, mix);
+      camera.zoom = THREE.MathUtils.lerp(camera.zoom, originalZoom, mix);
+      camera.updateProjectionMatrix();
+      if (done) { controls.maxZoom = maximumZoom; controls.enabled = true; active = false; }
+    }
+  };
+}
+
 const actionGlyph: Partial<Record<ActionId, string>> = { sleep: '🛏️', personal: '💻', cook: '🍳', breakfast: '🍳', rest: '🛋️', focus: '💻', test: '📋', talk: '💬', lunch: '🍜' };
 const locationGlyph: Record<LocationId, string> = { home: '🏠', office: '🏢', cafe: '☕', store: '🛒', park: '🌳', makerspace: '💡' };
 const actionLabel: Partial<Record<ActionId, string>> = {
@@ -41,9 +90,7 @@ const actionLabel: Partial<Record<ActionId, string>> = {
 };
 
 function setCityPlayerTarget(model: WorldModel, location: LocationId, target: THREE.Vector3) {
-  const place = model.hotspots.find(item => item.id === location);
-  if (!place || !model.player) return;
-  target.set(place.position.x, model.player.position.y, place.position.z + (location === 'park' ? 0 : 4.6));
+  if (model.player) target.copy(getCityPlayerPosition(location));
 }
 
 function disposeWorld(scene: THREE.Scene) {
@@ -121,6 +168,9 @@ export function WorldScene(props: WorldSceneProps) {
     const model = mode === 'city' ? createCityModel(latest.current.locationId) : createRoomModel(mode, latest.current.name);
     modelRef.current = model; scene.add(model.group);
     const travelStage = mode === 'city' ? createTravelStage(scene, camera, controls) : null;
+    const cityPerformance = mode === 'city' && model.player ? createCityPerformance(model.group, model.player) : undefined;
+    const cityFocus = { center: new THREE.Vector3(), zoom: 6.4 };
+    const actionCamera = createActionCamera(camera, controls, host, mode === 'city');
     lastActivityRevision.current = latest.current.revision;
     setHotspots(model.hotspots);
     if (model.player) target.current.copy(model.player.position);
@@ -146,11 +196,11 @@ export function WorldScene(props: WorldSceneProps) {
     const raycaster = new THREE.Raycaster(); const pointer = new THREE.Vector2();
     let downX = 0; let downY = 0; let pointerDown = false;
     function pickStart(event: PointerEvent) {
-      if (latest.current.travel) return;
+      if (latest.current.travel || latest.current.performance) return;
       downX = event.clientX; downY = event.clientY; pointerDown = true;
     }
     function pickEnd(event: PointerEvent) {
-      if (latest.current.travel || !pointerDown || Math.hypot(event.clientX - downX, event.clientY - downY) > 7) { pointerDown = false; return; }
+      if (latest.current.travel || latest.current.performance || !pointerDown || Math.hypot(event.clientX - downX, event.clientY - downY) > 7) { pointerDown = false; return; }
       pointerDown = false;
       const bounds = renderer.domElement.getBoundingClientRect();
       pointer.set((event.clientX - bounds.left) / bounds.width * 2 - 1, -(event.clientY - bounds.top) / bounds.height * 2 + 1);
@@ -192,22 +242,51 @@ export function WorldScene(props: WorldSceneProps) {
     const playerPosition = new THREE.Vector3();
     const backWall = model.group.getObjectByName('cutaway-back-wall');
     const leftWall = model.group.getObjectByName('cutaway-left-wall');
+    const twilight = new THREE.Color('#82968b');
+    const daylight = new THREE.Color('#a3b889');
+    const moonlight = new THREE.Color('#bbd1df');
+    const sunlight = new THREE.Color('#fffaf0');
     let wasTraveling = false;
+    let sleepStage = 0;
+    let sleepStageStarted = 0;
     function animate(now: number) {
       if (contextLost) return;
       frame = requestAnimationFrame(animate);
       const elapsed = Math.max(0, (now - last) / 1000);
       const delta = Math.min(elapsed, .05);
       last = now;
-      const { travel, reduceMotion, travelFallback } = latest.current;
+      const { travel, reduceMotion, travelFallback, performance: action } = latest.current;
       if (travel && reduceMotion && travelFallback) return;
+      if (travel && !wasTraveling) actionCamera(undefined, 0, true);
       const traveler = travelStage?.(travel, elapsed, Boolean(reduceMotion));
+      let focus: RoomPerformanceFrame | undefined;
+      if (action && !travel) focus = model.roomPerformance?.update(action, now, delta, Boolean(reduceMotion));
+      else model.roomPerformance?.clear();
+      if (cityPerformance?.(travel ? undefined : action, latest.current.locationId, now, Boolean(reduceMotion)) && model.player) {
+        cityFocus.center.copy(model.player.position);
+        cityFocus.center.y = 1.05;
+        focus = cityFocus;
+      }
+      const sleeping = mode === 'home' && action?.id === 'sleep' ? action.stage : 0;
+      if (sleepStage || sleeping) {
+        if (sleeping !== sleepStage) sleepStageStarted = now;
+        const hour = Math.floor(latest.current.minute / 60) % 24;
+        const night = hour >= 19 || hour < 6;
+        const settled = reduceMotion ? 1 : THREE.MathUtils.smoothstep(now - sleepStageStarted, 0, 750);
+        const dawn = sleeping === 2 ? settled : sleeping === 1 || night ? 0 : 1;
+        scene.background = (scene.background as THREE.Color).copy(twilight).lerp(daylight, dawn);
+        sun.color.copy(moonlight).lerp(sunlight, dawn);
+        sun.intensity = sleeping ? THREE.MathUtils.lerp(.47, 2.8, dawn) : night ? .9 : 2.8;
+        hemi.intensity = sleeping ? THREE.MathUtils.lerp(1, 1.75, dawn) : night ? 1.35 : 1.75;
+        sleepStage = sleeping;
+      }
+      if (!travel) actionCamera(focus, delta, Boolean(reduceMotion));
       controls.update();
       camera.updateMatrixWorld();
       if (backWall) backWall.visible = camera.position.z >= controls.target.z;
       if (leftWall) leftWall.visible = camera.position.x >= controls.target.x;
       if (model.player) model.player.visible = !traveler;
-      if (model.player && !traveler) {
+      if (model.player && !traveler && !focus) {
         if (wasTraveling) {
           setCityPlayerTarget(model, latest.current.locationId, target.current);
           model.player.position.copy(target.current);
@@ -230,11 +309,12 @@ export function WorldScene(props: WorldSceneProps) {
       wasTraveling = Boolean(traveler);
       const displayedPlayer = traveler ?? model.player;
       if (displayedPlayer) {
-        displayedPlayer.getWorldPosition(playerPosition);
-        playerPosition.y += traveler && latest.current.travel?.mode !== 'walk' ? 2.38 : 2.6;
+        const actorMarker = focus ? displayedPlayer.getObjectByName('playerDiamond') : undefined;
+        if (actorMarker?.visible) { actorMarker.getWorldPosition(playerPosition); playerPosition.y += .23; }
+        else { displayedPlayer.getWorldPosition(playerPosition); playerPosition.y += focus ? .6 : traveler && latest.current.travel?.mode !== 'walk' ? 2.38 : 2.6; }
         projected.copy(playerPosition).project(camera);
         const tag = playerLabel.current;
-        if (tag) { tag.style.transform = `translate(${(projected.x * .5 + .5) * host!.clientWidth}px,${(-projected.y * .5 + .5) * host!.clientHeight}px) translate(-50%,-100%)`; tag.style.visibility = projected.z > 1 || Math.abs(projected.x) > 1.05 || Math.abs(projected.y) > 1.05 ? 'hidden' : 'visible'; }
+        if (tag) { tag.style.transform = `translate(${(projected.x * .5 + .5) * host!.clientWidth}px,${(-projected.y * .5 + .5) * host!.clientHeight}px) translate(-50%,-100%)`; tag.style.visibility = actorMarker?.visible === false || projected.z > 1 || Math.abs(projected.x) > 1.05 || Math.abs(projected.y) > 1.05 ? 'hidden' : 'visible'; }
       }
       model.hotspots.forEach((item, index) => {
         const element = labels.current[index]; if (!element) return;
@@ -281,7 +361,7 @@ export function WorldScene(props: WorldSceneProps) {
   }, [revision, activity, mode, locationId]);
 
   useEffect(() => {
-    const current = rig.current; if (!current || !cameraCommand || latest.current.travel) return;
+    const current = rig.current; if (!current || !cameraCommand || latest.current.travel || latest.current.performance) return;
     if (cameraCommand.kind === 'reset') current.reset();
     else if (cameraCommand.kind === 'zoom-in' || cameraCommand.kind === 'zoom-out') {
       const factor = cameraCommand.kind === 'zoom-in' ? 1.2 : 1 / 1.2;
@@ -299,6 +379,8 @@ export function WorldScene(props: WorldSceneProps) {
     className: `world-scene world-scene-${mode} ${props.showNames ? 'has-place-names' : ''}`,
     'data-renderer': fallback || showTravelFallback ? 'svg' : 'webgl',
     'data-travel-mode': props.travel?.mode,
+    'data-action': props.performance?.id,
+    'data-action-stage': props.performance?.stage,
   };
 
   if (showTravelFallback) return <div {...sceneAttributes}>{props.travelFallback}</div>;
@@ -308,14 +390,14 @@ export function WorldScene(props: WorldSceneProps) {
       <div className="world-fallback" inert={Boolean(props.travel)}>
         <div className="world-fallback-message">当前浏览器未启用三维加速，已切换简化视图。所有生活行动仍可操作。</div>
         {mode === 'city' ? <CityScene location={locationId} onSelect={props.onLocation} /> : (
-          <RoomScene location={mode} name={props.name} minute={props.minute} activeAction={null} onSelect={props.onAction} />
+          <RoomScene location={mode} name={props.name} minute={props.minute} activeAction={props.performance?.id ?? null} onSelect={props.onAction} />
         )}
       </div>
     </div>;
   }
 
   return <div {...sceneAttributes}>
-    {!props.travel && <div className="world-hotspot-layer" aria-label={mode === 'city' ? '城市地点' : '房间物件'}>
+    {!props.travel && !props.performance && <div className="world-hotspot-layer" aria-label={mode === 'city' ? '城市地点' : '房间物件'}>
       {hotspots.map((hotspot, index) => {
         const isLocation = hotspot.kind === 'location';
         const isCurrent = isLocation && hotspot.id === locationId;

@@ -37,6 +37,14 @@ npm run build
 npx wrangler@4.114.0 deploy
 ```
 
+「游客留言」支持在游戏里匿名提交，也可通过 GitHub 账号发布。留言公开保存在 [portfolio Issues](https://github.com/zhangmin510/portfolio/issues)。匿名提交需要在 `programmer-life` Worker 设置加密 Secret `GITHUB_ISSUES_TOKEN`。使用仅授权 `zhangmin510/portfolio`、仓库权限为 **Issues: Read and write** 的 GitHub fine-grained token。
+
+```sh
+npx wrangler@4.114.0 secret put GITHUB_ISSUES_TOKEN
+```
+
+在提示中输入令牌。可用 `GET /api/feedback` 检查匿名入口是否已就绪。也可以从 [Cloudflare Workers 控制台](https://dash.cloudflare.com/?to=/:account/workers-and-pages) 的 `programmer-life → Settings → Variables and Secrets` 添加并部署 Secret。
+
 ## 先玩通这一天
 
 这是一条方便探索主要系统的路线，也可以按自己的节奏选择：
@@ -52,6 +60,8 @@ npx wrangler@4.114.0 deploy
 项目进度不必在首日达到 100%。这一天的目标是认识城市、体验工作与生活的取舍。省略工作也能结束首日，回顾会反映不同经历。
 
 出行在动画结束后结算费用并推进游戏时间。可以跳过动画，或者在设置中减少动态效果。阅读消息、切换页面和离线均不会消耗需求。
+
+点击「自动玩耍」可以按当前作息自动安排工作、吃饭、休息、散步和回家睡觉。可以随时暂停，已经出发的行程会正常抵达。当天回顾里可选「自动玩下一天」。
 
 ## 日常和职业日历
 
@@ -69,7 +79,7 @@ npx wrangler@4.114.0 deploy
 - 带分支的需求变更、职业事件、生活手记和每日回顾。
 - 自动存档、有效备份恢复、JSON 导入导出、重新开始与减少动态效果。
 
-AI 辅助是游戏规则选项，不调用真实模型。
+点击行动后会播放场景。工作包含敲代码、运行测试和 Codex 回复过程，复盘在会议室里分轮讨论。Codex 的提示和改动在游戏内模拟。
 
 ## 存档与数据
 

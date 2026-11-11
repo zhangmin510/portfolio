@@ -14,7 +14,7 @@
   backdrop-filter: blur(16px);
 }
 
-.trip-route, .trip-status > button {
+.trip-route, .trip-controls > button {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -40,8 +40,9 @@
   transform-origin: left;
 }
 
-.trip-status > button {
-  margin: 5px 0 0 auto;
+.trip-controls { display: flex; align-items: center; gap: 12px; margin-top: 5px; }
+.trip-controls > button:last-child { margin-left: auto; }
+.trip-controls > button {
   padding: 7px 2px;
   color: #476157;
   background: transparent;

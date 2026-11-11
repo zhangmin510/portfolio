@@ -1,13 +1,17 @@
 import { useCallback, useEffect, useEffectEvent, useRef, useState } from 'react';
 import { useGame } from './application/useGame';
+import { getAutoplayAction } from './domain/autoplay';
 import { hasGraduated } from './domain/career';
 import { getActions, getTravelOptions } from './domain/engine';
 import { getDaySchedule } from './domain/routine';
+import { ACTION_SCENES } from './content/actionScenes';
 import { EVENT_CHOICES, LOCATIONS, WISHES } from './content/game';
 import type { ActionId, GameState, LocationId, TravelMode } from './domain/types';
+import { ActionPerformance } from './ui/ActionPerformance';
 import { CareerCalendar } from './ui/CareerCalendar';
 import { CharacterCreation } from './ui/CharacterCreation';
 import { DailySummary } from './ui/DailySummary';
+import { GuestFeedback } from './ui/GuestFeedback';
 import { Icon } from './ui/Icon';
 import { TripFallback, TripStatus, travelModes } from './ui/Travel';
 import { WorldScene } from './ui/WorldScene';
@@ -23,6 +27,12 @@ type Trip = {
   mode: TravelMode;
   path: readonly RoutePoint[];
   durationMs: number;
+};
+type PerformedAction = {
+  origin: Pick<GameState, 'runId' | 'revision'>;
+  id: ActionId;
+  title: string;
+  stage: number;
 };
 const money = (value: number) => `¥${(value / 100).toLocaleString('zh-CN', { maximumFractionDigits: 2 })}`;
 const clock = (minute: number) => `${String(Math.floor(minute % 1440 / 60)).padStart(2, '0')}:${String(minute % 60).padStart(2, '0')}`;
@@ -50,6 +60,10 @@ export default function App() {
   const [destination, setDestination] = useState<LocationId>('office');
   const [travelMode, setTravelMode] = useState<TravelMode>('drive');
   const [trip, setTrip] = useState<Trip | null>(null);
+  const [performance, setPerformance] = useState<PerformedAction | null>(null);
+  const activePerformance = useRef<PerformedAction | null>(null);
+  const [autoplay, setAutoplay] = useState(false);
+  const autoplayRequested = useRef(false);
   const activeTrip = useRef<Trip | null>(null);
   const presentedTripPath = useRef<readonly RoutePoint[] | null>(null);
   const tripProgress = useRef(0);
@@ -66,6 +80,7 @@ export default function App() {
   const [worldReady, setWorldReady] = useState(false);
   const [showPlaceNames, setShowPlaceNames] = useState(false);
   const importInput = useRef<HTMLInputElement>(null);
+  const modalOpen = confirmReset || showSummary || showCareer || game?.phase === 'event';
 
   const selectAction = useCallback((id: ActionId) => {
     const chosen = id === 'cook' && game?.locationId === 'home' && game.minute < 660 && !game.flags.breakfast ? 'breakfast' : id;
@@ -74,14 +89,101 @@ export default function App() {
   const selectLocation = useCallback((id: LocationId) => { setDestination(id); setTravelMode('drive'); setPanel('travel'); }, []);
   const moveCamera = (kind: CameraCommand['kind']) => setCameraCommand(previous => ({ kind, nonce: previous.nonce + 1 }));
 
+  function stopAutoplay() {
+    autoplayRequested.current = false;
+    setAutoplay(false);
+  }
+
+  function startAutoplay() {
+    if (readOnly || !saved || document.hidden) return;
+    autoplayRequested.current = true;
+    setPanel(null);
+    setView('room');
+    setAutoplay(true);
+  }
+
+  function depart(to: LocationId, mode: TravelMode) {
+    if (!game || activeTrip.current || activePerformance.current || busy || readOnly || game.phase !== 'playing') return false;
+    const option = getTravelOptions(game, to).find(item => item.mode === mode);
+    if (!option || option.disabledReason) return false;
+    const origin = { runId: game.runId, revision: game.revision };
+    const path = getTravelPath(game.locationId, to, mode);
+    const length = path.reduce((distance, point, index) => index === 0 ? 0 : distance + Math.hypot(point.x - path[index - 1].x, point.z - path[index - 1].z), 0);
+    const journey = { origin, from: game.locationId, to, mode, path, durationMs: Math.min(7600, 3600 + length * 62) };
+    presentedTripPath.current = null;
+    tripProgress.current = 0;
+    skipTrip.current = false;
+    activeTrip.current = journey;
+    setPanel(null);
+    setView('city');
+    setTrip(journey);
+    return true;
+  }
+
   function arrive({ origin, to, mode }: Pick<Trip, 'origin' | 'to' | 'mode'>) {
     const next = act({ kind: 'travel', targetId: to, mode }, origin);
-    if (!next) return;
+    if (!next) { stopAutoplay(); return; }
     setActivity(null);
     setSelectedAction(null);
     setView('room');
-    setPanel(next.phase !== 'playing' || to === 'home' || to === 'office' ? null : 'actions');
+    setPanel(autoplayRequested.current || next.phase !== 'playing' || to === 'home' || to === 'office' ? null : 'actions');
   }
+
+  function perform(id: ActionId) {
+    if (!game || activeTrip.current || activePerformance.current || busy || readOnly || game.phase !== 'playing') return false;
+    const action = getActions(game).find(option => option.id === id);
+    if (!action || action.disabledReason) return false;
+    const scene = { id, stage: 0, title: action.title, origin: { runId: game.runId, revision: game.revision } };
+    activePerformance.current = scene;
+    setPanel(null);
+    setView('room');
+    setPerformance(scene);
+    return true;
+  }
+
+  function finishPerformance(scene: PerformedAction) {
+    if (activePerformance.current !== scene) return;
+    activePerformance.current = null;
+    setPerformance(null);
+    if (act({ kind: 'action', targetId: scene.id }, scene.origin)) setActivity(scene.id);
+    else stopAutoplay();
+  }
+
+  const advancePerformance = useEffectEvent((scene: PerformedAction) => {
+    if (activePerformance.current !== scene) return;
+    if (scene.stage + 1 === ACTION_SCENES[scene.id].length) {
+      finishPerformance(scene);
+      return;
+    }
+    const next = { ...scene, stage: scene.stage + 1 };
+    activePerformance.current = next;
+    setPerformance(next);
+  });
+
+  useEffect(() => {
+    if (!performance) return;
+    const duration = ACTION_SCENES[performance.id][performance.stage].milliseconds;
+    let frame: number;
+    let previous: number | null = null;
+    let elapsed = 0;
+    const tick = (now: number) => {
+      if (document.hidden) previous = null;
+      else {
+        if (previous !== null) elapsed += Math.min(now - previous, 100);
+        previous = now;
+      }
+      if (elapsed >= duration) advancePerformance(performance);
+      else frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [performance]);
+
+  useEffect(() => {
+    if (!performance || (!readOnly && game?.runId === performance.origin.runId && game.revision === performance.origin.revision)) return;
+    activePerformance.current = null;
+    setPerformance(null);
+  }, [performance, game?.runId, game?.revision, readOnly]);
 
   const finishTrip = useEffectEvent((completed: Trip) => {
     if (activeTrip.current !== completed) return;
@@ -123,6 +225,43 @@ export default function App() {
     setTrip(null);
   }, [trip, game?.runId, game?.revision, readOnly]);
 
+  const playNext = useEffectEvent(() => {
+    if (!autoplayRequested.current || !game || busy || readOnly || !saved || activeTrip.current || activePerformance.current || document.hidden) return;
+    const command = getAutoplayAction(game);
+    if (!command) {
+      stopAutoplay();
+      setMessage('自动玩耍已暂停。请查看可做的事，手动继续。');
+      return;
+    }
+    if (command.kind === 'travel') {
+      if (!depart(command.targetId, command.mode)) stopAutoplay();
+      return;
+    }
+    if (command.kind === 'action') {
+      if (!perform(command.targetId)) stopAutoplay();
+      return;
+    }
+    if (!act(command, game)) stopAutoplay();
+  });
+
+  useEffect(() => {
+    if (!autoplay) return;
+    if (!game || game.phase === 'complete' || readOnly || !saved) {
+      stopAutoplay();
+      return;
+    }
+    if (busy || trip || performance || showCareer || confirmReset) return;
+    const timer = window.setTimeout(() => playNext(), game.phase === 'event' ? 2800 : 1000);
+    return () => window.clearTimeout(timer);
+  }, [autoplay, game, busy, trip, performance, saved, readOnly, showCareer, confirmReset]);
+
+  useEffect(() => {
+    if (!autoplay) return;
+    function onVisibilityChange() { if (document.hidden) stopAutoplay(); }
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', onVisibilityChange);
+  }, [autoplay]);
+
   useEffect(() => { document.documentElement.dataset.reduceMotion = String(reduceMotion); }, [reduceMotion]);
   useEffect(() => { if (game?.phase === 'complete') setShowSummary(true); }, [game?.phase]);
   useEffect(() => { if (game?.phase === 'event' || game?.phase === 'complete') setPanel(null); }, [game?.phase]);
@@ -133,8 +272,6 @@ export default function App() {
     const dialog = dialogs[dialogs.length - 1];
     if (!dialog) return;
     const previousFocus = document.activeElement as HTMLElement | null;
-    const background = document.querySelectorAll<HTMLElement>('.world-layer, .hud-layer, .context-panel');
-    background.forEach(element => { element.inert = true; });
     dialog.tabIndex = -1;
     dialog.focus({ preventScroll: true });
     function keydown(event: KeyboardEvent) {
@@ -152,7 +289,7 @@ export default function App() {
       else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
     }
     document.addEventListener('keydown', keydown);
-    return () => { background.forEach(element => { element.inert = false; }); document.removeEventListener('keydown', keydown); if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true }); };
+    return () => { document.removeEventListener('keydown', keydown); if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true }); };
   }, [confirmReset, showSummary, showCareer, game?.phase]);
 
   if (!game) return <><CharacterCreation readOnly={readOnly} onStart={options => { start(options); setView('room'); setPanel(null); setActivity(null); }} />{message && <div className="toast" role="status"><Icon name="info" size={18} />{message}<button aria-label="关闭提示" onClick={() => setMessage('')}><Icon name="close" size={16} /></button></div>}</>;
@@ -171,20 +308,6 @@ export default function App() {
   const travelOptions = getTravelOptions(game, destination);
   const travel = travelOptions.find(option => option.mode === travelMode) ?? travelOptions[0];
 
-  function depart() {
-    if (!game || activeTrip.current || busy || readOnly || !travel || travel.disabledReason || game.phase !== 'playing') return;
-    const origin = { runId: game.runId, revision: game.revision };
-    const path = getTravelPath(game.locationId, destination, travel.mode);
-    const length = path.reduce((distance, point, index) => index === 0 ? 0 : distance + Math.hypot(point.x - path[index - 1].x, point.z - path[index - 1].z), 0);
-    const journey = { origin, from: game.locationId, to: destination, mode: travel.mode, path, durationMs: Math.min(7600, 3600 + length * 62) };
-    presentedTripPath.current = null;
-    tripProgress.current = 0;
-    skipTrip.current = false;
-    activeTrip.current = journey;
-    setPanel(null);
-    setView('city');
-    setTrip(journey);
-  }
   const lowest = [{ name: '精力', value: game.player.energy, icon: 'energy' }, { name: '饱腹', value: game.player.hunger, icon: 'food' }, { name: '心情', value: game.player.mood, icon: 'smile' }, { name: '社交', value: game.player.social, icon: 'social' }].sort((a, b) => a.value - b.value)[0];
   const milestones = [{ label: '在家吃点早餐', done: game.flags.breakfast }, { label: '去字节花园报到', done: game.flags.commuted }, { label: '完成第一轮实现', done: game.flags.workSessions > 0 }, { label: '把时间留给生活', done: game.flags.eveningActivity || game.flags.slept }];
   const workFinished = schedule.workEnd !== null && game.minute >= schedule.workEnd;
@@ -224,28 +347,33 @@ export default function App() {
     setShowCareer(true);
   }
 
-  function startNextDay() {
+  function startNextDay(automatic = false) {
     if (!act({ kind: 'next-day' })) return;
     setShowSummary(false);
     setPanel(null);
     setActivity(null);
     setSelectedAction(null);
     setView('room');
+    if (automatic) startAutoplay();
   }
 
   return <div className="game-shell">
-    <div className="world-layer" inert={!!trip}>
+    <div className="world-layer" inert={!!trip || !!performance || autoplay || modalOpen}>
       <WorldScene
         mode={mode} locationId={game.locationId} name={game.player.name} minute={game.minute}
-        activity={activity} revision={game.revision} onAction={selectAction} onLocation={selectLocation}
+        activity={activity} performance={performance ?? undefined} revision={game.revision} onAction={selectAction} onLocation={selectLocation}
         cameraCommand={cameraCommand} reduceMotion={reduceMotion} onReady={setWorldReady} showNames={showPlaceNames}
         travel={trip ? { path: trip.path, mode: trip.mode, progress: getTripProgress } : undefined}
         travelFallback={trip ? <TripFallback path={trip.path} mode={trip.mode} progress={getTripProgress} onPresented={markTripPresented} /> : undefined}
         onTravelPresented={markTripPresented}
       />
     </div>
-    {trip && <TripStatus from={trip.from} to={trip.to} mode={trip.mode} progress={getTripProgress} onSkip={() => { skipTrip.current = true; }} />}
-    {!trip && <div className="hud-layer">
+    {trip && <TripStatus from={trip.from} to={trip.to} mode={trip.mode} progress={getTripProgress} onSkip={() => { skipTrip.current = true; }} onPauseAutoplay={autoplay ? stopAutoplay : undefined} />}
+    {performance && <ActionPerformance id={performance.id} stage={performance.stage} title={performance.title} onSkip={() => finishPerformance(performance)} onPauseAutoplay={autoplay ? stopAutoplay : undefined} />}
+    {!trip && !performance && !modalOpen && game.phase === 'playing' && <button type="button" className="autoplay-control" aria-pressed={autoplay} disabled={readOnly || !saved} onClick={autoplay ? stopAutoplay : startAutoplay}>
+      <Icon name={autoplay ? 'pause' : 'play'} size={17} />{autoplay ? '暂停自动玩耍' : '自动玩耍'}
+    </button>}
+    {!trip && !performance && <div className="hud-layer" inert={autoplay || modalOpen}>
       <header className="sim-topbar">
         <button className="game-wordmark" aria-label="栈城日常，查看今日目标" onClick={() => setPanel(panel === 'goals' ? null : 'goals')}>栈城<span>LIFE</span></button>
         <div className="sim-clock"><strong><Icon name={hour >= 19 || hour < 6 ? 'moon' : 'sun'} size={17} />{clock(game.minute)}<i>·</i><span>{game.player.mood >= 60 ? '心情不错' : game.player.mood >= 30 ? '还好' : '想休息一下'}</span></strong><small><span className={`live-dot ${!saved ? 'unsaved' : ''}`} />第 {day} 天 · {weekdayNames[(day - 1) % 7]}<i>·</i>{readOnly ? '只读模式' : saved ? '已保存' : '未保存'}</small></div>
@@ -258,13 +386,13 @@ export default function App() {
       {readOnly && <div className="state-banner"><Icon name="info" size={15} />另一个标签页正在游玩，此页只读。<button onClick={() => window.location.reload()}>刷新</button></div>}
       {!saved && <div className="state-banner"><Icon name="save" size={15} />最近进度尚未保存。<button onClick={retrySave}>重试</button><button onClick={download}>导出</button></div>}
       <div className="camera-tools" aria-label="镜头控制"><button className="round-button" aria-label="旋转视角" onClick={() => moveCamera('rotate')}><Icon name="rotate" size={20} /></button><div><button aria-label="放大场景" onClick={() => moveCamera('zoom-in')}><Icon name="zoom-in" size={19} /></button><button aria-label="缩小场景" onClick={() => moveCamera('zoom-out')}><Icon name="zoom-out" size={19} /></button></div><button className="round-button" aria-label="重置镜头" onClick={() => moveCamera('reset')}><Icon name="reset" size={19} /></button></div>
-      <div className="scene-guide"><span>{nextHint}</span><small>{worldReady ? '拖动旋转 · 滚轮缩放' : '场景载入中'}<i>·</i>思考时，时间暂停</small></div>
+      <div className="scene-guide"><span>{autoplay ? '自动安排今日作息，睡觉后暂停' : nextHint}</span>{!autoplay && <small>{worldReady ? '拖动旋转 · 滚轮缩放' : '场景载入中'}<i>·</i>思考时，时间暂停</small>}</div>
       {busy && <div className="activity-feedback" role="status"><span className="live-dot" />{game.journal[game.journal.length - 1]?.title ?? '这一刻，收好了'}</div>}
       <div className="dock-area"><nav className="sim-dock" aria-label="游戏操作"><button className={view === 'room' && panel === null ? 'active' : ''} onClick={goHome}><Icon name="home" size={21} /><span>家里</span></button><button className={panel === 'project' ? 'active' : ''} onClick={() => setPanel(panel === 'project' ? null : 'project')}><Icon name="project" size={21} /><span>项目</span></button><button className={view === 'city' ? 'active' : ''} onClick={() => { setView(view === 'city' ? 'room' : 'city'); setPanel(null); }}><Icon name="map" size={21} /><span>地图</span></button></nav><button className={`phone-button ${panel === 'journal' || panel === 'settings' ? 'active' : ''}`} aria-label="打开手机" onClick={() => setPanel(panel === 'journal' ? null : 'journal')}><Icon name="phone" size={23} /></button></div>
       <button className="quick-action" onClick={() => { if (game.phase === 'complete') { setShowSummary(true); return; } setSelectedAction(null); setPanel(panel === 'actions' ? null : 'actions'); }}><Icon name="spark" size={17} />{game.phase === 'complete' ? '回看这一天' : '可做的事'}<Icon name="chevron" size={14} /></button>
     </div>}
-    {panel && <aside className={`context-panel ${panel === 'travel' || panel === 'actions' ? 'action-context' : ''}`} aria-label={panelTitles[panel]}><div className="panel-header"><h2>{panelTitles[panel]}</h2><button className="icon-button" aria-label="关闭面板" onClick={() => setPanel(null)}><Icon name="close" size={20} /></button></div><div className="panel-body">
-      {panel === 'actions' && <><div className="current-place"><Icon name={location.icon} size={15} />{location.name}<span>·</span>{clock(game.minute)}</div><div className="actions-list">{visibleActions.map(action => <button className={`action-option ${selected?.id === action.id ? 'selected' : ''} ${action.disabledReason ? 'unavailable' : ''}`} key={action.id} aria-pressed={selected?.id === action.id} onClick={() => setSelectedAction(action.id)}><span className="action-icon"><Icon name={actionIcons[action.id]} size={20} /></span><span><strong>{action.title}</strong><small>{action.id === 'sleep' ? '睡到明早 07:00' : duration(action.duration)} · {action.cost ? money(action.cost) : '免费'}</small></span><Icon name="chevron" size={14} /></button>)}</div>{selected && <div className="action-preview"><h3>{selected.title}</h3><p>{selected.description}</p><div className="effect-chips">{selected.effects.map(effect => <span key={effect}>{effect}</span>)}</div>{selected.risk && <p className="risk-note"><Icon name="info" size={14} />{selected.risk}</p>}<p className="quiet-note">行动期间，日常需求也会随游戏时间变化。</p><button className="primary-button" disabled={busy || readOnly || !!selected.disabledReason || game.phase !== 'playing'} onClick={() => { if (!busy && !readOnly && !selected.disabledReason) { act({ kind: 'action', targetId: selected.id }); setActivity(selected.id); setPanel(null); } }}>{selected.id === 'sleep' ? '睡到明早 07:00' : `开始 · ${duration(selected.duration)}`}<Icon name="arrow" size={18} /></button>{selected.disabledReason && <p className="disabled-explanation">{selected.disabledReason}</p>}</div>}{game.phase === 'complete' && <button className="primary-button" onClick={() => setShowSummary(true)}>打开首日回顾 <Icon name="journal" size={17} /></button>}</>}
+    {panel && <aside inert={modalOpen} className={`context-panel ${panel === 'travel' || panel === 'actions' ? 'action-context' : ''}`} aria-label={panelTitles[panel]}><div className="panel-header"><h2>{panelTitles[panel]}</h2><button className="icon-button" aria-label="关闭面板" onClick={() => setPanel(null)}><Icon name="close" size={20} /></button></div><div className="panel-body">
+      {panel === 'actions' && <><div className="current-place"><Icon name={location.icon} size={15} />{location.name}<span>·</span>{clock(game.minute)}</div><div className="actions-list">{visibleActions.map(action => <button className={`action-option ${selected?.id === action.id ? 'selected' : ''} ${action.disabledReason ? 'unavailable' : ''}`} key={action.id} aria-pressed={selected?.id === action.id} onClick={() => setSelectedAction(action.id)}><span className="action-icon"><Icon name={actionIcons[action.id]} size={20} /></span><span><strong>{action.title}</strong><small>{action.id === 'sleep' ? '睡到明早 07:00' : duration(action.duration)} · {action.cost ? money(action.cost) : '免费'}</small></span><Icon name="chevron" size={14} /></button>)}</div>{selected && <div className="action-preview"><h3>{selected.title}</h3><p>{selected.description}</p><div className="effect-chips">{selected.effects.map(effect => <span key={effect}>{effect}</span>)}</div>{selected.risk && <p className="risk-note"><Icon name="info" size={14} />{selected.risk}</p>}<p className="quiet-note">行动期间，日常需求也会随游戏时间变化。</p><button className="primary-button" disabled={busy || readOnly || !!selected.disabledReason || game.phase !== 'playing'} onClick={() => perform(selected.id)}>{selected.id === 'sleep' ? '睡到明早 07:00' : `开始 · ${duration(selected.duration)}`}<Icon name="arrow" size={18} /></button>{selected.disabledReason && <p className="disabled-explanation">{selected.disabledReason}</p>}</div>}{game.phase === 'complete' && <button className="primary-button" onClick={() => setShowSummary(true)}>打开首日回顾 <Icon name="journal" size={17} /></button>}</>}
       {panel === 'travel' && <>
         <div className="venue-icon"><Icon name={LOCATIONS[destination].icon} size={29} /></div>
         <div className="panel-intro"><h3>{LOCATIONS[destination].name}</h3><p>{LOCATIONS[destination].description}</p></div>
@@ -282,7 +410,7 @@ export default function App() {
             <strong>{travelModes[option.mode].label}</strong>
             <span>{duration(option.duration)} · {option.cost ? money(option.cost) : '免费'}</span>
           </button>)}</div>
-          <button className="primary-button" disabled={busy || readOnly || !travel || !!travel.disabledReason || game.phase !== 'playing'} onClick={depart}>
+          <button className="primary-button" disabled={busy || readOnly || !travel || !!travel.disabledReason || game.phase !== 'playing'} onClick={() => { if (travel) depart(destination, travel.mode); }}>
             出发去{LOCATIONS[destination].name}<Icon name="arrow" size={18} />
           </button>
           {travel?.disabledReason && <p className="disabled-explanation">{travel.disabledReason}</p>}
@@ -303,11 +431,11 @@ export default function App() {
         {schedule.kind === 'overtime' && !workFinished && game.locationId !== 'office' && <button className="secondary-button career-entry" onClick={() => { setView('city'); selectLocation('office'); }}>去公司看看周末值班</button>}
         <button className="secondary-button career-entry" onClick={openCareer}><Icon name="calendar" size={17} />职业日历</button>
       </>}
-      {(panel === 'journal' || panel === 'settings') && <><div className="phone-tabs"><button className={panel === 'journal' ? 'active' : ''} onClick={() => setPanel('journal')}><Icon name="journal" size={16} />手记</button><button className={panel === 'settings' ? 'active' : ''} onClick={() => setPanel('settings')}><Icon name="settings" size={16} />设置与账单</button></div>{panel === 'journal' ? <><div className="panel-intro"><h3>今天留下的片刻</h3><p>每一个选择，都记在这里。</p></div><div className="timeline">{[...game.journal].reverse().map(entry => <article key={entry.id}><time>{clock(entry.minute)}</time><div><h3>{entry.title}</h3><p>{entry.detail}</p><div className="effect-chips">{entry.changes.map((change, index) => <span key={index}>{change.label} {change.value > 0 ? '+' : ''}{Number(change.value.toFixed(1))}{change.unit ?? ''}</span>)}</div></div></article>)}</div></> : <><div className="save-indicator"><Icon name="save" size={22} /><span><strong>{readOnly ? '此标签页只读' : saved ? '所有进度已保存在本机' : '有尚未保存的进度'}</strong><small>第 {day} 天 {clock(game.minute)}</small></span></div><div className="settings-buttons"><button className="secondary-button" onClick={download}><Icon name="download" size={17} />导出</button><button className="secondary-button" disabled={readOnly || busy} onClick={() => importInput.current?.click()}><Icon name="upload" size={17} />导入</button></div><input ref={importInput} type="file" accept="application/json,.json" hidden aria-label="导入 JSON 存档" onChange={async event => { const input = event.currentTarget; const file = input.files?.[0]; try { if (file) { if (file.size > 1_000_000) setMessage('请选择小于 1MB 的 JSON 存档。'); else restore(await file.text()); } } catch { setMessage('无法读取文件，请重新选择存档。'); } finally { input.value = ''; } }} /><p className="quiet-note">导入会替换当前人生。离线不消耗需求，清除浏览器数据会清除进度。</p><label className="toggle-setting"><span>减少动态效果<small>出行时使用固定路线图，保留车辆移动。</small></span><input type="checkbox" checked={reduceMotion} onChange={event => setReduceMotion(event.target.checked)} /></label><hr /><h3 className="small-heading">工作收入</h3><p className="quiet-note">从第 2 天开始，每天睡觉时按当天工时结算。参加周末值班时，工时按 1.5 倍结算。</p><button className="text-button restart-button" disabled={busy || readOnly} onClick={() => setConfirmReset(true)}><Icon name="reset" size={16} />重新开始一段生活</button></>}</>}
+      {(panel === 'journal' || panel === 'settings') && <><div className="phone-tabs"><button className={panel === 'journal' ? 'active' : ''} onClick={() => setPanel('journal')}><Icon name="journal" size={16} />手记</button><button className={panel === 'settings' ? 'active' : ''} onClick={() => setPanel('settings')}><Icon name="settings" size={16} />设置与账单</button></div>{panel === 'journal' ? <><div className="panel-intro"><h3>今天留下的片刻</h3><p>每一个选择，都记在这里。</p></div><div className="timeline">{[...game.journal].reverse().map(entry => <article key={entry.id}><time>{clock(entry.minute)}</time><div><h3>{entry.title}</h3><p>{entry.detail}</p><div className="effect-chips">{entry.changes.map((change, index) => <span key={index}>{change.label} {change.value > 0 ? '+' : ''}{Number(change.value.toFixed(1))}{change.unit ?? ''}</span>)}</div></div></article>)}</div></> : <><div className="save-indicator"><Icon name="save" size={22} /><span><strong>{readOnly ? '此标签页只读' : saved ? '所有进度已保存在本机' : '有尚未保存的进度'}</strong><small>第 {day} 天 {clock(game.minute)}</small></span></div><div className="settings-buttons"><button className="secondary-button" onClick={download}><Icon name="download" size={17} />导出</button><button className="secondary-button" disabled={readOnly || busy} onClick={() => importInput.current?.click()}><Icon name="upload" size={17} />导入</button></div><input ref={importInput} type="file" accept="application/json,.json" hidden aria-label="导入 JSON 存档" onChange={async event => { const input = event.currentTarget; const file = input.files?.[0]; try { if (file) { if (file.size > 1_000_000) setMessage('请选择小于 1MB 的 JSON 存档。'); else restore(await file.text()); } } catch { setMessage('无法读取文件，请重新选择存档。'); } finally { input.value = ''; } }} /><p className="quiet-note">导入会替换当前人生。离线不消耗需求，清除浏览器数据会清除进度。</p><label className="toggle-setting"><span>减少动态效果<small>出行时使用固定路线图，保留车辆移动。</small></span><input type="checkbox" checked={reduceMotion} onChange={event => setReduceMotion(event.target.checked)} /></label><hr /><h3 className="small-heading">工作收入</h3><p className="quiet-note">从第 2 天开始，每天睡觉时按当天工时结算。参加周末值班时，工时按 1.5 倍结算。</p><hr /><GuestFeedback className="secondary-button" /><button className="text-button restart-button" disabled={busy || readOnly} onClick={() => setConfirmReset(true)}><Icon name="reset" size={16} />重新开始一段生活</button></>}</>}
     </div></aside>}
-    {game.phase === 'event' && <div className="modal-backdrop"><section className="event-modal" role="dialog" aria-modal="true" aria-labelledby="event-title"><div className="event-person"><span>林</span><div><strong>林可</strong><small>产品经理 · 一条新消息</small></div><span className="message-time">{clock(game.minute)}</span></div><h2 id="event-title">“顺手加个小功能，可以吗？”</h2><p className="event-copy">消息提醒做到一半，林可想再加上批量标记。看起来只多一个按钮，按钮后面却还有边界情况。</p><div className="event-quote">“演示的时候一起带上，效果应该会很好。你觉得呢？”</div><div className="event-choices">{EVENT_CHOICES.map(choice => <button disabled={busy || readOnly} onClick={() => act({ kind: 'choice', targetId: choice.id })} key={choice.id}><strong>{choice.title}<Icon name="chevron" size={17} /></strong><p>{choice.description}</p><small>{choice.effects.join(' · ')}</small></button>)}</div><p className="quiet-note"><Icon name="clock" size={14} />先想清楚。读消息时，游戏时间暂停。</p></section></div>}
-    {showSummary && game.phase === 'complete' && <DailySummary game={game} day={schedule.day} disabled={readOnly || busy} onNextDay={startNextDay} onCareer={openCareer} onClose={() => { setShowSummary(false); setPanel('journal'); }} onExport={download} onRestart={() => setConfirmReset(true)} />}
-    {showCareer && <CareerCalendar game={game} disabled={readOnly || busy} onChoice={id => act({ kind: 'career', targetId: id })} onClose={() => { setShowCareer(false); if (game.phase === 'complete') setShowSummary(true); }} />}
+    {game.phase === 'event' && <div className="modal-backdrop"><section className="event-modal" role="dialog" aria-modal="true" aria-labelledby="event-title"><div className="event-person"><span>林</span><div><strong>林可</strong><small>产品经理 · 一条新消息</small></div><span className="message-time">{clock(game.minute)}</span></div><h2 id="event-title">“顺手加个小功能，可以吗？”</h2><p className="event-copy">消息提醒做到一半，林可想再加上批量标记。看起来只多一个按钮，按钮后面却还有边界情况。</p><div className="event-quote">“演示的时候一起带上，效果应该会很好。你觉得呢？”</div><div className="event-choices">{EVENT_CHOICES.map(choice => <button disabled={busy || readOnly} onClick={() => { stopAutoplay(); act({ kind: 'choice', targetId: choice.id }); }} key={choice.id}><strong>{choice.title}<Icon name="chevron" size={17} /></strong><p>{choice.description}</p><small>{choice.effects.join(' · ')}</small></button>)}</div><p className="quiet-note"><Icon name="clock" size={14} />{autoplay ? '自动玩耍即将回复，也可以自己选。' : '读消息时，游戏时间暂停。'}</p><button type="button" className="text-button autoplay-event-control" disabled={readOnly || !saved} onClick={autoplay ? stopAutoplay : startAutoplay}><Icon name={autoplay ? 'pause' : 'play'} size={15} />{autoplay ? '暂停自动玩耍' : '自动玩耍'}</button></section></div>}
+    {showSummary && game.phase === 'complete' && <DailySummary game={game} day={schedule.day} disabled={readOnly || busy} onNextDay={() => startNextDay()} onAutoplayNextDay={saved ? () => startNextDay(true) : undefined} onCareer={openCareer} onClose={() => { setShowSummary(false); setPanel('journal'); }} onExport={download} onRestart={() => setConfirmReset(true)} />}
+    {showCareer && <CareerCalendar game={game} reduceMotion={reduceMotion} disabled={readOnly || busy} onChoice={id => act({ kind: 'career', targetId: id })} onClose={() => { setShowCareer(false); if (game.phase === 'complete') setShowSummary(true); }} />}
     {confirmReset && <div className="modal-backdrop"><section className="confirm-modal" role="alertdialog" aria-modal="true" aria-labelledby="reset-title"><Icon name="reset" size={30} /><h2 id="reset-title">换一种方式过今天？</h2><p>重新开始会替换当前进度。可以先导出存档，把这一天留下来。</p><div className="confirm-actions"><button className="secondary-button" onClick={download}>先导出</button><button className="primary-button" disabled={busy || readOnly} onClick={() => { reset(); setConfirmReset(false); setShowSummary(false); setShowCareer(false); setPanel(null); setView('room'); setActivity(null); }}>重新开始</button></div><button className="text-button" onClick={() => setConfirmReset(false)}>继续现在的生活</button></section></div>}
     {message && <div className="toast" role="status"><Icon name="info" size={18} />{message}<button aria-label="关闭提示" onClick={() => setMessage('')}><Icon name="close" size={16} /></button></div>}
   </div>;

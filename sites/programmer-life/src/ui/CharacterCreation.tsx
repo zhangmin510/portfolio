@@ -3,6 +3,7 @@ import type { BackgroundId, CharacterOptions, TraitId, WishId } from '../domain/
 import { TRAITS, WISHES } from '../content/game';
 import { WorldScene } from './WorldScene';
 import { Icon } from './Icon';
+import { GuestFeedback } from './GuestFeedback';
 import '../styles/creation.css';
 
 const backgrounds: { id: BackgroundId; name: string; cash: string; description: string; icon: string }[] = [
@@ -33,7 +34,7 @@ export function CharacterCreation({ onStart, readOnly }: { onStart: (options: Ch
         <span className="creation-brand-mark"><Icon name="code" size={24} /></span>
         <span><strong>栈城日常</strong><small>PROGRAMMER LIFE</small></span>
       </div>
-      <span className="creation-edition"><span /> 生活模拟</span>
+      <GuestFeedback className="creation-edition" />
     </header>
     <main className="creation-layout">
       <div className="creation-place-note" aria-hidden="true">

@@ -1,0 +1,25 @@
+.action-performance {
+  position: fixed;
+  z-index: 13;
+  left: 50%;
+  bottom: max(24px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  width: min(380px, calc(100% - 28px));
+  padding: 13px 16px 9px;
+  border-radius: 18px;
+  color: #294138;
+  background: #fffffff3;
+  box-shadow: var(--shadow);
+}
+.action-performance-progress { display: flex; gap: 4px; margin-bottom: 8px; }
+.action-performance-progress > span { flex: 1; height: 3px; border-radius: 3px; background: #dce7df; }
+.action-performance-progress > .is-current { background: #3d9d70; }
+.action-performance-state > strong { font-size: 13px; }
+.action-performance-screen { margin: 8px 0 3px; padding: 8px 10px; background: #223532; color: #d8f1e1; border-radius: 8px; }
+.action-performance-screen > span { font-size: 10px; color: #a5d6bb; }
+.action-performance-screen > pre { white-space: pre-wrap; overflow-wrap: anywhere; margin: 5px 0 0; font: 11px/1.5 ui-monospace, monospace; }
+.action-performance-dialogue { margin-top: 6px; color: #435e52; font-size: 12px; line-height: 1.65; }
+.action-performance-dialogue > b { color: #276447; margin-right: 5px; }
+.action-performance-controls { display: flex; gap: 8px; margin-top: 4px; }
+.action-performance-controls > button { display: flex; align-items: center; gap: 6px; padding: 7px 0; background: none; color: #3c6051; font-size: 12px; }
+.action-performance-controls > button:last-child { margin-left: auto; }

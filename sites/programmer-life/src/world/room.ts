@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import type { ActionId, LocationId } from '../domain/types';
+import { createRoomPerformance, makeMonitorDisplay } from './roomPerformance';
+import type { RoomPerformance, RoomPerformanceProps } from './roomPerformance';
 
 export interface WorldHotspot {
   id: ActionId | LocationId;
@@ -13,6 +15,7 @@ export interface WorldModel {
   hotspots: WorldHotspot[];
   player?: THREE.Group;
   anchors?: Partial<Record<ActionId, THREE.Vector3>>;
+  roomPerformance?: RoomPerformance;
 }
 
 const materials = new Map<string, THREE.MeshStandardMaterial>();
@@ -72,31 +75,34 @@ function outside(parent: THREE.Group, office: boolean) {
   for (const x of [-8.9, -7.1]) for (const z of [7.3, 8.7]) { const wheel = cylinder(parent, x, .3, z, .3, .15, '#3e4945'); wheel.rotation.x = Math.PI / 2; }
 }
 
-function monitor(parent: THREE.Object3D, x: number, z: number, side = false) {
+function monitor(parent: THREE.Object3D, x: number, z: number, side = false, interactive = false) {
   box(parent, x, 1.03, z, .33, .04, .25, '#4e5e60');
   box(parent, x, 1.22, z, .06, .4, .06, '#58676a');
   const screen = box(parent, x, 1.56, z, 1.02, .66, .08, '#33484b');
   const glass = box(parent, x, 1.56, z + .046, .9, .54, .02, '#426e75');
   if (side) { screen.rotation.y = .18; glass.rotation.y = .18; }
-  for (let i = 0; i < 5; i++) box(parent, x - .22 + (i % 2) * .05, 1.73 - i * .08, z + .061, .36 + (i % 3) * .08, .018, .007, i % 3 ? '#99c7b4' : '#e7c78d');
+  const display = interactive ? makeMonitorDisplay(parent, x, z) : undefined;
+  if (!display) for (let i = 0; i < 5; i++) box(parent, x - .22 + (i % 2) * .05, 1.73 - i * .08, z + .061, .36 + (i % 3) * .08, .018, .007, i % 3 ? '#99c7b4' : '#e7c78d');
+  return display;
 }
 
-function desk(parent: THREE.Object3D, x: number, z: number, wide = false) {
+function desk(parent: THREE.Object3D, x: number, z: number, wide = false, interactive = false) {
   const width = wide ? 3 : 2.5;
   box(parent, x, .95, z, width, .13, 1.05, '#c49b6e');
   for (const lx of [-width / 2 + .1, width / 2 - .1]) for (const lz of [-.36, .36]) box(parent, x + lx, .49, z + lz, .1, .92, .1, '#657168');
-  monitor(parent, x - .23, z - .23);
+  const display = monitor(parent, x - .23, z - .23, false, interactive);
   if (wide) monitor(parent, x + .83, z - .22, true);
-  box(parent, x - .3, 1.034, z + .28, .8, .035, .25, '#e9e9d8');
-  for (let i = 0; i < 8; i++) box(parent, x - .63 + i * .095, 1.055, z + .28, .008, .005, .2, '#a8afa0');
+  box(parent, x - .17, 1.034, z + .31, .86, .035, .25, '#e9e9d8');
+  for (let i = 0; i < 8; i++) for (let row = 0; row < 3; row++) box(parent, x - .52 + i * .1, 1.055, z + .24 + row * .07, .078, .012, .05, '#b6bfb6');
   box(parent, x + .43, 1.03, z + .3, .28, .02, .32, '#9a805e');
   cylinder(parent, x + .47, 1.08, z + .29, .065, .08, '#d7ddd1');
   cylinder(parent, x - .95, 1.13, z + .22, .09, .22, '#e5b67a');
-  const chair = new THREE.Group(); chair.position.set(x, 0, z + 1.05); parent.add(chair);
+  const chair = new THREE.Group(); chair.position.set(x, 0, z + .77); parent.add(chair);
   cylinder(chair, 0, .3, 0, .06, .5, '#4d5f58');
   box(chair, 0, .58, 0, .65, .13, .64, '#618680');
   box(chair, 0, .99, .3, .66, .75, .12, '#72938b');
   for (let i = 0; i < 5; i++) { const spoke = box(chair, Math.sin(i * 1.256) * .2, .09, Math.cos(i * 1.256) * .2, .08, .06, .5, '#53655d'); spoke.rotation.y = i * 1.256; }
+  return display;
 }
 
 export function makePerson(shirt = '#cf7750', skin = '#d3a078') {
@@ -104,26 +110,78 @@ export function makePerson(shirt = '#cf7750', skin = '#d3a078') {
   // Limb pivots are named so the renderer can animate a short walk without a rig asset.
   for (const [name, x] of [['leftLeg', -.115], ['rightLeg', .115]] as const) {
     const limb = new THREE.Group(); limb.name = name; limb.position.set(x, .72, 0); group.add(limb);
-    box(limb, 0, -.28, 0, .18, .56, .22, '#425d6a');
-    box(limb, 0, -.61, .05, .21, .12, .35, '#394643');
+    const knee = new THREE.Group(); knee.name = name.replace('Leg', 'Knee'); knee.position.y = -.29; limb.add(knee);
+    box(limb, 0, -.135, 0, .18, .3, .22, '#425d6a');
+    box(knee, 0, -.14, 0, .17, .3, .205, '#425d6a');
+    box(knee, 0, -.32, .05, .21, .12, .35, '#394643');
   }
   box(group, 0, 1.02, 0, .52, .63, .29, shirt);
   box(group, 0, 1.37, .005, .16, .16, .16, skin);
   for (const [name, x] of [['leftArm', -.34], ['rightArm', .34]] as const) {
     const limb = new THREE.Group(); limb.name = name; limb.position.set(x, 1.23, 0); group.add(limb);
-    box(limb, 0, -.1, 0, .17, .26, .23, shirt);
-    box(limb, 0, -.36, 0, .14, .31, .16, skin);
-    box(limb, 0, -.54, .01, .15, .12, .17, skin);
+    const elbow = new THREE.Group(); elbow.name = name.replace('Arm', 'Elbow'); elbow.position.y = -.24; limb.add(elbow);
+    box(limb, 0, -.11, 0, .17, .27, .23, shirt);
+    box(elbow, 0, -.12, 0, .14, .27, .16, skin);
+    box(elbow, 0, -.28, .01, .15, .12, .17, skin);
   }
-  box(group, 0, 1.6, .01, .38, .45, .36, skin);
-  box(group, 0, 1.83, -.015, .41, .17, .4, '#3b3930');
-  box(group, -.17, 1.68, -.03, .08, .26, .32, '#3b3930');
-  box(group, .17, 1.68, -.08, .08, .26, .22, '#3b3930');
-  for (const x of [-.09, .09]) box(group, x, 1.64, .198, .035, .045, .012, '#33382e');
-  box(group, 0, 1.51, .198, .09, .017, .012, '#9c6752');
+  const head = new THREE.Group(); head.name = 'head'; head.position.y = 1.4; group.add(head);
+  box(head, 0, .2, .01, .38, .45, .36, skin);
+  box(head, 0, .43, -.015, .41, .17, .4, '#3b3930');
+  box(head, -.17, .28, -.03, .08, .26, .32, '#3b3930');
+  box(head, .17, .28, -.08, .08, .26, .22, '#3b3930');
+  for (const x of [-.09, .09]) box(head, x, .24, .198, .035, .045, .012, '#33382e');
+  box(head, 0, .11, .198, .09, .017, .012, '#9c6752');
   const diamond = new THREE.Mesh(new THREE.OctahedronGeometry(.13), new THREE.MeshStandardMaterial({ color: '#61bc6a', emissive: '#317748', emissiveIntensity: .24, roughness: .7, flatShading: true }));
   diamond.position.y = 2.2; diamond.scale.y = 1.6; diamond.name = 'playerDiamond'; group.add(diamond);
   return group;
+}
+
+function hiddenProp(parent: THREE.Object3D, x: number, y: number, z: number) {
+  const prop = new THREE.Group(); prop.visible = false; prop.position.set(x, y, z); parent.add(prop); return prop;
+}
+
+function makeActionProps(group: THREE.Group, player: THREE.Group, home: boolean): RoomPerformanceProps['props'] {
+  const hand = player.getObjectByName('rightElbow')!;
+  const meal = hiddenProp(hand, 0, -.36, .022);
+  if (home) {
+    box(meal, 0, -.07, 0, .14, .14, .095, '#bc833e');
+    box(meal, 0, -.065, .049, .112, .105, .02, '#e5bd6a');
+    const cup = hiddenProp(hand, .01, -.35, .055);
+    cylinder(cup, 0, 0, 0, .079, .14, '#b0d5c7');
+    cylinder(cup, 0, .07, 0, .056, .01, '#855438');
+    const handle = new THREE.Mesh(new THREE.TorusGeometry(.045, .012, 5, 10), material('#b0d5c7')); handle.position.x = .083; cup.add(handle);
+    const pan = hiddenProp(group, -2.43, 1.435, -3.35);
+    cylinder(pan, 0, .025, 0, .3, .06, '#283b3d', 14);
+    cylinder(pan, 0, .062, 0, .23, .018, '#6e7b6e', 14);
+    cylinder(pan, .08, .078, .02, .11, .012, '#f1e5c3', 10);
+    cylinder(pan, .1, .098, .025, .057, .025, '#e7a23f', 10);
+    box(pan, .095, .041, .38, .075, .048, .33, '#283b3d').rotation.y = .29;
+    const steam = hiddenProp(group, -2.42, 1.57, -3.35);
+    for (let i = 0; i < 3; i++) {
+      const puff = new THREE.Mesh(new THREE.IcosahedronGeometry(.12, 0), new THREE.MeshBasicMaterial({ color: '#fbf9e8', transparent: true, opacity: .51, depthWrite: false }));
+      puff.position.z = i * .075 - .075; steam.add(puff);
+    }
+    const sleep = hiddenProp(group, -2.38, 1.75, .67);
+    const marker = new THREE.Mesh(new THREE.OctahedronGeometry(.12), new THREE.MeshStandardMaterial({ color: '#70c181', emissive: '#2d6d43', emissiveIntensity: .3 }));
+    marker.scale.y = 1.45; sleep.add(marker);
+    const board = hiddenProp(group, -2.5, 1.426, -3.06);
+    box(board, 0, 0, 0, .49, .03, .33, '#b88148');
+    for (let index = 0; index < 5; index++) box(board, -.15 + index * .073, .035, (index % 2) * .085 - .045, .054, .037, .059, index % 2 ? '#d9964f' : '#75a35d');
+    const utensil = hiddenProp(hand, 0, -.3, .04);
+    box(utensil, 0, -.15, 0, .038, .25, .03, '#a78459');
+    box(utensil, 0, -.298, 0, .09, .12, .035, '#6c7e7d');
+    const plate = hiddenProp(group, -1.37, 1.42, -2.98);
+    cylinder(plate, 0, 0, 0, .22, .036, '#f0f0dc');
+    box(plate, 0, .04, 0, .21, .05, .15, '#c18d4a');
+    return { pan, steam, meal, plate, cup, sleep, board, utensil };
+  }
+  box(meal, 0, -.135, .02, .028, .24, .03, '#9cabb1');
+  box(meal, 0, -.244, .02, .085, .07, .065, '#dba664');
+  const plate = hiddenProp(group, -3, .965, 2.77);
+  cylinder(plate, 0, 0, 0, .24, .04, '#f1f1df');
+  cylinder(plate, 0, .026, 0, .16, .04, '#d7ac6b');
+  for (let i = 0; i < 5; i++) box(plate, Math.sin(i * 2.4) * .1, .06, Math.cos(i * 2.4) * .1, .055, .038, .07, i % 2 ? '#bf8058' : '#7e9c5f');
+  return { meal, plate };
 }
 
 function windowPane(parent: THREE.Group, x: number, z: number, side = false) {
@@ -160,6 +218,8 @@ export function createRoomModel(mode: 'home' | 'office', _name: string): WorldMo
 
   const hotspots: WorldHotspot[] = [];
   const anchors: Partial<Record<ActionId, THREE.Vector3>> = {};
+  let display: RoomPerformanceProps['monitor'];
+  let colleague: THREE.Group | undefined;
   if (home) {
     // Bed, linen, two pillows and bedside lamp.
     box(group, -3.08, .54, 1.75, 2.3, .42, 3.4, '#a58258');
@@ -181,8 +241,10 @@ export function createRoomModel(mode: 'home' | 'office', _name: string): WorldMo
     box(group, -3.35, 1.88, -2.945, .86, .035, .015, '#9eafa2');
     box(group, -3.03, 1.5, -2.93, .045, .33, .06, '#83978c');
     box(group, -3.03, 2.13, -2.93, .045, .19, .06, '#83978c');
+    cylinder(group, -1.34, .54, -2.28, .12, .42, '#8b7961');
+    cylinder(group, -1.34, .72, -2.28, .29, .09, '#b59161');
     // Work corner.
-    desk(group, 2.03, -2.85);
+    display = desk(group, 2.03, -2.85, false, true);
     box(group, 4.3, 1.4, -3.55, .85, 2.2, .7, '#b79567');
     for (const y of [.5, 1.1, 1.7, 2.35]) box(group, 4.3, y, -3.5, .9, .08, .8, '#b39162');
     for (let i = 0; i < 6; i++) box(group, 3.98 + i * .115, 1.38 + (i % 2) * .04, -3.33, .08, .46 + (i % 2) * .08, .3, ['#6d9389', '#cd9168', '#e0c38c'][i % 3]);
@@ -208,7 +270,7 @@ export function createRoomModel(mode: 'home' | 'office', _name: string): WorldMo
     anchors.sleep = new THREE.Vector3(-1.6, .33, 1.9); anchors.personal = new THREE.Vector3(2.1, .33, -1.5); anchors.cook = new THREE.Vector3(-2.1, .33, -1.95); anchors.breakfast = anchors.cook; anchors.rest = new THREE.Vector3(2.45, .33, 1.9);
   } else {
     box(group, .7, .338, .05, 6.7, .025, 4.45, '#b4c0ad');
-    desk(group, -.1, -.4, true); desk(group, 3.23, -2.7);
+    display = desk(group, -.1, -.4, true, true); desk(group, 3.23, -2.7);
     // A whiteboard with a few tangible, low-poly sticky notes.
     box(group, -1.6, 2.07, -4.08, 3.3, 1.48, .1, '#a4b3a4');
     box(group, -1.6, 2.07, -3.995, 3.1, 1.28, .025, '#f5f6e9');
@@ -224,15 +286,17 @@ export function createRoomModel(mode: 'home' | 'office', _name: string): WorldMo
     for (const x of [-4.27, -2.73]) for (const z of [2.73, 3.4]) box(group, x, .57, z, .1, .57, .1, '#8e987f');
     for (const x of [-3.9, -3]) { box(group, x, .61, 2.15, .58, .1, .56, '#8da995'); box(group, x, .85, 1.94, .6, .6, .1, '#a0b8a0'); }
     plant(group, 4.5, 3.1, 1.2); plant(group, -4.4, -2.7, .85);
-    const colleague = makePerson('#638c8d', '#c79370'); colleague.position.set(3.44, .33, -.72); colleague.rotation.y = -.6; colleague.getObjectByName('playerDiamond')!.visible = false; group.add(colleague);
+    colleague = makePerson('#638c8d', '#c79370'); colleague.position.set(3.44, .33, -.72); colleague.rotation.y = -.6; colleague.getObjectByName('playerDiamond')!.visible = false; group.add(colleague);
     hotspots.push(
       { kind: 'action', id: 'focus', label: '工位 · 开始工作', position: new THREE.Vector3(-.2, 2.2, -.5) },
       { kind: 'action', id: 'test', label: '白板 · 测试评审', position: new THREE.Vector3(-1.6, 3.07, -3.9) },
       { kind: 'action', id: 'talk', label: '林工 · 聊一聊', position: new THREE.Vector3(3.5, 2.55, -.75) },
       { kind: 'action', id: 'lunch', label: '茶水间 · 吃午饭', position: new THREE.Vector3(-4, 2.15, 1.4) },
     );
-    anchors.focus = new THREE.Vector3(-.05, .33, 1.1); anchors.rush = anchors.focus; anchors.ai = anchors.focus; anchors.test = new THREE.Vector3(-1.5, .33, -2.75); anchors.talk = new THREE.Vector3(2.43, .33, -.33); anchors.lunch = new THREE.Vector3(-2.9, .33, 2.12); anchors.rest = new THREE.Vector3(1.5, .33, 2.5);
+    anchors.focus = new THREE.Vector3(-.05, .33, 1.1); anchors.rush = anchors.focus; anchors.ai = anchors.focus; anchors.test = anchors.focus; anchors.overtime = anchors.focus; anchors.talk = new THREE.Vector3(2.43, .33, -.33); anchors.lunch = new THREE.Vector3(-2.9, .33, 2.12); anchors.rest = new THREE.Vector3(-3.9, .33, 1.82); anchors['lunch-break'] = anchors.rest;
   }
   const player = makePerson(); player.position.set(.05, .33, 2.3); group.add(player);
-  return { group, hotspots, player, anchors };
+  const actionProps = makeActionProps(group, player, home);
+  for (const [name, prop] of Object.entries(actionProps)) prop.name = `room-prop-${name}`;
+  return { group, hotspots, player, anchors, roomPerformance: createRoomPerformance({ player, mode, monitor: display, props: actionProps, colleague }) };
 }

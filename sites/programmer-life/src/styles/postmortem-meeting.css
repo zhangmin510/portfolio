@@ -1,0 +1,87 @@
+.postmortem-meeting {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  height: clamp(205px, 34dvh, 302px);
+  margin: 0;
+  border: 1px solid #dbe4d6;
+  border-radius: 16px;
+  background: radial-gradient(ellipse at 52% 43%, #f3f5e9, #e4ebdf 82%);
+}
+
+.postmortem-meeting-canvas,
+.postmortem-meeting-canvas canvas,
+.postmortem-illustration {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.postmortem-meeting[data-meeting-renderer="svg"] .postmortem-meeting-canvas {
+  visibility: hidden;
+}
+
+.postmortem-speaker {
+  position: absolute;
+  z-index: 1;
+  left: 13px;
+  bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: min(80%, 220px);
+  padding: 6px 9px;
+  border: 1px solid #d2e4d8;
+  border-radius: 20px;
+  color: #255e47;
+  background: #f9fff5;
+  box-shadow: 0 2px 9px #355e4725;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.2;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.postmortem-speaker i {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #46a675;
+}
+
+.postmortem-meeting[data-meeting-renderer="webgl"] .postmortem-speaker {
+  top: var(--meeting-speaker-y, 40%);
+  bottom: auto;
+  left: var(--meeting-speaker-x, 50%);
+  transform: translate(-50%, -100%);
+}
+
+.postmortem-meeting[data-meeting-renderer="webgl"] .postmortem-speaker::after {
+  position: absolute;
+  bottom: -4px;
+  left: calc(50% - 3px);
+  width: 6px;
+  height: 6px;
+  border-right: 1px solid #d2e4d8;
+  border-bottom: 1px solid #d2e4d8;
+  background: inherit;
+  transform: rotate(45deg);
+  content: '';
+}
+
+@media (max-width: 600px) {
+  .postmortem-meeting {
+    height: clamp(176px, 28dvh, 233px);
+    border-radius: 12px;
+  }
+
+  .postmortem-speaker {
+    padding: 5px 7px;
+    font-size: 10px;
+  }
+}

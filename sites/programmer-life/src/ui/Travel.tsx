@@ -13,12 +13,13 @@ export const travelModes = {
   walk: { label: '步行', icon: 'walk', moving: '正在步行' },
 } satisfies Record<TravelMode, { label: string; icon: string; moving: string }>;
 
-export function TripStatus({ from, to, mode, progress, onSkip }: {
+export function TripStatus({ from, to, mode, progress, onSkip, onPauseAutoplay }: {
   from: LocationId;
   to: LocationId;
   mode: TravelMode;
   progress: () => number;
   onSkip: () => void;
+  onPauseAutoplay?: () => void;
 }) {
   const meter = useRef<HTMLSpanElement>(null);
   useEffect(() => {
@@ -37,7 +38,10 @@ export function TripStatus({ from, to, mode, progress, onSkip }: {
       <div><strong>{travelModes[mode].moving}</strong><span>{LOCATIONS[from].name} → {LOCATIONS[to].name}</span></div>
     </div>
     <div className="trip-progress" aria-hidden="true"><span ref={meter} /></div>
-    <button onClick={onSkip}>跳过动画 <Icon name="chevron" size={15} /></button>
+    <div className="trip-controls">
+      {onPauseAutoplay && <button type="button" onClick={onPauseAutoplay}><Icon name="pause" size={15} />暂停自动玩耍</button>}
+      <button type="button" onClick={onSkip}>跳过动画 <Icon name="chevron" size={15} /></button>
+    </div>
   </div>;
 }
 

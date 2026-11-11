@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { LOCATIONS } from '../content/game';
 import type { LocationId } from '../domain/types';
-import type { WorldModel } from './room';
+import { makePerson, type WorldModel } from './room';
 
 export const CITY_BRIDGE = {
   halfWidth: 2.35,
@@ -19,6 +19,19 @@ const SITE: Record<LocationId, { x: number; z: number; height: number }> = {
   park: { x: -10.5, z: 16, height: 2.7 },
   makerspace: { x: 13.8, z: 7.3, height: 6.6 },
 };
+
+const PLAYER_ENTRANCES: Record<LocationId, readonly [number, number, number]> = {
+  home: [-13.6, .30, -6.34],
+  office: [13.25, .30, -6.15],
+  cafe: [-9.8, .165, 11.35],
+  store: [-21, -.03, 10.68],
+  park: [-11.7, .18, 16.42],
+  makerspace: [13.8, .24, 11.35],
+};
+
+export function getCityPlayerPosition(locationId: LocationId) {
+  return new THREE.Vector3(...PLAYER_ENTRANCES[locationId]);
+}
 
 /** All geometry is original and built locally; no city assets or textures are fetched. */
 class CityBuilder {
@@ -308,6 +321,8 @@ export function createCityModel(locationId: LocationId): WorldModel {
   city.box(park, 0, .06, .7, 15.4, .12, 4.6, '#6f985b', false);
   city.box(park, 0, .14, .5, 15.4, .08, 1.0, '#b7b9a0', false);
   city.box(park, -1.2, .14, 1.1, 1.0, .08, 3.8, '#b7b9a0', false);
+  city.box(park, -3.1, .135, -.45, 4.8, .08, .9, '#b7b9a0', false);
+  city.box(park, -5, .135, -.02, .9, .08, 1.76, '#b7b9a0', false);
   city.round(park, 3.8, .3, -.85, 1.15, .4, '#b5c3ac');
   city.round(park, 3.8, .53, -.85, .93, .08, '#7aabb5');
   city.round(park, 3.8, 1.0, -.85, .12, .95, '#b6c9b7');
@@ -334,20 +349,10 @@ export function createCityModel(locationId: LocationId): WorldModel {
   city.box(root, -5.7, .7, 3.9, .5, 1.2, .5, '#668573');
   city.box(root, -5.7, 1.4, 3.9, .62, .18, .62, '#839a70');
 
-  const current = SITE[locationId];
-  const player = new THREE.Group();
+  const player = makePerson();
   player.name = 'city-player';
-  player.position.set(current.x, .2, current.z + (locationId === 'park' ? 0 : 4.6));
+  player.position.copy(getCityPlayerPosition(locationId));
   root.add(player);
-  city.box(player, 0, .85, 0, .55, .66, .3, '#e09d66');
-  city.round(player, 0, 1.43, 0, .25, .45, '#d7ac89');
-  city.box(player, 0, 1.65, -.03, .5, .14, .37, '#454d40');
-  for (const x of [-.15, .15]) city.box(player, x, .35, 0, .2, .55, .25, '#435c65');
-  const marker = new THREE.Mesh(new THREE.OctahedronGeometry(.25), city.material('#63ad69', { emissive: '#2a6331', emissiveIntensity: .12 }));
-  marker.name = 'player-marker';
-  marker.position.y = 2.25;
-  marker.scale.y = 1.65;
-  player.add(marker);
 
   return {
     group: root,

@@ -1,6 +1,9 @@
 import type { CSSProperties } from 'react';
 
 const paths: Record<string, React.ReactNode> = {
+  play: <path d="M8 5.5a.8.8 0 0 1 1.2-.7l10 6.5a.8.8 0 0 1 0 1.4l-10 6.5a.8.8 0 0 1-1.2-.7Z" />,
+  pause: <><path d="M9 5v14m6-14v14" /></>,
+  message: <path d="M4 5h16v11h-9l-5 4v-4H4Zm4 5h8m-8 3h5" />,
   phone: <><rect x="6" y="2" width="12" height="20" rx="3" /><path d="M10 5h4m-3 14h2" /></>,
   rotate: <><path d="M20 8a8 8 0 1 0 0 8M20 3v5h-5" /></>,
   'zoom-in': <><circle cx="10" cy="10" r="7" /><path d="m15 15 6 6M7 10h6m-3-3v6" /></>,
