@@ -103,7 +103,7 @@ describe('terminal command registry', () => {
     expect(executeCommand(input)).toEqual({ kind: 'output', result: { kind: 'message', text, tone: 'error' } })
   })
 
-  it('lists the same three project files and sixteen panoramas that the site publishes', () => {
+  it('lists the same three project files and seventeen panoramas that the site publishes', () => {
     const projects = executeCommand('ls -la projects')
     expect(projects).toMatchObject({ kind: 'output', result: { kind: 'file-list', path: `${HOME_DIRECTORY}/projects` } })
     if (projects.kind !== 'output' || projects.result.kind !== 'file-list') throw new Error('Expected files')
@@ -112,7 +112,7 @@ describe('terminal command registry', () => {
     expect(projects.result.entries?.map((file) => file.href)).toEqual(PROJECT_FILES.map(({ project }) => project.href))
     const panoramas = executeCommand('ls', undefined, { cwd: `${HOME_DIRECTORY}/panoramas` })
     if (panoramas.kind !== 'output' || panoramas.result.kind !== 'file-list') throw new Error('Expected panorama files')
-    expect(panoramas.result.entries).toHaveLength(16)
+    expect(panoramas.result.entries).toHaveLength(17)
     expect(panoramas.result.entries?.map((file) => file.href)).toEqual(PANORAMA_FILES.map((page) => page.href))
   })
 
@@ -181,11 +181,14 @@ describe('terminal command registry', () => {
       expect(executeCommand(`cat sites/${site.slug}.md`)).toEqual({ kind: 'output', result: { kind: 'site', slug: site.slug } })
     }
     expect(getCompletionCandidates('cat sites/eval')).toEqual([
+      'cat sites/eval-quest.md',
       'cat sites/evalfrontier.md',
       'cat sites/evaltube.md',
       'cat sites/evalpapers.md',
     ])
     expect(autocompleteCommand('cat sites/evalt')).toBe('cat sites/evaltube.md')
+    expect(executeCommand('cat panoramas/eval-quest.html')).toEqual({ kind: 'output', result: { kind: 'panorama', slug: 'eval-quest' } })
+    expect(WEBSITES.find((site) => site.slug === 'eval-quest')?.href).toBe('https://zhangmin.name/panoramas/eval-quest/')
   })
 
   it('escapes echoed HTML in rendered output', () => {

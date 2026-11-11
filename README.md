@@ -8,8 +8,9 @@
 ## 功能特性
 
 - 简洁的单栏终端主页，保留个人介绍、命令输入和轻量导航
-- 首页直接提供八个网站入口，`sites` / `websites` 命令可查看介绍，`cd sites` 可按目录浏览
-- `panoramas` 命令与全景图入口，连接 16 张独立目录发布的交互图谱
+- 首页直接提供九个网站入口，`sites` / `websites` 命令可查看介绍，`cd sites` 可按目录浏览
+- `panoramas` 命令与全景图入口，连接 17 张独立目录发布的交互图谱
+- 评测探索局：12 关游戏式知识地图、24 道情境挑战、4 个实验与全书阅读，进度本地保存
 - 全景图目录支持主题筛选、关键词搜索与手机浏览
 - 真实表单驱动的命令行交互，兼容键盘、触屏与屏幕阅读器
 - 命令历史 (↑/↓ 键)
@@ -46,6 +47,7 @@ Ctrl+L 清屏，Ctrl+A / E 移动到行首 / 行尾。页面内容以终端输�
 | 网站 | 入口 |
 | --- | --- |
 | 全景图 · 知识地图 | [全景图总览](https://zhangmin.name/panoramas/) |
+| 评测探索局 · 游戏式评测学习 | [进入知识远征](https://zhangmin.name/panoramas/eval-quest/) |
 | 评测前沿 · 模型与 Agent 评测 | [b.zhangmin.name](https://b.zhangmin.name/) |
 | EvalTube · AI 评测视频 | [evaltube.zhangmin.name](https://evaltube.zhangmin.name/) |
 | EvalPapers · 评测论文 | [evalpapers.zhangmin.name](https://evalpapers.zhangmin.name/)（[备用入口](https://evalpapers.zhangmin.workers.dev/)） |
@@ -56,7 +58,7 @@ Ctrl+L 清屏，Ctrl+A / E 移动到行首 / 行尾。页面内容以终端输�
 
 导航数据统一维护在 `src/data/portfolio.ts` 的 `WEBSITES`，同时用于首页链接、终端输出和虚拟目录。
 
-七个独立子站的源码、构建说明和 Cloudflare 配置见[子站目录](sites/README.md)。评测前沿的 Cloudflare 配置维护在 [AIHOT 的 `eval-frontier` 分支](https://github.com/zhangmin510/AIHOT/tree/eval-frontier/deploy/cloudflare)。
+八个子项目的源码与构建说明见[子站目录](sites/README.md)，其中评测探索局作为主页子路径发布，共用主页的 Cloudflare 部署。评测前沿的 Cloudflare 配置维护在 [AIHOT 的 `eval-frontier` 分支](https://github.com/zhangmin510/AIHOT/tree/eval-frontier/deploy/cloudflare)。
 
 ## 全景图目录
 
@@ -65,6 +67,7 @@ Ctrl+L 清屏，Ctrl+A / E 移动到行首 / 行尾。页面内容以终端输�
 
 | 全景图 | 目录链接 |
 | --- | --- |
+| 评测探索局：从度量衡到 AI 智能体 | [eval-quest/](https://zhangmin.name/panoramas/eval-quest/) |
 | AI 订阅与 Token Plan 全景图 | [ai-subscription-token-atlas/](https://zhangmin.name/panoramas/ai-subscription-token-atlas/) |
 | MiniMind × nanochat | [minimind-nanochat-panorama/](https://zhangmin.name/panoramas/minimind-nanochat-panorama/) |
 | 成长花园：1—7 岁女孩成长全景 | [girl-growth-1-7/](https://zhangmin.name/panoramas/girl-growth-1-7/) |
@@ -171,10 +174,11 @@ npx vercel --prod
 ```text
 public/panoramas/
   index.html                 # 可搜索、可筛选的目录页
-  <主题>/index.html          # 16 个独立页面的发布快照
+  <主题>/index.html          # 17 个独立页面的发布快照
   vendor/                    # 固定版本的 Chart.js 与 html-to-image
 scripts/panoramas.json       # 标题、分类、原始文件映射与校验值
 scripts/sync-panoramas.mjs    # 同步原始页面、生成目录并校验快照
+sites/eval-quest/            # 评测探索局的便携源码、内容快照与构建脚本
 src/data/portfolio.ts        # 个人资料、能力方向与项目
 src/commands/index.ts        # 终端命令注册
 worker/index.js              # Cloudflare 安全头、缓存与 404
@@ -184,7 +188,7 @@ worker/index.js              # Cloudflare 安全头、缓存与 404
 
 ### 全景图
 
-`public/panoramas/` 中的发布快照和脚本已提交到仓库，`npm run build` 直接使用这些文件。
+`public/panoramas/` 中的发布快照和脚本已提交到仓库，`npm run build` 使用这些文件，并从仓库内源码重建评测探索局。
 新克隆的仓库无需相邻的原始文件目录，也无需先运行同步命令，就能构建完整站点。
 
 需要更新内容时，可编辑清单映射的原始页面：它们默认位于仓库旁的
@@ -203,6 +207,18 @@ npm run check
 
 Cloudflare Worker 为全景图 HTML 配置专用 CSP，支持页面内联交互、Google 字体
 与搜索图谱的内嵌页面。Chart.js 和 html-to-image 从本站的 `vendor/` 目录加载。
+
+### 评测探索局
+
+编辑 [sites/eval-quest](sites/eval-quest/README.md) 中的页面、交互和公开内容数据，然后运行：
+
+```bash
+npm run build:eval-quest
+npm run sync:panoramas
+npm run check
+```
+
+这是教学草稿的公开衍生版，保留资料时效、引用与未完成专家审读的边界。构建不读取私人笔记库；发布版不含本机路径或 Obsidian 跳转。学习进度不会从本地文件自动迁移，可通过学习护照导出/导入 JSON 存档。
 
 ### 个人资料与命令
 

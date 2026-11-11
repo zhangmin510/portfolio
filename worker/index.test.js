@@ -1,6 +1,25 @@
 import { describe, expect, it } from 'vitest'
 import worker from './index.js'
 
+describe('interactive page security and caching', () => {
+  it.each(['/panoramas/eval-quest/', '/panoramas/eval-quest/index.html'])('serves %s with the scoped interaction CSP', async (pathname) => {
+    const response = await worker.fetch(new Request(`https://zhangmin.name${pathname}`), {
+      ASSETS: { fetch: async () => new Response('<!doctype html><title>Eval Quest</title>', { headers: { 'Content-Type': 'text/html; charset=utf-8' } }) },
+    })
+    expect(response.status).toBe(200)
+    expect(response.headers.get('Content-Security-Policy')).toContain("script-src 'self' 'unsafe-inline'")
+    expect(response.headers.get('Cache-Control')).toBe('public, max-age=0, must-revalidate')
+    expect(response.headers.get('X-Content-Type-Options')).toBe('nosniff')
+  })
+
+  it('does not weaken the personal homepage CSP', async () => {
+    const response = await worker.fetch(new Request('https://zhangmin.name/'), {
+      ASSETS: { fetch: async () => new Response('<!doctype html>', { headers: { 'Content-Type': 'text/html' } }) },
+    })
+    expect(response.headers.get('Content-Security-Policy')).not.toContain("'unsafe-inline'")
+  })
+})
+
 const bytes = new TextEncoder().encode('0123456789')
 async function fetchFilm(headers = {}, method = 'GET', path = '/keyword-film/test.mp4') {
   const request = new Request(`https://zhangmin.name${path}`, { method, headers })

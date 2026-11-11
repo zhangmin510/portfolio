@@ -90,6 +90,13 @@ export const WEBSITES = [
     href: 'https://zhangmin.name/panoramas/',
   },
   {
+    slug: 'eval-quest',
+    name: '评测探索局',
+    label: '游戏式评测学习',
+    summary: '从度量衡到 AI 智能体：12 关知识地图、24 道情境挑战、4 个实验与全书阅读。',
+    href: 'https://zhangmin.name/panoramas/eval-quest/',
+  },
+  {
     slug: 'evalfrontier',
     name: '评测前沿',
     label: '模型与 Agent 评测',

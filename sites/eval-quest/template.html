@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="theme-light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>评测探索局 · 从度量衡到 AI 智能体</title>
+
+  <script defer src="/panoramas/vendor/html-to-image.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { interpolate-size: allow-keywords; } /* Enable smooth height:auto transitions (Chrome 129+) */
+
+    /* ===== THEMES (class-based ONLY — no @media prefers-color-scheme) ===== */
+    html.theme-dark {
+      --bg: #0A0A0A; --surface: #141414; --surface-hover: #1C1C1C;
+      --border: rgba(255,255,255,0.04);
+      --text: #EDEDED; --text-secondary: #888;
+      --accent: #3b82f6; --accent-secondary: #8b5cf6;
+      --positive: #10b981; --negative: #f43f5e; --warning: #f59e0b;
+    }
+    html.theme-light {
+      --bg: #FAFAF9; --surface: #FFFFFF; --surface-hover: #F5F5F4;
+      --border: rgba(0,0,0,0.06);
+      --text: #0f172a; --text-secondary: #64748b;
+      --accent: #2563eb; --accent-secondary: #7c3aed;
+      --positive: #059669; --negative: #e11d48; --warning: #d97706;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+      letter-spacing: -0.01em; font-feature-settings: 'cv11', 'ss01';
+      transition: background 0.3s, color 0.3s;
+      scrollbar-gutter: stable;
+    }
+    h1,h2,h3,h4,h5,h6 {
+      color: var(--text);
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      text-wrap: balance;
+    }
+    h1 { font-weight: 700; }
+    h2 { font-weight: 600; }
+    body, p, li, td, th, span, label { font-weight: 400; }
+    p,li,td,th,span,label { color: var(--text); }
+    .text-secondary { color: var(--text-secondary); }
+
+    /* ===== CARD ===== */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 24px;
+      transition: box-shadow 0.2s ease;
+    }
+    .card:hover {
+      box-shadow: 0 0 0 1px var(--border), 0 8px 16px rgba(0,0,0,0.08);
+    }
+
+    /* ===== ANIMATIONS (CSS-first — always reliable) ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .animate { animation: fadeInUp 0.6s ease-out both; }
+    .animate.delay-1 { animation-delay: 0.1s; }
+    .animate.delay-2 { animation-delay: 0.2s; }
+    .animate.delay-3 { animation-delay: 0.3s; }
+    .animate.delay-4 { animation-delay: 0.4s; }
+    .animate.delay-5 { animation-delay: 0.5s; }
+    .animate.delay-6 { animation-delay: 0.6s; }
+
+    /* Scroll-triggered: JS adds .reveal, then .visible on scroll */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      body { background: white !important; color: black !important; }
+      .viz-menu, .reveal { display: revert; opacity: 1 !important; transform: none !important; }
+      .card { break-inside: avoid; border: 1px solid #ddd; box-shadow: none; }
+      * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
+    @page { margin: 1in; @bottom-center { content: "Page " counter(page); font-size: 9pt; color: #666; } }
+
+    /* ===== MENU ===== */
+    .viz-menu { position: fixed; top: 16px; right: 16px; z-index: 9999; }
+    .viz-menu-toggle {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(12px); transition: all 0.2s;
+    }
+    .viz-menu-toggle:hover { background: var(--surface-hover); }
+    .viz-menu-dropdown {
+      position: absolute; top: 52px; right: 0; min-width: 200px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 8px;
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: all 0.2s; backdrop-filter: blur(16px);
+    }
+    .viz-menu-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .viz-menu-dropdown button {
+      width: 100%; padding: 10px 14px; border: none; border-radius: 8px;
+      background: transparent; color: var(--text); font-size: 14px;
+      font-family: inherit; cursor: pointer; text-align: left;
+      display: flex; align-items: center; gap: 10px; transition: background 0.15s;
+    }
+    .viz-menu-dropdown button:hover { background: var(--surface-hover); }
+
+    /* ===== SKIP TO CONTENT (accessibility) ===== */
+    .skip-to-content {
+      position: absolute; top: -40px; left: 6px; background: var(--accent);
+      color: white; padding: 8px 12px; text-decoration: none;
+      border-radius: 4px; opacity: 0; pointer-events: none;
+      transition: all 0.2s; z-index: 10000;
+    }
+    .skip-to-content:focus { top: 6px; opacity: 1; pointer-events: auto; }
+
+    /* ===== DETAILS ACCORDION (Chrome 120+ exclusive, 131+ animated) ===== */
+    details { overflow: hidden; }
+    details summary { cursor: pointer; list-style: none; }
+    details summary::-webkit-details-marker { display: none; }
+    ::details-content {
+      transition: block-size 0.3s ease, opacity 0.3s ease;
+      block-size: 0; opacity: 0; overflow: hidden;
+    }
+    details[open]::details-content { block-size: auto; opacity: 1; }
+
+    /* ===== POPOVER (Chrome 114+, zero-JS tooltips/panels) ===== */
+    [popover] {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 16px; max-width: 320px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2); color: var(--text);
+    }
+    [popover]::backdrop { background: rgba(0,0,0,0.3); }
+
+    /*__EVAL_STYLES__*/
+  </style>
+<meta name="description" content="从度量衡到 AI 智能体：12 关互动知识地图、24 道情境挑战、4 个实验与原稿全文。学习进度仅保存在本地。"><meta name="referrer" content="no-referrer"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23286b51'/%3E%3Ctext x='16' y='24' text-anchor='middle' font-size='25' fill='white'%3E↗%3C/text%3E%3C/svg%3E"><link rel="canonical" href="https://zhangmin.name/panoramas/eval-quest/"><meta property="og:title" content="评测探索局 · 从度量衡到 AI 智能体"><meta property="og:description" content="12 关知识远征、24 道情境挑战、4 个实验与全书阅读。"><meta property="og:type" content="website"><meta property="og:url" content="https://zhangmin.name/panoramas/eval-quest/"><meta property="og:image" content="https://zhangmin.name/og.jpg"></head>
+<body>
+
+  <!-- MENU -->
+  <div class="viz-menu">
+    <button class="viz-menu-toggle" onclick="toggleMenu()" aria-label="页面工具菜单" aria-expanded="false">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/>
+      </svg>
+    </button>
+    <div class="viz-menu-dropdown" id="vizMenuDropdown">
+      <button onclick="cycleTheme()"><span id="themeIcon" aria-hidden="true">◐</span><span id="themeLabel">切换深色主题</span></button>
+      <button onclick="downloadImage()"><span aria-hidden="true">↓</span><span>导出截图 PNG</span></button>
+      <button onclick="window.print()"><span aria-hidden="true">▤</span><span>打印 / PDF</span></button>
+    </div>
+  </div>
+
+  <!-- SKIP TO CONTENT (accessibility) -->
+  <a href="#main-content" class="skip-to-content">跳到主要内容</a>
+
+  <main id="main-content" role="main">
+    <header class="site-header">
+ <a class="brand" href="#map" aria-label="评测探索局首页"><span class="brand-mark" aria-hidden="true">↗</span><span><b>评测探索局</b><small>EVAL / QUEST</small></span></a>
+ <nav class="primary-nav" aria-label="主要视图"><button data-page="map" class="active">知识地图</button><button data-page="labs">实验工坊<span class="nav-dot"></span></button><button data-page="library">随身手册</button></nav>
+ <button class="player-pill" onclick="showPassport()" aria-label="打开学习护照"><span class="player-avatar" aria-hidden="true">✦</span><span><b id="playerLevel">Lv. 1</b><small id="playerXP">0 XP</small></span></button>
+</header>
+<div class="workspace">
+ <section id="mapPage" class="page">
+  <div class="hero animate"><div><p class="eyebrow">一场从度量衡到 AI 智能体的知识远征</p><h1>把分数，变成<br class="mobile-break">可信的证据<span class="title-dot">.</span></h1><p class="hero-sub">不是再读一遍目录。去探索、做实验，然后挑战自己的判断。</p></div><div class="hero-progress"><span class="progress-orbit" id="progressOrbit"><b id="heroCount">0</b><small>/ 12</small></span><div><b id="heroStatus">旅程刚刚开始</b><small>每一关，点亮一种判断力</small><button class="text-btn" onclick="resumeJourney()" id="resumeButton">开始探索 →</button></div></div></div>
+  <div class="route-bar"><span class="label">选择你的路线</span><div class="route-choices" role="group" aria-label="学习路线"><button data-route="all" class="active" aria-pressed="true">完整远征 <span>12 关</span></button><button data-route="project" aria-pressed="false">做项目 <span>5 关</span></button><button data-route="audit" aria-pressed="false">审查报告 <span>4 关</span></button><button data-route="history" aria-pressed="false">读历史 <span>5 关</span></button></div><p id="routeDescription">从量尺出发，走到会行动的机器。所有关卡始终开放。</p></div>
+  <div class="map-layout">
+   <div class="map-column">
+    <div class="map-toolbar"><span class="map-kicker"><span class="live-dot"></span>远征地图 <span class="muted">/ 四片知识区域</span></span><label class="link-switch"><input id="linkToggle" type="checkbox">跨章联结</label></div>
+    <div class="map-frame" id="mapFrame"><div class="map-plane" id="mapPlane"><svg id="mapSvg" viewBox="0 0 1000 660" preserveAspectRatio="none" aria-hidden="true"></svg><div class="region-label region-label-0"><span>REGION 01</span><b>评测的起源</b></div><div class="region-label region-label-1"><span>REGION 02</span><b>可信的分数</b></div><div class="region-label region-label-2"><span>REGION 03</span><b>走出实验室</b></div><div class="region-label region-label-3"><span>REGION 04</span><b>会行动的机器</b></div><div id="nodeLayer"></div><div class="map-note">先认识量尺，再让证据带路。</div></div><div class="map-zoom" aria-label="地图缩放"><button id="zoomOut" aria-label="缩小地图">−</button><button id="zoomFit" aria-label="重置地图视角">全图</button><button id="zoomIn" aria-label="放大地图">＋</button></div></div>
+    <div class="map-footer"><div class="legend"><span><i class="legend-pin"></i>未探索</span><span><i class="legend-pin explored"></i>已探索</span><span><i class="legend-pin done">✓</i>已通关</span></div><span class="map-hint">点选地点探索 · 放大后拖动地图</span></div>
+   </div>
+   <aside id="missionPanel" class="mission-panel animate delay-1" aria-label="选中关卡"></aside>
+  </div>
+  <div class="field-strip"><div><span class="tiny-label">贯穿全书的任务</span><b>“远山设备”的助手，该上线了吗？</b><p>从一把尺子到一次真实行动，用不同证据检查同一个决定。</p></div><button class="outline-btn" onclick="openLab('release')">进入发布演练 <span>↗</span></button></div>
+  <p class="evidence-note">原稿 v0.3 · 资料核验截至 2026-11-06 · draft / pending · 互动题与实验为教学改编，不是专业认证或真实模型成绩。</p>
+ </section>
+ <section id="labsPage" class="page" hidden>
+  <div class="section-intro"><p class="eyebrow">LEARN BY CHANGING THINGS</p><h1>亲手拨动数字。</h1><p>改一个条件，看一个结论如何改变。以下均为教学演算，不是实际模型测试。</p></div>
+  <div class="lab-tabs" role="group" aria-label="选择实验"><button data-lab="paired" class="active">01 配对比较</button><button data-lab="judge">02 裁判显微镜</button><button data-lab="agent">03 可靠性分岔</button><button data-lab="release">04 发布委员会</button></div>
+  <article class="lab" id="lab-paired"><div class="lab-heading"><div><p class="eyebrow">EXPERIMENT 01 / 第 5 章</p><h2>高了 6 点，就该升级吗？</h2><p>把同一批题目的四种结果填入格子，观察净改善与区间。</p></div><button class="text-btn" onclick="openLesson(5)">回到样本峡谷 ↗</button></div><div class="lab-grid"><div class="control-panel"><div class="matrix"><span></span><b>B 通过</b><b>B 失败</b><b>A 通过</b><label>同时通过<input id="pairBoth" type="number" min="0" max="100000" step="1" value="240" aria-label="A B 同时通过的题数"></label><label>退步<input id="pairLoss" type="number" min="0" max="100000" step="1" value="40" aria-label="仅 A 通过的题数"></label><b>A 失败</b><label>修复<input id="pairGain" type="number" min="0" max="100000" step="1" value="64" aria-label="仅 B 通过的题数"></label><label>同时失败<input id="pairNeither" type="number" min="0" max="100000" step="1" value="56" aria-label="A B 同时失败的题数"></label></div><label class="slider-label" for="pairThreshold">事前最小收益门槛 <output id="pairThresholdOut">3 点</output></label><input type="range" id="pairThreshold" min="0" max="15" step="0.5" value="3"><p class="small muted">移动门槛只为敏感性演示。真实确认性评测不可看完结果再降低门槛。</p><button class="outline-btn small-btn" onclick="resetLab('paired')">恢复原稿示例</button></div><div class="result-panel" id="pairedResult" aria-live="polite"></div></div><details class="method-note"><summary>计算方法与适用边界 ＋</summary><p>每题 d = B − A；n 为四格之和。均值 Δ = (修复 − 退步) / n；样本方差 s² = [(修复 + 退步) − nΔ²] / (n − 1)；标准误 SE = √(s²/n)；近似 95% 区间为 Δ ± 1.96 SE。要求题目独立、有合适抽样解释且样本足够。聚类、小样本或零分歧时不应靠该近似放行；本页面会对小样本、少分歧或近似退化给出简易告警；没有触发告警不代表近似条件已经被验证。原稿来源：§5.2、§10.13、附录 B。</p></details></article>
+  <article class="lab" id="lab-judge" hidden><div class="lab-heading"><div><p class="eyebrow">EXPERIMENT 02 / 第 6、9 章</p><h2>谁在检查检查者？</h2><p>阳性 = 不合格答案。把问题的基准率调低，再看告警中有多少是真的。</p></div><button class="text-btn" onclick="openLesson(6)">回到裁判哨所 ↗</button></div><div class="lab-grid"><div class="control-panel"><label class="slider-label" for="judgeBase">不合格答案的基准率 <output id="judgeBaseOut"></output></label><input id="judgeBase" type="range" min="1" max="80" value="20"><label class="slider-label" for="judgeSensitivity">敏感度 / 问题召回率 <output id="judgeSensitivityOut"></output></label><input id="judgeSensitivity" type="range" min="0" max="100" value="80"><label class="slider-label" for="judgeSpecificity">特异度 / 合格识别率 <output id="judgeSpecificityOut"></output></label><input id="judgeSpecificity" type="range" min="0" max="100" value="90"><p class="muted small">固定 200 条的期望人数模型；小数是理论期望，不是假装观察到了半条回答。</p><button class="outline-btn small-btn" onclick="resetLab('judge')">恢复 200 条原稿示例</button></div><div class="result-panel" id="judgeResult" aria-live="polite"></div></div><details class="method-note"><summary>计算方法与适用边界 ＋</summary><p>TP = 200 × 基准率 × 敏感度；FN = 200 × 基准率 × (1 − 敏感度)；FP = 200 × (1 − 基准率) × (1 − 特异度)；TN 为剩余期望人数。告警精确率 = TP/(TP+FP)，准确率 = (TP+TN)/200。假设敏感度与特异度在改变基准率时保持不变；现实人群变化可能同时改变它们。人工参考也未必无误。来源：§6.3、§9.1。</p></details></article>
+  <article class="lab" id="lab-agent" hidden><div class="lab-heading"><div><p class="eyebrow">EXPERIMENT 03 / 第 11 章</p><h2>“成功过”不等于“靠得住”。</h2><p>相同的单次成功率，走向两种完全不同的服务承诺。</p></div><button class="text-btn" onclick="openLesson(11)">回到 Agent 试炼场 ↗</button></div><div class="lab-grid"><div class="control-panel"><label class="slider-label" for="agentP">单次成功率 p <output id="agentPOut"></output></label><input id="agentP" type="range" min="0" max="100" value="80"><label class="slider-label" for="agentK">尝试次数 k <output id="agentKOut"></output></label><input id="agentK" type="range" min="1" max="10" value="3"><div class="lab-prompt"><b>试试看</b><p>保持 p = 80%，把 k 从 1 拉到 10。为什么一条上升，另一条下降？</p></div><button class="outline-btn small-btn" onclick="resetLab('agent')">恢复原稿示例</button></div><div class="result-panel" id="agentResult" aria-live="polite"></div></div><details class="method-note"><summary>计算方法与适用边界 ＋</summary><p>固定任务、固定成功概率、独立同分布尝试下：至少一次成功 = 1 − (1 − p)^k；k 次全部成功 = p^k。前者并不免费提供成功选择器，也不免除失败尝试的副作用。若重试改变数据库、策略或成功概率，应重新评测完整流程。有限样本 pass@k 的组合估计是另一种计算，见 §11.7；本实验展示 §11.6 的理论概率，而非有限样本估计。</p></details></article>
+  <article class="lab" id="lab-release" hidden><div class="lab-heading"><div><p class="eyebrow">FINAL FIELD TEST / 第 10 章</p><h2>这次，由你决定是否上线。</h2><p>远山设备的候选 B：平均分更高。四个事前门禁，允许它被发布吗？</p></div><button class="text-btn" onclick="openLesson(10)">阅读项目背景 ↗</button></div><div class="release-grid"><div class="control-panel"><p class="small muted">门禁是原稿虚构团队的约定，不是行业标准。修改观测值只用于反事实演练。</p><label class="slider-label" for="releaseLower">改善区间下界 <output id="releaseLowerOut"></output></label><input id="releaseLower" type="range" min="-5" max="10" step="0.01" value="1.03"><label class="slider-label" for="releaseLatency">p95 延迟 <output id="releaseLatencyOut"></output></label><input id="releaseLatency" type="range" min="0.5" max="10" step="0.1" value="4.1"><label class="slider-label" for="releaseCost">每请求平均推理费用 <output id="releaseCostOut"></output></label><input id="releaseCost" type="range" min="0" max="0.08" step="0.001" value="0.026"><label class="check-line"><input id="releaseRisk" type="checkbox" checked>检测到预定义的重大权限披露</label><button class="outline-btn small-btn" onclick="resetLab('release')">恢复本轮证据</button></div><div id="releaseResult" aria-live="polite"></div></div><p class="method-note">通过这四道教学门禁 ≠ 证明生产安全。修复后仍需新确认、受控试点和持续监控。来源：§10.13—10.17。</p></article>
+ </section>
+ <section id="libraryPage" class="page" hidden><div class="section-intro"><p class="eyebrow">YOUR FIELD LIBRARY</p><h1>把整本书，放进口袋。</h1><p>12 章全文、4 个附录、封面与图版索引，以及全部 14 幅原图，已内嵌在此页面。</p></div><div class="library-toolbar"><label class="search-box"><span aria-hidden="true">⌕</span><input id="librarySearch" type="search" placeholder="搜索章节、术语或原文内容…" aria-label="搜索全书"></label><button class="outline-btn" onclick="showPassport()">学习护照 ↗</button></div><p class="small muted" id="searchStatus" aria-live="polite"></p><div id="bookList" class="book-grid"></div><div class="glossary-section"><div class="section-heading"><h2>概念口袋卡</h2><span class="muted">点开定义，也读一读“不要误解成”</span></div><div id="glossary" class="glossary-grid"></div></div><p class="evidence-note">全文为书稿 v0.3 的教学快照，资料截止原稿核验日 2026-11-06。尚未经过外部专家专题审读；虚构案例与演算数字不代表实际模型成绩。引用外链需联网，进度与摘记仅保存在当前浏览器。</p></section>
+</div>
+<footer class="site-footer"><a href="/">← 个人主页</a><a href="/panoramas/">全部知识地图</a><span>EVAL / QUEST <b>把每一个结论，接回证据。</b></span><button class="text-btn" onclick="openReader('00')">原稿与证据说明 ↗</button><span id="storageStatus">进度仅保存在当前浏览器 · 不上传</span></footer>
+<dialog id="lessonDialog" aria-labelledby="lessonTitle"><div class="dialog-shell"><div class="dialog-top"><span id="lessonEyebrow" class="eyebrow"></span><button class="icon-btn" onclick="closeLesson()" aria-label="关闭章节">×</button></div><h2 id="lessonTitle"></h2><p id="lessonSubtitle" class="muted"></p><nav class="lesson-tabs" id="lessonTabs" aria-label="章节内容"><button data-lesson-tab="learn" class="active">知识补给</button><button data-lesson-tab="challenge">情境挑战</button><button data-lesson-tab="original">章节原文</button></nav><div id="lessonContent"></div></div></dialog>
+<dialog id="passportDialog" aria-labelledby="passportTitle"><div class="dialog-shell"><div class="dialog-top"><span class="eyebrow">EXPLORER'S PASSPORT</span><button class="icon-btn" onclick="document.getElementById('passportDialog').close()" aria-label="关闭学习护照">×</button></div><h2 id="passportTitle">你的学习护照</h2><p class="muted">记录走过的路，不假装衡量了全部能力。</p><div id="passportContent"></div><div class="passport-actions"><button class="primary-btn" onclick="exportProgress()">导出存档 JSON</button><button class="outline-btn" onclick="document.getElementById('importProgress').click()">导入存档</button><button class="outline-btn" onclick="exportNotes()">导出学习笔记</button><input id="importProgress" type="file" accept="application/json,.json" hidden></div><p class="small muted">存档包含学习进度与个人摘记，不会上传。导出可用于换浏览器或移动 HTML 后恢复。</p><button class="danger-btn" onclick="resetProgress()">重置此页面的学习进度</button></div></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<noscript><p class="noscript">此互动页面需要启用 JavaScript。原始 Markdown 小册子未被修改，可继续在 Obsidian 中阅读。</p></noscript>
+
+  </main>
+
+  <!-- EXAMPLE: Exclusive accordion (only one open at a time, no JS needed) -->
+  <!--
+  <details name="faq" open>
+    <summary>Section 1</summary>
+    <div class="section-body"><p>Content</p></div>
+  </details>
+  <details name="faq">
+    <summary>Section 2</summary>
+    <div class="section-body"><p>Content</p></div>
+  </details>
+  -->
+
+  <!-- EXAMPLE: Popover (zero-JS tooltip/info panel) -->
+  <!--
+  <button popovertarget="info-panel">Details</button>
+  <div id="info-panel" popover>
+    <h3>More Information</h3>
+    <p>Content shown on click, no JS needed.</p>
+  </div>
+  -->
+
+  <script>
+    // === Menu ===
+    function toggleMenu() {
+      var dropdown = document.getElementById('vizMenuDropdown') || document.getElementById('vizMenu');
+      if (dropdown) { dropdown.classList.toggle('open'); document.querySelector('.viz-menu-toggle').setAttribute('aria-expanded', String(dropdown.classList.contains('open'))); }
+    }
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.viz-menu')) {
+        var dropdown = document.getElementById('vizMenuDropdown') || document.getElementById('vizMenu');
+        if (dropdown) { dropdown.classList.remove('open'); document.querySelector('.viz-menu-toggle').setAttribute('aria-expanded','false'); }
+      }
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        var dropdown = document.getElementById('vizMenuDropdown') || document.getElementById('vizMenu');
+        if (dropdown) { dropdown.classList.remove('open'); document.querySelector('.viz-menu-toggle').setAttribute('aria-expanded','false'); }
+      }
+    });
+
+    // === Theme (class-based, OS detection on first visit) ===
+    var savedTheme; try { savedTheme = localStorage.getItem('eval-quest-theme'); } catch(e) {}
+    if(savedTheme !== 'light' && savedTheme !== 'dark') savedTheme = null;
+    var currentTheme = savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    function applyTheme(t) {
+      document.documentElement.className = 'theme-' + t;
+      document.getElementById('themeIcon').textContent = t === 'dark' ? '◑' : '◐';
+      document.getElementById('themeLabel').textContent = t === 'dark' ? '切换浅色主题' : '切换深色主题';
+      try { localStorage.setItem('eval-quest-theme', t); } catch(e) {}
+      currentTheme = t;
+      if (typeof onThemeChange === 'function') onThemeChange();
+    }
+    function cycleTheme() { applyTheme(currentTheme === 'dark' ? 'light' : 'dark'); }
+    applyTheme(currentTheme);
+
+    // === Scroll Reveal (adds .reveal then .visible — content visible without JS) ===
+    document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('reveal'));
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // === Number Counter (use data-count="77" data-suffix="%" on elements) ===
+    function animateCounters() {
+      document.querySelectorAll('[data-count]').forEach(function(el) {
+        if (el.dataset.counted) return;
+        el.dataset.counted = '1';
+        var target = parseFloat(el.dataset.count), prefix = el.dataset.prefix || '', suffix = el.dataset.suffix || '';
+        var start = performance.now(), duration = 1200;
+        (function tick(now) {
+          var p = Math.min((now - start) / duration, 1), eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = prefix + Math.round(target * eased).toLocaleString() + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        })(start);
+      });
+    }
+    var counterEl = document.querySelector('[data-count]');
+    if (counterEl) {
+      var cObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) { animateCounters(); cObs.disconnect(); } });
+      }, { threshold: 0.3 });
+      cObs.observe(counterEl);
+    }
+
+    // === Download PNG ===
+    async function downloadImage() {
+      if(typeof htmlToImage === 'undefined'){toast('截图组件不可用。请联网后重试，或使用打印 / PDF。');return;}
+      var menu = document.querySelector('.viz-menu');
+      menu.style.display = 'none';
+      try {
+        var url = await htmlToImage.toPng(document.body, { quality: 1, pixelRatio: 2, skipFonts: true, filter: function(n) { return !n.classList || !n.classList.contains('viz-menu'); } });
+        var a = document.createElement('a'); a.href = url;
+        a.download = document.title.replace(/\s+/g, '-').toLowerCase() + '.png'; a.click();
+      } catch(e) { toast('PNG 导出失败，请改用打印 / PDF 或系统截图。'); }
+      menu.style.display = '';
+    }
+
+    // === Chart.js Pattern (use when file has Chart.js) ===
+    // var chartsBuilt = false;
+    // function buildCharts() {
+    //   if (chartsBuilt || typeof Chart === 'undefined') return;
+    //   var isDark = document.documentElement.classList.contains('theme-dark');
+    //   var textColor = isDark ? '#EDEDED' : '#0f172a';
+    //   var borderColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+    //   // Create charts with theme-aware colors
+    //   chartsBuilt = true;
+    // }
+    // function onThemeChange() { chartsBuilt = false; buildCharts(); }
+    // window.addEventListener('load', buildCharts);
+
+    /*__EVAL_DATA__*/
+/*__EVAL_APP__*/
+  </script>
+</body>
+</html>

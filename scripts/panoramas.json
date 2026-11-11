@@ -1,7 +1,7 @@
 {
   "version": 1,
   "basePath": "/panoramas/",
-  "updatedAt": "2026-11-04",
+  "updatedAt": "2026-11-11",
   "vendors": [
     {
       "file": "chart.umd.min.js",
@@ -255,6 +255,21 @@
       "source": "../html/ai-evaluation-atlas.html",
       "updatedAt": "2026-10-03",
       "sourceSha256": "e364abc232411097f7653295d7f6990d32a5d982a0400bcd78fc8af31a51baeb"
+    },
+    {
+      "slug": "eval-quest",
+      "title": "评测探索局",
+      "subtitle": "从度量衡到 AI 智能体的知识远征",
+      "description": "在 12 关知识地图中探索评测，完成 24 道情境挑战，动手做 4 个实验，再回到完整书稿与证据。",
+      "category": "评测与可靠性",
+      "tags": [
+        "游戏式学习",
+        "12 关挑战",
+        "统计与 Agent"
+      ],
+      "source": "public/panoramas/eval-quest/index.html",
+      "updatedAt": "2026-11-11",
+      "sourceSha256": "b7f1658ff0c8d655b767382f0713368882e96f8e6d47428141acd7aef0289949"
     }
   ]
 }
