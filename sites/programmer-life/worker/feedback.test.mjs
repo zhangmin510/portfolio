@@ -46,7 +46,7 @@ test('同源提交只向固定仓库发送文字，处理提及和 Markdown 后�
   assert.equal(target, 'https://api.github.com/repos/zhangmin510/portfolio/issues');
   assert.equal(options.method, 'POST');
   assert.equal(options.headers.Authorization, `Bearer ${TOKEN}`);
-  assert.equal(options.redirect, 'error');
+  assert.equal(options.redirect, 'manual');
   assert.ok(options.signal instanceof AbortSignal);
   assert.deepEqual(JSON.parse(options.body), {
     title: '[栈城反馈] 测试 ＠some-team ＃9',
@@ -126,15 +126,17 @@ test('限流拒绝或异常时不创建 Issue', async (t) => {
   assert.equal(upstream.mock.callCount(), 0);
 });
 
-test('上游响应地址异常、拒绝或超时时，不透传其响应或凭证', async (t) => {
+test('上游重定向、响应地址异常、拒绝或超时时，不透传其响应或凭证', async (t) => {
   const upstream = t.mock.method(globalThis, 'fetch', async () => { throw new DOMException(TOKEN, 'TimeoutError'); });
   upstream.mock.mockImplementationOnce(async () => Response.json({ number: 123, html_url: 'https://github.com/other/repo/issues/123' }, { status: 201 }), 0);
   upstream.mock.mockImplementationOnce(async () => Response.json({ error: TOKEN }, { status: 403 }), 1);
-  for (let attempt = 0; attempt < 3; attempt++) {
+  upstream.mock.mockImplementationOnce(async () => Response.redirect('https://example.test/elsewhere'), 2);
+  for (let attempt = 0; attempt < 4; attempt++) {
     const response = await worker.fetch(submit(feedback), environment());
     assert.equal(response.status, 502);
     const body = await response.json();
     assert.deepEqual(Object.keys(body), ['message']);
     assert.equal(body.message.includes(TOKEN), false);
   }
+  assert.equal(upstream.mock.callCount(), 4);
 });

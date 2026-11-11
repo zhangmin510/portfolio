@@ -80,7 +80,7 @@ async function createIssue(token, title, message) {
   const literal = neutralizeIssueLinks(message).split('\n').map(line => `    ${line}`).join('\n');
   const response = await fetch(ISSUES_API, {
     method: 'POST',
-    redirect: 'error',
+    redirect: 'manual',
     signal: AbortSignal.timeout(GITHUB_TIMEOUT_MS),
     headers: {
       'Accept': 'application/vnd.github+json',
@@ -96,14 +96,19 @@ async function createIssue(token, title, message) {
   });
 
   if (response.status !== 201) {
+    console.warn('Guest feedback: GitHub rejected issue creation', { status: response.status });
     await response.body?.cancel().catch(() => undefined);
     return null;
   }
 
   const result = await response.json();
-  if (!Number.isSafeInteger(result?.number) || result.number < 1) return null;
-  const issueUrl = `https://github.com/${REPOSITORY}/issues/${result.number}`;
-  return result.html_url === issueUrl ? issueUrl : null;
+  const number = result?.number;
+  if (Number.isSafeInteger(number) && number > 0) {
+    const issueUrl = `https://github.com/${REPOSITORY}/issues/${number}`;
+    if (result.html_url === issueUrl) return issueUrl;
+  }
+  console.warn('Guest feedback: GitHub did not return a valid issue link');
+  return null;
 }
 
 export default {
@@ -141,8 +146,9 @@ export default {
     try {
       const issueUrl = await createIssue(env.GITHUB_ISSUES_TOKEN.trim(), input.title, input.message);
       if (issueUrl) return json({ issueUrl }, 201);
-    } catch {
+    } catch (error) {
       // An upstream timeout can happen after GitHub accepted the request.
+      console.warn('Guest feedback: GitHub request did not complete', { type: error instanceof Error ? error.name : 'Unknown' });
     }
     return json({ message: UNCONFIRMED }, 502);
   },
