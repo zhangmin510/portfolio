@@ -1,0 +1,155 @@
+.room-scene,
+.city-scene {
+  width: 100%;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 18px;
+  background: radial-gradient(ellipse at 50% 44%, #f8f5e9 10%, #f2f1e3 75%);
+}
+
+.room-scene.is-night {
+  background: radial-gradient(ellipse at 50% 44%, #f0eedb 5%, #e5e8db 85%);
+}
+
+.room-illustration,
+.city-illustration {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 620px;
+  font-family: inherit;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.scene-person {
+  transition: transform 750ms cubic-bezier(.22, .68, .25, 1);
+}
+
+.scene-hotspot,
+.city-place {
+  outline: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.scene-hotspot .hotspot-label,
+.scene-hotspot .hotspot-ring,
+.city-place .city-place-label {
+  transition: filter 160ms ease, opacity 160ms ease;
+}
+
+.scene-hotspot .hotspot-halo {
+  transition: opacity 160ms ease;
+}
+
+.scene-hotspot:hover .hotspot-halo,
+.scene-hotspot:focus-visible .hotspot-halo {
+  opacity: .9;
+}
+
+.scene-hotspot:hover .hotspot-label,
+.scene-hotspot:focus-visible .hotspot-label,
+.city-place:hover .city-place-label,
+.city-place:focus-visible .city-place-label {
+  filter: drop-shadow(0 3px 5px #4b63402a);
+}
+
+.scene-hotspot:focus-visible .hotspot-ring {
+  stroke: #223d2a;
+  stroke-width: 3;
+}
+
+.city-place:focus-visible .city-place-label rect {
+  stroke: #223d2a;
+  stroke-width: 3;
+}
+
+.city-place:hover .city-place-label rect {
+  stroke: #7c936c;
+  stroke-width: 2;
+}
+
+.scene-hotspot.is-active .hotspot-ring {
+  filter: drop-shadow(0 0 5px #7d9f6c66);
+}
+
+.city-building-art {
+  pointer-events: none;
+}
+
+.city-mobile-places {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .room-scene,
+  .city-scene {
+    border-radius: 12px;
+  }
+
+  .room-illustration {
+    width: 128%;
+    max-width: none;
+    margin-left: -14%;
+  }
+
+  .city-illustration {
+    width: 110%;
+    max-width: none;
+    margin-left: -5%;
+  }
+
+  .city-mobile-places {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    padding: 0 15px 34px;
+  }
+
+  .city-mobile-places button {
+    min-height: 44px;
+    border: 1px solid #dce2ce;
+    border-radius: 9px;
+    padding: 7px 4px;
+    background: #fffdf5;
+    color: #7c8f6f;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .city-mobile-places button.is-current {
+    background: #e7eddb;
+    border-color: #b2c3a1;
+    color: #496844;
+  }
+
+  .city-mobile-places button:focus-visible {
+    outline: 2px solid #617f50;
+    outline-offset: 2px;
+  }
+
+  .scene-floor-caption {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-person,
+  .scene-hotspot .hotspot-label,
+  .scene-hotspot .hotspot-ring,
+  .scene-hotspot .hotspot-halo,
+  .city-place .city-place-label {
+    transition: none;
+  }
+}
+
+[data-reduce-motion="true"] .scene-person,
+[data-reduce-motion="true"] .scene-hotspot .hotspot-label,
+[data-reduce-motion="true"] .scene-hotspot .hotspot-ring,
+[data-reduce-motion="true"] .city-place .city-place-label {
+  transition: none;
+}

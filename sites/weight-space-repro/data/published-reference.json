@@ -1,0 +1,62 @@
+{
+  "base_url": "https://weights.zhangmin.name/",
+  "worker_version": "ba8f4d42-ae9f-4373-9837-70597ef21538",
+  "artifacts": [
+    {
+      "path": "/data/experiment-smoke.json",
+      "target": "results/smoke/results.json",
+      "compression": "identity",
+      "bytes": 123896,
+      "sha256": "114ac932779dd771229153a2d00b7c7f90b529348065f5c5ca4e69dec88b2127",
+      "output_sha256": "114ac932779dd771229153a2d00b7c7f90b529348065f5c5ca4e69dec88b2127"
+    },
+    {
+      "path": "/files/results/smoke/report.md",
+      "target": "results/smoke/report.md",
+      "compression": "identity",
+      "bytes": 109453,
+      "sha256": "3bbc7b23d386dd3c8bf7e768c2e0015cdcf1b56f1f1f8bb975c5c477675cdc4b",
+      "output_sha256": "3bbc7b23d386dd3c8bf7e768c2e0015cdcf1b56f1f1f8bb975c5c477675cdc4b"
+    },
+    {
+      "path": "/data/experiment-budget8192.json",
+      "target": "results/budget8192/results.json",
+      "compression": "identity",
+      "bytes": 41624,
+      "sha256": "f6c92a13331f9b5a21c3bcd5a6efa5875c058aede55b08f0f63364e45f4c20b5",
+      "output_sha256": "f6c92a13331f9b5a21c3bcd5a6efa5875c058aede55b08f0f63364e45f4c20b5"
+    },
+    {
+      "path": "/files/results/budget8192/report.md",
+      "target": "results/budget8192/report.md",
+      "compression": "identity",
+      "bytes": 37750,
+      "sha256": "9f1a7b80bd54d6525e9d3fe1b250f9d476d22491fd5547d72e17d1f1e3ac1f35",
+      "output_sha256": "9f1a7b80bd54d6525e9d3fe1b250f9d476d22491fd5547d72e17d1f1e3ac1f35"
+    },
+    {
+      "path": "/data/inference-trace.json.gz",
+      "target": "results/inference-trace.json",
+      "compression": "gzip",
+      "bytes": 654387,
+      "sha256": "c32e0c8ff481561e4cf7641d8fe54df884453f8e7db5f4b0a001aef3f1eefccc",
+      "output_sha256": "8a10e777e208a88e5aec74ba692f504d3e55f4f2120242661da6716a9315b211"
+    },
+    {
+      "path": "/files/results/inference-arrays.npz",
+      "target": "results/inference-arrays.npz",
+      "compression": "identity",
+      "bytes": 2166472,
+      "sha256": "213c62c6504885d0e6b5fd06d5cdca5ed15053bd7b2a626d79205bca36a27bda",
+      "output_sha256": "213c62c6504885d0e6b5fd06d5cdca5ed15053bd7b2a626d79205bca36a27bda"
+    },
+    {
+      "path": "/files/results/inference-validation.json",
+      "target": "results/inference-validation.json",
+      "compression": "identity",
+      "bytes": 442,
+      "sha256": "37fa667498497ca27c6421160c8faa44ab1ab15e2761d1bea78ba659b44ef0b9",
+      "output_sha256": "37fa667498497ca27c6421160c8faa44ab1ab15e2761d1bea78ba659b44ef0b9"
+    }
+  ]
+}

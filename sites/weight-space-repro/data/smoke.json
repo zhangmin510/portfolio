@@ -1,0 +1,12 @@
+[
+  {"id":"arithmetic", "problem":"Compute 17 * 23.", "answer":"391"},
+  {"id":"linear_equation", "problem":"If 3x + 7 = 31, what is x?", "answer":"8"},
+  {"id":"triangle", "problem":"A right triangle has legs of length 5 and 12. What is the length of its hypotenuse?", "answer":"13"},
+  {"id":"remainder", "problem":"What is the remainder when 7^100 is divided by 10?", "answer":"1"},
+  {"id":"coin_probability", "problem":"Three fair coins are tossed independently. What is the probability of getting exactly two heads? Give the answer as a fraction.", "answer":"3/8"},
+  {"id":"digit_count", "problem":"How many integers from 1 through 100 inclusive contain the digit 7?", "answer":"19"},
+  {"id":"factorial_zeros", "problem":"How many trailing zeros are there in the decimal representation of 100 factorial?", "answer":"24"},
+  {"id":"word_problem", "problem":"A shop sells pencils for 2 dollars each and notebooks for 5 dollars each. Maya buys 3 notebooks and some pencils for a total of 29 dollars. How many pencils does she buy?", "answer":"7"},
+  {"id":"consecutive_sum", "problem":"The sum of five consecutive integers is 120. What is the largest of the five integers?", "answer":"26"},
+  {"id":"quadratic_roots", "problem":"What is the sum of the squares of the two roots of x^2 - 5x + 6 = 0?", "answer":"13"}
+]

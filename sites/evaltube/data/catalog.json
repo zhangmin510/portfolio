@@ -1,0 +1,3721 @@
+{
+  "meta": {
+    "source": "HackerTube",
+    "sourceUrl": "https://hackertube.org/data",
+    "sourceGeneratedAt": "2026-10-31",
+    "fetchedAt": "2026-11-06T11:06:33.294Z",
+    "builtAt": "2026-11-06T11:22:24.868Z",
+    "totalSourceVideos": 6454,
+    "totalHnVideos": 49,
+    "totalCuratedVideos": 6,
+    "totalVideos": 55,
+    "totalComments": 384,
+    "filterVersion": "1.1.0",
+    "reviewedAt": "2026-11-06",
+    "policy": "收录大模型技术与能力评估，并扩展 AI 搜索、AI 应用实测与 Agent 任务评测。评测可包含实际工作流、对比、失败观察和研究，不将产品发布、纯营销或宽泛 AI 观点自动视为评测；保留少量相关训练基础。",
+    "pendingReview": 0,
+    "license": "ODC-By-1.0",
+    "licenseScope": "hacker-news records and HN comments only",
+    "curatedNotice": "外部编辑精选是独立编写的摘要与来源链接，不属于 HackerTube 开放导出；原视频权利属于其发布者。",
+    "attribution": [
+      {
+        "name": "HackerTube",
+        "url": "https://hackertube.org"
+      },
+      {
+        "name": "open-index/hacker-news",
+        "url": "https://huggingface.co/datasets/open-index/hacker-news"
+      }
+    ],
+    "metadataFile": "youtube-metadata.local.json",
+    "metadataNote": "YouTube 元数据只保存在本地可选缓存，不属于开放数据导出。HN 视频与评论来自 HackerTube；外部编辑精选单独标注来源，不附加 HN 推荐证据。"
+  },
+  "topics": [
+    {
+      "id": "llm",
+      "name": "大模型入门",
+      "description": "语言模型的原理、整体训练流程与能力概览。",
+      "count": 9
+    },
+    {
+      "id": "architecture",
+      "name": "模型架构",
+      "description": "Transformer、注意力、分词、嵌入与替代架构。",
+      "count": 12
+    },
+    {
+      "id": "training",
+      "name": "训练与对齐",
+      "description": "神经网络基础、预训练、微调、RLHF 与缩放定律。",
+      "count": 19
+    },
+    {
+      "id": "inference",
+      "name": "推理与使用",
+      "description": "模型采样、提示、API 使用与输出检测方法。",
+      "count": 4
+    },
+    {
+      "id": "evaluation",
+      "name": "能力与评测",
+      "description": "具体任务实验、红队、失败案例和效果研究；包含演示与观察，不等同于标准化 benchmark。",
+      "count": 22
+    },
+    {
+      "id": "ai-search",
+      "name": "AI 搜索",
+      "description": "AI 搜索、语义检索与 RAG，关注检索质量、相关性和回答依据。",
+      "count": 6
+    },
+    {
+      "id": "app-evaluation",
+      "name": "应用评测",
+      "description": "AI 产品与工具的实际工作流、效果研究、对比和局限；演示会明确标注。",
+      "count": 19
+    },
+    {
+      "id": "agent-evaluation",
+      "name": "Agent 评测",
+      "description": "用具体任务检查 Agent 的完成质量、可靠性与失败方式，不将架构介绍自动归入评测。",
+      "count": 4
+    },
+    {
+      "id": "agents",
+      "name": "Agent 与编程",
+      "description": "代码模型、工具调用、Agent 架构与实际任务验证。",
+      "count": 11
+    },
+    {
+      "id": "multimodal",
+      "name": "多模态",
+      "description": "图文大模型与生成模型机制、能力及局限。",
+      "count": 5
+    }
+  ],
+  "videos": [
+    {
+      "vid": "VMj-3S1tku0",
+      "url": "https://www.youtube.com/watch?v=VMj-3S1tku0",
+      "title": "The spelled-out intro to neural networks and backpropagation: building micrograd",
+      "channel": "Andrej Karpathy",
+      "summary": "Andrej Karpathy's first Neural Networks: Zero to Hero lecture, which builds micrograd, a tiny autograd engine, from scratch in Python. It explains backpropagation and neural network training step by step, assuming only basic Python and some high-school calculus.",
+      "why_hn": "HN treats it as the best starting point for really understanding backprop and neural nets, because Karpathy explains the why with intuition and builds everything in code.",
+      "content_type": "lecture",
+      "level": "intro",
+      "shelf_life": "evergreen",
+      "primary_topic": "backpropagation and neural networks",
+      "tags": [
+        "micrograd",
+        "autograd",
+        "backpropagation",
+        "neural networks",
+        "python",
+        "andrej karpathy"
+      ],
+      "categories": [
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "scripting-languages",
+          "name": "Python, Ruby & scripting languages",
+          "area": "software",
+          "area_name": "Software Engineering & Languages"
+        }
+      ],
+      "quote": {
+        "text": "It's especially useful because he explains the why and provides intuitive explanations instead of just talking about the what and how.",
+        "hn_comment_id": 36428875,
+        "year": "2023",
+        "id": 36428875
+      },
+      "hn": {
+        "mentions": 20,
+        "recommenders": 17,
+        "rec_months": 16,
+        "strong_recs": 10,
+        "stances": {
+          "rec": 7,
+          "strong_rec": 10,
+          "reference": 3
+        },
+        "first_year": 2022,
+        "last_year": 2025,
+        "first": "2022",
+        "last": "2025",
+        "strong": 10
+      },
+      "score": 21,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "training"
+      ],
+      "selection_reason": "从零实现自动微分与反向传播，补齐语言模型训练基础。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/VMj-3S1tku0"
+      }
+    },
+    {
+      "vid": "aircAruvnKk",
+      "url": "https://www.youtube.com/watch?v=aircAruvnKk",
+      "title": "But what is a neural network? | Deep learning chapter 1",
+      "channel": "3Blue1Brown",
+      "summary": "3Blue1Brown's first chapter on deep learning explains what neurons and layers are and the math underlying a basic neural network, using handwritten digit recognition with visual animations.",
+      "why_hn": "HN treats it as the standard first stop for learning neural networks, praised for making the math intuitive.",
+      "content_type": "explainer",
+      "level": "intro",
+      "shelf_life": "evergreen",
+      "primary_topic": "neural networks",
+      "tags": [
+        "deep learning",
+        "3blue1brown",
+        "gradient descent",
+        "visualization",
+        "machine learning basics"
+      ],
+      "categories": [
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "recreational-math",
+          "name": "Recreational & visual math",
+          "area": "math-theory",
+          "area_name": "Mathematics & Theoretical CS"
+        }
+      ],
+      "quote": {
+        "text": "the visualisations and explanations of the math/concepts are so amazing",
+        "hn_comment_id": 16040048,
+        "year": "2017",
+        "id": 16040048
+      },
+      "hn": {
+        "mentions": 19,
+        "recommenders": 16,
+        "rec_months": 14,
+        "strong_recs": 5,
+        "stances": {
+          "rec": 11,
+          "strong_rec": 5,
+          "reference": 3
+        },
+        "first_year": 2017,
+        "last_year": 2025,
+        "first": "2017",
+        "last": "2025",
+        "strong": 5
+      },
+      "score": 16.5,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "training"
+      ],
+      "selection_reason": "用可视化理解神经网络，为后续大模型结构与训练打基础。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/aircAruvnKk"
+      }
+    },
+    {
+      "vid": "wjZofJX0v4M",
+      "url": "https://www.youtube.com/watch?v=wjZofJX0v4M",
+      "title": "Transformers, the tech behind LLMs | Deep Learning Chapter 5",
+      "channel": "3Blue1Brown",
+      "summary": "3Blue1Brown's visual explanation of how transformers and GPT-style language models work, tracing data through tokens, embeddings and attention.",
+      "why_hn": "HN treats it as the go-to visual introduction to transformers, and many say it finally made attention and embeddings click.",
+      "content_type": "explainer",
+      "level": "intro",
+      "shelf_life": "evergreen",
+      "primary_topic": "transformer language models",
+      "tags": [
+        "transformers",
+        "attention",
+        "embeddings",
+        "llm",
+        "deep learning",
+        "visualization"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "what bade me finally understand the transformer architecture [0] and attention [1], are 3Blue1Brown's videos.",
+        "hn_comment_id": 40873442,
+        "year": "2024",
+        "id": 40873442
+      },
+      "hn": {
+        "mentions": 16,
+        "recommenders": 13,
+        "rec_months": 10,
+        "strong_recs": 6,
+        "stances": {
+          "reference": 3,
+          "rec": 7,
+          "strong_rec": 6
+        },
+        "first_year": 2024,
+        "last_year": 2026,
+        "first": "2024",
+        "last": "2026",
+        "strong": 6
+      },
+      "score": 13,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "llm",
+        "architecture"
+      ],
+      "selection_reason": "直观拆解 Transformer、token、嵌入和注意力。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/wjZofJX0v4M"
+      }
+    },
+    {
+      "vid": "7xTGNNLPyMI",
+      "url": "https://www.youtube.com/watch?v=7xTGNNLPyMI",
+      "title": "Deep Dive into LLMs like ChatGPT",
+      "channel": "Andrej Karpathy",
+      "summary": "Andrej Karpathy's three-hour-plus general-audience deep dive into how ChatGPT-style LLMs are built, covering the full training stack from pretraining to post-training. It also gives mental models for their quirks, like hallucination, and how to use them well.",
+      "why_hn": "HN's most frequent recommendation for a clear, approachable foundation in how LLMs work without heavy math.",
+      "content_type": "lecture",
+      "level": "intro",
+      "shelf_life": "evergreen",
+      "primary_topic": "large language models",
+      "tags": [
+        "llm training",
+        "chatgpt",
+        "pretraining",
+        "hallucination",
+        "tokenization",
+        "andrej karpathy"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "I highly recommend Andrej Karpathy's Deep Dive into LLMs like ChatGPT",
+        "hn_comment_id": 47002572,
+        "year": "2026",
+        "id": 47002572
+      },
+      "hn": {
+        "mentions": 18,
+        "recommenders": 10,
+        "rec_months": 8,
+        "strong_recs": 6,
+        "stances": {
+          "reference": 8,
+          "strong_rec": 6,
+          "rec": 4
+        },
+        "first_year": 2025,
+        "last_year": 2026,
+        "first": "2025",
+        "last": "2026",
+        "strong": 6
+      },
+      "score": 11,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "llm",
+        "training",
+        "evaluation"
+      ],
+      "selection_reason": "系统讲解预训练、后训练及大模型幻觉等能力边界。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/7xTGNNLPyMI"
+      }
+    },
+    {
+      "vid": "kCc8FmEb1nY",
+      "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
+      "title": "Let's build GPT: from scratch, in code, spelled out.",
+      "channel": "Andrej Karpathy",
+      "summary": "Andrej Karpathy builds a GPT from scratch in code, following Attention Is All You Need and GPT-2/3, in about two hours using PyTorch. He connects it to ChatGPT and assumes familiarity with his earlier makemore videos.",
+      "why_hn": "It is the go-to recommendation for learning how transformers and LLMs actually work, praised for its clarity and Karpathy's teaching.",
+      "content_type": "tutorial",
+      "level": "intermediate",
+      "shelf_life": "evergreen",
+      "primary_topic": "transformers and language models",
+      "tags": [
+        "gpt",
+        "transformer",
+        "pytorch",
+        "nanogpt",
+        "attention",
+        "from scratch"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "the best video I have seen on the topic",
+        "hn_comment_id": 35800127,
+        "year": "2023",
+        "id": 35800127
+      },
+      "hn": {
+        "mentions": 20,
+        "recommenders": 14,
+        "rec_months": 8,
+        "strong_recs": 4,
+        "stances": {
+          "rec": 10,
+          "strong_rec": 4,
+          "reference": 6
+        },
+        "first_year": 2023,
+        "last_year": 2025,
+        "first": "2023",
+        "last": "2025",
+        "strong": 4
+      },
+      "score": 10,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "architecture",
+        "training"
+      ],
+      "selection_reason": "用 PyTorch 从零训练 GPT，理解完整语言模型实现。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/kCc8FmEb1nY"
+      }
+    },
+    {
+      "vid": "jkrNMKz9pWU",
+      "url": "https://www.youtube.com/watch?v=jkrNMKz9pWU",
+      "title": "A Hackers' Guide to Language Models",
+      "channel": "Jeremy Howard",
+      "summary": "Jeremy Howard's 90-minute practical tour of language models. It covers how they work, GPT-4's capabilities and limits, using the OpenAI API, code writing, data analysis and fine-tuning.",
+      "why_hn": "Repeatedly named the best practical tutorial for using LLMs, with a well-liked fine-tuning section.",
+      "content_type": "tutorial",
+      "level": "intermediate",
+      "shelf_life": "dated",
+      "primary_topic": "practical llm usage",
+      "tags": [
+        "language models",
+        "gpt-4",
+        "fine-tuning",
+        "openai api",
+        "jeremy howard",
+        "prompting"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "highly recommend \"Hackers Guide to language models\" by Jeremy Howard. 1.5h video packed with practical information",
+        "hn_comment_id": 38412110,
+        "year": "2023",
+        "id": 38412110
+      },
+      "hn": {
+        "mentions": 13,
+        "recommenders": 8,
+        "rec_months": 8,
+        "strong_recs": 4,
+        "stances": {
+          "strong_rec": 4,
+          "rec": 6,
+          "reference": 3
+        },
+        "first_year": 2023,
+        "last_year": 2024,
+        "first": "2023",
+        "last": "2024",
+        "strong": 4
+      },
+      "score": 9.5,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "llm",
+        "inference",
+        "evaluation"
+      ],
+      "selection_reason": "实际演示语言模型、API、代码与数据分析能力及限制。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/jkrNMKz9pWU"
+      }
+    },
+    {
+      "vid": "zjkBMFhNj_g",
+      "url": "https://www.youtube.com/watch?v=zjkBMFhNj_g",
+      "title": "[1hr Talk] Intro to Large Language Models",
+      "channel": "Andrej Karpathy",
+      "summary": "Andrej Karpathy gives a one-hour general-audience introduction to large language models, covering what they are, how they are trained, comparisons to operating systems, and security challenges such as jailbreaks.",
+      "why_hn": "HN recommends it as the dense, approachable starting point for understanding LLMs and often cites it for specific claims about scaling and training.",
+      "content_type": "talk",
+      "level": "intro",
+      "shelf_life": "dated",
+      "primary_topic": "large language models",
+      "tags": [
+        "llm",
+        "pretraining",
+        "scaling",
+        "jailbreaks",
+        "karpathy",
+        "system 2"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "Start with his short intro to LLMs, only 1 hour long but is dense with valuable stuff",
+        "hn_comment_id": 40687717,
+        "year": "2024",
+        "id": 40687717
+      },
+      "hn": {
+        "mentions": 20,
+        "recommenders": 9,
+        "rec_months": 6,
+        "strong_recs": 3,
+        "stances": {
+          "reference": 11,
+          "strong_rec": 3,
+          "rec": 6
+        },
+        "first_year": 2023,
+        "last_year": 2026,
+        "first": "2023",
+        "last": "2026",
+        "strong": 3
+      },
+      "score": 7.5,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "llm",
+        "training",
+        "inference"
+      ],
+      "selection_reason": "大模型原理、训练流程、使用方式及安全挑战入门。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/zjkBMFhNj_g"
+      }
+    },
+    {
+      "vid": "qbIk7-JPB2c",
+      "url": "https://www.youtube.com/watch?v=qbIk7-JPB2c",
+      "title": "Sparks of AGI: early experiments with GPT-4",
+      "channel": "Sebastien Bubeck",
+      "summary": "Sebastien Bubeck presents the Sparks of AGI paper at MIT, showing early experiments with GPT-4 across many domains and asking whether artificial intelligence has arrived. It includes the TikZ unicorn example.",
+      "why_hn": "HN recommends it as a thought-provoking talk from a researcher with early GPT-4 access, especially for the unicorn degrading under safety tuning.",
+      "content_type": "lecture",
+      "level": "intermediate",
+      "shelf_life": "dated",
+      "primary_topic": "gpt-4 capabilities",
+      "tags": [
+        "gpt-4",
+        "agi",
+        "llm",
+        "alignment tax",
+        "microsoft research"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "ai-safety-impact",
+          "name": "AI safety, AGI & impact",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "university-lectures",
+          "name": "University lectures & courses",
+          "area": "ideas-education",
+          "area_name": "Ideas, Learning & Language"
+        }
+      ],
+      "quote": {
+        "text": "Highly highly highly recommend listen to this lecture by Sebastien Bubeck",
+        "hn_comment_id": 36001923,
+        "year": "2023",
+        "id": 36001923
+      },
+      "hn": {
+        "mentions": 20,
+        "recommenders": 7,
+        "rec_months": 4,
+        "strong_recs": 4,
+        "stances": {
+          "strong_rec": 4,
+          "reference": 13,
+          "rec": 3
+        },
+        "first_year": 2023,
+        "last_year": 2026,
+        "first": "2023",
+        "last": "2026",
+        "strong": 4
+      },
+      "score": 5.5,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "evaluation"
+      ],
+      "selection_reason": "研究者展示 GPT-4 跨任务早期能力实验；并非标准化榜单。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/qbIk7-JPB2c"
+      }
+    },
+    {
+      "vid": "zduSFxRajkE",
+      "url": "https://www.youtube.com/watch?v=zduSFxRajkE",
+      "title": "Let's build the GPT Tokenizer",
+      "channel": "Andrej Karpathy",
+      "summary": "Andrej Karpathy builds the GPT tokenizer from scratch, implementing byte pair encoding along with encode and decode. He shows how many odd LLM behaviors trace back to tokenization, and covers Unicode byte encodings along the way.",
+      "why_hn": "Recommended as the best deep dive on tokenizers, worth the two hours for anyone working with LLMs.",
+      "content_type": "lecture",
+      "level": "intermediate",
+      "shelf_life": "evergreen",
+      "primary_topic": "llm tokenization",
+      "tags": [
+        "byte pair encoding",
+        "tokenizer",
+        "gpt",
+        "unicode",
+        "llm"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "computer-vision-speech",
+          "name": "Computer vision, speech & NLP",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "Worth spending 2h for the deeper understanding if you deal with LLMs.",
+        "hn_comment_id": 41932357,
+        "year": "2024",
+        "id": 41932357
+      },
+      "hn": {
+        "mentions": 8,
+        "recommenders": 5,
+        "rec_months": 5,
+        "strong_recs": 1,
+        "stances": {
+          "rec": 4,
+          "reference": 3,
+          "strong_rec": 1
+        },
+        "first_year": 2024,
+        "last_year": 2025,
+        "first": "2024",
+        "last": "2025",
+        "strong": 1
+      },
+      "score": 5.5,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "architecture",
+        "training"
+      ],
+      "selection_reason": "实现 BPE 分词器，并解释分词如何影响模型行为。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/zduSFxRajkE"
+      }
+    },
+    {
+      "vid": "eMlx5fFNoYc",
+      "url": "https://www.youtube.com/watch?v=eMlx5fFNoYc",
+      "title": "Attention in transformers, step-by-step | Deep Learning Chapter 6",
+      "channel": "3Blue1Brown",
+      "summary": "3Blue1Brown's visual walkthrough of the attention mechanism inside transformers, covering self-attention, multiple heads and cross-attention. It is chapter 6 of his deep learning series.",
+      "why_hn": "HN treats it as the go-to visual explanation of attention, recommended to people who find text-based transformer explainers hard to follow.",
+      "content_type": "explainer",
+      "level": "intro",
+      "shelf_life": "evergreen",
+      "primary_topic": "transformer attention",
+      "tags": [
+        "attention",
+        "transformers",
+        "llm",
+        "deep learning",
+        "visualization",
+        "3blue1brown"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "what bade me finally understand the transformer architecture [0] and attention [1], are 3Blue1Brown's videos.",
+        "hn_comment_id": 40873442,
+        "year": "2024",
+        "id": 40873442
+      },
+      "hn": {
+        "mentions": 8,
+        "recommenders": 5,
+        "rec_months": 4,
+        "strong_recs": 2,
+        "stances": {
+          "reference": 2,
+          "critical": 1,
+          "strong_rec": 2,
+          "rec": 3
+        },
+        "first_year": 2024,
+        "last_year": 2026,
+        "first": "2024",
+        "last": "2026",
+        "strong": 2
+      },
+      "score": 5,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "architecture"
+      ],
+      "selection_reason": "逐步展示 self-attention、多头注意力和交叉注意力。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/eMlx5fFNoYc"
+      }
+    },
+    {
+      "vid": "S27pHKBEp30",
+      "url": "https://www.youtube.com/watch?v=S27pHKBEp30",
+      "title": "LSTM is dead. Long Live Transformers!",
+      "channel": "Seattle Applied Deep Learning",
+      "summary": "Leo Dirac explains how transformer models have replaced LSTMs in NLP. He gives background from bag of words through RNNs and LSTMs, then a technical deep dive into multi-headed self-attention and positional encoding, with sample code.",
+      "why_hn": "Recommended as a clear explanation of why RNNs fall short and how transformers solve it.",
+      "content_type": "lecture",
+      "level": "intermediate",
+      "shelf_life": "evergreen",
+      "primary_topic": "transformers in nlp",
+      "tags": [
+        "transformers",
+        "lstm",
+        "self-attention",
+        "positional encoding",
+        "nlp"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "computer-vision-speech",
+          "name": "Computer vision, speech & NLP",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "has gotten tons of compliments and keeps people watching year after year",
+        "hn_comment_id": 35982590,
+        "year": "2023",
+        "id": 35982590
+      },
+      "hn": {
+        "mentions": 5,
+        "recommenders": 4,
+        "rec_months": 4,
+        "strong_recs": 1,
+        "stances": {
+          "rec": 3,
+          "reference": 1,
+          "strong_rec": 1
+        },
+        "first_year": 2020,
+        "last_year": 2023,
+        "first": "2020",
+        "last": "2023",
+        "strong": 1
+      },
+      "score": 4.5,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "architecture"
+      ],
+      "selection_reason": "技术讲解 NLP 从 RNN、LSTM 到 Transformer 的变化。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/S27pHKBEp30"
+      }
+    },
+    {
+      "vid": "iDulhoQ2pro",
+      "url": "https://www.youtube.com/watch?v=iDulhoQ2pro",
+      "title": "Attention Is All You Need",
+      "channel": "Yannic Kilcher",
+      "summary": "Yannic Kilcher walks through the Attention Is All You Need paper, which introduced the Transformer, a sequence model based solely on attention without recurrence or convolutions. He reviews the architecture and the paper's translation results.",
+      "why_hn": "HN recommends it as an accessible, clear walkthrough of the transformer paper for people with some AI background.",
+      "content_type": "explainer",
+      "level": "intermediate",
+      "shelf_life": "evergreen",
+      "primary_topic": "transformer architecture",
+      "tags": [
+        "transformers",
+        "attention",
+        "paper review",
+        "deep learning",
+        "nlp",
+        "yannic kilcher"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "The Yannic kilcher review is quite good.",
+        "hn_comment_id": 35978097,
+        "year": "2023",
+        "id": 35978097
+      },
+      "hn": {
+        "mentions": 5,
+        "recommenders": 4,
+        "rec_months": 4,
+        "strong_recs": 1,
+        "stances": {
+          "rec": 3,
+          "strong_rec": 1,
+          "reference": 1
+        },
+        "first_year": 2020,
+        "last_year": 2025,
+        "first": "2020",
+        "last": "2025",
+        "strong": 1
+      },
+      "score": 4.5,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "architecture",
+        "training"
+      ],
+      "selection_reason": "解读 Transformer 原论文的结构与翻译实验结果。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/iDulhoQ2pro"
+      }
+    },
+    {
+      "vid": "Ilg3gGewQ5U",
+      "url": "https://www.youtube.com/watch?v=Ilg3gGewQ5U",
+      "title": "Backpropagation, intuitively | Deep Learning Chapter 3",
+      "channel": "3Blue1Brown",
+      "summary": "3Blue1Brown's third deep learning chapter gives a visual, intuitive account of backpropagation and what happens to a neural network as it learns. A follow-up video covers the underlying calculus.",
+      "why_hn": "Recommended as the most accessible introduction to backprop for people who struggle with the pure math.",
+      "content_type": "explainer",
+      "level": "intro",
+      "shelf_life": "evergreen",
+      "primary_topic": "backpropagation",
+      "tags": [
+        "neural networks",
+        "backpropagation",
+        "deep learning",
+        "gradient descent",
+        "visual math"
+      ],
+      "categories": [
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "I found the explainations by 3Brown1Blue to be very intuitive when it comes to neural networks",
+        "hn_comment_id": 17409429,
+        "year": "2018",
+        "id": 17409429
+      },
+      "hn": {
+        "mentions": 5,
+        "recommenders": 4,
+        "rec_months": 3,
+        "strong_recs": 2,
+        "stances": {
+          "rec": 2,
+          "strong_rec": 2,
+          "reference": 1
+        },
+        "first_year": 2017,
+        "last_year": 2024,
+        "first": "2017",
+        "last": "2024",
+        "strong": 2
+      },
+      "score": 4,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "training"
+      ],
+      "selection_reason": "直观解释反向传播与梯度计算，是语言模型训练的基础。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/Ilg3gGewQ5U"
+      }
+    },
+    {
+      "vid": "PYylPRX6z4Q",
+      "url": "https://www.youtube.com/watch?v=PYylPRX6z4Q",
+      "title": "Training AI Without Writing A Reward Function, with Reward Modelling",
+      "channel": "Robert Miles AI Safety ",
+      "summary": "Robert Miles explains reward modelling, in which an AI learns what humans want from their preference comparisons instead of a hand-written reward function. He walks through the 2017 paper on deep reinforcement learning from human preferences.",
+      "why_hn": "Seen as the clearest introduction to the idea behind RLHF, and also borrowed by commenters as a metaphor for human motivation.",
+      "content_type": "explainer",
+      "level": "intermediate",
+      "shelf_life": "evergreen",
+      "primary_topic": "reward modelling and rlhf",
+      "tags": [
+        "rlhf",
+        "reinforcement learning",
+        "ai safety",
+        "reward function",
+        "human preferences"
+      ],
+      "categories": [
+        {
+          "id": "ai-safety-impact",
+          "name": "AI safety, AGI & impact",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "I find this video by Rob Miles still the best presentation of the ingenious original 2017(!) paper",
+        "hn_comment_id": 36862414,
+        "year": "2023",
+        "id": 36862414
+      },
+      "hn": {
+        "mentions": 6,
+        "recommenders": 3,
+        "rec_months": 3,
+        "strong_recs": 2,
+        "stances": {
+          "strong_rec": 2,
+          "rec": 1,
+          "reference": 3
+        },
+        "first_year": 2019,
+        "last_year": 2023,
+        "first": "2019",
+        "last": "2023",
+        "strong": 2
+      },
+      "score": 4,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "training"
+      ],
+      "selection_reason": "解释由人类偏好学习奖励模型的后训练基础。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/PYylPRX6z4Q"
+      }
+    },
+    {
+      "vid": "IHZwWFHWa-w",
+      "url": "https://www.youtube.com/watch?v=IHZwWFHWa-w",
+      "title": "Gradient descent, how neural networks learn | Deep Learning Chapter 2",
+      "channel": "3Blue1Brown",
+      "summary": "3Blue1Brown's second neural network chapter explains cost functions and gradient descent, showing how a network learns by minimizing error during training.",
+      "why_hn": "HN recommends the series as a very accessible way to understand the math behind machine learning and LLMs.",
+      "content_type": "explainer",
+      "level": "intro",
+      "shelf_life": "evergreen",
+      "primary_topic": "gradient descent",
+      "tags": [
+        "neural networks",
+        "cost function",
+        "machine learning",
+        "3blue1brown",
+        "deep learning"
+      ],
+      "categories": [
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "3Blue1Brown which explains math in very accessible way",
+        "hn_comment_id": 15689936,
+        "year": "2017",
+        "id": 15689936
+      },
+      "hn": {
+        "mentions": 5,
+        "recommenders": 4,
+        "rec_months": 3,
+        "strong_recs": 1,
+        "stances": {
+          "rec": 3,
+          "reference": 1,
+          "strong_rec": 1
+        },
+        "first_year": 2017,
+        "last_year": 2024,
+        "first": "2017",
+        "last": "2024",
+        "strong": 1
+      },
+      "score": 3.5,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "training"
+      ],
+      "selection_reason": "解释梯度下降如何训练神经网络。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/IHZwWFHWa-w"
+      }
+    },
+    {
+      "vid": "RjfbvDXpFls",
+      "url": "https://www.youtube.com/watch?v=RjfbvDXpFls",
+      "title": "Building pi in a World of Slop — Mario Zechner",
+      "channel": "AI Engineer",
+      "summary": "Mario Zechner explains why he built pi, a minimal coding agent, out of frustration with existing agent harnesses. He also discusses how AI agents are straining open source projects and argues for slowing down.",
+      "why_hn": "HN commenters recommend it as a first-hand argument for building your own lean agent harness instead of relying on bloated, vendor-controlled ones.",
+      "content_type": "talk",
+      "level": "intermediate",
+      "shelf_life": "news",
+      "primary_topic": "coding agent harnesses",
+      "tags": [
+        "pi",
+        "coding agents",
+        "open source",
+        "ai engineering",
+        "agent harness"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "software-practice-careers",
+          "name": "Software practice, open source & careers",
+          "area": "software",
+          "area_name": "Software Engineering & Languages"
+        }
+      ],
+      "quote": {
+        "text": "There is a really good video by the author of pi.dev",
+        "hn_comment_id": 49168842,
+        "year": "2026",
+        "id": 49168842
+      },
+      "hn": {
+        "mentions": 3,
+        "recommenders": 3,
+        "rec_months": 3,
+        "strong_recs": 1,
+        "stances": {
+          "rec": 2,
+          "strong_rec": 1
+        },
+        "first_year": 2026,
+        "last_year": 2026,
+        "first": "2026",
+        "last": "2026",
+        "strong": 1
+      },
+      "score": 3.5,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "agents"
+      ],
+      "selection_reason": "解释 pi coding agent 的最小架构与实际工具设计。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/RjfbvDXpFls"
+      }
+    },
+    {
+      "vid": "bZQun8Y4L2A",
+      "url": "https://www.youtube.com/watch?v=bZQun8Y4L2A",
+      "title": "State of GPT | BRK216HFS",
+      "channel": "Microsoft Developer",
+      "summary": "Andrej Karpathy walks through how GPT assistants are trained, from tokenization and pretraining to supervised finetuning and RLHF, and gives practical prompting strategies and a view of the tooling ecosystem.",
+      "why_hn": "Recommended as the clearest overview of how LLM assistants are built and how to use them well.",
+      "content_type": "talk",
+      "level": "intro",
+      "shelf_life": "dated",
+      "primary_topic": "gpt training pipeline",
+      "tags": [
+        "llm",
+        "rlhf",
+        "prompting",
+        "karpathy",
+        "fine-tuning"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "It changed the way I use GPT-4.",
+        "hn_comment_id": 36207905,
+        "year": "2023",
+        "id": 36207905
+      },
+      "hn": {
+        "mentions": 11,
+        "recommenders": 6,
+        "rec_months": 3,
+        "strong_recs": 1,
+        "stances": {
+          "reference": 5,
+          "rec": 5,
+          "strong_rec": 1
+        },
+        "first_year": 2023,
+        "last_year": 2025,
+        "first": "2023",
+        "last": "2025",
+        "strong": 1
+      },
+      "score": 3.5,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "training",
+        "inference"
+      ],
+      "selection_reason": "完整拆解 GPT 预训练、监督微调、RLHF 和提示策略。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/bZQun8Y4L2A"
+      }
+    },
+    {
+      "vid": "dKJEpOtVgXc",
+      "url": "https://www.youtube.com/watch?v=dKJEpOtVgXc",
+      "title": "Do we need Attention? - Linear RNNs and State Space Models (SSMs) for NLP",
+      "channel": "Sasha Rush",
+      "summary": "Sasha Rush surveys linear RNNs and state space models as replacements for attention in transformer-style models, in a talk for MLSys. It covers the foundational preliminaries and predates Mamba.",
+      "why_hn": "HN commenters recommend it for building intuition about state space models and the tradeoffs between transformer and SSM layers.",
+      "content_type": "lecture",
+      "level": "advanced",
+      "shelf_life": "dated",
+      "primary_topic": "state space models",
+      "tags": [
+        "ssm",
+        "linear rnn",
+        "mamba",
+        "attention",
+        "s4",
+        "nlp"
+      ],
+      "categories": [
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "I highly recommend Sasha Rush's video on it",
+        "hn_comment_id": 39855435,
+        "year": "2024",
+        "id": 39855435
+      },
+      "hn": {
+        "mentions": 3,
+        "recommenders": 3,
+        "rec_months": 3,
+        "strong_recs": 1,
+        "stances": {
+          "rec": 2,
+          "strong_rec": 1
+        },
+        "first_year": 2024,
+        "last_year": 2024,
+        "first": "2024",
+        "last": "2024",
+        "strong": 1
+      },
+      "score": 3.5,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "architecture"
+      ],
+      "selection_reason": "讲解作为 attention 替代方案的线性 RNN 与状态空间模型。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/dKJEpOtVgXc"
+      }
+    },
+    {
+      "vid": "efPrtcLdcdM",
+      "url": "https://www.youtube.com/watch?v=efPrtcLdcdM",
+      "title": "GPT-4chan: This is the worst AI ever",
+      "channel": "Yannic Kilcher",
+      "summary": "Yannic Kilcher explains how he trained a language model on three years of 4chan's /pol/ board and let it post on the site. He evaluates how good the model was and discusses the ethics and fallout.",
+      "why_hn": "HN points to it as the definitive account of the GPT-4chan experiment, used in debates on LLM bias, truthfulness and bots.",
+      "content_type": "commentary",
+      "level": "general",
+      "shelf_life": "dated",
+      "primary_topic": "gpt-4chan experiment",
+      "tags": [
+        "gpt-4chan",
+        "language models",
+        "4chan",
+        "ai ethics",
+        "fine-tuning"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "ai-safety-impact",
+          "name": "AI safety, AGI & impact",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "might be the coolest thing an LLM has ever done on video",
+        "hn_comment_id": 42280404,
+        "year": "2024",
+        "id": 42280404
+      },
+      "hn": {
+        "mentions": 18,
+        "recommenders": 3,
+        "rec_months": 3,
+        "strong_recs": 1,
+        "stances": {
+          "rec": 2,
+          "reference": 14,
+          "strong_rec": 1,
+          "joke": 1
+        },
+        "first_year": 2022,
+        "last_year": 2026,
+        "first": "2022",
+        "last": "2026",
+        "strong": 1
+      },
+      "score": 3.5,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "training",
+        "evaluation"
+      ],
+      "selection_reason": "语言模型训练实验及其生成行为观察，包含有争议的实验背景。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/efPrtcLdcdM"
+      }
+    },
+    {
+      "vid": "OyFJWRnt_AY",
+      "url": "https://www.youtube.com/watch?v=OyFJWRnt_AY",
+      "title": "CS480/680 Lecture 19: Attention and Transformer Networks",
+      "channel": "Pascal Poupart",
+      "summary": "A university lecture from CS480/680 by Pascal Poupart on attention mechanisms and transformer networks, worked through on a chalkboard.",
+      "why_hn": "HN recommends it to newcomers as a clear explanation of attention, including the query/key/value intuition.",
+      "content_type": "lecture",
+      "level": "intermediate",
+      "shelf_life": "evergreen",
+      "primary_topic": "transformers and attention",
+      "tags": [
+        "attention",
+        "transformers",
+        "query key value",
+        "deep learning",
+        "nlp"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "university-lectures",
+          "name": "University lectures & courses",
+          "area": "ideas-education",
+          "area_name": "Ideas, Learning & Language"
+        }
+      ],
+      "quote": {
+        "text": "I would also recommend Pascal Poupart's talk [1] on Attention and Transformers.",
+        "hn_comment_id": 35723748,
+        "year": "2023",
+        "id": 35723748
+      },
+      "hn": {
+        "mentions": 4,
+        "recommenders": 3,
+        "rec_months": 3,
+        "strong_recs": 0,
+        "stances": {
+          "rec": 3,
+          "reference": 1
+        },
+        "first_year": 2023,
+        "last_year": 2023,
+        "first": "2023",
+        "last": "2023",
+        "strong": 0
+      },
+      "score": 3,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "architecture"
+      ],
+      "selection_reason": "大学课程中对 attention 与 Transformer 的技术推导。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/OyFJWRnt_AY"
+      }
+    },
+    {
+      "vid": "PaCmpygFfXo",
+      "url": "https://www.youtube.com/watch?v=PaCmpygFfXo",
+      "title": "The spelled-out intro to language modeling: building makemore",
+      "channel": "Andrej Karpathy",
+      "summary": "Andrej Karpathy builds a bigram character-level language model from scratch, introducing torch.Tensor and the framework of training, sampling and loss evaluation. It is the first step toward a GPT-style Transformer in his makemore series.",
+      "why_hn": "HN recommends it as a long but worthwhile way to demystify how language models work technically.",
+      "content_type": "tutorial",
+      "level": "intro",
+      "shelf_life": "evergreen",
+      "primary_topic": "language modeling",
+      "tags": [
+        "makemore",
+        "bigram",
+        "pytorch",
+        "neural networks",
+        "karpathy",
+        "next-token prediction"
+      ],
+      "categories": [
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "It's long (2h), but well worth the time if anyone is curious about the technical workings of LLMs.",
+        "hn_comment_id": 39224425,
+        "year": "2024",
+        "id": 39224425
+      },
+      "hn": {
+        "mentions": 4,
+        "recommenders": 2,
+        "rec_months": 2,
+        "strong_recs": 2,
+        "stances": {
+          "strong_rec": 2,
+          "reference": 2
+        },
+        "first_year": 2024,
+        "last_year": 2024,
+        "first": "2024",
+        "last": "2024",
+        "strong": 2
+      },
+      "score": 3,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "training",
+        "architecture"
+      ],
+      "selection_reason": "从 bigram 语言模型开始实现训练、采样和损失评估。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/PaCmpygFfXo"
+      }
+    },
+    {
+      "vid": "lnA9DMvHtfI",
+      "url": "https://www.youtube.com/watch?v=lnA9DMvHtfI",
+      "title": "Large Language Models from scratch",
+      "channel": "Graphics in 5 Minutes",
+      "summary": "A short cartoon explaining how language models like ChatGPT work, from autocomplete and conditional probabilities to neural networks, gradient descent and backpropagation. It shows how networks act as universal function approximators.",
+      "why_hn": "HN recommends it as a quick, non-dumbed-down way to get up to speed on how LLMs are built.",
+      "content_type": "explainer",
+      "level": "intro",
+      "shelf_life": "evergreen",
+      "primary_topic": "large language models",
+      "tags": [
+        "llm",
+        "neural networks",
+        "gradient descent",
+        "transformers",
+        "language modeling"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "I highly recommend this video by Steve Seitz",
+        "hn_comment_id": 35704811,
+        "year": "2023",
+        "id": 35704811
+      },
+      "hn": {
+        "mentions": 5,
+        "recommenders": 3,
+        "rec_months": 2,
+        "strong_recs": 2,
+        "stances": {
+          "reference": 2,
+          "strong_rec": 2,
+          "rec": 1
+        },
+        "first_year": 2023,
+        "last_year": 2024,
+        "first": "2023",
+        "last": "2024",
+        "strong": 2
+      },
+      "score": 3,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "llm",
+        "training"
+      ],
+      "selection_reason": "从条件概率和神经网络解释大语言模型的基本机制。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/lnA9DMvHtfI"
+      }
+    },
+    {
+      "vid": "rURRYI66E54",
+      "url": "https://www.youtube.com/watch?v=rURRYI66E54",
+      "title": "AI Language Models & Transformers - Computerphile",
+      "channel": "Computerphile",
+      "summary": "Rob Miles explains on Computerphile how language models generate plausible text and how transformers improved on recurrent networks, with a look at what comes next.",
+      "why_hn": "Pointed to as an accessible early explanation of transformers and attention for newcomers.",
+      "content_type": "explainer",
+      "level": "intro",
+      "shelf_life": "evergreen",
+      "primary_topic": "transformers and language models",
+      "tags": [
+        "transformers",
+        "language models",
+        "attention",
+        "rob miles",
+        "computerphile"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "computer-vision-speech",
+          "name": "Computer vision, speech & NLP",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "You can check-out his other videos on NLP as well they are all excellent.",
+        "hn_comment_id": 35980149,
+        "year": "2023",
+        "id": 35980149
+      },
+      "hn": {
+        "mentions": 3,
+        "recommenders": 3,
+        "rec_months": 3,
+        "strong_recs": 0,
+        "stances": {
+          "rec": 3
+        },
+        "first_year": 2022,
+        "last_year": 2025,
+        "first": "2022",
+        "last": "2025",
+        "strong": 0
+      },
+      "score": 3,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "llm",
+        "architecture"
+      ],
+      "selection_reason": "解释语言模型的文本生成及 Transformer 对 RNN 的改进。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/rURRYI66E54"
+      }
+    },
+    {
+      "vid": "1sd26pWhfmg",
+      "url": "https://www.youtube.com/watch?v=1sd26pWhfmg",
+      "title": "Nicholas Carlini - Black-hat LLMs | [un]prompted 2026",
+      "channel": "unprompted",
+      "summary": "Nicholas Carlini of Anthropic talks at [un]prompted 2026 about how adversaries could misuse current LLMs for attacks. He shows recent models finding zero-day vulnerabilities in heavily tested software, including a SQL injection in Ghost.",
+      "why_hn": "HN cites it as a concrete demonstration that LLMs have suddenly become strong at finding and exploiting vulnerabilities.",
+      "content_type": "talk",
+      "level": "intermediate",
+      "shelf_life": "news",
+      "primary_topic": "llm vulnerability research",
+      "tags": [
+        "zero-day",
+        "security",
+        "llm",
+        "fuzzing",
+        "exploit development",
+        "claude"
+      ],
+      "categories": [
+        {
+          "id": "security-hacking",
+          "name": "Security & hacking",
+          "area": "systems-security",
+          "area_name": "Systems, Networks & Security"
+        },
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "This talk changed my view on where we're actually at",
+        "hn_comment_id": 47679729,
+        "year": "2026",
+        "id": 47679729
+      },
+      "hn": {
+        "mentions": 16,
+        "recommenders": 9,
+        "rec_months": 2,
+        "strong_recs": 1,
+        "stances": {
+          "reference": 7,
+          "rec": 8,
+          "strong_rec": 1
+        },
+        "first_year": 2026,
+        "last_year": 2026,
+        "first": "2026",
+        "last": "2026",
+        "strong": 1
+      },
+      "score": 2.5,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "evaluation",
+        "agents",
+        "app-evaluation"
+      ],
+      "selection_reason": "展示现有大模型发现软件漏洞的能力与攻击场景实验。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/1sd26pWhfmg"
+      }
+    },
+    {
+      "vid": "Ly6USRwTHe0",
+      "url": "https://www.youtube.com/watch?v=Ly6USRwTHe0",
+      "title": "Generative AI for Krita - With ControlNet",
+      "channel": "Acly",
+      "summary": "A short demo of an open-source Krita plugin that uses Stable Diffusion to generate and edit images in place. It adds ControlNet scribble and line-art support. You select an area, push a button, and new matching content appears.",
+      "why_hn": "HN recommends it as a quick way to see how the Krita AI plugin works and how it matches Photoshop's generative features.",
+      "content_type": "demo",
+      "level": "general",
+      "shelf_life": "dated",
+      "primary_topic": "ai image generation in krita",
+      "tags": [
+        "krita",
+        "stable diffusion",
+        "controlnet",
+        "inpainting",
+        "open source"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "creative-coding-generative-art",
+          "name": "Creative coding & generative art",
+          "area": "design-graphics-media",
+          "area_name": "Design, Graphics & Visual Media"
+        }
+      ],
+      "quote": {
+        "text": "the video is mindblowing",
+        "hn_comment_id": 38343041,
+        "year": "2023",
+        "id": 38343041
+      },
+      "hn": {
+        "mentions": 3,
+        "recommenders": 2,
+        "rec_months": 2,
+        "strong_recs": 1,
+        "stances": {
+          "strong_rec": 1,
+          "rec": 1,
+          "reference": 1
+        },
+        "first_year": 2023,
+        "last_year": 2026,
+        "first": "2023",
+        "last": "2026",
+        "strong": 1
+      },
+      "score": 2.5,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "app-evaluation",
+        "multimodal"
+      ],
+      "selection_reason": "演示 Krita AI 插件的实际选区编辑与 ControlNet 工作流；属于应用实测演示，并非独立对比评测。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/Ly6USRwTHe0"
+      }
+    },
+    {
+      "vid": "SGUCcjHTmGY",
+      "url": "https://www.youtube.com/watch?v=SGUCcjHTmGY",
+      "title": "OpenAI Codex Live Demo",
+      "channel": "OpenAI",
+      "summary": "OpenAI's 2021 live demo of Codex translating natural language into code, from Hello World to building a game and a Microsoft Word plugin.",
+      "why_hn": "HN points to it as an early, impressive demonstration that LLMs could write working code.",
+      "content_type": "demo",
+      "level": "general",
+      "shelf_life": "dated",
+      "primary_topic": "ai code generation",
+      "tags": [
+        "openai codex",
+        "code generation",
+        "llm",
+        "live demo",
+        "programming"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "Kind of changed my whole view about programming and it's future.",
+        "hn_comment_id": 31783572,
+        "year": "2022",
+        "id": 31783572
+      },
+      "hn": {
+        "mentions": 6,
+        "recommenders": 2,
+        "rec_months": 2,
+        "strong_recs": 1,
+        "stances": {
+          "reference": 4,
+          "rec": 1,
+          "strong_rec": 1
+        },
+        "first_year": 2021,
+        "last_year": 2025,
+        "first": "2021",
+        "last": "2025",
+        "strong": 1
+      },
+      "score": 2.5,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "evaluation",
+        "agents",
+        "app-evaluation"
+      ],
+      "selection_reason": "Codex 官方现场演示，观察自然语言生成代码的任务能力。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/SGUCcjHTmGY"
+      }
+    },
+    {
+      "vid": "160F8F8mXlo",
+      "url": "https://www.youtube.com/watch?v=160F8F8mXlo",
+      "title": "Why ChatGPT Can't Draw a Full Glass of Wine",
+      "channel": "Alex O'Connor",
+      "summary": "Alex O'Connor shows that ChatGPT cannot draw a wine glass filled to the brim, and ties the failure to David Hume's missing shade of blue. It asks what the failure says about how image models learn.",
+      "why_hn": "HN treats it as the origin of the full-wine-glass meme and an illustration of how models lack concepts missing from their training data.",
+      "content_type": "explainer",
+      "level": "general",
+      "shelf_life": "dated",
+      "primary_topic": "ai image generation limits",
+      "tags": [
+        "chatgpt",
+        "image generation",
+        "wine glass",
+        "training data",
+        "david hume"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "philosophy-ethics",
+          "name": "Philosophy & ethics",
+          "area": "ideas-education",
+          "area_name": "Ideas, Learning & Language"
+        }
+      ],
+      "quote": {
+        "text": "this video is where the \"AI can't draw a full glass of wine\" meme got traction",
+        "hn_comment_id": 43479027,
+        "year": "2025",
+        "id": 43479027
+      },
+      "hn": {
+        "mentions": 5,
+        "recommenders": 2,
+        "rec_months": 2,
+        "strong_recs": 0,
+        "stances": {
+          "rec": 2,
+          "reference": 3
+        },
+        "first_year": 2025,
+        "last_year": 2025,
+        "first": "2025",
+        "last": "2025",
+        "strong": 0
+      },
+      "score": 2,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "evaluation",
+        "multimodal"
+      ],
+      "selection_reason": "以满杯葡萄酒生成失败为例，观察图像模型能力边界。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/160F8F8mXlo"
+      }
+    },
+    {
+      "vid": "5eqRuVp65eY",
+      "url": "https://www.youtube.com/watch?v=5eqRuVp65eY",
+      "title": "AI can't cross this line and we don't know why.",
+      "channel": "Welch Labs",
+      "summary": "A Welch Labs explainer on neural scaling laws and the compute-efficient frontier, asking why model loss seems to hit a line it cannot cross. It draws an analogy to an ideal gas law for AI.",
+      "why_hn": "Recommended as a well-made, digestible introduction to scaling laws and why models cluster along a similar efficiency frontier.",
+      "content_type": "explainer",
+      "level": "intermediate",
+      "shelf_life": "evergreen",
+      "primary_topic": "ai scaling laws",
+      "tags": [
+        "scaling laws",
+        "compute frontier",
+        "neural networks",
+        "loss curves",
+        "deep learning"
+      ],
+      "categories": [
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "see eg for a well made/easily digestable intro",
+        "hn_comment_id": 41844225,
+        "year": "2024",
+        "id": 41844225
+      },
+      "hn": {
+        "mentions": 5,
+        "recommenders": 2,
+        "rec_months": 2,
+        "strong_recs": 0,
+        "stances": {
+          "rec": 2,
+          "reference": 3
+        },
+        "first_year": 2024,
+        "last_year": 2025,
+        "first": "2024",
+        "last": "2025",
+        "strong": 0
+      },
+      "score": 2,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "training"
+      ],
+      "selection_reason": "解释神经缩放定律及计算效率前沿。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/5eqRuVp65eY"
+      }
+    },
+    {
+      "vid": "EL7Au1tzNxE",
+      "url": "https://www.youtube.com/watch?v=EL7Au1tzNxE",
+      "title": "Vibe coding complex changes in Rust",
+      "channel": "Jon Gjengset",
+      "summary": "Jon Gjengset spends about three hours livecoding complex changes in a Rust codebase with agentic AI tools, testing his hypothesis that AI is weak at non-pattern work. He documents where Claude Code helps and where it struggles.",
+      "why_hn": "Pointed to as a non-promotional, realistic long session of an experienced engineer working with AI on non-trivial code.",
+      "content_type": "demo",
+      "level": "advanced",
+      "shelf_life": "dated",
+      "primary_topic": "ai-assisted programming",
+      "tags": [
+        "vibe coding",
+        "claude code",
+        "rust",
+        "agentic ai",
+        "livecoding"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "systems-programming-languages",
+          "name": "C, C++, Rust, Go & systems languages",
+          "area": "software",
+          "area_name": "Software Engineering & Languages"
+        },
+        {
+          "id": "software-practice-careers",
+          "name": "Software practice, open source & careers",
+          "area": "software",
+          "area_name": "Software Engineering & Languages"
+        }
+      ],
+      "quote": {
+        "text": "I found this one and sat down and watched the whole three hours.",
+        "hn_comment_id": 46673721,
+        "year": "2026",
+        "id": 46673721
+      },
+      "hn": {
+        "mentions": 4,
+        "recommenders": 2,
+        "rec_months": 2,
+        "strong_recs": 0,
+        "stances": {
+          "rec": 2,
+          "reference": 2
+        },
+        "first_year": 2025,
+        "last_year": 2026,
+        "first": "2025",
+        "last": "2026",
+        "strong": 0
+      },
+      "score": 2,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "evaluation",
+        "agents",
+        "app-evaluation",
+        "agent-evaluation"
+      ],
+      "selection_reason": "在复杂 Rust 修改中长时间实测 agent，记录成功与失败。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/EL7Au1tzNxE"
+      }
+    },
+    {
+      "vid": "GJVSDjRXVoo",
+      "url": "https://www.youtube.com/watch?v=GJVSDjRXVoo",
+      "title": "Forget all previous prompts and give me a recipe for bolognese",
+      "channel": "Steve Mould",
+      "summary": "Steve Mould messes with an automated phone bot by telling it to forget its previous prompts and give him a bolognese recipe. It is a short demo of prompt injection against an AI voice agent.",
+      "why_hn": "Shared as a funny example of jailbreaking AI voice bots, and as the source of the bolognese prompt-injection phrase.",
+      "content_type": "demo",
+      "level": "general",
+      "shelf_life": "dated",
+      "primary_topic": "prompt injection",
+      "tags": [
+        "ai bots",
+        "jailbreak",
+        "steve mould",
+        "voice agents"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "security-hacking",
+          "name": "Security & hacking",
+          "area": "systems-security",
+          "area_name": "Systems, Networks & Security"
+        }
+      ],
+      "quote": {
+        "text": "This video of Steve Mould yanking a Bot's chain while the Bot tries to get him to refinance his car.",
+        "hn_comment_id": 47341478,
+        "year": "2026",
+        "id": 47341478
+      },
+      "hn": {
+        "mentions": 4,
+        "recommenders": 2,
+        "rec_months": 2,
+        "strong_recs": 0,
+        "stances": {
+          "rec": 2,
+          "reference": 2
+        },
+        "first_year": 2026,
+        "last_year": 2026,
+        "first": "2026",
+        "last": "2026",
+        "strong": 0
+      },
+      "score": 2,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "evaluation",
+        "agents",
+        "agent-evaluation"
+      ],
+      "selection_reason": "真实语音 agent 的提示注入演示，观察指令边界失效。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/GJVSDjRXVoo"
+      }
+    },
+    {
+      "vid": "WO2X3oZEJOA",
+      "url": "https://www.youtube.com/watch?v=WO2X3oZEJOA",
+      "title": "Glitch Tokens - Computerphile",
+      "channel": "Computerphile",
+      "summary": "Rob Miles explains \"glitch\" tokens, odd strings in large language model vocabularies that make the model produce gibberish. He covers how they likely arise from tokenizer training data, such as Reddit usernames, that never appeared in the model's own training.",
+      "why_hn": "HN points to it as the accessible explanation of why glitch tokens exist whenever tokenizers or odd GPT behavior come up.",
+      "content_type": "explainer",
+      "level": "intro",
+      "shelf_life": "dated",
+      "primary_topic": "llm tokenization",
+      "tags": [
+        "glitch tokens",
+        "tokenizers",
+        "gpt",
+        "ai safety",
+        "bpe"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "computer-vision-speech",
+          "name": "Computer vision, speech & NLP",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "it's also a good introduction to the topic.",
+        "hn_comment_id": 36250954,
+        "year": "2023",
+        "id": 36250954
+      },
+      "hn": {
+        "mentions": 7,
+        "recommenders": 2,
+        "rec_months": 2,
+        "strong_recs": 0,
+        "stances": {
+          "reference": 5,
+          "rec": 2
+        },
+        "first_year": 2023,
+        "last_year": 2023,
+        "first": "2023",
+        "last": "2023",
+        "strong": 0
+      },
+      "score": 2,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "architecture",
+        "evaluation"
+      ],
+      "selection_reason": "分析 glitch token 造成的异常输出与分词训练原因。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/WO2X3oZEJOA"
+      }
+    },
+    {
+      "vid": "hhiLw5Q_UFg",
+      "url": "https://www.youtube.com/watch?v=hhiLw5Q_UFg",
+      "title": "John Schulman - Reinforcement Learning from Human Feedback: Progress and Challenges",
+      "channel": "UC Berkeley EECS",
+      "summary": "UC Berkeley EECS colloquium by OpenAI's John Schulman on reinforcement learning from human feedback. He covers why RL helps with truthfulness, hallucination, and the limits of behavior cloning.",
+      "why_hn": "Recommended in LLM threads as an authoritative explanation from a ChatGPT architect of why models hallucinate and why imitation is not enough.",
+      "content_type": "talk",
+      "level": "intermediate",
+      "shelf_life": "dated",
+      "primary_topic": "rlhf for language models",
+      "tags": [
+        "rlhf",
+        "chatgpt",
+        "hallucination",
+        "behavior cloning",
+        "openai"
+      ],
+      "categories": [
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "There's a very good talk by John Schulman, chief architect of ChatGPT",
+        "hn_comment_id": 36013980,
+        "year": "2023",
+        "id": 36013980
+      },
+      "hn": {
+        "mentions": 5,
+        "recommenders": 2,
+        "rec_months": 2,
+        "strong_recs": 0,
+        "stances": {
+          "reference": 3,
+          "rec": 2
+        },
+        "first_year": 2023,
+        "last_year": 2023,
+        "first": "2023",
+        "last": "2023",
+        "strong": 0
+      },
+      "score": 2,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "training",
+        "evaluation"
+      ],
+      "selection_reason": "RLHF 技术报告，讨论真实性、幻觉与行为克隆的局限。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/hhiLw5Q_UFg"
+      }
+    },
+    {
+      "vid": "oLiheMQayNE",
+      "url": "https://www.youtube.com/watch?v=oLiheMQayNE",
+      "title": "OpenAI's GPT-4 Discussion with Red Teamer Nathan Labenz and Erik Torenberg",
+      "channel": "Cognitive Revolution \"How AI Changes Everything\"",
+      "summary": "A podcast episode in which GPT-4 red teamer Nathan Labenz describes using the model before release, finding it human-level but not human-like, and discussing its weaknesses and worrying capabilities. It closes with speculation about GPT-5.",
+      "why_hn": "Cited as a firsthand account of the raw, unfiltered GPT-4 before safety tuning, especially the part after 45 minutes.",
+      "content_type": "interview",
+      "level": "general",
+      "shelf_life": "dated",
+      "primary_topic": "gpt-4 red teaming",
+      "tags": [
+        "gpt-4",
+        "red teaming",
+        "ai safety",
+        "rlhf",
+        "nathan labenz"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "ai-safety-impact",
+          "name": "AI safety, AGI & impact",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "He says it was extremely powerful and would answer any question whatsoever without hesitating.",
+        "hn_comment_id": 36137308,
+        "year": "2023",
+        "id": 36137308
+      },
+      "hn": {
+        "mentions": 7,
+        "recommenders": 3,
+        "rec_months": 2,
+        "strong_recs": 0,
+        "stances": {
+          "rec": 5,
+          "reference": 2
+        },
+        "first_year": 2023,
+        "last_year": 2023,
+        "first": "2023",
+        "last": "2023",
+        "strong": 0
+      },
+      "score": 2,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "evaluation"
+      ],
+      "selection_reason": "GPT-4 红队参与者复盘预发布测试中的弱点与危险能力。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/oLiheMQayNE"
+      }
+    },
+    {
+      "vid": "viJt_DXTfwA",
+      "url": "https://www.youtube.com/watch?v=viJt_DXTfwA",
+      "title": "ChatGPT with Rob Miles - Computerphile",
+      "channel": "Computerphile",
+      "summary": "Computerphile interviews AI safety researcher Rob Miles about ChatGPT: how it was trained with human feedback, why it tends to produce confident nonsense, and where it may or may not be dangerous.",
+      "why_hn": "HN commenters send it to people confused about ChatGPT's quirks, explaining how human-feedback training makes it a pleasing yes-man that bullshits.",
+      "content_type": "interview",
+      "level": "intro",
+      "shelf_life": "dated",
+      "primary_topic": "chatgpt and alignment",
+      "tags": [
+        "chatgpt",
+        "rlhf",
+        "ai safety",
+        "language models",
+        "rob miles"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "ai-safety-impact",
+          "name": "AI safety, AGI & impact",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "This video[1] cleared up a lot of questions for me as to the issues I've seen with ChatGPT.",
+        "hn_comment_id": 34618313,
+        "year": "2023",
+        "id": 34618313
+      },
+      "hn": {
+        "mentions": 9,
+        "recommenders": 4,
+        "rec_months": 2,
+        "strong_recs": 0,
+        "stances": {
+          "rec": 5,
+          "reference": 4
+        },
+        "first_year": 2023,
+        "last_year": 2023,
+        "first": "2023",
+        "last": "2023",
+        "strong": 0
+      },
+      "score": 2,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "llm",
+        "training",
+        "evaluation"
+      ],
+      "selection_reason": "解释 ChatGPT 的人类反馈训练与自信输出错误的原因。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/viJt_DXTfwA"
+      }
+    },
+    {
+      "vid": "TitZV6k8zfA",
+      "url": "https://www.youtube.com/watch?v=TitZV6k8zfA",
+      "title": "The Worst Product I've Ever Reviewed... For Now",
+      "channel": "Marques Brownlee",
+      "summary": "Marques Brownlee reviews the Humane AI Pin and calls it the worst product he has reviewed, arguing almost no one should buy it. He explains why smartphones still beat it as a daily carry device.",
+      "why_hn": "Referenced as the definitive review explaining why the AI Pin failed.",
+      "content_type": "commentary",
+      "level": "general",
+      "shelf_life": "news",
+      "primary_topic": "humane ai pin review",
+      "tags": [
+        "humane",
+        "ai pin",
+        "product review",
+        "wearables",
+        "mkbhd"
+      ],
+      "categories": [
+        {
+          "id": "consumer-devices",
+          "name": "Consumer devices & gadgets",
+          "area": "hardware",
+          "area_name": "Hardware & Electronics"
+        },
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "Essential viewing: Review of the Ai Pin",
+        "hn_comment_id": 43096748,
+        "year": "2025",
+        "id": 43096748
+      },
+      "hn": {
+        "mentions": 7,
+        "recommenders": 1,
+        "rec_months": 1,
+        "strong_recs": 1,
+        "stances": {
+          "reference": 6,
+          "strong_rec": 1
+        },
+        "first_year": 2024,
+        "last_year": 2025,
+        "first": "2024",
+        "last": "2025",
+        "strong": 1
+      },
+      "score": 1.5,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "app-evaluation",
+        "evaluation"
+      ],
+      "selection_reason": "通过实际使用评估 Humane AI Pin 的日常可用性，并与手机体验比较。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/TitZV6k8zfA"
+      }
+    },
+    {
+      "vid": "AF2VyqSApjA",
+      "url": "https://www.youtube.com/watch?v=AF2VyqSApjA",
+      "title": "AI Live Painting in Krita - Interactive updates",
+      "channel": "Acly",
+      "summary": "A short demo of interactive AI live painting in Krita using the Stable Diffusion plugin, where canvas changes update the generated image immediately. It uses an LCM sampler for speed and needs a high-end GPU for the interactive feel.",
+      "why_hn": "HN points to it as a demonstration of local, controllable AI painting and a way to learn the workflow.",
+      "content_type": "demo",
+      "level": "intermediate",
+      "shelf_life": "dated",
+      "primary_topic": "ai-assisted digital painting",
+      "tags": [
+        "krita",
+        "stable diffusion",
+        "live painting",
+        "lcm",
+        "local ai"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "visual-arts",
+          "name": "Visual arts, photography & architecture",
+          "area": "arts-entertainment",
+          "area_name": "Arts, Comedy, Music & Film"
+        }
+      ],
+      "quote": {
+        "text": "I'd recommend Krita with diffusion if you want to get into this.",
+        "hn_comment_id": 40446545,
+        "year": "2024",
+        "id": 40446545
+      },
+      "hn": {
+        "mentions": 3,
+        "recommenders": 1,
+        "rec_months": 1,
+        "strong_recs": 0,
+        "stances": {
+          "reference": 2,
+          "rec": 1
+        },
+        "first_year": 2023,
+        "last_year": 2025,
+        "first": "2023",
+        "last": "2025",
+        "strong": 0
+      },
+      "score": 1,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "app-evaluation",
+        "multimodal"
+      ],
+      "selection_reason": "实际演示本地 Krita AI 实时绘画反馈，并说明交互速度对 GPU 的要求；不等同于独立评测。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/AF2VyqSApjA"
+      }
+    },
+    {
+      "vid": "LCEmiRjPEtQ",
+      "url": "https://www.youtube.com/watch?v=LCEmiRjPEtQ",
+      "title": "Andrej Karpathy: Software Is Changing (Again)",
+      "channel": "Y Combinator",
+      "summary": "Andrej Karpathy's keynote at AI Startup School laying out software 1.0, 2.0 and 3.0, with LLMs seen as utilities, fabs and operating systems. It covers LLM quirks, partial-autonomy apps and keeping a human in the generate-and-verify loop.",
+      "why_hn": "HN mostly cites it as a source for Karpathy's framing of programming in English and his generate-then-verify workflow, with a few critics finding it hype.",
+      "content_type": "talk",
+      "level": "general",
+      "shelf_life": "dated",
+      "primary_topic": "software in the era of ai",
+      "tags": [
+        "llms",
+        "software 3.0",
+        "vibe coding",
+        "ai agents",
+        "andrej karpathy"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "tech-figures-interviews",
+          "name": "Tech pioneers & interviews",
+          "area": "computing-history-culture",
+          "area_name": "Computing History & Culture"
+        },
+        {
+          "id": "software-practice-careers",
+          "name": "Software practice, open source & careers",
+          "area": "software",
+          "area_name": "Software Engineering & Languages"
+        }
+      ],
+      "quote": {
+        "text": "I enjoyed Andrej Karpathy's talk about software in the era of AI.",
+        "hn_comment_id": 44942098,
+        "year": "2025",
+        "id": 44942098
+      },
+      "hn": {
+        "mentions": 8,
+        "recommenders": 1,
+        "rec_months": 1,
+        "strong_recs": 0,
+        "stances": {
+          "reference": 6,
+          "critical": 1,
+          "rec": 1
+        },
+        "first_year": 2025,
+        "last_year": 2025,
+        "first": "2025",
+        "last": "2025",
+        "strong": 0
+      },
+      "score": 1,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "llm",
+        "agents"
+      ],
+      "selection_reason": "介绍 LLM 软件范式、部分自主应用与生成后验证流程。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/LCEmiRjPEtQ"
+      }
+    },
+    {
+      "vid": "XZJc1p6RE78",
+      "url": "https://www.youtube.com/watch?v=XZJc1p6RE78",
+      "title": "Ch(e)at GPT? - Computerphile",
+      "channel": "Computerphile",
+      "summary": "Computerphile video in which Mike Pound explains a University of Maryland paper on watermarking LLM output. The method biases token choices so generated text can later be detected statistically.",
+      "why_hn": "Linked as the approachable explanation whenever HN discusses detecting or watermarking AI-generated text.",
+      "content_type": "explainer",
+      "level": "intermediate",
+      "shelf_life": "evergreen",
+      "primary_topic": "llm watermarking",
+      "tags": [
+        "computerphile",
+        "watermarking",
+        "chatgpt",
+        "ai detection",
+        "language models"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "cryptography",
+          "name": "Cryptography",
+          "area": "systems-security",
+          "area_name": "Systems, Networks & Security"
+        }
+      ],
+      "quote": {
+        "text": "a nice very approachable video explaining it here",
+        "hn_comment_id": 34955751,
+        "year": "2023",
+        "id": 34955751
+      },
+      "hn": {
+        "mentions": 6,
+        "recommenders": 1,
+        "rec_months": 1,
+        "strong_recs": 0,
+        "stances": {
+          "reference": 5,
+          "rec": 1
+        },
+        "first_year": 2023,
+        "last_year": 2026,
+        "first": "2023",
+        "last": "2026",
+        "strong": 0
+      },
+      "score": 1,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "inference",
+        "evaluation"
+      ],
+      "selection_reason": "解读语言模型输出水印与统计检测方法。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/XZJc1p6RE78"
+      }
+    },
+    {
+      "vid": "ZJUyVVFOXOc",
+      "url": "https://www.youtube.com/watch?v=ZJUyVVFOXOc",
+      "title": "S1E8: Show And Tell: Efrit: When Steve Gives Claude Full Access To 50 Years of Emacs Capabilities",
+      "channel": "Vibe Coding With Steve and Gene",
+      "summary": "Steve Yegge shows Efrit, a tool that gives Claude full control of Emacs, on the Vibe Coding with Steve and Gene show. Claude opens info pages, runs shells and even draws a Mandelbrot fractal in a buffer.",
+      "why_hn": "HN shares it as a fun demo of an LLM driving a live Emacs process and orchestrating its long-standing ecosystem.",
+      "content_type": "demo",
+      "level": "general",
+      "shelf_life": "dated",
+      "primary_topic": "llm agents in emacs",
+      "tags": [
+        "efrit",
+        "emacs",
+        "claude",
+        "steve yegge",
+        "agentic coding"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "testing-debugging-tools",
+          "name": "Testing, debugging & developer tools",
+          "area": "software",
+          "area_name": "Software Engineering & Languages"
+        },
+        {
+          "id": "tech-figures-interviews",
+          "name": "Tech pioneers & interviews",
+          "area": "computing-history-culture",
+          "area_name": "Computing History & Culture"
+        }
+      ],
+      "quote": {
+        "text": "this is a fun watch",
+        "hn_comment_id": 45430899,
+        "year": "2025",
+        "id": 45430899
+      },
+      "hn": {
+        "mentions": 3,
+        "recommenders": 1,
+        "rec_months": 1,
+        "strong_recs": 0,
+        "stances": {
+          "rec": 1,
+          "reference": 2
+        },
+        "first_year": 2025,
+        "last_year": 2026,
+        "first": "2025",
+        "last": "2026",
+        "strong": 0
+      },
+      "score": 1,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "agents",
+        "app-evaluation",
+        "agent-evaluation"
+      ],
+      "selection_reason": "现场展示 Claude 调用 Emacs、shell 和文档工具执行任务。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/ZJUyVVFOXOc"
+      }
+    },
+    {
+      "vid": "iv-5mZ_9CPY",
+      "url": "https://www.youtube.com/watch?v=iv-5mZ_9CPY",
+      "title": "But how do AI images and videos actually work? | Guest video by Welch Labs",
+      "channel": "3Blue1Brown",
+      "summary": "A guest video by Welch Labs on 3Blue1Brown explaining how text-to-image and video models work. It covers CLIP, shared embedding spaces, diffusion models (DDPM, DDIM), conditioning, guidance and negative prompts.",
+      "why_hn": "HN uses it as a clear explainer for diffusion mechanics, such as negative prompts and faster sampling, and for joint text-image encoders.",
+      "content_type": "explainer",
+      "level": "intermediate",
+      "shelf_life": "evergreen",
+      "primary_topic": "diffusion models",
+      "tags": [
+        "diffusion",
+        "clip",
+        "ddpm",
+        "classifier-free guidance",
+        "image generation"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "WL & 3b1b made a nice video on it",
+        "hn_comment_id": 48442554,
+        "year": "2026",
+        "id": 48442554
+      },
+      "hn": {
+        "mentions": 3,
+        "recommenders": 1,
+        "rec_months": 1,
+        "strong_recs": 0,
+        "stances": {
+          "reference": 2,
+          "rec": 1
+        },
+        "first_year": 2025,
+        "last_year": 2026,
+        "first": "2025",
+        "last": "2026",
+        "strong": 0
+      },
+      "score": 1,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "multimodal",
+        "architecture"
+      ],
+      "selection_reason": "技术解释 CLIP、共享嵌入、扩散模型与条件生成。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/iv-5mZ_9CPY"
+      }
+    },
+    {
+      "vid": "outcGtbnMuQ",
+      "url": "https://www.youtube.com/watch?v=outcGtbnMuQ",
+      "title": "GPT-4 Developer Livestream",
+      "channel": "OpenAI",
+      "summary": "OpenAI's livestream demo of GPT-4 with Greg Brockman, showing its capabilities and limitations. Highlights include writing code, turning a hand-drawn sketch into a website, and a tax-question example.",
+      "why_hn": "HN refers back to it as the primary source for what GPT-4 could do at launch, especially the sketch-to-website and multimodal demos.",
+      "content_type": "demo",
+      "level": "general",
+      "shelf_life": "dated",
+      "primary_topic": "gpt-4 capabilities",
+      "tags": [
+        "gpt-4",
+        "openai",
+        "multimodal",
+        "code generation",
+        "greg brockman"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "the TaxGPT example in the GPT-4 Developer Livestream [1] was powerful",
+        "hn_comment_id": 35183571,
+        "year": "2023",
+        "id": 35183571
+      },
+      "hn": {
+        "mentions": 8,
+        "recommenders": 1,
+        "rec_months": 1,
+        "strong_recs": 0,
+        "stances": {
+          "reference": 7,
+          "rec": 1
+        },
+        "first_year": 2023,
+        "last_year": 2025,
+        "first": "2023",
+        "last": "2025",
+        "strong": 0
+      },
+      "score": 1,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "evaluation",
+        "multimodal",
+        "app-evaluation"
+      ],
+      "selection_reason": "GPT-4 官方现场演示代码、图像输入与能力局限。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/outcGtbnMuQ"
+      }
+    },
+    {
+      "vid": "5KKDCp3OaMo",
+      "url": "https://www.youtube.com/watch?v=5KKDCp3OaMo",
+      "title": "Can GPT-4 translate literature?",
+      "channel": "Tom Gally",
+      "summary": "Tom Gally, a former professional translator and University of Tokyo professor, discusses in March 2023 whether GPT-4 and similar models could translate literary and popular fiction. He gives his assessment of Japanese-to-English quality.",
+      "why_hn": "Cited as an expert's first-hand evidence that GPT translation is near human quality for distant language pairs.",
+      "content_type": "talk",
+      "level": "general",
+      "shelf_life": "dated",
+      "primary_topic": "llm literary translation",
+      "tags": [
+        "gpt-4",
+        "translation",
+        "japanese",
+        "llm",
+        "literature"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "language-linguistics",
+          "name": "Language & linguistics",
+          "area": "ideas-education",
+          "area_name": "Ideas, Learning & Language"
+        },
+        {
+          "id": "computer-vision-speech",
+          "name": "Computer vision, speech & NLP",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "the basic quality of the translation [from Japanese to English] is as good as a human might do",
+        "hn_comment_id": 35335590,
+        "year": "2023",
+        "id": 35335590
+      },
+      "hn": {
+        "mentions": 4,
+        "recommenders": 0,
+        "rec_months": 0,
+        "strong_recs": 0,
+        "stances": {
+          "reference": 4
+        },
+        "first_year": 2023,
+        "last_year": 2025,
+        "first": "2023",
+        "last": "2025",
+        "strong": 0
+      },
+      "score": 0,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "evaluation",
+        "app-evaluation"
+      ],
+      "selection_reason": "由专业译者评估 GPT-4 的日英文学翻译质量。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/5KKDCp3OaMo"
+      }
+    },
+    {
+      "vid": "AKMuA_TVz3A",
+      "url": "https://www.youtube.com/watch?v=AKMuA_TVz3A",
+      "title": "An Observation on Generalization",
+      "channel": "Simons Institute for the Theory of Computing",
+      "summary": "Ilya Sutskever gives a Simons Institute talk on why neural networks generalize, framing learning as finding short descriptions, like compression. It was part of the Large Language Models and Transformers program.",
+      "why_hn": "Cited in discussions of learning as compression and of why neural networks generalize.",
+      "content_type": "talk",
+      "level": "advanced",
+      "shelf_life": "evergreen",
+      "primary_topic": "generalization and compression in ml",
+      "tags": [
+        "ilya sutskever",
+        "compression",
+        "generalization",
+        "kolmogorov complexity",
+        "llm theory"
+      ],
+      "categories": [
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "information-theory",
+          "name": "Information theory & signal processing",
+          "area": "math-theory",
+          "area_name": "Mathematics & Theoretical CS"
+        }
+      ],
+      "quote": {
+        "text": "Ilya argues that the reason why neural networks generalize -- why they work at all -- is because they are effectively finding a simple description",
+        "hn_comment_id": 48821953,
+        "year": "2026",
+        "id": 48821953
+      },
+      "hn": {
+        "mentions": 3,
+        "recommenders": 0,
+        "rec_months": 0,
+        "strong_recs": 0,
+        "stances": {
+          "reference": 3
+        },
+        "first_year": 2023,
+        "last_year": 2026,
+        "first": "2023",
+        "last": "2026",
+        "strong": 0
+      },
+      "score": 0,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "training"
+      ],
+      "selection_reason": "在大语言模型研究项目中讨论泛化与压缩的理论关系。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/AKMuA_TVz3A"
+      }
+    },
+    {
+      "vid": "CqiL5QQnN64",
+      "url": "https://www.youtube.com/watch?v=CqiL5QQnN64",
+      "title": "Ray Summit 2022 - Day 1 Keynote - Fireside Chat",
+      "channel": "Anyscale",
+      "summary": "A Ray Summit 2022 keynote fireside chat between OpenAI's Greg Brockman and Anyscale's Robert Nishihara. They discuss how OpenAI's training infrastructure evolved and its use of Ray.",
+      "why_hn": "Cited as a source for the fact that OpenAI uses Ray for training, and for Brockman's views on developer speed.",
+      "content_type": "interview",
+      "level": "intermediate",
+      "shelf_life": "dated",
+      "primary_topic": "ml training infrastructure",
+      "tags": [
+        "openai",
+        "ray",
+        "distributed training",
+        "greg brockman",
+        "anyscale"
+      ],
+      "categories": [
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "distributed-systems",
+          "name": "Distributed systems",
+          "area": "systems-security",
+          "area_name": "Systems, Networks & Security"
+        },
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "OpenAI fireside chat on the evolution of their infrastructure and usage of Ray for training",
+        "hn_comment_id": 34758378,
+        "year": "2023",
+        "id": 34758378
+      },
+      "hn": {
+        "mentions": 3,
+        "recommenders": 0,
+        "rec_months": 0,
+        "strong_recs": 0,
+        "stances": {
+          "reference": 3
+        },
+        "first_year": 2023,
+        "last_year": 2023,
+        "first": "2023",
+        "last": "2023",
+        "strong": 0
+      },
+      "score": 0,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "training"
+      ],
+      "selection_reason": "讨论 OpenAI 的训练基础设施及 Ray 的具体使用。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/CqiL5QQnN64"
+      }
+    },
+    {
+      "vid": "FHwnrYm0mNc",
+      "url": "https://www.youtube.com/watch?v=FHwnrYm0mNc",
+      "title": "GitHub Copilot CRUSHES Leetcode Interview Questions! 😳",
+      "channel": "DevOps Directive",
+      "summary": "A DevOps YouTuber tests GitHub Copilot on a range of Leetcode problems and finds it solves most immediately, with a few needing tweaks and some far off. He concludes it would outperform him in a FAANG-style interview.",
+      "why_hn": "Cited as evidence that AI can solve interview-style algorithm puzzles, in threads questioning the value of Leetcode.",
+      "content_type": "demo",
+      "level": "general",
+      "shelf_life": "dated",
+      "primary_topic": "github copilot",
+      "tags": [
+        "copilot",
+        "leetcode",
+        "coding interviews",
+        "ai coding",
+        "faang"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "software-practice-careers",
+          "name": "Software practice, open source & careers",
+          "area": "software",
+          "area_name": "Software Engineering & Languages"
+        }
+      ],
+      "quote": null,
+      "hn": {
+        "mentions": 3,
+        "recommenders": 0,
+        "rec_months": 0,
+        "strong_recs": 0,
+        "stances": {
+          "reference": 3
+        },
+        "first_year": 2021,
+        "last_year": 2022,
+        "first": "2021",
+        "last": "2022",
+        "strong": 0
+      },
+      "score": 0,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "evaluation",
+        "agents",
+        "app-evaluation"
+      ],
+      "selection_reason": "实际测试 Copilot 解答 Leetcode，记录成功、修改与失败。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/FHwnrYm0mNc"
+      }
+    },
+    {
+      "vid": "_8yVOC4ciXc",
+      "url": "https://www.youtube.com/watch?v=_8yVOC4ciXc",
+      "title": "GPT3: An Even Bigger Language Model - Computerphile",
+      "channel": "Computerphile",
+      "summary": "Rob Miles discusses GPT-3 on Computerphile, covering how scaling parameters kept improving results over GPT-2 and how the model nearly learned arithmetic without anyone knowing exactly how.",
+      "why_hn": "HN commenters cite it as a concise explanation of GPT-3's scaling jump and surprising abilities at its release.",
+      "content_type": "explainer",
+      "level": "general",
+      "shelf_life": "dated",
+      "primary_topic": "gpt-3 language models",
+      "tags": [
+        "gpt-3",
+        "scaling",
+        "language models",
+        "computerphile",
+        "rob miles"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "machine-learning",
+          "name": "Machine learning & deep learning",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        }
+      ],
+      "quote": {
+        "text": "Computerphile summed it up pretty well on GPT-3's release",
+        "hn_comment_id": 34248453,
+        "year": "2023",
+        "id": 34248453
+      },
+      "hn": {
+        "mentions": 5,
+        "recommenders": 0,
+        "rec_months": 0,
+        "strong_recs": 0,
+        "stances": {
+          "reference": 5
+        },
+        "first_year": 2020,
+        "last_year": 2023,
+        "first": "2020",
+        "last": "2023",
+        "strong": 0
+      },
+      "score": 0,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "llm",
+        "evaluation"
+      ],
+      "selection_reason": "讨论 GPT-3 扩大模型规模后的效果与算术能力观察。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/_8yVOC4ciXc"
+      }
+    },
+    {
+      "vid": "j0UnS3jHhAA",
+      "url": "https://www.youtube.com/watch?v=j0UnS3jHhAA",
+      "title": "I made an GPT-powered Linux shell that guesses your bash command (and hallucinates crazy stuff)",
+      "channel": "River's Educational Channel",
+      "summary": "A short demo of a GPT-powered Linux shell that guesses the bash command you meant and sometimes hallucinates absurd results. The creator stresses that it is real and should not be trusted.",
+      "why_hn": "Cited as an early, amusing example of LLM-driven command-line toys, with commenters sharing similar experiments.",
+      "content_type": "demo",
+      "level": "general",
+      "shelf_life": "dated",
+      "primary_topic": "gpt-3 shell",
+      "tags": [
+        "gpt-3",
+        "bash",
+        "openai",
+        "hallucination",
+        "command line"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "testing-debugging-tools",
+          "name": "Testing, debugging & developer tools",
+          "area": "software",
+          "area_name": "Software Engineering & Languages"
+        }
+      ],
+      "quote": null,
+      "hn": {
+        "mentions": 3,
+        "recommenders": 0,
+        "rec_months": 0,
+        "strong_recs": 0,
+        "stances": {
+          "reference": 3
+        },
+        "first_year": 2021,
+        "last_year": 2022,
+        "first": "2021",
+        "last": "2022",
+        "strong": 0
+      },
+      "score": 0,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "evaluation",
+        "agents",
+        "app-evaluation"
+      ],
+      "selection_reason": "实测 GPT 驱动 shell 的命令猜测与幻觉失败。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/j0UnS3jHhAA"
+      }
+    },
+    {
+      "vid": "tNmgmwEtoWE",
+      "url": "https://www.youtube.com/watch?v=tNmgmwEtoWE",
+      "title": "Debunking Devin: \"First AI Software Engineer\" Upwork lie exposed!",
+      "channel": "Internet of Bugs",
+      "summary": "Internet of Bugs analyzes Cognition's Devin demo frame by frame, arguing the video did not show Devin completing paid Upwork jobs as claimed, and showing what the task required versus what Devin produced.",
+      "why_hn": "Cited as the debunking of Devin's marketing claims in skeptical discussions of AI software engineers.",
+      "content_type": "commentary",
+      "level": "intermediate",
+      "shelf_life": "news",
+      "primary_topic": "ai software engineer claims",
+      "tags": [
+        "devin",
+        "ai hype",
+        "upwork",
+        "debunking",
+        "ai agents"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "ai-data-other",
+          "name": "AI & data (other)",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "software-practice-careers",
+          "name": "Software practice, open source & careers",
+          "area": "software",
+          "area_name": "Software Engineering & Languages"
+        }
+      ],
+      "quote": null,
+      "hn": {
+        "mentions": 3,
+        "recommenders": 0,
+        "rec_months": 0,
+        "strong_recs": 0,
+        "stances": {
+          "critical": 3
+        },
+        "first_year": 2024,
+        "last_year": 2024,
+        "first": "2024",
+        "last": "2024",
+        "strong": 0
+      },
+      "score": 0,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "evaluation",
+        "agents",
+        "app-evaluation",
+        "agent-evaluation"
+      ],
+      "selection_reason": "逐帧核对 Devin 宣传演示与实际任务表现。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/tNmgmwEtoWE"
+      }
+    },
+    {
+      "vid": "tbDDYKRFjhk",
+      "url": "https://www.youtube.com/watch?v=tbDDYKRFjhk",
+      "title": "Does AI Actually Boost Developer Productivity? (100k Devs Study) - Yegor Denisov-Blanch, Stanford",
+      "channel": "AI Engineer",
+      "summary": "Yegor Denisov-Blanch of Stanford presents a study of nearly 100,000 developers at hundreds of companies, measuring how AI affects productivity from commit data. It finds an average boost of about 20% with wide variance by codebase, task complexity and stack.",
+      "why_hn": "Cited in AI-coding debates as one of the largest data-driven studies, notably for finding no correlation between self-assessed and measured productivity.",
+      "content_type": "talk",
+      "level": "intermediate",
+      "shelf_life": "dated",
+      "primary_topic": "ai developer productivity",
+      "tags": [
+        "llm coding",
+        "productivity study",
+        "stanford",
+        "commit data",
+        "ai engineering"
+      ],
+      "categories": [
+        {
+          "id": "llms-generative-ai",
+          "name": "LLMs & generative AI",
+          "area": "ai-data",
+          "area_name": "AI, Machine Learning & Data"
+        },
+        {
+          "id": "software-practice-careers",
+          "name": "Software practice, open source & careers",
+          "area": "software",
+          "area_name": "Software Engineering & Languages"
+        }
+      ],
+      "quote": {
+        "text": "This is a study that tries to be scientific, unlike developer self reports and CEO promises of 10x.",
+        "hn_comment_id": 45578696,
+        "year": "2025",
+        "id": 45578696
+      },
+      "hn": {
+        "mentions": 12,
+        "recommenders": 0,
+        "rec_months": 0,
+        "strong_recs": 0,
+        "stances": {
+          "reference": 12
+        },
+        "first_year": 2025,
+        "last_year": 2026,
+        "first": "2025",
+        "last": "2026",
+        "strong": 0
+      },
+      "score": 0,
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "evaluation",
+        "agents",
+        "app-evaluation"
+      ],
+      "selection_reason": "研究 AI 编程工具在开发者生产率上的实际效果与差异。",
+      "provenance": {
+        "kind": "hacker-news",
+        "sourceName": "HackerTube / Hacker News",
+        "sourceUrl": "https://hackertube.org/watch/tbDDYKRFjhk"
+      }
+    },
+    {
+      "content_type": "tutorial",
+      "level": "intermediate",
+      "shelf_life": "evergreen",
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "ai-search",
+        "app-evaluation"
+      ],
+      "vid": "lTfhw_9cJqc",
+      "title": "RAG Evaluation (Answer Correctness) | LangSmith Evaluations - Part 12",
+      "channel": "LangChain",
+      "summary": "LangChain 官方教程，用参考答案数据集检查 RAG 输出是否正确，并通过评估结果和调用轨迹定位回答错误。",
+      "selection_reason": "展示如何用参考答案评测检索增强应用的回答正确性。",
+      "primary_topic": "RAG answer correctness evaluation",
+      "tags": [
+        "rag",
+        "ai search",
+        "langsmith",
+        "answer correctness",
+        "reference answers"
+      ],
+      "url": "https://www.youtube.com/watch?v=lTfhw_9cJqc",
+      "provenance": {
+        "kind": "curated",
+        "sourceName": "LangChain 官方视频",
+        "sourceUrl": "https://www.youtube.com/watch?v=lTfhw_9cJqc",
+        "verifiedAt": "2026-11-06",
+        "reviewBasis": "通过 yt-dlp 实取发布者、标题和公开视频说明；说明明确讲解参考答案数据集、评估和轨迹分析。"
+      },
+      "why_hn": "",
+      "hn": null,
+      "score": 0,
+      "quote": null,
+      "categories": []
+    },
+    {
+      "content_type": "tutorial",
+      "level": "intermediate",
+      "shelf_life": "evergreen",
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "ai-search",
+        "app-evaluation"
+      ],
+      "vid": "Fr_7HtHjcf0",
+      "title": "RAG Evaluation (Document Relevance) | LangSmith Evaluations - Part 14",
+      "channel": "LangChain",
+      "summary": "LangChain 官方教程，用测试问题检查检索到的文档是否相关，结合输出轨迹分析低质量检索对最终回答的影响。",
+      "selection_reason": "直接评估 AI 搜索与 RAG 的文档相关性，区分检索错误和生成错误。",
+      "primary_topic": "RAG retrieval relevance evaluation",
+      "tags": [
+        "rag",
+        "ai search",
+        "retrieval",
+        "document relevance",
+        "langsmith"
+      ],
+      "url": "https://www.youtube.com/watch?v=Fr_7HtHjcf0",
+      "provenance": {
+        "kind": "curated",
+        "sourceName": "LangChain 官方视频",
+        "sourceUrl": "https://www.youtube.com/watch?v=Fr_7HtHjcf0",
+        "verifiedAt": "2026-11-06",
+        "reviewBasis": "通过 yt-dlp 实取发布者、标题和公开视频说明，并与 LangChain 官方发布帖相互核验。"
+      },
+      "why_hn": "",
+      "hn": null,
+      "score": 0,
+      "quote": null,
+      "categories": []
+    },
+    {
+      "content_type": "tutorial",
+      "level": "intermediate",
+      "shelf_life": "evergreen",
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "ai-search",
+        "app-evaluation"
+      ],
+      "vid": "m_J0nFmnrPI",
+      "title": "Optimizing LLM Retrieval Strategies with Arize AI & Qdrant",
+      "channel": "Arize AI",
+      "summary": "Arize AI 与 Qdrant 的实践分享，使用 Qdrant、LlamaIndex 和 Arize Phoenix 比较稠密向量检索与混合检索，并检查 RAG 应用表现。",
+      "selection_reason": "有实际检索方案对比与评估工具，覆盖 AI 搜索的效果诊断。",
+      "primary_topic": "dense versus hybrid retrieval evaluation",
+      "tags": [
+        "rag",
+        "ai search",
+        "hybrid search",
+        "qdrant",
+        "llamaindex",
+        "arize phoenix"
+      ],
+      "url": "https://www.youtube.com/watch?v=m_J0nFmnrPI",
+      "provenance": {
+        "kind": "curated",
+        "sourceName": "Qdrant 官方评估示例库",
+        "sourceUrl": "https://github.com/qdrant/qdrant-rag-eval",
+        "verifiedAt": "2026-11-06",
+        "reviewBasis": "Qdrant 官方仓库直接引用此视频并说明稠密与混合检索对比；YouTube oEmbed 核验视频标题和 Arize AI 发布者。"
+      },
+      "why_hn": "",
+      "hn": null,
+      "score": 0,
+      "quote": null,
+      "categories": []
+    },
+    {
+      "content_type": "tutorial",
+      "level": "intermediate",
+      "shelf_life": "evergreen",
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "ai-search",
+        "app-evaluation"
+      ],
+      "vid": "3MEMPZR1aZA",
+      "title": "Rapid RAG Optimization with Qdrant and Quotient",
+      "channel": "Qdrant Vector Search",
+      "summary": "Qdrant 官方工作坊以基础 RAG 为起点，改变分块大小、嵌入模型和语言模型，使用 Quotient 逐步评估并改进应用。",
+      "selection_reason": "用可重复实验评估搜索增强应用的不同配置，而非只展示产品功能。",
+      "primary_topic": "evaluation driven RAG optimization",
+      "tags": [
+        "rag",
+        "ai search",
+        "qdrant",
+        "quotient",
+        "chunking",
+        "embeddings",
+        "evaluation"
+      ],
+      "url": "https://www.youtube.com/watch?v=3MEMPZR1aZA",
+      "provenance": {
+        "kind": "curated",
+        "sourceName": "Qdrant 官方评估示例库",
+        "sourceUrl": "https://github.com/qdrant/qdrant-rag-eval",
+        "verifiedAt": "2026-11-06",
+        "reviewBasis": "Qdrant 官方仓库说明实验变量与评估方式，并直接引用视频；YouTube oEmbed 核验标题和官方发布者。"
+      },
+      "why_hn": "",
+      "hn": null,
+      "score": 0,
+      "quote": null,
+      "categories": []
+    },
+    {
+      "content_type": "talk",
+      "level": "intermediate",
+      "shelf_life": "evergreen",
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "topics": [
+        "ai-search",
+        "app-evaluation"
+      ],
+      "vid": "1cQlnfwmIdU",
+      "title": "open-rag-eval: RAG Evaluation without \"golden\" answers — Ofer Mendelevitch, Vectara",
+      "channel": "AI Engineer",
+      "summary": "AI Engineer 大会演讲介绍 Open RAG Eval，通过检索片段和生成回答评估相关性、信息覆盖、引用支持与幻觉，无需人工准备完整参考答案。",
+      "selection_reason": "解释无参考答案时如何分别评估检索质量和回答依据，并展示结果检查流程。",
+      "primary_topic": "reference free RAG evaluation",
+      "tags": [
+        "rag",
+        "ai search",
+        "open-rag-eval",
+        "umbrela",
+        "citation faithfulness",
+        "hallucinations"
+      ],
+      "url": "https://www.youtube.com/watch?v=1cQlnfwmIdU",
+      "provenance": {
+        "kind": "curated",
+        "sourceName": "AI Engineer 官方演讲与转录",
+        "sourceUrl": "https://ai.engineer/talks/1cQlnfwmIdU-open-rag-eval-rag-evaluation-without-golden",
+        "verifiedAt": "2026-11-06",
+        "reviewBasis": "会议官网完整逐字稿与章节、直接 YouTube 链接，以及 YouTube oEmbed 标题和发布者均已核验。"
+      },
+      "why_hn": "",
+      "hn": null,
+      "score": 0,
+      "quote": null,
+      "categories": []
+    },
+    {
+      "vid": "oOtAbb1_6EE",
+      "url": "https://www.youtube.com/watch?v=oOtAbb1_6EE",
+      "title": "ChatGPT Search vs. Perplexity - Side by Side Comparison",
+      "channel": "Getting Started with Jeff",
+      "summary": "作者在 2024 年版本的 ChatGPT Search 与 Perplexity 中逐项执行相同搜索任务，覆盖一般查询、地图与商家营业时间、图片、视频、新闻和天气。可观察界面和任务表现，不代表当前产品排名。",
+      "selection_reason": "搜索产品的并排任务实测，有明确测试列表；按历史版本保留，便于观察产品差异。",
+      "topics": [
+        "ai-search",
+        "app-evaluation"
+      ],
+      "primary_topic": "ChatGPT Search versus Perplexity task comparison",
+      "tags": [
+        "AI search",
+        "ChatGPT Search",
+        "Perplexity",
+        "product comparison",
+        "web search",
+        "应用评测"
+      ],
+      "content_type": "demo",
+      "level": "intro",
+      "shelf_life": "dated",
+      "duration_s": null,
+      "published": null,
+      "views": null,
+      "provenance": {
+        "kind": "curated",
+        "sourceName": "作者公开对比评测视频",
+        "sourceUrl": "https://www.youtube.com/watch?v=oOtAbb1_6EE",
+        "verifiedAt": "2026-11-06",
+        "reviewBasis": "作者公开视频描述与章节列出九种并排搜索任务；YouTube oEmbed 核验视频ID、标题和作者。该视频发表于2024-11-02，属于历史版本实测，不能当作当前产品胜负结论。"
+      },
+      "why_hn": "",
+      "hn": null,
+      "score": 0,
+      "quote": null,
+      "categories": []
+    }
+  ]
+}

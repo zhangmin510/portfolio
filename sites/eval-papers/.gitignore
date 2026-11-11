@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+runtime/
+.wrangler/
+.dev.vars
+.dev.vars.*
+.runtime/
+*.local.json
+dist-cloud/
+worker-configuration.d.ts

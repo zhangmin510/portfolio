@@ -1,0 +1,205 @@
+[
+  {
+    "content_type": "tutorial",
+    "level": "intermediate",
+    "shelf_life": "evergreen",
+    "duration_s": null,
+    "published": null,
+    "views": null,
+    "topics": [
+      "ai-search",
+      "app-evaluation"
+    ],
+    "vid": "lTfhw_9cJqc",
+    "title": "RAG Evaluation (Answer Correctness) | LangSmith Evaluations - Part 12",
+    "channel": "LangChain",
+    "summary": "LangChain 官方教程，用参考答案数据集检查 RAG 输出是否正确，并通过评估结果和调用轨迹定位回答错误。",
+    "selection_reason": "展示如何用参考答案评测检索增强应用的回答正确性。",
+    "primary_topic": "RAG answer correctness evaluation",
+    "tags": [
+      "rag",
+      "ai search",
+      "langsmith",
+      "answer correctness",
+      "reference answers"
+    ],
+    "url": "https://www.youtube.com/watch?v=lTfhw_9cJqc",
+    "provenance": {
+      "kind": "curated",
+      "sourceName": "LangChain 官方视频",
+      "sourceUrl": "https://www.youtube.com/watch?v=lTfhw_9cJqc",
+      "verifiedAt": "2026-11-06",
+      "reviewBasis": "通过 yt-dlp 实取发布者、标题和公开视频说明；说明明确讲解参考答案数据集、评估和轨迹分析。"
+    }
+  },
+  {
+    "content_type": "tutorial",
+    "level": "intermediate",
+    "shelf_life": "evergreen",
+    "duration_s": null,
+    "published": null,
+    "views": null,
+    "topics": [
+      "ai-search",
+      "app-evaluation"
+    ],
+    "vid": "Fr_7HtHjcf0",
+    "title": "RAG Evaluation (Document Relevance) | LangSmith Evaluations - Part 14",
+    "channel": "LangChain",
+    "summary": "LangChain 官方教程，用测试问题检查检索到的文档是否相关，结合输出轨迹分析低质量检索对最终回答的影响。",
+    "selection_reason": "直接评估 AI 搜索与 RAG 的文档相关性，区分检索错误和生成错误。",
+    "primary_topic": "RAG retrieval relevance evaluation",
+    "tags": [
+      "rag",
+      "ai search",
+      "retrieval",
+      "document relevance",
+      "langsmith"
+    ],
+    "url": "https://www.youtube.com/watch?v=Fr_7HtHjcf0",
+    "provenance": {
+      "kind": "curated",
+      "sourceName": "LangChain 官方视频",
+      "sourceUrl": "https://www.youtube.com/watch?v=Fr_7HtHjcf0",
+      "verifiedAt": "2026-11-06",
+      "reviewBasis": "通过 yt-dlp 实取发布者、标题和公开视频说明，并与 LangChain 官方发布帖相互核验。"
+    }
+  },
+  {
+    "content_type": "tutorial",
+    "level": "intermediate",
+    "shelf_life": "evergreen",
+    "duration_s": null,
+    "published": null,
+    "views": null,
+    "topics": [
+      "ai-search",
+      "app-evaluation"
+    ],
+    "vid": "m_J0nFmnrPI",
+    "title": "Optimizing LLM Retrieval Strategies with Arize AI & Qdrant",
+    "channel": "Arize AI",
+    "summary": "Arize AI 与 Qdrant 的实践分享，使用 Qdrant、LlamaIndex 和 Arize Phoenix 比较稠密向量检索与混合检索，并检查 RAG 应用表现。",
+    "selection_reason": "有实际检索方案对比与评估工具，覆盖 AI 搜索的效果诊断。",
+    "primary_topic": "dense versus hybrid retrieval evaluation",
+    "tags": [
+      "rag",
+      "ai search",
+      "hybrid search",
+      "qdrant",
+      "llamaindex",
+      "arize phoenix"
+    ],
+    "url": "https://www.youtube.com/watch?v=m_J0nFmnrPI",
+    "provenance": {
+      "kind": "curated",
+      "sourceName": "Qdrant 官方评估示例库",
+      "sourceUrl": "https://github.com/qdrant/qdrant-rag-eval",
+      "verifiedAt": "2026-11-06",
+      "reviewBasis": "Qdrant 官方仓库直接引用此视频并说明稠密与混合检索对比；YouTube oEmbed 核验视频标题和 Arize AI 发布者。"
+    }
+  },
+  {
+    "content_type": "tutorial",
+    "level": "intermediate",
+    "shelf_life": "evergreen",
+    "duration_s": null,
+    "published": null,
+    "views": null,
+    "topics": [
+      "ai-search",
+      "app-evaluation"
+    ],
+    "vid": "3MEMPZR1aZA",
+    "title": "Rapid RAG Optimization with Qdrant and Quotient",
+    "channel": "Qdrant Vector Search",
+    "summary": "Qdrant 官方工作坊以基础 RAG 为起点，改变分块大小、嵌入模型和语言模型，使用 Quotient 逐步评估并改进应用。",
+    "selection_reason": "用可重复实验评估搜索增强应用的不同配置，而非只展示产品功能。",
+    "primary_topic": "evaluation driven RAG optimization",
+    "tags": [
+      "rag",
+      "ai search",
+      "qdrant",
+      "quotient",
+      "chunking",
+      "embeddings",
+      "evaluation"
+    ],
+    "url": "https://www.youtube.com/watch?v=3MEMPZR1aZA",
+    "provenance": {
+      "kind": "curated",
+      "sourceName": "Qdrant 官方评估示例库",
+      "sourceUrl": "https://github.com/qdrant/qdrant-rag-eval",
+      "verifiedAt": "2026-11-06",
+      "reviewBasis": "Qdrant 官方仓库说明实验变量与评估方式，并直接引用视频；YouTube oEmbed 核验标题和官方发布者。"
+    }
+  },
+  {
+    "content_type": "talk",
+    "level": "intermediate",
+    "shelf_life": "evergreen",
+    "duration_s": null,
+    "published": null,
+    "views": null,
+    "topics": [
+      "ai-search",
+      "app-evaluation"
+    ],
+    "vid": "1cQlnfwmIdU",
+    "title": "open-rag-eval: RAG Evaluation without \"golden\" answers — Ofer Mendelevitch, Vectara",
+    "channel": "AI Engineer",
+    "summary": "AI Engineer 大会演讲介绍 Open RAG Eval，通过检索片段和生成回答评估相关性、信息覆盖、引用支持与幻觉，无需人工准备完整参考答案。",
+    "selection_reason": "解释无参考答案时如何分别评估检索质量和回答依据，并展示结果检查流程。",
+    "primary_topic": "reference free RAG evaluation",
+    "tags": [
+      "rag",
+      "ai search",
+      "open-rag-eval",
+      "umbrela",
+      "citation faithfulness",
+      "hallucinations"
+    ],
+    "url": "https://www.youtube.com/watch?v=1cQlnfwmIdU",
+    "provenance": {
+      "kind": "curated",
+      "sourceName": "AI Engineer 官方演讲与转录",
+      "sourceUrl": "https://ai.engineer/talks/1cQlnfwmIdU-open-rag-eval-rag-evaluation-without-golden",
+      "verifiedAt": "2026-11-06",
+      "reviewBasis": "会议官网完整逐字稿与章节、直接 YouTube 链接，以及 YouTube oEmbed 标题和发布者均已核验。"
+    }
+  },
+  {
+    "vid": "oOtAbb1_6EE",
+    "url": "https://www.youtube.com/watch?v=oOtAbb1_6EE",
+    "title": "ChatGPT Search vs. Perplexity - Side by Side Comparison",
+    "channel": "Getting Started with Jeff",
+    "summary": "作者在 2024 年版本的 ChatGPT Search 与 Perplexity 中逐项执行相同搜索任务，覆盖一般查询、地图与商家营业时间、图片、视频、新闻和天气。可观察界面和任务表现，不代表当前产品排名。",
+    "selection_reason": "搜索产品的并排任务实测，有明确测试列表；按历史版本保留，便于观察产品差异。",
+    "topics": [
+      "ai-search",
+      "app-evaluation"
+    ],
+    "primary_topic": "ChatGPT Search versus Perplexity task comparison",
+    "tags": [
+      "AI search",
+      "ChatGPT Search",
+      "Perplexity",
+      "product comparison",
+      "web search",
+      "应用评测"
+    ],
+    "content_type": "demo",
+    "level": "intro",
+    "shelf_life": "dated",
+    "duration_s": null,
+    "published": null,
+    "views": null,
+    "provenance": {
+      "kind": "curated",
+      "sourceName": "作者公开对比评测视频",
+      "sourceUrl": "https://www.youtube.com/watch?v=oOtAbb1_6EE",
+      "verifiedAt": "2026-11-06",
+      "reviewBasis": "作者公开视频描述与章节列出九种并排搜索任务；YouTube oEmbed 核验视频ID、标题和作者。该视频发表于2024-11-02，属于历史版本实测，不能当作当前产品胜负结论。"
+    }
+  }
+]

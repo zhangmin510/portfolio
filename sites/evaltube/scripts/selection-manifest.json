@@ -1,0 +1,421 @@
+{
+  "version": "1.1.0",
+  "reviewedAt": "2026-11-06",
+  "policy": "收录大模型技术与能力评估，并扩展 AI 搜索、AI 应用实测与 Agent 任务评测。评测可包含实际工作流、对比、失败观察和研究，不将产品发布、纯营销或宽泛 AI 观点自动视为评测；保留少量相关训练基础。",
+  "include": {
+    "VMj-3S1tku0": {
+      "topics": [
+        "training"
+      ],
+      "reason": "从零实现自动微分与反向传播，补齐语言模型训练基础。"
+    },
+    "aircAruvnKk": {
+      "topics": [
+        "training"
+      ],
+      "reason": "用可视化理解神经网络，为后续大模型结构与训练打基础。"
+    },
+    "Ilg3gGewQ5U": {
+      "topics": [
+        "training"
+      ],
+      "reason": "直观解释反向传播与梯度计算，是语言模型训练的基础。"
+    },
+    "IHZwWFHWa-w": {
+      "topics": [
+        "training"
+      ],
+      "reason": "解释梯度下降如何训练神经网络。"
+    },
+    "wjZofJX0v4M": {
+      "topics": [
+        "llm",
+        "architecture"
+      ],
+      "reason": "直观拆解 Transformer、token、嵌入和注意力。"
+    },
+    "7xTGNNLPyMI": {
+      "topics": [
+        "llm",
+        "training",
+        "evaluation"
+      ],
+      "reason": "系统讲解预训练、后训练及大模型幻觉等能力边界。"
+    },
+    "kCc8FmEb1nY": {
+      "topics": [
+        "architecture",
+        "training"
+      ],
+      "reason": "用 PyTorch 从零训练 GPT，理解完整语言模型实现。"
+    },
+    "jkrNMKz9pWU": {
+      "topics": [
+        "llm",
+        "inference",
+        "evaluation"
+      ],
+      "reason": "实际演示语言模型、API、代码与数据分析能力及限制。"
+    },
+    "zjkBMFhNj_g": {
+      "topics": [
+        "llm",
+        "training",
+        "inference"
+      ],
+      "reason": "大模型原理、训练流程、使用方式及安全挑战入门。"
+    },
+    "qbIk7-JPB2c": {
+      "topics": [
+        "evaluation"
+      ],
+      "reason": "研究者展示 GPT-4 跨任务早期能力实验；并非标准化榜单。"
+    },
+    "zduSFxRajkE": {
+      "topics": [
+        "architecture",
+        "training"
+      ],
+      "reason": "实现 BPE 分词器，并解释分词如何影响模型行为。"
+    },
+    "eMlx5fFNoYc": {
+      "topics": [
+        "architecture"
+      ],
+      "reason": "逐步展示 self-attention、多头注意力和交叉注意力。"
+    },
+    "S27pHKBEp30": {
+      "topics": [
+        "architecture"
+      ],
+      "reason": "技术讲解 NLP 从 RNN、LSTM 到 Transformer 的变化。"
+    },
+    "iDulhoQ2pro": {
+      "topics": [
+        "architecture",
+        "training"
+      ],
+      "reason": "解读 Transformer 原论文的结构与翻译实验结果。"
+    },
+    "RjfbvDXpFls": {
+      "topics": [
+        "agents"
+      ],
+      "reason": "解释 pi coding agent 的最小架构与实际工具设计。"
+    },
+    "bZQun8Y4L2A": {
+      "topics": [
+        "training",
+        "inference"
+      ],
+      "reason": "完整拆解 GPT 预训练、监督微调、RLHF 和提示策略。"
+    },
+    "dKJEpOtVgXc": {
+      "topics": [
+        "architecture"
+      ],
+      "reason": "讲解作为 attention 替代方案的线性 RNN 与状态空间模型。"
+    },
+    "efPrtcLdcdM": {
+      "topics": [
+        "training",
+        "evaluation"
+      ],
+      "reason": "语言模型训练实验及其生成行为观察，包含有争议的实验背景。"
+    },
+    "OyFJWRnt_AY": {
+      "topics": [
+        "architecture"
+      ],
+      "reason": "大学课程中对 attention 与 Transformer 的技术推导。"
+    },
+    "PaCmpygFfXo": {
+      "topics": [
+        "training",
+        "architecture"
+      ],
+      "reason": "从 bigram 语言模型开始实现训练、采样和损失评估。"
+    },
+    "lnA9DMvHtfI": {
+      "topics": [
+        "llm",
+        "training"
+      ],
+      "reason": "从条件概率和神经网络解释大语言模型的基本机制。"
+    },
+    "rURRYI66E54": {
+      "topics": [
+        "llm",
+        "architecture"
+      ],
+      "reason": "解释语言模型的文本生成及 Transformer 对 RNN 的改进。"
+    },
+    "1sd26pWhfmg": {
+      "topics": [
+        "evaluation",
+        "agents",
+        "app-evaluation"
+      ],
+      "reason": "展示现有大模型发现软件漏洞的能力与攻击场景实验。"
+    },
+    "SGUCcjHTmGY": {
+      "topics": [
+        "evaluation",
+        "agents",
+        "app-evaluation"
+      ],
+      "reason": "Codex 官方现场演示，观察自然语言生成代码的任务能力。"
+    },
+    "160F8F8mXlo": {
+      "topics": [
+        "evaluation",
+        "multimodal"
+      ],
+      "reason": "以满杯葡萄酒生成失败为例，观察图像模型能力边界。"
+    },
+    "5eqRuVp65eY": {
+      "topics": [
+        "training"
+      ],
+      "reason": "解释神经缩放定律及计算效率前沿。"
+    },
+    "EL7Au1tzNxE": {
+      "topics": [
+        "evaluation",
+        "agents",
+        "app-evaluation",
+        "agent-evaluation"
+      ],
+      "reason": "在复杂 Rust 修改中长时间实测 agent，记录成功与失败。"
+    },
+    "GJVSDjRXVoo": {
+      "topics": [
+        "evaluation",
+        "agents",
+        "agent-evaluation"
+      ],
+      "reason": "真实语音 agent 的提示注入演示，观察指令边界失效。"
+    },
+    "WO2X3oZEJOA": {
+      "topics": [
+        "architecture",
+        "evaluation"
+      ],
+      "reason": "分析 glitch token 造成的异常输出与分词训练原因。"
+    },
+    "hhiLw5Q_UFg": {
+      "topics": [
+        "training",
+        "evaluation"
+      ],
+      "reason": "RLHF 技术报告，讨论真实性、幻觉与行为克隆的局限。"
+    },
+    "oLiheMQayNE": {
+      "topics": [
+        "evaluation"
+      ],
+      "reason": "GPT-4 红队参与者复盘预发布测试中的弱点与危险能力。"
+    },
+    "viJt_DXTfwA": {
+      "topics": [
+        "llm",
+        "training",
+        "evaluation"
+      ],
+      "reason": "解释 ChatGPT 的人类反馈训练与自信输出错误的原因。"
+    },
+    "LCEmiRjPEtQ": {
+      "topics": [
+        "llm",
+        "agents"
+      ],
+      "reason": "介绍 LLM 软件范式、部分自主应用与生成后验证流程。"
+    },
+    "XZJc1p6RE78": {
+      "topics": [
+        "inference",
+        "evaluation"
+      ],
+      "reason": "解读语言模型输出水印与统计检测方法。"
+    },
+    "ZJUyVVFOXOc": {
+      "topics": [
+        "agents",
+        "app-evaluation",
+        "agent-evaluation"
+      ],
+      "reason": "现场展示 Claude 调用 Emacs、shell 和文档工具执行任务。"
+    },
+    "iv-5mZ_9CPY": {
+      "topics": [
+        "multimodal",
+        "architecture"
+      ],
+      "reason": "技术解释 CLIP、共享嵌入、扩散模型与条件生成。"
+    },
+    "outcGtbnMuQ": {
+      "topics": [
+        "evaluation",
+        "multimodal",
+        "app-evaluation"
+      ],
+      "reason": "GPT-4 官方现场演示代码、图像输入与能力局限。"
+    },
+    "5KKDCp3OaMo": {
+      "topics": [
+        "evaluation",
+        "app-evaluation"
+      ],
+      "reason": "由专业译者评估 GPT-4 的日英文学翻译质量。"
+    },
+    "AKMuA_TVz3A": {
+      "topics": [
+        "training"
+      ],
+      "reason": "在大语言模型研究项目中讨论泛化与压缩的理论关系。"
+    },
+    "CqiL5QQnN64": {
+      "topics": [
+        "training"
+      ],
+      "reason": "讨论 OpenAI 的训练基础设施及 Ray 的具体使用。"
+    },
+    "FHwnrYm0mNc": {
+      "topics": [
+        "evaluation",
+        "agents",
+        "app-evaluation"
+      ],
+      "reason": "实际测试 Copilot 解答 Leetcode，记录成功、修改与失败。"
+    },
+    "_8yVOC4ciXc": {
+      "topics": [
+        "llm",
+        "evaluation"
+      ],
+      "reason": "讨论 GPT-3 扩大模型规模后的效果与算术能力观察。"
+    },
+    "j0UnS3jHhAA": {
+      "topics": [
+        "evaluation",
+        "agents",
+        "app-evaluation"
+      ],
+      "reason": "实测 GPT 驱动 shell 的命令猜测与幻觉失败。"
+    },
+    "tNmgmwEtoWE": {
+      "topics": [
+        "evaluation",
+        "agents",
+        "app-evaluation",
+        "agent-evaluation"
+      ],
+      "reason": "逐帧核对 Devin 宣传演示与实际任务表现。"
+    },
+    "tbDDYKRFjhk": {
+      "topics": [
+        "evaluation",
+        "agents",
+        "app-evaluation"
+      ],
+      "reason": "研究 AI 编程工具在开发者生产率上的实际效果与差异。"
+    },
+    "PYylPRX6z4Q": {
+      "topics": [
+        "training"
+      ],
+      "reason": "解释由人类偏好学习奖励模型的后训练基础。"
+    },
+    "TitZV6k8zfA": {
+      "topics": [
+        "app-evaluation",
+        "evaluation"
+      ],
+      "reason": "通过实际使用评估 Humane AI Pin 的日常可用性，并与手机体验比较。"
+    },
+    "Ly6USRwTHe0": {
+      "topics": [
+        "app-evaluation",
+        "multimodal"
+      ],
+      "reason": "演示 Krita AI 插件的实际选区编辑与 ControlNet 工作流；属于应用实测演示，并非独立对比评测。"
+    },
+    "AF2VyqSApjA": {
+      "topics": [
+        "app-evaluation",
+        "multimodal"
+      ],
+      "reason": "实际演示本地 Krita AI 实时绘画反馈，并说明交互速度对 GPU 的要求；不等同于独立评测。"
+    }
+  },
+  "exclude": {
+    "xoVJKj8lcNQ": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "udPY5rQVoW0": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "GVT3WUa-48Y": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "IkdziSLYzHw": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "jPhJbKBuNnA": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "pdJQ8iVTwj8": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "F3Jd9GI6XqE": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "_zfN9wnPvU0": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "kgCUn4fQTsc": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "mb3uK-_QkOo": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "-opBifFfsMY": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "9WfZuNceFDM": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "I3l4XLZ59iw": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "NPOHf20slZg": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "P1IcaBn3ej0": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "YQ2QtKcK2dA": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "bPhUhypV27w": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "hJP5GqnTrNo": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "oFfVt3S51T4": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "qpoRO378qRY": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "qvNCVYkHKfg": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "xMYm2d9bmEA": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "wCEkK1YzqBo": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "yftBiNu0ZNU": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "5t1vTLU7s40": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "6n2eDcRjSsk": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "7k1ehaE0bdU": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "AaTRHFaaPG8": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "GyFkWb903aU": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "LY7x2Ihqjmc": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "QVXfcIb3OKo": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "TMoz3gSXBcY": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "_9LX9HSQkWo": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "tWZOEFvczzA": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "v0gjI__RyCY": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "wrHXA2cSpNU": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "21EYKqUsPfg": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "22wlLy7hKP4": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "3VJT2JeDCyw": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "8JUepj7wIl0": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "AmUC4m6w1wo": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "C_78DM8fG6E": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "D5VN56jQMWM": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "GcqQ1ebBqkc": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "IACHfKmZMr8": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "IkaAZE_UGMo": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "LSHZ_b05W7o": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "L_Guz73e6fw": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "NjpNG0CJRMM": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "RXeOiIDNNek": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "Sq1QZB5baNw": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "TGD8zKvRxc4": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "Y2F8yisiS6E": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "Yf1o0TQzry8": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "cQ54GDm1eL0": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "d6sVWEu9HWU": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "ebjkD1Om4uw": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "ebls5x-gb0s": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "iE39q-IKOzA": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "jvqFAi7vkBc": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "kSLJriaOumA": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "ogfYd705cRs": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "ohmajJTcpNk": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "ugvHCXCOmm4": "已审查：主题为产业访谈、社会影响、泛 AI 讨论、作品展示或其他非大模型技术/能力评估内容。",
+    "wpOxbesRNBc": "历史文本输入界面与统计语言模型，不是大模型技术或模型能力评估。",
+    "yvDCzhbjYWs": "历史数据驱动方法概论；没有直接讲解当前范围的大语言模型实现或具体能力实验。",
+    "hM_h0UA7upI": "跨自动驾驶、机器人、教育与产业的宽泛长访谈。",
+    "lXUZvyajciY": "跨强化学习观点、AGI 时间线、GDP 和教育的宽泛访谈，没有集中于具体模型实验。"
+  }
+}

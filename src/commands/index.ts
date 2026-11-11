@@ -18,6 +18,8 @@ export type CommandResult =
   | { kind: 'project'; slug: string }
   | { kind: 'panoramas' }
   | { kind: 'panorama'; slug: string }
+  | { kind: 'sites' }
+  | { kind: 'site'; slug: string }
   | { kind: 'contact' }
   | { kind: 'keywords' }
   | { kind: 'help' }
@@ -129,6 +131,13 @@ export const COMMANDS: CommandDefinition[] = [
     execute: () => output({ kind: 'panoramas' }),
   },
   {
+    name: 'sites',
+    aliases: ['websites'],
+    description: '打开评测论文、AI 历史档案与检索实验网站',
+    quick: true,
+    execute: () => output({ kind: 'sites' }),
+  },
+  {
     name: 'neofetch',
     aliases: ['sysinfo'],
     description: '终端风格个人信息',
@@ -210,7 +219,7 @@ export const COMMANDS: CommandDefinition[] = [
       if (target.execution) return target.execution
       const node = target.node!
       if (node.type === 'directory') return error(`cat: ${args[0]}: Is a directory`)
-      if (node.content === 'project' || node.content === 'panorama') {
+      if (node.content === 'project' || node.content === 'panorama' || node.content === 'site') {
         return output({ kind: node.content, slug: node.slug! })
       }
       return output({ kind: node.content })

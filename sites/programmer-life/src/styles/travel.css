@@ -1,0 +1,54 @@
+.trip-status {
+  position: fixed;
+  z-index: 13;
+  bottom: max(24px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(370px, calc(100% - 30px));
+  padding: 14px 16px 11px;
+  color: #294138;
+  background: #fffffff2;
+  border: 1px solid #ffffffd9;
+  border-radius: 20px;
+  box-shadow: 0 8px 36px #263d3550;
+  backdrop-filter: blur(16px);
+}
+
+.trip-route, .trip-status > button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trip-route > svg { color: #278061; flex-shrink: 0; }
+.trip-route strong, .trip-route span { display: block; }
+.trip-route span { color: #48625a; font-size: 13px; margin-top: 4px; }
+
+.trip-progress {
+  margin-top: 12px;
+  height: 4px;
+  border-radius: 2px;
+  overflow: hidden;
+  background: #dfebe3;
+}
+
+.trip-progress > span {
+  display: block;
+  height: 100%;
+  background: #369d73;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.trip-status > button {
+  margin: 5px 0 0 auto;
+  padding: 7px 2px;
+  color: #476157;
+  background: transparent;
+  font-size: 12px;
+}
+
+.trip-fallback { display: block; width: 100%; height: 100%; background: #9eae89; }
+
+.game-shell .journey-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.game-shell .journey-options > button { width: auto; padding-inline: 9px; }

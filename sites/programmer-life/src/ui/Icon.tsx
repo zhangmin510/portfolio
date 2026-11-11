@@ -1,0 +1,45 @@
+import type { CSSProperties } from 'react';
+
+const paths: Record<string, React.ReactNode> = {
+  phone: <><rect x="6" y="2" width="12" height="20" rx="3" /><path d="M10 5h4m-3 14h2" /></>,
+  rotate: <><path d="M20 8a8 8 0 1 0 0 8M20 3v5h-5" /></>,
+  'zoom-in': <><circle cx="10" cy="10" r="7" /><path d="m15 15 6 6M7 10h6m-3-3v6" /></>,
+  'zoom-out': <><circle cx="10" cy="10" r="7" /><path d="m15 15 6 6M7 10h6" /></>,
+  code: <><path d="m8 5-6 7 6 7m8-14 6 7-6 7m-3-16-2 18" /></>,
+  home: <><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z" /></>,
+  map: <><path d="m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2Zm6-2v16m6-14v16" /></>,
+  project: <><rect x="3" y="5" width="18" height="15" rx="3" /><path d="M8 5V3h8v2M3 11h18m-12 0v3h6v-3" /></>,
+  journal: <><path d="M5 3h14v18H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm2 0v18m3-12h6m-6 4h6" /></>,
+  settings: <><path d="M12 8v8m-4-4h8" /><circle cx="12" cy="12" r="9" /></>,
+  sun: <><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" /></>,
+  moon: <path d="M20 15A9 9 0 0 1 9 4a9 9 0 1 0 11 11Z" />,
+  clock: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>,
+  wallet: <><path d="M20 7H5a2 2 0 0 1 0-4h13v4M3 5v14a2 2 0 0 0 2 2h15V7m0 4h-6v6h6" /><path d="M17 14h.01" /></>,
+  energy: <path d="m13 2-9 12h7l-1 8 10-13h-7Z" />,
+  food: <><path d="M5 3v6m3-6v6m3-6v6M5 7h6v2a3 3 0 0 1-6 0Zm3 5v9m10 0V3c-4 3-4 9 0 9" /></>,
+  smile: <><circle cx="12" cy="12" r="9" /><path d="M8 9h.01M16 9h.01M8 14c1 4 7 4 8 0" /></>,
+  social: <><circle cx="9" cy="7" r="3" /><path d="M3 21v-3a6 6 0 0 1 12 0v3m2-17a3 3 0 0 1 0 6m1 4a5 5 0 0 1 3 4v3" /></>,
+  arrow: <><path d="M4 12h16m-6-6 6 6-6 6" /></>,
+  check: <path d="m5 12 4 4L19 6" />,
+  chevron: <path d="m9 5 7 7-7 7" />,
+  close: <path d="m6 6 12 12M6 18 18 6" />,
+  save: <><path d="M4 3h13l4 4v14H3V3Zm3 0v7h10V3M7 21v-7h10v7" /></>,
+  leaf: <><path d="M20 3C5 2 1 9 6 16c7 5 14 1 14-13ZM5 21 16 9" /></>,
+  coffee: <><path d="M3 8h13v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5Zm13 1h2a3 3 0 0 1 0 6h-2M6 3v2m4-2v2m4-2v2" /></>,
+  office: <><rect x="5" y="3" width="14" height="18" rx="1" /><path d="M9 7h1m4 0h1M9 11h1m4 0h1M9 15h1m4 0h1m-5 6v-3h4v3" /></>,
+  store: <><path d="m4 3-2 6v3a3 3 0 0 0 5 2 3 3 0 0 0 5 0 3 3 0 0 0 5 0 3 3 0 0 0 5-2V9l-2-6ZM2 9h20M4 15v6h16v-6M9 21v-5h6v5" /></>,
+  spark: <><path d="m12 2 3 7 7 3-7 3-3 7-3-7-7-3 7-3Zm8 0v4m-2-2h4" /></>,
+  bed: <><path d="M3 5v16m18-10v10M3 16h18M3 9h15a3 3 0 0 1 3 3v4M6 9v3h5V9" /></>,
+  download: <><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5" /></>,
+  upload: <><path d="M12 16V3m-5 5 5-5 5 5M4 16v5h16v-5" /></>,
+  reset: <><path d="M3 11a9 9 0 1 1 2 7M3 4v7h7" /></>,
+  info: <><circle cx="12" cy="12" r="9" /><path d="M12 11v6m0-10h.01" /></>,
+  walk: <><circle cx="14" cy="4" r="2" /><path d="m7 21 4-7m6 7-3-7-3-4 2-3m-7 5 4-3m4-1 3 5 4 1" /></>,
+  bus: <><rect x="4" y="3" width="16" height="16" rx="3" /><path d="M4 11h16M8 19v2m8-2v2M8 15h.01M16 15h.01" /></>,
+  car: <><path d="m4 11 2-5h12l2 5M3 17v2m18-2v2M7 14h.01m10 0h.01" /><rect x="3" y="11" width="18" height="6" rx="2" /></>,
+  calendar: <><rect x="3" y="5" width="18" height="16" rx="3" /><path d="M7 3v4m10-4v4M3 10h18M8 15h.01m4 0h.01m4 0h.01" /></>,
+};
+
+export function Icon({ name, size = 20, style, className = '' }: { name: string; size?: number; style?: CSSProperties; className?: string }) {
+  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className={className} style={style}>{paths[name] ?? paths.spark}</svg>;
+}

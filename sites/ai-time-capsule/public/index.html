@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="把 AI 的原始主张、后续证据与人工判断放回时间线。一个可追溯、可编辑的 AI 历史档案。">
+  <title>AI Time Capsule · 把判断放回时间</title>
+  <meta name="theme-color" content="#173e36">
+  <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="AI Time Capsule 首页"><span class="brand-mark">◷</span><span>TIME CAPSULE<small>AI 观察档案</small></span></a>
+    <nav><button class="quiet" id="method-button">整理方法</button><a class="quiet export-link" href="/api/export">导出档案 ↗</a><button class="primary" id="new-button"><span>＋</span>新建档案</button></nav>
+  </header>
+  <main>
+    <section class="hero">
+      <div><div class="eyebrow"><span></span>A RECORD OF PROMISES & EVIDENCE</div><h1>当时的承诺，<br><em>后来的证据。</em></h1><p>不是替历史打分，而是记住：谁在何时说了什么，<br class="desktop">后来又有哪些证据，改变了我们的判断。</p></div>
+      <div class="snapshot-card"><div class="card-kicker">TIME MACHINE <span>↶</span></div><label for="as-of">把档案回看到</label><input type="date" id="as-of" aria-label="回看日期"><div class="date-presets"><button data-date="2024-12-31">2024 年末</button><button data-date="2025-12-31">2025 年末</button><button data-date="today">最新</button></div><p>仅展示这一时点之前的主张、证据与判断。<br>今天写下的回顾，不会提前出现在过去。</p></div>
+    </section>
+    <p class="storage-notice" id="storage-note">个人修改保存在本机档案服务。</p>
+    <section class="stats" aria-label="档案统计"><div><strong id="claim-count">—</strong><span>条可回看的主张</span></div><div><strong id="evidence-count">—</strong><span>条有来源的证据</span></div><div><strong id="supported-count">—</strong><span>有证据支持</span></div><div><strong id="pending-count">—</strong><span>仍然值得观察</span></div></section>
+    <section class="archive-section">
+      <div class="section-heading"><div><div class="eyebrow">THE ARCHIVE</div><h2>让事实留下时间戳</h2></div><span class="snapshot-note" id="snapshot-note">本地快照 · 正在加载</span></div>
+      <div class="toolbar"><div class="topics" role="group" aria-label="领域筛选" id="topics"></div><label class="search"><span>⌕</span><input id="search" type="search" aria-label="搜索档案" placeholder="搜索主张、机构或证据…"></label></div>
+      <div class="filter-row"><div><select id="status" aria-label="判断状态"><option value="">所有判断状态</option></select><label class="own-filter"><input type="checkbox" id="own">只看自建档案</label></div><label class="sort-label">排序<select id="sort" aria-label="时间排序"><option value="newest">由近及远</option><option value="oldest">从最早开始</option></select></label></div>
+      <div class="timeline" id="timeline"><div class="empty">正在打开时间档案…</div></div>
+    </section>
+    <footer><div><b>AI TIME CAPSULE</b><p>保留主张，核对证据，也保留不确定性。</p></div><div><span>灵感来自 Karpathy 的</span><br><a href="https://github.com/karpathy/hn-time-capsule" target="_blank" rel="noopener noreferrer">HN Time Capsule ↗</a></div></footer>
+  </main>
+  <dialog id="detail-dialog" class="detail-dialog"><button class="close-button" data-close="detail-dialog" aria-label="关闭详情">×</button><div id="detail-content"></div></dialog>
+  <dialog id="edit-dialog" class="edit-dialog"><button class="close-button" data-close="edit-dialog" aria-label="关闭编辑">×</button><div class="eyebrow">KEEP A TRACE</div><h2 id="edit-heading">新建一条档案</h2><p class="form-intro">把原始说法、事实证据与自己的判断分开记录。所有修改保存在本机。</p><form id="claim-form">
+    <input type="hidden" name="id"><div class="form-grid"><label class="wide">档案标题<input name="title" required maxlength="300" placeholder="这个承诺，后来怎么样了？"></label><label>领域<select name="topic"></select></label><label>机构或作者<input name="organization" required maxlength="200" placeholder="例如：发布机构 / 论文作者"></label><label>原始主张日期<input type="date" name="date" required></label><label>原始来源发布者<input name="publisher" required maxlength="200"></label><label class="wide">原始主张摘要<textarea name="claim" rows="3" required maxlength="3000" placeholder="用自己的话转述，避免把推测当成原话。"></textarea></label><label class="wide">适用范围与条件<textarea name="scope" rows="2" maxlength="3000" placeholder="具体模型、任务、版本或实验条件。"></textarea></label><label class="wide">来源标题<input name="sourceTitle" required maxlength="500"></label><label class="wide">原始来源链接<input name="sourceUrl" type="url" required placeholder="https://…"></label></div>
+    <div class="form-subhead"><h3>后续证据</h3><button type="button" class="outline small" id="add-evidence">＋ 添加证据</button></div><p class="field-note">没有找到证据，也可以先存档。证据应有明确的发布日期和原始来源。</p><div id="evidence-fields"></div>
+    <div class="form-subhead"><h3>今天的人工判断</h3><span class="record-date" id="assessment-date"></span></div><div class="form-grid"><label>判断状态<select name="assessmentStatus"></select></label><label>判断者<input name="assessmentAuthor" value="本地编辑" maxlength="100" required></label><label class="wide">判断说明<textarea name="assessmentSummary" rows="3" required maxlength="3000" placeholder="哪些证据支持这个判断？没有结论时，说明还缺什么。"></textarea></label><label class="wide">不确定性与限制<textarea name="assessmentCaveat" rows="2" maxlength="3000" placeholder="不同人群、不同测试设置不能直接比较等。"></textarea></label></div><p class="field-note">新判断记录在今天；使用当前填写的证据作为依据，不会改写过去的判断。</p><p class="form-error" id="form-error" role="alert"></p><div class="form-actions"><button type="button" class="quiet" data-close="edit-dialog">取消</button><button type="submit" class="primary" id="save-button">保存到本地档案</button></div>
+  </form></dialog>
+  <dialog id="method-dialog" class="method-dialog"><button class="close-button" data-close="method-dialog" aria-label="关闭整理方法">×</button><div class="eyebrow">METHOD, NOT A VERDICT MACHINE</div><h2>不让后见之明，<br>伪装成当时已知。</h2><div class="prose"><h3>三个分开的层次</h3><p><b>原始主张</b>是对原文的中文转述，附原始来源和发布日期。<b>后续证据</b>只描述资料中可核对的事实。<b>人工判断</b>记录编辑的结论、依据、日期和不确定性，不由模型自动裁决。</p><h3>时间如何生效</h3><p>选择回看日期后，晚于该时点的主张、证据和人工判断都会隐藏。即使证据很早就存在，今天才写下的回顾也不会提前出现。原站链接可能后续更新，阅读时请核对其版本与日期。</p><h3>四种状态</h3><p>有证据支持、部分支持、被证据反驳、尚待观察。允许“没有结论”；不同任务、人群或模型版本的研究不能直接当成相互证伪。</p><h3>数据与本地记录</h3><p id="storage-method">首批档案由编辑从发布者公告、论文和研究机构原始资料人工整理，核验日期为 2026 年 11 月 7 日。这是可编辑快照，不会自动追踪网络。自建、修改、导入与版本记录保存在本机 runtime 目录，无需模型 API。</p><div class="import-box"><div><b>把已有资料带进来</b><p>支持本产品导出的 JSON，先验证整份文件，再合并保存。</p></div><button class="outline" id="import-button">导入 JSON</button><input type="file" accept=".json,application/json" id="import-file" hidden></div></div></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

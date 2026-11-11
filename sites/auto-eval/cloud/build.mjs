@@ -1,0 +1,13 @@
+import { build } from 'esbuild';
+import { mkdir,readFile,writeFile,cp,rm } from 'node:fs/promises';
+import path from 'node:path';
+const out='cloud-dist';
+await rm(out,{recursive:true,force:true});await mkdir(out+'/data',{recursive:true});
+for(const file of ['index.html','styles.css','favicon.svg','favicon.ico','favicon-32.png','apple-touch-icon.png'])await cp('public/'+file,out+'/'+file);
+await cp('data/demo.json',out+'/data/demo.json');
+const shim=path.resolve('cloud/browser-shims.mjs');
+const options={bundle:true,format:'esm',platform:'browser',target:'es2022',minify:true,legalComments:'eof',plugins:[{name:'browser-node-adapter',setup(b){b.onResolve({filter:/^node:(crypto|perf_hooks|timers\/promises)$/},()=>({path:shim}));}}]};
+await build({...options,entryPoints:['cloud/app-entry.mjs'],outfile:out+'/app.js'});
+await build({...options,entryPoints:['cloud/experiment-worker.mjs'],outfile:out+'/experiment-worker.js'});
+await writeFile(out+'/404.html','<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>页面未找到 · AutoEval</title><h1>页面未找到</h1><a href="/">返回实验室</a></html>');
+console.log('Cloudflare assets built: browser execution + private IndexedDB; no runtime files or API keys');

@@ -1,0 +1,23 @@
+{
+  "name": "eval-papers",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "build": "node build.mjs",
+    "update-data": "node scripts/update-data.mjs",
+    "preview:cloudflare": "npm run build && wrangler dev --ip 127.0.0.1 --port 8822",
+    "types:cloudflare": "wrangler types --include-runtime false",
+    "deploy:dry": "npm run build && wrangler deploy --dry-run",
+    "deploy:cloudflare": "npm run build && wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.158.0"
+  }
+}

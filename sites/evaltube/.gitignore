@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.DS_Store
+data/.cache/
+data/*.local.json
+*.log
+.wrangler/
+.dev.vars
+.env
+.env.*
+runtime/
+.runtime/
+*.local.json
+.dev.vars.*
+dist-cloud/

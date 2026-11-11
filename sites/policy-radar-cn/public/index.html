@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="实时跟踪中国重要党政会议与政策文件，进行历史版本对比，并用可复用框架判断政策阶段与落地证据。" />
+  <meta name="theme-color" content="#101a2c" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101a2c'/%3E%3Cpath d='M14 43h36M18 35h8l5-19 7 27 5-15h6' fill='none' stroke='%23e74d3c' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <title>中国政策雷达｜会议与政策信号跟踪</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;900&family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div>
+        <div class="brand-name">中国政策雷达</div>
+        <div class="brand-note">会议 → 文件 → 执行 → 结果</div>
+      </div>
+    </div>
+    <nav class="tabs" aria-label="主要视图">
+      <button class="tab is-active" data-view="radar">实时雷达</button>
+      <button class="tab" data-view="map">会议地图</button>
+      <button class="tab" data-view="compare">历史对比</button>
+      <button class="tab" data-view="framework">解读框架</button>
+    </nav>
+    <div class="header-actions">
+      <div class="live-indicator"><span class="pulse"></span><span id="live-state">连接官方源</span></div>
+      <button class="refresh-button" id="refresh-live" type="button" aria-label="刷新最新政策">刷新</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="view is-active" id="view-radar" data-view-panel="radar">
+      <div class="page-intro">
+        <div>
+          <p class="eyebrow">POLICY INTELLIGENCE DESK · CN</p>
+          <h1>先判断会议在哪一层，<br />再判断政策走到哪一步。</h1>
+        </div>
+        <div class="intro-note">
+          <p>把分散的通稿和政策文件放进同一条传导链，区分方向、基调、节奏、执行与预期。</p>
+          <p class="as-of">官方源最近更新：<strong id="source-date">读取中</strong></p>
+        </div>
+      </div>
+
+      <div class="metric-row" aria-label="当前监测摘要">
+        <article class="metric primary"><span>最新会议信号</span><strong id="meeting-count">—</strong><em>条</em></article>
+        <article class="metric"><span>最新政策文件</span><strong id="policy-count">—</strong><em>条</em></article>
+        <article class="metric"><span>监测层级</span><strong>5</strong><em>层</em></article>
+        <article class="metric"><span>历史样本</span><strong id="history-count">—</strong><em>个</em></article>
+        <article class="metric status"><span>数据状态</span><strong id="data-status">同步中</strong><em>15分钟缓存</em></article>
+      </div>
+
+      <div class="radar-grid">
+        <section class="panel feed-panel">
+          <div class="panel-head">
+            <div><span class="panel-kicker">实时监测</span><h2>会议与政策流</h2></div>
+            <div class="segmented" role="group" aria-label="筛选信息类型">
+              <button class="segment is-active" data-feed-filter="all">全部</button>
+              <button class="segment" data-feed-filter="news">会议</button>
+              <button class="segment" data-feed-filter="policy">文件</button>
+            </div>
+          </div>
+          <div class="feed-list" id="live-feed" aria-live="polite">
+            <div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div>
+          </div>
+        </section>
+
+        <aside class="side-stack">
+          <section class="panel signal-panel">
+            <div class="panel-head compact"><div><span class="panel-kicker">信号识别</span><h2>五层传导链</h2></div></div>
+            <ol class="transmission-chain">
+              <li><span>01</span><div><strong>定方向</strong><small>党代会 · 中央全会</small></div><b>5年+</b></li>
+              <li><span>02</span><div><strong>定基调</strong><small>中央经济工作会议 · 两会</small></div><b>1年</b></li>
+              <li><span>03</span><div><strong>定节奏</strong><small>政治局 · 财经委 · 深改委</small></div><b>季度</b></li>
+              <li><span>04</span><div><strong>抓落实</strong><small>国常会 · 部委文件</small></div><b>近期</b></li>
+              <li><span>05</span><div><strong>释预期</strong><small>国新办 · 部委发布会</small></div><b>即时</b></li>
+            </ol>
+          </section>
+
+          <section class="panel watch-panel">
+            <div class="panel-head compact"><div><span class="panel-kicker">本期观察</span><h2>读法提醒</h2></div></div>
+            <div class="watch-item"><span class="watch-no">A</span><p><strong>版本比较</strong>看新增词、频次跃升、任务排序和量化指标。</p></div>
+            <div class="watch-item"><span class="watch-no">B</span><p><strong>动词分级</strong>只能判断阶段，必须与责任人、时间表、资金配套交叉验证。</p></div>
+            <div class="watch-item"><span class="watch-no">C</span><p><strong>非常规加会</strong>往往比常规会议本身更能说明政策正在转折或加力。</p></div>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <section class="view" id="view-map" data-view-panel="map">
+      <div class="section-heading">
+        <div><p class="eyebrow">INSTITUTIONAL MAP</p><h1>中国党政会议体系地图</h1></div>
+        <p>不要只看会议规格，更要看它在政策链条中承担什么功能、产出什么文件、影响多长时间。</p>
+      </div>
+      <div class="map-legend">
+        <span><i class="dot direction"></i>定方向</span><span><i class="dot baseline"></i>定基调</span><span><i class="dot tempo"></i>定节奏</span><span><i class="dot execute"></i>抓落实</span><span><i class="dot explain"></i>释预期</span>
+      </div>
+      <div class="meeting-grid" id="meeting-grid"></div>
+    </section>
+
+    <section class="view" id="view-compare" data-view-panel="compare">
+      <div class="section-heading compare-heading">
+        <div><p class="eyebrow">VERSION COMPARISON</p><h1>历史会议与政策变化</h1></div>
+        <div class="compare-controls">
+          <label>基准年<select id="year-a" aria-label="选择基准年"></select></label>
+          <span class="versus">VS</span>
+          <label>对比年<select id="year-b" aria-label="选择对比年"></select></label>
+        </div>
+      </div>
+      <div class="compare-summary" id="compare-summary"></div>
+      <div class="compare-grid">
+        <section class="year-column" id="year-a-column"></section>
+        <section class="change-column">
+          <div class="change-sticky">
+            <span class="panel-kicker">变化识别</span>
+            <h2>四类增量</h2>
+            <ul>
+              <li><strong>新词</strong><span>是否出现新方向</span></li>
+              <li><strong>频次</strong><span>优先级是否抬升</span></li>
+              <li><strong>排序</strong><span>任务是否前移</span></li>
+              <li><strong>资源</strong><span>预算和工具是否跟进</span></li>
+            </ul>
+            <p>比较结果是线索，不是结论。必须回到原文，并继续追踪后续文件与执行数据。</p>
+          </div>
+        </section>
+        <section class="year-column" id="year-b-column"></section>
+      </div>
+      <div class="timeline-strip" id="timeline-strip" aria-label="历史事件时间线"></div>
+    </section>
+
+    <section class="view" id="view-framework" data-view-panel="framework">
+      <div class="section-heading">
+        <div><p class="eyebrow">INTERPRETATION PLAYBOOK</p><h1>六步政策解读与跟踪框架</h1></div>
+        <p>每次遇到新会议或新文件，都用同一套问题检查，留下可复核的判断依据。</p>
+      </div>
+      <div class="framework-layout">
+        <div class="framework-steps" id="framework-steps"></div>
+        <aside class="verb-card">
+          <span class="panel-kicker">政策阶段尺</span>
+          <h2>从措辞判断离落地还有多远</h2>
+          <div id="verb-ladder"></div>
+          <div class="evidence-rule">
+            <strong>三项落地证据</strong>
+            <p>牵头部委 · 细化施工图 · 财政金融支持</p>
+          </div>
+        </aside>
+      </div>
+      <section class="source-section">
+        <div><span class="panel-kicker">研究基础</span><h2>两篇 Cubox 收藏与官方信息源</h2></div>
+        <div class="source-grid" id="source-grid"></div>
+        <p class="disclaimer">本工具用于信息整理与研究，不构成投资、法律或政策执行建议。自动抓取仅展示中国政府网公开列表；关键判断请点击原文复核。</p>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <span>中国政策雷达</span><span>数据源：中国政府网、新华网等公开权威信息</span><span id="footer-time"></span>
+  </footer>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

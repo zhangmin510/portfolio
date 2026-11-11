@@ -1,0 +1,11 @@
+import { cp, mkdir, rm, readFile, writeFile } from 'node:fs/promises';
+const catalog = JSON.parse(await readFile(new URL('./data/catalog.json', import.meta.url)));
+if (!catalog.videos?.length) throw new Error('Catalog is empty; run npm run update-data');
+const output = new URL('./dist/', import.meta.url);
+await rm(output, { recursive: true, force: true });
+await mkdir(output, { recursive: true });
+await cp(new URL('./public/', import.meta.url), output, { recursive: true });
+await cp(new URL('./data/', import.meta.url), new URL('./dist/data/', import.meta.url), { recursive: true, filter: p => !p.includes('/.cache') && !p.endsWith('.local.json') });
+catalog.meta.metadataFile = null;
+await writeFile(new URL('./dist/data/catalog.json', import.meta.url), JSON.stringify(catalog, null, 2) + '\n');
+console.log(`Built dist/ · ${catalog.videos.length} verified videos · no runtime dependencies`);

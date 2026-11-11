@@ -1,0 +1,47 @@
+{
+  "name": "hackertube-data",
+  "generated": "2026-10-31",
+  "videos": 6454,
+  "mentions": 39834,
+  "zip": {
+    "name": "hackertube-data.zip",
+    "bytes": 17842799
+  },
+  "files": [
+    {
+      "name": "DATA.md",
+      "bytes": 13918,
+      "rows": null
+    },
+    {
+      "name": "videos.jsonl",
+      "bytes": 8634516,
+      "rows": 6454
+    },
+    {
+      "name": "mentions.jsonl",
+      "bytes": 34691588,
+      "rows": 39834
+    },
+    {
+      "name": "taxonomy.json",
+      "bytes": 44479,
+      "rows": 150
+    },
+    {
+      "name": "related.jsonl",
+      "bytes": 1493758,
+      "rows": 3778
+    },
+    {
+      "name": "embeddings.npy",
+      "bytes": 4956800,
+      "rows": 6454
+    },
+    {
+      "name": "embedding_ids.json",
+      "bytes": 96810,
+      "rows": 6454
+    }
+  ]
+}

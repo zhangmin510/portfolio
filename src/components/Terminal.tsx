@@ -16,7 +16,7 @@ import {
   executeCommand,
   type CommandResult,
 } from '../commands'
-import { PROFILE } from '../data/portfolio'
+import { PROFILE, WEBSITES } from '../data/portfolio'
 import type { HistoryItem } from '../types'
 import CommandOutput from './CommandOutput'
 import './Terminal.css'
@@ -494,6 +494,17 @@ export default function Terminal() {
             <p className="dim">输入 <span className="accent">help</span> 查看命令，<span className="accent">projects</span> 查看项目，<span className="accent">panoramas</span> 浏览全景图。</p>
           </div>
         )}
+
+        <nav className="site-navigation" aria-label="网站导航">
+          <p className="dim">// WEB APPS</p>
+          <div>
+            {WEBSITES.map((site) => (
+              <a key={site.slug} className="terminal-link" href={site.href} target="_blank" rel="noopener noreferrer">
+                <span>{site.name}</span><span className="dim">{site.label} ↗</span>
+              </a>
+            ))}
+          </div>
+        </nav>
 
         <div
           className="terminal-history"

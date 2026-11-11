@@ -1,0 +1,10 @@
+import { readFile, rm, cp, mkdir } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { validateClaim } from '../lib/archive.mjs';
+const root = fileURLToPath(new URL('../', import.meta.url));
+const seed = JSON.parse(await readFile(new URL('../data/claims.json', import.meta.url), 'utf8'));
+for (const claim of seed.claims) validateClaim(claim);
+await rm(`${root}dist`, { recursive: true, force: true });
+await mkdir(`${root}dist`, { recursive: true });
+await cp(`${root}public`, `${root}dist`, { recursive: true });
+console.log(`已验证 ${seed.claims.length} 条档案；静态资源已生成到 dist/。使用 npm start 提供 API。`);

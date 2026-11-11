@@ -92,6 +92,34 @@
   margin-top: 10px;
 }
 
+.site-navigation {
+  margin: 22px 0 26px;
+  font-size: 12px;
+}
+
+.site-navigation > p {
+  margin-bottom: 9px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.site-navigation > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+}
+
+.site-navigation a {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  cursor: pointer;
+}
+
+.site-navigation a > .dim {
+  font-size: 11px;
+}
+
 .terminal-line {
   min-width: 0;
   margin-top: 4px;

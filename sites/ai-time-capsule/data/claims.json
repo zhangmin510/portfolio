@@ -1,0 +1,440 @@
+{
+  "version": 1,
+  "verifiedAt": "2026-11-07",
+  "curation": "编辑基于原始来源人工整理；观点是有日期的人工判断，非模型自动裁决。",
+  "claims": [
+    {
+      "id": "copilot-productivity",
+      "title": "AI 编码助手能让开发者快 55% 吗？",
+      "topic": "apps",
+      "organization": "GitHub / METR",
+      "date": "2022-09-07",
+      "claim": "GitHub 的受控编程实验报告，使用 Copilot 的参与者更快完成指定任务，平均用时减少约 55%。",
+      "scope": "这是特定实验与参与者的结果，不是所有开发任务的通用提升率。",
+      "source": {
+        "title": "Quantifying GitHub Copilot’s impact on developer productivity and happiness",
+        "publisher": "GitHub",
+        "date": "2022-09-07",
+        "url": "https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-on-developer-productivity-and-happiness-/"
+      },
+      "evidence": [
+        {
+          "id": "metr-2025",
+          "date": "2025-07-10",
+          "relation": "context",
+          "title": "真实成熟项目中的结果并不相同",
+          "summary": "METR 对熟悉成熟开源项目的 16 位开发者、246 个任务进行随机试验，允许使用当时 AI 工具的一组平均耗时增加 19%。",
+          "source": {
+            "title": "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity",
+            "publisher": "METR",
+            "date": "2025-07-10",
+            "url": "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/"
+          }
+        }
+      ],
+      "assessments": [
+        {
+          "id": "editor-review-2026-11-07",
+          "date": "2026-11-07",
+          "status": "partial",
+          "summary": "原实验提供了特定任务上的支持；后续研究提醒我们不能把同一提升率外推到成熟项目。",
+          "caveat": "两项研究的人群、任务、工具和时间不同。后一个研究不构成对原始受控实验的直接复现或证伪。",
+          "basisEvidenceIds": [
+            "metr-2025"
+          ],
+          "author": "编辑人工复核"
+        }
+      ],
+      "verifiedAt": "2026-11-07",
+      "origin": "seed"
+    },
+    {
+      "id": "gpt4-benchmarks",
+      "title": "考试表现接近人类，意味着可靠通用能力吗？",
+      "topic": "models",
+      "organization": "OpenAI",
+      "date": "2023-03-14",
+      "claim": "GPT-4 发布说明称，它在多种专业与学术测试上表现接近人类水平，并报告了模拟律师资格考试等结果。",
+      "scope": "发布说明中的测试表现与日常任务可靠性是两个不同问题。",
+      "source": {
+        "title": "GPT-4 research",
+        "publisher": "OpenAI",
+        "date": "2023-03-14",
+        "url": "https://openai.com/index/gpt-4-research/"
+      },
+      "evidence": [
+        {
+          "id": "gpt4-report",
+          "date": "2023-03-15",
+          "relation": "context",
+          "title": "技术报告同时记录可靠性局限",
+          "summary": "GPT-4 技术报告指出模型仍可能生成不真实内容、犯推理错误；基准分数不能单独证明可靠完成真实工作。",
+          "source": {
+            "title": "GPT-4 Technical Report",
+            "publisher": "OpenAI / arXiv",
+            "date": "2023-03-15",
+            "url": "https://arxiv.org/abs/2303.08774"
+          }
+        }
+      ],
+      "assessments": [
+        {
+          "id": "editor-review-2026-11-07",
+          "date": "2026-11-07",
+          "status": "partial",
+          "summary": "有官方测试结果支撑特定能力，也有同一技术报告明确列出的局限。",
+          "caveat": "当前档案没有独立重跑原始试题；不把发布者报告的分数当作对所有现实任务的保证。",
+          "basisEvidenceIds": [
+            "gpt4-report"
+          ],
+          "author": "编辑人工复核"
+        }
+      ],
+      "verifiedAt": "2026-11-07",
+      "origin": "seed"
+    },
+    {
+      "id": "sora-world-simulation",
+      "title": "生成视频，离“理解物理世界”还有多远？",
+      "topic": "models",
+      "organization": "OpenAI",
+      "date": "2024-02-15",
+      "claim": "Sora 的研究介绍把视频生成视为通往理解、模拟物理世界的模型的一条路径。",
+      "scope": "这是研究方向与目标，不是已经实现通用世界模拟的可检验承诺。",
+      "source": {
+        "title": "Video generation models as world simulators",
+        "publisher": "OpenAI",
+        "date": "2024-02-15",
+        "url": "https://openai.com/index/video-generation-models-as-world-simulators/"
+      },
+      "evidence": [
+        {
+          "id": "sora-turbo",
+          "date": "2024-12-09",
+          "relation": "supports",
+          "title": "Sora 从研究演示走向产品",
+          "summary": "OpenAI 发布 Sora Turbo，向 Plus 和 Pro 用户提供独立视频产品，支持生成最长 20 秒的视频；发布说明仍列出物理与复杂动作方面的局限。",
+          "source": {
+            "title": "Sora is here",
+            "publisher": "OpenAI",
+            "date": "2024-12-09",
+            "url": "https://openai.com/index/sora-is-here/"
+          }
+        }
+      ],
+      "assessments": [
+        {
+          "id": "editor-review-2026-11-07",
+          "date": "2026-11-07",
+          "status": "pending",
+          "summary": "视频生成功能已形成产品，但“理解物理世界”缺少统一完成标准，继续观察。",
+          "caveat": "产品上线不能独立证明实现通用世界模型，也不能因某个失败片段就否定研究方向。",
+          "basisEvidenceIds": [
+            "sora-turbo"
+          ],
+          "author": "编辑人工复核"
+        }
+      ],
+      "verifiedAt": "2026-11-07",
+      "origin": "seed"
+    },
+    {
+      "id": "gpt4o-omni",
+      "title": "实时多模态模型，会一次开放所有能力吗？",
+      "topic": "models",
+      "organization": "OpenAI",
+      "date": "2024-05-13",
+      "claim": "GPT-4o 被介绍为跨文本、视觉和音频的端到端多模态模型，展示低延迟语音交互。",
+      "scope": "初始发布同时说明，不同模态能力分阶段开放。",
+      "source": {
+        "title": "Hello GPT-4o",
+        "publisher": "OpenAI",
+        "date": "2024-05-13",
+        "url": "https://openai.com/index/hello-gpt-4o/"
+      },
+      "evidence": [
+        {
+          "id": "gpt4o-card",
+          "date": "2024-08-08",
+          "relation": "context",
+          "title": "语音能力有专门评估与缓解措施",
+          "summary": "GPT-4o 系统卡补充音频、视觉和文本的能力评估，讨论声音生成等风险与限制，并描述外部评估工作。",
+          "source": {
+            "title": "GPT-4o System Card",
+            "publisher": "OpenAI",
+            "date": "2024-08-08",
+            "url": "https://openai.com/index/gpt-4o-system-card/"
+          }
+        }
+      ],
+      "assessments": [
+        {
+          "id": "editor-review-2026-11-07",
+          "date": "2026-11-07",
+          "status": "partial",
+          "summary": "官方后续系统卡支持多模态架构和评估工作的存在，开放范围与实际工作流仍需分开考察。",
+          "caveat": "这不是对当前版本所有模态可用性或任意任务可靠性的测试。",
+          "basisEvidenceIds": [
+            "gpt4o-card"
+          ],
+          "author": "编辑人工复核"
+        }
+      ],
+      "verifiedAt": "2026-11-07",
+      "origin": "seed"
+    },
+    {
+      "id": "google-ai-overviews",
+      "title": "AI 搜索摘要，能把复杂搜索交给模型吗？",
+      "topic": "search",
+      "organization": "Google",
+      "date": "2024-05-14",
+      "claim": "Google 推出扩大范围的 AI Overviews，提出由定制 Gemini 模型帮助用户处理更复杂的搜索与研究问题。",
+      "scope": "目标是降低搜索整理成本；摘要的事实性仍需结合来源判断。",
+      "source": {
+        "title": "Generative AI in Search: Let Google do the searching for you",
+        "publisher": "Google",
+        "date": "2024-05-14",
+        "url": "https://blog.google/products-and-platforms/products/search/generative-ai-google-search-may-2024/"
+      },
+      "evidence": [
+        {
+          "id": "aio-errors",
+          "date": "2024-05-30",
+          "relation": "challenges",
+          "title": "Google 复盘错误结果并调整触发条件",
+          "summary": "Google 承认出现少量不准确或无帮助的摘要，说明讽刺内容、信息稀缺与查询理解问题，并公布技术调整。",
+          "source": {
+            "title": "AI Overviews: About last week",
+            "publisher": "Google",
+            "date": "2024-05-30",
+            "url": "https://blog.google/products-and-platforms/products/search/ai-overviews-update-may-2024/"
+          }
+        }
+      ],
+      "assessments": [
+        {
+          "id": "editor-review-2026-11-07",
+          "date": "2026-11-07",
+          "status": "partial",
+          "summary": "AI 摘要已进入搜索产品；后续官方复盘表明，复杂问题的答案仍受来源和查询理解影响。",
+          "caveat": "这是发布者对问题的说明，不是覆盖所有查询的独立准确率审计。",
+          "basisEvidenceIds": [
+            "aio-errors"
+          ],
+          "author": "编辑人工复核"
+        }
+      ],
+      "verifiedAt": "2026-11-07",
+      "origin": "seed"
+    },
+    {
+      "id": "claude-computer-use",
+      "title": "模型能操作鼠标和键盘，就能稳定完成工作吗？",
+      "topic": "agents",
+      "organization": "Anthropic",
+      "date": "2024-10-22",
+      "claim": "Claude 3.5 Sonnet 的 computer use 公测让模型通过截图、光标和虚拟键盘操作计算机。",
+      "scope": "公开测试阶段的能力演示，不等于无人监管的完整任务自动化。",
+      "source": {
+        "title": "Developing a computer use model",
+        "publisher": "Anthropic",
+        "date": "2024-10-22",
+        "url": "https://www.anthropic.com/news/developing-computer-use"
+      },
+      "evidence": [
+        {
+          "id": "osworld-2024",
+          "date": "2024-10-22",
+          "relation": "context",
+          "title": "同日公布的基准暴露完成率边界",
+          "summary": "官方发布说明报告 screenshot-only OSWorld 成绩为 14.9%，并强调滚动、拖拽等动作仍可能出错。",
+          "source": {
+            "title": "Introducing computer use, a new Claude 3.5 Sonnet, and Claude 3.5 Haiku",
+            "publisher": "Anthropic",
+            "date": "2024-10-22",
+            "url": "https://www.anthropic.com/news/3-5-models-and-computer-use"
+          }
+        }
+      ],
+      "assessments": [
+        {
+          "id": "editor-review-2026-11-07",
+          "date": "2026-11-07",
+          "status": "partial",
+          "summary": "计算机操作接口确实被开放测试；同一时期的基准说明其任务完成能力仍有明显边界。",
+          "caveat": "该分数仅对应当时模型与设置，不能当作当前版本的成绩。",
+          "basisEvidenceIds": [
+            "osworld-2024"
+          ],
+          "author": "编辑人工复核"
+        }
+      ],
+      "verifiedAt": "2026-11-07",
+      "origin": "seed"
+    },
+    {
+      "id": "chatgpt-search-rollout",
+      "title": "ChatGPT Search 会向免费用户开放吗？",
+      "topic": "search",
+      "organization": "OpenAI",
+      "date": "2024-10-31",
+      "claim": "ChatGPT Search 发布时面向部分付费用户开放，并计划在之后几个月扩展到免费用户。",
+      "scope": "本档案核对开放范围的承诺，不对搜索答案质量作总体判断。",
+      "source": {
+        "title": "Introducing ChatGPT search",
+        "publisher": "OpenAI",
+        "date": "2024-10-31",
+        "url": "https://openai.com/index/introducing-chatgpt-search/"
+      },
+      "evidence": [
+        {
+          "id": "search-logged-in",
+          "date": "2024-12-16",
+          "relation": "supports",
+          "title": "扩大到所有登录用户",
+          "summary": "原始发布页面的日期更新称，在可用地区向所有登录用户开放搜索。",
+          "source": {
+            "title": "ChatGPT search — December 16 update",
+            "publisher": "OpenAI",
+            "date": "2024-12-16",
+            "url": "https://openai.com/index/introducing-chatgpt-search/"
+          }
+        },
+        {
+          "id": "search-no-signup",
+          "date": "2025-02-05",
+          "relation": "supports",
+          "title": "后续公告称无需注册即可使用",
+          "summary": "同一页面 2025 年 2 月更新进一步宣布，在 ChatGPT 可用地区，搜索向所有人开放且无需注册。",
+          "source": {
+            "title": "ChatGPT search — February 5 update",
+            "publisher": "OpenAI",
+            "date": "2025-02-05",
+            "url": "https://openai.com/index/introducing-chatgpt-search/"
+          }
+        }
+      ],
+      "assessments": [
+        {
+          "id": "editor-review-2026-11-07",
+          "date": "2026-11-07",
+          "status": "supported",
+          "summary": "后续官方公告支持开放范围逐步扩大的承诺已经落实。",
+          "caveat": "这里依据可核验的发布公告，不代表今天各地区、各账户的实际访问状态。",
+          "basisEvidenceIds": [
+            "search-logged-in",
+            "search-no-signup"
+          ],
+          "author": "编辑人工复核"
+        }
+      ],
+      "verifiedAt": "2026-11-07",
+      "origin": "seed"
+    },
+    {
+      "id": "operator-chatgpt-integration",
+      "title": "Operator 会从独立预览并入 ChatGPT 吗？",
+      "topic": "agents",
+      "organization": "OpenAI",
+      "date": "2025-01-23",
+      "claim": "Operator 的研究预览提出，浏览器任务能力未来会整合进 ChatGPT。",
+      "scope": "核对产品整合这一具体路线，不把发布演示解释为任意任务都能完成。",
+      "source": {
+        "title": "Introducing Operator",
+        "publisher": "OpenAI",
+        "date": "2025-01-23",
+        "url": "https://openai.com/index/introducing-operator/"
+      },
+      "evidence": [
+        {
+          "id": "operator-integration",
+          "date": "2025-07-17",
+          "relation": "supports",
+          "title": "官方更新宣布并入 ChatGPT agent",
+          "summary": "原发布页面 7 月更新宣布 Operator 已整合进 ChatGPT agent，并说明独立站点将逐步停止使用。",
+          "source": {
+            "title": "Operator — July 17 update",
+            "publisher": "OpenAI",
+            "date": "2025-07-17",
+            "url": "https://openai.com/index/introducing-operator/"
+          }
+        }
+      ],
+      "assessments": [
+        {
+          "id": "editor-review-2026-11-07",
+          "date": "2026-11-07",
+          "status": "supported",
+          "summary": "官方后续公告明确支持产品整合路线已经交付。",
+          "caveat": "整合是产品状态证据，不构成浏览器 Agent 成功率的独立评估。",
+          "basisEvidenceIds": [
+            "operator-integration"
+          ],
+          "author": "编辑人工复核"
+        }
+      ],
+      "verifiedAt": "2026-11-07",
+      "origin": "seed"
+    },
+    {
+      "id": "deep-research-analyst",
+      "title": "深度研究能交付专业研究员级别的报告吗？",
+      "topic": "agents",
+      "organization": "OpenAI",
+      "date": "2025-02-02",
+      "claim": "Deep research 被介绍为可执行多步骤互联网研究、整合大量资料并生成综合报告的能力。",
+      "scope": "“研究员级别”没有在此档案中定义为单一可重复指标。",
+      "source": {
+        "title": "Introducing deep research",
+        "publisher": "OpenAI",
+        "date": "2025-02-02",
+        "url": "https://openai.com/index/introducing-deep-research/"
+      },
+      "evidence": [
+        {
+          "id": "deep-research-limits",
+          "date": "2025-02-02",
+          "relation": "context",
+          "title": "发布说明保留幻觉与来源判断方面的局限",
+          "summary": "官方同日说明提到，深度研究仍可能产生不正确事实，也可能难以区分可靠资料与传闻。",
+          "source": {
+            "title": "Deep research — limitations",
+            "publisher": "OpenAI",
+            "date": "2025-02-02",
+            "url": "https://openai.com/index/introducing-deep-research/"
+          }
+        },
+        {
+          "id": "deep-research-expansion",
+          "date": "2025-04-24",
+          "relation": "supports",
+          "title": "后续扩展产品访问范围",
+          "summary": "原发布页面 4 月更新宣布轻量版本和更广的套餐访问范围，说明产品持续交付，但并非准确性复测。",
+          "source": {
+            "title": "Deep research — April 24 update",
+            "publisher": "OpenAI",
+            "date": "2025-04-24",
+            "url": "https://openai.com/index/introducing-deep-research/"
+          }
+        }
+      ],
+      "assessments": [
+        {
+          "id": "editor-review-2026-11-07",
+          "date": "2026-11-07",
+          "status": "pending",
+          "summary": "多步骤研究产品已发布并扩展；专业研究质量需要限定领域、引用核查和实际任务测试。",
+          "caveat": "现有证据不足以给“专业研究员级别”作统一判定，保留为待观察。",
+          "basisEvidenceIds": [
+            "deep-research-limits",
+            "deep-research-expansion"
+          ],
+          "author": "编辑人工复核"
+        }
+      ],
+      "verifiedAt": "2026-11-07",
+      "origin": "seed"
+    }
+  ]
+}

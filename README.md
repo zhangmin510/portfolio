@@ -8,6 +8,7 @@
 ## 功能特性
 
 - 简洁的单栏终端主页，保留个人介绍、命令输入和轻量导航
+- 首页直接提供八个网站入口，`sites` / `websites` 命令可查看介绍，`cd sites` 可按目录浏览
 - `panoramas` 命令与全景图入口，连接 16 张独立目录发布的交互图谱
 - 全景图目录支持主题筛选、关键词搜索与手机浏览
 - 真实表单驱动的命令行交互，兼容键盘、触屏与屏幕阅读器
@@ -39,6 +40,23 @@ cd ~
 
 ↑ / ↓ 浏览命令历史，Tab 补全命令或路径；Ctrl+C 取消当前输入，
 Ctrl+L 清屏，Ctrl+A / E 移动到行首 / 行尾。页面内容以终端输出形式展示。
+
+## 网站导航
+
+| 网站 | 入口 |
+| --- | --- |
+| 全景图 · 知识地图 | [全景图总览](https://zhangmin.name/panoramas/) |
+| 评测前沿 · 模型与 Agent 评测 | [b.zhangmin.name](https://b.zhangmin.name/) |
+| EvalTube · AI 评测视频 | [evaltube.zhangmin.name](https://evaltube.zhangmin.name/) |
+| EvalPapers · 评测论文 | [evalpapers.zhangmin.name](https://evalpapers.zhangmin.name/)（[备用入口](https://evalpapers.zhangmin.workers.dev/)） |
+| AI Time Capsule · AI 历史档案 | [timecapsule.zhangmin.name](https://timecapsule.zhangmin.name/) |
+| AutoEval · 检索实验 | [autoeval.zhangmin.name](https://autoeval.zhangmin.name/) |
+| 栈城日常 · 程序员生活模拟 | [programmer-life.zhangmin.workers.dev](https://programmer-life.zhangmin.workers.dev/) |
+| 权重实验室 · 模型权重与推理 | [weights.zhangmin.name](https://weights.zhangmin.name/) |
+
+导航数据统一维护在 `src/data/portfolio.ts` 的 `WEBSITES`，同时用于首页链接、终端输出和虚拟目录。
+
+七个独立子站的源码、构建说明和 Cloudflare 配置见[子站目录](sites/README.md)。评测前沿的 Cloudflare 配置维护在 [AIHOT 的 `eval-frontier` 分支](https://github.com/zhangmin510/AIHOT/tree/eval-frontier/deploy/cloudflare)。
 
 ## 全景图目录
 

@@ -1,0 +1,287 @@
+<div id="qwen-weight-lab">
+  <style>
+    #qwen-weight-lab { color:var(--foreground); display:grid; gap:calc(var(--font-size-base)*1.25); min-width:0; }
+    #qwen-weight-lab .qwv-heading { display:grid; gap:calc(var(--font-size-base)*.35); padding-inline-end:90px; }
+    #qwen-weight-lab .qwv-panel { display:grid; gap:calc(var(--font-size-base)*1.1); min-width:0; }
+    #qwen-weight-lab .qwv-panel[hidden] { display:none; }
+    #qwen-weight-lab .qwv-block { display:grid; gap:calc(var(--font-size-base)*.6); min-width:0; }
+    #qwen-weight-lab .qwv-layer-grid { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:calc(var(--font-size-base)*.35); }
+    #qwen-weight-lab .qwv-layer-linear { background:color-mix(in srgb,var(--viz-series-1) 12%,transparent); }
+    #qwen-weight-lab .qwv-layer-full { background:color-mix(in srgb,var(--viz-series-2) 16%,transparent); }
+    #qwen-weight-lab .qwv-layer-grid .qwv-edited { text-decoration:underline; text-underline-offset:.25em; }
+    #qwen-weight-lab .qwv-legend { display:flex; gap:calc(var(--font-size-base)*1); flex-wrap:wrap; align-items:center; }
+    #qwen-weight-lab .qwv-swatch { display:inline-block; width:calc(var(--font-size-base)*.65); height:calc(var(--font-size-base)*.65); margin-inline-end:calc(var(--font-size-base)*.35); }
+    #qwen-weight-lab .qwv-one { background:var(--viz-series-1); }
+    #qwen-weight-lab .qwv-two { background:var(--viz-series-2); }
+    #qwen-weight-lab .qwv-detail { color:var(--muted-foreground); overflow-wrap:anywhere; min-height:calc(var(--font-size-base)*1.5); }
+    #qwen-weight-lab .qwv-config { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:calc(var(--font-size-base)*1); margin:0; }
+    #qwen-weight-lab .qwv-config div { display:grid; gap:calc(var(--font-size-base)*.2); min-width:0; }
+    #qwen-weight-lab dt { color:var(--muted-foreground); }
+    #qwen-weight-lab dd { margin:0; overflow-wrap:anywhere; }
+    #qwen-weight-lab .qwv-heat-field { width:100%; min-width:0; }
+    #qwen-weight-lab canvas { display:block; width:100%; }
+    #qwen-weight-lab .qwv-scale { display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:calc(var(--font-size-base)*.6); }
+    #qwen-weight-lab .qwv-scale-strip { height:calc(var(--font-size-base)*.55); background:linear-gradient(to right,var(--viz-series-2),var(--muted),var(--viz-series-1)); }
+    #qwen-weight-lab .qwv-stat-row { display:flex; gap:calc(var(--font-size-base)*1.25); flex-wrap:wrap; }
+    #qwen-weight-lab .qwv-stat-row > span { white-space:nowrap; }
+    #qwen-weight-lab .qwv-status { display:flex; gap:calc(var(--font-size-base)*.5); flex-wrap:wrap; align-items:center; }
+    #qwen-weight-lab .qwv-inspect { display:grid; gap:calc(var(--font-size-base)*.65); min-width:0; }
+    #qwen-weight-lab .qwv-inspect code { overflow-wrap:anywhere; }
+    #qwen-weight-lab pre { white-space:pre-wrap; overflow-wrap:anywhere; }
+    #qwen-weight-lab summary { color:var(--foreground); }
+    #qwen-weight-lab .qwv-sources { display:flex; flex-wrap:wrap; gap:calc(var(--font-size-base)*1); }
+    #qwen-weight-lab .qwv-error { color:var(--destructive); }
+    #qwen-weight-lab #qwv-stats[hidden] { display:none; }
+    #qwen-weight-lab .qwv-infer-flow { display:flex; flex-wrap:wrap; gap:calc(var(--font-size-base)*.5); align-items:center; }
+    #qwen-weight-lab .qwv-infer-stage { display:grid; gap:calc(var(--font-size-base)*.2); }
+    #qwen-weight-lab .qwv-infer-arrow { color:var(--muted-foreground); }
+    #qwen-weight-lab .qwv-token-strip { display:flex; flex-wrap:wrap; gap:calc(var(--font-size-base)*.35); min-width:0; }
+    #qwen-weight-lab .qwv-token-strip code { overflow-wrap:anywhere; }
+    #qwen-weight-lab .qwv-infer-output { overflow-wrap:anywhere; }
+    #qwen-weight-lab .qwv-infer-vectors { display:grid; gap:calc(var(--font-size-base)*.35); }
+    @media(max-width:560px) {
+      #qwen-weight-lab .qwv-layer-grid { grid-template-columns:repeat(6,minmax(0,1fr)); }
+      #qwen-weight-lab .qwv-config { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      #qwen-weight-lab .qwv-heading { padding-inline-end:0; }
+    }
+  </style>
+  <header class="qwv-heading">
+    <h2 id="qwv-title">Qwen3.5-0.8B · 权重与推理</h2>
+    <span id="qwv-subtitle" class="text-muted">本地真实数据 · 模型结构、权重编辑与前向计算</span>
+  </header>
+  <div id="qwv-stats" class="viz-grid">
+    <div class="card viz-stat"><span class="text-muted">完整文件参数（含视觉与 MTP）</span><span id="qwv-total" class="viz-stat-value tabular-nums"></span><span id="qwv-storage" class="text-small text-muted"></span></div>
+    <div class="card viz-stat"><span class="text-muted">文本模型参数</span><span id="qwv-text" class="viz-stat-value tabular-nums"></span><span class="text-small text-muted">24 层 · 共享输入/输出嵌入</span></div>
+    <div class="card viz-stat"><span class="text-muted">实际改变的 BF16 数值</span><span id="qwv-changed" class="viz-stat-value tabular-nums"></span><span id="qwv-ratio" class="text-small text-muted"></span></div>
+  </div>
+  <div class="nav nav-pills" role="tablist" aria-label="模型信息视图">
+    <button id="qwv-tab-inference" class="nav-link" role="tab" aria-controls="qwv-inference" aria-selected="false" type="button">推理过程</button>
+    <button id="qwv-tab-overview" class="nav-link active" role="tab" aria-controls="qwv-overview" aria-selected="true" type="button">模型结构</button>
+    <button id="qwv-tab-edit" class="nav-link" role="tab" aria-controls="qwv-edit" aria-selected="false" type="button">权重变化</button>
+    <button id="qwv-tab-eval" class="nav-link" role="tab" aria-controls="qwv-eval" aria-selected="false" type="button">本地效果</button>
+  </div>
+  <section id="qwv-inference" class="qwv-panel" role="tabpanel" aria-labelledby="qwv-tab-inference" hidden>
+    <div id="qwv-infer-missing" class="qwv-detail" hidden>真实推理记录尚未载入。</div>
+    <div id="qwv-infer-content" class="qwv-panel">
+      <div class="qwv-status"><span class="viz-badge">真实前向记录 · thinking 关闭</span><code id="qwv-infer-question"></code><span id="qwv-infer-result" class="qwv-infer-output"></span></div>
+      <div class="viz-row"><button id="qwv-infer-prev" class="btn" type="button">上一个输出 token</button><span id="qwv-infer-step" class="tabular-nums" aria-live="polite"></span><button id="qwv-infer-next" class="btn" type="button">下一个输出 token</button></div>
+      <section class="qwv-block">
+        <h3>本轮前向计算 → 选出 1 个 token</h3>
+        <div class="qwv-infer-flow" role="img" aria-label="本轮输入token经过词嵌入、24层解码器、最终归一化、词表投影和softmax，选出下一个token">
+          <div class="qwv-infer-stage"><span id="qwv-infer-input-stage">文字 → token ID</span><span id="qwv-infer-input-shape" class="text-small text-muted"></span></div><span class="qwv-infer-arrow" aria-hidden="true">→</span>
+          <div class="qwv-infer-stage"><span>Embedding</span><span class="text-small text-muted">每 token 1,024 维</span></div><span class="qwv-infer-arrow" aria-hidden="true">→</span>
+          <div class="qwv-infer-stage"><span>24 层解码器</span><span class="text-small text-muted">18 GDN + 6 全注意力</span></div><span class="qwv-infer-arrow" aria-hidden="true">→</span>
+          <div class="qwv-infer-stage"><span>最终归一化</span><span class="text-small text-muted">RMSNorm</span></div><span class="qwv-infer-arrow" aria-hidden="true">→</span>
+          <div class="qwv-infer-stage"><span>词表投影</span><span class="text-small text-muted">248,320 logits</span></div><span class="qwv-infer-arrow" aria-hidden="true">→</span>
+          <div class="qwv-infer-stage"><span>Softmax / argmax</span><span id="qwv-infer-chosen" class="text-small text-muted"></span></div>
+        </div>
+        <div id="qwv-infer-context" class="qwv-detail"></div>
+        <div id="qwv-infer-consumed" class="qwv-token-strip" aria-label="本轮实际送入模型的token"></div>
+        <div id="qwv-infer-append" class="qwv-detail" aria-live="polite"></div>
+      </section>
+      <section class="qwv-block">
+        <h3>查看本轮的某一层</h3>
+        <div id="qwv-infer-layer-detail" class="qwv-detail" aria-live="polite"></div>
+        <div id="qwv-infer-layer-grid" class="qwv-layer-grid" role="group" aria-label="选择本轮前向计算中的层"></div>
+        <div class="qwv-legend text-small"><span><i class="qwv-swatch qwv-one" aria-hidden="true"></i>线性注意力 GDN</span><span><i class="qwv-swatch qwv-two" aria-hidden="true"></i>全注意力</span></div>
+        <div id="qwv-infer-norms" class="qwv-stat-row text-small tabular-nums"></div>
+        <div id="qwv-infer-vectors" class="qwv-infer-vectors text-small tabular-nums"></div>
+        <span class="text-small text-muted">本轮最后一个输入位置的真实隐藏向量，展示前 8 / 1,024 维；这些数值不表示可读的“思考步骤”。</span>
+        <details id="qwv-infer-mlp" class="qwv-inspect" hidden><summary id="qwv-infer-mlp-label">MLP 子计算记录</summary><pre><code id="qwv-infer-mlp-values"></code></pre></details>
+      </section>
+      <section class="qwv-block" data-viz-composition>
+        <h3>下一个 token 的概率 · Top 10</h3>
+        <div id="qwv-infer-prob-chart" data-viz-container></div>
+        <span id="qwv-infer-prob-note" class="text-small text-muted"></span>
+      </section>
+      <details class="qwv-inspect"><summary>完整模板、token ID 与边界数值</summary><div id="qwv-infer-prompt-tokens" class="qwv-token-strip"></div><pre><code id="qwv-infer-raw"></code></pre></details>
+    </div>
+  </section>
+  <section id="qwv-overview" class="qwv-panel" role="tabpanel" aria-labelledby="qwv-tab-overview">
+    <section class="qwv-block" data-viz-composition>
+      <h3>参数分配</h3>
+      <div id="qwv-group-chart" data-viz-container></div>
+    </section>
+    <section class="qwv-block">
+      <h3>24 层文本解码器</h3>
+      <div id="qwv-layer-detail" class="qwv-detail" aria-live="polite"></div>
+      <div id="qwv-layer-grid" class="qwv-layer-grid" role="group" aria-label="选择文本模型层"></div>
+      <div class="qwv-legend text-small"><span><i class="qwv-swatch qwv-one" aria-hidden="true"></i>线性注意力 × 18</span><span><i class="qwv-swatch qwv-two" aria-hidden="true"></i>全注意力 × 6</span><span>下划线：第 15、19 层被编辑</span></div>
+      <div id="qwv-layer-chart" data-viz-composition><div data-viz-container></div></div>
+    </section>
+    <section class="qwv-block">
+      <h3>配置与精度</h3>
+      <dl id="qwv-config" class="qwv-config"></dl>
+      <span id="qwv-dtypes" class="text-small text-muted"></span>
+    </section>
+    <details class="qwv-inspect"><summary>文本与视觉完整配置</summary><pre><code id="qwv-raw-config"></code></pre></details>
+    <details class="qwv-inspect">
+      <summary>检查全部 488 个张量</summary>
+      <label class="form-label" for="qwv-tensor-select">张量名称<select id="qwv-tensor-select" class="form-select"></select></label>
+      <div id="qwv-tensor-detail" class="qwv-detail" aria-live="polite"></div>
+    </details>
+  </section>
+  <section id="qwv-edit" class="qwv-panel" role="tabpanel" aria-labelledby="qwv-tab-edit" hidden>
+    <div class="viz-controls">
+      <label class="form-label" for="qwv-edit-layer">目标矩阵<select id="qwv-edit-layer" class="form-select"><option value="15">第 15 层 · MLP down_proj</option><option value="19">第 19 层 · MLP down_proj</option></select></label>
+      <label class="form-label" for="qwv-mode">显示值<select id="qwv-mode" class="form-select"><option value="delta">差值（修改后 − 修改前）</option><option value="before">修改前</option><option value="after">修改后</option></select></label>
+    </div>
+    <section class="qwv-block">
+      <h3>实际权重切片</h3>
+      <div id="qwv-edit-detail" class="qwv-detail" aria-live="polite"></div>
+      <div class="qwv-heat-field"><canvas id="qwv-heat" role="img" aria-label="选中矩阵的 64 行与 64 个编辑列的实际权重热力图"></canvas></div>
+      <div class="qwv-scale text-small tabular-nums"><span id="qwv-scale-min"></span><div class="qwv-scale-strip" aria-hidden="true"></div><span id="qwv-scale-max"></span></div>
+      <span class="text-small text-muted">64 个等距实际行 × 全部 64 个编辑列；未聚合。修改前/后共用色标，差值独立色标。</span>
+      <div id="qwv-cell-detail" class="qwv-detail tabular-nums" aria-live="polite"></div>
+      <div class="viz-controls"><label class="form-label" for="qwv-row">检查行<select id="qwv-row" class="form-select"></select></label><label class="form-label" for="qwv-col">检查列<select id="qwv-col" class="form-select"></select></label></div>
+    </section>
+    <section class="qwv-block" data-viz-composition>
+      <h3>完整矩阵的权重分布</h3>
+      <div id="qwv-hist-chart" data-viz-container></div>
+      <div id="qwv-value-stats" class="qwv-stat-row text-small tabular-nums"></div>
+      <span class="text-small text-muted">完整 1,024 × 3,584 矩阵的 64 个区间频数；差值包含未修改位置的零值。</span>
+    </section>
+    <details class="qwv-inspect"><summary>编辑校验与修改位置</summary><div id="qwv-audit" class="qwv-detail"></div></details>
+  </section>
+  <section id="qwv-eval" class="qwv-panel" role="tabpanel" aria-labelledby="qwv-tab-eval" hidden>
+    <div class="qwv-status"><span class="viz-badge">10 题 · 2,048 token / 题</span><span>短预算测试未观察到提升</span></div>
+    <section class="qwv-block" data-viz-composition><h3>同题、同 seed 的配对结果</h3><div id="qwv-eval-chart" data-viz-container></div></section>
+    <div id="qwv-eval-detail" class="qwv-stat-row text-small tabular-nums"></div>
+    <label class="form-label" for="qwv-problem">检查题目<select id="qwv-problem" class="form-select"></select></label>
+    <div id="qwv-problem-detail" class="qwv-detail" aria-live="polite"></div>
+    <div id="qwv-budget" class="qwv-block"></div>
+    <span class="text-small text-muted">手工题、单次采样、MLX 后端；不等价于原文的 MATH-500 全量评测。正确率仅计思考结束后提交的最终 boxed 答案。</span>
+  </section>
+  <footer class="qwv-block">
+    <span id="qwv-revision" class="text-small text-muted"></span>
+    <div class="qwv-sources text-small"><a id="qwv-source-model" target="_blank" rel="noreferrer">模型与版本</a><a id="qwv-source-blog" target="_blank" rel="noreferrer">原始研究</a><a id="qwv-source-upstream" target="_blank" rel="noreferrer">实验日志与补丁</a></div>
+    <div id="qwv-chart-error" class="qwv-error text-small" role="alert" hidden>统计图组件未加载；参数摘要与权重切片仍可使用。</div>
+  </footer>
+  <script id="qwv-data" type="application/json">__QWEN_DATA_JSON__</script>
+</div>
+<script>
+/* QWV_CONFIG_BUILDERS_START */
+function qwvBuildConfig(data, kind, layer, mode) {
+  var names = {embeddings:"词嵌入",text_mlp:"文本 MLP",text_attention:"文本注意力",text_norm:"文本归一化",vision:"视觉塔",other:"MTP 附加预测"};
+  if (kind === "groups") return {id:"qwv-groups",title:"完整 checkpoint 参数量",showHeader:false,height:240,columns:["模块","参数量"],rows:data.groups.map(function(g){return[names[g.name]||g.name,g.params];}),spec:{type:"horizontalBar",y:"模块",x:"参数量",xLabel:"参数个数",showValues:true,sortOrder:"original",valueFormat:{style:"decimal",maximumFractionDigits:0}}};
+  if (kind === "layer") {
+    var item=data.layer_stats.find(function(x){return x.layer===layer;});
+    return {id:"qwv-layer",title:"第 "+layer+" 层参数量",showHeader:false,height:180,columns:["模块","参数量"],rows:[["MLP",item.mlp_params],["注意力",item.attention_params],["归一化及其他",item.params-item.mlp_params-item.attention_params]],spec:{type:"horizontalBar",y:"模块",x:"参数量",xLabel:"参数个数",showValues:true,xDomain:[0,Math.max.apply(null,data.layer_stats.map(function(x){return Math.max(x.mlp_params,x.attention_params);} ))],valueFormat:{style:"decimal",maximumFractionDigits:0}}};
+  }
+  if (kind === "hist") {
+    var edit=data.edits.find(function(x){return x.layer===layer;});
+    var h=edit.histogram, counts=h[mode], rows=counts.map(function(n,i){return[h.edges[i],h.edges[i+1],i===counts.length-1?"["+h.edges[i]+", "+h.edges[i+1]+"]":"["+h.edges[i]+", "+h.edges[i+1]+")",n];});
+    return {id:"qwv-hist",title:"第 "+layer+" 层 · "+({before:"修改前",after:"修改后",delta:"差值"}[mode]),showHeader:false,height:250,columns:["下界","上界","区间","频数"],rows:rows,spec:{type:"histogram",input:"binned",x:{lower:"下界",upper:"上界",label:"区间"},y:"频数",binLayout:"equal",statistic:"count",xLabel:mode==="delta"?"权重差值区间":"权重值区间",yLabel:"参数个数"}};
+  }
+  if (kind === "evaluation") {
+    var s=data.evaluation.summary;
+    return {id:"qwv-evaluation",title:"10 题本地配对结果",showHeader:false,height:230,columns:["模型","正确最终答案","达到 token 上限"],rows:[["原模型",s.base.correct,s.base.cut_at_limit],["修改版",s.edited.correct,s.edited.cut_at_limit]],spec:{type:"horizontalBar",y:"模型",x:["正确最终答案","达到 token 上限"],xLabel:"题目数 / 10",xDomain:[0,s.base.samples],showValues:true,valueFormat:{style:"decimal",maximumFractionDigits:0}}};
+  }
+  if (kind === "inference") {
+    var step=data.inference.steps[layer];
+    return {id:"qwv-inference-probabilities",title:"输出 token "+(layer+1)+" 的候选概率",showHeader:false,height:320,columns:["候选 token / ID","概率"],rows:step.top_tokens.map(function(t){return[JSON.stringify(t.text)+" · "+t.id,t.probability];}),spec:{type:"horizontalBar",y:"候选 token / ID",x:"概率",xLabel:"全词表 softmax 概率",xDomain:[0,1],showValues:true,sortOrder:"original",valueFormat:{style:"percent",maximumFractionDigits:3}}};
+  }
+  throw new Error("Unknown chart kind: "+kind);
+}
+/* QWV_CONFIG_BUILDERS_END */
+(function(){
+  var root=document.getElementById("qwen-weight-lab");
+  var data=JSON.parse(document.getElementById("qwv-data").textContent);
+  var number=new Intl.NumberFormat("zh-CN"), state={tab:data.inference&&data.inference.steps&&data.inference.steps.length?"inference":"overview",layer:15,editLayer:15,mode:"delta",row:0,col:0,inferStep:0,inferLayer:0};
+  var charts={}, mount=null, animation=0, priorGrid=null, heatGeometry=null;
+  var q=function(id){return root.querySelector("#"+id);};
+  var fmt=function(n){return number.format(n);};
+  var sci=function(n){return n===0?"0":Math.abs(n)<.0001||Math.abs(n)>10000?n.toExponential(3):Number(n.toPrecision(5)).toString();};
+  var compact=function(n){return (n/1e6).toFixed(2)+" M";};
+  var labels={before:"修改前",after:"修改后",delta:"差值"};
+  var maybeSaved=window.openai&&window.openai.widgetState;
+  function validSaved(saved){var v=saved&&(saved.modelContent||saved);if(!v||v.v!==2)return; if(["inference","overview","edit","eval"].includes(v.tab))state.tab=v.tab;if(Number.isInteger(v.layer)&&v.layer>=0&&v.layer<24)state.layer=v.layer;if([15,19].includes(v.editLayer))state.editLayer=v.editLayer;if(["before","after","delta"].includes(v.mode))state.mode=v.mode;if(data.inference&&Number.isInteger(v.inferStep)&&v.inferStep>=0&&v.inferStep<data.inference.steps.length)state.inferStep=v.inferStep;if(Number.isInteger(v.inferLayer)&&v.inferLayer>=0&&v.inferLayer<24)state.inferLayer=v.inferLayer;}
+  validSaved(maybeSaved);
+  function save(){if(window.openai&&window.openai.setWidgetState)window.openai.setWidgetState({modelContent:{v:2,tab:state.tab,layer:state.layer,editLayer:state.editLayer,mode:state.mode,inferStep:state.inferStep,inferLayer:state.inferLayer},privateContent:{row:state.row,col:state.col}}).catch(function(){});}
+  function setText(id,text){q(id).textContent=text;}
+  function chart(id,config){if(!mount)return;if(charts[id])charts[id].config=config;else charts[id]=mount(q(id).matches("[data-viz-container]")?q(id):q(id).querySelector("[data-viz-container]"),config);}
+  function renderCharts(){if(state.tab==="overview"){chart("qwv-group-chart",qwvBuildConfig(data,"groups"));chart("qwv-layer-chart",qwvBuildConfig(data,"layer",state.layer));}else if(state.tab==="edit")chart("qwv-hist-chart",qwvBuildConfig(data,"hist",state.editLayer,state.mode));else if(state.tab==="inference"){if(data.inference&&data.inference.steps.length)chart("qwv-infer-prob-chart",qwvBuildConfig(data,"inference",state.inferStep));}else chart("qwv-eval-chart",qwvBuildConfig(data,"evaluation"));}
+  function renderLayer(){
+    var item=data.layer_stats.find(function(x){return x.layer===state.layer;});
+    setText("qwv-layer-detail","第 "+item.layer+" 层 · "+(item.attention_type==="full_attention"?"全注意力":"线性注意力")+" · "+fmt(item.params)+" 参数"+(item.changed_entries?" · 已编辑 "+fmt(item.changed_entries)+" 个数值":" · 未编辑"));
+    q("qwv-layer-grid").querySelectorAll("button").forEach(function(b){b.setAttribute("aria-pressed",String(Number(b.dataset.layer)===state.layer));});
+    if(state.tab==="overview")renderCharts();
+  }
+  function rgb(css){var c=document.createElement("canvas"),ctx=c.getContext("2d");c.width=1;c.height=1;ctx.fillStyle=css;ctx.fillRect(0,0,1,1);return Array.from(ctx.getImageData(0,0,1,1).data).slice(0,3);}
+  function themeColor(token){var s=getComputedStyle(root);return rgb(s.getPropertyValue(token).trim()||s.color);}
+  function heatColor(value,limit,colors){var target=value<0?colors.negative:colors.positive,t=Math.min(1,Math.abs(value)/(limit||1));return "rgb("+colors.zero.map(function(v,i){return Math.round(v+(target[i]-v)*t);}).join(",")+")";}
+  function selectedEdit(){return data.edits.find(function(e){return e.layer===state.editLayer;});}
+  function heatLimit(edit){var values=state.mode==="delta"?edit.heatmap.delta.flat():edit.heatmap.before.flat().concat(edit.heatmap.after.flat());return Math.max.apply(null,values.map(Math.abs))||1;}
+  function paintHeat(grid,limit){
+    var canvas=q("qwv-heat"), width=Math.max(260,canvas.parentElement.getBoundingClientRect().width), height=Math.min(440,Math.max(295,width*.61));
+    var dpr=window.devicePixelRatio||1,ctx=canvas.getContext("2d");canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);canvas.style.height=height+"px";ctx.scale(dpr,dpr);
+    var s=getComputedStyle(root),font=s.fontSize+" "+s.fontFamily;ctx.font=font;var left=48,top=12,right=10,bottom=53,w=width-left-right,h=height-top-bottom;
+    var colors={positive:themeColor("--viz-series-1"),negative:themeColor("--viz-series-2"),zero:themeColor("--muted")};
+    grid.forEach(function(row,r){row.forEach(function(v,c){ctx.fillStyle=heatColor(v,limit,colors);ctx.fillRect(left+c*w/64,top+r*h/64,w/64+.4,h/64+.4);});});
+    ctx.fillStyle=s.color;ctx.textAlign="right";ctx.textBaseline="middle";var hm=selectedEdit().heatmap;
+    [0,16,32,48,63].forEach(function(r){ctx.fillText(hm.row_indices[r],left-9,top+(r+.5)*h/64);});
+    ctx.textAlign="center";ctx.textBaseline="top";[0,16,32,48,63].forEach(function(c){ctx.fillText(hm.column_indices[c],left+(c+.5)*w/64,top+h+7);});
+    ctx.fillText("选中列的原始索引",left+w/2,height-20);ctx.save();ctx.translate(10,top+h/2);ctx.rotate(-Math.PI/2);ctx.textBaseline="top";ctx.fillText("行索引",0,0);ctx.restore();
+    heatGeometry={left:left,top:top,w:w,h:h,width:width,height:height};
+    ctx.strokeStyle=s.color;ctx.lineWidth=1;ctx.strokeRect(left+state.col*w/64,top+state.row*h/64,w/64,h/64);
+  }
+  function drawHeat(animate){var edit=selectedEdit(),grid=edit.heatmap[state.mode],limit=heatLimit(edit);cancelAnimationFrame(animation);setText("qwv-scale-min",sci(-limit));setText("qwv-scale-max",sci(limit));
+    if(animate&&priorGrid&&!matchMedia("(prefers-reduced-motion: reduce)").matches){var start=performance.now(),from=priorGrid;var tick=function(now){var t=Math.min(1,(now-start)/180),mix=grid.map(function(row,r){return row.map(function(v,c){return from[r][c]+(v-from[r][c])*t;});});paintHeat(mix,limit);if(t<1)animation=requestAnimationFrame(tick);};animation=requestAnimationFrame(tick);}else paintHeat(grid,limit);priorGrid=grid;
+  }
+  function renderCell(){var e=selectedEdit(),h=e.heatmap,r=state.row,c=state.col;setText("qwv-cell-detail","W["+h.row_indices[r]+", "+h.column_indices[c]+"]  "+sci(h.before[r][c])+" → "+sci(h.after[r][c])+"  · Δ "+sci(h.delta[r][c]));q("qwv-row").value=String(r);q("qwv-col").value=String(c);}
+  function renderEdit(animate){var e=selectedEdit();q("qwv-edit-layer").value=String(state.editLayer);q("qwv-mode").value=state.mode;
+    setText("qwv-edit-detail","第 "+e.layer+" 层 · 1,024 × 3,584 · 64 列 · "+fmt(e.changed_entries)+" 个 BF16 数值改变");
+    ["row","col"].forEach(function(kind){var select=q("qwv-"+kind),indices=e.heatmap[kind==="row"?"row_indices":"column_indices"];select.replaceChildren();indices.forEach(function(n,i){var o=document.createElement("option");o.value=String(i);o.textContent=n;select.appendChild(o);});});
+    var stats=e.stats[state.mode];q("qwv-value-stats").replaceChildren();[["均值",stats.mean],["标准差",stats.std],["最小",stats.min],["最大",stats.max],["L2 范数",stats.l2]].forEach(function(p){var span=document.createElement("span");span.textContent=p[0]+" "+sci(p[1]);q("qwv-value-stats").appendChild(span);});
+    var change=data.audit.changes.find(function(x){return x.name===e.name;});
+    setText("qwv-audit",e.name+" · 原始 / 编辑后 SHA256 均匹配 · "+fmt(data.audit.verified_tensors)+" 个张量校验通过 · 其余 "+fmt(data.audit.verified_tensors-data.audit.changed_tensors)+" 个张量一致。编辑列："+e.selected_columns.join(", ")+(change?"。编辑后 SHA256："+change.edited_sha256:""));
+    renderCell();if(state.tab==="edit"){drawHeat(animate);renderCharts();}
+  }
+  function renderTensor(){var t=data.tensors[Number(q("qwv-tensor-select").value)];setText("qwv-tensor-detail",t.name+" · ["+t.shape.join(" × ")+"] · "+t.dtype+" · "+fmt(t.params)+" 参数 · "+(t.bytes/1024/1024).toFixed(3)+" MiB · "+(t.edited?"已编辑":"保持原值"));}
+  function renderProblem(){var id=q("qwv-problem").value,rows=data.evaluation.samples.filter(function(r){return r.id===id;}),first=rows[0];if(!first)return;var lines=[first.problem,"参考答案："+first.answer];rows.forEach(function(r){lines.push((r.model==="base"?"原模型":"修改版")+"："+(r.correct?"正确":"未正确提交")+" · "+fmt(r.tokens)+" tokens · "+(r.finish==="length"?"达到上限":"自然结束"));});setText("qwv-problem-detail",lines.join("\n"));q("qwv-problem-detail").style.whiteSpace="pre-line";}
+  function renderBudget(){var box=q("qwv-budget"),d=data.diagnostic;box.replaceChildren();var h=document.createElement("h3");h.textContent="第一题 · 8,192 token 预算诊断";box.appendChild(h);var text=document.createElement("span");text.className="text-small text-muted";if(!d||d.status!=="complete")text.textContent="诊断尚未完成；不计入 10 题统计。";else text.textContent=d.samples.map(function(r){return(r.model==="base"?"原模型":"修改版")+"："+(r.correct?"正确":"未正确提交")+" / "+fmt(r.tokens)+" tokens / "+(r.finish==="stop"?"自然结束":"达到上限");}).join("； ")+"。单题诊断，不计入 10 题统计。";box.appendChild(text);}
+  function tokenName(text){return JSON.stringify(text);}
+  function renderInference(){
+    var trace=data.inference,ready=trace&&Array.isArray(trace.steps)&&trace.steps.length;
+    q("qwv-infer-missing").hidden=Boolean(ready);q("qwv-infer-content").hidden=!ready;if(!ready)return;
+    state.inferStep=Math.min(state.inferStep,trace.steps.length-1);var step=trace.steps[state.inferStep],layer=step.layers.find(function(l){return l.layer===state.inferLayer;})||step.layers[0],choice=step.selected_token;
+    setText("qwv-infer-question",trace.example.user_message);setText("qwv-infer-result","实际完整输出："+tokenName(trace.generated_text));
+    setText("qwv-infer-step","输出 token "+(state.inferStep+1)+" / "+trace.steps.length);q("qwv-infer-prev").disabled=state.inferStep===0;q("qwv-infer-next").disabled=state.inferStep===trace.steps.length-1;
+    setText("qwv-infer-input-stage",step.phase==="prefill"?"文字分词 → token ID":"追加上轮 token ID");setText("qwv-infer-input-shape",step.input_ids.length+" 个 · "+step.phase);setText("qwv-infer-chosen",tokenName(choice.text)+" · ID "+choice.id);
+    setText("qwv-infer-context","上下文 "+step.context_length+" tokens · 本轮观测位置 "+step.input_position+" · 本轮 24 / 24 层均已执行");
+    q("qwv-infer-consumed").replaceChildren();step.consumed_tokens.forEach(function(t){var code=document.createElement("code");code.textContent=tokenName(t.text);code.dataset.tooltip="ID "+t.id+" · 本轮输入";q("qwv-infer-consumed").appendChild(code);});
+    setText("qwv-infer-append",choice.is_eos?"选中结束 token → 停止生成，不再开始下一轮。":"选中 "+tokenName(choice.text)+" → 追加到上下文 → 下一轮重新执行 24 层；该输出 token 尚未作为本轮输入。");
+    setText("qwv-infer-layer-detail","第 "+layer.layer+" 层 · "+(layer.type==="full_attention"?"全注意力":"线性注意力 GDN")+" · 观测本轮最后输入位置");
+    q("qwv-infer-layer-grid").querySelectorAll("button").forEach(function(b){b.setAttribute("aria-pressed",String(Number(b.dataset.layer)===layer.layer));});
+    q("qwv-infer-norms").replaceChildren();[["输入 L2",layer.input_norm],["输出 L2",layer.output_norm],["残差变化 L2",layer.residual_delta_norm],["Embedding L2",step.embedding.norm],["最终 RMSNorm 输出 L2",step.final_norm.output_norm]].forEach(function(p){var span=document.createElement("span");span.textContent=p[0]+" "+sci(p[1]);q("qwv-infer-norms").appendChild(span);});
+    q("qwv-infer-vectors").replaceChildren();[["输入前 8 维",layer.input_preview],["输出前 8 维",layer.output_preview]].forEach(function(p){var code=document.createElement("code");code.textContent=p[0]+"：["+p[1].map(sci).join(", ")+"]";q("qwv-infer-vectors").appendChild(code);});
+    q("qwv-infer-mlp").hidden=!step.mlp_detail;if(step.mlp_detail){setText("qwv-infer-mlp-label","本轮 MLP 子计算记录 · 层 "+(step.mlp_detail.layer===undefined?"15":step.mlp_detail.layer));setText("qwv-infer-mlp-values",JSON.stringify(step.mlp_detail,null,2));}
+    var mass=step.top_tokens.reduce(function(sum,t){return sum+t.probability;},0);setText("qwv-infer-prob-note","Softmax 分母为完整 248,320 词表；Top 10 概率合计 "+(mass*100).toFixed(4)+"%，其余候选 "+(Math.max(0,1-mass)*100).toFixed(4)+"%。选择方式：greedy argmax。");
+    q("qwv-infer-prompt-tokens").replaceChildren();trace.prompt_tokens.forEach(function(t){var code=document.createElement("code");code.textContent=tokenName(t.text)+" #"+t.id;code.dataset.tooltip="位置 "+t.position+" · embedding L2 "+sci(t.embedding.norm);q("qwv-infer-prompt-tokens").appendChild(code);});
+    setText("qwv-infer-raw",JSON.stringify({prompt:trace.prompt,protocol:trace.protocol,step:step.step,phase:step.phase,input_ids:step.input_ids,context_ids:step.context_ids,embedding:step.embedding,final_norm:step.final_norm,lm_head:step.lm_head,selected_token:choice,top_tokens:step.top_tokens},null,2));
+    if(state.tab==="inference")renderCharts();
+  }
+  function selectTab(tab,write){state.tab=tab;["inference","overview","edit","eval"].forEach(function(name){q("qwv-"+name).hidden=name!==tab;var b=q("qwv-tab-"+name);b.classList.toggle("active",name===tab);b.setAttribute("aria-selected",String(name===tab));});q("qwv-stats").hidden=tab==="inference";setText("qwv-title",tab==="inference"?"Qwen3.5-0.8B · 推理过程":"Qwen3.5-0.8B · 权重解剖");setText("qwv-subtitle",tab==="inference"?"简单例子的真实记录 · 一轮前向选出一个 token":"本地原始 checkpoint · BF16 / F32 · 精确补丁 p50c");if(tab==="edit")renderEdit(false);else if(tab==="inference")renderInference();else renderCharts();if(write)save();}
+  setText("qwv-total",compact(data.model.total_parameters));setText("qwv-storage",(data.model.file_bytes/1024/1024/1024).toFixed(3)+" GiB · "+fmt(data.tensors.length)+" 个张量");setText("qwv-text",compact(data.model.text_parameters));setText("qwv-changed",fmt(data.audit.changed_entries));setText("qwv-ratio","占精确文本参数 "+(100*data.audit.changed_entries/data.model.text_parameters).toFixed(6)+"%");
+  data.layer_stats.forEach(function(l){var b=document.createElement("button");b.type="button";b.className="btn viz-tile "+(l.attention_type==="full_attention"?"qwv-layer-full":"qwv-layer-linear")+(l.changed_entries?" qwv-edited":"");b.textContent=l.layer;b.dataset.layer=l.layer;b.setAttribute("aria-label","第 "+l.layer+" 层，"+(l.attention_type==="full_attention"?"全注意力":"线性注意力")+"，"+fmt(l.params)+" 参数"+(l.changed_entries?"，已编辑":""));b.addEventListener("click",function(){state.layer=l.layer;renderLayer();save();});q("qwv-layer-grid").appendChild(b);});
+  data.layer_stats.forEach(function(l){var b=document.createElement("button");b.type="button";b.className="btn viz-tile "+(l.attention_type==="full_attention"?"qwv-layer-full":"qwv-layer-linear");b.textContent=l.layer;b.dataset.layer=l.layer;b.setAttribute("aria-label","检查本轮第 "+l.layer+" 层的真实输入与输出");b.addEventListener("click",function(){state.inferLayer=l.layer;renderInference();save();});q("qwv-infer-layer-grid").appendChild(b);});
+  var tc=data.model.config.text,vc=data.model.config.vision;[["隐藏维度",fmt(tc.hidden_size)],["MLP 中间维度",fmt(tc.intermediate_size)],["词表大小",fmt(tc.vocab_size)],["上下文配置上限",fmt(tc.max_position_embeddings)+" tokens"],["全注意力头 / KV 头",tc.num_attention_heads+" / "+tc.num_key_value_heads],["视觉塔",vc.depth+" 层 · "+vc.hidden_size+" 维"]].forEach(function(p){var div=document.createElement("div"),dt=document.createElement("dt"),dd=document.createElement("dd");dt.textContent=p[0];dd.textContent=p[1];div.append(dt,dd);q("qwv-config").appendChild(div);});
+  setText("qwv-dtypes",Object.keys(data.model.dtype_counts).map(function(k){var d=data.model.dtype_counts[k];return k+" · "+fmt(d.params)+" 参数 / "+d.tensors+" 张量";}).join("； ")+"。上下文配置上限未在本机验证。");
+  setText("qwv-raw-config",JSON.stringify(data.model.config,null,2));
+  data.tensors.forEach(function(t,i){var o=document.createElement("option");o.value=String(i);o.textContent=t.name;q("qwv-tensor-select").appendChild(o);});q("qwv-tensor-select").addEventListener("change",renderTensor);renderTensor();
+  var seen=new Set();data.evaluation.samples.forEach(function(r){if(seen.has(r.id))return;seen.add(r.id);var o=document.createElement("option");o.value=r.id;o.textContent=r.id;q("qwv-problem").appendChild(o);});q("qwv-problem").addEventListener("change",renderProblem);renderProblem();renderBudget();
+  var es=data.evaluation.summary;setText("qwv-eval-detail","正确答案 "+es.base.correct+"/"+es.base.samples+" → "+es.edited.correct+"/"+es.edited.samples+"；平均生成 "+es.base.mean_generated_tokens.toFixed(1)+" → "+es.edited.mean_generated_tokens.toFixed(1)+" tokens");
+  setText("qwv-revision","固定 revision "+data.model.revision.slice(0,12)+" · 文件哈希及全部张量已校验");["model","blog","upstream"].forEach(function(n){q("qwv-source-"+n).href=data.sources[n];});
+  ["inference","overview","edit","eval"].forEach(function(tab){q("qwv-tab-"+tab).addEventListener("click",function(){selectTab(tab,true);});});q("qwv-edit-layer").addEventListener("change",function(){state.editLayer=Number(this.value);renderEdit(true);save();});q("qwv-mode").addEventListener("change",function(){state.mode=this.value;renderEdit(true);save();});["row","col"].forEach(function(n){q("qwv-"+n).addEventListener("change",function(){state[n]=Number(this.value);renderCell();drawHeat(false);save();});});
+  q("qwv-infer-prev").addEventListener("click",function(){if(state.inferStep>0){state.inferStep--;renderInference();save();}});q("qwv-infer-next").addEventListener("click",function(){if(data.inference&&state.inferStep+1<data.inference.steps.length){state.inferStep++;renderInference();save();}});
+  q("qwv-heat").addEventListener("pointerdown",function(e){if(!heatGeometry)return;var rect=this.getBoundingClientRect(),x=(e.clientX-rect.left)*heatGeometry.width/rect.width,y=(e.clientY-rect.top)*heatGeometry.height/rect.height,g=heatGeometry;if(x<g.left||x>g.left+g.w||y<g.top||y>g.top+g.h)return;state.col=Math.min(63,Math.floor((x-g.left)/g.w*64));state.row=Math.min(63,Math.floor((y-g.top)/g.h*64));renderCell();drawHeat(false);save();});
+  new ResizeObserver(function(){if(state.tab==="edit")drawHeat(false);}).observe(q("qwv-heat").parentElement);
+  new MutationObserver(function(){if(state.tab==="edit")drawHeat(false);}).observe(document.documentElement,{attributes:true,attributeFilter:["class","style","data-theme"]});
+  window.addEventListener("openai:set_globals",function(event){if(event.detail&&event.detail.globals&&event.detail.globals.widgetState){validSaved(event.detail.globals.widgetState);renderLayer();selectTab(state.tab,false);}});
+  renderLayer();selectTab(state.tab,false);
+  window.qwenWeightViz={data:data,state:state,root:root,setMount:function(fn){mount=fn;renderCharts();},chartStates:function(){var out=[qwvBuildConfig(data,"groups"),qwvBuildConfig(data,"evaluation")];data.layer_stats.forEach(function(l){out.push(qwvBuildConfig(data,"layer",l.layer));});[15,19].forEach(function(l){["before","after","delta"].forEach(function(m){out.push(qwvBuildConfig(data,"hist",l,m));});});if(data.inference)data.inference.steps.forEach(function(s,i){out.push(qwvBuildConfig(data,"inference",i));});return out;}};
+})();
+</script>
+<script type="module">
+  import("https://persistent.oaistatic.com/plugins/visualize/charts/1.2.3/element.js").then(function(module){window.qwenWeightViz.setMount(module.mountChart);}).catch(function(){document.getElementById("qwv-chart-error").hidden=false;});
+</script>

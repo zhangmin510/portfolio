@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.example
+.runtime/
+dist/
+node_modules/
+.DS_Store
+*.log
+cloud-dist/
+.wrangler/
+.dev.vars
+.dev.vars.*
+worker-configuration.d.ts

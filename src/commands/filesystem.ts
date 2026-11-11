@@ -1,5 +1,5 @@
 import panoramaManifest from '../../scripts/panoramas.json'
-import { PROJECTS } from '../data/portfolio'
+import { PROJECTS, WEBSITES } from '../data/portfolio'
 
 export const HOME_DIRECTORY = '/home/guest'
 
@@ -27,7 +27,7 @@ export interface FileEntry {
 interface ContentFile extends FileEntry {
   type: 'file'
   path: string
-  content: 'about' | 'skills' | 'contact' | 'project' | 'panorama'
+  content: 'about' | 'skills' | 'contact' | 'project' | 'panorama' | 'site'
   slug?: string
 }
 
@@ -59,12 +59,21 @@ export const CONTENT_FILES: ContentFile[] = [
     slug,
     href,
   })),
+  ...WEBSITES.map(({ slug, href }) => ({
+    name: `${slug}.md`,
+    type: 'file' as const,
+    path: `${HOME_DIRECTORY}/sites/${slug}.md`,
+    content: 'site' as const,
+    slug,
+    href,
+  })),
 ]
 
 export const CONTENT_DIRECTORIES: ContentDirectory[] = [
   { name: '~', type: 'directory', path: HOME_DIRECTORY },
   { name: 'projects', type: 'directory', path: `${HOME_DIRECTORY}/projects` },
   { name: 'panoramas', type: 'directory', path: `${HOME_DIRECTORY}/panoramas` },
+  { name: 'sites', type: 'directory', path: `${HOME_DIRECTORY}/sites` },
 ]
 
 export function resolveContentPath(input: string, cwd = HOME_DIRECTORY): string {

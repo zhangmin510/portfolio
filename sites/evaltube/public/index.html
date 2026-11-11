@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="精选大模型、AI 搜索、应用与 Agent 的能力评测、真实任务实测和技术实践。无需登录，本地收藏。">
+  <title>EvalTube · AI 评测</title>
+  <link rel="canonical" href="https://evaltube.zhangmin.name/">
+  <meta property="og:site_name" content="EvalTube">
+  <meta property="og:title" content="EvalTube · AI 评测">
+  <meta property="og:description" content="大模型、AI 搜索、应用与 Agent 的评测和实测精选。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://evaltube.zhangmin.name/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ff6600'/%3E%3Cpath d='M9 8h14v4H13v2h9v4h-9v2h10v4H9z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳转到内容</a>
+  <header class="topbar">
+    <div class="brand-group">
+      <button class="icon-button" id="menu" aria-label="展开或收起侧栏" aria-expanded="true"></button>
+      <a class="brand" href="#/home" aria-label="EvalTube 首页">Eval<span>Tube</span><sup>AI</sup></a>
+    </div>
+    <form class="search" id="search-form" role="search">
+      <input id="search" type="search" name="q" placeholder="搜索模型、AI 搜索、应用、Agent…" aria-label="搜索视频" autocomplete="off">
+      <button type="submit" aria-label="搜索" id="search-button"></button>
+    </form>
+    <div class="header-actions">
+      <a href="#/about" class="icon-button about-link" aria-label="关于与数据来源" id="about-link"></a>
+      <button class="icon-button" id="theme-toggle" aria-label="切换深色模式"></button>
+    </div>
+  </header>
+  <aside class="sidebar" id="sidebar" aria-label="主导航"></aside>
+  <button class="scrim" id="scrim" aria-label="关闭侧栏"></button>
+  <main id="main" tabindex="-1"><div class="loading"><span></span>正在整理值得看的视频…</div></main>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <noscript>请启用 JavaScript 以浏览视频和使用本地收藏。</noscript>
+</body>
+</html>

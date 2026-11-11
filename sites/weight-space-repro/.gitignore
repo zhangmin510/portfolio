@@ -1,0 +1,16 @@
+/.venv/
+/.cache/
+/.wrangler/
+/models/
+/upstream/
+/results/
+/cloudflare/dist/
+/cloudflare/.cloudflare-build-*/
+__pycache__/
+*.py[cod]
+*.partial
+.env
+.env.*
+.dev.vars
+.dev.vars.*
+.DS_Store

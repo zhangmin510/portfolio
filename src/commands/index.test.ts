@@ -10,6 +10,7 @@ import {
   getCompletionCandidates,
 } from './index'
 import { PANORAMA_FILES, PROJECT_FILES } from './filesystem'
+import { WEBSITES } from '../data/portfolio'
 
 describe('terminal command registry', () => {
   it('keeps the most useful calls to action first', () => {
@@ -141,7 +142,7 @@ describe('terminal command registry', () => {
     expect(autocompleteCommand('cd ../pa', `${HOME_DIRECTORY}/projects`)).toBe('cd ../panoramas/')
     expect(autocompleteCommand('cat front', `${HOME_DIRECTORY}/projects`)).toBe('cat frontier-benchmarks.md')
     expect(autocompleteCommand('cat "proj')).toBe('cat "projects/"')
-    expect(getCompletionCandidates('cd ')).toEqual(['cd projects/', 'cd panoramas/'])
+    expect(getCompletionCandidates('cd ')).toEqual(['cd projects/', 'cd panoramas/', 'cd sites/'])
     expect(getCompletionCandidates('cd about')).toEqual([])
     expect(getCompletionCandidates('cat nonexistent/')).toEqual([])
   })
@@ -163,6 +164,28 @@ describe('terminal command registry', () => {
     for (const { project } of PROJECT_FILES) expect(projects).toContain(`href="${project.href}"`)
     expect(projects).not.toContain('Fabric Console')
     expect(projects.match(/class="command-project"/g)).toHaveLength(3)
+  })
+
+  it('exposes the published web apps through navigation commands and content paths', () => {
+    expect(executeCommand('websites')).toEqual({ kind: 'output', result: { kind: 'sites' } })
+    expect(executeCommand('sites')).toEqual({ kind: 'output', result: { kind: 'sites' } })
+    expect(executeCommand('cd sites')).toEqual({ kind: 'change-directory', cwd: `${HOME_DIRECTORY}/sites` })
+    const listing = executeCommand('ls sites')
+    if (listing.kind !== 'output' || listing.result.kind !== 'file-list') throw new Error('Expected site files')
+    expect(listing.result.entries?.map((file) => file.href)).toEqual(WEBSITES.map((site) => site.href))
+    const html = renderToStaticMarkup(createElement(CommandOutput, {
+      result: { kind: 'sites' }, viewport: { width: 1000, height: 700 },
+    }))
+    for (const site of WEBSITES) {
+      expect(html).toContain(`href="${site.href}"`)
+      expect(executeCommand(`cat sites/${site.slug}.md`)).toEqual({ kind: 'output', result: { kind: 'site', slug: site.slug } })
+    }
+    expect(getCompletionCandidates('cat sites/eval')).toEqual([
+      'cat sites/evalfrontier.md',
+      'cat sites/evaltube.md',
+      'cat sites/evalpapers.md',
+    ])
+    expect(autocompleteCommand('cat sites/evalt')).toBe('cat sites/evaltube.md')
   })
 
   it('escapes echoed HTML in rendered output', () => {

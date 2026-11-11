@@ -9,6 +9,7 @@ import {
   PROFILE,
   SKILL_GROUPS,
   YEARLY_KEYWORDS,
+  WEBSITES,
 } from '../data/portfolio'
 
 interface CommandOutputProps {
@@ -124,6 +125,24 @@ export default function CommandOutput({
           <h3>全景图 / Panoramas</h3>
           <PanoramaList slug={result.kind === 'panorama' ? result.slug : undefined} />
           <p><a className="terminal-link" href="/panoramas/">打开全景图目录 ↗</a></p>
+        </section>
+      )
+
+    case 'sites':
+    case 'site':
+      return (
+        <section className="command-section">
+          <h3>网站导航 / Web Apps</h3>
+          <div className="command-projects">
+            {WEBSITES.filter((site) => result.kind === 'sites' || site.slug === result.slug).map((site) => (
+              <article className="command-project" key={site.slug}>
+                <p className="command-project-name">
+                  <a className="terminal-link" href={site.href} target="_blank" rel="noopener noreferrer">{site.name} · {site.label} ↗</a>
+                </p>
+                <p>{site.summary}</p>
+              </article>
+            ))}
+          </div>
         </section>
       )
 
