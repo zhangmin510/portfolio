@@ -48,7 +48,16 @@
   font-size: 12px;
 }
 
-.trip-fallback { display: block; width: 100%; height: 100%; background: #9eae89; }
+.trip-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #afc394;
+  pointer-events: none;
+}
 
 .game-shell .journey-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .game-shell .journey-options > button { width: auto; padding-inline: 9px; }

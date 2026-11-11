@@ -51,9 +51,13 @@ export default function App() {
   const [travelMode, setTravelMode] = useState<TravelMode>('drive');
   const [trip, setTrip] = useState<Trip | null>(null);
   const activeTrip = useRef<Trip | null>(null);
+  const presentedTripPath = useRef<readonly RoutePoint[] | null>(null);
   const tripProgress = useRef(0);
   const skipTrip = useRef(false);
   const getTripProgress = useCallback(() => tripProgress.current, []);
+  const markTripPresented = useCallback((path: readonly RoutePoint[]) => {
+    if (activeTrip.current?.path === path) presentedTripPath.current = path;
+  }, []);
   const [cameraCommand, setCameraCommand] = useState<CameraCommand>({ kind: 'reset', nonce: 0 });
   const [showSummary, setShowSummary] = useState(false);
   const [showCareer, setShowCareer] = useState(false);
@@ -91,13 +95,24 @@ export default function App() {
     let frame: number;
     let previous: number | null = null;
     let elapsed = 0;
-    function tick(now: number) {
-      if (previous !== null) elapsed += Math.min(now - previous, 100);
-      previous = now;
-      tripProgress.current = Math.min(1, elapsed / trip!.durationMs);
-      if (skipTrip.current || elapsed >= trip!.durationMs + 350) finishTrip(trip!);
-      else frame = requestAnimationFrame(tick);
-    }
+    const startHoldMs = 400;
+    const arrivalHoldMs = 600;
+    const tick = (now: number) => {
+      if (skipTrip.current) {
+        finishTrip(trip);
+        return;
+      }
+      if (presentedTripPath.current === trip.path) {
+        if (previous !== null) elapsed += Math.min(now - previous, 100);
+        previous = now;
+        tripProgress.current = Math.max(0, Math.min(1, (elapsed - startHoldMs) / trip.durationMs));
+        if (elapsed >= startHoldMs + trip.durationMs + arrivalHoldMs) {
+          finishTrip(trip);
+          return;
+        }
+      }
+      frame = requestAnimationFrame(tick);
+    };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
   }, [trip]);
@@ -159,13 +174,10 @@ export default function App() {
   function depart() {
     if (!game || activeTrip.current || busy || readOnly || !travel || travel.disabledReason || game.phase !== 'playing') return;
     const origin = { runId: game.runId, revision: game.revision };
-    if (reduceMotion) {
-      arrive({ origin, to: destination, mode: travel.mode });
-      return;
-    }
     const path = getTravelPath(game.locationId, destination, travel.mode);
     const length = path.reduce((distance, point, index) => index === 0 ? 0 : distance + Math.hypot(point.x - path[index - 1].x, point.z - path[index - 1].z), 0);
-    const journey = { origin, from: game.locationId, to: destination, mode: travel.mode, path, durationMs: Math.min(5900, 2550 + length * 46) };
+    const journey = { origin, from: game.locationId, to: destination, mode: travel.mode, path, durationMs: Math.min(7600, 3600 + length * 62) };
+    presentedTripPath.current = null;
     tripProgress.current = 0;
     skipTrip.current = false;
     activeTrip.current = journey;
@@ -222,7 +234,16 @@ export default function App() {
   }
 
   return <div className="game-shell">
-    <div className="world-layer" inert={!!trip}><WorldScene mode={mode} locationId={game.locationId} name={game.player.name} minute={game.minute} activity={activity} revision={game.revision} onAction={selectAction} onLocation={selectLocation} cameraCommand={cameraCommand} reduceMotion={reduceMotion} onReady={setWorldReady} showNames={showPlaceNames} travel={trip ? { path: trip.path, mode: trip.mode, progress: getTripProgress } : undefined} travelFallback={trip ? <TripFallback path={trip.path} mode={trip.mode} progress={getTripProgress} /> : undefined} /></div>
+    <div className="world-layer" inert={!!trip}>
+      <WorldScene
+        mode={mode} locationId={game.locationId} name={game.player.name} minute={game.minute}
+        activity={activity} revision={game.revision} onAction={selectAction} onLocation={selectLocation}
+        cameraCommand={cameraCommand} reduceMotion={reduceMotion} onReady={setWorldReady} showNames={showPlaceNames}
+        travel={trip ? { path: trip.path, mode: trip.mode, progress: getTripProgress } : undefined}
+        travelFallback={trip ? <TripFallback path={trip.path} mode={trip.mode} progress={getTripProgress} onPresented={markTripPresented} /> : undefined}
+        onTravelPresented={markTripPresented}
+      />
+    </div>
     {trip && <TripStatus from={trip.from} to={trip.to} mode={trip.mode} progress={getTripProgress} onSkip={() => { skipTrip.current = true; }} />}
     {!trip && <div className="hud-layer">
       <header className="sim-topbar">
@@ -282,7 +303,7 @@ export default function App() {
         {schedule.kind === 'overtime' && !workFinished && game.locationId !== 'office' && <button className="secondary-button career-entry" onClick={() => { setView('city'); selectLocation('office'); }}>去公司看看周末值班</button>}
         <button className="secondary-button career-entry" onClick={openCareer}><Icon name="calendar" size={17} />职业日历</button>
       </>}
-      {(panel === 'journal' || panel === 'settings') && <><div className="phone-tabs"><button className={panel === 'journal' ? 'active' : ''} onClick={() => setPanel('journal')}><Icon name="journal" size={16} />手记</button><button className={panel === 'settings' ? 'active' : ''} onClick={() => setPanel('settings')}><Icon name="settings" size={16} />设置与账单</button></div>{panel === 'journal' ? <><div className="panel-intro"><h3>今天留下的片刻</h3><p>每一个选择，都记在这里。</p></div><div className="timeline">{[...game.journal].reverse().map(entry => <article key={entry.id}><time>{clock(entry.minute)}</time><div><h3>{entry.title}</h3><p>{entry.detail}</p><div className="effect-chips">{entry.changes.map((change, index) => <span key={index}>{change.label} {change.value > 0 ? '+' : ''}{Number(change.value.toFixed(1))}{change.unit ?? ''}</span>)}</div></div></article>)}</div></> : <><div className="save-indicator"><Icon name="save" size={22} /><span><strong>{readOnly ? '此标签页只读' : saved ? '所有进度已保存在本机' : '有尚未保存的进度'}</strong><small>第 {day} 天 {clock(game.minute)}</small></span></div><div className="settings-buttons"><button className="secondary-button" onClick={download}><Icon name="download" size={17} />导出</button><button className="secondary-button" disabled={readOnly || busy} onClick={() => importInput.current?.click()}><Icon name="upload" size={17} />导入</button></div><input ref={importInput} type="file" accept="application/json,.json" hidden aria-label="导入 JSON 存档" onChange={async event => { const input = event.currentTarget; const file = input.files?.[0]; try { if (file) { if (file.size > 1_000_000) setMessage('请选择小于 1MB 的 JSON 存档。'); else restore(await file.text()); } } catch { setMessage('无法读取文件，请重新选择存档。'); } finally { input.value = ''; } }} /><p className="quiet-note">导入会替换当前人生。离线不消耗需求，清除浏览器数据会清除进度。</p><label className="toggle-setting"><span>减少动态效果<small>保留静止视角与简短反馈。</small></span><input type="checkbox" checked={reduceMotion} onChange={event => setReduceMotion(event.target.checked)} /></label><hr /><h3 className="small-heading">工作收入</h3><p className="quiet-note">从第 2 天开始，每天睡觉时按当天工时结算。参加周末值班时，工时按 1.5 倍结算。</p><button className="text-button restart-button" disabled={busy || readOnly} onClick={() => setConfirmReset(true)}><Icon name="reset" size={16} />重新开始一段生活</button></>}</>}
+      {(panel === 'journal' || panel === 'settings') && <><div className="phone-tabs"><button className={panel === 'journal' ? 'active' : ''} onClick={() => setPanel('journal')}><Icon name="journal" size={16} />手记</button><button className={panel === 'settings' ? 'active' : ''} onClick={() => setPanel('settings')}><Icon name="settings" size={16} />设置与账单</button></div>{panel === 'journal' ? <><div className="panel-intro"><h3>今天留下的片刻</h3><p>每一个选择，都记在这里。</p></div><div className="timeline">{[...game.journal].reverse().map(entry => <article key={entry.id}><time>{clock(entry.minute)}</time><div><h3>{entry.title}</h3><p>{entry.detail}</p><div className="effect-chips">{entry.changes.map((change, index) => <span key={index}>{change.label} {change.value > 0 ? '+' : ''}{Number(change.value.toFixed(1))}{change.unit ?? ''}</span>)}</div></div></article>)}</div></> : <><div className="save-indicator"><Icon name="save" size={22} /><span><strong>{readOnly ? '此标签页只读' : saved ? '所有进度已保存在本机' : '有尚未保存的进度'}</strong><small>第 {day} 天 {clock(game.minute)}</small></span></div><div className="settings-buttons"><button className="secondary-button" onClick={download}><Icon name="download" size={17} />导出</button><button className="secondary-button" disabled={readOnly || busy} onClick={() => importInput.current?.click()}><Icon name="upload" size={17} />导入</button></div><input ref={importInput} type="file" accept="application/json,.json" hidden aria-label="导入 JSON 存档" onChange={async event => { const input = event.currentTarget; const file = input.files?.[0]; try { if (file) { if (file.size > 1_000_000) setMessage('请选择小于 1MB 的 JSON 存档。'); else restore(await file.text()); } } catch { setMessage('无法读取文件，请重新选择存档。'); } finally { input.value = ''; } }} /><p className="quiet-note">导入会替换当前人生。离线不消耗需求，清除浏览器数据会清除进度。</p><label className="toggle-setting"><span>减少动态效果<small>出行时使用固定路线图，保留车辆移动。</small></span><input type="checkbox" checked={reduceMotion} onChange={event => setReduceMotion(event.target.checked)} /></label><hr /><h3 className="small-heading">工作收入</h3><p className="quiet-note">从第 2 天开始，每天睡觉时按当天工时结算。参加周末值班时，工时按 1.5 倍结算。</p><button className="text-button restart-button" disabled={busy || readOnly} onClick={() => setConfirmReset(true)}><Icon name="reset" size={16} />重新开始一段生活</button></>}</>}
     </div></aside>}
     {game.phase === 'event' && <div className="modal-backdrop"><section className="event-modal" role="dialog" aria-modal="true" aria-labelledby="event-title"><div className="event-person"><span>林</span><div><strong>林可</strong><small>产品经理 · 一条新消息</small></div><span className="message-time">{clock(game.minute)}</span></div><h2 id="event-title">“顺手加个小功能，可以吗？”</h2><p className="event-copy">消息提醒做到一半，林可想再加上批量标记。看起来只多一个按钮，按钮后面却还有边界情况。</p><div className="event-quote">“演示的时候一起带上，效果应该会很好。你觉得呢？”</div><div className="event-choices">{EVENT_CHOICES.map(choice => <button disabled={busy || readOnly} onClick={() => act({ kind: 'choice', targetId: choice.id })} key={choice.id}><strong>{choice.title}<Icon name="chevron" size={17} /></strong><p>{choice.description}</p><small>{choice.effects.join(' · ')}</small></button>)}</div><p className="quiet-note"><Icon name="clock" size={14} />先想清楚。读消息时，游戏时间暂停。</p></section></div>}
     {showSummary && game.phase === 'complete' && <DailySummary game={game} day={schedule.day} disabled={readOnly || busy} onNextDay={startNextDay} onCareer={openCareer} onClose={() => { setShowSummary(false); setPanel('journal'); }} onExport={download} onRestart={() => setConfirmReset(true)} />}

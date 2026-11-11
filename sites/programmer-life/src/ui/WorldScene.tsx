@@ -28,6 +28,7 @@ export interface WorldSceneProps {
   showNames?: boolean;
   travel?: WorldTravel;
   travelFallback?: ReactNode;
+  onTravelPresented?: (path: WorldTravel['path']) => void;
 }
 
 type CameraRig = { camera: THREE.OrthographicCamera; controls: OrbitControls; reset: () => void };
@@ -75,6 +76,7 @@ export function WorldScene(props: WorldSceneProps) {
   const target = useRef(new THREE.Vector3());
   const lighting = useRef<{ sun: THREE.DirectionalLight; hemi: THREE.HemisphereLight; scene: THREE.Scene } | null>(null);
   const lastActivityRevision = useRef(-1);
+  const presentedTravelPaths = useRef(new WeakSet<WorldTravel['path']>());
 
   useEffect(() => {
     const host = container.current;
@@ -85,6 +87,8 @@ export function WorldScene(props: WorldSceneProps) {
     } catch {
       setFallback(true); latest.current.onReady?.(false); return;
     }
+    let frame = 0;
+    let contextLost = false;
     setFallback(false);
     const scene = new THREE.Scene();
     scene.background = new THREE.Color('#a3b889');
@@ -122,6 +126,7 @@ export function WorldScene(props: WorldSceneProps) {
     if (model.player) target.current.copy(model.player.position);
 
     function resize() {
+      if (contextLost) return;
       const width = host!.clientWidth; const height = host!.clientHeight;
       if (!width || !height) return;
       const aspect = width / height;
@@ -165,18 +170,38 @@ export function WorldScene(props: WorldSceneProps) {
     renderer.domElement.addEventListener('pointerdown', pickStart);
     renderer.domElement.addEventListener('pointerup', pickEnd);
 
-    let frame = 0; let last = performance.now(); let ready = false;
+    function activateFallback() {
+      if (contextLost) return;
+      contextLost = true;
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      renderer.domElement.style.display = 'none';
+      rig.current = null;
+      setFallback(true);
+      latest.current.onReady?.(false);
+    }
+
+    function handleContextLoss(event: Event) {
+      event.preventDefault();
+      activateFallback();
+    }
+    renderer.domElement.addEventListener('webglcontextlost', handleContextLoss);
+
+    let last = performance.now(); let ready = false;
     const projected = new THREE.Vector3();
     const playerPosition = new THREE.Vector3();
     const backWall = model.group.getObjectByName('cutaway-back-wall');
     const leftWall = model.group.getObjectByName('cutaway-left-wall');
     let wasTraveling = false;
     function animate(now: number) {
+      if (contextLost) return;
       frame = requestAnimationFrame(animate);
       const elapsed = Math.max(0, (now - last) / 1000);
       const delta = Math.min(elapsed, .05);
       last = now;
-      const traveler = travelStage?.(latest.current.travel, elapsed, Boolean(latest.current.reduceMotion));
+      const { travel, reduceMotion, travelFallback } = latest.current;
+      if (travel && reduceMotion && travelFallback) return;
+      const traveler = travelStage?.(travel, elapsed, Boolean(reduceMotion));
       controls.update();
       camera.updateMatrixWorld();
       if (backWall) backWall.visible = camera.position.z >= controls.target.z;
@@ -218,12 +243,21 @@ export function WorldScene(props: WorldSceneProps) {
         element.style.visibility = projected.z > 1 || Math.abs(projected.x) > 1.03 || Math.abs(projected.y) > 1.03 ? 'hidden' : 'visible';
       });
       renderer.render(scene, camera);
+      if (renderer.getContext().isContextLost()) {
+        activateFallback();
+        return;
+      }
       if (!ready) { ready = true; latest.current.onReady?.(true); }
+      if (traveler && travel && !presentedTravelPaths.current.has(travel.path)) {
+        presentedTravelPaths.current.add(travel.path);
+        latest.current.onTravelPresented?.(travel.path);
+      }
     }
     frame = requestAnimationFrame(animate);
     return () => {
       cancelAnimationFrame(frame); observer.disconnect();
       renderer.domElement.removeEventListener('pointerdown', pickStart); renderer.domElement.removeEventListener('pointerup', pickEnd);
+      renderer.domElement.removeEventListener('webglcontextlost', handleContextLoss);
       controls.dispose(); disposeWorld(scene); renderer.dispose(); renderer.forceContextLoss();
       renderer.domElement.remove(); rig.current = null; modelRef.current = null; lighting.current = null;
     };
@@ -259,23 +293,24 @@ export function WorldScene(props: WorldSceneProps) {
     current.controls.update();
   }, [cameraCommand]);
 
+  const showTravelFallback = Boolean(props.travel && props.travelFallback && (fallback || props.reduceMotion));
   const sceneAttributes = {
     ref: container,
     className: `world-scene world-scene-${mode} ${props.showNames ? 'has-place-names' : ''}`,
-    'data-renderer': fallback ? 'svg' : 'webgl',
+    'data-renderer': fallback || showTravelFallback ? 'svg' : 'webgl',
     'data-travel-mode': props.travel?.mode,
   };
 
+  if (showTravelFallback) return <div {...sceneAttributes}>{props.travelFallback}</div>;
+
   if (fallback) {
     return <div {...sceneAttributes}>
-      {props.travel && props.travelFallback ? props.travelFallback : (
-        <div className="world-fallback" inert={Boolean(props.travel)}>
-          <div className="world-fallback-message">当前浏览器未启用三维加速，已切换简化视图。所有生活行动仍可操作。</div>
-          {mode === 'city' ? <CityScene location={locationId} onSelect={props.onLocation} /> : (
-            <RoomScene location={mode} name={props.name} minute={props.minute} activeAction={null} onSelect={props.onAction} />
-          )}
-        </div>
-      )}
+      <div className="world-fallback" inert={Boolean(props.travel)}>
+        <div className="world-fallback-message">当前浏览器未启用三维加速，已切换简化视图。所有生活行动仍可操作。</div>
+        {mode === 'city' ? <CityScene location={locationId} onSelect={props.onLocation} /> : (
+          <RoomScene location={mode} name={props.name} minute={props.minute} activeAction={null} onSelect={props.onAction} />
+        )}
+      </div>
     </div>;
   }
 
