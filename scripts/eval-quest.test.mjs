@@ -1,9 +1,25 @@
-import { readFile } from 'node:fs/promises'
+import { mkdtemp, readFile, rm, symlink } from 'node:fs/promises'
+import { execFile } from 'node:child_process'
+import { tmpdir } from 'node:os'
+import path from 'node:path'
+import { promisify } from 'node:util'
 import { Script } from 'node:vm'
 import { describe, expect, it } from 'vitest'
 import { outputPath, renderPage, validatePublicData, validatePublicText } from '../sites/eval-quest/build.mjs'
 
 describe('Eval Quest public edition', () => {
+  it('runs its CLI through a symlink as well as a canonical path', async () => {
+    const directory = await mkdtemp(path.join(tmpdir(), 'eval-quest-cli-test-'))
+    try {
+      const alias = path.join(directory, 'build.mjs')
+      await symlink(new URL('../sites/eval-quest/build.mjs', import.meta.url), alias)
+      const { stdout } = await promisify(execFile)(process.execPath, [alias, '--check'])
+      expect(stdout).toContain('Verified Eval Quest public snapshot')
+    } finally {
+      await rm(directory, { recursive: true, force: true })
+    }
+  })
+
   it('rebuilds the committed snapshot without private sources or build dependencies', async () => {
     const html = await renderPage()
     expect(html === await readFile(outputPath, 'utf8')).toBe(true)

@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, realpath, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -61,7 +61,7 @@ export async function renderPage() {
   return html
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && await realpath(process.argv[1]).catch(() => null) === fileURLToPath(import.meta.url)) {
   const html = await renderPage()
   if (process.argv.includes('--check')) {
     if (await readFile(outputPath, 'utf8') !== html) throw new Error('Eval Quest snapshot is stale; run npm run build:eval-quest')
