@@ -55,6 +55,23 @@ test('同源提交只向固定仓库发送文字，处理提及和 Markdown 后�
   assert.equal(options.body.includes(CLIENT_IP), false);
 });
 
+test('主页绑定转发的原始网址区分留言来源，其他来源仍使用栈城反馈', async (t) => {
+  const upstream = t.mock.method(globalThis, 'fetch', async () => Response.json({ number: 123, html_url: ISSUE_URL }, { status: 201 }));
+  const origins = ['https://zhangmin.name', 'https://terminal-portfolio.zhangmin.workers.dev', 'https://programmer-life.zhangmin.name'];
+  for (const [index, origin] of origins.entries()) {
+    const request = new Request(`${origin}/api/feedback`, {
+      method: 'POST',
+      headers: { Origin: origin, 'Content-Type': 'application/json', 'X-Forwarded-Host': 'zhangmin.name' },
+      body: JSON.stringify({ ...feedback, source: 'homepage' }),
+    });
+    const response = await worker.fetch(request, environment());
+    assert.equal(response.status, 201);
+    const { title, body } = JSON.parse(upstream.mock.calls[index].arguments[1].body);
+    assert.equal(title, `${index < 2 ? '[主页留言]' : '[栈城反馈]'} ${feedback.title}`);
+    assert.equal(body, `${index < 2 ? '来自个人主页的匿名留言。' : '来自《栈城日常》的匿名反馈。'}\n\n    ${feedback.message}`);
+  }
+});
+
 test('缺失来源和其他站点的 POST 不会访问限流绑定或 GitHub', async (t) => {
   const upstream = t.mock.method(globalThis, 'fetch', unexpectedFetch);
   const limit = t.mock.fn();

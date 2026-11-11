@@ -42,6 +42,8 @@ cd ~
 ↑ / ↓ 浏览命令历史，Tab 补全命令或路径；Ctrl+C 取消当前输入，
 Ctrl+L 清屏，Ctrl+A / E 移动到行首 / 行尾。页面内容以终端输出形式展示。
 
+输入 `留言` 或 `feedback` 可在主页匿名留言，也可用 GitHub 账号发布。留言公开显示在 [portfolio Issues](https://github.com/zhangmin510/portfolio/issues)。
+
 ## 网站导航
 
 | 网站 | 入口 |

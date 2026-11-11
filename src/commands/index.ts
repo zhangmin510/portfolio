@@ -21,6 +21,7 @@ export type CommandResult =
   | { kind: 'sites' }
   | { kind: 'site'; slug: string }
   | { kind: 'contact' }
+  | { kind: 'feedback' }
   | { kind: 'keywords' }
   | { kind: 'help' }
   | { kind: 'neofetch' }
@@ -117,6 +118,12 @@ export const COMMANDS: CommandDefinition[] = [
     description: '能力方向与技术栈',
     quick: true,
     execute: () => output({ kind: 'skills' }),
+  },
+  {
+    name: 'feedback',
+    aliases: ['留言'],
+    description: '留言 · 匿名提交或使用 GitHub 账号',
+    execute: () => output({ kind: 'feedback' }),
   },
   {
     name: 'keyword',

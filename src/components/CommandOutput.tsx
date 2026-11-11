@@ -11,6 +11,7 @@ import {
   YEARLY_KEYWORDS,
   WEBSITES,
 } from '../data/portfolio'
+import Feedback from './Feedback'
 
 interface CommandOutputProps {
   result: CommandResult
@@ -175,6 +176,9 @@ export default function CommandOutput({
           </p>
         </section>
       )
+
+    case 'feedback':
+      return <Feedback />
 
     case 'keywords':
       return (

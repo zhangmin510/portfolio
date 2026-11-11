@@ -200,6 +200,8 @@ export default function Terminal() {
 
   useEffect(() => {
     if (latestCommandId.current === null) return
+    const lastItem = history[history.length - 1]
+    if (lastItem?.type === 'output' && lastItem.result.kind === 'feedback') return
     inputRef.current?.scrollIntoView({
       block: 'nearest',
       behavior: reducedMotion ? 'auto' : 'smooth',
@@ -308,7 +310,9 @@ export default function Terminal() {
       setHistoryIndex(nextCommandHistory.length)
       draftInput.current = ''
       setInput('')
-      window.requestAnimationFrame(() => inputRef.current?.focus({ preventScroll: true }))
+      if (execution.kind !== 'output' || execution.result.kind !== 'feedback') {
+        window.requestAnimationFrame(() => inputRef.current?.focus({ preventScroll: true }))
+      }
     },
     [appendHistory, cancelEasterEgg, clearScreen, commandHistory, cwd, previousCwd, startEasterEgg],
   )
@@ -423,7 +427,7 @@ export default function Terminal() {
   const focusTerminal = (event: ReactMouseEvent<HTMLElement>) => {
     const target = event.target
     if (!(target instanceof Element) ||
-      target.closest('a, button, input, textarea, select, summary, [contenteditable]') ||
+      target.closest('a, button, input, textarea, select, label, summary, [contenteditable]') ||
       window.getSelection()?.toString()) return
     inputRef.current?.focus({ preventScroll: true })
   }
@@ -491,7 +495,7 @@ export default function Terminal() {
           <div className="terminal-welcome">
             <p>{PROFILE.name} · {PROFILE.title}</p>
             <p className="dim">{PROFILE.motto}</p>
-            <p className="dim">输入 <span className="accent">help</span> 查看命令，<span className="accent">projects</span> 查看项目，<span className="accent">panoramas</span> 浏览全景图。</p>
+            <p className="dim">输入 <span className="accent">help</span> 查看命令，<span className="accent">projects</span> 查看项目，<span className="accent">panoramas</span> 浏览全景图，或<button type="button" className="terminal-link welcome-feedback" onClick={() => runCommand('留言')}>留言</button>。</p>
           </div>
         )}
 

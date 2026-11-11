@@ -15,6 +15,42 @@ const SECURITY_HEADERS = {
   'X-Frame-Options': 'DENY',
 }
 
+const FEEDBACK_REQUEST_HEADERS = ['Origin', 'Content-Type', 'Content-Length', 'CF-Connecting-IP']
+
+function feedbackJson(body, status = 200, headers = {}) {
+  return Response.json(body, {
+    status,
+    headers: { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', ...headers },
+  })
+}
+
+async function forwardFeedback(request, service) {
+  if (request.method !== 'GET' && request.method !== 'POST') {
+    return feedbackJson({ message: '此接口支持查询和提交留言。' }, 405, { Allow: 'GET, POST' })
+  }
+
+  if (!service) {
+    return request.method === 'GET'
+      ? feedbackJson({ available: false })
+      : feedbackJson({ message: '匿名留言暂不可用。' }, 503)
+  }
+
+  const headers = new Headers()
+  for (const name of FEEDBACK_REQUEST_HEADERS) {
+    const value = request.headers.get(name)
+    if (value !== null) headers.set(name, value)
+  }
+
+  try {
+    // Keep the original URL for the shared Worker's same-origin check and source label.
+    return await service.fetch(new Request(request, { headers }))
+  } catch {
+    return request.method === 'GET'
+      ? feedbackJson({ available: false })
+      : feedbackJson({ message: '暂时无法确认留言提交结果。' }, 502)
+  }
+}
+
 function cacheControl(pathname, status) {
   if (status === 404) return 'no-store'
 
@@ -83,6 +119,8 @@ async function withVideoRange(request, response) {
 const worker = {
   async fetch(request, env) {
     const url = new URL(request.url)
+    if (url.pathname === '/api/feedback') return forwardFeedback(request, env.FEEDBACK)
+
     let response = await env.ASSETS.fetch(request)
 
     if (response.status === 404 && url.pathname !== '/404.html') {

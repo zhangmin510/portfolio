@@ -1,6 +1,48 @@
 import { describe, expect, it } from 'vitest'
 import worker from './index.js'
 
+describe('homepage feedback service binding', () => {
+  const url = 'https://zhangmin.name/api/feedback'
+
+  it('passes the original URL, payload and required headers to the feedback Worker', async () => {
+    const body = JSON.stringify({ title: '主页反馈', message: '在主页留下的一条反馈。' })
+    const request = new Request(url, {
+      method: 'POST',
+      headers: {
+        Origin: 'https://zhangmin.name',
+        'Content-Type': 'application/json',
+        'CF-Connecting-IP': '203.0.113.7',
+        'X-Forwarded-For': '198.51.100.18',
+        Cookie: 'session=private',
+      },
+      body,
+    })
+    const upstream = Response.json({ issueUrl: 'https://github.com/zhangmin510/portfolio/issues/123' }, { status: 201 })
+    const response = await worker.fetch(request, {
+      FEEDBACK: { async fetch(forwarded) {
+        expect(forwarded.url).toBe(url)
+        expect(forwarded.method).toBe('POST')
+        expect(forwarded.headers.get('Origin')).toBe('https://zhangmin.name')
+        expect(forwarded.headers.get('Content-Type')).toBe('application/json')
+        expect(forwarded.headers.get('CF-Connecting-IP')).toBe('203.0.113.7')
+        expect(forwarded.headers.has('X-Forwarded-For')).toBe(false)
+        expect(forwarded.headers.has('Cookie')).toBe(false)
+        expect(await forwarded.text()).toBe(body)
+        return upstream
+      } },
+    })
+    expect(response).toBe(upstream)
+  })
+
+  it.each([undefined, { fetch: async () => { throw new Error('binding unavailable') } }])('handles an unavailable feedback service', async (FEEDBACK) => {
+    const response = await worker.fetch(new Request(url), { FEEDBACK })
+    expect(response.headers.get('Cache-Control')).toBe('no-store')
+    expect(await response.json()).toEqual({ available: false })
+    const rejected = await worker.fetch(new Request(url, { method: 'POST' }), { FEEDBACK })
+    expect(rejected.status).toBe(FEEDBACK ? 502 : 503)
+  })
+})
+
 describe('interactive page security and caching', () => {
   it.each(['/panoramas/eval-quest/', '/panoramas/eval-quest/index.html'])('serves %s with the scoped interaction CSP', async (pathname) => {
     const response = await worker.fetch(new Request(`https://zhangmin.name${pathname}`), {

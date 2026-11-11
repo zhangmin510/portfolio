@@ -6,6 +6,10 @@ const INVALID_FORMAT = '反馈格式有误，请检查标题和正文。';
 const TOO_LARGE = '反馈内容超出大小限制。';
 const UNAVAILABLE = '反馈暂时不可用，请稍后再试。';
 const UNCONFIRMED = '暂时无法确认反馈提交结果。';
+const HOMEPAGE_ORIGINS = new Set([
+  'https://zhangmin.name',
+  'https://terminal-portfolio.zhangmin.workers.dev',
+]);
 
 function json(body, status = 200, headers = {}) {
   return Response.json(body, {
@@ -75,7 +79,7 @@ function rateLimitKey(request) {
   return `feedback:${clientIp && /^[\da-f.:]{1,45}$/i.test(clientIp) ? clientIp : 'unknown'}`;
 }
 
-async function createIssue(token, title, message) {
+async function createIssue(token, title, message, fromHomepage) {
   // Indent every user line so Markdown syntax is preserved as literal feedback.
   const literal = neutralizeIssueLinks(message).split('\n').map(line => `    ${line}`).join('\n');
   const response = await fetch(ISSUES_API, {
@@ -90,8 +94,8 @@ async function createIssue(token, title, message) {
       'X-GitHub-Api-Version': '2026-03-10',
     },
     body: JSON.stringify({
-      title: `[栈城反馈] ${neutralizeIssueLinks(title)}`,
-      body: `来自《栈城日常》的匿名反馈。\n\n${literal}`,
+      title: `[${fromHomepage ? '主页留言' : '栈城反馈'}] ${neutralizeIssueLinks(title)}`,
+      body: `${fromHomepage ? '来自个人主页的匿名留言。' : '来自《栈城日常》的匿名反馈。'}\n\n${literal}`,
     }),
   });
 
@@ -123,8 +127,11 @@ export default {
     if (request.method !== 'POST') {
       return json({ message: '此接口支持查询和提交反馈。' }, 405, { Allow: 'GET, POST' });
     }
+    // The portfolio service binding preserves the original URL. Do not infer the
+    // source from caller-controlled forwarding headers or the request body.
+    const fromHomepage = HOMEPAGE_ORIGINS.has(url.origin);
     if (request.headers.get('Origin') !== url.origin) {
-      return json({ message: '请在《栈城日常》网页内提交反馈。' }, 403);
+      return json({ message: fromHomepage ? '请在个人主页内提交留言。' : '请在《栈城日常》网页内提交反馈。' }, 403);
     }
     if (!available) return json({ message: UNAVAILABLE }, 503);
 
@@ -144,7 +151,7 @@ export default {
     }
 
     try {
-      const issueUrl = await createIssue(env.GITHUB_ISSUES_TOKEN.trim(), input.title, input.message);
+      const issueUrl = await createIssue(env.GITHUB_ISSUES_TOKEN.trim(), input.title, input.message, fromHomepage);
       if (issueUrl) return json({ issueUrl }, 201);
     } catch (error) {
       // An upstream timeout can happen after GitHub accepted the request.

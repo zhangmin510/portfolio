@@ -1,0 +1,77 @@
+.terminal-welcome .welcome-feedback {
+  min-height: 24px;
+  margin: 0;
+  color: var(--link-color);
+  background: transparent;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.feedback-section {
+  max-width: 38rem;
+  padding-block: 12px;
+  cursor: auto;
+}
+
+.feedback-form {
+  display: grid;
+  justify-items: start;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.feedback-form label {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+}
+
+.feedback-form small {
+  color: var(--muted-color);
+}
+
+.feedback-form input,
+.feedback-form textarea {
+  width: 100%;
+  padding: 8px 10px;
+  scroll-margin-block: 24px;
+  color: var(--text-color);
+  font: inherit;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+.feedback-form textarea {
+  resize: vertical;
+}
+
+.feedback-form button {
+  padding: 7px 12px;
+  color: var(--success-color);
+  background: var(--surface-raised);
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.feedback-form button:disabled {
+  color: var(--muted-color);
+  border-color: var(--border-color);
+  cursor: default;
+}
+
+.feedback-success {
+  color: var(--success-color);
+}
+
+.feedback-error {
+  color: var(--error-color);
+}
+
+.feedback-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}

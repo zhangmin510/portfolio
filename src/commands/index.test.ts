@@ -29,6 +29,20 @@ describe('terminal command registry', () => {
     })
   })
 
+  it('opens the public guestbook from both command names', () => {
+    const expected = { kind: 'output', result: { kind: 'feedback' } }
+    expect(executeCommand('留言')).toEqual(expected)
+    expect(executeCommand('feedback')).toEqual(expected)
+    expect(autocompleteCommand('留')).toBe('留言')
+    expect(autocompleteCommand('feed')).toBe('feedback')
+
+    const html = renderToStaticMarkup(createElement(CommandOutput, {
+      result: { kind: 'feedback' }, viewport: { width: 0, height: 0 },
+    }))
+    expect(html).toContain('用 GitHub 账号提交')
+    expect(html).toContain('https://github.com/zhangmin510/portfolio/issues/new?')
+  })
+
   it('keeps echoed HTML as plain text data', () => {
     expect(executeCommand('echo <img src=x onerror=alert(1)>')).toEqual({
       kind: 'output',
