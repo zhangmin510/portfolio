@@ -169,6 +169,9 @@ export default function CommandOutput({
               </div>
             ))}
           </dl>
+          <p>
+            <a className="terminal-link" href="/keyword-film/index.html">播放年度关键词短片 · 年岁有词 →</a>
+          </p>
         </section>
       )
 

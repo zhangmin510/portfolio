@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#eee8dc">
+    <meta name="description" content="以 zhangmin.name 的年度关键词，串起 2020 至 2026 的人生片段。一部关于家、成长与行动的温暖短片。">
+    <title>年岁有词 · 2020—2026 | zhangmin.name</title>
+    <link rel="stylesheet" href="player.css">
+    <script src="player.js" defer></script>
+  </head>
+  <body>
+    <div class="page">
+      <header class="masthead">
+        <a class="wordmark" href="https://zhangmin.name/">zhangmin.name<span aria-hidden="true"> ↗</span></a>
+        <span class="edition">PERSONAL ARCHIVE <span class="edition-divider" aria-hidden="true">/</span> 2020—2026</span>
+      </header>
+
+      <main>
+        <section class="introduction" aria-labelledby="film-title">
+          <div>
+            <p class="eyebrow"><span aria-hidden="true">●</span> AN ANNUAL KEYWORD FILM</p>
+            <h1 id="film-title">年岁有词<span class="title-dot">。</span></h1>
+            <p class="lede">把年份里的几个词，慢慢连成生活。</p>
+          </div>
+          <p class="film-meta"><span>一段温暖的年度回望</span><span>00:50 <i aria-hidden="true">·</i> 1920 × 1080</span></p>
+        </section>
+
+        <figure class="film">
+          <div class="screen">
+            <video id="keyword-film" controls playsinline preload="metadata" poster="poster.jpg" width="1920" height="1080" aria-label="年岁有词：2020 至 2026 年度关键词短片" aria-describedby="film-description">
+              <source src="keywords-2020-2026.mp4" type="video/mp4">
+              <track kind="captions" src="captions.vtt" srclang="zh" label="中文">
+              你的浏览器无法播放此视频。<a href="keywords-2020-2026.mp4" download>下载 MP4 后观看</a>。
+            </video>
+          </div>
+          <figcaption>
+            <p id="film-description">六个年份，十八个关键词。<span>从「家」出发，走向新的可能。</span></p>
+            <a class="download" href="keywords-2020-2026.mp4" download="zhangmin-keywords-2020-2026.mp4">下载短片 <span aria-hidden="true">↓</span></a>
+          </figcaption>
+        </figure>
+        <p id="player-status" class="player-status" role="status" aria-live="polite"></p>
+
+        <section class="chapters" aria-labelledby="chapters-title">
+          <div class="section-heading">
+            <h2 id="chapters-title">每一年，都有自己的名字</h2>
+            <p>点击年份，回到那一页 <span aria-hidden="true">↙</span></p>
+          </div>
+          <div class="chapter-list">
+            <button class="chapter" type="button" data-time="5" data-end="11" aria-pressed="false"><span class="chapter-number">01 <span>00:05</span></span><span class="chapter-year">2020</span><span class="chapter-words">家 · 7 · 而立</span><span class="chapter-arrow" aria-hidden="true">↗</span></button>
+            <button class="chapter" type="button" data-time="11" data-end="17" aria-pressed="false"><span class="chapter-number">02 <span>00:11</span></span><span class="chapter-year">2021</span><span class="chapter-words">家 · 做时间的朋友 · 而立</span><span class="chapter-arrow" aria-hidden="true">↗</span></button>
+            <button class="chapter" type="button" data-time="17" data-end="23" aria-pressed="false"><span class="chapter-number">03 <span>00:17</span></span><span class="chapter-year">2022</span><span class="chapter-words">家 · 突破 · 而立</span><span class="chapter-arrow" aria-hidden="true">↗</span></button>
+            <button class="chapter" type="button" data-time="23" data-end="29" aria-pressed="false"><span class="chapter-number">04 <span>00:23</span></span><span class="chapter-year">2024</span><span class="chapter-words">真行 · 传承 · 节奏</span><span class="chapter-arrow" aria-hidden="true">↗</span></button>
+            <button class="chapter" type="button" data-time="29" data-end="35" aria-pressed="false"><span class="chapter-number">05 <span>00:29</span></span><span class="chapter-year">2025</span><span class="chapter-words">沟通 · 成长 · Agent</span><span class="chapter-arrow" aria-hidden="true">↗</span></button>
+            <button class="chapter" type="button" data-time="35" data-end="41" aria-pressed="false"><span class="chapter-number">06 <span>00:35</span></span><span class="chapter-year">2026</span><span class="chapter-words">认知 · Agent · MVP</span><span class="chapter-arrow" aria-hidden="true">↗</span></button>
+          </div>
+          <p class="archive-note">年份与关键词取自 <a href="https://zhangmin.name/">zhangmin.name</a> 的 keyword；原始记录未包含 2023 年。</p>
+        </section>
+
+        <details class="embed-details">
+          <summary>把这段回望放进网页 <span aria-hidden="true">＋</span></summary>
+          <div class="embed-content">
+            <p>将本目录上传至网站的 <code>/keyword-film/</code>，即可使用以下播放器。将响应式样式放入网站现有的 CSS 文件。</p>
+            <pre tabindex="0" aria-label="HTML 嵌入代码"><code>&lt;video class="keyword-film" controls playsinline preload="metadata"
+  poster="/keyword-film/poster.jpg" width="1920" height="1080"&gt;
+  &lt;source src="/keyword-film/keywords-2020-2026.mp4" type="video/mp4"&gt;
+  &lt;track kind="captions" src="/keyword-film/captions.vtt"
+    srclang="zh" label="中文"&gt;
+&lt;/video&gt;</code></pre>
+            <pre tabindex="0" aria-label="CSS 响应式样式"><code>.keyword-film { display: block; width: 100%; height: auto; }</code></pre>
+          </div>
+        </details>
+      </main>
+
+      <footer><span>年岁有词 / WORDS THROUGH THE YEARS</span><a href="https://zhangmin.name/">回到主页 <span aria-hidden="true">↗</span></a></footer>
+    </div>
+  </body>
+</html>

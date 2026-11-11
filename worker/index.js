@@ -34,6 +34,52 @@ function cacheControl(pathname, status) {
   return 'public, max-age=0, must-revalidate'
 }
 
+// Static Assets returns the whole file for Range requests. Native video seeking
+// needs byte ranges, so provide them for the small, same-origin keyword film.
+async function withVideoRange(request, response) {
+  const headers = new Headers(response.headers)
+  headers.set('Accept-Ranges', 'bytes')
+  const full = () => new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  })
+  if (request.method !== 'GET') return full()
+
+  const range = request.headers.get('Range')
+  if (!range) return full()
+  const match = /^bytes=(\d*)-(\d*)$/.exec(range.trim())
+  // Ignore unsupported units, malformed ranges, and multipart range requests.
+  if (!match || (!match[1] && !match[2])) return full()
+
+  const ifRange = request.headers.get('If-Range')
+  if (ifRange) {
+    const etag = response.headers.get('ETag')
+    const modified = Date.parse(response.headers.get('Last-Modified') || '')
+    const isTag = ifRange.startsWith('"') || ifRange.startsWith('W/')
+    const since = isTag ? NaN : Date.parse(ifRange)
+    const matchesTag = !ifRange.startsWith('W/') && ifRange === etag
+    const matchesDate = Number.isFinite(modified) && Number.isFinite(since) && since === modified
+    if (!matchesTag && !matchesDate) return full()
+  }
+
+  const bytes = await response.arrayBuffer()
+  const size = bytes.byteLength
+  const suffix = !match[1]
+  const start = suffix ? Math.max(0, size - Number(match[2])) : Number(match[1])
+  const end = suffix || !match[2] ? size - 1 : Math.min(size - 1, Number(match[2]))
+  if (!size || !Number.isFinite(start) || start >= size || end < start) {
+    headers.set('Content-Range', `bytes */${size}`)
+    headers.set('Content-Length', '0')
+    return new Response(null, { status: 416, headers })
+  }
+
+  const partial = bytes.slice(start, end + 1)
+  headers.set('Content-Range', `bytes ${start}-${end}/${size}`)
+  headers.set('Content-Length', String(partial.byteLength))
+  return new Response(partial, { status: 206, headers })
+}
+
 const worker = {
   async fetch(request, env) {
     const url = new URL(request.url)
@@ -50,6 +96,14 @@ const worker = {
         statusText: 'Not Found',
         headers: notFound.headers,
       })
+    }
+
+    if (
+      response.status === 200 &&
+      url.pathname.startsWith('/keyword-film/') &&
+      url.pathname.endsWith('.mp4')
+    ) {
+      response = await withVideoRange(request, response)
     }
 
     const headers = new Headers(response.headers)

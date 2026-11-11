@@ -12,3 +12,6 @@ dist/
 
 # Vercel
 .vercel
+
+# Keyword film intermediate audio, frames, and validation reports
+.film-work/
