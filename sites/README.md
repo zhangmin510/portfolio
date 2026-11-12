@@ -6,7 +6,7 @@
 | --- | --- | --- |
 | 评测探索局 | [eval-quest](eval-quest/) | [zhangmin.name/panoramas/eval-quest/](https://zhangmin.name/panoramas/eval-quest/) |
 | Qwen3.5 权重实验室 | [weight-space-repro](weight-space-repro/) | [weights.zhangmin.name](https://weights.zhangmin.name/) |
-| 栈城日常 | [programmer-life](programmer-life/) | [programmer-life.zhangmin.workers.dev](https://programmer-life.zhangmin.workers.dev/) |
+| 栈城日常 | [programmer-life](programmer-life/) | [programmer-life.zhangmin.name](https://programmer-life.zhangmin.name/) |
 | EvalTube | [evaltube](evaltube/) | [evaltube.zhangmin.name](https://evaltube.zhangmin.name/) |
 | EvalPapers | [eval-papers](eval-papers/) | [evalpapers.zhangmin.name](https://evalpapers.zhangmin.name/) |
 | AI Time Capsule | [ai-time-capsule](ai-time-capsule/) | [timecapsule.zhangmin.name](https://timecapsule.zhangmin.name/) |

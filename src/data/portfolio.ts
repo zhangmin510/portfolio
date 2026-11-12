@@ -1,3 +1,5 @@
+import websites from './sites.json'
+
 export interface Project {
   name: string
   tagline: string
@@ -81,71 +83,7 @@ export const PROJECTS: Project[] = [
   },
 ]
 
-export const WEBSITES = [
-  {
-    slug: 'panoramas',
-    name: '全景图',
-    label: '知识地图',
-    summary: '浏览技术、产业与学习主题的全景图总览。',
-    href: 'https://zhangmin.name/panoramas/',
-  },
-  {
-    slug: 'eval-quest',
-    name: '评测探索局',
-    label: '游戏式评测学习',
-    summary: '从度量衡到 AI 智能体：12 关知识地图、24 道情境挑战、4 个实验与全书阅读。',
-    href: 'https://zhangmin.name/panoramas/eval-quest/',
-  },
-  {
-    slug: 'evalfrontier',
-    name: '评测前沿',
-    label: '模型与 Agent 评测',
-    summary: '查看大模型、Agent 与应用评测的基准、结果和来源。',
-    href: 'https://b.zhangmin.name/',
-  },
-  {
-    slug: 'evaltube',
-    name: 'EvalTube',
-    label: 'AI 评测视频',
-    summary: '聚焦模型、AI 搜索、应用与 Agent 的评测视频。',
-    href: 'https://evaltube.zhangmin.name/',
-  },
-  {
-    slug: 'evalpapers',
-    name: 'EvalPapers',
-    label: '评测论文',
-    summary: '围绕模型、AI 搜索、应用与 Agent，搜索论文、收藏阅读清单并发现相关研究。',
-    href: 'https://evalpapers.zhangmin.name/',
-  },
-  {
-    slug: 'timecapsule',
-    name: 'AI Time Capsule',
-    label: 'AI 历史档案',
-    summary: '把 AI 产品的原始主张与后续证据放回时间线，按日期回看并整理自己的判断。',
-    href: 'https://timecapsule.zhangmin.name/',
-  },
-  {
-    slug: 'autoeval',
-    name: 'AutoEval',
-    label: '检索实验',
-    summary: '在固定数据上比较 RAG 检索配置，记录真实指标、保留改进并导出实验报告。',
-    href: 'https://autoeval.zhangmin.name/',
-  },
-  {
-    slug: 'programmer-life',
-    name: '栈城日常',
-    label: '程序员生活模拟',
-    summary: '在三维城市里体验程序员的一天，安排通勤、工作和休息。',
-    href: 'https://programmer-life.zhangmin.workers.dev/',
-  },
-  {
-    slug: 'weight-space',
-    name: '权重实验室',
-    label: '模型权重与推理',
-    summary: '逐张量查看 Qwen3.5-0.8B 的权重和补丁，用 1 + 1 跟踪逐 token 推理。',
-    href: 'https://weights.zhangmin.name/',
-  },
-] as const
+export const WEBSITES = websites
 
 export const YEARLY_KEYWORDS = [
   { year: 2026, keywords: '认知 Agent MVP' },

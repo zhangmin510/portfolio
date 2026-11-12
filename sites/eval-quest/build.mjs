@@ -1,3 +1,4 @@
+import { decoratePanorama } from '../../scripts/navigation/render.mjs'
 import { mkdir, readFile, realpath, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -58,7 +59,8 @@ export async function renderPage() {
     html = html.replace(marker, () => value)
   }
   validatePublicText(html)
-  return html
+  const manifest = JSON.parse(await readFile(path.resolve(directory, '../../scripts/panoramas.json'), 'utf8'))
+  return decoratePanorama(html, manifest.pages.find(p => p.slug === 'eval-quest'), manifest.pages)
 }
 
 if (process.argv[1] && await realpath(process.argv[1]).catch(() => null) === fileURLToPath(import.meta.url)) {

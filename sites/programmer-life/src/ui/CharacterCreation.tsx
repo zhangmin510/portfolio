@@ -1,3 +1,4 @@
+import { PortfolioNavigation } from './PortfolioNavigation';
 import { useState } from 'react';
 import type { BackgroundId, CharacterOptions, TraitId, WishId } from '../domain/types';
 import { TRAITS, WISHES } from '../content/game';
@@ -35,6 +36,7 @@ export function CharacterCreation({ onStart, readOnly }: { onStart: (options: Ch
         <span><strong>栈城日常</strong><small>PROGRAMMER LIFE</small></span>
       </div>
       <GuestFeedback className="creation-edition" />
+      <div className="creation-portfolio-nav"><PortfolioNavigation /></div>
     </header>
     <main className="creation-layout">
       <div className="creation-place-note" aria-hidden="true">

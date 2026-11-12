@@ -1,3 +1,4 @@
+import { decoratePanorama, stripNavigation, navigation, css } from './navigation/render.mjs'
 import { createHash } from 'node:crypto'
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
@@ -69,6 +70,7 @@ function localize(html) {
 }
 
 function restoreOriginal(html) {
+  html = stripNavigation(html)
   return manifest.vendors.reduce((result, vendor) => replaceScriptSrc(
     result, `${manifest.basePath}vendor/${vendor.file}`, vendor.url,
   ), restoreDownloadExpressions(html))
@@ -111,7 +113,7 @@ for (const page of manifest.pages) {
   const sourcePath = path.resolve(projectDir, page.source)
   let source
   if (await exists(sourcePath)) {
-    source = await readFile(sourcePath, 'utf8')
+    source = stripNavigation(await readFile(sourcePath, 'utf8'))
   } else {
     source = restoreOriginal(await readFile(destination, 'utf8').catch(() => {
       throw new Error(`Both source and published snapshot are missing for ${page.slug}: ${sourcePath}`)
@@ -126,7 +128,7 @@ for (const page of manifest.pages) {
     errors.push(`Source checksum changed for ${page.slug}; run the sync command`)
   }
   page.sourceSha256 = sourceSha256
-  await saveOrCheck(destination, localize(source))
+  await saveOrCheck(destination, decoratePanorama(localize(source), page, manifest.pages))
 }
 
 const categories = [...new Set(manifest.pages.map((page) => page.category))]
@@ -140,7 +142,7 @@ const cards = manifest.pages.map((page, index) => {
       <p class="card-subtitle">${escapeHtml(page.subtitle)}</p>
       <p class="card-description">${escapeHtml(page.description)}</p>
       <div class="tags">${page.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join('')}</div>
-      <div class="card-bottom"><time datetime="${page.updatedAt}">${page.updatedAt.replaceAll('-', '.')}</time><span class="card-link">打开全景 <span aria-hidden="true">↗</span></span></div>
+      <div class="card-bottom"><time datetime="${page.updatedAt}">${page.updatedAt.replaceAll('-', '.')}</time><span class="card-link">打开全景 <span aria-hidden="true">→</span></span></div>
     </a>`
 }).join('\n')
 
@@ -159,6 +161,7 @@ const html = `<!doctype html>
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://zhangmin.name/panoramas/">
   <style>
+${css}
     :root{color-scheme:dark;--bg:#0d1117;--surface:#141b23;--text:#e4eaf1;--muted:#97a7b8;--line:#283441;--mint:#81d5b8;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--mint);outline-offset:5px}::selection{background:var(--mint);color:var(--bg)}.wrap{width:min(1180px,calc(100% - 64px));margin:auto}
     .masthead{display:flex;align-items:center;justify-content:space-between;padding:27px 0;border-bottom:1px solid var(--line);font:13px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace}.brand{font-weight:700;letter-spacing:.03em}.brand i{font-style:normal;color:var(--mint)}.home{color:var(--muted);transition:color .2s}.home:hover{color:var(--text)}.home span{margin-right:8px}
@@ -172,7 +175,7 @@ const html = `<!doctype html>
 </head>
 <body>
   <div class="wrap">
-    <header class="masthead"><a class="brand" href="/">ZhangMin<i>.name</i></a><a class="home" href="/"><span aria-hidden="true">←</span>返回个人主页</a></header>
+    <header class="masthead"><a class="brand" href="/">ZhangMin<i>.name</i></a>${navigation({slug:"panoramas"})}</header>
     <main>
       <section class="hero" aria-labelledby="page-title">
         <div><p class="eyebrow">THE PANORAMA COLLECTION</p><h1 id="page-title">全景图<span>把知识，展开来看。</span></h1></div>
@@ -191,34 +194,9 @@ const html = `<!doctype html>
         <noscript><p>所有全景图已列于上方。开启 JavaScript 后可使用搜索和主题筛选。</p></noscript>
       </section>
     </main>
-    <footer class="footer"><span>© 2026 ZhangMin.name · 持续记录与探索</span><a href="/">回到首页 <span aria-hidden="true">↗</span></a></footer>
+    <footer class="footer"><span>© 2026 ZhangMin.name · 持续记录与探索</span><a href="/">个人主页 <span aria-hidden="true">←</span></a></footer>
   </div>
-  <script>
-    (() => {
-      const input = document.getElementById('search');
-      const filters = [...document.querySelectorAll('.filter')];
-      const cards = [...document.querySelectorAll('.card')];
-      const status = document.getElementById('result-count');
-      const empty = document.getElementById('empty');
-      let selectedCategory = '';
-      function update() {
-        const terms = input.value.trim().toLocaleLowerCase().split(/\\s+/).filter(Boolean);
-        let visible = 0;
-        cards.forEach(card => {
-          const text = card.dataset.search.toLocaleLowerCase();
-          const matches = (!selectedCategory || card.dataset.category === selectedCategory) && terms.every(term => text.includes(term));
-          card.hidden = !matches;
-          if (matches) visible += 1;
-        });
-        filters.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.category === selectedCategory)));
-        status.textContent = '展示 ' + visible + ' / ' + cards.length + ' 张全景图';
-        empty.hidden = visible !== 0;
-      }
-      input.addEventListener('input', update);
-      filters.forEach(button => button.addEventListener('click', () => { selectedCategory = button.dataset.category; update(); }));
-      document.getElementById('reset').addEventListener('click', () => { input.value = ''; selectedCategory = ''; update(); input.focus(); });
-    })();
-  </script>
+  <script src="/panoramas/directory.js" defer></script>
 </body>
 </html>
 `

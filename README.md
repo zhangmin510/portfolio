@@ -8,7 +8,7 @@
 ## 功能特性
 
 - 简洁的单栏终端主页，保留个人介绍、命令输入和轻量导航
-- 首页直接提供九个网站入口，`sites` / `websites` 命令可查看介绍，`cd sites` 可按目录浏览
+- 首页直接提供十个网站入口，`sites` / `websites` 命令可查看介绍，`cd sites` 可按目录浏览
 - `panoramas` 命令与全景图入口，连接 17 张独立目录发布的交互图谱
 - 评测探索局：12 关游戏式知识地图、24 道情境挑战、4 个实验与全书阅读，进度本地保存
 - 全景图目录支持主题筛选、关键词搜索与手机浏览
@@ -55,10 +55,11 @@ Ctrl+L 清屏，Ctrl+A / E 移动到行首 / 行尾。页面内容以终端输�
 | EvalPapers · 评测论文 | [evalpapers.zhangmin.name](https://evalpapers.zhangmin.name/)（[备用入口](https://evalpapers.zhangmin.workers.dev/)） |
 | AI Time Capsule · AI 历史档案 | [timecapsule.zhangmin.name](https://timecapsule.zhangmin.name/) |
 | AutoEval · 检索实验 | [autoeval.zhangmin.name](https://autoeval.zhangmin.name/) |
-| 栈城日常 · 程序员生活模拟 | [programmer-life.zhangmin.workers.dev](https://programmer-life.zhangmin.workers.dev/) |
+| 栈城日常 · 程序员生活模拟 | [programmer-life.zhangmin.name](https://programmer-life.zhangmin.name/) |
+| 中国政策雷达 · 政策观察 | [zhengce-radar.zhangmin.workers.dev](https://zhengce-radar.zhangmin.workers.dev/) |
 | 权重实验室 · 模型权重与推理 | [weights.zhangmin.name](https://weights.zhangmin.name/) |
 
-导航数据统一维护在 `src/data/portfolio.ts` 的 `WEBSITES`，同时用于首页链接、终端输出和虚拟目录。
+导航数据统一维护在 `src/data/sites.json`，由 `src/data/portfolio.ts` 导出 `WEBSITES`，同时用于首页链接、终端输出和虚拟目录。
 
 八个子项目的源码与构建说明见[子站目录](sites/README.md)，其中评测探索局作为主页子路径发布，共用主页的 Cloudflare 部署。评测前沿的 Cloudflare 配置维护在 [AIHOT 的 `eval-frontier` 分支](https://github.com/zhangmin510/AIHOT/tree/eval-frontier/deploy/cloudflare)。
 

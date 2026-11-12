@@ -12,3 +12,23 @@ main{margin-left:232px;padding:92px 32px 40px;min-height:100vh}.collapsed main{m
 
 .curated-source{color:var(--green)}.curated-source i{background:var(--surface);color:var(--green)}
 .footer-copy{display:grid;gap:6px}.tribute{font-size:12px}.footnote .tribute a{display:inline;margin:0;color:var(--accent)}.footnote .tribute a:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* portfolio-nav:start */
+
+.portfolio-navigation{box-sizing:border-box;padding:0;border:0;overflow:visible;background:transparent;display:flex;align-items:center;gap:12px;flex-shrink:0;font:12px/1.5 system-ui,sans-serif;color:inherit;isolation:isolate}
+.portfolio-navigation a,.portfolio-navigation summary{box-sizing:border-box;color:inherit;text-decoration:none;font:inherit;cursor:pointer;letter-spacing:normal}
+.portfolio-navigation>a{display:inline-flex;align-items:center;min-height:40px;white-space:nowrap;padding:0 5px}
+.portfolio-navigation a:hover{text-decoration:underline;text-underline-offset:4px}
+.portfolio-navigation :focus-visible{outline:2px solid #41836a;outline-offset:3px}
+.portfolio-navigation details{position:relative;margin:0;padding:0;border:0;background:none}
+.portfolio-navigation summary{display:list-item;min-height:40px;align-content:center;white-space:nowrap;padding:0 5px}
+.portfolio-navigation details>div{position:absolute;right:0;top:100%;width:min(300px,calc(100vw - 24px));max-height:65dvh;overflow:auto;padding:14px;background:#fff;color:#34483f;border:1px solid #cad7ce;border-radius:12px;box-shadow:0 12px 36px #172d2626;z-index:10000;text-align:left}
+.portfolio-navigation details a{display:block;padding:9px 10px;min-height:38px;border-radius:5px;white-space:normal}
+.portfolio-navigation details strong{display:block;padding:7px 10px;font-size:11px;color:#65796e}
+.portfolio-navigation[data-placement="page"]{position:sticky;top:0;z-index:10000;justify-content:flex-end;min-height:44px;padding:0 18px;background:#f8fbf8;color:#34483f;border-bottom:1px solid #cad7ce}
+.portfolio-navigation .portfolio-title{margin-right:auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:45%;font-weight:600}
+@media(max-width:650px){.portfolio-navigation{gap:5px;font-size:11px}.portfolio-navigation[data-placement="page"]{padding:0 10px}.portfolio-navigation .portfolio-title{display:none}.portfolio-navigation[data-placement="page"]>a:first-of-type{margin-right:auto}}
+@media print{.portfolio-navigation{display:none}}
+
+.topbar{gap:16px}.topbar>.search{min-width:100px}@media(max-width:620px){.topbar{height:152px}.topbar>.portfolio-navigation{position:absolute;top:106px;right:14px;left:14px;justify-content:flex-end}.topbar>.portfolio-navigation>a{margin-right:auto}.sidebar,.collapsed .sidebar{top:152px}.mobile-open .scrim{inset:152px 0 0}main,.collapsed main{padding-top:173px}}
+/* portfolio-nav:end */

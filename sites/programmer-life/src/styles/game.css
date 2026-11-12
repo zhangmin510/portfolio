@@ -46,3 +46,5 @@
 .place-chip>button{background:#f2f5f0;border-radius:15px;font-size:10px;color:#647362;padding:4px 8px;margin-left:5px}.place-chip>button.active{background:#dcebd7;color:#357947}
 .panel-header h2,.panel-intro h3,.action-preview h3,.small-heading{color:#303e35}.panel-intro>p,.action-preview>p,.timeline p,.event-copy{color:#69776c}.action-option strong,.timeline h3{color:#4d6251}.event-choices strong{color:#376348}.event-choices p{color:#76886e}
 @media(max-width:600px){.context-panel.action-context{top:auto;bottom:calc(80px + env(safe-area-inset-bottom));max-height:65dvh}}
+
+.creation-screen .creation-topbar{flex-wrap:wrap;z-index:20}.creation-portfolio-nav{pointer-events:auto;width:100%;display:flex;justify-content:flex-end;border-top:1px solid #d9e6d8}.creation-portfolio-nav .portfolio-navigation{margin:0}.game-home-link{pointer-events:auto;font-size:11px}.game-shell .portfolio-navigation{margin-bottom:14px}

@@ -61,7 +61,7 @@ function PanoramaList({ slug }: { slug?: string }) {
       {PANORAMA_FILES.filter((page) => !slug || page.slug === slug).map((page) => (
         <article className="command-project" key={page.slug}>
           <p className="command-project-name">
-            <a className="terminal-link" href={page.href}>{page.title} ↗</a>
+            <a className="terminal-link" href={page.href}>{page.title} →</a>
           </p>
           <p>{page.description}</p>
           <p className="dim">{page.category} · {page.updatedAt}</p>
@@ -125,7 +125,7 @@ export default function CommandOutput({
         <section className="command-section">
           <h3>全景图 / Panoramas</h3>
           <PanoramaList slug={result.kind === 'panorama' ? result.slug : undefined} />
-          <p><a className="terminal-link" href="/panoramas/">打开全景图目录 ↗</a></p>
+          <p><a className="terminal-link" href="/panoramas/">打开全景图目录 →</a></p>
         </section>
       )
 
@@ -138,7 +138,7 @@ export default function CommandOutput({
             {WEBSITES.filter((site) => result.kind === 'sites' || site.slug === result.slug).map((site) => (
               <article className="command-project" key={site.slug}>
                 <p className="command-project-name">
-                  <a className="terminal-link" href={site.href} target="_blank" rel="noopener noreferrer">{site.name} · {site.label} ↗</a>
+                  <a className="terminal-link" href={site.href}>{site.name} · {site.label} →</a>
                 </p>
                 <p>{site.summary}</p>
               </article>

@@ -167,8 +167,27 @@ body{font-family:Inter,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;font
 @media print{.masthead,.view-tabs,.hero-actions,.segmented,.toolbar,.capability-filters,.compare-tray,.viz-menu,.dialog-close,dialog,#toast{display:none!important}.view-panel[hidden]{display:block!important}.atlas-shell{max-width:none;padding:0}.hero{padding:0 0 25px;grid-template-columns:1fr}.hero-visual{display:none}.view-panel{padding:25px 0;min-height:0;break-before:page}.view-panel#view-overview{break-before:auto}.landscape{display:block}.vendor-items{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px}.vendor-card,.event,.model-card,.trend-card{break-inside:avoid}.model-grid{grid-template-columns:1fr 1fr}.event-list{grid-template-columns:1fr}.year-label{position:static}.trend-grid{grid-template-columns:1fr 1fr}.table-scroll{overflow:visible}.matrix-table td,.matrix-table th{min-width:0;font-size:8px;padding:6px}.source-row{break-inside:avoid}.animate{animation:none}.hero h1{font-size:38px}h2{font-size:28px}.primary,.outline,.subtle{display:none}.method-grid{grid-template-columns:1fr}.pipeline{grid-template-columns:repeat(5,1fr)}html.theme-dark{--bg:#fff;--surface:#fff;--surface-hover:#f0f0f0;--border:#aaa;--text:#18211c;--text-secondary:#4c564e;--accent:#924019;--accent-secondary:#345943;--positive:#256136;--negative:#913b31;--warning:#88600e}body{background:var(--bg)!important;color:var(--text)!important}}
 
   </style>
-</head>
-<body>
+<!-- portfolio-nav:start --><style>
+.portfolio-navigation{box-sizing:border-box;padding:0;border:0;overflow:visible;background:transparent;display:flex;align-items:center;gap:12px;flex-shrink:0;font:12px/1.5 system-ui,sans-serif;color:inherit;isolation:isolate}
+.portfolio-navigation a,.portfolio-navigation summary{box-sizing:border-box;color:inherit;text-decoration:none;font:inherit;cursor:pointer;letter-spacing:normal}
+.portfolio-navigation>a{display:inline-flex;align-items:center;min-height:40px;white-space:nowrap;padding:0 5px}
+.portfolio-navigation a:hover{text-decoration:underline;text-underline-offset:4px}
+.portfolio-navigation :focus-visible{outline:2px solid #41836a;outline-offset:3px}
+.portfolio-navigation details{position:relative;margin:0;padding:0;border:0;background:none}
+.portfolio-navigation summary{display:list-item;min-height:40px;align-content:center;white-space:nowrap;padding:0 5px}
+.portfolio-navigation details>div{position:absolute;right:0;top:100%;width:min(300px,calc(100vw - 24px));max-height:65dvh;overflow:auto;padding:14px;background:#fff;color:#34483f;border:1px solid #cad7ce;border-radius:12px;box-shadow:0 12px 36px #172d2626;z-index:10000;text-align:left}
+.portfolio-navigation details a{display:block;padding:9px 10px;min-height:38px;border-radius:5px;white-space:normal}
+.portfolio-navigation details strong{display:block;padding:7px 10px;font-size:11px;color:#65796e}
+.portfolio-navigation[data-placement="page"]{position:sticky;top:0;z-index:10000;justify-content:flex-end;min-height:44px;padding:0 18px;background:#f8fbf8;color:#34483f;border-bottom:1px solid #cad7ce}
+.portfolio-navigation .portfolio-title{margin-right:auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:45%;font-weight:600}
+@media(max-width:650px){.portfolio-navigation{gap:5px;font-size:11px}.portfolio-navigation[data-placement="page"]{padding:0 10px}.portfolio-navigation .portfolio-title{display:none}.portfolio-navigation[data-placement="page"]>a:first-of-type{margin-right:auto}}
+@media print{.portfolio-navigation{display:none}}
+
+body:has(>.portfolio-navigation[data-placement="page"]) .viz-menu{top:60px}
+body:has(>.portfolio-navigation[data-placement="page"])>.sidebar,body:has(>.portfolio-navigation[data-placement="page"])>.rail{top:44px}
+body:has(>.portfolio-navigation[data-placement="page"]) .topbar,body:has(>.portfolio-navigation[data-placement="page"]) .site-header,body:has(>.portfolio-navigation[data-placement="page"]) .view-tabs{top:44px}
+</style><!-- portfolio-nav:end --></head>
+<body><!-- portfolio-nav:start --><nav class="portfolio-navigation" data-placement="page" aria-label="个人网站导航"><span class="portfolio-title">视频生成模型全景图</span><a href="https://zhangmin.name/">← 个人主页</a><a href="https://zhangmin.name/panoramas/" data-panorama-return>全部知识地图</a><details><summary>更多作品</summary><div><strong>继续探索</strong><a href="https://zhangmin.name/panoramas/minimind-nanochat-panorama/">MiniMind × nanochat</a><a href="https://zhangmin.name/panoramas/open-model-finetuning-atlas/">开源模型微调全景</a><a href="https://zhangmin.name/panoramas/llm-distillation-atlas/">大模型蒸馏全景图</a><strong>其他网站</strong><a href="https://zhangmin.name/panoramas/eval-quest/">评测探索局</a><a href="https://b.zhangmin.name/">评测前沿</a><a href="https://evaltube.zhangmin.name/">EvalTube</a><a href="https://evalpapers.zhangmin.name/">EvalPapers</a><a href="https://timecapsule.zhangmin.name/">AI Time Capsule</a><a href="https://autoeval.zhangmin.name/">AutoEval</a><a href="https://programmer-life.zhangmin.name/">栈城日常</a><a href="https://weights.zhangmin.name/">权重实验室</a><a href="https://zhengce-radar.zhangmin.workers.dev/">中国政策雷达</a></div></details></nav><!-- portfolio-nav:end -->
   <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:10000;padding:8px 16px;background:var(--accent);color:white;text-decoration:none;border-radius:4px;" onfocus="this.style.cssText='position:fixed;left:16px;top:16px;z-index:10000;padding:8px 16px;background:var(--accent);color:white;text-decoration:none;border-radius:4px;'" onblur="this.style.cssText='position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;'">跳转到内容</a>
 
   <!-- MENU -->

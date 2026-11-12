@@ -64,3 +64,5 @@ $('.dialog-close').onclick=()=>$('#detail-dialog').close();
 $('#detail-dialog').addEventListener('click',e=>{if(e.target===$('#detail-dialog'))$('#detail-dialog').close();});
 addEventListener('hashchange',render);
 try{[config,datasets]=await Promise.all([api('/api/config'),api('/api/datasets')]);selectedDataset=datasets[0]?.id;await refresh();}catch(error){main.innerHTML=`<div class="notice error">${esc(error.message)}。${globalThis.__autoEvalApi?'请检查浏览器存储设置后重新加载。':'请确认使用 npm run dev 启动本地服务。'}</div>`;}
+
+addEventListener('beforeunload',event=>{if(config?.runtime==='browser' && currentJob?.status==='running'){event.preventDefault();event.returnValue='';}});

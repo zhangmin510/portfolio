@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/clean-build.mjs && npm run build:eval-quest && tsc && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "build": "npm run sync:navigation && node scripts/clean-build.mjs && npm run build:eval-quest && node scripts/sync-panoramas.mjs && tsc && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "build:eval-quest": "node sites/eval-quest/build.mjs",
     "build:sites": "npm run build && node scripts/prepare-sites-build.mjs",
     "sync:panoramas": "node scripts/sync-panoramas.mjs",
@@ -13,7 +13,8 @@
     "check": "npm run test && npm run build",
     "preview": "vite preview",
     "preview:cloudflare": "npm run build && wrangler dev --ip 0.0.0.0",
-    "deploy:cloudflare": "npm run build && wrangler deploy"
+    "deploy:cloudflare": "npm run build && wrangler deploy",
+    "sync:navigation": "node scripts/navigation/sync-sites.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",

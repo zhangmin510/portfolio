@@ -503,8 +503,8 @@ export default function Terminal() {
           <p className="dim">// WEB APPS</p>
           <div>
             {WEBSITES.map((site) => (
-              <a key={site.slug} className="terminal-link" href={site.href} target="_blank" rel="noopener noreferrer">
-                <span>{site.name}</span><span className="dim">{site.label} ↗</span>
+              <a key={site.slug} className="terminal-link" href={site.href}>
+                <span>{site.name}</span><span className="dim">{site.label} →</span>
               </a>
             ))}
           </div>
