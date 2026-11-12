@@ -11,4 +11,4 @@
 | EvalPapers | [eval-papers](eval-papers/) | [evalpapers.zhangmin.name](https://evalpapers.zhangmin.name/) |
 | AI Time Capsule | [ai-time-capsule](ai-time-capsule/) | [timecapsule.zhangmin.name](https://timecapsule.zhangmin.name/) |
 | AutoEval | [auto-eval](auto-eval/) | [autoeval.zhangmin.name](https://autoeval.zhangmin.name/) |
-| 中国政策雷达 | [policy-radar-cn](policy-radar-cn/) | [zhengce-radar.zhangmin.workers.dev](https://zhengce-radar.zhangmin.workers.dev/) |
+| 中国政策雷达 | [policy-radar-cn](policy-radar-cn/) | [zhengce.zhangmin.name](https://zhengce.zhangmin.name/) |

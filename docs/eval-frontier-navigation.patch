@@ -21,12 +21,12 @@ index 25e433e..242ccd9 100644
                {preview.exportedAt && Number.isFinite(Date.parse(preview.exportedAt)) && <> 快照导出于 <time dateTime={preview.exportedAt}>{new Date(preview.exportedAt).toLocaleString("zh-CN", { timeZone: "Asia/Shanghai", hour12: false })}</time>（UTC+8）。</>}
 diff --git a/apps/web/app/components/shell/PortfolioNavigation.tsx b/apps/web/app/components/shell/PortfolioNavigation.tsx
 new file mode 100644
-index 0000000..0164aa6
+index 0000000..08cf6bf
 --- /dev/null
 +++ b/apps/web/app/components/shell/PortfolioNavigation.tsx
 @@ -0,0 +1,2 @@
 +// Generated from portfolio/src/data/sites.json by sync:navigation --frontier.
-+export function PortfolioNavigation() { return <div dangerouslySetInnerHTML={{__html: "<nav class=\"portfolio-navigation\" data-placement=\"page\" aria-label=\"个人网站导航\"><a href=\"https://zhangmin.name/\">← 个人主页</a><details><summary>更多作品</summary><div><strong>继续探索</strong><a href=\"https://evalpapers.zhangmin.name/\">EvalPapers</a><a href=\"https://evaltube.zhangmin.name/\">EvalTube</a><a href=\"https://zhangmin.name/panoramas/eval-quest/\">评测探索局</a><strong>其他网站</strong><a href=\"https://zhangmin.name/panoramas/\">全景图</a><a href=\"https://timecapsule.zhangmin.name/\">AI Time Capsule</a><a href=\"https://autoeval.zhangmin.name/\">AutoEval</a><a href=\"https://programmer-life.zhangmin.name/\">栈城日常</a><a href=\"https://weights.zhangmin.name/\">权重实验室</a><a href=\"https://zhengce-radar.zhangmin.workers.dev/\">中国政策雷达</a></div></details></nav>"}} />; }
++export function PortfolioNavigation() { return <div dangerouslySetInnerHTML={{__html: "<nav class=\"portfolio-navigation\" data-placement=\"page\" aria-label=\"个人网站导航\"><a href=\"https://zhangmin.name/\">← 个人主页</a><details><summary>更多作品</summary><div><strong>继续探索</strong><a href=\"https://evalpapers.zhangmin.name/\">EvalPapers</a><a href=\"https://evaltube.zhangmin.name/\">EvalTube</a><a href=\"https://zhangmin.name/panoramas/eval-quest/\">评测探索局</a><strong>其他网站</strong><a href=\"https://zhangmin.name/panoramas/\">全景图</a><a href=\"https://timecapsule.zhangmin.name/\">AI Time Capsule</a><a href=\"https://autoeval.zhangmin.name/\">AutoEval</a><a href=\"https://programmer-life.zhangmin.name/\">栈城日常</a><a href=\"https://weights.zhangmin.name/\">权重实验室</a><a href=\"https://zhengce.zhangmin.name/\">中国政策雷达</a></div></details></nav>"}} />; }
 diff --git a/apps/web/app/portfolio-navigation.css b/apps/web/app/portfolio-navigation.css
 new file mode 100644
 index 0000000..86b526b

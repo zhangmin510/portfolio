@@ -1,7 +1,7 @@
 {
   "version": 1,
   "basePath": "/panoramas/",
-  "updatedAt": "2026-11-11",
+  "updatedAt": "2026-11-12",
   "vendors": [
     {
       "file": "chart.umd.min.js",
@@ -20,7 +20,7 @@
       "slug": "ai-subscription-token-atlas",
       "title": "AI 订阅与 Token Plan 全景图",
       "subtitle": "重度编程与 Agent 的月度成本",
-      "description": "对照 27 个订阅和 Token Plan 与 10 个 API 模型，按任务、缓存和重试估算月度成本。价格快照：2026-10-23。",
+      "description": "对照 27 个订阅和 Token Plan 与 12 个 API 模型，按任务、缓存和重试估算月度成本。订阅快照为 2026-10-23，2026-11-12 补录两款 API 模型。",
       "category": "行业与基础设施",
       "tags": [
         "AI 订阅",
@@ -28,8 +28,8 @@
         "成本测算"
       ],
       "source": "../html/ai-subscription-token-atlas.html",
-      "updatedAt": "2026-10-23",
-      "sourceSha256": "45e1171dc65c64eba417781ff6e846d294aef95423c78de4ac94584cde5f5a72"
+      "updatedAt": "2026-11-12",
+      "sourceSha256": "4be8061c417aaccc8d2a8343ba19c4193dfb1e7a989c9e570bfbc6a02631288f"
     },
     {
       "slug": "minimind-nanochat-panorama",
@@ -43,8 +43,8 @@
         "从零训练"
       ],
       "source": "../html/minimind-nanochat-panorama.html",
-      "updatedAt": "2026-10-05",
-      "sourceSha256": "edeb19a81f4baf472fb8abe51ccc4126d6c4a6652cf1153280c8d815bc789a51"
+      "updatedAt": "2026-11-12",
+      "sourceSha256": "39d3263bc395c41cb7e4f9e7a48fe3b4b9609ad28836262fada9c36e8b8427bd"
     },
     {
       "slug": "girl-growth-1-7",
@@ -73,8 +73,8 @@
         "模型生态"
       ],
       "source": "../html/video-generation-atlas.html",
-      "updatedAt": "2026-10-04",
-      "sourceSha256": "086df80d4333198104ae6595c8c7b5b8d0eb6e66ab1058c816f64d0300bba23b"
+      "updatedAt": "2026-11-12",
+      "sourceSha256": "f80dd426ad2345afd2ae31a88a6295e0717316aa5eb4a37d5231dec188a2eef2"
     },
     {
       "slug": "search-panorama",
@@ -88,8 +88,8 @@
         "技术与评测"
       ],
       "source": "../html/search-panorama.html",
-      "updatedAt": "2026-10-04",
-      "sourceSha256": "6e1621a4fa75fdcf688fc53254fff129a22a95e080538b516569a42a751c0c82"
+      "updatedAt": "2026-11-12",
+      "sourceSha256": "5944f46a98c604259ab9b3fb9c6b666eaa96958de7e1e835bc01feeb8ed0c0f8"
     },
     {
       "slug": "search-technology",
@@ -103,8 +103,8 @@
         "技术节点"
       ],
       "source": "../html/search-technology.html",
-      "updatedAt": "2026-10-04",
-      "sourceSha256": "336a5d64fe3c5e008370c6fa699394cbfd44635f6cc84c005b9133c97365b24e"
+      "updatedAt": "2026-11-12",
+      "sourceSha256": "d405d44f22b797b70541c892bc8167033dd7aa05f40e28bb0f4a86b4df73d5e9"
     },
     {
       "slug": "search-evaluation",
@@ -118,8 +118,8 @@
         "交互图谱"
       ],
       "source": "../html/search-evaluation.html",
-      "updatedAt": "2026-10-04",
-      "sourceSha256": "adca01d325e58da9176824967007a24244cc820f4d81294cd0f0ff3c7062717f"
+      "updatedAt": "2026-11-12",
+      "sourceSha256": "11a84850a072701a5d4ede4a8b946deced4af870f2adf9f5ea2419cfc23f5b53"
     },
     {
       "slug": "agent-evolution-atlas",
@@ -133,8 +133,8 @@
         "历史与趋势"
       ],
       "source": "../html/agent-evolution-atlas.html",
-      "updatedAt": "2026-10-03",
-      "sourceSha256": "6ca7cbac9b22912c2cf37f7ca4ca5470392bbe99e19b1060466cb8ded10e14ec"
+      "updatedAt": "2026-11-12",
+      "sourceSha256": "664f0fd0f8842543d3eaf9965fedfc4fb5f10534f02073607c25d3e484e5ea5c"
     },
     {
       "slug": "open-model-finetuning-atlas",
@@ -148,8 +148,8 @@
         "数据与训练"
       ],
       "source": "../html/open-model-finetuning-atlas.html",
-      "updatedAt": "2026-10-03",
-      "sourceSha256": "83f3681346624f280298dc284ee84f0e372e61f3e2dbc5adfb4532add3371758"
+      "updatedAt": "2026-11-12",
+      "sourceSha256": "95d72e21769550df150cd9239769f7039422f9c7ad403a3ed22e6d2c3d43a565"
     },
     {
       "slug": "llm-distillation-atlas",
@@ -163,8 +163,8 @@
         "训练方法"
       ],
       "source": "../html/llm-distillation-atlas.html",
-      "updatedAt": "2026-10-03",
-      "sourceSha256": "53c12299db7f1e2382fafbf89cad4e43b43e7a8d1b151c583c76624490b5a9a8"
+      "updatedAt": "2026-11-12",
+      "sourceSha256": "78789053e86a579d82cb1474c865afc51fcc53cf665d45007a2b48a78ee5e39e"
     },
     {
       "slug": "ai-evaluation-panorama",
@@ -178,8 +178,8 @@
         "前沿趋势"
       ],
       "source": "../html/ai-evaluation-panorama.html",
-      "updatedAt": "2026-10-03",
-      "sourceSha256": "ee6299b3a84162a79cd0f522f3064aea59aad51c8177097f00f390779192c996"
+      "updatedAt": "2026-11-12",
+      "sourceSha256": "bef3cd2b55d4ae5986086c7504d20a6cd84b81568e47aa358c8ba5dcf048562a"
     },
     {
       "slug": "ai-compute-atlas",
@@ -193,8 +193,8 @@
         "数据中心"
       ],
       "source": "../html/ai-compute-atlas.html",
-      "updatedAt": "2026-10-03",
-      "sourceSha256": "ff569d0d324d07e04d8c24ab042db05ab6e473e649494d44cd5ed6d3b48b0add"
+      "updatedAt": "2026-11-12",
+      "sourceSha256": "cdec2c35de059718ae4436e0248f02e3cbd4204962d827b766352fac05619d79"
     },
     {
       "slug": "ai-company-atlas",
@@ -208,8 +208,8 @@
         "2025—2026"
       ],
       "source": "../html/ai-company-atlas.html",
-      "updatedAt": "2026-10-03",
-      "sourceSha256": "09385abe6959887bae1c271e426e3af3924e75ce818f9462eedc3ec3926f37d0"
+      "updatedAt": "2026-11-12",
+      "sourceSha256": "f7753db784ad2a030a09150b65d3bbf44b3452458c6f163583f91cce385796c4"
     },
     {
       "slug": "llm-landscape-atlas",
@@ -223,8 +223,8 @@
         "2025—2026"
       ],
       "source": "../html/llm-landscape-atlas.html",
-      "updatedAt": "2026-10-03",
-      "sourceSha256": "a805c5473f51c2490083928b52ffc0fab1289bd083dc527d25e3d317770846d1"
+      "updatedAt": "2026-11-12",
+      "sourceSha256": "7084feaa7b7c43cfdf738c36df5c5c36734977f7fa2ab0af8a10b26018a9b42f"
     },
     {
       "slug": "llm-training-atlas",
@@ -238,8 +238,8 @@
         "交互图谱"
       ],
       "source": "../html/llm-training-atlas.html",
-      "updatedAt": "2026-10-03",
-      "sourceSha256": "53effa3e482903e0688d2813430dd6747972bdb872b6c05b967a01bb8550cd94"
+      "updatedAt": "2026-11-12",
+      "sourceSha256": "4d0c1782fbb7cc0762c2eb0e0b3c1a1f5c5e417076956fd415a4b81fbc686c98"
     },
     {
       "slug": "ai-evaluation-atlas",
@@ -253,8 +253,8 @@
         "能力维度"
       ],
       "source": "../html/ai-evaluation-atlas.html",
-      "updatedAt": "2026-10-03",
-      "sourceSha256": "e364abc232411097f7653295d7f6990d32a5d982a0400bcd78fc8af31a51baeb"
+      "updatedAt": "2026-11-12",
+      "sourceSha256": "902e53c6093181b7e1f75ca80c5598267fb18a87e2490f1cd7e9305e1940605b"
     },
     {
       "slug": "eval-quest",

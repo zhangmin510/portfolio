@@ -1,6 +1,6 @@
 # 中国政策雷达
 
-浏览历次政策与会议信号，结合中国政府网公开列表查看近期更新。[线上站点](https://zhengce-radar.zhangmin.workers.dev/)
+浏览历次政策与会议信号，结合中国政府网公开列表查看近期更新。[线上站点](https://zhengce.zhangmin.name/)
 
 在 `sites/policy-radar-cn` 中运行以下命令。建议使用 Node.js 22 或更新版本。
 

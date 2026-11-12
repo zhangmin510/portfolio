@@ -56,7 +56,7 @@ Ctrl+L 清屏，Ctrl+A / E 移动到行首 / 行尾。页面内容以终端输�
 | AI Time Capsule · AI 历史档案 | [timecapsule.zhangmin.name](https://timecapsule.zhangmin.name/) |
 | AutoEval · 检索实验 | [autoeval.zhangmin.name](https://autoeval.zhangmin.name/) |
 | 栈城日常 · 程序员生活模拟 | [programmer-life.zhangmin.name](https://programmer-life.zhangmin.name/) |
-| 中国政策雷达 · 政策观察 | [zhengce-radar.zhangmin.workers.dev](https://zhengce-radar.zhangmin.workers.dev/) |
+| 中国政策雷达 · 政策观察 | [zhengce.zhangmin.name](https://zhengce.zhangmin.name/) |
 | 权重实验室 · 模型权重与推理 | [weights.zhangmin.name](https://weights.zhangmin.name/) |
 
 导航数据统一维护在 `src/data/sites.json`，由 `src/data/portfolio.ts` 导出 `WEBSITES`，同时用于首页链接、终端输出和虚拟目录。
