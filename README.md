@@ -9,7 +9,7 @@
 
 - 简洁的单栏终端主页，保留个人介绍、命令输入和轻量导航
 - 首页直接提供十个网站入口，`sites` / `websites` 命令可查看介绍，`cd sites` 可按目录浏览
-- `panoramas` 命令与全景图入口，连接 17 张独立目录发布的交互图谱
+- `panoramas` 命令与全景图入口，连接 18 张独立目录发布的交互图谱
 - 评测探索局：12 关游戏式知识地图、24 道情境挑战、4 个实验与全书阅读，进度本地保存
 - 全景图目录支持主题筛选、关键词搜索与手机浏览
 - 真实表单驱动的命令行交互，兼容键盘、触屏与屏幕阅读器
@@ -71,6 +71,7 @@ Ctrl+L 清屏，Ctrl+A / E 移动到行首 / 行尾。页面内容以终端输�
 | 全景图 | 目录链接 |
 | --- | --- |
 | 评测探索局：从度量衡到 AI 智能体 | [eval-quest/](https://zhangmin.name/panoramas/eval-quest/) |
+| Managed Agent 全景图 | [managed-agent-atlas/](https://zhangmin.name/panoramas/managed-agent-atlas/) |
 | AI 订阅与 Token Plan 全景图 | [ai-subscription-token-atlas/](https://zhangmin.name/panoramas/ai-subscription-token-atlas/) |
 | MiniMind × nanochat | [minimind-nanochat-panorama/](https://zhangmin.name/panoramas/minimind-nanochat-panorama/) |
 | 成长花园：1—7 岁女孩成长全景 | [girl-growth-1-7/](https://zhangmin.name/panoramas/girl-growth-1-7/) |

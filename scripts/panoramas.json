@@ -270,6 +270,21 @@
       "source": "public/panoramas/eval-quest/index.html",
       "updatedAt": "2026-11-11",
       "sourceSha256": "b7f1658ff0c8d655b767382f0713368882e96f8e6d47428141acd7aef0289949"
+    },
+    {
+      "slug": "managed-agent-atlas",
+      "title": "Managed Agent 全景图",
+      "subtitle": "从任务编排到生产运行",
+      "description": "对照托管智能体平台、运行架构和上线实践，并在案例中演练失败恢复与人工审批。",
+      "category": "Agent 与搜索",
+      "tags": [
+        "托管智能体",
+        "Managed Agent",
+        "案例演示"
+      ],
+      "source": "src/panoramas/managed-agent-atlas.html",
+      "updatedAt": "2026-11-12",
+      "sourceSha256": "55f6884f000cc816fbcd6e3c2501200ab78b813cb80a35feb7550797b3543583"
     }
   ]
 }

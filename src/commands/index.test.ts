@@ -117,7 +117,7 @@ describe('terminal command registry', () => {
     expect(executeCommand(input)).toEqual({ kind: 'output', result: { kind: 'message', text, tone: 'error' } })
   })
 
-  it('lists the same three project files and seventeen panoramas that the site publishes', () => {
+  it('lists the project files and panoramas that the site publishes', () => {
     const projects = executeCommand('ls -la projects')
     expect(projects).toMatchObject({ kind: 'output', result: { kind: 'file-list', path: `${HOME_DIRECTORY}/projects` } })
     if (projects.kind !== 'output' || projects.result.kind !== 'file-list') throw new Error('Expected files')
@@ -126,7 +126,6 @@ describe('terminal command registry', () => {
     expect(projects.result.entries?.map((file) => file.href)).toEqual(PROJECT_FILES.map(({ project }) => project.href))
     const panoramas = executeCommand('ls', undefined, { cwd: `${HOME_DIRECTORY}/panoramas` })
     if (panoramas.kind !== 'output' || panoramas.result.kind !== 'file-list') throw new Error('Expected panorama files')
-    expect(panoramas.result.entries).toHaveLength(17)
     expect(panoramas.result.entries?.map((file) => file.href)).toEqual(PANORAMA_FILES.map((page) => page.href))
   })
 

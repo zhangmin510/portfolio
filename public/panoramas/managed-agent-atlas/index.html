@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="zh-CN" class="theme-light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Managed Agent 全景图 · ZhangMin.name</title>
+  <meta name="description" content="理解托管智能体的架构与平台边界，比较主流产品，并演练故障排查、PR 审查和资料调研。">
+  <link rel="canonical" href="https://zhangmin.name/panoramas/managed-agent-atlas/">
+  <link rel="icon" href="/favicon-32.png" type="image/png">
+  <meta property="og:title" content="Managed Agent 全景图">
+  <meta property="og:description" content="运行架构、平台对照、最佳实践与三种交互案例。">
+  <meta property="og:url" content="https://zhangmin.name/panoramas/managed-agent-atlas/">
+  <style>
+    .theme-light {
+      --bg: #f6f6ed;
+      --surface: #fdfdf7;
+      --surface-hover: #edf1e5;
+      --border: #d6ddcf;
+      --text: #192c23;
+      --text-secondary: #4c6154;
+      --accent: #196047;
+      --accent-secondary: #d9ebcf;
+      --positive: #1c6040;
+      --negative: #9d3e32;
+      --warning: #805219;
+    }
+    .theme-dark {
+      --bg: #152820;
+      --surface: #1e352b;
+      --surface-hover: #29483b;
+      --border: #496657;
+      --text: #f0f7e9;
+      --text-secondary: #c0d3c4;
+      --accent: #c1e4a8;
+      --accent-secondary: #365c47;
+      --positive: #b4e7af;
+      --negative: #ffb4a7;
+      --warning: #f6d69b;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 1rem/1.7 Inter, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    h1, h2, h3, p, ul, ol, dl { margin: 0; }
+    h1, h2, h3 { line-height: 1.18; text-wrap: balance; }
+    h2 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.04em; }
+    h3 { font-size: 1.3rem; }
+    a { color: var(--accent); text-underline-offset: .2em; }
+    button, input, select { font: inherit; color: inherit; }
+    button { cursor: pointer; }
+    button:disabled { cursor: default; opacity: .58; }
+    :focus-visible { outline: 3px solid #ab723c; outline-offset: 4px; }
+    [id] { scroll-margin-top: 118px; }
+    code, .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+    .wrap { width: min(1160px, calc(100% - 64px)); margin-inline: auto; }
+    .skip-link {
+      position: fixed; top: 8px; left: 12px; z-index: 11000; transform: translateY(-180%);
+      background: var(--surface); padding: 8px 12px; border-radius: 6px;
+    }
+    .skip-link:focus { transform: none; }
+    .hero {
+      color: var(--text);
+      background: radial-gradient(ellipse at 88% 12%, #345648 0%, transparent 48%), var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr);
+      gap: clamp(32px, 6vw, 86px);
+      align-items: center;
+      padding-block: clamp(52px, 8vw, 100px);
+    }
+    .eyebrow { font: 700 .78rem/1.45 "IBM Plex Mono", ui-monospace, monospace; color: var(--accent); letter-spacing: .08em; }
+    h1 { font-size: clamp(2.75rem, 6.6vw, 6rem); letter-spacing: -.06em; margin: 14px 0 18px; }
+    h1 span { display: block; color: var(--accent); font-size: .64em; letter-spacing: -.035em; margin-top: 9px; }
+    .hero-copy { max-width: 35rem; color: var(--text-secondary); font-size: clamp(1rem, 1.8vw, 1.14rem); }
+    .hero-actions, .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+    .hero-actions { margin-top: 26px; }
+    .button {
+      display: inline-flex; min-height: 42px; align-items: center; justify-content: center;
+      border: 1px solid var(--border); border-radius: 8px; padding: 8px 15px;
+      background: var(--surface); color: var(--text); text-decoration: none; font-weight: 650;
+    }
+    .button:hover:not(:disabled) { background: var(--surface-hover); }
+    .button.primary { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+    .button.primary:hover:not(:disabled) { filter: brightness(.94); }
+    .button.deny { color: var(--negative); }
+    .hero .button.primary { color: #182b21; }
+    .flow-card { border: 1px solid var(--border); border-radius: 15px; background: #172a22d9; padding: clamp(15px, 2.7vw, 27px); }
+    .flow-head { display: flex; flex-wrap: wrap; gap: 4px 18px; justify-content: space-between; padding-bottom: 14px; }
+    .flow-head span { color: var(--text-secondary); font-size: .77rem; }
+    .flow { list-style: none; padding: 0; display: grid; gap: 10px; }
+    .flow li {
+      position: relative; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px;
+      align-items: center; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px;
+      background: var(--surface);
+    }
+    .flow li + li::before { content: ""; position: absolute; top: -11px; left: 28px; width: 1px; height: 10px; background: var(--accent); }
+    .flow-no { display: grid; place-items: center; min-height: 32px; border-radius: 5px; background: var(--accent-secondary); color: var(--accent); font-size: .76rem; }
+    .flow strong, .flow small { display: block; }
+    .flow small { color: var(--text-secondary); font-size: .81rem; }
+    .section-nav { position: sticky; top: 44px; z-index: 20; background: var(--surface); border-bottom: 1px solid var(--border); }
+    .section-nav .wrap { display: flex; flex-wrap: wrap; gap: 0 19px; }
+    .section-nav a { color: var(--text); font-size: .86rem; font-weight: 650; padding: 11px 0; text-decoration: none; }
+    .section-nav a:hover { color: var(--accent); text-decoration: underline; }
+    .section { padding-block: clamp(46px, 7vw, 82px); border-bottom: 1px solid var(--border); }
+    .section-header { margin-bottom: 24px; }
+    .section-header p { max-width: 52rem; margin-top: 10px; color: var(--text-secondary); }
+    .architecture { display: grid; grid-template-columns: minmax(210px, .7fr) minmax(0, 1.3fr); gap: 16px; align-items: start; }
+    .layer-picker { display: grid; gap: 6px; }
+    .layer-picker button {
+      display: grid; grid-template-columns: 27px minmax(0, 1fr); gap: 8px; text-align: left;
+      padding: 10px 12px; border-radius: 7px; border: 1px solid var(--border); background: var(--surface);
+    }
+    .layer-picker span { color: var(--accent); font-size: .83rem; }
+    .layer-picker button[aria-pressed="true"] { background: var(--accent-secondary); border-color: var(--accent); font-weight: 700; }
+    .layer-picker button:hover { border-color: var(--accent); }
+    .layer-panel, .panel { border: 1px solid var(--border); border-radius: 11px; background: var(--surface); padding: clamp(16px, 3vw, 27px); }
+    .layer-panel + .layer-panel { margin-top: 8px; }
+    .layer-panel[hidden] + .layer-panel { margin-top: 0; }
+    .layer-panel p { margin-top: 10px; }
+    .layer-panel dl { display: grid; grid-template-columns: 5em minmax(0, 1fr); gap: 7px 14px; margin-top: 15px; }
+    dt { font-weight: 700; color: var(--accent); }
+    dd { margin: 0; color: var(--text-secondary); }
+    .compare-controls { display: grid; grid-template-columns: minmax(0, 1fr) minmax(190px, .5fr); gap: 13px; max-width: 680px; margin-bottom: 12px; }
+    .field { display: grid; gap: 4px; font-size: .86rem; font-weight: 700; }
+    .field input, .field select {
+      width: 100%; min-width: 0; min-height: 43px; padding: 7px 10px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 7px; font-weight: 400;
+    }
+    .result { color: var(--text-secondary); font-size: .85rem; margin-bottom: 8px; }
+    .platform-list { list-style: none; padding: 0; border: 1px solid var(--border); border-radius: 11px; background: var(--surface); }
+    .platform-labels, .platform {
+      display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.04fr) minmax(0, 1.28fr);
+      gap: 16px 22px; padding: 17px 20px; align-items: start;
+    }
+    .platform-labels { color: var(--text-secondary); font-size: .84rem; font-weight: 700; }
+    .platform { border-top: 1px solid var(--border); }
+    .platform h3 { font-size: 1.08rem; }
+    .platform p { color: var(--text-secondary); font-size: .91rem; }
+    .platform .sources { display: flex; flex-wrap: wrap; gap: 2px 11px; margin-top: 7px; font-size: .82rem; }
+    .empty { color: var(--text-secondary); padding: 20px; }
+    .practices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 11px; }
+    .practice { border: 1px solid var(--border); border-radius: 9px; background: var(--surface); }
+    .practice summary { cursor: pointer; font-weight: 720; padding: 14px 16px; }
+    .practice[open] summary { border-bottom: 1px solid var(--border); }
+    .practice p { padding: 11px 16px; color: var(--text-secondary); }
+    .practice p + p { padding-top: 0; }
+    .practice strong { color: var(--text); }
+    .case-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 14px; }
+    .case-summary { color: var(--text-secondary); margin-bottom: 16px; }
+    .case-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 14px; align-items: start; }
+    .case-state { font-weight: 700; color: var(--accent); margin: 12px 0; }
+    .case-list { margin-top: 12px; padding-left: 22px; overflow-wrap: anywhere; }
+    .case-list li { padding: 5px 0; }
+    .case-list li[aria-current="step"] { color: var(--accent); font-weight: 700; }
+    .case-log { min-height: 44px; }
+    .case-output { margin-top: 17px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 7px; background: var(--surface-hover); overflow-wrap: anywhere; }
+    .case-output h3 { margin-bottom: 5px; font-size: 1.05rem; }
+    .case-output ul { padding-left: 20px; }
+    #case-decision { padding-top: 10px; }
+    .source-notes { display: flex; flex-wrap: wrap; gap: 7px 20px; list-style: none; padding: 0; margin-top: 12px; }
+    .footer { padding-block: 23px 34px; color: var(--text-secondary); font-size: .86rem; }
+    @media (max-width: 720px) {
+      .wrap { width: calc(100% - 32px); }
+      .hero-grid, .architecture, .case-layout { grid-template-columns: minmax(0, 1fr); }
+      .hero-grid { gap: 24px; padding-block: 38px; }
+      .section-nav .wrap { gap: 0 12px; }
+      .section-nav a { padding: 8px 0; }
+      .layer-picker { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .layer-picker button { grid-template-columns: auto minmax(0, 1fr); font-size: .85rem; }
+      .platform-labels { display: none; }
+      .platform { grid-template-columns: minmax(0, 1fr); gap: 7px; padding: 14px; }
+      .platform:first-of-type { border-top: 0; }
+      .platform p::before { content: attr(data-label) " · "; color: var(--accent); font-weight: 700; }
+    }
+    @media (max-width: 430px) {
+      .practices, .compare-controls, .case-controls { grid-template-columns: minmax(0, 1fr); }
+      .section-nav a { font-size: .79rem; }
+      .hero .button { font-size: .9rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @media print {
+      body { background: white; color: black; }
+      .hero { background: white; color: black; }
+      .hero-copy, .eyebrow { color: black; }
+      h1 span { color: black; }
+      .section-nav, .hero-actions, .flow-card, .controls, .compare-controls { display: none; }
+      .section { padding-block: 16px; }
+      .platform, .practice, .layer-panel { break-inside: avoid; }
+    }
+  </style>
+<!-- portfolio-nav:start --><style>
+.portfolio-navigation{box-sizing:border-box;padding:0;border:0;overflow:visible;background:transparent;display:flex;align-items:center;gap:12px;flex-shrink:0;font:12px/1.5 system-ui,sans-serif;color:inherit;isolation:isolate}
+.portfolio-navigation a,.portfolio-navigation summary{box-sizing:border-box;color:inherit;text-decoration:none;font:inherit;cursor:pointer;letter-spacing:normal}
+.portfolio-navigation>a{display:inline-flex;align-items:center;min-height:40px;white-space:nowrap;padding:0 5px}
+.portfolio-navigation a:hover{text-decoration:underline;text-underline-offset:4px}
+.portfolio-navigation :focus-visible{outline:2px solid #41836a;outline-offset:3px}
+.portfolio-navigation details{position:relative;margin:0;padding:0;border:0;background:none}
+.portfolio-navigation summary{display:list-item;min-height:40px;align-content:center;white-space:nowrap;padding:0 5px}
+.portfolio-navigation details>div{position:absolute;right:0;top:100%;width:min(300px,calc(100vw - 24px));max-height:65dvh;overflow:auto;padding:14px;background:#fff;color:#34483f;border:1px solid #cad7ce;border-radius:12px;box-shadow:0 12px 36px #172d2626;z-index:10000;text-align:left}
+.portfolio-navigation details a{display:block;padding:9px 10px;min-height:38px;border-radius:5px;white-space:normal}
+.portfolio-navigation details strong{display:block;padding:7px 10px;font-size:11px;color:#65796e}
+.portfolio-navigation[data-placement="page"]{position:sticky;top:0;z-index:10000;justify-content:flex-end;min-height:44px;padding:0 18px;background:#f8fbf8;color:#34483f;border-bottom:1px solid #cad7ce}
+.portfolio-navigation .portfolio-title{margin-right:auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:45%;font-weight:600}
+@media(max-width:650px){.portfolio-navigation{gap:5px;font-size:11px}.portfolio-navigation[data-placement="page"]{padding:0 10px}.portfolio-navigation .portfolio-title{display:none}.portfolio-navigation[data-placement="page"]>a:first-of-type{margin-right:auto}}
+@media print{.portfolio-navigation{display:none}}
+
+body:has(>.portfolio-navigation[data-placement="page"]) .viz-menu{top:60px}
+body:has(>.portfolio-navigation[data-placement="page"])>.sidebar,body:has(>.portfolio-navigation[data-placement="page"])>.rail{top:44px}
+body:has(>.portfolio-navigation[data-placement="page"]) .topbar,body:has(>.portfolio-navigation[data-placement="page"]) .site-header,body:has(>.portfolio-navigation[data-placement="page"]) .view-tabs{top:44px}
+</style><!-- portfolio-nav:end --></head>
+<body><!-- portfolio-nav:start --><nav class="portfolio-navigation" data-placement="page" aria-label="个人网站导航"><span class="portfolio-title">Managed Agent 全景图</span><a href="https://zhangmin.name/">← 个人主页</a><a href="https://zhangmin.name/panoramas/" data-panorama-return>全部知识地图</a><details><summary>更多作品</summary><div><strong>继续探索</strong><a href="https://zhangmin.name/panoramas/search-panorama/">联网搜索全景</a><a href="https://zhangmin.name/panoramas/search-technology/">联网搜索技术图谱</a><a href="https://zhangmin.name/panoramas/search-evaluation/">联网搜索评测图谱</a><strong>其他网站</strong><a href="https://zhangmin.name/panoramas/eval-quest/">评测探索局</a><a href="https://b.zhangmin.name/">评测前沿</a><a href="https://evaltube.zhangmin.name/">EvalTube</a><a href="https://evalpapers.zhangmin.name/">EvalPapers</a><a href="https://timecapsule.zhangmin.name/">AI Time Capsule</a><a href="https://autoeval.zhangmin.name/">AutoEval</a><a href="https://programmer-life.zhangmin.name/">栈城日常</a><a href="https://weights.zhangmin.name/">权重实验室</a><a href="https://zhengce.zhangmin.name/">中国政策雷达</a></div></details></nav><!-- portfolio-nav:end -->
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+  <header class="hero theme-dark">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">托管智能体</p>
+        <h1>Managed Agent<span>全景图</span></h1>
+        <p class="hero-copy">一个 Agent 怎样调用工具、暂停审批、失败后继续运行？拆开运行链路，对照平台边界，再用三个案例练习上线前的关键决策。</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#demo">运行案例演示</a>
+          <a class="button" href="#platforms">比较平台</a>
+        </div>
+      </div>
+      <div class="flow-card" aria-label="一次托管智能体任务的流程">
+        <div class="flow-head"><strong>一次任务的运行链路</strong><span class="mono">run → tools → result</span></div>
+        <ol class="flow">
+          <li><span class="flow-no mono" aria-hidden="true">01</span><div><strong>接收任务</strong><small>身份、任务目标、预算</small></div></li>
+          <li><span class="flow-no mono" aria-hidden="true">02</span><div><strong>编排与模型决策</strong><small>选择下一步，等待工具返回</small></div></li>
+          <li><span class="flow-no mono" aria-hidden="true">03</span><div><strong>通过权限网关调用工具</strong><small>读取、沙箱执行、审批后写入</small></div></li>
+          <li><span class="flow-no mono" aria-hidden="true">04</span><div><strong>记录检查点并交付</strong><small>续跑、审计、可追溯产物</small></div></li>
+        </ol>
+      </div>
+    </div>
+  </header>
+  <nav class="section-nav" aria-label="全景图章节">
+    <div class="wrap">
+      <a href="#architecture">运行架构</a><a href="#platforms">平台对照</a><a href="#practices">最佳实践</a><a href="#demo">案例演示</a><a href="#sources">来源</a>
+    </div>
+  </nav>
+  <main id="main-content">
+    <section id="architecture" class="section">
+      <div class="wrap">
+        <header class="section-header">
+          <h2>运行架构</h2>
+          <p>托管智能体把模型调用、工具执行和任务状态连成一套运行系统。选平台时，先确认由谁驱动模型与工具的循环，再确认由谁承载执行环境、会话和日志。</p>
+        </header>
+        <div class="architecture">
+          <div class="layer-picker" aria-label="查看运行环节">
+            <button type="button" data-layer="intake" aria-controls="layer-intake" aria-pressed="true"><span class="mono">01</span>任务入口</button>
+            <button type="button" data-layer="loop" aria-controls="layer-loop" aria-pressed="false"><span class="mono">02</span>编排与模型</button>
+            <button type="button" data-layer="state" aria-controls="layer-state" aria-pressed="false"><span class="mono">03</span>会话与检查点</button>
+            <button type="button" data-layer="tools" aria-controls="layer-tools" aria-pressed="false"><span class="mono">04</span>工具与沙箱</button>
+            <button type="button" data-layer="approval" aria-controls="layer-approval" aria-pressed="false"><span class="mono">05</span>权限与审批</button>
+            <button type="button" data-layer="delivery" aria-controls="layer-delivery" aria-pressed="false"><span class="mono">06</span>交付与追踪</button>
+          </div>
+          <div class="layers">
+            <article class="layer-panel" id="layer-intake">
+              <h3>把用户意图变成有边界的任务</h3>
+              <p>入口可以是 HTTP 请求、定时触发或事件。应用先认证调用方，再保存目标、输入引用、输出契约和可用预算，返回任务 ID。</p>
+              <dl><dt>运行输入</dt><dd>身份、目标、附件引用、截止时间和 Agent 版本。</dd><dt>应用负责</dt><dd>租户鉴权、并发额度、重复触发合并。</dd></dl>
+            </article>
+            <article class="layer-panel" id="layer-loop">
+              <h3>模型决定下一步，编排器推动任务</h3>
+              <p>编排器把上下文交给模型，接收结构化工具请求，执行后回填结果。它根据完成条件、预算和错误策略决定继续、暂停或结束。</p>
+              <dl><dt>托管循环</dt><dd>声明模型、指令和工具，由平台推进执行。</dd><dt>自带编排</dt><dd>用代码或图定义状态机，再部署到托管运行环境。</dd></dl>
+            </article>
+            <article class="layer-panel" id="layer-state">
+              <h3>用检查点续跑，用会话承载上下文</h3>
+              <p>会话关联消息和工具结果。检查点记录已完成步骤和下一步。跨会话记忆另设访问范围、保留期和删除规则。</p>
+              <dl><dt>恢复输入</dt><dd>任务 ID、上次提交的事件序号、待完成操作。</dd><dt>实现要点</dt><dd>进程恢复后先查询写入结果，再决定能否重试。</dd></dl>
+            </article>
+            <article class="layer-panel" id="layer-tools">
+              <h3>工具调用和代码执行有各自的边界</h3>
+              <p>应用工具、MCP 服务和内置工具都要验证参数和身份。代码执行放进短生命周期环境，并限制文件、网络、CPU 和凭据。</p>
+              <dl><dt>读取工具</dt><dd>监控指标、代码差异、文档检索等，可按错误类型有限重试。</dd><dt>执行工具</dt><dd>命令、文件操作和写入系统分别授权，按需注入短期凭据。</dd></dl>
+            </article>
+            <article class="layer-panel" id="layer-approval">
+              <h3>把高影响操作停在可审核的草稿</h3>
+              <p>先呈现确切的目标与载荷。审批通过后，写入工具再校验身份、审批有效期、载荷版本和幂等键。</p>
+              <dl><dt>待审批</dt><dd>发布消息、提交代码、共享文档或修改业务状态。</dd><dt>审批失败</dt><dd>保存草稿，记录决定，停在清晰的结束状态。</dd></dl>
+            </article>
+            <article class="layer-panel" id="layer-delivery">
+              <h3>交付产物，同时交付证据</h3>
+              <p>输出应带来源、影响范围与不确定性。可观测系统用任务 ID 串起模型、工具、审批、重试和产物的时间线。</p>
+              <dl><dt>用户可见</dt><dd>状态、结果、失败原因和下一步。</dd><dt>运维可见</dt><dd>耗时、失败分类、每次成功任务的成本和评测结果。</dd></dl>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="platforms" class="section">
+      <div class="wrap">
+        <header class="section-header">
+          <h2>平台对照</h2>
+          <p>按托管范围筛选。平台托管循环时，你主要配置 Agent。使用托管运行环境时，应用仍可自带编排代码。同一产品可以同时提供两种路径。</p>
+        </header>
+        <div class="compare-controls">
+          <label class="field" for="platform-search">搜索平台或能力
+            <input id="platform-search" type="search" placeholder="例如沙箱、Memory Store、MCP">
+          </label>
+          <label class="field" for="platform-mode">托管范围
+            <select id="platform-mode">
+              <option value="all">全部平台</option>
+              <option value="loop">平台托管执行循环</option>
+              <option value="runtime">托管自带编排的运行环境</option>
+            </select>
+          </label>
+        </div>
+        <p id="platform-count" class="result" role="status">10 个产品与部署路径</p>
+        <div class="platform-table">
+          <div class="platform-labels" aria-hidden="true"><span>产品与官方来源</span><span>托管范围</span><span>会话、工具与发布</span></div>
+          <ul class="platform-list" id="platform-list">
+            <li class="platform" data-mode="loop">
+              <div><h3>OpenAI Agents API</h3><div class="sources"><a href="https://developers.openai.com/api/docs/guides/agents-api/overview">产品概览</a><a href="https://developers.openai.com/api/docs/guides/agents-api/architecture">架构</a></div></div>
+              <p data-label="托管范围">托管 Codex 编排循环。保存 Agent 配置后，通过 API 创建并推进异步会话。</p>
+              <p data-label="状态与工具">会话可保留任务进度，支持 SSE 和 Webhook。执行环境可选 OpenAI 托管沙箱、自带环境或无沙箱。</p>
+            </li>
+            <li class="platform" data-mode="loop">
+              <div><h3>Claude Managed Agents</h3><div class="sources"><a href="https://platform.claude.com/docs/en/managed-agents/overview">产品概览</a><a href="https://platform.claude.com/docs/en/managed-agents/memory">记忆</a></div></div>
+              <p data-label="托管范围">Anthropic 编排 Agent、Environment、Session 和 Events，支持托管容器或自带沙箱。</p>
+              <p data-label="状态与工具">内置工具、应用工具与 MCP。需显式挂载 Memory Store 才能跨会话保留资料。Deployments 可按定时规则触发会话。</p>
+            </li>
+            <li class="platform" data-mode="loop runtime">
+              <div><h3>Amazon Bedrock AgentCore</h3><div class="sources"><a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/harness.html">Harness</a><a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-sessions.html">运行会话</a></div></div>
+              <p data-label="托管范围">AgentCore Harness 提供配置驱动的编排，AgentCore Runtime 也可运行自带 Agent 代码。</p>
+              <p data-label="状态与工具">隔离运行会话，可选 AgentCore Memory。工具可通过 Gateway、MCP 或内置浏览器和代码执行器接入。</p>
+            </li>
+            <li class="platform" data-mode="loop">
+              <div><h3>Amazon Bedrock Managed Agents, powered by OpenAI</h3><div class="sources"><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-managed-agents-openai.html">Bedrock 开发指南</a></div></div>
+              <p data-label="托管范围">独立的预览产品。Bedrock 运行 OpenAI 编排与模型推理，工具执行可接入 AgentCore Runtime 或自带环境。</p>
+              <p data-label="状态与工具">会话记录 Agent 配置、事件和产物。通过 AWS IAM 授权访问模型和执行环境。</p>
+            </li>
+            <li class="platform" data-mode="loop runtime">
+              <div><h3>Gemini Enterprise Agent Platform</h3><div class="sources"><a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/managed-agents">Managed Agents API</a><a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/agents">Agent Platform</a></div></div>
+              <p data-label="托管范围">Managed Agents API 提供声明式托管沙箱与编排，目前为预览。自带 ADK 等代码可部署到 Agent Runtime。</p>
+              <p data-label="状态与工具">Managed Agents 可用交互 ID 延续对话，环境 ID 用于继续使用沙箱文件。按需配置工具、网络与 Cloud Storage。</p>
+            </li>
+            <li class="platform" data-mode="loop runtime">
+              <div><h3>Microsoft Foundry Agent Service</h3><div class="sources"><a href="https://learn.microsoft.com/en-us/azure/foundry/agents/overview">产品概览</a><a href="https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/hosted-agents">Hosted agents</a></div></div>
+              <p data-label="托管范围">Prompt agents 走托管编排，Hosted agents 运行自带代码。</p>
+              <p data-label="状态与工具">Hosted agents 的 Responses 接口可管理对话。可用 MCP 和 Entra 身份，并通过发布流程生成可调用端点或发布到 Teams 等渠道。</p>
+            </li>
+            <li class="platform" data-mode="loop">
+              <div><h3>火山方舟 Managed Agents</h3><div class="sources"><a href="https://docs.volcengine.com/docs/ark/overview?lang=zh">产品概览</a><a href="https://docs.volcengine.com/docs/ark/session-event-stream?lang=zh">事件流</a></div></div>
+              <p data-label="托管范围">Agent 定义模型、指令、工具和 Skill。环境可配置方舟沙箱或企业自托管执行环境。</p>
+              <p data-label="状态与工具">Session 隔离上下文、文件和状态，Events 持久化并支持 SSE。应用自定义工具仍由应用执行。</p>
+            </li>
+            <li class="platform" data-mode="loop">
+              <div><h3>阿里云百炼 Managed Agents</h3><div class="sources"><a href="https://help.aliyun.com/zh/model-studio/managed-agents-introduction">产品概览</a><a href="https://help.aliyun.com/zh/model-studio/managed-agents-deployment">任务部署</a></div></div>
+              <p data-label="托管范围">托管 Agent 循环、沙箱、会话和工具执行。Agent 与 Environment 独立配置。</p>
+              <p data-label="状态与工具">Memory Store 可跨会话挂载。Deployment 指定时或手动任务，每次执行创建 Session 并记录 Run。</p>
+            </li>
+            <li class="platform" data-mode="runtime">
+              <div><h3>Cloudflare Agents SDK</h3><div class="sources"><a href="https://developers.cloudflare.com/agents/getting-started/learn-the-runtime/">运行时</a><a href="https://developers.cloudflare.com/agents/harnesses/">Harness</a></div></div>
+              <p data-label="托管范围">Agent 代码运行于 Workers 和 SQLite Durable Objects，可选择 Pi 等编排组件。</p>
+              <p data-label="状态与工具">按需选择状态同步、定时、可恢复任务、WebSocket 和 MCP 等能力，通过 Wrangler 部署 Worker。</p>
+            </li>
+            <li class="platform" data-mode="runtime">
+              <div><h3>LangSmith Deployment</h3><div class="sources"><a href="https://docs.langchain.com/langsmith/deployment">部署方式</a><a href="https://docs.langchain.com/langsmith/agent-server">Agent Server</a></div></div>
+              <p data-label="托管范围">将应用代码或图部署到 Agent Server，有托管云、混合及自托管选项。</p>
+              <p data-label="状态与工具">Thread 保存状态，Run 表示执行。服务带任务队列与持久化，编排和工具由应用代码定义。</p>
+            </li>
+          </ul>
+          <p id="platform-empty" class="empty" hidden>没有匹配的产品。可换关键词或选择全部平台。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="practices" class="section">
+      <div class="wrap">
+        <header class="section-header">
+          <h2>最佳实践</h2>
+          <p>用能观察到的结果验收每一项，覆盖失败、越权和恢复路径。</p>
+        </header>
+        <div class="practices">
+          <details class="practice" open>
+            <summary>约定输出和停止条件</summary>
+            <p>固定步骤用工作流，确实需要动态选工具时再交给 Agent。明确输出结构、证据要求、最大轮次、时限和调用预算。</p>
+            <p><strong>验收</strong> · 缺证据时返回待核查项，超出预算时返回当前进度和结束原因。</p>
+          </details>
+          <details class="practice">
+            <summary>在工具网关校验权限和审批</summary>
+            <p>用明确的工具与参数白名单限制读取和写入。审批页展示目标与实际载荷，执行前校验权限、审批有效期和载荷版本。</p>
+            <p><strong>验收</strong> · 工具结果里的指令无法扩大权限，过期审批或改过的草稿无法写入。</p>
+          </details>
+          <details class="practice">
+            <summary>保存检查点，区分读取和写入重试</summary>
+            <p>读取遇到 429 或暂时故障时，遵从退避信号并限制重试次数。写入使用稳定幂等键。响应丢失时先查询远端结果。</p>
+            <p><strong>验收</strong> · 断开连接后续跑，已完成步骤有记录，超时重试只产生一次外部写入。</p>
+          </details>
+          <details class="practice">
+            <summary>分开管理会话、文件与长期记忆</summary>
+            <p>分别定义身份范围、保留期和删除路径。把经过验证的长期知识写入记忆，产物用明确的版本和权限交付。</p>
+            <p><strong>验收</strong> · 租户间互不可读，删除后可验证相关索引和产物的处理结果。</p>
+          </details>
+          <details class="practice">
+            <summary>限制沙箱的文件、网络和凭据</summary>
+            <p>给执行环境最小文件挂载与网络允许列表。按任务发短期凭据，并给进程、存储和网络请求设置资源上限。</p>
+            <p><strong>验收</strong> · 未授权的文件、域名和操作均被拦截，敏感凭据不会出现在日志和产物里。</p>
+          </details>
+          <details class="practice">
+            <summary>用轨迹和评测验收上线</summary>
+            <p>把模型、提示、工具和规则固定到版本。记录经过脱敏的任务轨迹，从成功、失败和越权样本中建立回归集。</p>
+            <p><strong>验收</strong> · 发布前对比任务成功率、恢复耗时和每次成功任务成本，发布后可定位和回滚版本。</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo" class="section">
+      <div class="wrap">
+        <header class="section-header">
+          <h2>案例演示</h2>
+          <p>在浏览器中模拟一次运行。选择案例和故障模式，逐步执行，再决定是否批准对外操作。</p>
+        </header>
+        <div class="case-controls">
+          <label class="field" for="case-picker">案例<select id="case-picker"></select></label>
+          <label class="field" for="case-inject">故障模式
+            <select id="case-inject"><option value="none">正常运行</option><option value="transient">模拟一次读取失败</option></select>
+          </label>
+        </div>
+        <p id="case-summary" class="case-summary"></p>
+        <div class="case-layout">
+          <article class="panel">
+            <h3>运行步骤</h3>
+            <ol id="case-steps" class="case-list"></ol>
+            <p id="case-state" class="case-state" role="status" aria-live="polite"></p>
+            <div class="controls">
+              <button type="button" class="button primary" id="case-next">开始演示</button>
+              <button type="button" class="button" id="case-reset">重置案例</button>
+            </div>
+            <div id="case-decision" class="controls" role="group" aria-label="选择审批决定" tabindex="-1" hidden>
+              <button type="button" class="button primary" id="case-approve">批准并模拟执行</button>
+              <button type="button" class="button deny" id="case-deny">拒绝，保留草稿</button>
+            </div>
+          </article>
+          <article class="panel">
+            <h3>运行日志与产物</h3>
+            <ol id="case-log" class="case-list case-log" aria-label="运行日志"></ol>
+            <div id="case-output" class="case-output" hidden></div>
+          </article>
+        </div>
+        <noscript>开启 JavaScript 后可运行案例演示。</noscript>
+      </div>
+    </section>
+
+    <section id="sources" class="section">
+      <div class="wrap">
+        <header class="section-header">
+          <h2>来源与口径</h2>
+          <p>平台信息于 <time datetime="2026-11-12">2026 年 11 月 12 日</time> 按官方文档核对。地区、预览资格、数据保留、配额和计费应按目标部署核实。</p>
+        </header>
+        <ul class="source-notes">
+          <li><a href="https://www.anthropic.com/research/building-effective-agents">Anthropic · 工作流与 Agent 架构</a></li>
+          <li><a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-security-best-practices.html">AWS · 执行环境安全</a></li>
+          <li><a href="https://developers.openai.com/api/docs/guides/agent-evals">OpenAI · Agent 评测</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap footer">Managed Agent 全景图 · ZhangMin.name</footer>
+  <script>
+    (() => {
+      const buttons = [...document.querySelectorAll('[data-layer]')];
+      function selectLayer(selected) {
+        for (const button of buttons) {
+          const active = button === selected;
+          button.setAttribute('aria-pressed', String(active));
+          document.getElementById(button.getAttribute('aria-controls')).hidden = !active;
+        }
+      }
+      for (const button of buttons) button.addEventListener('click', () => selectLayer(button));
+      selectLayer(buttons[0]);
+
+      const query = document.getElementById('platform-search');
+      const mode = document.getElementById('platform-mode');
+      const rows = [...document.querySelectorAll('#platform-list [data-mode]')];
+      const count = document.getElementById('platform-count');
+      const empty = document.getElementById('platform-empty');
+      function filterPlatforms() {
+        const words = query.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+        let shown = 0;
+        for (const row of rows) {
+          const searchable = row.textContent.toLowerCase();
+          const matchesMode = mode.value === 'all' || row.dataset.mode.split(' ').includes(mode.value);
+          row.hidden = !matchesMode || !words.every((word) => searchable.includes(word));
+          if (!row.hidden) shown++;
+        }
+        count.textContent = '显示 ' + shown + ' / ' + rows.length + ' 个产品与部署路径';
+        empty.hidden = shown !== 0;
+      }
+      query.addEventListener('input', filterPlatforms);
+      mode.addEventListener('change', filterPlatforms);
+      filterPlatforms();
+    })();
+  </script>
+  <script>
+    (() => {
+      'use strict';
+
+      const cases = [
+        {
+          id: 'incident',
+          name: '故障分诊',
+          summary: '目标是在值班群发布一条有证据的故障更新。先固定告警时间窗，再读取指标和发布记录。',
+          steps: [
+            { id: 'scope', title: '锁定告警范围', result: '检查点已保存。服务为 checkout-api，告警始于 10:12，检查窗口为 10:00–10:20。' },
+            { id: 'read', title: '读取指标和发布记录', result: '读到两条证据。10:11 发布 checkout v42，随后 p95 延迟从 280 ms 升到 930 ms。' },
+            { id: 'draft', title: '整理初步判断与下一步', result: '已生成分诊草稿，保留影响范围、证据和待核查事项。' },
+            { id: 'approval', title: '确认是否发往值班群' },
+          ],
+          error: '指标接口返回 429。退避后可重新读取同一时间窗。',
+          destination: '值班群 #checkout-oncall',
+          action: '发送故障更新',
+          operation: 'incident:post-status',
+          artifact: {
+            title: 'checkout-api 故障更新',
+            lines: [
+              '影响范围为 checkout-api，10:12 后请求延迟升高，错误率仍需核查。',
+              '证据为 10:11 的 v42 发布，以及同一时间窗内 p95 从 280 ms 升到 930 ms。',
+              '优先核查 v42 的连接池改动和旧版本流量。关联性需要进一步验证。',
+            ],
+          },
+        },
+        {
+          id: 'review',
+          name: 'PR 审查',
+          summary: '目标是为 PR #184 提交一条可复现的审查意见。先固定提交版本，再读取差异和 CI 日志。',
+          steps: [
+            { id: 'scope', title: '固定待审提交', result: '检查点已保存。PR #184 当前提交为 7c4af1e，审查范围是重试逻辑。' },
+            { id: 'read', title: '读取差异和 CI 日志', result: '差异显示请求超时后会直接重发。CI 仅覆盖了服务明确返回失败的情况。' },
+            { id: 'draft', title: '写出可复现的审查意见', result: '已记录触发条件、可能的后果和需要补齐的测试。' },
+            { id: 'approval', title: '确认是否发布 PR 评论' },
+          ],
+          error: '读取 CI 日志超时。恢复时沿用原提交 SHA，重新读取日志。',
+          destination: 'GitHub PR #184 评论区',
+          action: '发布审查意见',
+          operation: 'review:post-comment:184',
+          artifact: {
+            title: 'PR #184 审查意见',
+            lines: [
+              '问题在 retry.ts 的超时分支。服务端可能已接收请求，客户端却尚未收到确认。',
+              '复现方式是先让服务端成功处理请求，再模拟客户端等待响应超时，检查重试是否产生第二次写入。',
+              '建议复用同一个幂等键，并补充“已处理但响应丢失”的测试。',
+            ],
+          },
+        },
+        {
+          id: 'research',
+          name: '资料研究',
+          summary: '目标是整理一份可核查的工具选型摘要。先记录问题和来源范围，再读取示例材料。',
+          steps: [
+            { id: 'scope', title: '确定研究问题与来源范围', result: '检查点已保存。比较两种工具的限流说明和故障恢复方式，仅使用两份示例官方文档。' },
+            { id: 'read', title: '读取两份示例文档', result: '已取得示例文档 A 的限流说明，以及示例文档 B 的超时和重试说明。' },
+            { id: 'draft', title: '写出附证据的选型摘要', result: '已把主张对应到来源，并列出需要实测的问题。' },
+            { id: 'approval', title: '确认是否共享摘要' },
+          ],
+          error: '读取示例文档 B 超时。恢复时保留文档 A 的结果，只补读文档 B。',
+          destination: '项目共享文档',
+          action: '共享研究摘要',
+          operation: 'research:share-summary',
+          artifact: {
+            title: '工具选型研究摘要',
+            lines: [
+              '示例文档 A 明确说明读取限流的等待条件。示例文档 B 列出了超时后的重试条件。',
+              '初步选择标准为明确的错误分类、有限次重试和可保存的执行状态。',
+              '待实测项目为并发下的限流行为、恢复耗时和外部写入的重复风险。',
+            ],
+          },
+        },
+      ];
+
+      const ids = ['picker', 'summary', 'steps', 'state', 'log', 'output', 'next', 'reset', 'inject', 'approve', 'deny', 'decision'];
+      const ui = Object.fromEntries(ids.map((id) => [id, document.getElementById('case-' + id)]));
+      if (ids.some((id) => !ui[id])) return;
+
+      const newRun = () => ({ index: 0, phase: 'ready', failureUsed: false, logs: [], outcome: null, writes: new Set() });
+      let run = newRun();
+
+      function activeCase() {
+        return cases.find((item) => item.id === ui.picker.value) || cases[0];
+      }
+
+      function element(tag, text) {
+        const item = document.createElement(tag);
+        item.textContent = text;
+        return item;
+      }
+
+      function artifact(item) {
+        ui.output.replaceChildren();
+        ui.output.hidden = run.index < 3;
+        if (ui.output.hidden) return;
+
+        const status = run.outcome === 'approved'
+          ? '已模拟' + item.action + '，目标为' + item.destination + '。'
+          : run.outcome === 'denied'
+            ? '审批被拒绝。草稿保留在本次演示中。'
+            : '草稿可供核对。';
+        const list = element('ul', '');
+        list.append(...item.artifact.lines.map((line) => element('li', line)));
+        ui.output.append(element('h3', item.artifact.title), element('p', status), list);
+      }
+
+      function render() {
+        const item = activeCase();
+        ui.summary.textContent = item.summary;
+        ui.steps.replaceChildren(...item.steps.map((step, index) => {
+          const complete = index < run.index;
+          const current = index === run.index;
+          const row = element('li', step.title + (complete ? ' · 已完成' : current ? ' · 当前步骤' : ''));
+          row.dataset.state = complete ? 'complete' : current ? 'current' : 'pending';
+          if (current) row.setAttribute('aria-current', 'step');
+          return row;
+        }));
+
+        const state = {
+          ready: run.index === 0 ? '准备就绪。选择故障模式后开始。' : '检查点已保存。可以继续下一步。',
+          retry: '读取中断。可从最近的检查点恢复。',
+          approval: '等待审批。目标为' + item.destination + '，操作为' + item.action + '。',
+          done: run.outcome === 'approved' ? '演示完成，已模拟一次外部操作。' : '演示完成，草稿已保留。',
+        }[run.phase];
+        if (ui.state.textContent !== state) ui.state.textContent = state;
+
+        ui.log.replaceChildren(...run.logs.map((entry) => element('li', entry)));
+        ui.log.hidden = run.logs.length === 0;
+        ui.next.textContent = run.phase === 'retry' ? '从检查点恢复' : run.index === 0 ? '开始演示' : '继续下一步';
+        ui.next.disabled = run.phase !== 'ready' && run.phase !== 'retry';
+        ui.inject.disabled = run.index > 0 || run.phase !== 'ready';
+        ui.decision.hidden = run.phase !== 'approval';
+        ui.approve.disabled = ui.deny.disabled = ui.decision.hidden;
+        artifact(item);
+      }
+
+      function advance() {
+        if (run.phase !== 'ready' && run.phase !== 'retry') return;
+        const item = activeCase();
+        const step = item.steps[run.index];
+
+        if (step.id === 'read' && ui.inject.value === 'transient' && !run.failureUsed) {
+          run.failureUsed = true;
+          run.phase = 'retry';
+          run.logs.push(item.error, '已保留检查点。点击恢复以模拟完成退避，继续读取当前步骤。');
+        } else if (step.id === 'approval') {
+          run.phase = 'approval';
+          run.logs.push('待审批的外部操作为' + item.action + '，目标为' + item.destination + '。');
+        } else {
+          if (run.phase === 'retry') run.logs.push('从检查点恢复。此前完成的步骤已保留。');
+          run.index += 1;
+          run.phase = 'ready';
+          run.logs.push(step.result);
+        }
+
+        render();
+        if (run.phase === 'approval') ui.decision.focus();
+      }
+
+      function decide(approved) {
+        if (run.phase !== 'approval') return;
+        const item = activeCase();
+        run.outcome = approved ? 'approved' : 'denied';
+        if (approved && !run.writes.has(item.operation)) {
+          run.writes.add(item.operation);
+          run.logs.push('批准后登记操作键 ' + item.operation + '，模拟执行一次。');
+        }
+        if (!approved) run.logs.push('审批被拒绝。没有提交外部操作，已保留草稿。');
+        run.index += 1;
+        run.phase = 'done';
+        render();
+        ui.reset.focus();
+      }
+
+      function reset() {
+        run = newRun();
+        render();
+      }
+
+      const options = cases.map((item) => {
+        const option = element('option', item.name);
+        option.value = item.id;
+        return option;
+      });
+      ui.picker.replaceChildren(...options);
+      ui.picker.addEventListener('change', reset);
+      ui.reset.addEventListener('click', reset);
+      ui.next.addEventListener('click', advance);
+      ui.approve.addEventListener('click', () => decide(true));
+      ui.deny.addEventListener('click', () => decide(false));
+      render();
+    })();
+  </script>
+</body>
+</html>
