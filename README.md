@@ -8,7 +8,7 @@
 ## 功能特性
 
 - 简洁的单栏终端主页，保留个人介绍、命令输入和轻量导航
-- 首页直接提供十个网站入口，`sites` / `websites` 命令可查看介绍，`cd sites` 可按目录浏览
+- 首页直接提供十一个网站入口，`sites` / `websites` 命令可查看介绍，`cd sites` 可按目录浏览
 - `panoramas` 命令与全景图入口，连接 18 张独立目录发布的交互图谱
 - 评测探索局：12 关游戏式知识地图、24 道情境挑战、4 个实验与全书阅读，进度本地保存
 - 全景图目录支持主题筛选、关键词搜索与手机浏览
@@ -56,6 +56,7 @@ Ctrl+L 清屏，Ctrl+A / E 移动到行首 / 行尾。页面内容以终端输�
 | AI Time Capsule · AI 历史档案 | [timecapsule.zhangmin.name](https://timecapsule.zhangmin.name/) |
 | AutoEval · 检索实验 | [autoeval.zhangmin.name](https://autoeval.zhangmin.name/) |
 | 栈城日常 · 程序员生活模拟 | [programmer-life.zhangmin.name](https://programmer-life.zhangmin.name/) |
+| 二阶魔方实验室 · 互动式教程 | [zhangmin.name/cube-guide/](https://zhangmin.name/cube-guide/) |
 | 中国政策雷达 · 政策观察 | [zhengce.zhangmin.name](https://zhengce.zhangmin.name/) |
 | 权重实验室 · 模型权重与推理 | [weights.zhangmin.name](https://weights.zhangmin.name/) |
 
@@ -180,6 +181,7 @@ public/panoramas/
   index.html                 # 可搜索、可筛选的目录页
   <主题>/index.html          # 17 个独立页面的发布快照
   vendor/                    # 固定版本的 Chart.js 与 html-to-image
+public/cube-guide/           # 二阶魔方交互教程与高清图解
 scripts/panoramas.json       # 标题、分类、原始文件映射与校验值
 scripts/sync-panoramas.mjs    # 同步原始页面、生成目录并校验快照
 sites/eval-quest/            # 评测探索局的便携源码、内容快照与构建脚本

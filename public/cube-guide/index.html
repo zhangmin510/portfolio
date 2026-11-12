@@ -1,0 +1,896 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="二阶魔方三步两公式交互式中文图解教程">
+  <title>二阶魔方 · 三步学会</title>
+  <style>
+    :root {
+      --ink: #14213d;
+      --muted: #52627a;
+      --line: #dfe6ef;
+      --paper: #fffdf9;
+      --cream: #f7f3ea;
+      --blue: #2563eb;
+      --blue-soft: #eaf1ff;
+      --green: #16a34a;
+      --green-soft: #eaf9ef;
+      --yellow: #facc15;
+      --orange: #ea580c;
+      --red: #ef4444;
+      --radius: 24px;
+      --shadow: 0 18px 50px rgba(20, 33, 61, .10);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(37, 99, 235, .09), transparent 26rem),
+        radial-gradient(circle at 96% 18%, rgba(250, 204, 21, .13), transparent 25rem),
+        var(--cream);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      line-height: 1.65;
+    }
+
+    button, input { font: inherit; }
+    button { color: inherit; }
+    img { max-width: 100%; display: block; }
+    [hidden] { display: none !important; }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: -60px;
+      z-index: 100;
+      padding: 10px 16px;
+      border-radius: 12px;
+      color: #fff;
+      background: var(--ink);
+    }
+    .skip-link:focus { top: 16px; }
+
+    .app { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 24px 0 56px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 850; letter-spacing: -.02em; }
+    .brand-mark {
+      display: grid;
+      grid-template-columns: repeat(2, 12px);
+      gap: 3px;
+      padding: 9px;
+      border-radius: 12px;
+      background: var(--ink);
+      box-shadow: 0 8px 22px rgba(20, 33, 61, .18);
+    }
+    .brand-mark i { width: 12px; height: 12px; border-radius: 3px; background: var(--yellow); }
+    .brand-mark i:nth-child(2) { background: var(--blue); }
+    .brand-mark i:nth-child(3) { background: var(--red); }
+    .brand-mark i:nth-child(4) { background: var(--green); }
+    .top-actions { display: flex; gap: 10px; }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 10px 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .button:hover { transform: translateY(-1px); border-color: #b9c8db; box-shadow: 0 8px 20px rgba(20, 33, 61, .08); }
+    .button:focus-visible, .step-tab:focus-visible, .choice:focus-visible, .figure-button:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, .34);
+      outline-offset: 3px;
+    }
+    .button.primary { color: #fff; border-color: var(--ink); background: var(--ink); }
+    .button.soft { border-color: transparent; background: var(--blue-soft); color: #1746a2; }
+    .button.icon { width: 44px; padding: 0; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(290px, .75fr);
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .hero-copy, .progress-card, .formula-lab, .lesson-panel, .quiz-card {
+      border: 1px solid rgba(223, 230, 239, .9);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .91);
+      box-shadow: var(--shadow);
+    }
+    .hero-copy { padding: clamp(28px, 5vw, 52px); position: relative; overflow: hidden; }
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      right: -88px;
+      bottom: -105px;
+      width: 270px;
+      height: 270px;
+      border: 38px solid rgba(37, 99, 235, .08);
+      border-radius: 50%;
+    }
+    .eyebrow { margin: 0 0 10px; color: var(--blue); font-size: .86rem; font-weight: 850; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { max-width: 760px; margin: 0; font-size: clamp(2.25rem, 5.5vw, 4.7rem); line-height: 1.02; letter-spacing: -.055em; }
+    .lead { max-width: 680px; margin: 20px 0 0; color: var(--muted); font-size: clamp(1rem, 2vw, 1.18rem); }
+    .formula-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .formula-pill { padding: 9px 14px; border-radius: 999px; background: var(--blue-soft); color: #1746a2; font: 800 .95rem ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .formula-pill:nth-child(2) { color: #7c2d12; background: #fff0e7; }
+
+    .progress-card { display: grid; place-items: center; padding: 28px; text-align: center; }
+    .progress-ring {
+      --progress: 0deg;
+      display: grid;
+      place-items: center;
+      width: 174px;
+      height: 174px;
+      border-radius: 50%;
+      background: conic-gradient(var(--green) var(--progress), #e8edf3 0);
+      transition: background .35s ease;
+    }
+    .progress-ring::before { content: ""; grid-area: 1 / 1; width: 136px; height: 136px; border-radius: 50%; background: #fff; }
+    .progress-value { grid-area: 1 / 1; position: relative; font-size: 2rem; font-weight: 900; letter-spacing: -.04em; }
+    .progress-title { margin: 18px 0 2px; font-weight: 850; font-size: 1.14rem; }
+    .progress-caption { margin: 0; color: var(--muted); font-size: .92rem; }
+
+    .stepper {
+      position: sticky;
+      top: 10px;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-bottom: 24px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .88);
+      box-shadow: 0 12px 28px rgba(20, 33, 61, .08);
+      backdrop-filter: blur(16px);
+    }
+    .step-tab {
+      min-width: 0;
+      padding: 11px 8px;
+      border: 0;
+      border-radius: 12px;
+      color: var(--muted);
+      background: transparent;
+      font-weight: 750;
+      cursor: pointer;
+    }
+    .step-tab span { display: inline-grid; place-items: center; width: 26px; height: 26px; margin-right: 6px; border-radius: 50%; background: #edf1f6; font-size: .82rem; }
+    .step-tab[aria-selected="true"] { color: #fff; background: var(--ink); }
+    .step-tab[aria-selected="true"] span { color: var(--ink); background: var(--yellow); }
+    .step-tab.is-done:not([aria-selected="true"]) { color: #166534; background: var(--green-soft); }
+
+    .formula-lab {
+      display: grid;
+      grid-template-columns: minmax(310px, .9fr) minmax(0, 1.1fr);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .cube-zone {
+      min-height: 400px;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      background: linear-gradient(145deg, #eef3fa, #fbfdff);
+      overflow: hidden;
+    }
+    .cube-wrap { display: grid; justify-items: center; gap: 18px; width: 100%; }
+    .scene { width: 230px; height: 230px; display: grid; place-items: center; perspective: 850px; touch-action: none; cursor: grab; }
+    .scene:active { cursor: grabbing; }
+    .cube3d { --rx: -24deg; --ry: 35deg; position: relative; width: 150px; height: 150px; transform-style: preserve-3d; transform: rotateX(var(--rx)) rotateY(var(--ry)); transition: transform .28s ease; }
+    .scene.is-dragging .cube3d { transition: none; }
+    .face { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; padding: 6px; border: 3px solid #101827; border-radius: 6px; background: #101827; backface-visibility: visible; transition: filter .2s ease, box-shadow .2s ease; }
+    .face span { border-radius: 5px; box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .22); }
+    .face-f { transform: translateZ(75px); } .face-f span { background: var(--red); }
+    .face-b { transform: rotateY(180deg) translateZ(75px); } .face-b span { background: #fb923c; }
+    .face-r { transform: rotateY(90deg) translateZ(75px); } .face-r span { background: var(--blue); }
+    .face-l { transform: rotateY(-90deg) translateZ(75px); } .face-l span { background: var(--green); }
+    .face-u { transform: rotateX(90deg) translateZ(75px); } .face-u span { background: var(--yellow); }
+    .face-d { transform: rotateX(-90deg) translateZ(75px); } .face-d span { background: #f8fafc; }
+    .face.is-active { filter: brightness(1.12) saturate(1.25); box-shadow: 0 0 0 7px rgba(250, 204, 21, .9), 0 0 32px 14px rgba(250, 204, 21, .42); animation: facePulse .64s ease; }
+    @keyframes facePulse { 50% { filter: brightness(1.35) saturate(1.45); } }
+    .view-controls { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px; }
+    .view-controls .button { min-height: 35px; padding: 6px 11px; font-size: .84rem; }
+    .drag-hint { margin: 0; color: var(--muted); font-size: .82rem; }
+
+    .player { padding: clamp(24px, 4vw, 42px); }
+    .section-kicker { margin: 0 0 8px; color: var(--blue); font-size: .8rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+    h2 { margin: 0; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.2; letter-spacing: -.035em; }
+    h3 { margin: 0; font-size: 1.22rem; line-height: 1.3; }
+    .player-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
+    .formula-switch { display: flex; gap: 8px; }
+    .formula-switch .button[aria-pressed="true"] { color: #fff; border-color: var(--blue); background: var(--blue); }
+    .tokens { display: flex; flex-wrap: wrap; gap: 9px; margin: 30px 0 22px; }
+    .token {
+      display: grid;
+      place-items: center;
+      min-width: 54px;
+      height: 58px;
+      padding: 0 12px;
+      border: 2px solid transparent;
+      border-radius: 14px;
+      color: #44536a;
+      background: #f0f3f7;
+      font: 850 1.35rem ui-monospace, SFMono-Regular, Menlo, monospace;
+      transition: transform .18s ease, color .18s ease, background .18s ease, border .18s ease;
+    }
+    .token.is-past { color: #166534; background: var(--green-soft); }
+    .token.is-current { transform: translateY(-4px); color: #fff; border-color: #7ca4ff; background: var(--blue); box-shadow: 0 10px 22px rgba(37, 99, 235, .26); }
+    .move-explain { min-height: 92px; padding: 16px 18px; border-radius: 16px; background: #f8fafc; border: 1px solid var(--line); }
+    .move-explain strong { display: block; margin-bottom: 3px; font-size: 1.08rem; }
+    .move-explain span { color: var(--muted); }
+    .player-controls { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+    .key-hint { margin: 16px 0 0; color: var(--muted); font-size: .8rem; }
+
+    .lesson-panel { padding: clamp(24px, 5vw, 50px); }
+    .lesson-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+    .lesson-head p { max-width: 700px; margin: 10px 0 0; color: var(--muted); }
+    .step-number { flex: 0 0 auto; display: grid; place-items: center; width: 58px; height: 58px; border-radius: 18px; color: #fff; background: var(--ink); font-weight: 900; font-size: 1.25rem; }
+    .lesson-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); gap: 28px; align-items: start; }
+    .figure-button { width: 100%; padding: 0; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; background: #f8fafc; cursor: zoom-in; }
+    .figure-button img { width: 100%; }
+    .figure-caption { margin: 10px 0 0; color: var(--muted); font-size: .84rem; text-align: center; }
+    .instruction-list { margin: 0; padding: 0; list-style: none; counter-reset: instruction; }
+    .instruction-list li { position: relative; padding: 0 0 18px 42px; counter-increment: instruction; }
+    .instruction-list li::before { content: counter(instruction); position: absolute; left: 0; top: 1px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 9px; color: #1746a2; background: var(--blue-soft); font-size: .83rem; font-weight: 850; }
+    .callout { margin-top: 18px; padding: 16px 18px; border-left: 5px solid var(--yellow); border-radius: 12px; background: #fff9db; }
+    .callout.danger { border-color: var(--red); background: #fff0f0; }
+    code { padding: .16em .4em; border-radius: 7px; color: #1746a2; background: var(--blue-soft); font: 800 .94em ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+    .checkpoints { display: grid; gap: 10px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); }
+    .checkpoint { display: flex; align-items: flex-start; gap: 11px; padding: 13px 14px; border-radius: 14px; background: #f8fafc; cursor: pointer; }
+    .checkpoint:hover { background: #f2f6fa; }
+    .checkpoint input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--green); }
+    .checkpoint.is-checked { color: #166534; background: var(--green-soft); }
+
+    .panel-actions { display: flex; justify-content: space-between; gap: 12px; margin-top: 30px; }
+
+    .quiz-card { padding: clamp(24px, 5vw, 50px); }
+    .quiz-layout { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 28px; margin-top: 28px; }
+    .question-box { min-height: 250px; padding: 26px; border-radius: 20px; background: #f8fafc; border: 1px solid var(--line); }
+    .question-move { margin: 8px 0 16px; font: 900 clamp(2.5rem, 8vw, 5rem) ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--blue); }
+    .choices { display: grid; gap: 10px; }
+    .choice { padding: 13px 16px; border: 1px solid var(--line); border-radius: 14px; background: #fff; text-align: left; cursor: pointer; }
+    .choice:hover { border-color: #8fb0f8; background: var(--blue-soft); }
+    .choice.correct { border-color: #57ca7e; color: #166534; background: var(--green-soft); }
+    .choice.wrong { border-color: #f38f8f; color: #991b1b; background: #fff0f0; }
+    .score-board { padding: 24px; border-radius: 20px; color: #fff; background: var(--ink); }
+    .score-number { display: block; margin: 4px 0; font-size: 3rem; font-weight: 900; line-height: 1; }
+    .score-board p { margin: 8px 0 0; color: #cbd5e1; font-size: .9rem; }
+    .feedback { min-height: 30px; margin: 14px 0 0; font-weight: 750; }
+
+    footer { margin-top: 24px; color: var(--muted); font-size: .86rem; text-align: center; }
+
+    dialog { width: min(1100px, calc(100% - 24px)); max-height: calc(100vh - 24px); padding: 0; border: 0; border-radius: 22px; background: #fff; box-shadow: 0 30px 100px rgba(15, 23, 42, .3); }
+    dialog::backdrop { background: rgba(15, 23, 42, .68); backdrop-filter: blur(5px); }
+    .dialog-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+    .dialog-image { width: 100%; max-height: calc(100vh - 90px); object-fit: contain; background: #f8fafc; }
+
+    @media (max-width: 880px) {
+      .hero, .formula-lab, .lesson-grid, .quiz-layout { grid-template-columns: 1fr; }
+      .progress-card { grid-template-columns: auto 1fr; justify-items: start; text-align: left; }
+      .progress-ring { width: 118px; height: 118px; }
+      .progress-ring::before { width: 90px; height: 90px; }
+      .progress-value { font-size: 1.45rem; }
+      .cube-zone { min-height: 320px; }
+      .step-tab { font-size: 0; }
+      .step-tab span { margin: 0; font-size: .78rem; }
+    }
+
+    @media (max-width: 560px) {
+      .app { width: min(100% - 20px, 1180px); padding-top: 14px; }
+      .brand-text { display: none; }
+      .top-actions #jumpTrainer { display: none; }
+      .hero-copy, .progress-card, .lesson-panel, .quiz-card { border-radius: 20px; }
+      .progress-card { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+      .stepper { top: 6px; }
+      .formula-lab { border-radius: 20px; }
+      .player-head, .lesson-head { flex-direction: column; }
+      .formula-switch { width: 100%; }
+      .formula-switch .button { flex: 1; }
+      .player-controls .button { flex: 1; min-width: 42%; }
+      .tokens { gap: 6px; }
+      .token { min-width: 46px; height: 52px; padding: 0 9px; font-size: 1.15rem; }
+      .panel-actions { flex-direction: column; }
+      .panel-actions .button { width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#lessonContent">跳到教程内容</a>
+
+  <div class="app">
+    <header>
+      <div class="topbar">
+        <div class="brand" aria-label="二阶魔方教程">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="brand-text">2×2 CUBE LAB</span>
+        </div>
+        <div class="top-actions">
+          <a class="button" href="https://zhangmin.name/" aria-label="返回 ZhangMin.name 个人主页">← 个人主页</a>
+          <button class="button" id="jumpTrainer" type="button">公式训练器</button>
+          <button class="button icon" id="resetProgress" type="button" aria-label="重置学习进度" title="重置进度">↺</button>
+        </div>
+      </div>
+
+      <section class="hero" aria-labelledby="pageTitle">
+        <div class="hero-copy">
+          <p class="eyebrow">三步 · 两公式 · 离线可用</p>
+          <h1 id="pageTitle">把二阶魔方，真正学会。</h1>
+          <p class="lead">跟着图解完成白色整层、黄角归位和黄角翻正。公式可以逐步播放，魔方可以拖动观察，学到哪里都会自动记住。</p>
+          <div class="formula-pills" aria-label="两条核心公式">
+            <span class="formula-pill">A · R U R' U'</span>
+            <span class="formula-pill">B · U R U' L' U R' U' L</span>
+          </div>
+        </div>
+
+        <aside class="progress-card" aria-label="学习进度">
+          <div class="progress-ring" id="progressRing">
+            <span class="progress-value" id="progressValue">0%</span>
+          </div>
+          <div>
+            <p class="progress-title">你的复原进度</p>
+            <p class="progress-caption" id="progressCaption">完成检查点后会自动保存</p>
+          </div>
+        </aside>
+      </section>
+    </header>
+
+    <nav class="stepper" role="tablist" aria-label="学习步骤">
+      <button class="step-tab" role="tab" aria-selected="true" aria-controls="panel-0" id="tab-0" data-step="0"><span>0</span>看懂记号</button>
+      <button class="step-tab" role="tab" aria-selected="false" aria-controls="panel-1" id="tab-1" data-step="1"><span>1</span>白色整层</button>
+      <button class="step-tab" role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" data-step="2"><span>2</span>黄角归位</button>
+      <button class="step-tab" role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3" data-step="3"><span>3</span>黄角翻正</button>
+      <button class="step-tab" role="tab" aria-selected="false" aria-controls="panel-4" id="tab-4" data-step="4"><span>✓</span>小测验</button>
+    </nav>
+
+    <section class="formula-lab" id="formulaTrainer" aria-labelledby="trainerTitle">
+      <div class="cube-zone">
+        <div class="cube-wrap">
+          <div class="scene" id="cubeScene" aria-label="可拖动观察的三维二阶魔方">
+            <div class="cube3d" id="cube3d">
+              <div class="face face-f" data-face="F"><span></span><span></span><span></span><span></span></div>
+              <div class="face face-b" data-face="B"><span></span><span></span><span></span><span></span></div>
+              <div class="face face-r" data-face="R"><span></span><span></span><span></span><span></span></div>
+              <div class="face face-l" data-face="L"><span></span><span></span><span></span><span></span></div>
+              <div class="face face-u" data-face="U"><span></span><span></span><span></span><span></span></div>
+              <div class="face face-d" data-face="D"><span></span><span></span><span></span><span></span></div>
+            </div>
+          </div>
+          <div class="view-controls" aria-label="魔方观察角度">
+            <button class="button" type="button" data-view="home">立体</button>
+            <button class="button" type="button" data-view="top">看 U</button>
+            <button class="button" type="button" data-view="right">看 R</button>
+            <button class="button" type="button" data-view="front">看 F</button>
+          </div>
+          <p class="drag-hint">拖动魔方可自由观察；播放公式时对应面会亮起</p>
+        </div>
+      </div>
+
+      <div class="player">
+        <div class="player-head">
+          <div>
+            <p class="section-kicker">Interactive trainer</p>
+            <h2 id="trainerTitle">公式逐步播放器</h2>
+          </div>
+          <div class="formula-switch" aria-label="选择公式">
+            <button class="button" type="button" data-formula="A" aria-pressed="true">公式 A</button>
+            <button class="button" type="button" data-formula="B" aria-pressed="false">公式 B</button>
+          </div>
+        </div>
+
+        <div class="tokens" id="formulaTokens" aria-label="当前公式"></div>
+        <div class="move-explain" aria-live="polite">
+          <strong id="moveTitle">准备开始</strong>
+          <span id="moveDescription">点击“下一步”，逐个完成转动。</span>
+        </div>
+        <div class="player-controls">
+          <button class="button" type="button" id="playerReset">从头开始</button>
+          <button class="button" type="button" id="playerPrev">上一步</button>
+          <button class="button primary" type="button" id="playerPlay">自动播放</button>
+          <button class="button" type="button" id="playerNext">下一步</button>
+        </div>
+        <p class="key-hint">键盘：← 上一步　→ 下一步　空格 播放/暂停</p>
+      </div>
+    </section>
+
+    <main id="lessonContent">
+      <section class="lesson-panel" id="panel-0" role="tabpanel" aria-labelledby="tab-0" data-panel="0">
+        <div class="lesson-head">
+          <div>
+            <p class="section-kicker">准备</p>
+            <h2>先把方向说清楚</h2>
+            <p>顺逆时针不是按屏幕方向判断，而是想象自己正对正在转动的那个面。</p>
+          </div>
+          <span class="step-number">0</span>
+        </div>
+        <div class="lesson-grid">
+          <div>
+            <button class="figure-button" type="button" data-lightbox="01-notation.png" aria-label="放大查看转动记号图">
+              <img src="01-notation.png" alt="二阶魔方 U、D、F、R、L 记号及两条核心公式">
+            </button>
+            <p class="figure-caption">点击图片可以放大查看</p>
+          </div>
+          <div>
+            <ol class="instruction-list">
+              <li><code>U</code> 上面、<code>D</code> 下面、<code>R</code> 右面、<code>L</code> 左面、<code>F</code> 前面。</li>
+              <li>无撇号表示正对该面看，顺时针转 90°。</li>
+              <li>撇号 <code>'</code> 表示逆时针；数字 <code>2</code> 表示转半圈。</li>
+              <li>在复原状态连续做 6 遍公式 A，魔方会回到原状。</li>
+            </ol>
+            <div class="callout">先在上方播放器中练公式 A。能不看字完整做完，再进入白色整层。</div>
+          </div>
+        </div>
+        <div class="checkpoints">
+          <label class="checkpoint"><input type="checkbox" data-checkpoint="notation"><span>我能说出 U、D、R、L、F 分别是哪一面</span></label>
+          <label class="checkpoint"><input type="checkbox" data-checkpoint="formula-a"><span>我能独立完成公式 A：R U R' U'</span></label>
+        </div>
+        <div class="panel-actions"><span></span><button class="button primary" type="button" data-next-step="1">下一步：白色整层</button></div>
+      </section>
+
+      <section class="lesson-panel" id="panel-1" role="tabpanel" aria-labelledby="tab-1" data-panel="1" hidden>
+        <div class="lesson-head">
+          <div>
+            <p class="section-kicker">Step 1</p>
+            <h2>完成白色“整层”</h2>
+            <p>底面全白还不够；每个侧面的下排两格也必须同色。</p>
+          </div>
+          <span class="step-number">1</span>
+        </div>
+        <div class="lesson-grid">
+          <div>
+            <button class="figure-button" type="button" data-lightbox="02-white-layer.png" aria-label="放大查看白色整层图解">
+              <img src="02-white-layer.png" alt="完成白色整层的三个步骤">
+            </button>
+            <p class="figure-caption">绿色框表示右前上目标角，圆圈表示右前下目标槽</p>
+          </div>
+          <div>
+            <ol class="instruction-list">
+              <li>任取一个白角，把白色放到底面；之后保持白面朝下。</li>
+              <li>找另一个白角，看它另外两色，确定它属于哪个角。</li>
+              <li>转 <code>U</code>，把角块送到目标槽正上方。</li>
+              <li>水平转整块，让目标角来到右前上、目标槽来到右前下。</li>
+              <li>完整重复公式 A，直到白角正确落下。</li>
+            </ol>
+            <button class="button soft" type="button" data-load-formula="A">在播放器载入公式 A</button>
+            <div class="callout danger">白角若卡在底层错误位置：把它放在右前下，先做一次 A 顶出。</div>
+          </div>
+        </div>
+        <div class="checkpoints">
+          <label class="checkpoint"><input type="checkbox" data-checkpoint="white-target"><span>我会通过角块另外两色判断目标位置</span></label>
+          <label class="checkpoint"><input type="checkbox" data-checkpoint="white-insert"><span>我能用公式 A 插入右前下角</span></label>
+          <label class="checkpoint"><input type="checkbox" data-checkpoint="white-layer"><span>我完成了白色整层，并检查过四个侧面</span></label>
+        </div>
+        <div class="panel-actions"><button class="button" type="button" data-next-step="0">返回记号</button><button class="button primary" type="button" data-next-step="2">下一步：黄角归位</button></div>
+      </section>
+
+      <section class="lesson-panel" id="panel-2" role="tabpanel" aria-labelledby="tab-2" data-panel="2" hidden>
+        <div class="lesson-head">
+          <div>
+            <p class="section-kicker">Step 2</p>
+            <h2>把黄色角块放到正确位置</h2>
+            <p>保持白面朝下、黄层在上。现在只管角块位置，不管黄色贴纸朝向。</p>
+          </div>
+          <span class="step-number">2</span>
+        </div>
+        <div class="lesson-grid">
+          <div>
+            <button class="figure-button" type="button" data-lightbox="03-position-yellow-corners.png" aria-label="放大查看黄角归位图解">
+              <img src="03-position-yellow-corners.png" alt="判断黄色角块位置并使用公式 B 归位">
+            </button>
+            <p class="figure-caption">忽略黄色，只看角块另外两色是否与下面两面对应</p>
+          </div>
+          <div>
+            <ol class="instruction-list">
+              <li>找到一个位置正确的黄角：它另外两色与下面相邻两面相符。</li>
+              <li>把这个正确角放在右前上。</li>
+              <li>保持握法，做公式 B：<code>U R U' L' U R' U' L</code>。</li>
+              <li>重新数正确角；若还不是 4 个，重新摆位再做一次 B。</li>
+            </ol>
+            <button class="button soft" type="button" data-load-formula="B">在播放器载入公式 B</button>
+            <div class="callout">没有正确角时先转 U；两个相邻正确时转 U 变成只对一个；两个对角正确时任取一角放右前上。</div>
+          </div>
+        </div>
+        <div class="checkpoints">
+          <label class="checkpoint"><input type="checkbox" data-checkpoint="position-check"><span>我会判断黄角的位置是否正确</span></label>
+          <label class="checkpoint"><input type="checkbox" data-checkpoint="formula-b"><span>我能在正确角位于右前上时完成公式 B</span></label>
+        </div>
+        <div class="panel-actions"><button class="button" type="button" data-next-step="1">返回白色整层</button><button class="button primary" type="button" data-next-step="3">下一步：黄角翻正</button></div>
+      </section>
+
+      <section class="lesson-panel" id="panel-3" role="tabpanel" aria-labelledby="tab-3" data-panel="3" hidden>
+        <div class="lesson-head">
+          <div>
+            <p class="section-kicker">Step 3</p>
+            <h2>逐个翻正黄色角块</h2>
+            <p>这一步中途会看起来越来越乱。握法不变、四步做完整，最后会一起复原。</p>
+          </div>
+          <span class="step-number">3</span>
+        </div>
+        <div class="lesson-grid">
+          <div>
+            <button class="figure-button" type="button" data-lightbox="04-twist-yellow-corners.png" aria-label="放大查看黄角翻正图解">
+              <img src="04-twist-yellow-corners.png" alt="逐个翻正黄色角块的操作步骤">
+            </button>
+            <p class="figure-caption">橙色框始终是右前下 DFR，换角时只转底层 D</p>
+          </div>
+          <div>
+            <ol class="instruction-list">
+              <li>翻转整块：白面朝上、黄色层朝下。</li>
+              <li>把未翻正黄角放在右前下 <code>DFR</code>。</li>
+              <li>一组一组重复公式 A，直到该角黄色朝下，通常 2 或 4 组。</li>
+              <li>只转底层 <code>D</code>，把下一个黄角送到同一个右前下位置。</li>
+              <li>全部朝下后，用 <code>D</code>、<code>D'</code> 或 <code>D2</code> 对齐。</li>
+            </ol>
+            <button class="button soft" type="button" data-load-formula="A">在播放器载入公式 A</button>
+            <div class="callout danger">三个防错点：不换握法、不在第三步停下、换角只转 D 不转整块。</div>
+          </div>
+        </div>
+        <div class="checkpoints">
+          <label class="checkpoint"><input type="checkbox" data-checkpoint="twist-place"><span>我能始终固定右前下 DFR 作为工作位</span></label>
+          <label class="checkpoint"><input type="checkbox" data-checkpoint="twist-d"><span>我知道换角只转底层 D</span></label>
+          <label class="checkpoint"><input type="checkbox" data-checkpoint="first-solve"><span>我独立完成了第一次二阶魔方复原</span></label>
+        </div>
+        <div class="panel-actions"><button class="button" type="button" data-next-step="2">返回黄角归位</button><button class="button primary" type="button" data-next-step="4">开始小测验</button></div>
+      </section>
+
+      <section class="quiz-card" id="panel-4" role="tabpanel" aria-labelledby="tab-4" data-panel="4" hidden>
+        <div class="lesson-head">
+          <div>
+            <p class="section-kicker">Quick check</p>
+            <h2>转动记号小测验</h2>
+            <p>连续答对 3 题，就说明你已经能脱离图例读公式。</p>
+          </div>
+          <span class="step-number">✓</span>
+        </div>
+        <div class="quiz-layout">
+          <div class="question-box">
+            <p class="section-kicker">这一步是什么意思？</p>
+            <div class="question-move" id="quizMove">R'</div>
+            <div class="choices" id="quizChoices"></div>
+            <p class="feedback" id="quizFeedback" aria-live="polite"></p>
+          </div>
+          <aside class="score-board">
+            <span>当前连续答对</span>
+            <strong class="score-number" id="quizScore">0</strong>
+            <span>最佳记录：<b id="quizBest">0</b></span>
+            <p>答题会自动更新学习进度。</p>
+            <button class="button" type="button" id="newQuestion" style="width:100%;margin-top:18px">换一道题</button>
+          </aside>
+        </div>
+        <div class="checkpoints">
+          <label class="checkpoint"><input type="checkbox" data-checkpoint="quiz-three"><span>我在小测验中连续答对了 3 题</span></label>
+        </div>
+        <div class="panel-actions"><button class="button" type="button" data-next-step="3">返回黄角翻正</button><button class="button primary" type="button" data-next-step="0">再复习一次</button></div>
+      </section>
+    </main>
+
+    <footer>所有进度只保存在你的浏览器中；页面无需联网即可使用。</footer>
+  </div>
+
+  <dialog id="imageDialog" aria-labelledby="dialogTitle">
+    <div class="dialog-bar">
+      <strong id="dialogTitle">图解大图</strong>
+      <button class="button icon" id="closeDialog" type="button" aria-label="关闭大图">×</button>
+    </div>
+    <img class="dialog-image" id="dialogImage" alt="放大的二阶魔方教学图">
+  </dialog>
+
+  <script>
+    (() => {
+      const formulas = {
+        A: ["R", "U", "R'", "U'"],
+        B: ["U", "R", "U'", "L'", "U", "R'", "U'", "L"]
+      };
+
+      const faceNames = { U: "上面", D: "下面", R: "右面", L: "左面", F: "前面", B: "后面" };
+      const stepNames = ["看懂记号", "白色整层", "黄角归位", "黄角翻正", "小测验"];
+      const storageKey = "cube-2x2-learning-v1";
+      const state = { currentStep: 0, formula: "A", moveIndex: -1, playing: false, timer: null, checks: {}, best: 0 };
+
+      const qs = (selector, root = document) => root.querySelector(selector);
+      const qsa = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+      function loadState() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+          state.currentStep = Number.isInteger(saved.currentStep) ? Math.min(4, Math.max(0, saved.currentStep)) : 0;
+          state.checks = saved.checks || {};
+          state.best = Number(saved.best) || 0;
+        } catch (_) { /* local file privacy settings may disable storage */ }
+      }
+
+      function saveState() {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify({ currentStep: state.currentStep, checks: state.checks, best: state.best }));
+        } catch (_) { /* progress still works for this session */ }
+      }
+
+      function setStep(index, focusTab = false) {
+        index = Math.min(4, Math.max(0, Number(index)));
+        state.currentStep = index;
+        qsa("[data-panel]").forEach(panel => { panel.hidden = Number(panel.dataset.panel) !== index; });
+        qsa(".step-tab").forEach(tab => {
+          const active = Number(tab.dataset.step) === index;
+          tab.setAttribute("aria-selected", String(active));
+          tab.tabIndex = active ? 0 : -1;
+          if (focusTab && active) tab.focus();
+        });
+        if (location.hash !== `#step-${index}`) {
+          try { history.replaceState(null, "", `#step-${index}`); } catch (_) { /* file URLs may restrict history changes */ }
+        }
+        saveState();
+      }
+
+      function updateProgress() {
+        const boxes = qsa("[data-checkpoint]");
+        const done = boxes.filter(box => state.checks[box.dataset.checkpoint]).length;
+        const percent = Math.round((done / boxes.length) * 100);
+        qs("#progressRing").style.setProperty("--progress", `${percent * 3.6}deg`);
+        qs("#progressValue").textContent = `${percent}%`;
+        qs("#progressCaption").textContent = done === boxes.length ? "全部完成，可以开始计时练习了" : `已完成 ${done} / ${boxes.length} 个检查点`;
+
+        qsa(".step-tab").forEach((tab, index) => {
+          const panelChecks = qsa(`[data-panel="${index}"] [data-checkpoint]`);
+          tab.classList.toggle("is-done", panelChecks.length > 0 && panelChecks.every(box => state.checks[box.dataset.checkpoint]));
+        });
+      }
+
+      function initCheckpoints() {
+        qsa("[data-checkpoint]").forEach(box => {
+          box.checked = Boolean(state.checks[box.dataset.checkpoint]);
+          box.closest(".checkpoint").classList.toggle("is-checked", box.checked);
+          box.addEventListener("change", () => {
+            state.checks[box.dataset.checkpoint] = box.checked;
+            box.closest(".checkpoint").classList.toggle("is-checked", box.checked);
+            updateProgress();
+            saveState();
+          });
+        });
+      }
+
+      function moveDescription(move) {
+        const face = move[0];
+        const prime = move.includes("'");
+        const half = move.includes("2");
+        return {
+          title: `${move} · 转动${faceNames[face]}`,
+          description: half ? `正对${faceNames[face]}看，转动 180°。` : `正对${faceNames[face]}看，${prime ? "逆时针" : "顺时针"}转动 90°。`
+        };
+      }
+
+      function stopPlayer() {
+        state.playing = false;
+        clearInterval(state.timer);
+        state.timer = null;
+        qs("#playerPlay").textContent = "自动播放";
+      }
+
+      function renderFormula() {
+        const moves = formulas[state.formula];
+        qs("#formulaTokens").innerHTML = moves.map((move, index) => `<span class="token${index < state.moveIndex ? " is-past" : ""}${index === state.moveIndex ? " is-current" : ""}">${move}</span>`).join("");
+        qsa("[data-formula]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.formula === state.formula)));
+        qsa(".face").forEach(face => face.classList.remove("is-active"));
+
+        if (state.moveIndex >= 0 && state.moveIndex < moves.length) {
+          const move = moves[state.moveIndex];
+          const info = moveDescription(move);
+          qs("#moveTitle").textContent = `第 ${state.moveIndex + 1} / ${moves.length} 步 · ${info.title}`;
+          qs("#moveDescription").textContent = info.description;
+          const face = qs(`.face[data-face="${move[0]}"]`);
+          if (face) {
+            face.classList.remove("is-active");
+            void face.offsetWidth;
+            face.classList.add("is-active");
+          }
+        } else if (state.moveIndex >= moves.length) {
+          qs("#moveTitle").textContent = `公式 ${state.formula} 完成`;
+          qs("#moveDescription").textContent = "检查角块结果；需要时保持握法，再完整做一组。";
+          stopPlayer();
+        } else {
+          qs("#moveTitle").textContent = `公式 ${state.formula} · 准备开始`;
+          qs("#moveDescription").textContent = "点击“下一步”，逐个完成转动。";
+        }
+      }
+
+      function selectFormula(name) {
+        stopPlayer();
+        state.formula = name;
+        state.moveIndex = -1;
+        renderFormula();
+      }
+
+      function nextMove() {
+        const length = formulas[state.formula].length;
+        state.moveIndex = Math.min(length, state.moveIndex + 1);
+        renderFormula();
+      }
+
+      function prevMove() {
+        stopPlayer();
+        state.moveIndex = Math.max(-1, state.moveIndex - 1);
+        renderFormula();
+      }
+
+      function togglePlay() {
+        if (state.playing) return stopPlayer();
+        if (state.moveIndex >= formulas[state.formula].length) state.moveIndex = -1;
+        state.playing = true;
+        qs("#playerPlay").textContent = "暂停播放";
+        nextMove();
+        state.timer = setInterval(() => {
+          if (state.moveIndex >= formulas[state.formula].length) return stopPlayer();
+          nextMove();
+        }, 1150);
+      }
+
+      function initFormulaPlayer() {
+        qsa("[data-formula]").forEach(button => button.addEventListener("click", () => selectFormula(button.dataset.formula)));
+        qs("#playerReset").addEventListener("click", () => selectFormula(state.formula));
+        qs("#playerPrev").addEventListener("click", prevMove);
+        qs("#playerNext").addEventListener("click", () => { stopPlayer(); nextMove(); });
+        qs("#playerPlay").addEventListener("click", togglePlay);
+        qsa("[data-load-formula]").forEach(button => button.addEventListener("click", () => {
+          selectFormula(button.dataset.loadFormula);
+          qs("#formulaTrainer").scrollIntoView({ behavior: "smooth", block: "start" });
+        }));
+        qs("#jumpTrainer").addEventListener("click", () => qs("#formulaTrainer").scrollIntoView({ behavior: "smooth", block: "start" }));
+        renderFormula();
+      }
+
+      function initCube() {
+        const scene = qs("#cubeScene");
+        const cube = qs("#cube3d");
+        let rx = -24, ry = 35, dragging = false, startX = 0, startY = 0, baseX = rx, baseY = ry;
+        const apply = () => { cube.style.setProperty("--rx", `${rx}deg`); cube.style.setProperty("--ry", `${ry}deg`); };
+        const views = { home: [-24, 35], top: [-88, 0], right: [0, -88], front: [0, 0] };
+
+        scene.addEventListener("pointerdown", event => {
+          dragging = true; startX = event.clientX; startY = event.clientY; baseX = rx; baseY = ry;
+          scene.classList.add("is-dragging"); scene.setPointerCapture(event.pointerId);
+        });
+        scene.addEventListener("pointermove", event => {
+          if (!dragging) return;
+          ry = baseY + (event.clientX - startX) * .45;
+          rx = Math.max(-100, Math.min(100, baseX - (event.clientY - startY) * .45));
+          apply();
+        });
+        const release = () => { dragging = false; scene.classList.remove("is-dragging"); };
+        scene.addEventListener("pointerup", release);
+        scene.addEventListener("pointercancel", release);
+        qsa("[data-view]").forEach(button => button.addEventListener("click", () => { [rx, ry] = views[button.dataset.view]; apply(); }));
+      }
+
+      const quizQuestions = [
+        { move: "R", answer: "正对右面，顺时针 90°" },
+        { move: "R'", answer: "正对右面，逆时针 90°" },
+        { move: "U", answer: "正对上面，顺时针 90°" },
+        { move: "U'", answer: "正对上面，逆时针 90°" },
+        { move: "L", answer: "正对左面，顺时针 90°" },
+        { move: "L'", answer: "正对左面，逆时针 90°" },
+        { move: "D", answer: "正对下面，顺时针 90°" },
+        { move: "D2", answer: "下面转动 180°" }
+      ];
+      const allAnswers = quizQuestions.map(q => q.answer);
+      let quizScore = 0;
+      let currentQuestion = null;
+      let answered = false;
+
+      function shuffled(items) { return [...items].sort(() => Math.random() - .5); }
+
+      function renderQuestion() {
+        answered = false;
+        currentQuestion = quizQuestions[Math.floor(Math.random() * quizQuestions.length)];
+        const distractors = shuffled(allAnswers.filter(answer => answer !== currentQuestion.answer)).slice(0, 2);
+        const choices = shuffled([currentQuestion.answer, ...distractors]);
+        qs("#quizMove").textContent = currentQuestion.move;
+        qs("#quizFeedback").textContent = "";
+        qs("#quizChoices").innerHTML = choices.map(choice => `<button class="choice" type="button">${choice}</button>`).join("");
+        qsa(".choice", qs("#quizChoices")).forEach(button => button.addEventListener("click", () => answerQuestion(button)));
+      }
+
+      function answerQuestion(button) {
+        if (answered) return;
+        answered = true;
+        const correct = button.textContent === currentQuestion.answer;
+        qsa(".choice", qs("#quizChoices")).forEach(choice => {
+          choice.disabled = true;
+          if (choice.textContent === currentQuestion.answer) choice.classList.add("correct");
+        });
+        if (correct) {
+          quizScore += 1;
+          qs("#quizFeedback").textContent = "答对了！保持这个视角判断方法。";
+          if (quizScore >= 3) {
+            state.checks["quiz-three"] = true;
+            const box = qs('[data-checkpoint="quiz-three"]');
+            box.checked = true;
+            box.closest(".checkpoint").classList.add("is-checked");
+            updateProgress();
+          }
+        } else {
+          quizScore = 0;
+          button.classList.add("wrong");
+          qs("#quizFeedback").textContent = `正确答案：${currentQuestion.answer}`;
+        }
+        state.best = Math.max(state.best, quizScore);
+        qs("#quizScore").textContent = quizScore;
+        qs("#quizBest").textContent = state.best;
+        saveState();
+        setTimeout(renderQuestion, 1050);
+      }
+
+      function initQuiz() {
+        qs("#quizBest").textContent = state.best;
+        qs("#newQuestion").addEventListener("click", renderQuestion);
+        renderQuestion();
+      }
+
+      function initLightbox() {
+        const dialog = qs("#imageDialog");
+        qsa("[data-lightbox]").forEach(button => button.addEventListener("click", () => {
+          qs("#dialogImage").src = button.dataset.lightbox;
+          dialog.showModal();
+        }));
+        qs("#closeDialog").addEventListener("click", () => dialog.close());
+        dialog.addEventListener("click", event => {
+          const rect = dialog.getBoundingClientRect();
+          if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
+        });
+      }
+
+      function initNavigation() {
+        qsa(".step-tab").forEach(tab => tab.addEventListener("click", () => setStep(tab.dataset.step)));
+        qsa("[data-next-step]").forEach(button => button.addEventListener("click", () => {
+          setStep(button.dataset.nextStep);
+          qs(".stepper").scrollIntoView({ behavior: "smooth", block: "start" });
+        }));
+        const hashStep = Number((location.hash.match(/step-(\d)/) || [])[1]);
+        setStep(Number.isInteger(hashStep) ? hashStep : state.currentStep);
+
+        document.addEventListener("keydown", event => {
+          const tag = document.activeElement?.tagName;
+          if (["INPUT", "TEXTAREA", "SELECT"].includes(tag) || qs("#imageDialog").open) return;
+          if (event.key === "ArrowRight") { event.preventDefault(); stopPlayer(); nextMove(); }
+          if (event.key === "ArrowLeft") { event.preventDefault(); prevMove(); }
+          if (event.code === "Space") { event.preventDefault(); togglePlay(); }
+        });
+      }
+
+      function initReset() {
+        qs("#resetProgress").addEventListener("click", () => {
+          if (!confirm("要清除所有检查点和测验记录吗？")) return;
+          state.checks = {}; state.best = 0; quizScore = 0;
+          qsa("[data-checkpoint]").forEach(box => { box.checked = false; box.closest(".checkpoint").classList.remove("is-checked"); });
+          qs("#quizScore").textContent = "0"; qs("#quizBest").textContent = "0";
+          updateProgress(); saveState(); setStep(0);
+        });
+      }
+
+      loadState();
+      initCheckpoints();
+      initFormulaPlayer();
+      initCube();
+      initQuiz();
+      initLightbox();
+      initNavigation();
+      initReset();
+      updateProgress();
+    })();
+  </script>
+</body>
+</html>

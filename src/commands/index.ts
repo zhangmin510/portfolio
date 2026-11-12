@@ -140,7 +140,7 @@ export const COMMANDS: CommandDefinition[] = [
   {
     name: 'sites',
     aliases: ['websites'],
-    description: '打开评测论文、AI 历史档案与检索实验网站',
+    description: '浏览互动教程、知识地图与独立网站',
     quick: true,
     execute: () => output({ kind: 'sites' }),
   },

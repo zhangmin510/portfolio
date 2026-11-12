@@ -91,6 +91,18 @@
     ]
   },
   {
+    "slug": "cube-guide",
+    "name": "二阶魔方实验室",
+    "label": "互动式教程",
+    "summary": "用三步、两条公式学习二阶魔方，配有可拖动 3D 魔方、逐步播放器、小测验与本地学习进度。",
+    "href": "https://zhangmin.name/cube-guide/",
+    "related": [
+      "programmer-life",
+      "eval-quest",
+      "panoramas"
+    ]
+  },
+  {
     "slug": "weight-space",
     "name": "权重实验室",
     "label": "模型权重与推理",

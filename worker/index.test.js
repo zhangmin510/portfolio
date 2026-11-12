@@ -60,6 +60,15 @@ describe('interactive page security and caching', () => {
     })
     expect(response.headers.get('Content-Security-Policy')).not.toContain("'unsafe-inline'")
   })
+
+  it.each(['/cube-guide/', '/cube-guide/index.html'])('serves %s with the cube tutorial CSP', async (pathname) => {
+    const response = await worker.fetch(new Request(`https://zhangmin.name${pathname}`), {
+      ASSETS: { fetch: async () => new Response('<!doctype html><title>2×2 Cube Lab</title>', { headers: { 'Content-Type': 'text/html; charset=utf-8' } }) },
+    })
+    const policy = response.headers.get('Content-Security-Policy') || ''
+    expect(policy).toContain("script-src 'self' 'sha256-8iPrnL1HtvOVDORGiNQc088Iy+1aWieqYp7xIQtbeBQ='")
+    expect(policy).not.toContain("script-src 'self' 'unsafe-inline'")
+  })
 })
 
 const bytes = new TextEncoder().encode('0123456789')

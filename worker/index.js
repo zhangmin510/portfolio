@@ -5,6 +5,10 @@ const CSP =
 const PANORAMA_CSP =
   "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' data: blob: https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.jsdelivr.net; frame-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
 
+// The cube tutorial is a self-contained page with one verified inline script.
+const CUBE_GUIDE_CSP =
+  "default-src 'self'; script-src 'self' 'sha256-8iPrnL1HtvOVDORGiNQc088Iy+1aWieqYp7xIQtbeBQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+
 const SECURITY_HEADERS = {
   'Content-Security-Policy': CSP,
   'Cross-Origin-Opener-Policy': 'same-origin',
@@ -156,6 +160,14 @@ const worker = {
           headers.get('Content-Type')?.includes('text/html')))
     ) {
       headers.set('Content-Security-Policy', PANORAMA_CSP)
+    }
+    if (
+      url.pathname.startsWith('/cube-guide/') &&
+      (response.status === 304 ||
+        (response.status === 200 &&
+          headers.get('Content-Type')?.includes('text/html')))
+    ) {
+      headers.set('Content-Security-Policy', CUBE_GUIDE_CSP)
     }
 
     return new Response(response.body, {
