@@ -1,0 +1,2 @@
+# Finder metadata is local workspace state, never a public asset.
+**/.DS_Store
