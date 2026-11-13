@@ -1,7 +1,7 @@
 {
   "version": 1,
   "basePath": "/panoramas/",
-  "updatedAt": "2026-11-12",
+  "updatedAt": "2026-11-13",
   "vendors": [
     {
       "file": "chart.umd.min.js",
@@ -16,6 +16,21 @@
     }
   ],
   "pages": [
+    {
+      "slug": "recursive-self-improvement",
+      "title": "RSI · 递归自我改进全景图",
+      "subtitle": "AI 如何改进自己的改进能力",
+      "description": "沿六个改进层级探索递归自我改进，拆解研究证据、验证闭环与能力增长瓶颈，并动手调节反馈实验。",
+      "category": "Agent 与搜索",
+      "tags": [
+        "RSI",
+        "递归自我改进",
+        "研究与实验"
+      ],
+      "source": "src/panoramas/recursive-self-improvement.html",
+      "updatedAt": "2026-11-13",
+      "sourceSha256": "fbfbec731e240695c4c296287e43bc302a6f7454a8de6014bbeeb3e2e4c6d0c4"
+    },
     {
       "slug": "ai-subscription-token-atlas",
       "title": "AI 订阅与 Token Plan 全景图",
