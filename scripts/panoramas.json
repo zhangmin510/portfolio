@@ -20,16 +20,16 @@
       "slug": "recursive-self-improvement",
       "title": "RSI · 递归自我改进全景图",
       "subtitle": "AI 如何改进自己的改进能力",
-      "description": "沿六个改进层级探索递归自我改进，拆解研究证据、验证闭环与能力增长瓶颈，并动手调节反馈实验。",
+      "description": "沿六个层级探索 RSI，用 Self-Refine、STaR、DGM、STOP 四组逐轮案例观察改动、验证和继承，再动手调节反馈实验。",
       "category": "Agent 与搜索",
       "tags": [
         "RSI",
         "递归自我改进",
-        "研究与实验"
+        "逐轮交互案例"
       ],
       "source": "src/panoramas/recursive-self-improvement.html",
       "updatedAt": "2026-11-13",
-      "sourceSha256": "fbfbec731e240695c4c296287e43bc302a6f7454a8de6014bbeeb3e2e4c6d0c4"
+      "sourceSha256": "2acc494d5b17b0f15c651f06ed020d0ff081c3f3b62502c6b32680de3098158d"
     },
     {
       "slug": "ai-subscription-token-atlas",
