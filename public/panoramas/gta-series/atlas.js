@@ -94,6 +94,7 @@ function showGame(game, revealRow = true) {
       <dl class="record-facts"><dt>舞台</dt><dd>${game.setting}</dd><dt>首发平台</dt><dd>${game.platform}</dd></dl>
     </div>
     <div class="record-body">
+      ${game.id === 'gta6' ? '<a class="guide-entry" href="#gta6-guide">打开 GTA VI 无剧透攻略</a>' : ''}
       <h4 class="record-headline">${game.headline}</h4>
       <p class="record-text">${game.story}</p><p class="record-text">${game.design}</p>
       <a class="record-source" href="${game.source}">${game.sourceName}</a>
@@ -199,3 +200,11 @@ showGame(selected, false);
 showCity('liberty');
 showComparison(0);
 if (location.hash.startsWith('#game-')) openLinkedGame(location.hash);
+
+// The dossier above the guide can change height when a saved page is reloaded.
+window.addEventListener('pageshow', event => {
+  if (event.persisted || location.hash !== '#gta6-guide') return;
+  requestAnimationFrame(() => {
+    if (location.hash === '#gta6-guide') document.querySelector('#gta6-guide').scrollIntoView();
+  });
+});

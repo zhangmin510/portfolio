@@ -111,6 +111,35 @@ h2 { font-size: clamp(2.1rem,3vw,3rem); letter-spacing: -.045em; line-height: 1.
 .record-text { font-size: .96rem; line-height: 1.85; color: #443e3e }
 .record-text + .record-text { margin-top: 7px }
 .record-source { display: inline-block; margin-top: 11px; font-size: .82rem; color: var(--rust) }
+.guide-entry { display: inline-block; margin-bottom: 12px; padding: 6px 13px; border: 1px solid #ac5d3d; border-radius: 3px; font-size: .91rem; font-weight: 700; text-decoration: none; color: #7e3825; background: #ffe5cc }
+.guide-entry:hover, .guide-return:hover { text-decoration: underline }
+.guide-section { padding-block: clamp(32px,4.1vw,60px); border-top: 1px solid var(--line); background: #f0e9dc }
+.guide-section .section-intro { align-items: start }
+.guide-grid { display: grid; grid-template-columns: minmax(0,1.7fr) minmax(260px,.92fr); gap: clamp(22px,4vw,56px); align-items: start }
+.guide-topics { border-top: 2px solid var(--ink) }
+.guide-topics details { border-bottom: 1px solid #c7baab }
+.guide-topics summary, .guide-sources summary { cursor: pointer; font-weight: 700 }
+.guide-topics summary { padding: 14px 4px; line-height: 1.6; font-size: 1.04rem }
+.guide-topics summary::marker, .guide-sources summary::marker { color: var(--rust) }
+.guide-topics details[open] summary { color: #873f2b }
+.guide-answer { padding: 0 5px 18px 22px; font-size: 1rem; line-height: 1.85 }
+.guide-answer ol { margin: 0; padding-left: 1.4em }
+.guide-answer li + li, .guide-answer p + p { margin-top: 8px }
+.guide-answer li::marker { color: #87412d; font-weight: 700 }
+.guide-pocket { min-width: 0; padding: clamp(15px,2vw,26px); color: #fff4e5; background: var(--night); border-top: 4px solid var(--hot); border-radius: 3px }
+.guide-pocket h3 { font-size: 1.35rem }
+.guide-pocket p { margin: 2px 0 15px; color: #d8c8cb; font-size: .86rem }
+.guide-pocket table { width: 100%; border-collapse: collapse; color: #f2e2d9; font-size: .9rem; text-align: left }
+.guide-pocket th, .guide-pocket td { padding: 9px 5px; border-bottom: 1px solid #665363; vertical-align: top }
+.guide-pocket thead th { color: #ffb18e }
+.guide-pocket tbody th { font-weight: 500 }
+.guide-return { display: inline-block; margin-top: 18px; color: #ffb18e; font-size: .91rem }
+.guide-sources { margin-top: 18px; font-size: .87rem; color: var(--muted) }
+@media(max-width: 760px) {
+  .guide-grid { grid-template-columns: 1fr; gap: 20px }
+  .guide-section .section-intro { flex-direction: column; gap: 10px }
+  .guide-answer { padding-left: 5px }
+}
 .dossier-nav { border-top: 1px solid var(--line); padding: 7px 18px }
 .dossier-nav button { padding: 7px 8px; background: transparent; border: none; font-size: .86rem; font-weight: 700 }
 .dossier-nav button:hover:enabled { color: var(--rust); text-decoration: underline }

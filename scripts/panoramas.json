@@ -52,16 +52,17 @@
       "slug": "gta-series",
       "title": "GTA 系列全景图",
       "subtitle": "从俯视街区到开放世界",
-      "description": "沿发行年表浏览 Grand Theft Auto 系列，追踪自由城、罪城与洛圣都在不同作品中的面貌，看视角、叙事和在线玩法如何演变。",
+      "description": "沿发行年表与城市谱系回看 Grand Theft Auto 的玩法演变，还可查阅 GTA VI 的无剧透攻略、双主角操作和手柄速查表。",
       "category": "游戏与文化",
       "tags": [
         "GTA",
         "侠盗猎车手",
+        "GTA VI 无剧透攻略",
         "开放世界"
       ],
       "source": "src/panoramas/gta-series.html",
       "updatedAt": "2026-11-20",
-      "sourceSha256": "a0476d7027d10d0afef2237e06aaa3c3e9dc30770bbd6e0b0ee3641e3647c4e0"
+      "sourceSha256": "f3c49e157603407d88bd459167eba4416723d03e86a65458d9b72dcb451716de"
     },
     {
       "slug": "recursive-self-improvement",
