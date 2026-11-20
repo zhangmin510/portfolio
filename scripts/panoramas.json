@@ -17,6 +17,22 @@
   ],
   "pages": [
     {
+      "slug": "deepseek-harness",
+      "title": "DeepSeek Harness 全景图",
+      "subtitle": "从一次文件读取看懂智能体运行时",
+      "description": "沿六个节点跟踪模型请求与工具调用，探索五种使用场景、四个公开案例，以及插件生态和六款热门社区插件。",
+      "category": "Agent 与搜索",
+      "tags": [
+        "DeepSeek",
+        "Harness",
+        "Cordis",
+        "插件"
+      ],
+      "source": "src/panoramas/deepseek-harness.html",
+      "updatedAt": "2026-11-20",
+      "sourceSha256": "92100c39e33e5d885490371982eb2418f4e69f41c4dda727bcd58e32ba33f067"
+    },
+    {
       "slug": "model-benchmark-atlas",
       "title": "大模型评测图鉴",
       "subtitle": "三家厂商 · 三年官方 Benchmark",

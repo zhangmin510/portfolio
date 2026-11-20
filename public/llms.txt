@@ -12,6 +12,8 @@
 
 ## Selected projects
 
+- An interactive Chinese field guide to the DeepSeek Harness runtime, workflows, public cases and plugin ecosystem. [DeepSeek Harness Atlas](https://zhangmin.name/panoramas/deepseek-harness/)
+
 - A Chinese reference to benchmarks reported by OpenAI, Anthropic and Google across three years, with examples, metrics, methods and linked model results. [Benchmark Atlas](https://zhangmin.name/panoramas/model-benchmark-atlas/)
 
 - A Chinese interactive guide to twelve Mac mini workflows across six settings, including desktop work, home servers, and local AI. [Mac mini use cases](https://zhangmin.name/panoramas/mac-mini-use-cases/)

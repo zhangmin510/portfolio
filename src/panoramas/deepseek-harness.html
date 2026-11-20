@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="zh-CN" class="theme-light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DeepSeek Harness 全景图 · 架构、场景与插件</title>
+<meta name="description" content="从一次读取 README 的请求理解 DeepSeek Harness 如何调用模型和工具，探索五个使用场景、四个公开案例、插件生态与社区热门插件。"><meta property="og:title" content="DeepSeek Harness 全景图"><meta property="og:description" content="从一次读取 README 的请求理解 DeepSeek Harness 如何调用模型和工具，探索五个使用场景、四个公开案例、插件生态与社区热门插件。">
+<link rel="canonical" href="https://zhangmin.name/panoramas/deepseek-harness/"><link rel="icon" href="/favicon-32.png">
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
+<style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { interpolate-size: allow-keywords; } /* Enable smooth height:auto transitions (Chrome 129+) */
+
+    /* ===== THEMES (class-based ONLY — no @media prefers-color-scheme) ===== */
+    html.theme-dark {
+      --bg: #0A0A0A; --surface: #141414; --surface-hover: #1C1C1C;
+      --border: rgba(255,255,255,0.04);
+      --text: #EDEDED; --text-secondary: #888;
+      --accent: #3b82f6; --accent-secondary: #8b5cf6;
+      --positive: #10b981; --negative: #f43f5e; --warning: #f59e0b;
+    }
+    html.theme-light {
+      --bg: #FAFAF9; --surface: #FFFFFF; --surface-hover: #F5F5F4;
+      --border: rgba(0,0,0,0.06);
+      --text: #0f172a; --text-secondary: #64748b;
+      --accent: #2563eb; --accent-secondary: #7c3aed;
+      --positive: #059669; --negative: #e11d48; --warning: #d97706;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+      letter-spacing: -0.01em; font-feature-settings: 'cv11', 'ss01';
+      transition: background 0.3s, color 0.3s;
+      scrollbar-gutter: stable;
+    }
+    h1,h2,h3,h4,h5,h6 {
+      color: var(--text);
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      text-wrap: balance;
+    }
+    h1 { font-weight: 700; }
+    h2 { font-weight: 600; }
+    body, p, li, td, th, span, label { font-weight: 400; }
+    p,li,td,th,span,label { color: var(--text); }
+    .text-secondary { color: var(--text-secondary); }
+
+    /* ===== CARD ===== */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 24px;
+      transition: box-shadow 0.2s ease;
+    }
+    .card:hover {
+      box-shadow: 0 0 0 1px var(--border), 0 8px 16px rgba(0,0,0,0.08);
+    }
+
+    /* ===== ANIMATIONS (CSS-first — always reliable) ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .animate { animation: fadeInUp 0.6s ease-out both; }
+    .animate.delay-1 { animation-delay: 0.1s; }
+    .animate.delay-2 { animation-delay: 0.2s; }
+    .animate.delay-3 { animation-delay: 0.3s; }
+    .animate.delay-4 { animation-delay: 0.4s; }
+    .animate.delay-5 { animation-delay: 0.5s; }
+    .animate.delay-6 { animation-delay: 0.6s; }
+
+    /* Scroll-triggered: JS adds .reveal, then .visible on scroll */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      body { background: white !important; color: black !important; }
+      .viz-menu, .reveal { display: revert; opacity: 1 !important; transform: none !important; }
+      .card { break-inside: avoid; border: 1px solid #ddd; box-shadow: none; }
+      * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
+    @page { margin: 1in; @bottom-center { content: "Page " counter(page); font-size: 9pt; color: #666; } }
+
+    /* ===== MENU ===== */
+    .viz-menu { position: fixed; top: 16px; right: 16px; z-index: 9999; }
+    .viz-menu-toggle {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(12px); transition: all 0.2s;
+    }
+    .viz-menu-toggle:hover { background: var(--surface-hover); }
+    .viz-menu-dropdown {
+      position: absolute; top: 52px; right: 0; min-width: 200px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 8px;
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: all 0.2s; backdrop-filter: blur(16px);
+    }
+    .viz-menu-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .viz-menu-dropdown button {
+      width: 100%; padding: 10px 14px; border: none; border-radius: 8px;
+      background: transparent; color: var(--text); font-size: 14px;
+      font-family: inherit; cursor: pointer; text-align: left;
+      display: flex; align-items: center; gap: 10px; transition: background 0.15s;
+    }
+    .viz-menu-dropdown button:hover { background: var(--surface-hover); }
+
+    /* ===== SKIP TO CONTENT (accessibility) ===== */
+    .skip-to-content {
+      position: absolute; top: -40px; left: 6px; background: var(--accent);
+      color: white; padding: 8px 12px; text-decoration: none;
+      border-radius: 4px; opacity: 0; pointer-events: none;
+      transition: all 0.2s; z-index: 10000;
+    }
+    .skip-to-content:focus { top: 6px; opacity: 1; pointer-events: auto; }
+
+
+  html.theme-light {
+  --bg:#f7f7f1;--surface:#fffef8;--surface-hover:#eef2f8;--border:#c4ced5;
+  --text:#142641;--text-secondary:#495e73;--accent:#1b50a3;--accent-secondary:#ab4d22;
+  --positive:#28755a;--negative:#b2393b;--warning:#a86620;
+}
+html.theme-dark {
+  --bg:#101b2a;--surface:#162438;--surface-hover:#213449;--border:#425369;
+  --text:#e4edf5;--text-secondary:#b6c6d5;--accent:#98befb;--accent-secondary:#ffb784;
+  --positive:#93d5a6;--negative:#f29c98;--warning:#edc38b;
+}
+:root {scroll-behavior:smooth;scroll-padding-top:112px}
+body {font-family:"Helvetica Neue","PingFang SC","Microsoft YaHei",system-ui,sans-serif;line-height:1.7}
+main {max-width:1296px;padding:0 clamp(18px,4vw,64px);margin:0 auto}
+p {margin:0} a {color:var(--accent);text-underline-offset:4px}
+button {font:inherit;cursor:pointer;color:var(--text)}
+:focus-visible {outline:3px solid var(--accent-secondary);outline-offset:3px}
+main h1,main h2,main h3 {letter-spacing:-.045em;line-height:1.19}
+.mono,.kicker,.eyeline,.figure-caption, .node small,.step-count,.star,.folio,code {font-family:"SFMono-Regular",Consolas,"Liberation Mono","PingFang SC",monospace}
+.mast {display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);min-height:64px;font-size:12px;color:var(--text-secondary);letter-spacing:.04em}
+.brand {display:flex;gap:12px;align-items:center;font-weight:700;letter-spacing:.065em}
+.emblem {display:grid;width:26px;height:26px;grid-template-columns:repeat(3,1fr);gap:2px;transform:skewY(-9deg)}
+.emblem i {background:var(--accent)}.emblem i:nth-child(3){background:var(--accent-secondary)}
+.issue {margin-left:auto;margin-right:16px}
+body .mast .viz-menu {position:relative;top:auto;right:auto;z-index:10}
+.viz-menu-toggle {border-radius:50%;width:36px;height:36px;background:transparent;color:var(--text)}
+.viz-menu-dropdown {top:42px;box-shadow:0 8px 28px #10284c28}
+.hero {display:grid;grid-template-columns:0.97fr 1.14fr;gap:clamp(25px,4vw,76px);align-items:center;padding:clamp(35px,4.2vw,68px) 0}
+.eyeline,.kicker {font-size:12px;letter-spacing:.09em;color:var(--accent);font-weight:650}
+.eyeline {display:flex;gap:10px;align-items:center}.eyeline::before {content:"";background:var(--accent-secondary);width:9px;height:9px;border-radius:50%}
+.hero h1 {font-size:clamp(55px,6.9vw,100px);line-height:.93;font-weight:750;letter-spacing:-.067em;margin:20px 0 18px}
+.hero .zh-title {font-size:clamp(23px,2.3vw,36px);font-weight:680;letter-spacing:.065em;display:block;line-height:1.3;margin-top:15px}
+.dek {max-width:31em;color:var(--text-secondary);font-size:16px;line-height:1.8}
+.hero-actions {display:flex;gap:18px;align-items:center;margin-top:23px;font-size:14px;font-weight:630}
+.hero-actions a {text-decoration:none}.primary {background:var(--text);color:var(--bg);padding:9px 15px;border-radius:3px}.primary:hover {background:var(--accent)}
+.plate {background:#132b57;overflow:hidden;border:1px solid #203e65;border-radius:4px;box-shadow:5px 5px 0 var(--border)}
+.plate svg {display:block;width:100%;height:auto}
+.figure-caption {display:flex;justify-content:space-between;gap:12px;margin-top:11px;color:var(--text-secondary);font-size:11px;letter-spacing:.035em}
+.index-nav {position:sticky;top:44px;z-index:5;display:flex;align-items:center;gap:clamp(12px,3vw,48px);border-block:1px solid var(--border);background:var(--bg);padding:0 3px}
+.index-nav a {display:block;padding:14px 0;color:var(--text-secondary);text-decoration:none;font-size:14px;white-space:nowrap;font-weight:600}
+.index-nav a[aria-current],.index-nav a:hover {color:var(--accent);box-shadow:inset 0 -3px var(--accent)}
+main>section:not(.hero){padding:58px 0;border-bottom:1px solid var(--border)}
+.section-head {margin-bottom:24px}
+.section-head h2 {font-size:clamp(29px,3vw,43px);margin:8px 0 10px}
+.section-head>p:last-child {color:var(--text-secondary);max-width:58em}
+.arch-grid {display:grid;grid-template-columns:1.05fr 1fr;gap:0;border:1px solid var(--border);border-radius:5px;overflow:hidden}
+.trace {display:flex;flex-direction:column;justify-content:center;gap:19px;padding:28px;background-color:var(--surface-hover);background-image:radial-gradient(var(--border) .9px, transparent 1px);background-size:12px 12px;min-width:0}
+.trace-name {display:flex;gap:8px;align-items:center;font-size:12px;color:var(--text-secondary);font-weight:600}
+.trace-name::before{content:"";width:19px;border-top:2px solid var(--accent-secondary)}
+.nodes {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 20px;list-style:none;isolation:isolate}
+.node {position:relative;min-width:0;padding:13px 7px 12px;text-align:left;border:1px solid var(--border);border-radius:4px;background:var(--surface);line-height:1.4}
+.node strong,.node small {display:block}.node strong {font-size:15px}.node small {font-size:10px;color:var(--text-secondary);margin-top:4px}
+.node:nth-child(4){grid-area:2/3}.node:nth-child(5){grid-area:2/2}.node:nth-child(6){grid-area:2/1}
+.node:not(:last-child)::after {content:"→";position:absolute;left:100%;width:21px;top:50%;transform:translateY(-50%);text-align:center;color:var(--text-secondary)}
+.node:nth-child(3)::after {content:"↓";left:50%;top:100%;height:23px;transform:translateX(-50%)}
+.node:nth-child(4)::after,.node:nth-child(5)::after {content:"←";left:auto;right:100%}
+.node[aria-pressed="true"] {background:var(--accent);border-color:var(--accent);color:var(--bg);box-shadow:2px 3px 0 var(--border)}
+.node[aria-pressed="true"] small {color:var(--bg)}
+.trace-foot {font-size:12px;color:var(--text-secondary)}
+.node-reader {background:var(--surface);padding:26px 30px;display:flex;flex-direction:column;justify-content:space-between}
+.node-reader h3 {font-size:24px;margin:9px 0}.node-reader article>p {font-size:15px;color:var(--text-secondary)}
+.node-reader blockquote {margin:14px 0 9px;background:var(--surface-hover);border-left:3px solid var(--accent-secondary);padding:9px 13px;font-size:14px}
+.step-count {color:var(--accent);font-size:12px;letter-spacing:.08em}
+.source,.assembly-source {font-size:13px;line-height:1.6;color:var(--text-secondary)}
+.controls {display:flex;justify-content:space-between;align-items:center;margin-top:13px}
+.controls button {background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:5px 14px;font-size:13px;line-height:1.7}
+.controls button:disabled {opacity:.45;cursor:default}
+.assembly {margin-top:25px}.assembly h3 {font-size:22px}.assembly-steps,.eco-grid,.case-grid {display:grid;gap:16px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.assembly-steps {list-style:none;gap:24px;margin:18px 0 10px}
+.assembly-steps li {border-top:2px solid var(--border);padding-top:11px}.assembly-steps p,.case-grid article>p:not(.kicker),.eco-grid article>p:not(.kicker),.plugin-list article p:not(.kicker) {font-size:15px;color:var(--text-secondary)}
+.field-list {border-top:1px solid var(--border)}.field-list details {border-bottom:1px solid var(--border);overflow:visible}
+.field-list summary {display:flex;align-items:center;justify-content:space-between;padding:14px 0;font-size:19px;font-weight:640;gap:12px;list-style:none}
+.field-list summary::after {content:"+";color:var(--accent);font-size:20px;font-family:monospace}
+.field-list details[open] summary::after {content:"−"}.field-list details[open] summary {color:var(--accent)}
+.field-list p {font-size:15px;color:var(--text-secondary);margin:0 0 10px}.field-list details p:last-child {margin-bottom:22px}
+.field-list p strong {color:var(--text)}
+.field-list+.source,.eco-grid+.source,.plugin-list+.source {margin-top:14px}
+.case-grid {grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.case-grid article,.eco-grid article {border:1px solid var(--border);border-radius:4px;padding:18px;background:var(--surface);display:flex;flex-direction:column;align-items:flex-start}
+.case-grid h3,.eco-grid h3,.plugin-list h3 {font-size:21px;margin:8px 0 10px;overflow-wrap:anywhere}
+.case-grid .source,.eco-grid .source {margin-top:auto;padding-top:12px}.case-art {width:calc(100% + 36px);margin:-18px -18px 16px;background:#e3ebf5;display:block;height:98px}
+.eco-grid {margin-bottom:22px}
+.plugin-list {border-top:2px solid var(--text)}.plugin-list article {padding:15px 0;border-bottom:1px solid var(--border);position:relative}
+.plugin-list .star {display:inline-block;color:var(--accent-secondary);font-size:15px;font-weight:bold}
+.plugin-list article h3 {margin:4px 0}.plugin-list a {overflow-wrap:anywhere}
+footer {padding:28px 0;display:flex;justify-content:space-between;font-size:13px;color:var(--text-secondary)}
+[hidden]{display:none!important}
+@media(max-width:980px){.case-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.trace{padding:18px}.node-reader{padding:22px}.eco-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:730px){.mast{min-height:54px}.hero{grid-template-columns:1fr;gap:28px}.hero h1 br{display:none}.hero h1{font-size:clamp(47px,10vw,72px);line-height:1}.hero h1 span.word{display:block}.hero .zh-title{margin-top:14px}.hero figure{width:100%;max-width:650px}.index-nav{justify-content:space-between;gap:6px}.index-nav a{font-size:13px}.arch-grid{grid-template-columns:1fr}.assembly-steps{grid-template-columns:1fr;gap:14px}.trace{gap:12px;padding:20px}.node{padding:10px}.node-reader{border-top:1px solid var(--border)}main>section:not(.hero){padding:44px 0}.issue{font-size:10px;margin-right:8px}}
+@media(max-width:470px){.brand{font-size:10px;gap:8px}.issue{font-size:9px}.case-grid,.eco-grid{grid-template-columns:1fr}.trace{padding:13px}.node{padding:11px 5px}.node strong{font-size:14px}.node small{font-size:9px}.index-nav a{font-size:12px}.index-nav{gap:3px}.node-reader{padding:19px}.hero-actions{margin-top:16px}.case-art{height:87px}.issue span{display:none}.hero-actions a{font-size:13px}.nodes{gap:19px 16px}.node:not(:last-child)::after{width:17px}}
+@media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}}
+@media print{.viz-menu,.index-nav,.hero-actions,.controls,footer a{display:none!important}.hero{grid-template-columns:1fr 1fr}.arch-grid,.node-reader{display:block}.trace{display:none}.node-reader article[hidden]{display:block!important}.node-reader article{margin-bottom:14px}.field-list details::details-content{display:block;block-size:auto;content-visibility:visible}.case-grid,.eco-grid{grid-template-columns:1fr 1fr}.case-grid article,.eco-grid article{break-inside:avoid}.case-art{height:65px}}
+.eco-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.eco-install {border:1px solid var(--border);border-radius:4px;background:var(--surface);padding:13px 16px}
+.eco-install summary {cursor:pointer;color:var(--accent);font-weight:630}
+.eco-install ol {padding-left:20px;margin:13px 0}.eco-install li {margin-bottom:6px;overflow-wrap:anywhere}
+.plugin-list article {display:grid;grid-template-columns:minmax(118px,1fr) minmax(90px,.53fr) minmax(200px,1.75fr) 76px;grid-template-rows:auto auto;gap:0 20px;align-items:center}
+.plugin-list .kicker {grid-area:1/1}.plugin-list article h3 {grid-area:2/1;margin:0}
+.plugin-list .star {grid-area:1/2/3/3;font-size:14px}.plugin-list .star::after {content:"";display:block;margin-top:4px;width:var(--fraction);height:3px;background:currentColor}
+.plugin-list article p {grid-area:1/3/3/4}.plugin-list .source {grid-area:1/4/3/5}
+@media(max-width:960px){.eco-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:730px){.plugin-list article{grid-template-columns:1fr auto;gap:4px 8px}.plugin-list .star{grid-area:1/2/3/3}.plugin-list article p{grid-area:3/1/4/3}.plugin-list .source{grid-area:4/1/5/3}}
+@media(max-width:470px){.eco-grid{grid-template-columns:1fr}}
+body:has(>.portfolio-navigation[data-placement="page"]) .mast .viz-menu {top:auto}
+</style></head><body><a class="skip-to-content" href="#architecture">跳至系统架构</a><main id="main-content">
+<header class="mast"><div class="brand"><span class="emblem" aria-hidden="true"><i></i><i></i><i></i></span>智能体系统图谱 <span class="folio" lang="en">/ FIELD ATLAS</span></div><div class="issue mono"><span>资料核对 · </span><time datetime="2026-11-20">2026.11.20</time></div>
+  <div class="viz-menu">
+    <button class="viz-menu-toggle" onclick="toggleMenu()" aria-label="显示与导出" aria-expanded="false" aria-controls="vizMenuDropdown">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/>
+      </svg>
+    </button>
+    <div class="viz-menu-dropdown" id="vizMenuDropdown">
+      <button onclick="cycleTheme()"><span id="themeIcon">🌙</span><span id="themeLabel">切换主题</span></button>
+      <button onclick="downloadImage()"><span>📥</span><span>保存长图 PNG</span></button>
+      <button onclick="window.print()"><span>🖨️</span><span>打印或另存 PDF</span></button>
+    </div>
+  </div>
+
+</header>
+<section class="hero" aria-labelledby="page-title"><div class="animate"><p class="eyeline">系统架构手册 / AGENT SYSTEMS</p>
+<h1 id="page-title">DeepSeek<br> <span class="word">Harness</span><span class="zh-title">全景图</span></h1>
+<p class="dek">模型提出下一步，工具读写工作区，会话记住结果。沿着一次文件读取，看 DeepSeek 如何用插件组装出能动手工作的智能体。</p>
+<div class="hero-actions"><a class="primary" href="#architecture">探索系统架构 ↓</a><a href="https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.2-rc.5">预览版 v0.2.2-rc.5 ↗</a></div></div>
+<figure><div class="plate"><svg role="img" aria-labelledby="diagram-title diagram-desc" viewBox="0 0 580 410" xmlns="http://www.w3.org/2000/svg">
+<title id="diagram-title">DeepSeek Harness 分层示意图</title><desc id="diagram-desc">交互入口位于上层，Agent Loop 在中间协调模型与工具，工具通过运行环境访问工作区。各层由 Cordis 插件装配。</desc>
+<defs><pattern id="mesh" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="0.9" fill="#85a6d4" opacity=".38"/></pattern></defs>
+<rect width="580" height="410" fill="#132b57"/><rect width="580" height="410" fill="url(#mesh)"/>
+<g fill="#aac4e4" font-family="monospace" font-size="11" letter-spacing="1.2"><text x="18" y="24">DSH / RUNTIME</text><text x="562" y="24" text-anchor="end">EXPLODED VIEW</text></g>
+<polyline points="245.0,247.0 245.0,51.0" fill="none" stroke="#6a90bc" stroke-width="1" stroke-dasharray="3 5"/>
+<polyline points="418.9,325.7 418.9,129.7" fill="none" stroke="#6a90bc" stroke-width="1" stroke-dasharray="3 5"/>
+<polyline points="142.0,313.0 142.0,117.0" fill="none" stroke="#6a90bc" stroke-width="1" stroke-dasharray="3 5"/>
+<polyline points="315.9,391.7 315.9,195.7" fill="none" stroke="#6a90bc" stroke-width="1" stroke-dasharray="3 5"/>
+<polygon points="142.0,302.0 315.9,380.7 315.9,391.7 142.0,313.0" fill="#16396d" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="418.9,314.7 315.9,380.7 315.9,391.7 418.9,325.7" fill="#426ca2" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="245.0,236.0 418.9,314.7 315.9,380.7 142.0,302.0" fill="#244a86" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="165.9,295.2 184.0,303.3 184.0,307.3 165.9,299.2" fill="#264773" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="212.0,285.3 184.0,303.3 184.0,307.3 212.0,289.3" fill="#465f91" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="194.0,277.2 212.0,285.3 184.0,303.3 165.9,295.2" fill="#5c8fd2" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="196.3,278.7 207.3,271.7 218.6,271.7 231.9,263.2" fill="none" stroke="#8db3dc" stroke-width="1" stroke-dasharray=""/>
+<polygon points="191.6,306.8 209.6,314.9 209.6,318.9 191.6,310.8" fill="#264773" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="237.7,296.9 209.6,314.9 209.6,318.9 237.7,300.9" fill="#465f91" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="219.7,288.8 237.7,296.9 209.6,314.9 191.6,306.8" fill="#5c8fd2" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="222.0,290.3 232.9,283.3 244.2,283.3 257.5,274.8" fill="none" stroke="#8db3dc" stroke-width="1" stroke-dasharray=""/>
+<polygon points="217.2,318.4 235.3,326.6 235.3,330.6 217.2,322.4" fill="#264773" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="263.4,308.6 235.3,326.6 235.3,330.6 263.4,312.6" fill="#465f91" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="245.3,300.4 263.4,308.6 235.3,326.6 217.2,318.4" fill="#5c8fd2" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="247.6,301.9 258.6,294.9 269.9,294.9 283.2,286.4" fill="none" stroke="#8db3dc" stroke-width="1" stroke-dasharray=""/>
+<polygon points="242.9,330.0 260.9,338.2 260.9,342.2 242.9,334.0" fill="#264773" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="289.0,320.2 260.9,338.2 260.9,342.2 289.0,324.2" fill="#465f91" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="271.0,312.0 289.0,320.2 260.9,338.2 242.9,330.0" fill="#5c8fd2" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="273.3,313.5 284.2,306.5 295.5,306.5 308.8,298.0" fill="none" stroke="#8db3dc" stroke-width="1" stroke-dasharray=""/>
+<polygon points="268.5,341.6 286.6,349.8 286.6,353.8 268.5,345.6" fill="#264773" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="314.6,331.8 286.6,349.8 286.6,353.8 314.6,335.8" fill="#465f91" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="296.6,323.6 314.6,331.8 286.6,349.8 268.5,341.6" fill="#5c8fd2" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="298.9,325.1 309.9,318.1 321.2,318.1 334.4,309.6" fill="none" stroke="#8db3dc" stroke-width="1" stroke-dasharray=""/>
+<polygon points="294.2,353.2 312.2,361.4 312.2,365.4 294.2,357.2" fill="#264773" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="340.3,343.4 312.2,361.4 312.2,365.4 340.3,347.4" fill="#465f91" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="322.2,335.2 340.3,343.4 312.2,361.4 294.2,353.2" fill="#5c8fd2" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="324.6,336.7 335.5,329.7 346.8,329.7 360.1,321.2" fill="none" stroke="#8db3dc" stroke-width="1" stroke-dasharray=""/>
+<polyline points="243.2,244.4 226.1,255.4 227.1,261.0 216.2,268.0" fill="none" stroke="#7a9bc7" stroke-width="1" stroke-dasharray=""/>
+<polyline points="246.1,245.7 228.9,256.7 229.9,262.3 219.0,269.3" fill="none" stroke="#7a9bc7" stroke-width="1" stroke-dasharray=""/>
+<polyline points="248.9,247.0 231.8,258.0 232.8,263.6 221.9,270.6" fill="none" stroke="#7a9bc7" stroke-width="1" stroke-dasharray=""/>
+<polyline points="251.8,248.3 234.6,259.3 235.7,264.9 224.7,271.9" fill="none" stroke="#7a9bc7" stroke-width="1" stroke-dasharray=""/>
+<polyline points="254.6,249.6 237.5,260.6 238.5,266.2 227.6,273.2" fill="none" stroke="#7a9bc7" stroke-width="1" stroke-dasharray=""/>
+<polyline points="257.5,250.9 240.3,261.9 241.4,267.5 230.4,274.5" fill="none" stroke="#7a9bc7" stroke-width="1" stroke-dasharray=""/>
+<polyline points="260.3,252.2 243.2,263.2 244.2,268.8 233.3,275.8" fill="none" stroke="#7a9bc7" stroke-width="1" stroke-dasharray=""/>
+<polyline points="263.2,253.5 246.0,264.5 247.1,270.1 236.1,277.1" fill="none" stroke="#7a9bc7" stroke-width="1" stroke-dasharray=""/>
+<polyline points="266.0,254.8 248.9,265.8 249.9,271.3 239.0,278.3" fill="none" stroke="#7a9bc7" stroke-width="1" stroke-dasharray=""/>
+<polyline points="268.9,256.1 251.7,267.1 252.8,272.6 241.8,279.6" fill="none" stroke="#7a9bc7" stroke-width="1" stroke-dasharray=""/>
+<polyline points="271.7,257.3 254.6,268.3 255.6,273.9 244.7,280.9" fill="none" stroke="#7a9bc7" stroke-width="1" stroke-dasharray=""/>
+<polyline points="274.6,258.6 257.4,269.6 258.4,275.2 247.5,282.2" fill="none" stroke="#7a9bc7" stroke-width="1" stroke-dasharray=""/>
+<polygon points="277.6,288.1 311.8,303.6 311.8,309.6 277.6,294.1" fill="#264773" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="339.9,285.6 311.8,303.6 311.8,309.6 339.9,291.6" fill="#465f91" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="305.7,270.1 339.9,285.6 311.8,303.6 277.6,288.1" fill="#5c8fd2" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="323.2,308.8 357.4,324.2 357.4,330.2 323.2,314.8" fill="#264773" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="385.5,306.2 357.4,324.2 357.4,330.2 385.5,312.2" fill="#465f91" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="351.3,290.8 385.5,306.2 357.4,324.2 323.2,308.8" fill="#5c8fd2" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="142.0,224.0 315.9,302.7 315.9,313.7 142.0,235.0" fill="#20487f" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="418.9,236.7 315.9,302.7 315.9,313.7 418.9,247.7" fill="#5684b5" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="245.0,158.0 418.9,236.7 315.9,302.7 142.0,224.0" fill="#2e62a2" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="231.0,171.2 250.0,179.8 253.6,184.8 269.7,192.1" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="348.8,224.5 363.1,230.9 379.9,232.6 399.9,241.6" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="225.6,174.7 244.6,183.2 248.1,188.3 264.2,195.6" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="343.4,228.0 357.6,234.4 374.5,236.1 394.4,245.1" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="220.1,178.2 239.1,186.8 242.6,191.8 258.8,199.1" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="337.9,231.5 352.2,237.9 369.0,239.6 389.0,248.6" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="214.7,181.7 233.7,190.2 237.2,195.3 253.3,202.6" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="332.4,235.0 346.7,241.4 363.6,243.1 383.5,252.1" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="209.2,185.2 228.2,193.8 231.7,198.8 247.9,206.1" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="327.0,238.5 341.2,244.9 358.1,246.6 378.0,255.6" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="203.7,188.7 222.7,197.2 226.3,202.3 242.4,209.6" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="321.5,242.0 335.8,248.4 352.6,250.1 372.6,259.1" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="198.3,192.2 217.3,200.8 220.8,205.8 237.0,213.1" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="316.1,245.5 330.3,251.9 347.2,253.6 367.1,262.6" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="192.8,195.6 211.8,204.2 215.3,209.3 231.5,216.6" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="310.6,249.0 324.9,255.4 341.7,257.1 361.7,266.1" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="187.3,199.1 206.3,207.8 209.9,212.8 226.0,220.1" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="305.1,252.5 319.4,258.9 336.3,260.6 356.2,269.6" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="181.9,202.6 200.9,211.2 204.4,216.3 220.6,223.6" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="299.7,256.0 313.9,262.4 330.8,264.1 350.8,273.1" fill="none" stroke="#a3c7ea" stroke-width="1" stroke-dasharray=""/>
+<polyline points="296.5,186.3 276.3,199.3" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="227.1,230.8 206.8,243.8" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="301.3,188.4 281.0,201.4" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="231.9,232.9 211.6,245.9" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="306.0,190.6 285.8,203.6" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="236.6,235.1 216.3,248.1" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="310.8,192.8 290.5,205.8" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="241.4,237.2 221.1,250.2" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="315.5,194.9 295.3,207.9" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="246.1,239.4 225.8,252.4" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="320.3,197.1 300.0,210.1" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="250.9,241.6 230.6,254.6" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="325.0,199.2 304.8,212.2" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="255.6,243.7 235.3,256.7" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="329.8,201.4 309.5,214.4" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="260.4,245.9 240.1,258.9" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="334.5,203.5 314.3,216.5" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="265.1,248.0 244.8,261.0" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="339.3,205.6 319.0,218.6" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="269.9,250.1 249.6,263.1" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="344.0,207.8 323.8,220.8" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="274.6,252.3 254.3,265.3" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="348.8,209.9 328.5,222.9" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polyline points="279.4,254.4 259.1,267.4" fill="none" stroke="#92b6da" stroke-width="1" stroke-dasharray=""/>
+<polygon points="214.3,218.6 290.3,253.0 290.3,262.0 214.3,227.6" fill="#b76842" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="342.6,219.5 290.3,253.0 290.3,262.0 342.6,228.5" fill="#dc844e" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="266.6,185.1 342.6,219.5 290.3,253.0 214.3,218.6" fill="#fcb57c" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<text transform="matrix(.95 .43 -.78 .50 253.4 221.6)" fill="#56382d" font-size="16" font-weight="bold" font-family="monospace">LOOP</text>
+<polyline points="158.5,227.0 164.2,229.6" fill="none" stroke="#c8e0f8" stroke-width="2" stroke-dasharray=""/>
+<polyline points="178.4,236.1 184.1,238.6" fill="none" stroke="#c8e0f8" stroke-width="2" stroke-dasharray=""/>
+<polyline points="198.4,245.1 204.1,247.7" fill="none" stroke="#c8e0f8" stroke-width="2" stroke-dasharray=""/>
+<polyline points="218.3,254.1 224.0,256.7" fill="none" stroke="#c8e0f8" stroke-width="2" stroke-dasharray=""/>
+<polyline points="238.3,263.1 244.0,265.7" fill="none" stroke="#c8e0f8" stroke-width="2" stroke-dasharray=""/>
+<polyline points="258.2,272.2 263.9,274.8" fill="none" stroke="#c8e0f8" stroke-width="2" stroke-dasharray=""/>
+<polyline points="278.2,281.2 283.9,283.8" fill="none" stroke="#c8e0f8" stroke-width="2" stroke-dasharray=""/>
+<polygon points="142.0,136.0 315.9,214.7 315.9,221.7 142.0,143.0" fill="#49719e" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="418.9,148.7 315.9,214.7 315.9,221.7 418.9,155.7" fill="#5784b2" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="245.0,70.0 418.9,148.7 315.9,214.7 142.0,136.0" fill="#8bb7e0" stroke="#b6dafa" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="246.5,77.4 403.3,148.3 315.1,204.8 158.4,133.9" fill="#d9e8f0" stroke="#a6c4df" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="247.2,80.1 396.4,147.6 384.7,155.1 235.5,87.6" fill="#294d80" stroke="#294d80" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="249.8,83.7 253.6,85.4 250.5,87.4 246.7,85.7" fill="#f2d2a9" stroke="#f2d2a9" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="256.4,86.7 260.2,88.4 257.1,90.4 253.3,88.7" fill="#f2d2a9" stroke="#f2d2a9" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="263.1,89.7 266.9,91.4 263.8,93.4 260.0,91.7" fill="#f2d2a9" stroke="#f2d2a9" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="233.7,91.9 265.0,106.1 202.6,146.1 171.3,131.9" fill="#aac6df" stroke="#a0bbd1" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="233.8,96.0 250.9,103.8" fill="none" stroke="#6085ab" stroke-width="1.7" stroke-dasharray=""/>
+<polyline points="225.2,101.5 242.3,109.3" fill="none" stroke="#6085ab" stroke-width="1.7" stroke-dasharray=""/>
+<polyline points="216.6,107.0 233.7,114.8" fill="none" stroke="#6085ab" stroke-width="1.7" stroke-dasharray=""/>
+<polyline points="208.0,112.5 225.1,120.3" fill="none" stroke="#6085ab" stroke-width="1.7" stroke-dasharray=""/>
+<polyline points="199.4,118.0 216.5,125.8" fill="none" stroke="#6085ab" stroke-width="1.7" stroke-dasharray=""/>
+<polyline points="190.8,123.5 207.9,131.3" fill="none" stroke="#6085ab" stroke-width="1.7" stroke-dasharray=""/>
+<polygon points="269.9,112.4 330.7,139.9 326.8,142.4 265.9,114.9" fill="#7299bb" stroke="#7299bb" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="273.2,125.8 348.2,159.8 344.3,162.3 269.3,128.3" fill="#7299bb" stroke="#7299bb" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="248.0,126.4 325.9,161.6 322.0,164.1 244.1,128.9" fill="#7299bb" stroke="#7299bb" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="241.0,130.9 285.6,151.1 281.7,153.6 237.1,133.4" fill="#7299bb" stroke="#7299bb" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="251.9,147.8 320.3,178.7 316.4,181.2 248.0,150.3" fill="#7299bb" stroke="#7299bb" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="245.0" cy="70.0" r="2.1" fill="#ecf4ff"/>
+<circle cx="418.85" cy="148.69" r="2.1" fill="#ecf4ff"/>
+<circle cx="142.04" cy="136.0" r="2.1" fill="#ecf4ff"/>
+<circle cx="315.89" cy="214.69" r="2.1" fill="#ecf4ff"/>
+<polyline points="344.0,119.0 432.0,79.0 448.0,79.0" fill="none" stroke="#9dbedc" stroke-width="1" stroke-dasharray=""/>
+<circle cx="344" cy="119" r="2.5" fill="#ffd3a7"/><g fill="#e2ecfa"><text x="456" y="83" font-family="system-ui,sans-serif" font-size="14">交互入口</text><text x="456" y="99" font-family="monospace" font-size="9.5" letter-spacing=".8">INTERFACE</text></g>
+<polyline points="374.0,232.0 432.0,192.0 448.0,192.0" fill="none" stroke="#9dbedc" stroke-width="1" stroke-dasharray=""/>
+<circle cx="374" cy="232" r="2.5" fill="#ffd3a7"/><g fill="#e2ecfa"><text x="456" y="196" font-family="system-ui,sans-serif" font-size="14">智能体循环</text><text x="456" y="212" font-family="monospace" font-size="9.5" letter-spacing=".8">AGENT LOOP</text></g>
+<polyline points="382.0,318.0 432.0,299.0 448.0,299.0" fill="none" stroke="#9dbedc" stroke-width="1" stroke-dasharray=""/>
+<circle cx="382" cy="318" r="2.5" fill="#ffd3a7"/><g fill="#e2ecfa"><text x="456" y="303" font-family="system-ui,sans-serif" font-size="14">工具与工作区</text><text x="456" y="319" font-family="monospace" font-size="9.5" letter-spacing=".8">WORKSPACE</text></g>
+<path d="M18 377v12h12m520 0h12v-12" fill="none" stroke="#8daace"/><text x="37" y="389" fill="#b3cce7" font-size="10" font-family="monospace" letter-spacing="1.2">CORDIS PLUGIN RUNTIME</text></svg></div><figcaption class="figure-caption"><span>交互入口、循环与工作区的关系示意</span><span>DSH / FIG. 01</span></figcaption></figure></section>
+<nav class="index-nav" aria-label="图谱章节"><a href="#architecture" aria-current="location">系统架构</a><a href="#scenarios">使用场景</a><a href="#cases">公开案例</a><a href="#ecosystem">插件生态</a><a href="#plugins">热门插件</a></nav><section id="architecture"><div class="section-head"><p class="kicker">运行时 / ARCHITECTURE</p><h2>一次文件读取，怎样走完一轮对话？</h2><p>点选节点，跟踪一句“项目怎么启动”如何变成有文件依据的回答。</p></div>
+<div class="arch-grid"><div class="trace"><p class="trace-name mono">README.md / 示例调用路径</p><div class="nodes"><button class="node" type="button" aria-pressed="true" aria-controls="part-input" data-node="input"><strong>任务入口</strong><small>Workspace</small></button><button class="node" type="button" aria-pressed="false" aria-controls="part-session" data-node="session"><strong>会话日志</strong><small>Session</small></button><button class="node" type="button" aria-pressed="false" aria-controls="part-loop" data-node="loop"><strong>代理循环</strong><small>Agent Loop</small></button><button class="node" type="button" aria-pressed="false" aria-controls="part-model" data-node="model"><strong>模型适配器</strong><small>LLM Adapter</small></button><button class="node" type="button" aria-pressed="false" aria-controls="part-tool" data-node="tool"><strong>工具执行</strong><small>Tool Registry</small></button><button class="node" type="button" aria-pressed="false" aria-controls="part-result" data-node="result"><strong>结果回流</strong><small>Next Step</small></button></div><p class="trace-foot">↺ 工具返回后，循环取出新的会话记录，再次请求模型。</p></div><div class="node-reader"><div id="readout" aria-live="polite"><article id="part-input"><span class="step-count">STEP 01 / 06</span><h3>给工作区一个具体问题</h3><p>桌面端或 Web 界面把用户消息交给当前会话。工作目录给文件工具提供路径起点，同一目录里的不同会话可以分别保留自己的历史。</p><blockquote>用户问“读一下 README.md，告诉我项目用什么命令启动？”</blockquote><a class="source" href="https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.2.2-rc.5/docs/architecture.zh.md">官方架构说明 ↗</a></article><article id="part-session"><span class="step-count">STEP 02 / 06</span><h3>这次提问有一份连续记录</h3><p>会话用追加事件记录交互。运行时从这些事件还原模型能看到的历史，随后加入的工具结果也会成为下一次请求的上下文。</p><blockquote>示例中，提问进入这次会话，稍后读取 README.md 的结果也会记在同一处。</blockquote><a class="source" href="https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.2.2-rc.5/docs/subsystems/session.zh.md">Session 会话机制 ↗</a></article><article id="part-loop"><span class="step-count">STEP 03 / 06</span><h3>准备模型需要的上下文</h3><p>循环领取待处理的输入，组合当前会话的提示、模型选择和可用工具说明。一次用户交互可以包含多次模型请求，每次请求及其工具调用组成一个 step。</p><blockquote>第一步把问题和 read 的参数说明交给模型，此时还没有文件正文。</blockquote><a class="source" href="https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.2.2-rc.5/docs/architecture.zh.md">官方回合流程 ↗</a></article><article id="part-model"><span class="step-count">STEP 04 / 06</span><h3>模型决定是否需要工具</h3><p>适配器把请求交给选定的模型，并将返回的文本或工具调用转成运行时统一的流式消息。需要操作工作区时，模型可以给出工具名和参数。</p><blockquote>模型请求 read，目标路径是 README.md。文件读取在下一环节执行。</blockquote><a class="source" href="https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.2.2-rc.5/docs/subsystems/llm-streaming.zh.md">模型与流式响应 ↗</a></article><article id="part-tool"><span class="step-count">STEP 05 / 06</span><h3>在授权范围内读取文件</h3><p>运行时找到已注册的工具，校验调用，并按当前策略及文件访问范围处理。成功时返回内容。文件不存在或权限不足时，错误也会作为结果返回。</p><blockquote>在这个示例里，read 可以访问工作区内的 README.md，并从文件中读到启动命令 npm run dev。</blockquote><a class="source" href="https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.2.2-rc.5/docs/subsystems/tools.zh.md">工具执行机制 ↗</a></article><article id="part-result"><span class="step-count">STEP 06 / 06</span><h3>用读到的内容完成回答</h3><p>工具结果写进会话，循环据此发起下一次模型请求。模型可以继续调用工具，也可以给出答复。待处理工作清空后，这一回合结束。</p><blockquote>第二次请求有了 README.md 的正文，模型答复“启动命令是 npm run dev”。这是示例项目的命令。</blockquote><a class="source" href="https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.2.2-rc.5/docs/architecture.zh.md">官方回合流程 ↗</a></article></div><div class="controls"><button type="button" id="previous">← 上一步</button><button type="button" id="next">下一步 →</button></div></div></div><section class="assembly" aria-labelledby="assembly-title">
+  <h3 id="assembly-title">启动时，能力如何装进工作区？</h3>
+  <ol class="assembly-steps">
+    <li><strong>Profile 选择运行方式</strong><p>Web 提供浏览器界面，headless 适合执行一次任务，SDK 面向程序调用，ACP 用于协议接入。每份配置都会列出要加载的组合包。</p></li>
+    <li><strong>Bundle 提供一组能力</strong><p>Web、headless、SDK 和 ACP 共用基础包，再加载各自的应用包。极简 SDK 单独组装。用户可以用配置补丁替换或加入插件。</p></li>
+    <li><strong>Cordis 挂载插件树</strong><p>插件向共享上下文注册服务、监听事件，卸载时撤销注册。模型适配器、工具表、会话日志，甚至驱动每一轮任务的循环都可以替换。</p></li>
+  </ol>
+  <p class="assembly-source"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.2.2-rc.5/docs/architecture.zh.md">官方架构文档 ↗</a> · <a href="https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.2.2-rc.5/docs/cordis-primer.zh.md">Cordis 入门 ↗</a></p>
+</section>
+</section><section id="scenarios" aria-labelledby="scenarios-title">
+  <div class="section-head">
+    <p class="kicker">使用场景 / WORKFLOWS</p>
+    <h2 id="scenarios-title">把任务交给 Harness</h2>
+    <p>选一个与你手头工作相近的任务，看看需要准备什么、会用到哪些工具，以及怎样验收结果。</p>
+  </div>
+  <div class="field-list">
+    <details open>
+      <summary>修复仓库里的一处报错</summary>
+      <p><strong>给它什么</strong>　一个可运行的代码仓库、触发错误的输入，以及你期望看到的结果。</p>
+      <p><strong>怎么做</strong>　在标准模式下让它先运行失败用例，再读相关实现、编辑文件并重跑测试。用代码差异视图逐行核对改动。</p>
+      <p><strong>怎样验收</strong>　用相同输入重试。保留代码补丁、测试命令和退出结果，检查相邻功能是否仍能工作。</p>
+    </details>
+    <details>
+      <summary>给销售报表补齐同比和环比</summary>
+      <p><strong>给它什么</strong>　一份至少覆盖十三个月的销售明细，指明按月份还是地区汇总，以及金额单位。</p>
+      <p><strong>怎么做</strong>　先检查日期和缺失值，再分组计算。让它把对比期缺数或分母为零的行单独列出。</p>
+      <p><strong>怎样验收</strong>　打开新工作簿，抽选一个地区，用原始明细复算连续两个月与去年同期的数据。</p>
+    </details>
+    <details>
+      <summary>核对一份技术选型提案</summary>
+      <p><strong>给它什么</strong>　候选项目、必需功能和几项待核实的说法，例如某个版本能否恢复中断的会话。</p>
+      <p><strong>怎么做</strong>　让它搜索上游文档和版本记录，把每项说法对应到具体版本、原文链接及适用条件。</p>
+      <p><strong>怎样验收</strong>　检查对照表里的链接能否支撑结论，遇到文档未说明的功能，保留待验证项。</p>
+    </details>
+    <details>
+      <summary>复盘一次走错方向的工具调用</summary>
+      <p><strong>给它什么</strong>　一个已有会话，以及首次出现偏差的位置，例如读错了同名文件。</p>
+      <p><strong>怎么做</strong>　在 Trajectory 中定位那一轮，依次看当时的上下文、工具参数和返回内容。需要比较另一种做法时，从相关位置分叉。</p>
+      <p><strong>怎样验收</strong>　记下出错的路径与调用次序，再比较两条分支的输出，确认哪一步改变了结果。</p>
+    </details>
+    <details>
+      <summary>在极简环境中比较模型</summary>
+      <p><strong>给它什么</strong>　一组可独立评分的编码任务、初始文件和统一的评分规则。</p>
+      <p><strong>怎么做</strong>　用 Minimal 预设限制工具集，为各任务分配独立的工作区和会话编号，记录模型设置与结果。</p>
+      <p><strong>怎样验收</strong>　按同一规则汇总通过数，抽查失败轨迹，确认两个模型接触到相同的初始文件和工具。</p>
+    </details>
+  </div>
+  <p class="source">场景依据　<a href="https://www.deepseek.com/harness/">官方使用演示</a> · <a href="https://www.deepseek.com/harness/zh/">轨迹与运行模式</a> · <a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/BENCHMARK.md">基准测试说明</a></p>
+</section>
+<section id="cases" aria-labelledby="cases-title">
+  <div class="section-head">
+    <p class="kicker">公开案例 / CASEBOOK</p>
+    <h2 id="cases-title">从一个悬浮时钟，到一间协作仓库</h2>
+    <p>四个有原始记录的实例，分别展示界面扩展、定时触发、团队协作和移动端接入。</p>
+  </div>
+  <div class="case-grid">
+    <article><svg class="case-art" viewBox="0 0 245 98" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#315995" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="78" cy="50" r="27" fill="#fffaf1"/><path d="M78 28v4m0 18 13-10m-13 10-7-7m5-25h6"/><circle cx="78" cy="50" r="2" fill="#c46d39"/><rect x="116" y="35" width="72" height="28" rx="4" fill="#274e85"/><text x="152" y="55" text-anchor="middle" fill="#fff4db" stroke="none" font-family="monospace" font-size="17">25:00</text></g></svg>
+      <p class="kicker">官网演示 · 创造模式</p>
+      <h3>对话生成悬浮番茄钟</h3>
+      <p>用户提出要一个番茄钟。Agent 读取插件开发技能，查询界面插槽，写出插件包并安装。官网演示最后给出了可启动的 25 分钟悬浮计时器。</p>
+      <a class="source" href="https://www.deepseek.com/harness/">查看官网演示 ↗</a>
+    </article>
+    <article><svg class="case-art" viewBox="0 0 245 98" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#315995" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="62" y="20" width="62" height="58" rx="5" fill="#fffaf1"/><path d="M62 36h62m-47-20v11m29-11v11"/><text x="92" y="64" text-anchor="middle" fill="#244779" stroke="none" font-family="monospace" font-size="20">FRI</text><path d="M132 50h16"/><rect x="148" y="35" width="55" height="30" rx="3" fill="#f6c798"/><text x="176" y="55" text-anchor="middle" fill="#503a27" stroke="none" font-family="monospace" font-size="15">17:00</text></g></svg>
+      <p class="kicker">官网演示 · 自动化任务</p>
+      <h3>让周报在周五开始整理</h3>
+      <p>用户约定每周五北京时间 17:00 整理项目记录。Agent 将提示词、时区和重复周期交给 <code>schedule_create</code>，任务面板随即出现一条等待触发的排程。</p>
+      <a class="source" href="https://www.deepseek.com/harness/">查看定时任务演示 ↗</a>
+    </article>
+    <article><svg class="case-art" viewBox="0 0 245 98" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#315995" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M49 59h147M75 58c0-29 20-29 40-29s34 0 40 29"/><g fill="#faf9ef"><circle cx="48" cy="59" r="7"/><circle cx="76" cy="59" r="7"/><circle cx="116" cy="29" r="7"/><circle cx="157" cy="59" r="7"/></g><circle cx="196" cy="59" r="7" fill="#f5be8c"/><text x="114" y="79" fill="#395573" stroke="none" text-anchor="middle" font-family="monospace" font-size="10">WORK ITEM → PR</text></g></svg>
+      <p class="kicker">DeepSeek 团队 · 研究原型</p>
+      <h3>在 GitHub 讨论里交付修复</h3>
+      <p>Super-agent 将单个仓库接入 Harness。获准的用户可以在 GitHub 或飞书提出请求，原型为工作项分配会话和目录，完成后回到原对话回复，例如附上待审查的 PR。</p>
+      <a class="source" href="https://github.com/deepseek-ai/dsh-superagent-prototype">阅读研究原型说明 ↗</a>
+    </article>
+    <article><svg class="case-art" viewBox="0 0 245 98" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#315995" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="45" y="21" width="86" height="50" rx="4" fill="#f8fbfb"/><path d="M45 60h86m-47 11v6m-13 1h31m-40-42h36m-36 8h47m-47 8h24"/><rect x="165" y="15" width="35" height="67" rx="6" fill="#f9d6b5"/><path d="M176 21h12m-11 52h10m-51-29h24m-5-5 5 5-5 5" stroke-dasharray="2 3"/></g></svg>
+      <p class="kicker">社区实作 · 移动端</p>
+      <h3>从手机接着看电脑上的会话</h3>
+      <p>april-jk 的 DSH Mobile Remote 在 Web 界面增加配对入口。作者展示了从 Android 选择工作区、提交任务和查看执行进度的过程，电脑端可查看访问历史并撤销配对。</p>
+      <a class="source" href="https://github.com/deepseek-ai/deepseek-harness/discussions/2520">查看作者演示与测试环境 ↗</a>
+    </article>
+  </div>
+</section>
+<section id="ecosystem" aria-labelledby="eco-title">
+  <div class="section-head">
+    <div><span class="kicker">ECOSYSTEM</span><h2 id="eco-title">插件从哪里来？</h2></div>
+    <p>DeepSeek 维护运行时和插件接口。社区作者发布组合包、整理发现目录，也把同一套能力带到新的客户端。</p>
+  </div>
+  <div class="eco-grid">
+    <article>
+      <span class="kicker">官方运行时</span><h3>DeepSeek Harness</h3>
+      <p>上游项目提供 dsh、内置插件和扩展文档。作者可发布带有 <code>dsh.bundle</code> 声明的包，并标明兼容的宿主版本。</p>
+      <a class="source" href="https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.2.2-rc.5/docs/user/guide/plugin-market.zh.md">官方插件索引规范 ↗</a>
+    </article>
+    <article>
+      <span class="kicker">社区索引</span><h3>Awesome DSH Plugin</h3>
+      <p>按功能查找插件，从目录回到作者仓库核实用途与依赖。这份清单也提供可订阅的 JSON 索引，可直接添加到 Harness。</p>
+      <a class="source" href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin">浏览社区目录 ↗</a>
+    </article>
+    <article>
+      <span class="kicker">社区桌面端</span><h3>DSH Desktop</h3>
+      <p>Anywhere Labs 将上游 Host 和本地 Web 界面集成到 Windows、macOS 与 Linux 桌面应用，提供原生窗口、托盘与终端。</p>
+      <a class="source" href="https://github.com/anywhere-labs/dsh-desktop">桌面项目与下载 ↗</a>
+    </article>
+    <article>
+      <span class="kicker">社区移动端</span><h3>DSH Go</h3>
+      <p>用 Android 手机运行本机引擎，或连接电脑上的 Harness 主机。两种模式提供的附件和插件管理能力有所不同。</p>
+      <a class="source" href="https://github.com/ccch1mneyyy/dsh-Go">移动端与连接方式 ↗</a>
+    </article>
+  </div>
+  <details class="eco-install">
+    <summary>如何把社区索引接入自己的 Harness？</summary>
+    <ol>
+      <li>在目标配置档（profile）的「插件 → 实验性插件」中打开「自定义插件索引」。</li>
+      <li>进入「发现 → 添加索引源」，填入社区清单提供的地址，例如 <code>https://cdn.jsdelivr.net/npm/dsh-plugin-catalog/index.json</code>。</li>
+      <li>搜索插件，查看与当前宿主兼容的版本。点「安装」后核对 npm 包或 Git 提交，再确认安装。完成后在「已安装」查看组合包，按作者说明配置和启用。</li>
+    </ol>
+    <a class="source" href="https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.2.2-rc.5/docs/user/guide/plugin-market.zh.md">查看 0.2.2-rc.5 操作说明 ↗</a>
+  </details>
+</section>
+
+<section id="plugins" aria-labelledby="plugin-title">
+  <div class="section-head">
+    <div><span class="kicker">PLUGIN DIRECTORY</span><h2 id="plugin-title">热门插件</h2></div>
+    <p>从不同用途选出六个受到关注的社区插件。★ 为 2026 年 11 月 20 日查询的 GitHub 仓库星标数，反映社区对仓库的关注程度。</p>
+  </div>
+  <div class="plugin-list">
+    <article>
+      <span class="kicker">发现与管理</span><h3>dsh-market</h3><span class="star" style="--fraction:100.0%" aria-label="13058 个 GitHub 星标">★ 13,058</span>
+      <p>想给 Web 界面增加能力时，在可视化市场里搜索、安装或升级社区插件。其 npm 包名为 <code>dshmarket</code>。</p>
+      <a class="source" href="https://github.com/dsh-market/dsh-market">作者仓库 ↗</a>
+    </article>
+    <article>
+      <span class="kicker">终端交互</span><h3>dsh-TUI</h3><span class="star" style="--fraction:61.4%" aria-label="8023 个 GitHub 星标">★ 8,023</span>
+      <p>在终端中续接会话、查看工具审批、切换侧栏。适合希望把代码变更和模型对话放在同一个命令行工作环境的开发者。</p>
+      <a class="source" href="https://github.com/ccch1mneyyy/dsh-TUI">作者仓库 ↗</a>
+    </article>
+    <article>
+      <span class="kicker">界面与创作</span><h3>dsh-pet</h3><span class="star" style="--fraction:50.5%" aria-label="6588 个 GitHub 星标">★ 6,588</span>
+      <p>在 Harness 界面加入透明动画宠物。可调整大小与位置，也能用自己的视频制作动作素材并替换角色。</p>
+      <a class="source" href="https://github.com/PC2005-cloud/dsh-pet">作者仓库 ↗</a>
+    </article>
+    <article>
+      <span class="kicker">上下文诊断</span><h3>dsh-context</h3><span class="star" style="--fraction:41.0%" aria-label="5350 个 GitHub 星标">★ 5,350</span>
+      <p>长会话逐渐占满上下文时，可查看每轮输入的构成和变化。运行多智能体任务时，还能检查参与者之间的消息。</p>
+      <a class="source" href="https://github.com/bowenliang123/dsh-context">作者仓库 ↗</a>
+    </article>
+    <article>
+      <span class="kicker">消息渠道</span><h3>dsh-im</h3><span class="star" style="--fraction:28.6%" aria-label="3735 个 GitHub 星标">★ 3,735</span>
+      <p>连接飞书、钉钉、Slack 等平台的机器人，把收到的消息送入绑定的工作区和会话，再通过对应渠道返回回复。</p>
+      <a class="source" href="https://github.com/xmanrui/dsh-im">作者仓库 ↗</a>
+    </article>
+    <article>
+      <span class="kicker">三维制作</span><h3>DSH × Blender</h3><span class="star" style="--fraction:17.0%" aria-label="2214 个 GitHub 星标">★ 2,214</span>
+      <p>接入正在运行的 Blender，让智能体查看选中的物体、修改场景并检查渲染帧。交互模式需要在 Blender 中安装配套桥接扩展。</p>
+      <a class="source" href="https://github.com/sixtysevenlf/dsh-blender-plugin">作者仓库 ↗</a>
+    </article>
+  </div>
+</section>
+<footer><span class="mono">DSH / FIELD ATLAS · 2026.11.20</span><a href="#page-title">返回顶部 ↑</a></footer></main><script>
+var nodeButtons = Array.from(document.querySelectorAll('[data-node]'));
+var selected = 0;
+function showStep(index) {
+  selected = index;
+  nodeButtons.forEach(function (button, i) {
+    button.setAttribute('aria-pressed', String(i === index));
+    document.getElementById(button.getAttribute('aria-controls')).hidden = i !== index;
+  });
+  document.getElementById('previous').disabled = index === 0;
+  document.getElementById('next').disabled = index === nodeButtons.length - 1;
+}
+nodeButtons.forEach(function (button, i) {
+  button.addEventListener('click', function () { showStep(i); });
+});
+document.getElementById('previous').onclick = function () { if (selected > 0) showStep(selected - 1); };
+document.getElementById('next').onclick = function () { if (selected < nodeButtons.length - 1) showStep(selected + 1); };
+showStep(0);
+
+var navLinks = Array.from(document.querySelectorAll('.index-nav a'));
+function syncNavigation() {
+  var current = navLinks[0];
+  navLinks.forEach(function (link) {
+    if (document.querySelector(link.hash).getBoundingClientRect().top < 160) current = link;
+  });
+  if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) current = navLinks[navLinks.length - 1];
+  navLinks.forEach(function (link) {
+    if (link === current) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  });
+}
+window.addEventListener('scroll', syncNavigation, {passive:true});
+syncNavigation();
+var toggle = document.querySelector('.viz-menu-toggle');
+var dropdown = document.getElementById('vizMenuDropdown');
+function menuOpen(open) {
+  dropdown.classList.toggle('open', open);
+  toggle.setAttribute('aria-expanded', String(open));
+}
+function toggleMenu() { menuOpen(!dropdown.classList.contains('open')); }
+document.addEventListener('click', function (event) {
+  if (!event.target.closest('.viz-menu')) menuOpen(false);
+});
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'Escape' && dropdown.classList.contains('open')) {menuOpen(false);toggle.focus();}
+});
+function applyTheme(theme) {
+  document.documentElement.className = 'theme-' + theme;
+  document.getElementById('themeLabel').textContent = theme === 'dark' ? '切换到浅色' : '切换到深色';
+  document.getElementById('themeIcon').textContent = theme === 'dark' ? '☀' : '☾';
+}
+function cycleTheme() {
+  var theme = document.documentElement.classList.contains('theme-dark') ? 'light' : 'dark';
+  applyTheme(theme);
+  try {localStorage.setItem('dsh-atlas-theme', theme);} catch {}
+}
+var preference = '';
+try {preference = localStorage.getItem('dsh-atlas-theme');} catch {}
+applyTheme(preference || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'));
+async function downloadImage() {
+  menuOpen(false);
+  var main = document.getElementById('main-content');
+  var blob = await htmlToImage.toBlob(main, {
+    backgroundColor:getComputedStyle(document.body).backgroundColor,
+    pixelRatio:Math.min(2, 11000/main.scrollHeight),
+    filter:function (node) {return !node.classList || !node.classList.contains('viz-menu');}
+  });
+  var link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'DeepSeek-Harness-全景图.png';
+  link.click();
+  setTimeout(function () {URL.revokeObjectURL(link.href);}, 30000);
+}
+
+</script></body></html>
