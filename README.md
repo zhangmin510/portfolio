@@ -9,7 +9,7 @@
 
 - 简洁的单栏终端主页，保留个人介绍、命令输入和轻量导航
 - 首页直接提供十一个网站入口，`sites` / `websites` 命令可查看介绍，`cd sites` 可按目录浏览
-- `panoramas` 命令与全景图入口，连接 25 张独立目录发布的交互图谱
+- `panoramas` 命令与全景图入口，连接 26 张独立目录发布的交互图谱
 - 评测探索局：12 关游戏式知识地图、24 道情境挑战、4 个实验与全书阅读，进度本地保存
 - 全景图目录支持主题筛选、关键词搜索与手机浏览
 - 真实表单驱动的命令行交互，兼容键盘、触屏与屏幕阅读器
@@ -66,11 +66,12 @@ Ctrl+L 清屏，Ctrl+A / E 移动到行首 / 行尾。页面内容以终端输�
 
 ## 全景图目录
 
-内容涵盖模型与训练、Agent 与搜索、评测与可靠性、行业与基础设施、生活与成长、游戏与文化、硬件与桌面，以及市场与产业链。
+内容涵盖模型与训练、Agent 与搜索、评测与可靠性、行业与基础设施、生活与成长、游戏与文化、硬件与桌面、市场与产业链，以及影视与创作。
 以下目录均位于 `/panoramas/` 下，可直接访问或分享。
 
 | 全景图 | 目录链接 |
 | --- | --- |
+| 红果短剧制作全景图 | [hongguo-short-drama/](https://zhangmin.name/panoramas/hongguo-short-drama/) |
 | AI 全产业链上市公司图谱 | [ai-equity-atlas/](https://zhangmin.name/panoramas/ai-equity-atlas/) |
 | AI Infra 交互读本 | [ai-infra-book/](https://zhangmin.name/panoramas/ai-infra-book/) |
 | DeepSeek Harness 全景图 | [deepseek-harness/](https://zhangmin.name/panoramas/deepseek-harness/) |

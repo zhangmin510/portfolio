@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="theme-light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>红果短剧制作全景图 · 片场手册</title>
+  <meta name="description" content="跟着原创案例《底片未取》，从剧本、分镜、拍摄走到版权合作、审核和红果上线。含可下载的全流程长图与制片工作表。">
+  <link rel="canonical" href="https://zhangmin.name/panoramas/hongguo-short-drama/">
+  <meta property="og:title" content="红果短剧制作全景图 · 片场手册">
+  <meta property="og:image" content="https://zhangmin.name/panoramas/hongguo-short-drama/film-set.webp">
+  <script defer src="/panoramas/vendor/html-to-image.js"></script>
+  <style>
+*{box-sizing:border-box}
+html.theme-light{color-scheme:light;--bg:#f6f4ec;--surface:#fffcf5;--surface-hover:#ece9df;--border:#d1cfc3;--text:#242720;--text-secondary:#54584e;--accent:#af3527;--accent-secondary:#475c50;--positive:#3b6650;--negative:#a6342d;--warning:#916224;--wash:#f3e6d9;--ink-wash:#e5e9dd}
+html.theme-dark{color-scheme:dark;--bg:#1d211e;--surface:#262a25;--surface-hover:#32382f;--border:#515749;--text:#f4f0e5;--text-secondary:#c1c5b7;--accent:#ff8975;--accent-secondary:#b7ccbd;--positive:#97c8a3;--negative:#ff9f91;--warning:#e6c38a;--wash:#3c2d27;--ink-wash:#323e33}
+html{scroll-padding-top:62px}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.72 Inter,-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,p,figure,ol,ul,dl,dd{margin:0}button,a,input,summary{touch-action:manipulation}button{font:inherit;color:inherit;cursor:pointer}a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:4px}button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+[hidden]{display:none!important}.frame{width:min(calc(100% - 80px),1180px);margin-inline:auto}.mono,.eyebrow,.kicker,.phase-id,.num,.shot-caption,.progress-info,#progress-count{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,"PingFang SC",monospace;font-variant-numeric:tabular-nums}
+.skip{position:fixed;top:-200px;left:10px;z-index:12000;background:var(--surface);padding:8px 16px}.skip:focus{top:4px}.brand-strip{border-bottom:1px solid var(--border)}.brand-row{display:flex;align-items:center;min-height:63px;gap:25px}.wordmark{display:flex;align-items:center;gap:10px;color:var(--text);font-weight:800;font-size:17px;text-decoration:none;letter-spacing:.06em}.wordmark svg{width:29px;height:29px;color:var(--accent)}
+.page-nav{margin-left:auto;display:flex;gap:24px;align-items:center}.page-nav a,.tool-toggle{font-size:13px;font-weight:650;text-decoration:none;color:var(--text-secondary)}.page-nav a:hover{color:var(--accent)}.tools-wrap{position:relative}.tool-toggle{border:1px solid var(--border);background:transparent;padding:6px 13px;display:flex;align-items:center;gap:6px;border-radius:5px}.tool-toggle svg,.btn svg{width:17px;height:17px}.tools-menu{position:absolute;right:0;top:calc(100% + 6px);padding:5px;min-width:164px;border:1px solid var(--border);background:var(--surface);box-shadow:0 10px 28px #0002;z-index:9;border-radius:6px}.tools-menu button,.tools-menu a{color:var(--text);text-decoration:none;display:block;padding:8px 12px;background:none;border:0;width:100%;text-align:left;font-size:14px}.tools-menu button:hover,.tools-menu a:hover{background:var(--surface-hover)}.sr{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.hero{display:grid;grid-template-columns:.93fr 1.07fr;align-items:center;gap:clamp(28px,4vw,72px);padding-block:clamp(38px,4vw,64px)}.hero-copy{animation:enter .55s both}.eyebrow,.kicker{display:flex;align-items:center;gap:9px;color:var(--accent);font-size:12px;line-height:1.5;font-weight:750;letter-spacing:.08em}.red-line{display:inline-block;width:25px;height:3px;background:var(--accent)}.hero h1{font-size:clamp(57px,5.95vw,90px);line-height:1.08;letter-spacing:-.055em;font-weight:900;margin:16px 0 19px}.hero h1 span{color:var(--accent);display:block}.hero .intro{font-size:clamp(15px,1.22vw,18px);line-height:1.8;color:var(--text-secondary);max-width:28em}.hero-actions{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:25px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:14px;line-height:1.4;min-height:44px;padding:12px 18px;text-decoration:none;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--text)}.btn:hover{box-shadow:0 2px 0 var(--border)}.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}.btn.quiet{background:none;border-color:transparent;padding:9px 0;border-radius:0}.btn.quiet:hover{box-shadow:none;color:var(--accent)}
+.film{margin:0;border:6px solid #262a23;background:#262a23;color:#f2eddf;border-radius:5px;overflow:hidden;box-shadow:3px 4px 0 var(--border);transform:rotate(-.7deg)}.viewfinder{position:relative;overflow:hidden;background:#342d24}.viewfinder img{width:100%;height:auto;display:block;aspect-ratio:1.65;object-fit:cover}.viewfinder:after{content:"";position:absolute;inset:12px;pointer-events:none;background:linear-gradient(#f3f0ddaa 0 0) left top/17px 1px,linear-gradient(#f3f0ddaa 0 0) left top/1px 17px,linear-gradient(#f3f0ddaa 0 0) right bottom/17px 1px,linear-gradient(#f3f0ddaa 0 0) right bottom/1px 17px;background-repeat:no-repeat}.film figcaption{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:5px 5px 0;color:#e0dfcd;font-size:11px;line-height:1.5}.film figcaption b{display:inline-flex;align-items:center;gap:6px;letter-spacing:.08em}.film figcaption b:before{content:"";width:6px;height:6px;border-radius:50%;background:#ef715e}.sec{padding:46px 0 48px;border-top:1px solid var(--border)}h2{font-size:clamp(30px,3.25vw,49px);letter-spacing:-.055em;line-height:1.16}.section-head{display:flex;align-items:flex-end;gap:18px;justify-content:space-between;margin-bottom:24px}.section-head .eyebrow{margin-bottom:8px}.sub{color:var(--text-secondary);margin-top:10px;font-size:15px}.progress-info{min-width:135px;color:var(--text-secondary);font-size:12px;line-height:1.5}.progress-info>div{display:flex;justify-content:space-between;gap:14px;align-items:center}.progress-info strong{color:var(--text);font-size:16px}progress{display:block;width:100%;height:5px;background:var(--border);color:var(--accent);border:0;margin:8px 0 0;appearance:none}progress::-webkit-progress-bar{background:var(--border)}progress::-webkit-progress-value{background:var(--accent)}progress::-moz-progress-bar{background:var(--accent)}
+#map-sheet{background:var(--bg);padding:3px 0}.phase-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.phase{position:relative;border:1px solid var(--border);border-top:3px solid var(--text);border-radius:3px;background:var(--surface);padding:15px 15px 13px}.phase:first-child{border-top-color:var(--accent)}.phase:not(:last-child):after{content:"›";position:absolute;top:35px;right:-13px;width:10px;text-align:center;z-index:1;color:var(--text-secondary);font:19px/1 ui-monospace,monospace}.phase-head{display:flex;align-items:center;gap:11px;margin-bottom:13px}.phase-icon{width:35px;height:35px;border-radius:5px;background:var(--ink-wash);color:var(--accent-secondary);display:grid;place-items:center}.phase:first-child .phase-icon{background:var(--wash);color:var(--accent)}.phase-icon svg{width:22px;height:22px}.phase-id{color:var(--text-secondary);font-size:10px;letter-spacing:.08em;font-weight:700}.phase h3{font-size:20px;line-height:1.32;letter-spacing:-.04em}.step-select{width:100%;display:flex;align-items:center;gap:9px;padding:8px 9px;text-align:left;font-size:14px;font-weight:650;line-height:1.5;border:0;border-radius:3px;background:transparent;min-height:38px}.step-select+.step-select{border-top:1px solid var(--border)}.num{color:var(--text-secondary);font-size:11px;letter-spacing:.04em}.step-select[aria-pressed="true"]{background:var(--wash);color:var(--accent)}.step-select[aria-pressed="true"] .num{color:var(--accent)}.step-select[aria-pressed="true"]:after{content:"↘";margin-left:auto}.step-select.is-done .num:before{content:"✓";color:var(--positive);margin-right:2px}.step-select:hover{background:var(--surface-hover)}
+.reader{margin-top:18px;border:1px solid var(--border);background:var(--surface);border-radius:5px}.step-detail{padding:clamp(20px,3.3vw,42px)}.step-head{margin-bottom:18px}.step-head h3,.case-panel-body h3,.route-panel h3,.release-gates h3,.realcase h3{font-size:clamp(21px,2.2vw,30px);line-height:1.4;letter-spacing:-.035em}.step-head .kicker{margin-bottom:5px}.step-cols{display:grid;grid-template-columns:1.45fr 1fr;gap:36px}.actions{list-style:none;counter-reset:action;padding:0;display:grid;gap:14px}.actions li{position:relative;padding-left:29px;counter-increment:action;color:var(--text-secondary);font-size:15px}.actions li:before{content:counter(action);position:absolute;left:0;top:.25em;font:12px/1.5 ui-monospace,monospace;color:var(--accent);border:1px solid var(--border);width:19px;text-align:center;border-radius:2px}.actions strong,.step-note strong{color:var(--text);display:block}.step-note{padding:18px 21px;background:var(--bg);border-left:3px solid var(--accent-secondary);align-self:start;font-size:14px}.step-note p{margin:4px 0 12px;color:var(--text-secondary)}.step-note a,.route-source a,.realcase a,.release-gates a,.rules-body a{font-weight:650}.step-foot{border-top:1px solid var(--border);padding-top:16px;margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px}.step-foot label{cursor:pointer;display:inline-flex;align-items:center;min-height:40px;gap:8px}.step-foot input{width:18px;height:18px;accent-color:var(--accent)}.step-foot a{text-decoration:none;font-weight:700}
+.case-intro{display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:22px}.case-intro .sub{max-width:32em}.case-meta{display:flex;gap:20px;flex-wrap:wrap;align-items:center;justify-content:flex-end;font-size:13px;color:var(--text-secondary)}.case-meta b{font-size:21px;color:var(--text);line-height:1.25;margin-right:2px}.sequence{margin:22px 0 25px;padding:6px;background:#262a23;border-radius:5px}.sequence img{display:block;width:100%;height:auto;max-height:320px;aspect-ratio:3.4;object-fit:cover}.sequence figcaption{display:flex;gap:12px;justify-content:space-between;font-size:11px;color:#e0dfcd;padding:5px 6px 1px}.choices{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 0}.choices button{padding:8px 16px;min-height:40px;border:1px solid var(--border);border-radius:4px;background:var(--surface);font-size:14px;font-weight:650}.choices button[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}.choices button:hover{border-color:var(--text)}.case-panel-body,.route-panel{background:var(--surface);border:1px solid var(--border);padding:clamp(19px,3vw,36px);border-radius:4px;margin-top:12px}.case-panel-body h3,.route-panel h3{margin-bottom:12px}.case-panel-body .kicker{margin-bottom:5px}.case-panel-body p,.route-panel li,.release-gates li,.realcase p,.rules-body p{color:var(--text-secondary);font-size:15px}.case-panel-body dl{margin:13px 0 15px}.case-panel-body dt{font-weight:750;margin-top:13px}.case-panel-body dd{color:var(--text-secondary);font-size:15px}.case-panel-body .small{font-size:13px;border-top:1px solid var(--border);padding-top:12px;margin-top:14px}.table-wrap{overflow-x:auto}.case-panel-body table{width:100%;border-collapse:collapse;text-align:left;margin:4px 0 10px;font-size:15px}.case-panel-body th{background:var(--surface-hover);font-size:13px}.case-panel-body td,.case-panel-body th{border-bottom:1px solid var(--border);padding:11px;vertical-align:top}.case-panel-body td:first-child{white-space:nowrap;color:var(--accent);font-weight:650}.realcase{margin-top:18px;border-left:4px solid var(--accent-secondary);padding:15px 24px;background:var(--ink-wash)}.realcase h3{font-size:20px}.realcase p{margin-top:7px}.rules{margin:16px 0 0;background:var(--surface);border:1px solid var(--border);border-radius:5px}.rules>summary{cursor:pointer;padding:17px 22px;font-weight:750}.rules>summary::marker{color:var(--accent)}.rules-body{padding:0 22px 20px}.class-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}.class-grid article{background:var(--bg);padding:14px}.class-grid h3{font-size:16px;line-height:1.5}.class-grid p,.rules-body>p{margin-top:9px;font-size:14px}.rules-body strong{color:var(--text)}.route-panel ol,.release-gates ol{margin-top:8px;padding-left:1.35em}.route-panel li,.release-gates li{padding-left:4px;margin:7px 0}.route-panel strong,.release-gates strong{color:var(--text)}.route-source{margin-top:16px;font-size:14px}.release-gates{margin-top:30px}.kit{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 28px;background:var(--ink-wash);border:1px solid var(--border);border-radius:5px;margin:25px 0 0}.kit h3{font-size:23px}.kit .sub{margin-top:2px}.kit a{flex-shrink:0}.foot{border-top:1px solid var(--border);padding:22px 0 32px;font-size:12px;color:var(--text-secondary)}.foot .frame{display:flex;justify-content:space-between;gap:14px}.foot a{color:inherit}
+@keyframes enter{from{opacity:.3;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:900px){.frame{width:calc(100% - 52px)}.hero{gap:27px}.hero h1{font-size:clamp(46px,6.7vw,66px)}.phase-grid{gap:9px}.phase{padding:12px 8px}.phase:not(:last-child):after{right:-9px;width:8px;font-size:14px}.phase-head{gap:6px}.phase-icon{width:29px;height:29px}.phase-icon svg{width:18px}.phase h3{font-size:18px}.step-cols{gap:22px}.class-grid{grid-template-columns:1fr}}
+@media(max-width:680px){.frame{width:calc(100% - 36px)}.brand-row{min-height:52px;gap:10px}.wordmark{font-size:15px;gap:7px}.wordmark svg{width:23px;height:23px}.page-nav{gap:11px}.page-nav a,.tool-toggle{font-size:12px}.page-nav a:first-child{display:none}.tool-toggle{padding:5px 7px}.tool-toggle span{display:none}.hero{grid-template-columns:1fr;gap:25px;padding:27px 0 28px}.hero h1{font-size:clamp(47px,10.3vw,67px);margin:9px 0 13px}.hero .intro{font-size:15px;line-height:1.65}.hero-actions{margin-top:16px}.film{transform:none;border-width:4px}.viewfinder img{aspect-ratio:1.93}.film figcaption{font-size:10px}.sec{padding:31px 0}.section-head{margin-bottom:16px;align-items:center;gap:10px}.progress-info{min-width:84px}.progress-info>div{gap:4px}.progress-info strong{font-size:13px}.progress-info .progress-label{font-size:10px}.sub{font-size:14px}.phase-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.phase{padding:12px 10px}.phase:nth-child(2):after{display:none}.phase:not(:last-child):after{top:26px;right:-10px}.step-select{padding:7px 4px;min-height:39px;font-size:13px;gap:6px}.phase-head{margin-bottom:6px}.step-cols,.case-intro{grid-template-columns:1fr;gap:17px}.case-meta{justify-content:flex-start;gap:16px}.step-foot{flex-wrap:wrap}.step-foot label{min-height:34px}.sequence{margin:16px 0}.sequence img{aspect-ratio:2}.sequence figcaption{font-size:9px}.choices{gap:4px}.choices button{font-size:13px;padding:7px 10px}.case-panel-body table{font-size:13px}.case-panel-body td,.case-panel-body th{padding:7px 4px}.case-panel-body td:first-child{white-space:normal;min-width:45px}.realcase{padding:15px}.kit{align-items:flex-start;flex-direction:column;gap:10px;padding:18px}.foot .frame{flex-wrap:wrap}.class-grid{gap:8px}}
+@media(max-width:375px){.frame{width:calc(100% - 28px)}.page-nav{gap:9px}.brand-row{gap:7px}.phase-icon{display:none}.progress-info{min-width:73px}.intro{max-width:100%}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+@media print{html{color-scheme:light!important}body,main{background:white!important;color:#111!important}.frame{width:100%;max-width:none}.brand-strip,.portfolio-navigation,.hero-actions,.choices,.step-foot,.tools-wrap,.progress-info,.kit .btn,.foot,.section-head .btn{display:none!important}.hero{padding:10px 0;grid-template-columns:1fr 1fr}.hero h1{font-size:40px}.sec{padding:15px 0}.film,.sequence{max-width:450px}.phase-grid{grid-template-columns:repeat(4,1fr)}.step-detail[hidden],article[data-case-panel][hidden],article[data-route-panel][hidden]{display:block!important}.step-detail,.case-panel-body,.route-panel{break-inside:avoid;padding:14px 6px;background:white}.step-cols{gap:10px}.step-detail+.step-detail{border-top:1px solid #ddd}.reader{border:0}.step-note{padding:8px}.section-head,.step-head{break-after:avoid}.class-grid{grid-template-columns:1fr}.step-detail,.case-panel-body,.route-panel,.rules-body{color:black}.case-panel-body .small,.realcase,.kit{break-inside:avoid}a{color:#333}h1,h2,h3,p,li,dt,dd{color:#111!important}}
+
+.kit-links{display:flex;flex-wrap:wrap;gap:8px;flex-shrink:0}#tool-status:not(:empty){padding:4px 10px;font-size:12px;color:var(--text-secondary)}.case-intro .eyebrow{margin-bottom:8px}
+  </style>
+<!-- portfolio-nav:start --><style>
+.portfolio-navigation{box-sizing:border-box;padding:0;border:0;overflow:visible;background:transparent;display:flex;align-items:center;gap:12px;flex-shrink:0;font:12px/1.5 system-ui,sans-serif;color:inherit;isolation:isolate}
+.portfolio-navigation a,.portfolio-navigation summary{box-sizing:border-box;color:inherit;text-decoration:none;font:inherit;cursor:pointer;letter-spacing:normal}
+.portfolio-navigation>a{display:inline-flex;align-items:center;min-height:40px;white-space:nowrap;padding:0 5px}
+.portfolio-navigation a:hover{text-decoration:underline;text-underline-offset:4px}
+.portfolio-navigation :focus-visible{outline:2px solid #41836a;outline-offset:3px}
+.portfolio-navigation details{position:relative;margin:0;padding:0;border:0;background:none}
+.portfolio-navigation summary{display:list-item;min-height:40px;align-content:center;white-space:nowrap;padding:0 5px}
+.portfolio-navigation details>div{position:absolute;right:0;top:100%;width:min(300px,calc(100vw - 24px));max-height:65dvh;overflow:auto;padding:14px;background:#fff;color:#34483f;border:1px solid #cad7ce;border-radius:12px;box-shadow:0 12px 36px #172d2626;z-index:10000;text-align:left}
+.portfolio-navigation details a{display:block;padding:9px 10px;min-height:38px;border-radius:5px;white-space:normal}
+.portfolio-navigation details strong{display:block;padding:7px 10px;font-size:11px;color:#65796e}
+.portfolio-navigation[data-placement="page"]{position:sticky;top:0;z-index:10000;justify-content:flex-end;min-height:44px;padding:0 18px;background:#f8fbf8;color:#34483f;border-bottom:1px solid #cad7ce}
+.portfolio-navigation .portfolio-title{margin-right:auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:45%;font-weight:600}
+@media(max-width:650px){.portfolio-navigation{gap:5px;font-size:11px}.portfolio-navigation[data-placement="page"]{padding:0 10px}.portfolio-navigation .portfolio-title{display:none}.portfolio-navigation[data-placement="page"]>a:first-of-type{margin-right:auto}}
+@media print{.portfolio-navigation{display:none}}
+
+body:has(>.portfolio-navigation[data-placement="page"]) .viz-menu{top:60px}
+body:has(>.portfolio-navigation[data-placement="page"])>.sidebar,body:has(>.portfolio-navigation[data-placement="page"])>.rail{top:44px}
+body:has(>.portfolio-navigation[data-placement="page"]) .topbar,body:has(>.portfolio-navigation[data-placement="page"]) .site-header,body:has(>.portfolio-navigation[data-placement="page"]) .view-tabs{top:44px}
+</style><!-- portfolio-nav:end --></head>
+<body><!-- portfolio-nav:start --><nav class="portfolio-navigation" data-placement="page" aria-label="个人网站导航"><span class="portfolio-title">红果短剧制作全景图</span><a href="https://zhangmin.name/">← 个人主页</a><a href="https://zhangmin.name/panoramas/" data-panorama-return>全部知识地图</a><details><summary>更多作品</summary><div><strong>继续探索</strong><a href="https://b.zhangmin.name/">评测前沿</a><a href="https://evaltube.zhangmin.name/">EvalTube</a><a href="https://evalpapers.zhangmin.name/">EvalPapers</a><strong>其他网站</strong><a href="https://zhangmin.name/panoramas/eval-quest/">评测探索局</a><a href="https://timecapsule.zhangmin.name/">AI Time Capsule</a><a href="https://autoeval.zhangmin.name/">AutoEval</a><a href="https://programmer-life.zhangmin.name/">栈城日常</a><a href="https://zhangmin.name/cube-guide/">二阶魔方实验室</a><a href="https://weights.zhangmin.name/">权重实验室</a><a href="https://zhengce.zhangmin.name/">中国政策雷达</a></div></details></nav><!-- portfolio-nav:end -->
+<a class="skip" href="#main-content">跳到制片手册正文</a>
+<header class="brand-strip"><div class="frame brand-row">
+<a class="wordmark" href="#main-content"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8 16-5 1.5 5L4.5 13zM4 12h16v9H4z"/><path d="m7 7 4 3m1-5 4 3M7 16h6"/></svg>片场手册</a>
+<nav class="page-nav" aria-label="手册目录"><a href="#workflow">制作路线</a><a href="#case">案例拆解</a><a href="#release">红果上线</a></nav>
+<div class="tools-wrap"><button class="tool-toggle" id="tools-toggle" aria-label="阅读工具" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/><path d="M8 3v6m9 0v6M9 15v6" stroke-width="3"/></svg><span>工具</span></button>
+<div id="tools-menu" class="tools-menu" hidden><button id="theme-toggle"><span data-theme-label>切换为深色</span></button><a href="/panoramas/hongguo-short-drama/field-map.png" download="红果短剧制作全景图.png">保存完整流程长图</a><button id="export-map">导出当前进度图</button><button id="print-guide">打印完整手册</button><p id="tool-status" aria-live="polite"></p></div></div></div></header>
+<main id="main-content"><noscript><div class="frame"><a href="/panoramas/hongguo-short-drama/field-map.html">阅读八步全流程打印版</a> · <a href="/panoramas/hongguo-short-drama/production-kit.md" download>下载制片资料包</a></div></noscript>
+<section class="hero frame" aria-labelledby="page-title"><div class="hero-copy">
+<p class="eyebrow"><i class="red-line"></i> 真人竖屏短剧 · 新手实作指南</p>
+<h1 id="page-title">红果短剧<span>制作全景图</span></h1>
+<p class="intro">用一间照相馆、两位演员，先练拍 75 秒的第一集。再沿着八个步骤，把剧本做成可以送审、在红果播出的作品。</p>
+<div class="hero-actions"><a class="btn primary" href="#step-1">从第一步开始 <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h17m-7-7 7 7-7 7"/></svg></a><a class="btn quiet" href="#case">先看案例 ↘</a></div></div>
+<figure class="film"><div class="viewfinder"><img src="/panoramas/hongguo-short-drama/film-set.webp" width="1250" height="833" alt="照相馆柜台两侧的演员在灯下查看底片，摄影机记录她们的对话" fetchpriority="high"></div>
+<figcaption class="shot-caption"><b>INT. 照相馆 · 傍晚</b><span>《底片未取》 · AI 片场示意</span></figcaption></figure></section>
+<section id="workflow" class="sec"><div class="frame"><div id="map-sheet">
+<header class="section-head"><div><p class="eyebrow">PRODUCTION MAP</p><h2>制作路线图</h2><p class="sub">点选步骤，查看做法、交付物和案例。</p></div>
+<div class="progress-info" title="完成进度保存在当前浏览器"><div><span class="progress-label">我的进度</span><strong id="progress-count" aria-live="polite">0 / 8</strong></div><progress id="progress-bar" aria-label="制作步骤完成进度" max="8" value="0"></progress></div></header>
+<div class="phase-grid"><div class="phase"><div class="phase-head"><span class="phase-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="m4 20 4-1 12-12-3-3L5 16l-1 4ZM14 7l3 3M4 22h16"/></svg></span><div><div class="phase-id">PHASE 01</div><h3>故事开发</h3></div></div><button class="step-select" data-step="1" aria-pressed="true" aria-controls="step-1"><span class="num">01</span>选题与路线</button><button class="step-select" data-step="2" aria-pressed="false" aria-controls="step-2"><span class="num">02</span>剧本与分集</button></div><div class="phase"><div class="phase-head"><span class="phase-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18v10H3zM3 8l17-5 1 5-17 5zM7 7l3 3m3-5 3 3"/></svg></span><div><div class="phase-id">PHASE 02</div><h3>开机准备</h3></div></div><button class="step-select" data-step="3" aria-pressed="false" aria-controls="step-3"><span class="num">03</span>立项与权属</button><button class="step-select" data-step="4" aria-pressed="false" aria-controls="step-4"><span class="num">04</span>筹备与分镜</button></div><div class="phase"><div class="phase-head"><span class="phase-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="13" height="13" rx="2"/><path d="m15 11 6-3v11l-6-3M5 4h6"/></svg></span><div><div class="phase-id">PHASE 03</div><h3>影像制作</h3></div></div><button class="step-select" data-step="5" aria-pressed="false" aria-controls="step-5"><span class="num">05</span>现场拍摄</button><button class="step-select" data-step="6" aria-pressed="false" aria-controls="step-6"><span class="num">06</span>剪辑与质检</button></div><div class="phase"><div class="phase-head"><span class="phase-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="16" rx="2"/><path d="m10 7 5 4-5 3zM8 22h8"/></svg></span><div><div class="phase-id">PHASE 04</div><h3>发行上线</h3></div></div><button class="step-select" data-step="7" aria-pressed="false" aria-controls="step-7"><span class="num">07</span>提报与审核</button><button class="step-select" data-step="8" aria-pressed="false" aria-controls="step-8"><span class="num">08</span>上线与复盘</button></div></div></div>
+<div class="reader" id="step-reader"><article class="step-detail" id="step-1" data-step-panel="1">
+  <header class="step-head"><p class="kicker">步骤 01 / 08　·　选题与路线</p><h3>把故事写成一句能拍的话</h3></header>
+  <div class="step-cols"><ol class="actions"><li><strong>先写一句话</strong>用“谁想做什么，却遇到什么阻碍”写梗概。讲给一个朋友听，请他复述主角在争取什么。</li><li><strong>盘一下手上的资源</strong>写下能联系到的演员、能取得使用同意的场地、可支配时间，以及你最愿意讲的一件小事。</li><li><strong>选合作身份</strong>有剧本可以走编剧投稿；能带团队拍摄可以接导演项目；已有完整发行权和成片可以洽谈版权合作。</li></ol>
+  <aside class="step-note"><strong>这一步交什么</strong><p>一页项目卡：暂定剧名、观众、梗概、资源和目标合作身份。</p><strong>《底片未取》怎么做</strong><p>照相馆打烊前，唐宁想清空母亲留下的抽屉，一张迟到多年的取件票让她停了手。</p><a href="#release">看三种合作身份 ↗</a></aside></div>
+  <footer class="step-foot"><label><input type="checkbox" data-done="1">我已完成这一步</label><a href="#step-2">下一步 · 剧本与分集 →</a></footer></article><article class="step-detail" id="step-2" data-step-panel="2" hidden>
+  <header class="step-head"><p class="kicker">步骤 02 / 08　·　剧本与分集</p><h3>把转折写成角色能做的动作</h3></header>
+  <div class="step-cols"><ol class="actions"><li><strong>给每集留一个问题</strong>每集写三行：人物这次想得到什么，什么事情打乱了计划，结尾让观众想知道什么。先想好最后一集怎样回答。</li><li><strong>按场次写正文</strong>标明内外景、地点、日夜、出场人。把“她很怀念母亲”改写成演员可以完成的动作，再写对手的回应。</li><li><strong>拿手机计时读一遍</strong>两个人把台词读出声，在取物、沉默、转身处留出时间。在稿上圈出删掉仍然看得懂的重复信息。</li></ol>
+  <aside class="step-note"><strong>这一步交什么</strong><p>一句话梗概、分集大纲、带场次与版本日期的剧本。</p><strong>《底片未取》怎么做</strong><p>第一集用一把空椅子制造疑问，第二集找到母亲，第三集用一次定时合影回答“谁按了快门”。</p><a href="#case-story">读分集和对白 ↗</a></aside></div>
+  <footer class="step-foot"><label><input type="checkbox" data-done="2">我已完成这一步</label><a href="#step-3">下一步 · 立项与权属 →</a></footer></article><article class="step-detail" id="step-3" data-step-panel="3" hidden>
+  <header class="step-head"><p class="kicker">步骤 03 / 08　·　立项与权属</p><h3>开拍前把谁负责、谁有权写清楚</h3></header>
+  <div class="step-cols"><ol class="actions"><li><strong>确定主责和投资</strong>制片人列资金、人员与物料，核算全剧总投资，写下题材和拟播平台。按分类确认拍前手续与申报主体。</li><li><strong>清点每一项权利</strong>原著改编、剧本、演员肖像与表演、剧照、音乐、字体、场地分别记录权利人、授权方式、渠道、地域和期限。</li><li><strong>把合作写进文件</strong>确认谁持有成片权利、谁有权向红果交付、谁签合同及承担返修。先补齐过期或缺失的授权再使用相应素材。</li></ol>
+  <aside class="step-note"><strong>这一步交什么</strong><p>分类确认记录、主创分工、合同和素材权利台账。</p><strong>《底片未取》怎么做</strong><p>旧照片和取件票可以专门做道具。拍入母亲照片的人像也要取得相应授权，并记录这些照片能否用于剧集宣传。</p><a href="#rules">核对真人剧分类 ↗</a></aside></div>
+  <footer class="step-foot"><label><input type="checkbox" data-done="3">我已完成这一步</label><a href="#step-4">下一步 · 筹备与分镜 →</a></footer></article><article class="step-detail" id="step-4" data-step-panel="4" hidden>
+  <header class="step-head"><p class="kicker">步骤 04 / 08　·　筹备与分镜</p><h3>让所有人在开机前知道要拍什么</h3></header>
+  <div class="step-cols"><ol class="actions"><li><strong>拆解每一场</strong>从剧本逐行列人物、服装、道具和声音。把场次编成镜号，写上景别（画面取多近）、动作、台词和预计秒数。</li><li><strong>排一张通告单</strong>写集合时间、地址、联系人、每场的演员和道具。相同机位集中拍，单独留出补镜、收声与备份的时间。</li><li><strong>去场地试拍</strong>让演员站到预定位置，按计划画幅试拍并戴耳机听。看脸上光线、玻璃反光、对白清晰度，现场修改分镜。</li></ol>
+  <aside class="step-note"><strong>这一步交什么</strong><p>分镜表、通告单、道具清单、预算和试拍片。</p><strong>《底片未取》怎么做</strong><p>照相馆柜台会反光。先让唐宁举起底片套试拍，挪灯或调整站位，直到能同时看清她的眼神和道具。</p><a href="#case-shots">打开首集分镜 ↗</a></aside></div>
+  <footer class="step-foot"><label><input type="checkbox" data-done="4">我已完成这一步</label><a href="#step-5">下一步 · 现场拍摄 →</a></footer></article><article class="step-detail" id="step-5" data-step-panel="5" hidden>
+  <header class="step-head"><p class="kicker">步骤 05 / 08　·　现场拍摄</p><h3>拍齐能接在一起的画面和声音</h3></header>
+  <div class="step-cols"><ol class="actions"><li><strong>每条开头报镜号</strong>开拍前说出集、场、镜、条次，用击掌给分开录制的声音对齐点；先完整拍两人对话，再补手部和反应。</li><li><strong>记住上一条的状态</strong>记录谁用哪只手递票、票朝哪边、底片袋放哪，换机位前拍一张连续性参考照；每条完成后记下可用条次。</li><li><strong>离场前回放和备份</strong>戴耳机查关键对白，录一段全员安静的现场环境声。把素材复制到两处，分别打开抽查后再收工。</li></ol>
+  <aside class="step-note"><strong>这一步交什么</strong><p>按集场镜整理的双份素材、场记表、单独的现场声。</p><strong>《底片未取》怎么做</strong><p>取件票从秀姨手里推向唐宁。补特写时保留同一只手、同一方向，让两条素材剪在一起看得懂。</p><a href="#case-shots">对照镜头表 ↗</a></aside></div>
+  <footer class="step-foot"><label><input type="checkbox" data-done="5">我已完成这一步</label><a href="#step-6">下一步 · 剪辑与质检 →</a></footer></article><article class="step-detail" id="step-6" data-step-panel="6" hidden>
+  <header class="step-head"><p class="kicker">步骤 06 / 08　·　剪辑与质检</p><h3>先剪出故事，再做能交的母版</h3></header>
+  <div class="step-cols"><ol class="actions"><li><strong>先剪信息顺序</strong>用人物的目标、动作和反应粗剪，再补特写。对白突然断开时，用现场环境声平滑衔接，记录后续要补录的台词。</li><li><strong>按项目要求输出</strong>确认画幅、尺寸、编码、帧率、音频、字幕和命名。保留干净母版、字幕及工程，交付版本按合同与最新后台规格制作。</li><li><strong>换一部手机验收</strong>戴耳机听一遍，再静音看字幕；检查黑帧、爆音、错字、遮挡、串集、剧名和署名。编号由相应主体确认后再按要求标注。</li></ol>
+  <aside class="step-note"><strong>这一步交什么</strong><p>逐集母版、字幕、封面、交付版号和逐集质检记录。</p><strong>《底片未取》怎么做</strong><p>第一集压住“你只看了第一格”后的停顿。让没看过剧本的人试映，问他下集想知道什么，再决定这一刀落在哪。</p><a href="#case-shots">看首集时间轴 ↗</a></aside></div>
+  <footer class="step-foot"><label><input type="checkbox" data-done="6">我已完成这一步</label><a href="#step-7">下一步 · 提报与审核 →</a></footer></article><article class="step-detail" id="step-7" data-step-panel="7" hidden>
+  <header class="step-head"><p class="kicker">步骤 07 / 08　·　提报与审核</p><h3>把可追溯的一套文件交给约定主体</h3></header>
+  <div class="step-cols"><ol class="actions"><li><strong>编一张交付目录</strong>列剧名、集序、时长、文件名、版本、授权文件与责任人，逐集点开核对；海报、简介和成片剧名保持一致。</li><li><strong>从相应身份进入</strong>已有成片由版权方或获授权主体走成品合作；承制团队按约给项目方交片。确认合作渠道包含红果，并按当期要求提交。</li><li><strong>一条意见对应一处修改</strong>把反馈抄成“集号＋时间码＋问题＋责任人”，保留旧版，导出新版本并复核相邻镜头，按原项目要求重新提交。</li></ol>
+  <aside class="step-note"><strong>这一步交什么</strong><p>送审版本、项目回执、权属材料、审批材料和返修记录。</p><strong>《底片未取》怎么做</strong><p>练习写一条返修单：EP01 取件票特写反光，补清晰近景；剪辑替换后，制片复核前后镜头的票面方向。</p><a href="#route-owner">看成片提交路线 ↗</a></aside></div>
+  <footer class="step-foot"><label><input type="checkbox" data-done="7">我已完成这一步</label><a href="#step-8">下一步 · 上线与复盘 →</a></footer></article><article class="step-detail" id="step-8" data-step-panel="8" hidden>
+  <header class="step-head"><p class="kicker">步骤 08 / 08　·　上线与复盘</p><h3>用观众的手机把上线走完一遍</h3></header>
+  <div class="step-cols"><ol class="actions"><li><strong>先核发行通知</strong>确认审核结果、红果渠道、最终剧名、首发时间、开放集数及更新安排，记下发行对接人。</li><li><strong>在红果验收</strong>在红果观众端搜剧名，核对封面与集序，播放本轮首集和末集，检查片头、音画、字幕。归档详情链接、截图和验收时间。</li><li><strong>用数据改下一版</strong>如后台提供，记录同一观察窗口的首集播放、看完人数与次集观看情况，注明各指标口径；结合观众留言找一个值得复查的时间点。</li></ol>
+  <aside class="step-note"><strong>这一步交什么</strong><p>红果上线验收记录、问题追踪单与一页复盘。</p><strong>《底片未取》怎么做</strong><p>如果试映观众误以为秀姨拿的是一张欠条，先回看取件票的特写和对白，再考虑是否补拍。正式上线数据由项目方按权限查看。</p><a href="#verify">看上线验收清单 ↗</a></aside></div>
+  <footer class="step-foot"><label><input type="checkbox" data-done="8">我已完成这一步</label><a href="#workflow">回到路线图 ↑</a></footer></article></div>
+<details class="rules" id="rules"><summary>开机前查清楚 · 我的真人剧走哪一类审核？</summary><div class="rules-body"><div class="class-grid">
+  <article>
+    <h3>三类 · 一般题材，低于 100 万元</h3>
+    <p><strong>开拍前</strong> 制作方核对总投资、题材，与拟播平台确认合作资格和交付要求。</p>
+    <p><strong>上线前</strong> 由符合条件的播出单位审核、标注本平台节目编号，并同步向广电主管部门报送。多平台播出时各用各自的编号。</p>
+  </article>
+  <article>
+    <h3>二类 · 一般题材，100 万至不足 300 万元</h3>
+    <p><strong>开拍前</strong> 制作方查询属地省级广电主管部门的备案公示细则，确认当地要求。</p>
+    <p><strong>上线前</strong> 制作方向省级以上广电主管部门报审成片，取得省级批准文件，交播出平台核验。</p>
+  </article>
+  <article>
+    <h3>一类 · 至少 300 万元，或涉及特殊题材</h3>
+    <p><strong>开拍前</strong> 持证制作机构或依法设立的广电播出机构申请备案，由广电总局统一公示。以司法、公安等特殊题材为主要剧情的，低预算也走此类。</p>
+    <p><strong>上线前</strong> 向省级以上广电主管部门提交成片审核，取得《微短剧发行许可证》，交播出平台核验。</p>
+  </article>
+</div>
+<p>以上按境内真人微短剧的总投资和主要剧情判断。片头醒目标注剧名及相应的节目编号、批准文件编号或许可证号。编剧、导演等署名放在首集片头或末集片尾的醒目位置。</p>
+<p><a href="https://www.nrta.gov.cn/art/2026/7/31/art_113_73785.html" target="_blank" rel="noopener noreferrer">广电总局《微短剧发展管理办法》</a> · <a href="https://wlj.nanjing.gov.cn/whyw/202609/t20260902_5904082.html" target="_blank" rel="noopener noreferrer">南京市文旅局刊载的分类金额说明</a></p>
+</div></details></div></section>
+<section id="case" class="sec"><div class="frame">
+<div class="case-intro"><div><p class="eyebrow">CASE STUDY　/　原创教学案例</p><h2>《底片未取》</h2><p class="sub">照相馆的最后一个客人，来取一张等了多年的照片。</p></div><div class="case-meta"><span><b>03</b> 集练习</span><span><b>02</b> 位演员</span><span><b>01</b> 处场景</span></div></div>
+<figure class="sequence"><img src="/panoramas/hongguo-short-drama/shot-study.webp" alt="连续三个教学画面：手压取件票、唐宁端详底片、秀姨抬眼回应" width="1320" height="563" loading="lazy">
+<figcaption class="shot-caption"><span>取件票 → 唐宁找底片 → 秀姨的反应</span><span>AI 镜头示意</span></figcaption></figure>
+<div class="choices" role="group" aria-label="切换案例内容"><button data-case="story" aria-controls="case-story" aria-pressed="true">三集故事</button><button data-case="shots" aria-controls="case-shots" aria-pressed="false">首集分镜</button><button data-case="plan" aria-controls="case-plan" aria-pressed="false">排期与预算</button></div>
+<article class="case-panel-body" id="case-story" data-case-panel="story">
+  <p class="kicker">原创教学案例 · 真人竖屏</p>
+  <h3>一张取件票，撑起三集戏</h3>
+  <p>母亲去世，唐宁正收拾照相馆。关门前，老顾客秀姨把一张边角磨白的取件票推过柜台。票上写着“27”。</p>
+  <dl>
+    <dt>第 1 集 · 空椅子｜75 秒</dt><dd>唐宁找到 27 号袋。滑出来的照片上只有一把空椅子。她以为母亲装错了，秀姨把照片轻轻推回去。“你只看了第一格。”</dd>
+    <dt>第 2 集 · 谁按的快门｜约 70 秒</dt><dd>唐宁用放大镜看第二格底片。秀姨坐在椅子上，旁边那人系着母亲的围裙，口袋上还有唐宁小时候补的歪扣子。唐宁抬头。“那你俩都在这儿，谁给拍的？”</dd>
+    <dt>第 3 集 · 最后一单｜约 80 秒</dt><dd>秀姨拨动老相机的自拍扳手。“十秒。你妈跑过来的时候，差点带倒凳子。”唐宁在手机上设好十秒定时，赶在快门前坐到她身边。她把新合照打印出来，装进 27 号袋，亲手交给秀姨。</dd>
+  </dl>
+  <p class="small">两位成年演员，一个照相馆场景。旧照里的母亲只露围裙和手，用唐宁的演员兼拍道具照；三集用于练习，投稿的集数和时长另向平台确认。</p>
+</article>
+<article class="case-panel-body" id="case-shots" data-case-panel="shots" hidden>
+  <p class="kicker">第 1 集 · 《空椅子》</p>
+  <h3>75 秒，六个镜头</h3>
+  <div class="table-wrap"><table><thead><tr><th scope="col">时间</th><th scope="col">画面与动作</th><th scope="col">对白与声音</th></tr></thead><tbody>
+    <tr><td>0–7 秒</td><td>特写。唐宁翻转“营业中”的牌子。一张旧票从画外压住牌角。</td><td>门铃响。秀姨：“二十七号，还能取吗？”</td></tr>
+    <tr><td>7–19 秒</td><td>双人中景。柜台隔开两人。唐宁把搬家纸箱搁下。</td><td>唐宁：“今天收店。您这票……挺早了吧？” 秀姨：“你小时候，柜台才到你下巴。”</td></tr>
+    <tr><td>19–32 秒</td><td>近景。唐宁沿抽屉摸到 27 号袋，停一下，把袋子放在两人之间。</td><td>唐宁：“我妈连这个都留着。” 秀姨：“她答应给我洗一张。” 留纸袋摩擦声。</td></tr>
+    <tr><td>32–45 秒</td><td>俯拍特写。只让首张样片滑出来，椅子正中，底片留在袋里。给观众两秒看清。</td><td>收住对白，只留相纸擦过柜面的声音。</td></tr>
+    <tr><td>45–60 秒</td><td>唐宁近景。她看照片，又低头对票号，将要把抽屉拉开。</td><td>唐宁：“椅子是对的……可人呢？我再找找。”</td></tr>
+    <tr><td>60–75 秒</td><td>秀姨近景转手部。她挡住抽屉，把照片推回。切到露出袋口的一小截底片。</td><td>秀姨：“你只看了第一格。” 尾音落下，再停两秒切黑。</td></tr>
+  </tbody></table></div>
+  <p class="small">排练时从门铃计时到切黑。若超过 75 秒，先缩短找袋和拉抽屉的动作，给观众看清空椅子的时间要留够。</p>
+</article>
+<article class="case-panel-body" id="case-plan" data-case-panel="plan" hidden>
+  <p class="kicker">一场景 · 两位演员 · 四人小组</p>
+  <h3>借一间店，按机位拍半天</h3>
+  <dl>
+    <dt>前一天 · 准备道具</dt><dd>准备两份 27 号票袋、空椅样片、两格底片和带歪扣子的围裙。先用道具照试拍，确保手机竖屏上也看得清第二格。</dd>
+    <dt>拍摄日 · 13:00–17:00</dt><dd>13:00 走位收声，13:30 连拍柜台双人戏，14:30 拍两人的近景。15:20 补拍票袋、底片和自拍扳手。16:00 拍定时合影与交片，16:35 补录房间声并双份备份。</dd>
+    <dt>后两天 · 剪辑和交付练习</dt><dd>第一天剪完三集，用手机外放检查对白、静音检查字幕。第二天请一位没看过剧本的人指出第二格的线索，再导出成片、封面、字幕和授权清单。</dd>
+  </dl>
+  <p><strong>本次练习预算合计 ¥800。</strong>场地 ¥300、道具和冲印 ¥120、支架与录音设备 ¥100、四人餐饮交通 ¥120、备份介质 ¥60、备用 ¥100。四人自愿练习，手机和剪辑电脑自备，未计人工、商业授权及发行费用。</p>
+  <p class="small">正式拍摄前另列演员和工作人员报酬，签肖像、表演、场地及道具照片的使用授权；确认能向平台授权的期限、区域和用途。</p>
+</article>
+
+<aside class="realcase">
+  <h3>看片练习 ·《家里家外》</h3>
+  <p>这部已在红果上线的剧从 1981 年的一个重组家庭讲起。导演杨科南用四川话原声和成都老厂房实景，让一家四口的生活有了具体的模样。</p>
+  <p>看第一集，暂停在你第一次看懂两个人关系的地方。记下是谁做了什么，再把自己剧本里的一句人物介绍改成能拍出来的动作。</p>
+  <p><a href="https://hongguoduanju.com/player/7481108346636864536" target="_blank" rel="noopener noreferrer">在红果看第一集 ↗</a> · <a href="https://ent.scol.com.cn/wh/202606/83266491.html" target="_blank" rel="noopener noreferrer">读导演专访 ↗</a></p>
+</aside>
+
+</div></section>
+<section id="release" class="sec"><div class="frame"><header class="section-head"><div><p class="eyebrow">RELEASE DESK</p><h2>怎样发布到红果？</h2><p class="sub">先看自己手上有什么，再选对应的合作身份。具体准入和交付规格以登录后的项目要求为准。</p></div></header>
+<div class="choices" role="group" aria-label="按手上已有的材料选路线"><button data-route="writer" aria-controls="route-writer" aria-pressed="true">我有剧本</button><button data-route="director" aria-controls="route-director" aria-pressed="false">我能承制</button><button data-route="owner" aria-controls="route-owner" aria-pressed="false">我已有成片</button></div>
+<article class="route-panel" data-route-panel="writer" id="route-writer">
+  <h3>只有剧本，从编剧投稿开始</h3>
+  <ol>
+    <li><strong>准备一份读得懂的稿子。</strong>整理一句话卖点、人物关系、分集大纲和正文。按本次征稿说明核对集数、字数和文件格式，保留有日期的原稿。</li>
+    <li><strong>选择「编剧」。</strong>进入短剧创作者中心，登录或注册，按页面提示认证身份。找到剧本投稿，选择适合的项目或征稿方向，提交后保存记录。</li>
+    <li><strong>跟进评估和邀约。</strong>关注投稿记录和平台通知。收到合作意向时，先核对改编权、署名、交稿时间和报酬。进入投拍后，由约定的制片与版权合作主体接手制作、送审和发行。</li>
+  </ol>
+  <p class="route-source"><a href="https://www.shortdramas.com/" target="_blank" rel="noopener">去短剧创作者中心选「编剧」 ↗</a></p>
+</article>
+<article class="route-panel" data-route-panel="director" id="route-director" hidden>
+  <h3>能组队拍摄，从导演承接项目开始</h3>
+  <ol>
+    <li><strong>拿作品说明你能拍什么。</strong>准备一段有权展示的样片，附上你在片中承担的工作、团队可用档期和估算报价。</li>
+    <li><strong>选择「导演」。</strong>在短剧创作者中心登录，按页面提示认证，查看能参与的合作项目或收到的邀约。提交前看清对方要什么题材、何时开拍和交付。</li>
+    <li><strong>开拍前落实分工。</strong>和项目方书面约定预算、交片规格、验收与返修、权利归属，写明谁负责备案、送审和红果发行。按约交片，由约定主体跟进上线。</li>
+  </ol>
+  <p class="route-source"><a href="https://www.shortdramas.com/" target="_blank" rel="noopener">去短剧创作者中心选「导演」 ↗</a></p>
+</article>
+<article class="route-panel" data-route-panel="owner" id="route-owner" hidden>
+  <h3>已有完整成片，从版权方合作开始</h3>
+  <ol>
+    <li><strong>先找能签约的人。</strong>确认提交人拥有成片在目标渠道的发行权或取得书面授权。整理权利链、逐集文件、封面、简介和本剧适用的审批材料。</li>
+    <li><strong>选择「版权方」。</strong>登录短剧创作者中心，按页面核对可申请的主体、资质和认证材料。看不到成品剧合作权限时，可通过创作者中心的客服入口咨询当前主体能否申请。</li>
+    <li><strong>提交并确认红果渠道。</strong>按项目交付清单逐集核对并提交。核实合同约定的播出渠道是否包括红果，再核对独家范围、授权期限和结算口径，保存提交记录与版本号。</li>
+  </ol>
+  <p class="route-source"><a href="https://www.shortdramas.com/" target="_blank" rel="noopener">去短剧创作者中心选「版权方」 ↗</a>　<a href="https://www.shortdramas.com/page/user-protocol" target="_blank" rel="noopener">中心用户协议 ↗</a></p>
+</article>
+<section class="release-gates" id="verify" aria-label="从送审到红果可播放">
+  <h3>送审后，怎样确认观众已经能看？</h3>
+  <ol>
+    <li><strong>等审核反馈。</strong>项目负责人保存提交时间、剧名、送审版本及集数。若收到修改意见，逐条记下集号、时间码和问题，改完导出新版本，注明改动，按原项目要求复交。<a href="https://www.nrta.gov.cn/art/2026/7/31/art_113_73785.html" target="_blank" rel="noopener">广电总局审核与播出规定 ↗</a></li>
+    <li><strong>确认排期。</strong>由发行对接人核对审核结果、红果播出安排、最终剧名和本次开放的集数。尚未收到排期时，凭提交记录向项目对接人查询。</li>
+    <li><strong>用观众身份验收。</strong>到约定上线时间，在红果短剧 App 搜最终剧名，核对封面、集序与本轮开放集数。点播第一集和本轮最后一集，核对声音、字幕及片头标注。把剧集详情页分享链接、播放截图和核验时间一起归档。若有错集或搜不到，附链接或搜索截图反馈给发行对接人。<a href="https://hongguoduanju.com/" target="_blank" rel="noopener">红果短剧观众端 ↗</a></li>
+  </ol>
+</section>
+
+<div class="kit" id="kit"><div><h3>把手册带到片场</h3><p class="sub">保存八步流程长图，或下载可填写的项目卡、分镜、预算和上线验收表。<a href="/panoramas/hongguo-short-drama/field-map.html">A4 单页打印版 ↗</a></p></div><div class="kit-links"><a class="btn" href="/panoramas/hongguo-short-drama/field-map.png" download="红果短剧制作全景图.png"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m-5-5 5 5 5-5M4 16v5h16v-5"/></svg> 流程长图</a><a class="btn primary" href="/panoramas/hongguo-short-drama/production-kit.md" download="红果短剧制作练习资料包.md"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m-5-5 5 5 5-5M4 16v5h16v-5"/></svg> 制片工作表</a></div></div>
+</div></section></main>
+<footer class="foot"><div class="frame"><span>真人微短剧独立制作指南 · 平台与规则核对于 2026 年 11 月 20 日</span><a href="#main-content">回到开头 ↑</a></div></footer>
+<script>
+(() => {
+  'use strict';
+
+  function init() {
+    const byId = id => document.getElementById(id);
+    const kinds = ['step', 'case', 'route'];
+    const groups = new Map();
+    const selected = {};
+    for (const kind of kinds) {
+      const buttons = [...document.querySelectorAll('button[data-' + kind + ']')];
+      const panels = new Map([...document.querySelectorAll('article[data-' + kind + '-panel]')].map(panel => {
+        const key = panel.getAttribute('data-' + kind + '-panel');
+        panel.id ||= kind + '-' + key;
+        return [key, panel];
+      }));
+      for (const button of buttons) {
+        const panel = panels.get(button.getAttribute('data-' + kind));
+        if (panel) button.setAttribute('aria-controls', panel.id);
+      }
+      groups.set(kind, { buttons, panels });
+    }
+
+    function select(kind, key) {
+      const group = groups.get(kind);
+      if (!group.panels.has(key)) return;
+      selected[kind] = key;
+      for (const [value, panel] of group.panels) panel.hidden = value !== key;
+      for (const control of group.buttons) {
+        const chosen = control.getAttribute('data-' + kind) === key;
+        control.classList.toggle('is-active', chosen);
+        control.setAttribute('aria-pressed', String(chosen));
+        if (control.getAttribute('role') === 'tab') control.setAttribute('aria-selected', String(chosen));
+      }
+    }
+
+    function decodeHash() {
+      try { return decodeURIComponent(location.hash.slice(1)); } catch { return ''; }
+    }
+    function showTarget(id, shouldScroll) {
+      if (!id) return;
+      const match = /^(step|case|route)-(.+)$/.exec(id);
+      let target = byId(id);
+      if (match && groups.get(match[1]).panels.has(match[2])) {
+        const [, kind, key] = match;
+        select(kind, key);
+        target = kind === 'step' ? byId('step-reader') || target : groups.get(kind).panels.get(key);
+      }
+      if (target instanceof HTMLDetailsElement) target.open = true;
+      if (shouldScroll && target) target.scrollIntoView({ block: 'start', behavior: 'instant' });
+    }
+    function navigate(id, scroll) {
+      showTarget(id, scroll);
+      const state = { ...history.state, hongguoPanels: { ...selected } };
+      if (decodeHash() === id) history.replaceState(state, '');
+      else history.pushState(state, '', '#' + encodeURIComponent(id));
+    }
+    function readLocation(scroll) {
+      const saved = history.state?.hongguoPanels;
+      for (const kind of kinds) {
+        const group = groups.get(kind);
+        const value = saved?.[kind];
+        select(kind, group.panels.has(value) ? value : group.panels.keys().next().value);
+      }
+      showTarget(decodeHash(), scroll);
+    }
+    readLocation(false);
+    history.replaceState({ ...history.state, hongguoPanels: { ...selected } }, '');
+    if (location.hash) {
+      const firstHash = decodeHash();
+      requestAnimationFrame(() => { if (decodeHash() === firstHash) showTarget(firstHash, true); });
+    }
+    // Fragment changes cover native links and Back/Forward. Our own pushState changes run immediately.
+    window.addEventListener('hashchange', () => readLocation(true));
+
+    for (const [kind, { buttons }] of groups) {
+      for (const [index, control] of buttons.entries()) {
+        control.addEventListener('click', () => navigate(kind + '-' + control.getAttribute('data-' + kind), kind === 'step'));
+        control.addEventListener('keydown', event => {
+          let next;
+          switch (event.key) {
+            case 'ArrowRight': next = (index + 1) % buttons.length; break;
+            case 'ArrowLeft': next = (index + buttons.length - 1) % buttons.length; break;
+            case 'Home': next = 0; break;
+            case 'End': next = buttons.length - 1; break;
+            default: return;
+          }
+          event.preventDefault();
+          buttons[next].focus({ preventScroll: true });
+          buttons[next].click();
+        });
+      }
+    }
+    document.addEventListener('click', event => {
+      const link = event.target.closest?.('a[href^="#"]');
+      if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const id = link.getAttribute('href').slice(1);
+      if (!id || !byId(id)) return;
+      event.preventDefault();
+      navigate(id, true);
+    });
+
+    const doneKey = 'hongguo-short-drama:completed:v1';
+    const themeKey = 'hongguo-short-drama:theme:v1';
+    function stored(key) {
+      try { return localStorage.getItem(key); } catch { return null; }
+    }
+    function save(key, value) {
+      try { localStorage.setItem(key, value); } catch { /* The page still works for this visit. */ }
+    }
+    function readDone(raw) {
+      try {
+        const list = JSON.parse(raw || '[]');
+        return new Set(Array.isArray(list) ? list.filter(key => groups.get('step').panels.has(key)) : []);
+      } catch { return new Set(); }
+    }
+
+    const checks = [...document.querySelectorAll('input[type="checkbox"][data-done]')];
+    let done = readDone(stored(doneKey));
+    function renderDone() {
+      for (const check of checks) check.checked = done.has(check.dataset.done);
+      for (const control of groups.get('step').buttons) control.classList.toggle('is-done', done.has(control.dataset.step));
+      byId('progress-count').textContent = done.size + ' / ' + groups.get('step').panels.size;
+      const progress = byId('progress-bar');
+      progress.max = groups.get('step').panels.size;
+      progress.value = done.size;
+    }
+    for (const check of checks) {
+      check.addEventListener('change', () => {
+        const raw = stored(doneKey);
+        if (raw !== null) done = readDone(raw);
+        if (check.checked) done.add(check.dataset.done);
+        else done.delete(check.dataset.done);
+        save(doneKey, JSON.stringify([...done]));
+        renderDone();
+      });
+    }
+    renderDone();
+
+    const theme = byId('theme-toggle');
+    function setTheme(value) {
+      const dark = value === 'dark';
+      for (const el of [document.documentElement, document.body]) {
+        el.classList.toggle('theme-dark', dark);
+        el.classList.toggle('theme-light', !dark);
+      }
+      theme.setAttribute('aria-pressed', String(dark));
+      const label = theme.querySelector('[data-theme-label]');
+      if (label) label.textContent = dark ? '切换为浅色' : '切换为深色';
+    }
+    setTheme(stored(themeKey));
+    theme.addEventListener('click', () => {
+      const next = document.documentElement.classList.contains('theme-dark') ? 'light' : 'dark';
+      setTheme(next);
+      save(themeKey, next);
+    });
+    window.addEventListener('storage', event => {
+      if (event.key === doneKey || event.key === null) { done = readDone(stored(doneKey)); renderDone(); }
+      if (event.key === themeKey || event.key === null) setTheme(stored(themeKey));
+    });
+
+    const tools = byId('tools-toggle');
+    const menu = byId('tools-menu');
+    const status = byId('tool-status');
+    tools.setAttribute('aria-controls', menu.id);
+    function showMenu(open) {
+      menu.hidden = !open;
+      tools.setAttribute('aria-expanded', String(open));
+    }
+    showMenu(false);
+    tools.addEventListener('click', () => showMenu(menu.hidden));
+    document.addEventListener('click', event => {
+      if (!menu.hidden && !menu.contains(event.target) && !tools.contains(event.target)) showMenu(false);
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && !menu.hidden) {
+        event.preventDefault();
+        showMenu(false);
+        tools.focus();
+      }
+    });
+
+    const exporter = byId('export-map');
+    exporter.addEventListener('click', async () => {
+      if (exporter.disabled) return;
+      exporter.disabled = true;
+      status.textContent = '正在生成流程图…';
+      try {
+        const sheet = byId('map-sheet');
+        const bg = getComputedStyle(sheet).backgroundColor;
+        const fallback = document.documentElement.classList.contains('theme-dark') ? '#151718' : '#fbf8f1';
+        const blob = await window.htmlToImage.toBlob(sheet, {
+          pixelRatio: 2, skipFonts: true,
+          backgroundColor: bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent' ? fallback : bg
+        });
+        if (!blob || !blob.size) throw new Error('Empty image');
+        const url = URL.createObjectURL(blob);
+        const download = document.createElement('a');
+        download.download = '红果短剧制作流程全景图.png';
+        download.href = url;
+        document.body.appendChild(download);
+        download.click();
+        download.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 30000);
+        status.textContent = '流程图 PNG 已生成。';
+      } catch {
+        status.textContent = '流程图导出失败，请重试，或选择打印指南。';
+      } finally {
+        exporter.disabled = false;
+      }
+    });
+
+    let printSnapshot;
+    function preparePrint() {
+      if (printSnapshot) return;
+      const panels = [...groups.values()].flatMap(group => [...group.panels.values()]);
+      const details = [...document.querySelectorAll('details')];
+      printSnapshot = {
+        hidden: panels.map(panel => [panel, panel.hidden]),
+        open: details.map(item => [item, item.open])
+      };
+      for (const panel of panels) panel.hidden = false;
+      for (const item of details) item.open = true;
+    }
+    function restorePrint() {
+      if (!printSnapshot) return;
+      for (const [panel, hidden] of printSnapshot.hidden) panel.hidden = hidden;
+      for (const [item, open] of printSnapshot.open) item.open = open;
+      printSnapshot = null;
+    }
+    window.addEventListener('beforeprint', preparePrint);
+    window.addEventListener('afterprint', restorePrint);
+    byId('print-guide').addEventListener('click', () => {
+      showMenu(false);
+      tools.focus({ preventScroll: true });
+      window.print();
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+  else init();
+})();
+
+</script>
+</body>
+</html>

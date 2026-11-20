@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>红果短剧制作全景图 · 一页流程图</title>
+  <meta name="description" content="一页保存真人微短剧从项目卡、分镜、拍摄、剪辑到红果审核与上线验收的步骤。">
+  <style>
+    :root{color-scheme:light;--paper:#f6f4ec;--ink:#242720;--red:#af3527;--muted:#555b50;--line:#c7c8bb}
+    *{box-sizing:border-box}
+    body{margin:0;background:#dfded5;color:var(--ink);font:17px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-underline-offset:.18em}
+    h1,h2,h3,p,dl,dd{margin:0}
+    .sheet{width:min(100%,820px);margin:0 auto;background:var(--paper);padding:28px 48px 26px}
+    .mono,.phase-id,.step-id{font-family:ui-monospace,SFMono-Regular,Menlo,"PingFang SC",monospace}
+    .mast{display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:14px;font-weight:600;font-size:13px;letter-spacing:.06em}
+    .mast b{display:inline-block;background:var(--ink);color:var(--paper);padding:2px 9px;letter-spacing:.1em;margin-right:8px}
+    .leader{display:inline-block;width:90px;height:12px;margin-right:10px;background:repeating-linear-gradient(125deg,var(--red) 0 9px,transparent 9px 15px);vertical-align:-1px}
+    h1{font-size:51px;line-height:1.2;letter-spacing:-.065em;font-weight:850;margin:22px 0 7px}
+    .dek{font-size:19px;color:var(--muted);margin-bottom:19px}
+    .phase{border-top:1px solid var(--ink);padding:13px 0 14px;break-inside:avoid}
+    .phase-head{display:flex;align-items:center;gap:11px;margin-bottom:9px}
+    .phase-id{font-size:12px;line-height:1.2;padding:5px 8px;background:var(--red);color:white;letter-spacing:.02em}
+    h2{font-size:22px;line-height:1.25;font-weight:750;letter-spacing:-.03em}
+    .pair{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .step{padding-left:36px;position:relative}
+    .step+.step{border-left:1px dotted #a4aa9d;padding-left:49px}
+    .step-id{position:absolute;left:0;top:1px;color:var(--red);font-size:17px;font-weight:700;line-height:1.25}
+    .step+.step .step-id{left:13px}
+    h3{font-size:20px;line-height:1.28;letter-spacing:-.035em;margin-bottom:3px}
+    .step p{font-size:16px;line-height:1.47}
+    .step .out{margin-top:4px;color:var(--muted);font-size:15px}
+    .out b{color:var(--red);font-weight:700;margin-right:.35em}
+    .routes{background:#ebe9df;border-top:2px solid var(--ink);padding:13px 18px 14px;margin-top:3px}
+    .section-line{display:flex;gap:8px;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+    .section-line span{font-size:13px;color:var(--muted)}
+    .routes dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:15px}
+    .routes dt{font-weight:750;color:var(--red)}
+    .verify{background:var(--ink);color:var(--paper);padding:15px 18px;margin-top:10px}
+    .verify h2{margin-bottom:5px}.verify p{font-size:16px;line-height:1.5}
+    footer{display:flex;gap:14px;align-items:center;margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+    footer img{width:69px;height:69px;image-rendering:pixelated;background:white;border:5px solid white;display:block}
+    footer .links{flex:1;min-width:0}
+    footer strong{font-size:16px}
+    footer .url{display:block;font-size:13px;overflow-wrap:anywhere;font-weight:560}
+    footer .issue{font-size:12px;color:var(--muted);margin-left:auto;white-space:nowrap}
+    @media(max-width:650px){
+      .sheet{padding:17px 20px}.mast{font-size:11px}.mast b{margin-right:3px}.leader{width:35px}
+      h1{font-size:clamp(31px,6.4vw,45px);margin-top:17px}.dek{font-size:16px}.pair{gap:12px}
+      .step{padding-left:29px}.step+.step{padding-left:33px}.step+.step .step-id{left:5px}
+      .step p,.verify p{font-size:15px}.step .out{font-size:14px}.issue{display:none}
+    }
+    @media(max-width:490px){
+      .pair{grid-template-columns:1fr;gap:11px}.step,.step+.step{padding-left:32px;border:0}.step+.step .step-id{left:0}
+      .routes dl{gap:6px 9px}.routes,.verify{padding:12px}.section-line{display:block}
+      .section-line span{display:block;margin-top:4px}footer img{width:61px;height:61px}
+    }
+    @page{size:A4 portrait;margin:0}
+    @media print{
+      html,body{background:var(--paper);print-color-adjust:exact;-webkit-print-color-adjust:exact}
+      .sheet{width:210mm;max-width:none;padding:7mm 10mm 5mm;margin:0}
+      h1{font-size:43px;margin-top:13px}.dek{margin-bottom:12px}
+      .phase{padding:9px 0}.phase-head{margin-bottom:5px}
+      .routes,.verify{margin-top:5px;padding-top:9px;padding-bottom:9px}
+      footer{margin-top:8px;padding-top:7px}footer img{width:52px;height:52px}
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header>
+      <div class="mast"><span><b>场记手册</b> 真人微短剧</span><span class="mono"><i class="leader" aria-hidden="true"></i> ZHANGMIN.NAME</span></div>
+      <h1>红果短剧制作全景图</h1>
+      <p class="dek">从第一张项目卡，到观众在红果点开第一集。</p>
+    </header>
+    <section class="phase">
+      <div class="phase-head"><span class="phase-id">阶段 1 / 4</span><h2>故事开发</h2></div>
+      <div class="pair">
+        <div class="step"><span class="step-id">01</span><h3>选题与路线</h3><p>写清谁想做什么、遇到什么阻碍，盘点手头的演员与场地。</p><p class="out"><b>交付</b>一页项目卡、合作身份</p></div>
+        <div class="step"><span class="step-id">02</span><h3>剧本与分集</h3><p>给每集一个转折，两人读出对白，计入动作和停顿的时间。</p><p class="out"><b>交付</b>分集大纲、带场次的剧本</p></div>
+      </div>
+    </section>
+    <section class="phase">
+      <div class="phase-head"><span class="phase-id">阶段 2 / 4</span><h2>开机准备</h2></div>
+      <div class="pair">
+        <div class="step"><span class="step-id">03</span><h3>立项与权属</h3><p>按投资、题材和播出安排核对分类，确认谁申报、谁有权交片。</p><p class="out"><b>交付</b>分类确认、合同与授权台账</p></div>
+        <div class="step"><span class="step-id">04</span><h3>筹备与分镜</h3><p>逐场拆出镜头、台词、道具与时长，去实景拍一条并听回放。</p><p class="out"><b>交付</b>分镜、通告、预算和试拍片</p></div>
+      </div>
+    </section>
+    <section class="phase">
+      <div class="phase-head"><span class="phase-id">阶段 3 / 4</span><h2>影像制作</h2></div>
+      <div class="pair">
+        <div class="step"><span class="step-id">05</span><h3>现场拍摄</h3><p>先拍完整表演，再补反应和特写，录环境声并检查双份备份。</p><p class="out"><b>交付</b>场记表、两份可播放的素材</p></div>
+        <div class="step"><span class="step-id">06</span><h3>剪辑与质检</h3><p>按约定规格导出，换部手机听对白，再静音检查字幕与集序。</p><p class="out"><b>交付</b>逐集母版、字幕、封面、质检表</p></div>
+      </div>
+    </section>
+    <section class="phase">
+      <div class="phase-head"><span class="phase-id">阶段 4 / 4</span><h2>发行上线</h2></div>
+      <div class="pair">
+        <div class="step"><span class="step-id">07</span><h3>提报与审核</h3><p>有权主体按约交片，保存回执；按集号、时间码记录并复交修改版。</p><p class="out"><b>交付</b>送审版、回执、权属与审批材料</p></div>
+        <div class="step"><span class="step-id">08</span><h3>上线与复盘</h3><p>核实红果排期和开放集数，逐项验收播放页，再记录观众反馈。</p><p class="out"><b>交付</b>上线记录、问题单、一页复盘</p></div>
+      </div>
+    </section>
+    <section class="routes">
+      <div class="section-line"><h2>按你的身份进入</h2><span>短剧创作者中心 · <a class="mono" href="https://www.shortdramas.com/">www.shortdramas.com</a></span></div>
+      <dl>
+        <dt>编剧</dt><dd>带大纲与剧本，按当期征稿要求提交，由合作方评估投拍。</dd>
+        <dt>导演</dt><dd>带样片和团队档期对接项目，事先约定交付、备案及发行分工。</dd>
+        <dt>版权方</dt><dd>持成片及发行授权申请合作，核实主体资质和合同约定的红果渠道。</dd>
+      </dl>
+    </section>
+    <section class="verify">
+      <h2>怎样确认真的上线了？</h2>
+      <p>到约定时间，在红果短剧 App 搜最终剧名，核对封面、集序和开放集数。点播首集及本轮最后一集，检查片头标注、声音和字幕；留存详情页链接、截图和核验时间。</p>
+    </section>
+    <footer>
+      <a href="https://zhangmin.name/panoramas/hongguo-short-drama/" aria-label="打开交互全景图"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAAAXNSR0IArs4c6QAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAI6ADAAQAAAABAAAAIwAAAACbdGGdAAACzUlEQVRYCc3WWXLbQAwE0CiV+1/ZYZN5kyY8tPyXTBWFpReAtCTr9XGcH//J+ZU9Xq/X4zq9K156yWH6TBr/ioefGM25jKLB5D1kl3evPfQTLcx71j3nJ5JmDJjB1NNo1nh0wWfvqznryTD4TrREBhmoF/1T/s779mTekQ1yt71Ievrts+s13vntyfQdNSn5V5iBOGq61DC9xHnWMm0wSeppqp4x/Azfee56y/8Qvf2eYdADZr4Mj6ewO98Yc320+86mUUwYNc+C+LDUO376U9Pc5OsN3EQLtGnIfWCJvUg4vHZYcNrkOfivA/hQEF+U63UKifWndno81d3ntZ6MIYlAggx0BXd6kfTo4InhPPWDN7aWSdOF1EZEFsBJdILR4MN47/R6axmNiJPnioGYPsPkOTTiboGLeb3yah7t6XcA50db84nYpvLmnmZ1A6kbn/4WE8NfTyZFnybFlLEYrgEiPU76E8Ohxz3ro1hfehGmnLENmCSWdGmaOxfh/aS9PZk2b0FMGVs0ePfUuM3ji28pdbQ55/8mwgY7Z3ZJ7q+txaOF3RXXTfRCdOeTUXRMro6pATHuITj6iXoirbq5nZ/LIBuS6Ao5p41St4auOclxwncmRz9xvWcYihERtrE+LCbyaF3p5/CTJ+LPfC0TAmFiTtcMGjtJf3hyvK756HXd+fpx1cTkTVI3x/LpWUDE75oWP/5y2Kdl2sBC3SNklloeHs3k4Yg8m3/+hCB8igwa78EMJ283MB7Nb5/1PdODOg95mhrKaPK7xk3PEo0n57/+TBpNZCROLJpeqPMeQtczeIrB1jIRAJ6MgjcneUwMgXWdfOp2y6V3WwbpXTQsPAsk78HJmwdPpBFh314mQubTpAdYSK+XosPhF27ObZkJXpS/d9y1PNGi4tMw/pbC57WWQQB0bIyBXgbshuu1j9xSqfmd+QGsH1fI/yr+BiGq12sw97zuAAAAAElFTkSuQmCC" width="69" height="69" alt="交互全景图二维码"></a>
+      <div class="links"><strong>看案例《底片未取》，下载制作工作表</strong><a class="url mono" href="https://zhangmin.name/panoramas/hongguo-short-drama/">zhangmin.name/panoramas/hongguo-short-drama/</a></div>
+      <p class="issue mono">2026.11.20</p>
+    </footer>
+  </main>
+</body>
+</html>

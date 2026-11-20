@@ -17,6 +17,22 @@
   ],
   "pages": [
     {
+      "slug": "hongguo-short-drama",
+      "title": "红果短剧制作全景图",
+      "subtitle": "从第一行剧本到红果上线",
+      "description": "跟着原创案例《底片未取》走完八步制作流程，拆解 75 秒分镜，按编剧、导演或版权方身份找到红果合作入口。",
+      "category": "影视与创作",
+      "tags": [
+        "红果短剧",
+        "真人微短剧",
+        "分镜与制片",
+        "发行上线"
+      ],
+      "source": "src/panoramas/hongguo-short-drama.html",
+      "updatedAt": "2026-11-20",
+      "sourceSha256": "c35354312b26e016e3b123a2a701906cfefb75a8c51138b870cbb2042d4db839"
+    },
+    {
       "slug": "ai-equity-atlas",
       "title": "AI 全产业链上市公司图谱",
       "subtitle": "A 股、港股、美股的上市公司、ETF 与指数",
