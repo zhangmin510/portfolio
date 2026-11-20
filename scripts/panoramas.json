@@ -17,6 +17,22 @@
   ],
   "pages": [
     {
+      "slug": "model-benchmark-atlas",
+      "title": "大模型评测图鉴",
+      "subtitle": "三家厂商 · 三年官方 Benchmark",
+      "description": "按厂商和年份查阅 OpenAI、Anthropic 与 Google 的模型评测，逐项阅读题目示例、指标、评测方式和官方成绩。",
+      "category": "评测与可靠性",
+      "tags": [
+        "Benchmark",
+        "OpenAI",
+        "Anthropic",
+        "Google"
+      ],
+      "source": "src/panoramas/model-benchmark-atlas.html",
+      "updatedAt": "2026-11-20",
+      "sourceSha256": "0598b5e1880dd02a20299d630d1ac4bb88f343951b4dfe508a10e586e2c40521"
+    },
+    {
       "slug": "mac-mini-use-cases",
       "title": "Mac mini 使用场景全景图",
       "subtitle": "从桌面办公到家庭服务器",

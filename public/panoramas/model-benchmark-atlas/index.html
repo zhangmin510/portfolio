@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f6f5ef">
+  <title>大模型评测图鉴 · OpenAI、Anthropic、Google 三年官方 Benchmark</title>
+  <meta name="description" content="查阅 OpenAI、Anthropic、Google 近三年官方报告中的模型评测。按厂商和年份比较采用情况，逐项查看题目示例、评分指标、测试方法与原始出处。">
+  <meta property="og:title" content="大模型评测图鉴 · 三年官方 Benchmark">
+  <meta property="og:description" content="三家模型厂商用什么衡量进步？从一道样题读懂一项评测，再回到官方成绩。">
+  <link rel="canonical" href="https://zhangmin.name/panoramas/model-benchmark-atlas/">
+  <link rel="icon" href="/favicon-32.png">
+  <link rel="stylesheet" href="./atlas.css">
+  <script type="module" src="./atlas.js"></script>
+<!-- portfolio-nav:start --><style>
+.portfolio-navigation{box-sizing:border-box;padding:0;border:0;overflow:visible;background:transparent;display:flex;align-items:center;gap:12px;flex-shrink:0;font:12px/1.5 system-ui,sans-serif;color:inherit;isolation:isolate}
+.portfolio-navigation a,.portfolio-navigation summary{box-sizing:border-box;color:inherit;text-decoration:none;font:inherit;cursor:pointer;letter-spacing:normal}
+.portfolio-navigation>a{display:inline-flex;align-items:center;min-height:40px;white-space:nowrap;padding:0 5px}
+.portfolio-navigation a:hover{text-decoration:underline;text-underline-offset:4px}
+.portfolio-navigation :focus-visible{outline:2px solid #41836a;outline-offset:3px}
+.portfolio-navigation details{position:relative;margin:0;padding:0;border:0;background:none}
+.portfolio-navigation summary{display:list-item;min-height:40px;align-content:center;white-space:nowrap;padding:0 5px}
+.portfolio-navigation details>div{position:absolute;right:0;top:100%;width:min(300px,calc(100vw - 24px));max-height:65dvh;overflow:auto;padding:14px;background:#fff;color:#34483f;border:1px solid #cad7ce;border-radius:12px;box-shadow:0 12px 36px #172d2626;z-index:10000;text-align:left}
+.portfolio-navigation details a{display:block;padding:9px 10px;min-height:38px;border-radius:5px;white-space:normal}
+.portfolio-navigation details strong{display:block;padding:7px 10px;font-size:11px;color:#65796e}
+.portfolio-navigation[data-placement="page"]{position:sticky;top:0;z-index:10000;justify-content:flex-end;min-height:44px;padding:0 18px;background:#f8fbf8;color:#34483f;border-bottom:1px solid #cad7ce}
+.portfolio-navigation .portfolio-title{margin-right:auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:45%;font-weight:600}
+@media(max-width:650px){.portfolio-navigation{gap:5px;font-size:11px}.portfolio-navigation[data-placement="page"]{padding:0 10px}.portfolio-navigation .portfolio-title{display:none}.portfolio-navigation[data-placement="page"]>a:first-of-type{margin-right:auto}}
+@media print{.portfolio-navigation{display:none}}
+
+body:has(>.portfolio-navigation[data-placement="page"]) .viz-menu{top:60px}
+body:has(>.portfolio-navigation[data-placement="page"])>.sidebar,body:has(>.portfolio-navigation[data-placement="page"])>.rail{top:44px}
+body:has(>.portfolio-navigation[data-placement="page"]) .topbar,body:has(>.portfolio-navigation[data-placement="page"]) .site-header,body:has(>.portfolio-navigation[data-placement="page"]) .view-tabs{top:44px}
+</style><!-- portfolio-nav:end --></head>
+<body><!-- portfolio-nav:start --><nav class="portfolio-navigation" data-placement="page" aria-label="个人网站导航"><span class="portfolio-title">大模型评测图鉴</span><a href="https://zhangmin.name/">← 个人主页</a><a href="https://zhangmin.name/panoramas/" data-panorama-return>全部知识地图</a><details><summary>更多作品</summary><div><strong>继续探索</strong><a href="https://zhangmin.name/panoramas/ai-evaluation-panorama/">AI 评测历史与趋势</a><a href="https://zhangmin.name/panoramas/ai-evaluation-atlas/">AI 评测行业全景</a><a href="https://zhangmin.name/panoramas/eval-quest/">评测探索局</a><strong>其他网站</strong><a href="https://b.zhangmin.name/">评测前沿</a><a href="https://evaltube.zhangmin.name/">EvalTube</a><a href="https://evalpapers.zhangmin.name/">EvalPapers</a><a href="https://timecapsule.zhangmin.name/">AI Time Capsule</a><a href="https://autoeval.zhangmin.name/">AutoEval</a><a href="https://programmer-life.zhangmin.name/">栈城日常</a><a href="https://zhangmin.name/cube-guide/">二阶魔方实验室</a><a href="https://weights.zhangmin.name/">权重实验室</a><a href="https://zhengce.zhangmin.name/">中国政策雷达</a></div></details></nav><!-- portfolio-nav:end -->
+<div class="shell">
+  <header class="mast"><div class="imprint" lang="en"><i class="mark" aria-hidden="true"></i> Benchmark Atlas</div><div class="issue">资料截止 <time datetime="2026-11-20">2026.11.20</time></div></header>
+  <main>
+    <section class="hero" aria-labelledby="atlas-title">
+      <div class="hero-copy">
+        <div class="period"><span aria-hidden="true"></span> 2023.11 — 2026.11</div>
+        <h1 id="atlas-title">大模型<span>评测图鉴</span></h1>
+        <p class="lede">OpenAI、Anthropic 和 Google 用哪些题目衡量模型进步？从一道样题，读到评分方法和官方成绩。</p>
+        <div class="counts" aria-label="收录规模"><div><b id="total-bench">…</b><span>项评测基准</span></div><div><b id="total-uses">…</b><span>条使用记录</span></div><div><b id="total-report">…</b><span>份官方资料</span></div></div>
+      </div>
+      <figure class="matrix-card">
+        <figcaption><strong>各厂商逐年使用的基准</strong><span>收录项数</span></figcaption>
+        <div id="matrix" class="matrix-scroll"></div>
+        <div class="matrix-foot"><span class="scale" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>色块越深，收录越多。选择数字查看对应条目。</span></div>
+      </figure>
+    </section>
+    <div class="workspace" id="workspace">
+      <nav class="views" aria-label="图鉴视图"><a href="#catalog" data-view="catalog" aria-current="page">基准目录</a><a href="#timeline" data-view="timeline">官方报告年表</a><a href="#method" data-view="method">收录与读数</a></nav>
+      <section id="browser" aria-label="浏览图鉴">
+        <details class="history-note" id="history-note" hidden><summary>沿四份报告看题目怎样变化</summary>
+          <div class="history-grid">
+            <article><b>2023 · 学科问答</b><p>Gemini 1.0 报告用 MMLU 检查跨学科知识，同时列出直接作答和多次推理的结果。即使模型相同，采样策略也会影响成绩。</p><a href="https://arxiv.org/pdf/2312.11805v1" target="_blank" rel="noopener noreferrer">Gemini 技术报告</a></article>
+            <article><b>2024 · 操作电脑</b><p>Claude 3.5 Sonnet 在 OSWorld 只看截图操作桌面，成功率为 14.9%。允许更多操作步骤后升到 22.0%。</p><a href="https://www.anthropic.com/news/3-5-models-and-computer-use" target="_blank" rel="noopener noreferrer">Claude 计算机使用报告</a></article>
+            <article><b>2025 · 修复仓库</b><p>GPT-4.1 在 SWE-bench Verified 中提交修复补丁，OpenAI 报告 54.6%。需要查看实际可运行的任务数，才能读懂解决率。</p><a href="https://openai.com/index/gpt-4-1/" target="_blank" rel="noopener noreferrer">GPT-4.1 发布报告</a></article>
+            <article><b>2026 · 交付业务结果</b><p>Gemini 4 Neon 模型卡同时列出 AutomationBench 的 56.3% 和 Agents’ Last Exam v1.1 的 75.8%。两套任务分别考查跨应用自动化与长流程专业工作。</p><a href="https://deepmind.google/models/model-cards/gemini-4-neon/" target="_blank" rel="noopener noreferrer">Gemini 4 Neon 模型卡</a></article>
+          </div></details>
+        <div class="filters">
+          <label class="searchbox"><i aria-hidden="true"></i><input type="search" id="query" placeholder="搜索基准、模型或任务" aria-label="搜索基准、模型或任务" maxlength="120"></label>
+          <label class="selectbox"><span>厂商</span><select id="provider" aria-label="筛选厂商"><option value="">全部厂商</option><option>OpenAI</option><option>Anthropic</option><option>Google</option><option value="shared">三家共同使用</option></select></label>
+          <label class="selectbox"><span>年份</span><select id="year" aria-label="筛选年份"><option value="">全部年份</option><option>2026</option><option>2025</option><option>2024</option><option>2023</option></select></label>
+          <label class="selectbox"><span>能力</span><select id="category" aria-label="筛选能力"><option value="">全部能力</option></select></label>
+        </div>
+        <div class="result-head"><h2 id="view-title">评测基准</h2><div><span id="result-count" role="status" aria-live="polite">正在读取资料</span><button id="clear" type="button" hidden>清除筛选</button></div></div>
+        <div id="catalog-list" class="catalog-list"></div>
+        <div id="timeline-list" hidden></div>
+        <p class="empty" id="empty" hidden>没有找到符合条件的记录。可以清除筛选，或换一个模型名称。</p>
+        <div class="more-wrap"><button id="more" type="button" hidden>显示更多</button></div>
+      </section>
+      <section id="method-view" hidden>
+        <h2>收录与读数</h2>
+        <article><h3>什么算一次使用</h3><p>从 2023 年 11 月 20 日到 2026 年 11 月 20 日，以厂商公开资料的日期为准。每条记录都将本厂模型、基准及原文关联起来。报告若注明采用第三方成绩，沿用其归属。其他厂商模型在对照表中出现，不能单独算作该厂商的使用证据。</p></article>
+        <article><h3>矩阵里的数字怎么算</h3><p>在同一厂商、同一自然年内，一个基准无论被多少模型使用，都只计一次。2023 年和 2026 年只覆盖窗口内的部分日期。空白格表示本图鉴尚未收录相应记录。题集明确变更且有单独方法说明的版本可单列，其他子集与工具设置标在成绩旁。同一条记录可含多个测试条件。图鉴选取有公开证据的代表性报告，各年的数字也会受到资料收录密度影响。</p></article>
+        <article><h3>如何对照两份成绩</h3><p>先核对题集版本和子集，再看工具权限、提示示例数、采样次数和推理预算。一次答对的概率、尝试多次至少成功一次的概率、与专家持平或胜出的比例，各自回答不同的问题。年表保留具体模型名和原文链接，可回到报告查看附注。</p></article>
+        <article><h3>四个容易看错的标记</h3><p><strong>5-shot</strong> 表示提示中先给五道示范题。<strong>pass@1</strong> 衡量单次尝试成功的概率。<strong>pass@k</strong> 衡量 k 次中至少一次成功的概率。客服任务里常见的 <strong>pass^k</strong> 要求 k 次全部成功，衡量的是稳定性。</p></article>
+        <article><h3>题目示例从哪里来</h3><p>条目中的题目是按任务形式编写的中文教学示例。对于读图、音频、软件环境与多轮任务，示例用文字缩写所需材料和操作目标。每项基准都另附项目、论文或厂商方法说明。部分条目还标出可直接打开的公开原题，例如 HumanEval/0 和 SWE-bench Verified 的 Astropy 修复任务。</p></article>
+        <a class="data-link" href="./records.json" download>下载本期结构化数据（JSON）</a>
+      </section>
+    </div>
+    <noscript><p>请启用 JavaScript 以使用筛选和年表，或<a href="./records.json">直接读取完整图鉴数据</a>。</p></noscript>
+  </main>
+  <footer class="colophon"><span>Benchmark Atlas</span><a href="/panoramas/">全部知识地图</a></footer>
+</div>
+<dialog id="detail" aria-labelledby="detail-title"><div class="dialog-bar"><span>基准档案</span><button autofocus id="close" type="button" aria-label="关闭基准档案">关闭 <span aria-hidden="true">×</span></button></div><div id="detail-body"></div></dialog>
+</body></html>

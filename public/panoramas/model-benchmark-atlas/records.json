@@ -1,0 +1,5363 @@
+[
+  {
+    "id": "mmlu",
+    "name": "MMLU",
+    "category": "知识与推理",
+    "about": "面向 57 门学科的英语知识测验，从基础知识到专业考试内容均有覆盖。",
+    "example": "统计课上，所有样本值都增加 5。均值、方差如何变化？应选「均值增加 5，方差不变」。",
+    "metric": "四选一准确率。",
+    "method": "向模型呈现题目和四个选项，抽取最终选项与答案键比对。提示示例数量会影响结果。",
+    "origin": "https://github.com/hendrycks/test",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4o mini",
+        "date": "2024-07-18",
+        "url": "https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/",
+        "result": "82.0%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "o1（研究版）",
+        "date": "2024-09-12",
+        "url": "https://openai.com/index/learning-to-reason-with-llms/",
+        "result": "90.8%（pass@1）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.1",
+        "date": "2025-04-14",
+        "url": "https://openai.com/index/gpt-4-1/",
+        "result": "90.2%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "86.8%（5-shot），88.2%（5-shot CoT）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3.5 Sonnet（6 月版）",
+        "date": "2024-06-20",
+        "url": "https://www-cdn.anthropic.com/fed9cc193a14b84131812372d8d5857f8f304c52/Model_Card_Claude_3_Addendum.pdf",
+        "result": "88.7%（5-shot），90.4%（5-shot CoT）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Ultra",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "83.7%（5-shot），90.04%（不确定性路由 CoT@32）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Pro",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "71.8%（5-shot），79.13%（不确定性路由 CoT@8）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4o",
+        "date": "2024-05-13",
+        "url": "https://github.com/openai/simple-evals/blob/294cb1fb18f7aed4e21dc567350b0761a9e6f699/README.md",
+        "result": "ChatGPT 系统提示 88.7，assistant 系统提示 87.2（百分制）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4 Turbo（2024-04-09）",
+        "date": "2024-05-13",
+        "url": "https://github.com/openai/simple-evals/blob/294cb1fb18f7aed4e21dc567350b0761a9e6f699/README.md",
+        "result": "ChatGPT 系统提示 86.5，assistant 系统提示 86.7（百分制）"
+      }
+    ]
+  },
+  {
+    "id": "gpqa-diamond",
+    "name": "GPQA Diamond",
+    "category": "数学与科学",
+    "about": "物理、化学、生物学博士级选择题中的高质量子集，强调专家推理。",
+    "example": "一维对称势阱的非简并基态受到奇函数微扰。它的一阶能量修正是正、负、零还是无法判断？因被积函数为奇函数，应选零。",
+    "metric": "四选一准确率。pass@1 与多次作答后投票分别报告。",
+    "method": "研究人员设计并复核题目及干扰项。让模型作答后抽取最终选项。比较时核对是否开放工具。",
+    "origin": "https://arxiv.org/abs/2311.12022",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "o1（研究版）",
+        "date": "2024-09-12",
+        "url": "https://openai.com/index/learning-to-reason-with-llms/",
+        "result": "77.3%（pass@1）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.1",
+        "date": "2025-04-14",
+        "url": "https://openai.com/index/gpt-4-1/",
+        "result": "66.3%（模型抽取最终答案）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "92.4%（无工具）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.5",
+        "date": "2026-04-23",
+        "url": "https://openai.com/index/introducing-gpt-5-5/",
+        "result": "93.6%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "96.0%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "50.4%（0-shot CoT），59.5%（5-shot、32 次多数票）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3.5 Sonnet（6 月版）",
+        "date": "2024-06-20",
+        "url": "https://www-cdn.anthropic.com/fed9cc193a14b84131812372d8d5857f8f304c52/Model_Card_Claude_3_Addendum.pdf",
+        "result": "59.4%（0-shot CoT）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4",
+        "date": "2025-05-22",
+        "url": "https://www.anthropic.com/news/claude-4",
+        "result": "79.6%（延长思考）。83.3%（增加并行计算）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.5",
+        "date": "2025-11-24",
+        "url": "https://www-cdn.anthropic.com/bf10f64990cfda0ba858290be7b8cc6317685f47.pdf",
+        "result": "87.0%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.6",
+        "date": "2026-02-05",
+        "url": "https://www-cdn.anthropic.com/0dd865075ad3132672ee0ab40b05a53f14cf5288.pdf",
+        "result": "91.3%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.7",
+        "date": "2026-04-16",
+        "url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/037f06850df7fbe871e206dad004c3db5fd50340.pdf",
+        "result": "94.2%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "93.6%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "65.2%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Pro",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "86.4%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3 Pro",
+        "date": "2025-11-18",
+        "url": "https://blog.google/products-and-platforms/products/gemini/gemini-3/",
+        "result": "91.9%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.1 Pro",
+        "date": "2026-02-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+        "result": "94.3%（无工具）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash Experimental",
+        "date": "2024-12-11",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/google-gemini-ai-update-december-2024/",
+        "result": "62.1%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4o",
+        "date": "2024-05-13",
+        "url": "https://github.com/openai/simple-evals/blob/294cb1fb18f7aed4e21dc567350b0761a9e6f699/README.md",
+        "result": "ChatGPT 系统提示 53.6，assistant 系统提示 49.9（百分制）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4 Turbo（2024-04-09）",
+        "date": "2024-05-13",
+        "url": "https://github.com/openai/simple-evals/blob/294cb1fb18f7aed4e21dc567350b0761a9e6f699/README.md",
+        "result": "ChatGPT 系统提示 49.1，assistant 系统提示 49.3（百分制）"
+      }
+    ]
+  },
+  {
+    "id": "swe-bench-verified",
+    "name": "SWE-bench Verified",
+    "category": "编程与软件工程",
+    "about": "专家审核的 500 个真实 Python 仓库问题，要求修复代码并守住原有功能。",
+    "example": "一个日期库无法解析带空格的月份缩写。请让原有入口接受新格式，并保留原格式的解析行为。",
+    "metric": "解决率（% resolved），即通过指定修复与回归测试的问题比例。",
+    "method": "给定 issue 和指定版本的仓库，运行模型提交的补丁，核对原先失败的测试变绿、原先通过的验证继续通过。",
+    "origin": "https://openai.com/index/introducing-swe-bench-verified/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.1",
+        "date": "2025-04-14",
+        "url": "https://openai.com/index/gpt-4-1/",
+        "result": "54.6%（477/500 题可运行）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "o3",
+        "date": "2025-04-16",
+        "url": "https://openai.com/index/introducing-o3-and-o4-mini/",
+        "result": "官方采用固定 477 题子集"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5 Thinking",
+        "date": "2025-08-07",
+        "url": "https://openai.com/index/introducing-gpt-5/",
+        "result": "74.9%（477 题）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "80.0%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3.5 Sonnet（10 月版）",
+        "date": "2024-10-22",
+        "url": "https://www.anthropic.com/news/3-5-models-and-computer-use",
+        "result": "49.0%（升级版）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3.7 Sonnet",
+        "date": "2025-02-24",
+        "url": "https://www.anthropic.com/news/claude-3-7-sonnet",
+        "result": "可运行的 489 题：63.7%（常规框架），70.3%（专用框架）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4",
+        "date": "2025-05-22",
+        "url": "https://www.anthropic.com/news/claude-4",
+        "result": "72.5%（单次补丁，10 次运行均值）。79.4%（增加并行计算）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Sonnet 4",
+        "date": "2025-05-22",
+        "url": "https://www.anthropic.com/news/claude-4",
+        "result": "72.7%（单次补丁，10 次运行均值）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.5",
+        "date": "2025-11-24",
+        "url": "https://www-cdn.anthropic.com/bf10f64990cfda0ba858290be7b8cc6317685f47.pdf",
+        "result": "80.9%（关闭延长思考）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.6",
+        "date": "2026-02-05",
+        "url": "https://www-cdn.anthropic.com/0dd865075ad3132672ee0ab40b05a53f14cf5288.pdf",
+        "result": "80.8%（25 次运行均值）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.7",
+        "date": "2026-04-16",
+        "url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/037f06850df7fbe871e206dad004c3db5fd50340.pdf",
+        "result": "87.6%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "88.6%（5 次运行均值）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Pro Experimental",
+        "date": "2025-03-25",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-model-thinking-updates-march-2025/",
+        "result": "63.8%（自建代理）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Pro",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "59.6%（单次），67.2%（多次生成后重排）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.1 Pro",
+        "date": "2026-02-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+        "result": "80.6%（单次尝试取十轮均值，含修正三道测试项的 0.6 个百分点）"
+      }
+    ],
+    "publicExample": {
+      "label": "astropy__astropy-12907 · 嵌套复合模型的计算错误",
+      "url": "https://huggingface.co/datasets/princeton-nlp/SWE-bench_Verified/viewer/default/test?row=0"
+    }
+  },
+  {
+    "id": "hle",
+    "name": "Humanity’s Last Exam",
+    "category": "知识与推理",
+    "about": "由多学科专家撰写的高难度封闭题，有文字题、含图题、选择题和短答题。",
+    "example": "设一个有限域含 81 个元素，它的乘法群中阶恰为 8 的元素有多少个？答案为 4。",
+    "metric": "最终答案准确率。原项目还记录置信度校准误差。",
+    "method": "评分器分别处理选择与短答，对照专家答案判断。发布方注明是否可搜索网页或运行代码。",
+    "origin": "https://www.lastexam.ai/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "Deep Research（o3 系研究模型）",
+        "date": "2025-02-02",
+        "url": "https://openai.com/index/introducing-deep-research/",
+        "result": "26.6%（浏览与 Python，早期题集）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "无工具 34.5%。搜索和 Python 45.5%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.5",
+        "date": "2026-04-23",
+        "url": "https://openai.com/index/introducing-gpt-5-5/",
+        "result": "无工具 41.4%。有工具 52.2%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "57.2%（有工具）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.7",
+        "date": "2026-04-16",
+        "url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/037f06850df7fbe871e206dad004c3db5fd50340.pdf",
+        "result": "46.9%（无工具），54.7%（有工具）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "49.8%（无工具），57.9%（有工具）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 5.5",
+        "date": "2026-09-22",
+        "url": "https://www.anthropic.com/claude-opus-5-5",
+        "result": "67.7%（有工具）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Sonnet 5.5",
+        "date": "2026-09-28",
+        "url": "https://www.anthropic.com/claude-sonnet-5-5",
+        "result": "64.5%（有工具）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Haiku 5.5",
+        "date": "2026-10-07",
+        "url": "https://www.anthropic.com/claude-haiku-5-5",
+        "result": "45.9%（无工具），57.4%（有工具）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/document/claude-fable-5-2-mythos-5-2-system-card",
+        "result": "73.2%（无工具），74.2%（有工具）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Pro Experimental",
+        "date": "2025-03-25",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-model-thinking-updates-march-2025/",
+        "result": "18.8%（无工具）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Pro",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "21.6%（无工具，技术报告转引 Scale 榜单）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3 Pro",
+        "date": "2025-11-18",
+        "url": "https://blog.google/products-and-platforms/products/gemini/gemini-3/",
+        "result": "37.5%（无工具）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.1 Pro",
+        "date": "2026-02-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+        "result": "44.4%（无工具），51.4%（屏蔽部分网站的搜索＋代码）"
+      }
+    ]
+  },
+  {
+    "id": "aime-2025",
+    "name": "AIME 2025",
+    "category": "数学与科学",
+    "about": "美国数学邀请赛 2025 年试卷，单列年份可减少跨届试题难度差异造成的误读。",
+    "example": "某三位正整数与逆序数之差为 396，且百位、个位之和为 10。求百位数字。答案 007。",
+    "metric": "最终整数准确率，区分单次作答、投票以及工具配置。",
+    "method": "按当年两场试卷的标准答案评分。能执行 Python 时，模型可以编程枚举或验算。",
+    "origin": "https://maa.org/student-programs/amc/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "o3",
+        "date": "2025-04-16",
+        "url": "https://openai.com/index/introducing-o3-and-o4-mini/",
+        "result": "98.4%（Python，pass@1）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "o4-mini",
+        "date": "2025-04-16",
+        "url": "https://openai.com/index/introducing-o3-and-o4-mini/",
+        "result": "99.5%（Python，pass@1）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5 Thinking",
+        "date": "2025-08-07",
+        "url": "https://openai.com/index/introducing-gpt-5/",
+        "result": "94.6%（无工具）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "100.0%（无工具）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4",
+        "date": "2025-05-22",
+        "url": "https://www.anthropic.com/news/claude-4",
+        "result": "75.5%（延长思考）。90.0%（增加并行计算）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Sonnet 4",
+        "date": "2025-05-22",
+        "url": "https://www.anthropic.com/news/claude-4",
+        "result": "70.5%（延长思考）。85.0%（增加并行计算）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Pro",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "88.0%（技术报告引用 MathArena）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Flash",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "72.0%（同口径）"
+      }
+    ]
+  },
+  {
+    "id": "mmmu",
+    "name": "MMMU",
+    "category": "视觉与多模态",
+    "about": "以大学课程为背景，覆盖六大领域、30 门学科，题目结合图片、图表或示意图。",
+    "example": "某电路图中 6 Ω 与 3 Ω 电阻并联，两端电压为 12 V。根据图中连接方式求总电流，应得 6 A。",
+    "metric": "选择与开放题的答案准确率。",
+    "method": "模型同时读取题干和视觉信息，输出选项或短答。按题型解析答案，和标准答案核对。",
+    "origin": "https://mmmu-benchmark.github.io/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4o mini",
+        "date": "2024-07-18",
+        "url": "https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/",
+        "result": "59.4%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "o1（研究版）",
+        "date": "2024-09-12",
+        "url": "https://openai.com/index/learning-to-reason-with-llms/",
+        "result": "78.2%（验证集，pass@1）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.1",
+        "date": "2025-04-14",
+        "url": "https://openai.com/index/gpt-4-1/",
+        "result": "74.8%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5 Thinking",
+        "date": "2025-08-07",
+        "url": "https://openai.com/index/introducing-gpt-5/",
+        "result": "84.2%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "59.4%（验证集，0-shot）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3.5 Sonnet（6 月版）",
+        "date": "2024-06-20",
+        "url": "https://www-cdn.anthropic.com/fed9cc193a14b84131812372d8d5857f8f304c52/Model_Card_Claude_3_Addendum.pdf",
+        "result": "68.3%（验证集）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4",
+        "date": "2025-05-22",
+        "url": "https://www.anthropic.com/news/claude-4",
+        "result": "76.5%（验证集，延长思考）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Sonnet 4",
+        "date": "2025-05-22",
+        "url": "https://www.anthropic.com/news/claude-4",
+        "result": "74.4%（验证集，延长思考）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.5",
+        "date": "2025-11-24",
+        "url": "https://www-cdn.anthropic.com/bf10f64990cfda0ba858290be7b8cc6317685f47.pdf",
+        "result": "80.7%（验证集）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Ultra",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "59.4%（验证集，pass@1），62.4%（32 次投票）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.5 Pro（2024 年 5 月版）",
+        "date": "2024-06-14",
+        "url": "https://arxiv.org/pdf/2403.05530v3",
+        "result": "62.2%（验证集，0-shot）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Pro",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "82.0%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "69.3%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash Experimental",
+        "date": "2024-12-11",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/google-gemini-ai-update-december-2024/",
+        "result": "70.7%"
+      }
+    ],
+    "publicExample": {
+      "label": "dev_Art_1 · 根据画作识别相关艺术家",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/viewer/Art/dev?row=0"
+    }
+  },
+  {
+    "id": "browsecomp",
+    "name": "BrowseComp",
+    "category": "搜索与研究",
+    "about": "OpenAI 编写 1,266 道需要多步检索才能找到、但答案容易核验的短答题。",
+    "example": "从一份博物馆年报找到展览借出作品，再查出借方档案，回答该作品首次入藏的年份。",
+    "metric": "最终答案正确率，须注明浏览、采样次数和工具配置。",
+    "method": "代理在网页之间检索和交叉核对，把最终短答与参考答案交给评分器判断。",
+    "origin": "https://openai.com/index/browsecomp/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "65.8%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.4",
+        "date": "2026-03-05",
+        "url": "https://openai.com/index/introducing-gpt-5-4/",
+        "result": "82.7%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.5",
+        "date": "2026-04-23",
+        "url": "https://openai.com/index/introducing-gpt-5-5/",
+        "result": "84.4%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.6 Sol",
+        "date": "2026-07-09",
+        "url": "https://openai.com/index/gpt-5-6/",
+        "result": "92.2%（发布页报告的最佳配置）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "91.5%（见该页评测配置）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.7",
+        "date": "2026-04-16",
+        "url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/037f06850df7fbe871e206dad004c3db5fd50340.pdf",
+        "result": "79.3%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "84.3%（单智能体），88.5%（多智能体）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.1 Pro",
+        "date": "2026-02-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+        "result": "85.9%（Deep Research，搜索＋Python＋浏览）"
+      }
+    ]
+  },
+  {
+    "id": "terminal-bench-2",
+    "name": "Terminal-Bench 2.0",
+    "category": "编程与软件工程",
+    "about": "89 个命令行工作流任务，涵盖软件构建、数据处理、调试等，交付结果可自动验收。",
+    "example": "容器里有多月账单，部分 CSV 文件的分隔符不同。请生成按月份汇总的总额文件，验收程序会换样本核对。",
+    "metric": "任务解决率，常按多次独立运行估算 pass@1。",
+    "method": "在固定容器和资源上通过终端执行任务，再运行任务作者编写的隐藏验证器。代理框架和预算影响成绩。",
+    "origin": "https://www.tbench.ai/news/announcement-2-0",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.3-Codex",
+        "date": "2026-02-05",
+        "url": "https://openai.com/index/introducing-gpt-5-3-codex/",
+        "result": "77.3%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.4",
+        "date": "2026-03-05",
+        "url": "https://openai.com/index/introducing-gpt-5-4/",
+        "result": "75.1%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.5",
+        "date": "2026-04-23",
+        "url": "https://openai.com/index/introducing-gpt-5-5/",
+        "result": "82.7%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.5",
+        "date": "2025-11-24",
+        "url": "https://www-cdn.anthropic.com/bf10f64990cfda0ba858290be7b8cc6317685f47.pdf",
+        "result": "59.3%（128k 思考预算）。57.8%（64k）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.6",
+        "date": "2026-02-05",
+        "url": "https://www-cdn.anthropic.com/0dd865075ad3132672ee0ab40b05a53f14cf5288.pdf",
+        "result": "65.4%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.7",
+        "date": "2026-04-16",
+        "url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/037f06850df7fbe871e206dad004c3db5fd50340.pdf",
+        "result": "69.4%（关闭思考）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.1 Pro",
+        "date": "2026-02-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+        "result": "68.5%（Terminus 2，Google 自测）"
+      }
+    ]
+  },
+  {
+    "id": "humaneval",
+    "name": "HumanEval",
+    "category": "编程与软件工程",
+    "about": "OpenAI 发布的 164 道手写 Python 函数补全题，用于检验代码功能。",
+    "example": "补全 first_repeat(xs)，返回最早第二次出现的元素。输入 [2, 5, 5, 2] 应返回 5，无重复则返回 None。",
+    "metric": "pass@k，表示 k 个候选中至少一个能通过该题测试的概率。常报告 pass@1。",
+    "method": "把生成的函数与测试程序组合，在隔离环境运行。该题所有断言均通过才算成功。",
+    "origin": "https://github.com/openai/human-eval",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4o mini",
+        "date": "2024-07-18",
+        "url": "https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/",
+        "result": "87.2%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "84.9%（0-shot）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3.5 Sonnet（6 月版）",
+        "date": "2024-06-20",
+        "url": "https://www-cdn.anthropic.com/fed9cc193a14b84131812372d8d5857f8f304c52/Model_Card_Claude_3_Addendum.pdf",
+        "result": "92.0%（0-shot）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Ultra",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "74.4%（零样例，指令微调模型）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Pro",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "67.7%（同口径）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4o",
+        "date": "2024-05-13",
+        "url": "https://github.com/openai/simple-evals/blob/294cb1fb18f7aed4e21dc567350b0761a9e6f699/README.md",
+        "result": "ChatGPT 系统提示 90.2，assistant 系统提示 91.0（百分制）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4 Turbo（2024-04-09）",
+        "date": "2024-05-13",
+        "url": "https://github.com/openai/simple-evals/blob/294cb1fb18f7aed4e21dc567350b0761a9e6f699/README.md",
+        "result": "ChatGPT 系统提示 87.6，assistant 系统提示 88.2（百分制）"
+      }
+    ],
+    "publicExample": {
+      "label": "HumanEval/0 · 判断列表中是否有两个足够接近的数",
+      "url": "https://huggingface.co/datasets/openai/openai_humaneval/viewer/openai_humaneval/test?row=0"
+    }
+  },
+  {
+    "id": "arc-agi-2",
+    "name": "ARC-AGI-2",
+    "category": "知识与推理",
+    "about": "ARC Prize 的第二代静态网格推理题，强化组合规则、多步骤转换与符号解释。",
+    "example": "训练对表明外框颜色决定操作：蓝框要求旋转，黄框要求镜像。遇到并排两个框时，分别推断框内图形应如何变化。",
+    "metric": "解对完整输出网格的题目比例。须记录数据划分和允许尝试次数。",
+    "method": "根据每题自带的少量示范推导未明示的规则，对新输入生成完整网格并精确核对。",
+    "origin": "https://arcprize.org/arc-agi/2",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "52.9%（Verified）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "95.0%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.5",
+        "date": "2025-11-24",
+        "url": "https://www-cdn.anthropic.com/bf10f64990cfda0ba858290be7b8cc6317685f47.pdf",
+        "result": "37.6%（Verified）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.6",
+        "date": "2026-02-05",
+        "url": "https://www-cdn.anthropic.com/0dd865075ad3132672ee0ab40b05a53f14cf5288.pdf",
+        "result": "68.8%（Verified）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.1 Pro",
+        "date": "2026-02-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+        "result": "77.1%（ARC Prize 验证，半私有集）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.5 Flash",
+        "date": "2026-05-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-5-flash/",
+        "result": "72.1%（同类验证）"
+      }
+    ]
+  },
+  {
+    "id": "graphwalks",
+    "name": "GraphWalks",
+    "category": "长上下文",
+    "about": "将有向图摊开成很长的关系清单，要求模型跨越多处输入寻找相关节点。",
+    "example": "给定有向边 A→B、A→C、B→D、C→E。从 A 出发，最短距离恰好为两步的节点有哪些？答案是 D、E。",
+    "metric": "GPT-4.1 发布页按任务及长度报告准确率。后续 Claude 和 Gemini 报告使用节点集合 F1，同时考虑遗漏和多报。两种指标应分别比较。",
+    "method": "在输入中给出节点之间的边，要求求出指定深度的广度优先搜索结果或父节点，再与真实集合核对。",
+    "origin": "https://huggingface.co/datasets/openai/graphwalks",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "256K 档，BFS 85.9 F1，Parents 99.3 F1（百分制）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Carbon",
+        "date": "2026-11-10",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+        "result": "96.2% F1（256K–1M，BFS）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Neon",
+        "date": "2026-11-18",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-neon/",
+        "result": "95.2% F1（同口径）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.1",
+        "date": "2025-04-14",
+        "url": "https://openai.com/index/gpt-4-1/",
+        "result": "广度优先搜索：低于 128k token 为 61.7%，高于 128k 为 19.0%。"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.5",
+        "date": "2026-04-23",
+        "url": "https://openai.com/index/introducing-gpt-5-5/",
+        "result": "xhigh。BFS F1 分别为 73.7%（256K）、45.4%（1M），Parents F1 为 90.1%（256K）、58.5%（1M）。"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Argon",
+        "date": "2026-10-13",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-argon/",
+        "result": "BFS F1，≤128K 为 99.7%，256K–1M 为 84.2%。"
+      }
+    ]
+  },
+  {
+    "id": "math",
+    "name": "MATH",
+    "category": "数学与科学",
+    "about": "英语竞赛数学习题，题目按主题与难度分级，并提供解答过程。",
+    "example": "求整数 1 到 100 中恰好能被 3 或 5 之一整除的数的个数。答案 41。",
+    "metric": "最终答案正确率或 pass@1。",
+    "method": "让模型独立解答，提取最终表达式，按数值或数学等价关系核对。要注明完整集或抽样子集。",
+    "origin": "https://github.com/hendrycks/math",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "o1（研究版）",
+        "date": "2024-09-12",
+        "url": "https://openai.com/index/learning-to-reason-with-llms/",
+        "result": "94.8%（pass@1，固定 500 题）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "61.0%（4-shot CoT），73.7%（4-shot、32 次多数票）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3.5 Sonnet（6 月版）",
+        "date": "2024-06-20",
+        "url": "https://www-cdn.anthropic.com/fed9cc193a14b84131812372d8d5857f8f304c52/Model_Card_Claude_3_Addendum.pdf",
+        "result": "71.1%（0-shot CoT）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Ultra",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "53.2%（4-shot）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.5 Pro（2024 年 5 月版）",
+        "date": "2024-06-14",
+        "url": "https://arxiv.org/pdf/2403.05530v3",
+        "result": "67.7%（2024 年 5 月版）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash Experimental",
+        "date": "2024-12-11",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/google-gemini-ai-update-december-2024/",
+        "result": "89.7%（发布日图表）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4o",
+        "date": "2024-05-13",
+        "url": "https://github.com/openai/simple-evals/blob/294cb1fb18f7aed4e21dc567350b0761a9e6f699/README.md",
+        "result": "ChatGPT 系统提示 76.6，assistant 系统提示 76.6（百分制）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4 Turbo（2024-04-09）",
+        "date": "2024-05-13",
+        "url": "https://github.com/openai/simple-evals/blob/294cb1fb18f7aed4e21dc567350b0761a9e6f699/README.md",
+        "result": "ChatGPT 系统提示 72.2，assistant 系统提示 73.4（百分制）"
+      }
+    ]
+  },
+  {
+    "id": "automationbench",
+    "name": "AutomationBench",
+    "category": "专业与办公",
+    "about": "Zapier 将销售、财务、人事等日常业务编成跨多个应用的自动化工作流。",
+    "example": "检测库存达到补货线的商品，在任务系统为各负责人建单，并在共享表里记录新任务编号。",
+    "metric": "任务通过率，公开集、私有官方集及修订版各有独立口径。",
+    "method": "从给定应用状态开始，通过工具操作真实风格的业务数据，按预先设定的断言检查终态。",
+    "origin": "https://github.com/zapier/AutomationBench",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.6 Sol",
+        "date": "2026-07-09",
+        "url": "https://openai.com/index/gpt-5-6/",
+        "result": "18.1%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "41.4%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6.2 Astra",
+        "date": "2026-11-17",
+        "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+        "result": "发布页列出 1.0.6 版"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "15.5%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 5.5",
+        "date": "2026-09-22",
+        "url": "https://www.anthropic.com/claude-opus-5-5",
+        "result": "40.0%（Zapier 运行，无后备模型）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+        "result": "51.4%（采用默认后备模型的配置）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Carbon",
+        "date": "2026-11-10",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+        "result": "53.9%（Zapier 私有集，转引公开榜单）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Neon",
+        "date": "2026-11-18",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-neon/",
+        "result": "56.3%（转引官方榜单）"
+      }
+    ]
+  },
+  {
+    "id": "charxiv",
+    "name": "CharXiv",
+    "category": "视觉与多模态",
+    "about": "以论文中的真实图表构造描述题与推理题，分别测量读图和结合图表作判断的能力。",
+    "example": "一张双折线图显示方法 A 由 70 升至 84，B 由 75 升至 81。哪条线的增幅大，差多少个百分点？答案为 A，大 8 点。",
+    "metric": "正确率。描述（D）与推理（R）分报，并记录是否可以运行 Python。",
+    "method": "模型看论文图表和问题，评测程序用原项目的答案与判分规则核查。题型可包括提取、计算和比较。",
+    "origin": "https://charxiv.github.io/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.1",
+        "date": "2025-04-14",
+        "url": "https://openai.com/index/gpt-4-1/",
+        "result": "推理 56.7%，描述 87.9%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "推理 82.1%（无工具），88.7%（Python）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.7",
+        "date": "2026-04-16",
+        "url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/037f06850df7fbe871e206dad004c3db5fd50340.pdf",
+        "result": "推理子集：82.1%（无工具），91.0%（有工具）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.5 Flash",
+        "date": "2026-05-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-5-flash/",
+        "result": "推理子集：84.2%（无工具）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.8 Flash",
+        "date": "2026-09-02",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-8-flash/",
+        "result": "推理子集：86.2%（无工具）"
+      }
+    ]
+  },
+  {
+    "id": "drop",
+    "name": "DROP",
+    "category": "语言与阅读",
+    "about": "阅读一个段落后，答案可能要通过计数、排序或计算差值才能得到。",
+    "example": "一名选手首轮得 24 分，次轮比首轮少 7 分，决赛拿了 20 分。次轮与决赛合计多少分？答案 37。",
+    "metric": "可报告精确匹配与词元 F1。OpenAI 的这组记录为 3-shot F1。",
+    "method": "提供段落和问题，模型生成答案，对文字或数字做归一化，再按参考答案计算分数。",
+    "origin": "https://aclanthology.org/N19-1246/",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "83.1 F1（3-shot，百分制）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3.5 Sonnet（6 月版）",
+        "date": "2024-06-20",
+        "url": "https://www-cdn.anthropic.com/fed9cc193a14b84131812372d8d5857f8f304c52/Model_Card_Claude_3_Addendum.pdf",
+        "result": "87.1 F1（3-shot，百分制）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Ultra",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "82.4 F1（示例数可变）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Pro",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "74.1 F1（示例数可变）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4o",
+        "date": "2024-05-13",
+        "url": "https://github.com/openai/simple-evals/blob/294cb1fb18f7aed4e21dc567350b0761a9e6f699/README.md",
+        "result": "ChatGPT 系统提示 83.4，assistant 系统提示 83.7（3-shot，F1 百分制）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4 Turbo（2024-04-09）",
+        "date": "2024-05-13",
+        "url": "https://github.com/openai/simple-evals/blob/294cb1fb18f7aed4e21dc567350b0761a9e6f699/README.md",
+        "result": "ChatGPT 系统提示 85.4，assistant 系统提示 86.0（3-shot，F1 百分制）"
+      }
+    ]
+  },
+  {
+    "id": "frontiercode-1-1",
+    "name": "FrontierCode 1.1（Main）",
+    "category": "编程与软件工程",
+    "about": "Cognition 用开源仓库维护者拟定的验收标准评判代码改动能否直接合并。",
+    "example": "给定命令行工具的 issue，增加一项输出选项，保持现有输出和公共接口兼容。",
+    "metric": "按验收细则加权汇总，触发阻断条件的解答计零分。",
+    "method": "编码代理提交补丁，再按维护者的逐题评分规则检查功能、修改范围及代码质量。",
+    "origin": "https://cognition.com/blog/frontier-code-1.1",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 5.5",
+        "date": "2026-09-22",
+        "url": "https://www.anthropic.com/claude-opus-5-5",
+        "result": "54.4%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Sonnet 5.5",
+        "date": "2026-09-28",
+        "url": "https://www.anthropic.com/claude-sonnet-5-5",
+        "result": "46.2%（max），52.1%（xhigh）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Haiku 5.5",
+        "date": "2026-10-07",
+        "url": "https://www.anthropic.com/claude-haiku-5-5",
+        "result": "46.4%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.7 Flash",
+        "date": "2026-08-13",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-7-flash/",
+        "result": "43.6%（Main）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "53.3%（Main，官方表注 8）"
+      }
+    ]
+  },
+  {
+    "id": "frontiercode-2",
+    "name": "FrontierCode 2.0",
+    "category": "编程与软件工程",
+    "about": "Cognition 以能否达到维护者合并标准评价真实代码变更，检查正确性、设计和完整性。",
+    "example": "在图算法库增加批量查询 API，保证旧接口兼容，保持已有性能，并提供与项目惯例一致的测试和文档。",
+    "metric": "按验收细则加权汇总，触发阻断条件的解答计零分。",
+    "method": "模型在现有仓库实现非细化需求，通过阻断检查后再按逐项规则评估实现是否足够完整、可维护。",
+    "origin": "https://cognition.com/blog/frontier-code-2.0",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6.2 Astra / Sol",
+        "date": "2026-11-17",
+        "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+        "result": "Astra 与 Sol（max）相差 0.5 分"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+        "result": "49.1%（xhigh），45.3%（high）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Neon",
+        "date": "2026-11-18",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-neon/",
+        "result": "46.2%（High 档，官方榜单）"
+      }
+    ]
+  },
+  {
+    "id": "mathvista",
+    "name": "MathVista",
+    "category": "视觉与多模态",
+    "about": "汇集图形、图表、视觉谜题和几何图等任务，测量从视觉输入进行数学推理的能力。",
+    "example": "图中横轴每格 2 分钟、纵轴每格 3 米。直线从原点走到右两格、上四格，该段平均速度为多少？答案 3 米/分钟。",
+    "metric": "最终答案准确率，常见公开口径为 testmini。",
+    "method": "读取图片和问题，将模型答案转换为选项、数字或其他指定格式，再与标准答案比对。",
+    "origin": "https://mathvista.github.io/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "o1（研究版）",
+        "date": "2024-09-12",
+        "url": "https://openai.com/index/learning-to-reason-with-llms/",
+        "result": "73.9%（testmini，pass@1）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.1",
+        "date": "2025-04-14",
+        "url": "https://openai.com/index/gpt-4-1/",
+        "result": "72.2%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "50.5%（testmini，0-shot CoT）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3.5 Sonnet（6 月版）",
+        "date": "2024-06-20",
+        "url": "https://www-cdn.anthropic.com/fed9cc193a14b84131812372d8d5857f8f304c52/Model_Card_Claude_3_Addendum.pdf",
+        "result": "67.7%（testmini）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Ultra",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "53.0%（testmini）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.5 Pro（2024 年 5 月版）",
+        "date": "2024-06-14",
+        "url": "https://arxiv.org/pdf/2403.05530v3",
+        "result": "63.9%（testmini，0-shot）"
+      }
+    ]
+  },
+  {
+    "id": "mcp-atlas",
+    "name": "MCP Atlas",
+    "category": "工具与智能体",
+    "about": "Scale 利用多个真实 MCP 服务设计跨工具信息检索与整合任务。",
+    "example": "先从地图工具找出离指定地点最近的展馆，再用活动工具查该馆下周的公开活动，并给出两个已核验的字段。",
+    "metric": "参考事实覆盖率达到 75% 的任务占比。",
+    "method": "裁判把参考答案拆成事实，对模型答案逐项给 0、0.5 或 1 分，再按覆盖阈值决定通过。2026 年 4 月更新了裁判和预算。",
+    "origin": "https://labs.scale.com/leaderboard/mcp_atlas",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "60.6%（早期评测）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.5",
+        "date": "2026-04-23",
+        "url": "https://openai.com/index/introducing-gpt-5-5/",
+        "result": "75.3%（2026 年 4 月更新版）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.5",
+        "date": "2025-11-24",
+        "url": "https://www-cdn.anthropic.com/bf10f64990cfda0ba858290be7b8cc6317685f47.pdf",
+        "result": "62.3%（关闭延长思考）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.6",
+        "date": "2026-02-05",
+        "url": "https://www-cdn.anthropic.com/0dd865075ad3132672ee0ab40b05a53f14cf5288.pdf",
+        "result": "59.5%（max）。62.7%（high）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "82.2%（Scale 更新裁判，100 次调用预算）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.1 Pro",
+        "date": "2026-02-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+        "result": "69.2%（公开集）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.5 Flash",
+        "date": "2026-05-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-5-flash/",
+        "result": "83.6%（Scale 榜单）"
+      }
+    ]
+  },
+  {
+    "id": "mgsm",
+    "name": "MGSM",
+    "category": "语言与阅读",
+    "about": "将 250 道小学数学应用题人工翻译为多种语言，考察相同算术问题在不同语言中的解答。",
+    "example": "「Ana tiene 3 cajas de 8 lápices y regala 5.」还剩多少支？答案为 19。",
+    "metric": "最终数值正确率，可按语言或跨语言汇总。",
+    "method": "向模型提供指定语种的问题，从回答中取出最终数值，与参考答案比对。同时记录提示和推理所用语言。",
+    "origin": "https://arxiv.org/abs/2210.03057",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4o mini",
+        "date": "2024-07-18",
+        "url": "https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/",
+        "result": "87.0%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "90.7%（0-shot）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3.5 Sonnet（6 月版）",
+        "date": "2024-06-20",
+        "url": "https://www-cdn.anthropic.com/fed9cc193a14b84131812372d8d5857f8f304c52/Model_Card_Claude_3_Addendum.pdf",
+        "result": "91.6%（0-shot CoT）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Ultra",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "79.0%（8-shot）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.5 Pro（2024 年 5 月版）",
+        "date": "2024-06-14",
+        "url": "https://arxiv.org/pdf/2403.05530v3",
+        "result": "87.5%（8-shot）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4o",
+        "date": "2024-05-13",
+        "url": "https://github.com/openai/simple-evals/blob/294cb1fb18f7aed4e21dc567350b0761a9e6f699/README.md",
+        "result": "ChatGPT 系统提示 90.5，assistant 系统提示 89.9（百分制）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4 Turbo（2024-04-09）",
+        "date": "2024-05-13",
+        "url": "https://github.com/openai/simple-evals/blob/294cb1fb18f7aed4e21dc567350b0761a9e6f699/README.md",
+        "result": "ChatGPT 系统提示 88.6，assistant 系统提示 89.6（百分制）"
+      }
+    ]
+  },
+  {
+    "id": "mmmlu",
+    "name": "MMMLU",
+    "category": "语言与阅读",
+    "about": "OpenAI 将 MMLU 测试集通过专业译者翻译成 14 种语言，检验跨语种学科知识。",
+    "example": "用日语呈现一道天文题「火星と木星の間にあるのは何ですか」，从四项中选「小惑星帯」（小行星带）。",
+    "metric": "各语言选择题准确率，可汇总报告。",
+    "method": "对照各语种试卷的原始选项键评分。阅读跨语言平均值时，也要查看语言集合和提示格式。",
+    "origin": "https://huggingface.co/datasets/openai/MMMLU",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.1",
+        "date": "2025-04-14",
+        "url": "https://openai.com/index/gpt-4-1/",
+        "result": "87.3%（报告标为 Multilingual MMLU）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "89.6%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4",
+        "date": "2025-05-22",
+        "url": "https://www.anthropic.com/news/claude-4",
+        "result": "88.8%（14 种非英语语言平均）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Sonnet 4",
+        "date": "2025-05-22",
+        "url": "https://www.anthropic.com/news/claude-4",
+        "result": "86.5%（同设置）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.5",
+        "date": "2025-11-24",
+        "url": "https://www-cdn.anthropic.com/bf10f64990cfda0ba858290be7b8cc6317685f47.pdf",
+        "result": "90.8%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.7",
+        "date": "2026-04-16",
+        "url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/037f06850df7fbe871e206dad004c3db5fd50340.pdf",
+        "result": "91.5%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.1 Pro",
+        "date": "2026-02-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+        "result": "92.6%（Google 自测）"
+      }
+    ]
+  },
+  {
+    "id": "mmmu-pro",
+    "name": "MMMU-Pro",
+    "category": "视觉与多模态",
+    "about": "MMMU 的高难版本，剔除部分仅靠文本可解的题，增加干扰项，并提供纯视觉呈现形式。",
+    "example": "两个受力图仅支点位置不同。图中负载 30 N、离支点 2 m。平衡它的力作用于另一侧 3 m 处，应选 20 N。",
+    "metric": "正确率。记录标准输入、纯视觉输入及工具条件。",
+    "method": "按试题格式出示图像、选项和必要文字。判断模型选择的答案。模型可否用 Python 处理图像是独立变量。",
+    "origin": "https://mmmu-benchmark.github.io/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "无工具 79.5%。Python 80.4%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.5",
+        "date": "2026-04-23",
+        "url": "https://openai.com/index/introducing-gpt-5-5/",
+        "result": "无工具 81.2%。有工具 83.2%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.6 Sol",
+        "date": "2026-07-09",
+        "url": "https://openai.com/index/gpt-5-6/",
+        "result": "无工具 83.0%。有工具 84.6%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.6",
+        "date": "2026-02-05",
+        "url": "https://www-cdn.anthropic.com/0dd865075ad3132672ee0ab40b05a53f14cf5288.pdf",
+        "result": "73.9%（无工具），77.3%（有工具）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3 Pro",
+        "date": "2025-11-18",
+        "url": "https://blog.google/products-and-platforms/products/gemini/gemini-3/",
+        "result": "81.0%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.1 Pro",
+        "date": "2026-02-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+        "result": "80.5%（无工具）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.5 Flash",
+        "date": "2026-05-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-5-flash/",
+        "result": "83.6%（无工具）"
+      }
+    ]
+  },
+  {
+    "id": "osworld-verified",
+    "name": "OSWorld-Verified",
+    "category": "工具与智能体",
+    "about": "OSWorld 对真实桌面软件操作任务进行复核的版本，要求模型在应用里实际完成操作。",
+    "example": "把表格按日期排序，冻结首行，并另存到指定目录。检查保存后的文件，而非只检查截图外观。",
+    "metric": "任务成功率。",
+    "method": "从可重复的桌面初始状态开始，模型读取截图并操作应用，任务脚本核查文件或系统最终状态。",
+    "origin": "https://os-world.github.io/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.3-Codex",
+        "date": "2026-02-05",
+        "url": "https://openai.com/index/introducing-gpt-5-3-codex/",
+        "result": "64.7%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.4",
+        "date": "2026-03-05",
+        "url": "https://openai.com/index/introducing-gpt-5-4/",
+        "result": "75.0%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.5",
+        "date": "2026-04-23",
+        "url": "https://openai.com/index/introducing-gpt-5-5/",
+        "result": "78.7%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "83.4%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.5 Flash",
+        "date": "2026-05-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-5-flash/",
+        "result": "78.4%（Google 自测，五轮单次尝试的均值）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.7",
+        "date": "2026-04-16",
+        "url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/037f06850df7fbe871e206dad004c3db5fd50340.pdf",
+        "result": "78.0%（系统卡图 8.9.4.A/B，1080p，最多 100 步，五次 pass@1 均值）"
+      }
+    ]
+  },
+  {
+    "id": "screenspot-pro",
+    "name": "ScreenSpot-Pro",
+    "category": "视觉与多模态",
+    "about": "测量模型在高分辨率专业软件截图中定位界面控件的能力。",
+    "example": "给一张绘图软件的完整截图，要求返回「锁定纵横比」图标内部的一个点，旁边有相似的对齐图标。",
+    "metric": "点击定位准确率，预测点落入标注框即成功。",
+    "method": "模型接收截图和自然语言目标，输出坐标。无需实际执行点击，系统拿坐标与目标框核对。",
+    "origin": "https://arxiv.org/abs/2504.07981",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "86.3%（使用 Python）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "92.7%（无工具）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.7",
+        "date": "2026-04-16",
+        "url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/037f06850df7fbe871e206dad004c3db5fd50340.pdf",
+        "result": "79.5%（无工具）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "82.3%（无工具），87.9%（Python 工具）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3 Pro",
+        "date": "2025-11-18",
+        "url": "https://deepmind.google/models/evals-methodology/gemini-3-pro/",
+        "result": "72.7%（extra_high，截图工具）。high 为 60.5%。"
+      }
+    ]
+  },
+  {
+    "id": "swe-bench-pro",
+    "name": "SWE-bench Pro",
+    "category": "编程与软件工程",
+    "about": "Scale 的多语言大型仓库维护评测，公开子集包括跨文件修改与更长的工程任务。",
+    "example": "某库存服务允许设置最低库存阈值。请把阈值贯通到配置加载、事件通知和持久化层，并通过集成测试。",
+    "metric": "公开集问题解决率。不同代际的 Pro 试题需标明版本。",
+    "method": "在仓库快照上实现需求，通过隐藏功能测试和回归验证。运行框架、工具预算会影响成绩。",
+    "origin": "https://labs.scale.com/leaderboard/swe_bench_pro",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "55.6%（Public）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.3-Codex",
+        "date": "2026-02-05",
+        "url": "https://openai.com/index/introducing-gpt-5-3-codex/",
+        "result": "56.8%（Public）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.5",
+        "date": "2026-04-23",
+        "url": "https://openai.com/index/introducing-gpt-5-5/",
+        "result": "58.6%（Public。发布页提示存在记忆迹象）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.6 Sol",
+        "url": "https://openai.com/index/gpt-5-6/",
+        "date": "2026-07-09",
+        "result": "64.6%（发布页表）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.7",
+        "date": "2026-04-16",
+        "url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/037f06850df7fbe871e206dad004c3db5fd50340.pdf",
+        "result": "64.3%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "69.2%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/document/claude-fable-5-2-mythos-5-2-system-card",
+        "result": "93.0%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.1 Pro",
+        "date": "2026-02-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+        "result": "54.2%（Public，单次尝试取五轮均值）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.5 Flash",
+        "date": "2026-05-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-5-flash/",
+        "result": "55.1%（Public，五轮均值）"
+      }
+    ]
+  },
+  {
+    "id": "terminal-bench-2-1",
+    "name": "Terminal-Bench 2.1",
+    "category": "编程与软件工程",
+    "about": "Terminal-Bench 2.0 的修订版，原 89 题中有 28 题修复了实现或验收问题。",
+    "example": "修复一个解析旧配置的命令行工具。验收同时测试最新格式、旧格式和文档指定的默认行为。",
+    "metric": "任务通过率。2.0 与 2.1 含不同版本验证器，分数需标注版本。",
+    "method": "代理在容器里执行命令、检查输出，提交后由修订过的任务验证程序判定结果。",
+    "origin": "https://www.tbench.ai/news/terminal-bench-2-1",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.6 Sol",
+        "date": "2026-07-09",
+        "url": "https://openai.com/index/gpt-5-6/",
+        "result": "88.8%（Sol），91.9%（Sol Ultra）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "74.6%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.5 Flash",
+        "date": "2026-05-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-5-flash/",
+        "result": "76.2%（Terminus 2）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.8 Flash",
+        "date": "2026-09-02",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-8-flash/",
+        "result": "89.4%（Terminus 2）"
+      }
+    ]
+  },
+  {
+    "id": "terminal-bench-4",
+    "name": "Terminal-Bench 4.0",
+    "category": "编程与软件工程",
+    "about": "Terminal-Bench 后续一代命令行任务，面向更复杂的终端内工程工作。",
+    "example": "在给定资源预算下，为大批离线日志实现可恢复的流式索引，并用工具确认重启后不会重复记录。",
+    "metric": "完成任务的比例，随任务版本、代理框架和资源设置变化。",
+    "method": "在任务专用环境中执行，使用配套验收器核对输出文件、程序行为及指定性能约束。",
+    "origin": "https://www.tbench.ai/news/terminal-bench-4-0",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "57.9%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 5.5",
+        "date": "2026-09-22",
+        "url": "https://www.anthropic.com/claude-opus-5-5",
+        "result": "66.4%（xhigh）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Sonnet 5.5",
+        "date": "2026-09-28",
+        "url": "https://www.anthropic.com/claude-sonnet-5-5",
+        "result": "70.6%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Haiku 5.5",
+        "date": "2026-10-07",
+        "url": "https://www.anthropic.com/claude-haiku-5-5",
+        "result": "39.2%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Carbon",
+        "date": "2026-11-10",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+        "result": "65.2%（AA 报告口径）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.8 Flash",
+        "date": "2026-09-02",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-8-flash/",
+        "result": "19.1%（模型卡所报榜单成绩）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Argon",
+        "date": "2026-10-13",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-argon/",
+        "result": "57.4%"
+      }
+    ]
+  },
+  {
+    "id": "terminal-bench-science",
+    "name": "Terminal-Bench-Science 0.1",
+    "category": "数学与科学",
+    "about": "70 个专家设计的科学终端任务，来自物理、地球科学、工程和数学等研究流程。",
+    "example": "从已给恒星光变数据中识别周期，输出带误差范围的估计及一份能重算结果的脚本。",
+    "metric": "按任务验证器返回的奖励取平均值（Average Reward），取值和汇总方式见相应版本说明。",
+    "method": "允许代理在终端处理实验数据、运行模拟并交付文件。专家撰写可重复运行的验证器。",
+    "origin": "https://www.tbench.ai/news/terminal-bench-science-0-1",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "64.6%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6.2 Astra",
+        "date": "2026-11-17",
+        "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+        "result": "比 GPT-6 Astra 高 9 个百分点（同篇配置）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 5.5",
+        "date": "2026-09-22",
+        "url": "https://www.anthropic.com/claude-opus-5-5",
+        "result": "58.7%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+        "result": "74.6%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Carbon",
+        "date": "2026-11-10",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+        "result": "64.8%（Artificial Analysis）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Hydrogen",
+        "date": "2026-11-12",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-hydrogen/",
+        "result": "51.4%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Neon",
+        "date": "2026-11-18",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-neon/",
+        "result": "70.5%（五次平均奖励，Google 自测）"
+      }
+    ]
+  },
+  {
+    "id": "toolathlon",
+    "name": "Toolathlon",
+    "category": "工具与智能体",
+    "about": "香港科技大学等构建的跨应用、多工具长流程评测，包含可执行任务和结果检查程序。",
+    "example": "根据邮件附件中的排班变更，改日历、更新团队表格，再把有冲突的两个班次写进待办清单。",
+    "metric": "任务通过率，即整项流程的验收结果正确的比例。",
+    "method": "在预置的隔离服务中提供工具和初始数据，执行后用任务专用评估器检查交付物和应用状态。",
+    "origin": "https://github.com/hkust-nlp/Toolathlon",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "46.3%（该发布报告配置）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.5",
+        "date": "2026-04-23",
+        "url": "https://openai.com/index/introducing-gpt-5-5/",
+        "result": "55.6%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.6 Sol",
+        "date": "2026-07-09",
+        "url": "https://openai.com/index/gpt-5-6/",
+        "result": "58.0%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "59.9%（108 题，各三次平均，内部框架）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.5 Flash",
+        "date": "2026-05-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-5-flash/",
+        "result": "56.5%（香港科技大学基准作者提供）"
+      }
+    ]
+  },
+  {
+    "id": "tau2-bench",
+    "name": "τ²-bench",
+    "category": "工具与智能体",
+    "about": "相较 τ-bench 加入双端工具使用，用户和客服可能要协同完成设置或业务操作。",
+    "example": "模拟用户手机已开启飞行模式，同时套餐流量被暂停。客服要指导用户更改设备设置，并在政策允许时恢复服务。",
+    "metric": "按领域报告成功率，可测多次全部成功的 pass^k。",
+    "method": "语言模型扮演客户，另一代理使用客服工具。系统检查客户设备、业务后台及对话目标等终态。",
+    "origin": "https://github.com/sierra-research/tau2-bench",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5（high）",
+        "url": "https://openai.com/index/introducing-gpt-5-for-developers/",
+        "date": "2025-08-07",
+        "result": "航空 62.6%，零售 81.1%，电信 96.7%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "电信 98.7%，零售 82.0%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.5",
+        "date": "2026-04-23",
+        "url": "https://openai.com/index/introducing-gpt-5-5/",
+        "result": "电信 98.0%（原始提示，不调整）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.5",
+        "date": "2025-11-24",
+        "url": "https://www-cdn.anthropic.com/bf10f64990cfda0ba858290be7b8cc6317685f47.pdf",
+        "result": "零售 88.9%，电信 98.2%（关闭延长思考）。航空原题 67.9%，厂商修订版 87.8%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.6",
+        "date": "2026-02-05",
+        "url": "https://www-cdn.anthropic.com/0dd865075ad3132672ee0ab40b05a53f14cf5288.pdf",
+        "result": "零售 91.9%，电信 99.3%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.1 Pro",
+        "date": "2026-02-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+        "result": "零售 90.8%，电信 99.3%（分环境调整提示，Gemini 模拟用户）"
+      }
+    ]
+  },
+  {
+    "id": "mrcr-v2",
+    "name": "OpenAI MRCR v2",
+    "category": "长上下文",
+    "about": "多轮共指检索的修订版，记录多个相似目标在长对话中的序号和内容。",
+    "example": "同一长记录中有八段关于木桥的介绍。输出第六段的原文，保留段落顺序并加上给定前缀。",
+    "metric": "目标文本平均匹配比例。8 针设置要注明输入 token 区间。",
+    "method": "将带相似内容的对话扩展到目标长度，要求复现特定轮次。按项目评分脚本核对前缀和内容。",
+    "origin": "https://huggingface.co/datasets/openai/mrcr",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "77.0%（8 针，128K–256K）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.6 Sol",
+        "date": "2026-07-09",
+        "url": "https://openai.com/index/gpt-5-6/",
+        "result": "73.8%（8 针，512K–1M）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "96.3%（8 针，512K–1M）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.6",
+        "date": "2026-02-05",
+        "url": "https://www-cdn.anthropic.com/0dd865075ad3132672ee0ab40b05a53f14cf5288.pdf",
+        "result": "8 needles，64k 思考预算：256K 长度档 91.9%，1M 档 78.3%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.5",
+        "date": "2026-04-23",
+        "url": "https://openai.com/index/introducing-gpt-5-5/",
+        "result": "xhigh。8 针，128K–256K 档 87.5%，512K–1M 档 74.0%。"
+      }
+    ]
+  },
+  {
+    "id": "ai2d",
+    "name": "AI2D",
+    "category": "视觉与多模态",
+    "about": "用小学科学教学图测试模型能否理解标注、箭头以及各部件关系。",
+    "example": "给出带 A、B、C 标记的水循环图，问哪个箭头代表蒸发。",
+    "metric": "选项准确率，越高越好。",
+    "method": "提供科学示意图、问题和候选项，原模型卡对低分辨率图片可做上采样。",
+    "origin": "https://allenai.org/data/diagrams",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "88.1%（测试集）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3.5 Sonnet（6 月版）",
+        "date": "2024-06-20",
+        "url": "https://www-cdn.anthropic.com/fed9cc193a14b84131812372d8d5857f8f304c52/Model_Card_Claude_3_Addendum.pdf",
+        "result": "94.7%（测试集）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Ultra",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "79.5%（原报告，像素输入）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.5 Pro（2024 年 5 月版）",
+        "date": "2024-06-14",
+        "url": "https://arxiv.org/pdf/2403.05530v3",
+        "result": "94.4%（测试集，使用透明边界框）"
+      }
+    ]
+  },
+  {
+    "id": "aider-polyglot",
+    "name": "Aider Polyglot",
+    "category": "编程与软件工程",
+    "about": "基于 Exercism 的多语言编程练习，检验模型能否在代码编辑器里正确修改文件。",
+    "example": "在 Rust 模板中实现按字母分组：相同字母忽略大小写，输出按首次出现顺序排列。测试将覆盖空字符串和重复字母。",
+    "metric": "在允许尝试次数内通过测试的题目比例。可分别报告整文件和差量编辑。",
+    "method": "模型在 Aider 环境编辑指定文件，收到单元测试反馈后可再修改。编辑格式与重试策略需要一并记录。",
+    "origin": "https://aider.chat/docs/leaderboards/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.1",
+        "date": "2025-04-14",
+        "url": "https://openai.com/index/gpt-4-1/",
+        "result": "52.9%（diff）。51.6%（整文件）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5 Thinking",
+        "date": "2025-08-07",
+        "url": "https://openai.com/index/introducing-gpt-5/",
+        "result": "88%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Pro",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "82.2%（Aider 榜单）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Flash",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "56.7%（Aider 榜单）"
+      }
+    ]
+  },
+  {
+    "id": "arc-agi-3",
+    "name": "ARC-AGI-3",
+    "category": "知识与推理",
+    "about": "第三代 ARC 将抽象归纳放进交互游戏，模型自行探索规则、目标与有效操作。",
+    "example": "未知棋盘只有移动与选择操作。第一次触碰圆形后门的颜色发生变化，模型需通过反馈学会过关并在下一关复用规则。",
+    "metric": "以人类基线归一化的动作效率得分，综合过关表现与动作数。",
+    "method": "在未提供自然语言游戏说明的环境中迭代行动并观察反馈，按关卡得分后聚合，需记录运行框架。",
+    "origin": "https://arcprize.org/arc-agi/3",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "99.9%（使用 Responses API 评测框架）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/document/claude-fable-5-2-mythos-5-2-system-card",
+        "result": "high：标准框架 79.26%，厂商适配框架 97.72%"
+      }
+    ]
+  },
+  {
+    "id": "aa-intelligence-index",
+    "name": "Artificial Analysis Intelligence Index",
+    "category": "知识与推理",
+    "about": "由多项评测综合构成的能力指数，版本变更时可能替换子任务与权重。",
+    "example": "v5 同时测试终端编程和知识工作，例如分别验证一次代码修改和一份分析工作簿，两项先单独计分再按所属维度合成。",
+    "metric": "综合指数分（index points），各版本的分值不宜直接连成时间序列。",
+    "method": "评测机构在指定框架下分别运行子测验，依据当前版本的方法归一化和加权。v5.0.1 纳入九项。",
+    "origin": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.6 Sol",
+        "date": "2026-07-09",
+        "url": "https://openai.com/index/gpt-5-6/",
+        "result": "58.9（v4.1）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "61.2（v4.1.1）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6.2 Astra",
+        "date": "2026-11-17",
+        "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+        "result": "发布页列出 v5.0.1"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Carbon",
+        "date": "2026-11-10",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+        "result": "59 指数点（AA v5.0）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Neon",
+        "date": "2026-11-18",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-neon/",
+        "result": "61 指数点（AA v5.0.1）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.7 Flash",
+        "date": "2026-08-13",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-7-flash/",
+        "result": "56 指数点（2026 年 8 月榜单，报告未注明指数版本）"
+      }
+    ]
+  },
+  {
+    "id": "bbq",
+    "name": "BBQ",
+    "category": "可靠性与安全",
+    "about": "考查语言模型在描述信息充足或含糊时，是否会借助社会刻板印象回答问题。",
+    "example": "一位年轻同事和一位年长同事一起报修打印机。材料没有提到谁会修理，应选哪位，还是“无法判断”？",
+    "metric": "上下文充分/含糊时的准确率及 bias score。偏向方向应结合正负号，绝对值越接近零越好。",
+    "method": "成组比较补充证据前后的选择，分别计算能否正确作答及在缺乏依据时倾向哪个群体。",
+    "origin": "https://aclanthology.org/2022.findings-acl.165/",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "模型卡 §7.4、图 21 分别报告含糊与明确上下文的偏差和准确率"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.5",
+        "date": "2025-02-27",
+        "url": "https://cdn.openai.com/gpt-4-5-system-card-2272025.pdf",
+        "result": "表 5：信息不足题正确率 95%，信息充足题正确率 74%。"
+      }
+    ]
+  },
+  {
+    "id": "benchcad-2-1",
+    "name": "BenchCAD 2.1",
+    "category": "视觉与多模态",
+    "about": "评估程序化 CAD 与硬件设计任务，包含由视图重建几何形状、读图及电路相关问题。",
+    "example": "从三个正交视图重建一个带两个螺孔的支架，使输出模型与参考几何吻合。",
+    "metric": "按几何、拓扑或题型专用规则给部分分，再汇总至 0–1 或百分制。",
+    "method": "在规定框架中提交 CAD 程序或答案，执行产物并与参考形状或连接关系比较。",
+    "origin": "https://benchcad.com/",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+        "result": "83.5/100（有工具，max）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6.2 Astra",
+        "date": "2026-11-17",
+        "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+        "result": "发布页列入 BenchCAD 2.1 Core，并比较成本和质量。"
+      }
+    ]
+  },
+  {
+    "id": "bbh",
+    "name": "BIG-Bench Hard（BBH）",
+    "category": "知识与推理",
+    "about": "BIG-Bench 中筛出的 23 项高难度任务，涵盖逻辑、符号操作、顺序跟踪等。",
+    "example": "三人依次进入后又交换两次位置，根据动作记录给出最终队列。",
+    "metric": "各任务正确率的汇总。",
+    "method": "按任务使用对应输出格式，抽取选项或短答，再与标注答案核对。",
+    "origin": "https://github.com/suzgunmirac/BIG-Bench-Hard",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "86.8%（3-shot CoT）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3.5 Sonnet（6 月版）",
+        "date": "2024-06-20",
+        "url": "https://www-cdn.anthropic.com/fed9cc193a14b84131812372d8d5857f8f304c52/Model_Card_Claude_3_Addendum.pdf",
+        "result": "93.1%（3-shot CoT）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Ultra",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "83.6%（3-shot）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Pro",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "75.0%（3-shot）"
+      }
+    ]
+  },
+  {
+    "id": "chartography",
+    "name": "Chartography",
+    "category": "视觉与多模态",
+    "about": "Surge AI 用 100 个由专业人士设计的真实行业图表问题测试视觉理解。",
+    "example": "从等高线图和色标读出两处地面高程，并估算高度差。",
+    "metric": "按专家给出的答案或容许范围核对，汇总单次尝试准确率。",
+    "method": "模型读取专业图表并作答，按题核对数值范围或标签。工具权限会显著影响结果。",
+    "origin": "https://arxiv.org/abs/2608.10677",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 5.5",
+        "date": "2026-09-22",
+        "url": "https://www.anthropic.com/claude-opus-5-5",
+        "result": "89.0%（有工具）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Sonnet 5.5",
+        "date": "2026-09-28",
+        "url": "https://www.anthropic.com/claude-sonnet-5-5",
+        "result": "61.6%（无工具）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Haiku 5.5",
+        "date": "2026-10-07",
+        "url": "https://www.anthropic.com/claude-haiku-5-5",
+        "result": "46.4%（无工具）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/document/claude-fable-5-2-mythos-5-2-system-card",
+        "result": "73.4%（无工具），91.6%（有工具）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Carbon",
+        "date": "2026-11-10",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+        "result": "72.5%（无工具）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Hydrogen",
+        "date": "2026-11-12",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-hydrogen/",
+        "result": "66.6%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Neon",
+        "date": "2026-11-18",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-neon/",
+        "result": "73.5%（无工具，Google 自测）"
+      }
+    ]
+  },
+  {
+    "id": "chartqa",
+    "name": "ChartQA",
+    "category": "视觉与多模态",
+    "about": "针对柱状图、折线图等的图表理解与算术推理任务。",
+    "example": "图上二月显示 80 份、三月 120 份，问三月比二月增长百分之几。",
+    "metric": "宽松准确率，数值可按参考答案容许一定相对误差。",
+    "method": "根据图像回答，文本答案按匹配规则核对，数值答案一般允许 5% 的误差。",
+    "origin": "https://github.com/vis-nlp/ChartQA",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "80.8%（测试集，宽松准确率）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3.5 Sonnet（6 月版）",
+        "date": "2024-06-20",
+        "url": "https://www-cdn.anthropic.com/fed9cc193a14b84131812372d8d5857f8f304c52/Model_Card_Claude_3_Addendum.pdf",
+        "result": "90.8%（测试集，宽松准确率）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Ultra",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "80.8%（测试集）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.5 Pro（2024 年 5 月版）",
+        "date": "2024-06-14",
+        "url": "https://arxiv.org/pdf/2403.05530v3",
+        "result": "87.2%（测试集，0-shot）"
+      }
+    ]
+  },
+  {
+    "id": "deepswe-v1-1",
+    "name": "DeepSWE v1.1",
+    "category": "编程与软件工程",
+    "about": "Datacurve 从真实仓库构造需跨多个步骤完成的工程维护任务。",
+    "example": "扩展命令行工具以支持分层读取配置，并兼容已有默认值和命令行覆盖。验证器会替换配置组合。",
+    "metric": "任务解决率，按仓库问题的隐藏行为验证结果汇总。",
+    "method": "给定仓库状态和需求，模型修改代码。人工编写的验证器验证外部可观察行为，允许多种正确实现。",
+    "origin": "https://deepswe.datacurve.ai/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.6 Sol",
+        "date": "2026-07-09",
+        "url": "https://openai.com/index/gpt-5-6/",
+        "result": "72.7%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "74.1%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.8 Flash",
+        "date": "2026-09-02",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-8-flash/",
+        "result": "73.7%（Google 自测，mini-swe-agent，高思考档）"
+      }
+    ]
+  },
+  {
+    "id": "docvqa",
+    "name": "DocVQA",
+    "category": "视觉与多模态",
+    "about": "在扫描件和文档图像中定位并阅读所需文本。",
+    "example": "给出会议通知的扫描图，问报名截止日期是哪一天。",
+    "metric": "ANLS，按归一化编辑距离衡量文本相似度，再取平均。",
+    "method": "直接看文档图片回答，预测字符串与标注比较。小幅抄录差错可获得部分分。",
+    "origin": "https://www.docvqa.org/datasets/docvqa",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "89.3%（测试集 ANLS）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3.5 Sonnet（6 月版）",
+        "date": "2024-06-20",
+        "url": "https://www-cdn.anthropic.com/fed9cc193a14b84131812372d8d5857f8f304c52/Model_Card_Claude_3_Addendum.pdf",
+        "result": "95.2%（测试集，ANLS）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Ultra",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "90.9% ANLS（测试集，纯像素）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.5 Pro（2024 年 5 月版）",
+        "date": "2024-06-14",
+        "url": "https://arxiv.org/pdf/2403.05530v3",
+        "result": "93.1% ANLS（测试集，含 OCR）"
+      }
+    ]
+  },
+  {
+    "id": "finance-agent-v2",
+    "name": "Finance Agent v2",
+    "category": "专业与办公",
+    "about": "Vals AI 用上市公司财报等资料设计金融分析师工作问题。v2 使用较难的新题集。",
+    "example": "查同一公司连续两份年度报告，统一货币和财年口径，计算某一业务部门的收入增幅。",
+    "metric": "Vals AI 公布的回答准确得分。",
+    "method": "使用浏览、监管申报检索等工具收集证据，生成带计算过程或解释的答案，再由评测方评分。",
+    "origin": "https://www.vals.ai/benchmarks/fabv2",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "53.92%（Vals AI 运行，max）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.5 Flash",
+        "date": "2026-05-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-5-flash/",
+        "result": "57.9%（Vals AI 榜单）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.8 Flash",
+        "date": "2026-09-02",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-8-flash/",
+        "result": "61.4%（Vals AI 榜单）"
+      }
+    ]
+  },
+  {
+    "id": "fleurs",
+    "name": "FLEURS",
+    "category": "语言与阅读",
+    "about": "覆盖百余种语言的平行朗读语音数据，可用于比较同一任务在不同语言上的表现。",
+    "example": "把录音“明天九点在车站集合”逐字转写。如果把“九点”听成“六点”，应记一次替换错误。",
+    "metric": "语音转写常用词错误率 WER，即替换、漏词、插词数之和除以参考词数，越低越好。",
+    "method": "向模型输入录音，在约定的文本规范化与分词规则下，对齐模型转写及参考文本，再计算错误率。",
+    "origin": "https://huggingface.co/datasets/google/fleurs",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 1.5 Pro（2024 年 5 月版）",
+        "date": "2024-06-14",
+        "url": "https://arxiv.org/pdf/2403.05530v3",
+        "result": "6.5% WER（55 种语言，越低越好）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.5 Flash",
+        "date": "2024-06-14",
+        "url": "https://arxiv.org/pdf/2403.05530v3",
+        "result": "9.8% WER（同口径）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4o Transcribe",
+        "date": "2025-03-20",
+        "url": "https://openai.com/index/introducing-our-next-generation-audio-models/",
+        "result": "OpenAI 报告其在 FLEURS 等转写基准上的 WER 低于此前的 Whisper 模型。"
+      }
+    ]
+  },
+  {
+    "id": "frontierswe-v2",
+    "name": "FrontierSWE v2",
+    "category": "编程与软件工程",
+    "about": "Proximal 设计 34 项长时程技术挑战，跨系统实现、科学计算、性能优化等。",
+    "example": "在给定程序行为规范下构建兼容查询引擎。按覆盖率与运行性能给分。",
+    "metric": "每题归一为 0 至 1，汇总各题多次尝试的平均得分，允许部分完成。",
+    "method": "给代理每次最长 20 小时，每题运行五次，按测试、性能或研究目标的专用验证器计分。",
+    "origin": "https://www.frontierswe.com/blog/v2",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+        "result": "69.9%（mean@5）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Carbon",
+        "date": "2026-11-10",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+        "result": "61.2%（Proximal 榜单）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Argon",
+        "date": "2026-10-13",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-argon/",
+        "result": "55.0%"
+      }
+    ]
+  },
+  {
+    "id": "gsm8k",
+    "name": "GSM8K",
+    "category": "数学与科学",
+    "about": "英语小学算术应用题，需要把文字转化为多步计算。",
+    "example": "学校采购 6 箱铅笔，每箱 24 支。发给 8 个班级，每班 15 支，还剩几支？",
+    "metric": "最终数值正确率。",
+    "method": "模型读题并计算，抽取数字答案后与标注比对。",
+    "origin": "https://github.com/openai/grade-school-math",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "95.0%（0-shot CoT）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3.5 Sonnet（6 月版）",
+        "date": "2024-06-20",
+        "url": "https://www-cdn.anthropic.com/fed9cc193a14b84131812372d8d5857f8f304c52/Model_Card_Claude_3_Addendum.pdf",
+        "result": "96.4%（0-shot CoT）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Ultra",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "94.4%（32 次采样投票）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Pro",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "86.5%（同口径）"
+      }
+    ],
+    "publicExample": {
+      "label": "test 第 1 题 · 用剩余鸭蛋数算出当天收入",
+      "url": "https://huggingface.co/datasets/openai/gsm8k/viewer/main/test?row=0"
+    }
+  },
+  {
+    "id": "harvey-legal-agent",
+    "name": "Harvey Legal Agent Benchmark",
+    "category": "专业与办公",
+    "about": "Harvey 的多文件法律工作任务，要求结合卷宗内邮件、表格和模板完成具体交付物。",
+    "example": "按虚构交易卷宗中的提醒邮件和附件，完成一份文件到期日历，注明每个日期的来源。",
+    "metric": "all-pass 为满足所有条款的任务比例。另可报告每条标准的平均通过率。",
+    "method": "按题目要求交付文件，由模型裁判逐一核查专业人员编写的细则。Anthropic 使用内部工具框架。",
+    "origin": "https://www.harvey.ai/blog/introducing-harveys-legal-agent-benchmark",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "9.62%（整题全过），89.01%（逐项平均通过）。1,235 题，五轮"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.8 Flash",
+        "date": "2026-09-02",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-8-flash/",
+        "result": "10.0%（all-pass，全部评分条件满足）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Argon",
+        "date": "2026-10-13",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-argon/",
+        "result": "19.6%"
+      }
+    ]
+  },
+  {
+    "id": "healthbench",
+    "name": "HealthBench",
+    "category": "专业与办公",
+    "about": "OpenAI 与 262 位医生建立的 5,000 个健康对话情境，每个情境都有独立评分表。",
+    "example": "用户想把半年的就诊资料整理给新医生，但日期有缺失。作答应帮助整理已知资料，并明确标出需要补录的信息。",
+    "metric": "逐题评分表归一后的平均得分。完整集、Hard 子集和长度校正版须区分。",
+    "method": "裁判模型按医生撰写的带权正负条目逐项检查答复，再将每题得分除以可得分数并聚合。",
+    "origin": "https://openai.com/index/healthbench/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "o3",
+        "date": "2025-05-12",
+        "url": "https://openai.com/index/healthbench/",
+        "result": "原始发布报告纳入评测"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5 Thinking",
+        "date": "2025-08-07",
+        "url": "https://openai.com/index/introducing-gpt-5/",
+        "result": "46.2%（Hard 子集）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6.1 Sol",
+        "date": "2026-09-29",
+        "url": "https://deploymentsafety.openai.com/gpt-6-1-sol",
+        "result": "58.5（完整集，长度校正），36.2（Hard，长度校正）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/document/claude-fable-5-2-mythos-5-2-system-card",
+        "result": "58.8%（原始），59.6%（长度校正，max）"
+      }
+    ]
+  },
+  {
+    "id": "healthbench-professional",
+    "name": "HealthBench Professional",
+    "category": "专业与办公",
+    "about": "面向临床专业人员的任务，两位医生分工撰写、审核对话和评价规则。",
+    "example": "给值班交接提供两份日期不同的检查摘要。请为医生提取仍需确认的项目，注明分别来自哪一份记录。",
+    "metric": "按病例的加权评分表计算得分，可进一步校正答复长度。",
+    "method": "在临床工作情境中生成回答，裁判依医生复核的规则检查是否准确、完整，报告指定聚合与长度调整方式。",
+    "origin": "https://cdn.openai.com/dd128428-0184-4e25-b155-3a7686c7d744/HealthBench-Professional.pdf",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "63.4%（9 月 3 日发布页。9 月后续系统卡修订）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6.1 Sol",
+        "date": "2026-09-29",
+        "url": "https://deploymentsafety.openai.com/gpt-6-1-sol",
+        "result": "64.2（长度校正）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "url": "https://deploymentsafety.openai.com/gpt-6-1-sol",
+        "date": "2026-09-29",
+        "result": "64.7（长度校正，9 月更新后）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/document/claude-fable-5-2-mythos-5-2-system-card",
+        "result": "71.1%（原始），67.7%（长度校正，max）"
+      }
+    ]
+  },
+  {
+    "id": "hellaswag",
+    "name": "HellaSwag",
+    "category": "知识与推理",
+    "about": "叙事情境有四个续写选项，测试对日常动作顺序和常识的理解。",
+    "example": "有人把洗净的咖啡滤杯架在杯口。下一步最合理的是放入滤纸，还是拧上轮胎、点燃蜡烛或折叠雨伞？",
+    "metric": "选项准确率，越高越好。",
+    "method": "根据上下文评估候选结尾，选出可信续写，再与人工确认的答案比较。",
+    "origin": "https://rowanzellers.com/hellaswag/",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "95.4%（10-shot）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Ultra",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "87.8%（验证集，10-shot）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Pro",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "84.7%（同口径）"
+      }
+    ]
+  },
+  {
+    "id": "officeqa-pro",
+    "name": "OfficeQA Pro",
+    "category": "专业与办公",
+    "about": "Databricks 用美国财政部历史公报构造检索和数值推理任务，材料包括扫描件和复杂表格。",
+    "example": "在两本不同年份的公报中找到同一支出科目，以表下注明的单位换算，再报告两个财年的支出差额。",
+    "metric": "最终答案正确率，按基准的数值容差或答案等价规则核对。",
+    "method": "在给定的长文档库中检索证据，解析表格、计算，再用统一答案评分器核查结果。",
+    "origin": "https://github.com/databricks/officeqa",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.5",
+        "date": "2026-04-23",
+        "url": "https://openai.com/index/introducing-gpt-5-5/",
+        "result": "54.1%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "66.2%（Pro 子集，解析文本，精确匹配）"
+      }
+    ]
+  },
+  {
+    "id": "osworld-2",
+    "name": "OSWorld 2.0",
+    "category": "工具与智能体",
+    "about": "OSWorld 团队新增长流程桌面工作，区分离线题、联网题及按子步骤计算的部分分。",
+    "example": "从本地 PDF 提取三项试验结果，在电子表格生成图表，再嵌入演示文稿。漏做其中一项会影响部分分。",
+    "metric": "完整成功率或部分完成分。报告中须注明口径、离线集和版本。",
+    "method": "在桌面虚拟机中跨应用操作，由可执行检查器核验阶段目标。不同任务划分不能直接比较。",
+    "origin": "https://osworld-v2.xlang.ai/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.6 Sol",
+        "date": "2026-07-09",
+        "url": "https://openai.com/index/gpt-5-6/",
+        "result": "62.6%（发布页所报峰值）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "72.6%（v2026.08.08，离线集，部分分）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.8 Flash",
+        "date": "2026-09-02",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-8-flash/",
+        "result": "59.0%（部分分，启用批量操作工具）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Argon",
+        "date": "2026-10-13",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-argon/",
+        "result": "69.2%（离线子集，部分分）"
+      }
+    ]
+  },
+  {
+    "id": "osworld-2-1",
+    "name": "OSWorld 2.1",
+    "category": "工具与智能体",
+    "about": "较长的桌面工作流，一个任务设多个中间验收点。报告可采用完整任务或离线子集。",
+    "example": "在桌面读取表格，计算月度销售额，把图表插入演示并另存为指定文件。",
+    "metric": "partial 为每任务完成检查点的平均比例，strict 要求所有检查点均通过。",
+    "method": "按初始快照通过鼠标与键盘操作 Ubuntu 桌面，检查点逐项评分。离线子集为 108 个任务中的 82 个。",
+    "origin": "https://osworld-v2.xlang.ai/",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 5.5",
+        "date": "2026-09-22",
+        "url": "https://www.anthropic.com/claude-opus-5-5",
+        "result": "81.8%（partial，9 月发布口径）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Sonnet 5.5",
+        "date": "2026-09-28",
+        "url": "https://www.anthropic.com/claude-sonnet-5-5",
+        "result": "80.1%（partial，9 月发布口径）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/document/claude-fable-5-2-mythos-5-2-system-card",
+        "result": "离线 82 题：89.3% partial，54.6% strict。每题五次"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Carbon",
+        "date": "2026-11-10",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+        "result": "81.5%（82 题离线子集，partial score）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Hydrogen",
+        "date": "2026-11-12",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-hydrogen/",
+        "result": "77.6%（离线子集）"
+      }
+    ]
+  },
+  {
+    "id": "simpleqa",
+    "name": "SimpleQA",
+    "category": "可靠性与安全",
+    "about": "OpenAI 发布的短答案事实问答集，每题追求明确、可核查的单一答案。",
+    "example": "「《时间简史》英文原著的作者是谁？」参考答案为 Stephen Hawking。",
+    "metric": "正确、错误、未尝试三种比例。正确率看全部试题，另可计算已回答题目的准确率。",
+    "method": "模型作答后由评分模型参照标准答案判为三类。明确承认不知道与给出错误事实分开统计。",
+    "origin": "https://openai.com/index/introducing-simpleqa/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4o",
+        "date": "2024-10-30",
+        "url": "https://openai.com/index/introducing-simpleqa/",
+        "result": "低于 40%（原始发布页）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.5",
+        "date": "2025-02-27",
+        "url": "https://openai.com/index/introducing-gpt-4-5/",
+        "result": "发布报告列为事实准确性评测"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Pro",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "54.0%（F1，无搜索）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "29.9%（F1，无搜索）"
+      }
+    ]
+  },
+  {
+    "id": "vending-bench-2",
+    "name": "Vending-Bench 2",
+    "category": "工具与智能体",
+    "about": "Andon Labs 创设模拟经营环境，用一年期的自动售货机生意测试长时程决策。",
+    "example": "现有 500 美元资金，结合补货周期和已售商品，决定下一批库存、价格与订货时间。",
+    "metric": "一年模拟期末账户余额（美元）。",
+    "method": "代理读取订单、与模拟供应商沟通并补货定价，环境按时间推进、结算收入及成本。",
+    "origin": "https://andonlabs.com/evals/vending-bench-2",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "期末余额 2,992.34 美元（max），5,787.43 美元（high）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Hydrogen",
+        "date": "2026-11-12",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-hydrogen/",
+        "result": "14,549 美元（期末余额）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Carbon",
+        "date": "2026-11-10",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+        "result": "16,484 美元（Andon Labs 榜单）"
+      }
+    ]
+  },
+  {
+    "id": "video-mmmu",
+    "name": "Video-MMMU",
+    "category": "视觉与多模态",
+    "about": "通过大学层级教学视频评估多模态模型获取、理解并迁移知识的能力。",
+    "example": "视频先演示双滑轮，再更换配重。问第二次实验中绳端的移动距离与重物上升高度之比，并说明哪一段展示了绕线方式。",
+    "metric": "题目答案正确率，可按感知、理解、迁移类别查看。",
+    "method": "让模型观看教学视频或指定采样帧，然后作答。用标准答案评判，比较时记录帧采样与工具条件。",
+    "origin": "https://videommmu.github.io/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "85.9%（无工具）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3 Pro",
+        "date": "2025-11-18",
+        "url": "https://blog.google/products-and-platforms/products/gemini/gemini-3/",
+        "result": "87.6%"
+      }
+    ]
+  },
+  {
+    "id": "tau-bench",
+    "name": "τ-bench",
+    "category": "工具与智能体",
+    "about": "让助手在航空或零售客服系统中与模拟用户对话，用工具完成符合业务规则的操作。",
+    "example": "用户要退掉同一订单中的一件外套。助手需要核实订单、商品与退款渠道，再更新这件商品的状态。",
+    "metric": "任务成功率及多次独立执行都成功的 pass^k。单次成功率常并列。",
+    "method": "固定初始订单与政策，让用户模拟器与模型交谈。检查最终数据库状态和必要回答。模拟器会影响成绩。",
+    "origin": "https://github.com/sierra-research/tau-bench",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.1",
+        "date": "2025-04-14",
+        "url": "https://openai.com/index/gpt-4-1/",
+        "result": "航空 49.4%，零售 68.0%（5 次运行均值，默认用户模拟器）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3.5 Sonnet（10 月版）",
+        "date": "2024-10-22",
+        "url": "https://www.anthropic.com/news/3-5-models-and-computer-use",
+        "result": "零售 69.2%，航空 46.0%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4",
+        "date": "2025-05-22",
+        "url": "https://www.anthropic.com/news/claude-4",
+        "result": "零售 81.4%，航空 59.6%（延长思考）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Sonnet 4",
+        "date": "2025-05-22",
+        "url": "https://www.anthropic.com/news/claude-4",
+        "result": "零售 80.5%，航空 60.0%（延长思考）"
+      }
+    ]
+  },
+  {
+    "id": "1h-videoqa",
+    "name": "1H-VideoQA",
+    "category": "视觉与多模态",
+    "about": "Google 编写的 125 道五选一长视频题，素材约 40 至 105 分钟。",
+    "example": "一场讲座在开头提出三类云。最后的演示回到哪一类？需要对照开场列表和结尾演示。",
+    "metric": "五选一正确率，结果随视频采样密度变化。",
+    "method": "给模型不同帧数或全片每秒一帧，不提供已答示例，再按选项判分。",
+    "origin": "https://arxiv.org/pdf/2403.05530v3",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 1.5 Pro（2024 年 5 月版）",
+        "date": "2024-06-14",
+        "url": "https://arxiv.org/pdf/2403.05530v3",
+        "result": "45.2%（16 帧），56.3%（150 帧），72.2%（全片 1 fps）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.5 Flash",
+        "date": "2024-06-14",
+        "url": "https://arxiv.org/pdf/2403.05530v3",
+        "result": "65.9%（全片 1 fps）"
+      }
+    ]
+  },
+  {
+    "id": "aa-3d",
+    "name": "AA-3D",
+    "category": "视觉与多模态",
+    "about": "Artificial Analysis 测试按文字需求用代码生成可实际操作的 3D 网页体验。",
+    "example": "制作可在浏览器中旋转和拆分的复古相机模型，滚轮缩放，单击按钮展示镜头组。评审会亲自操作。",
+    "metric": "由匿名两两偏好投票估计的相对 Elo 等级分。",
+    "method": "多个模型接收同一需求。人类评审分别操作隐藏来源的两个成品，再对照体验投票。",
+    "origin": "https://artificialanalysis.ai/methodology/aa-3d",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6.2 Astra",
+        "date": "2026-11-17",
+        "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+        "result": "1,318 Elo"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6.2 Sol",
+        "date": "2026-11-17",
+        "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+        "result": "1,259 Elo"
+      }
+    ]
+  },
+  {
+    "id": "aa-analystagent",
+    "name": "AA-AnalystAgent",
+    "category": "专业与办公",
+    "about": "Artificial Analysis 让模型从真实电子表格和文档中检索数值并完成定量分析。",
+    "example": "三个工作簿分别包含运量、燃料费和退费。按题目定义计算每吨净运输成本，处理缺失行和币种。",
+    "metric": "pass^5，即同一问题五次独立作答全部正确的占比。",
+    "method": "在支持文件读取、代码执行的代理环境中作答，核对最终数值。重复五次以衡量可靠性。",
+    "origin": "https://artificialanalysis.ai/evaluations/aa-analyst-agent",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6.2 Astra",
+        "date": "2026-11-17",
+        "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+        "result": "62.5%（五次均答对）"
+      }
+    ]
+  },
+  {
+    "id": "aa-briefcase",
+    "name": "AA-Briefcase v1.1",
+    "category": "专业与办公",
+    "about": "Artificial Analysis 搭建多阶段专业项目，让代理从文件和工作资料出发制作可交付成果。",
+    "example": "读取库存明细、供应商合同和管理层来信，提交补货建议表，并说明哪些物料优先。",
+    "metric": "rubric 量表达成率和成对评审 Elo 分开报告。",
+    "method": "评分覆盖可验证任务要求、分析质量和呈现质量。Elo 依赖比较样本及评测时点。",
+    "origin": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Sonnet 5.5",
+        "date": "2026-09-28",
+        "url": "https://www.anthropic.com/claude-sonnet-5-5",
+        "result": "1811 Elo（9 月公告）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+        "result": "66.1%（rubric），1785 Elo（11 月公告）"
+      }
+    ]
+  },
+  {
+    "id": "agents-last-exam",
+    "name": "Agents’ Last Exam",
+    "category": "工具与智能体",
+    "about": "伯克利 RDI 将专家实际完成的专业项目转化为可执行任务，包括多应用、长流程的工作。",
+    "example": "整理一次供应链异常：核对库存、发运记录和合同，在工作簿中列出缺货量并准备一份可追溯的补货计划。",
+    "metric": "按任务计算完成比例，可分难度档统计。",
+    "method": "给任务材料及计算机环境，让代理完成项目，然后用基于结果的检查项或验证程序判定交付物。",
+    "origin": "https://rdi.berkeley.edu/blog/agents-last-exam/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.6 Sol",
+        "date": "2026-07-09",
+        "url": "https://openai.com/index/gpt-5-6/",
+        "result": "52.7%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "59.3%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6.2 Astra",
+        "date": "2026-11-17",
+        "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+        "result": "比 GPT-6 Astra 高 5.2 分（同篇配置）"
+      }
+    ]
+  },
+  {
+    "id": "agents-last-exam-v1-1",
+    "name": "Agents’ Last Exam v1.1",
+    "category": "工具与智能体",
+    "about": "Berkeley RDI 等组织用专业软件中的长流程任务评估代理交付实际工作产品的能力。",
+    "example": "在动画工程中按修改意见调整两个镜头的时长，修正字幕出现位置，导出供客户审阅的版本。",
+    "metric": "各任务评分量表得分的平均值。",
+    "method": "Gemini 4 在 122 项任务上运行五小时窗口。Carbon 用默认 ALE-Claw，Neon 用 Antigravity-CLI 1.4.8。",
+    "origin": "https://agents-last-exam.org/",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Carbon",
+        "date": "2026-11-10",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+        "result": "77.4%（ALE-Claw，5 小时）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Hydrogen",
+        "date": "2026-11-12",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-hydrogen/",
+        "result": "71.6%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Neon",
+        "date": "2026-11-18",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-neon/",
+        "result": "75.8%（Antigravity-CLI，5 小时）"
+      }
+    ]
+  },
+  {
+    "id": "aime-2024",
+    "name": "AIME 2024",
+    "category": "数学与科学",
+    "about": "American Invitational Mathematics Examination（美国数学邀请赛） 2024 年试卷。每场 15 道题，答案是 000 至 999 的整数。",
+    "example": "从 1 到 20 中任选两个不同整数，和是 4 的倍数的选法有几种？答案 045。",
+    "metric": "逐题整数答案正确率。pass@1 与 64 次采样投票的 cons@64 分开。",
+    "method": "使用该年度试题，抽取最终整数，按答案键比对并在各题间取平均。同时标注工具与采样条件。",
+    "origin": "https://maa.org/student-programs/amc/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "o1（研究版）",
+        "date": "2024-09-12",
+        "url": "https://openai.com/index/learning-to-reason-with-llms/",
+        "result": "74.4% pass@1。83.3% cons@64（附录）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.5",
+        "date": "2025-02-27",
+        "url": "https://openai.com/index/introducing-gpt-4-5/",
+        "result": "36.7%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.1",
+        "date": "2025-04-14",
+        "url": "https://openai.com/index/gpt-4-1/",
+        "result": "48.1%"
+      }
+    ]
+  },
+  {
+    "id": "apex-agents",
+    "name": "APEX-Agents",
+    "category": "专业与办公",
+    "about": "Mercor 用咨询、投行与公司法的长流程任务测量专业代理能力。",
+    "example": "阅读虚构公司三个部门的预算和会议记录，提交一份整合后的成本方案，并为每项假设标注出处。",
+    "metric": "任务一次完成率 pass@1。",
+    "method": "代理在带文档和工具的工作区生成交付物，按行业专家编写的量表判定是否满足任务要求。",
+    "origin": "https://www.mercor.com/blog/introducing-apex-agents/",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 3.1 Pro",
+        "date": "2026-02-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+        "result": "33.5%"
+      }
+    ]
+  },
+  {
+    "id": "apps",
+    "name": "APPS",
+    "category": "编程与软件工程",
+    "about": "面向编程题的程序合成评测，包含竞赛、面试等不同难度。",
+    "example": "程序从标准输入读取若干区间，合并重叠部分并按起点升序输出。",
+    "metric": "通过测试的任务比例，读数需结合抽样次数。",
+    "method": "生成可运行代码，从标准输入输出或函数接口执行题目给定的测试。",
+    "origin": "https://github.com/hendrycks/apps",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "70.2%（0-shot，模型卡表 1）"
+      }
+    ]
+  },
+  {
+    "id": "arc-agi-1",
+    "name": "ARC-AGI-1",
+    "category": "知识与推理",
+    "about": "François Chollet 推出的抽象推理评测。模型从少数输入输出彩色网格中归纳转换规则。",
+    "example": "训练对把每个红色方块向右移动一格，其余格不变。测试输入红块出现在左上角，请填出整张输出网格。",
+    "metric": "网格完全正确的题目比例，形状和每个格子的颜色均须匹配。",
+    "method": "给少量示范与新的测试网格，让模型提交预测。按对应轮次允许的尝试次数判分。",
+    "origin": "https://arcprize.org/arc-agi/1",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "86.2%（Verified）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "98.5%"
+      }
+    ],
+    "publicExample": {
+      "label": "007bbfb7 · 在格子中填出变换后的图案",
+      "url": "https://arcprize.org/tasks/007bbfb7"
+    }
+  },
+  {
+    "id": "arc-challenge",
+    "name": "ARC-Challenge",
+    "category": "知识与推理",
+    "about": "AI2 的中小学科学选择题挑战子集，筛除了简单检索或词共现方法即可解决的题目。",
+    "example": "同质量的冰块分别放在保温盒和金属盘中。哪块在室温下通常最慢熔化？",
+    "metric": "选项准确率，越高越好。",
+    "method": "逐题选择科学上正确的选项，与答案键比较。",
+    "origin": "https://allenai.org/data/arc",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "96.4%（25-shot）"
+      }
+    ]
+  },
+  {
+    "id": "aa-coding-agent-index",
+    "name": "Artificial Analysis Coding Agent Index",
+    "category": "编程与软件工程",
+    "about": "将多项软件工程与终端代理评测合成为一个编码能力指数。",
+    "example": "同一代理先修正现有库的导出错误，再在另一套终端环境生成可复算的数据文件，两套结果分别计分。",
+    "metric": "综合指数分，须记录基准构成和版本。",
+    "method": "按各分项的操作环境、工具预算及通过条件评测，再按该版公开方法合成，与成本和时间分开报告。",
+    "origin": "https://artificialanalysis.ai/methodology/coding-agents-benchmarking",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.6 Sol",
+        "date": "2026-07-09",
+        "url": "https://openai.com/index/gpt-5-6/",
+        "result": "80（v1.1）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "67.0（v1.4）"
+      }
+    ]
+  },
+  {
+    "id": "betterchartqa",
+    "name": "BetterChartQA",
+    "category": "视觉与多模态",
+    "about": "Google 在 ChartQA 外构建的图表理解集，将问题按九种图表技能划分。",
+    "example": "月销量折线依次是 40、43、39、60。图上哪两个月之间涨幅最大？答案为第三至第四个月。",
+    "metric": "图表问答正确率。",
+    "method": "以图像及问题为输入，核对短答案，再汇总各类图表读数与运算题的表现。",
+    "origin": "https://arxiv.org/pdf/2403.05530v3",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 1.5 Pro（2024 年 5 月版）",
+        "date": "2024-06-14",
+        "url": "https://arxiv.org/pdf/2403.05530v3",
+        "result": "65.8%（0-shot）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Pro",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "72.4%"
+      }
+    ]
+  },
+  {
+    "id": "bird-sql",
+    "name": "BIRD-SQL",
+    "category": "编程与软件工程",
+    "about": "在真实数据库上将自然语言分析需求转换成 SQL，需理解数据库模式与具体值。",
+    "example": "给定 orders(id, region, amount)，找出总销售额最高的地区，若有多个并列则全数返回。",
+    "metric": "执行准确率，比较生成查询和参考查询在数据库中的结果。",
+    "method": "提供问题、数据库模式和可用外部知识，执行查询并比对返回值。Gemini 2.0 表采用开发集。",
+    "origin": "https://bird-bench.github.io/",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash Experimental",
+        "date": "2024-12-11",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/google-gemini-ai-update-december-2024/",
+        "result": "56.9%（开发集）"
+      }
+    ]
+  },
+  {
+    "id": "blueprint-bench-2",
+    "name": "Blueprint-Bench 2",
+    "category": "视觉与多模态",
+    "about": "Andon Labs 要求模型从住宅室内照片重建平面图，重点是房间连通关系与相对布局。",
+    "example": "三张室内照片显示客厅通向走廊、走廊通向卧室。画出三间空间并标记两个门洞。",
+    "metric": "连通图相似度，随机基线归一为 0、完美为 1，报告换算为百分数。",
+    "method": "代理依次分析 50 套住宅并生成平面图。评分器匹配房间和通道，综合拓扑、数量及朝向等六项指标。",
+    "origin": "https://andonlabs.com/evals/blueprint-bench-2",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 3.5 Flash",
+        "date": "2026-05-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-5-flash/",
+        "result": "33.6%（Andon Labs 榜单）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Carbon",
+        "date": "2026-11-10",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+        "result": "58.6%（Andon Labs 榜单）"
+      }
+    ]
+  },
+  {
+    "id": "browsecomp-long-context",
+    "name": "BrowseComp Long Context",
+    "category": "长上下文",
+    "about": "从 BrowseComp 衍生的静态长文档版本，把可用材料和干扰文档放进同一上下文。",
+    "example": "档案包含多家同名公司的招股书。请先靠注册地址确定公司，再从正确文件中找出首任财务负责人。",
+    "metric": "按给定上下文长度统计答案正确率。",
+    "method": "直接把检索材料送入提示，要求模型从中定位和整合证据。上下文长度以 token 档位标明。",
+    "origin": "https://openai.com/index/introducing-gpt-5-for-developers/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5（high）",
+        "date": "2025-08-07",
+        "url": "https://openai.com/index/introducing-gpt-5-for-developers/",
+        "result": "90.0%（128K）。88.8%（256K）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "92.0%（128K）。89.8%（256K）"
+      }
+    ]
+  },
+  {
+    "id": "chartmuseum",
+    "name": "ChartMuseum",
+    "category": "视觉与多模态",
+    "about": "针对真实图表的视觉推理，常涉及无文字标记的图形、相对位置和轨迹。",
+    "example": "在一张不标数值的河流图上，哪个区域先变宽又在最后恢复到初始宽度？",
+    "metric": "回答正确率。",
+    "method": "根据图像作答，评判器对照专家答案。Anthropic 在测试集跑五次，使用 Claude Sonnet 4.6 作裁判。",
+    "origin": "https://github.com/Liyan06/ChartMuseum",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "75.8%（无工具，max）"
+      }
+    ]
+  },
+  {
+    "id": "chartqapro",
+    "name": "ChartQAPro",
+    "category": "视觉与多模态",
+    "about": "用新闻、报告、仪表盘等多来源图表测试选择、假设、对话与不可回答问题。",
+    "example": "某统计图只展示四个季度收入。有人问第四季度利润率，请据图回答或说明信息不足。",
+    "metric": "按题型评分的准确率。",
+    "method": "读图给出最终答案。Claude 4.8 采用参考实现的规则评分，并将完整测试集运行五次取平均。",
+    "origin": "https://arxiv.org/abs/2504.05506",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "69.4%（无工具），72.3%（有工具）"
+      }
+    ]
+  },
+  {
+    "id": "claude-factual-honesty",
+    "name": "Claude 事实问答诚实度（内部）",
+    "category": "可靠性与安全",
+    "about": "Anthropic 专门收集模型容易答错的复杂事实题，区分给错事实和坦承信息不足。",
+    "example": "某资料只记载这座天文台于 1987 年开放。请问首次对公众售票是哪一天？资料不足时说明无法确定。",
+    "metric": "错误陈述率，越低越好。厂商公布相对变化。",
+    "method": "用相同问题测试新旧模型，再按评分规则区分错误断言和表达不确定。",
+    "origin": "https://www.anthropic.com/news/claude-2-1",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 2.1",
+        "date": "2023-11-21",
+        "url": "https://www.anthropic.com/news/claude-2-1",
+        "result": "与 Claude 2.0 相比，错误陈述率约减半"
+      }
+    ]
+  },
+  {
+    "id": "claude-agentic-coding",
+    "name": "Claude 内部代码修改评测（2024）",
+    "category": "编程与软件工程",
+    "about": "Anthropic 为开放源码库设计错误修复和新功能请求，衡量模型在工具辅助下自行完成修改的能力。",
+    "example": "给日程解析器增加对本地日期格式的识别，并保留现有 ISO 日期的行为。",
+    "metric": "完成全部测试的任务比例。",
+    "method": "从自然语言需求开始，模型可编辑和运行代码，最后执行相应的功能及回归测试。",
+    "origin": "https://www-cdn.anthropic.com/fed9cc193a14b84131812372d8d5857f8f304c52/Model_Card_Claude_3_Addendum.pdf",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3.5 Sonnet（6 月版）",
+        "date": "2024-06-20",
+        "url": "https://www-cdn.anthropic.com/fed9cc193a14b84131812372d8d5857f8f304c52/Model_Card_Claude_3_Addendum.pdf",
+        "result": "64%（同一报告中 Claude 3 Opus 为 38%）"
+      }
+    ]
+  },
+  {
+    "id": "claude-document-faithfulness",
+    "name": "Claude 长文档理解与忠实度（内部）",
+    "category": "可靠性与安全",
+    "about": "Anthropic 用法律、财务或技术材料测试模型能否依据长文作答，以及能否发现文档缺少某项支持。",
+    "example": "材料只写“委员会讨论了延长营业时间”。说法“委员会通过了提案”是否得到原文支持？",
+    "metric": "错误答案率、误判文档支持论点的频率，越低越好。",
+    "method": "依据给定文档核对回答和支持关系，与上一代对照。",
+    "origin": "https://www.anthropic.com/news/claude-2-1",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 2.1",
+        "date": "2023-11-21",
+        "url": "https://www.anthropic.com/news/claude-2-1",
+        "result": "错误答案相对减少 30%，误称文档支持论点的频率降至前代约 1/3 至 1/4"
+      }
+    ]
+  },
+  {
+    "id": "codeforces",
+    "name": "Codeforces",
+    "category": "编程与软件工程",
+    "about": "用在线程序设计竞赛的限时题目评估算法实现，并对照真人选手的排名分布。",
+    "example": "给定一个整数数组，对每次更新输出数组中最长连续递增段的长度。输入规模使每次重新扫描都超时。",
+    "metric": "模拟竞赛等级分（Elo）与在人类参赛者中的百分位。",
+    "method": "在限定提交次数的模拟比赛中生成程序，按隐藏测例、比赛规则与其他选手成绩估算等级分。",
+    "origin": "https://codeforces.com/contests",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "o1（研究版）",
+        "date": "2024-09-12",
+        "url": "https://openai.com/index/learning-to-reason-with-llms/",
+        "result": "1,673 Elo，第 89 百分位"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "o3",
+        "date": "2025-04-16",
+        "url": "https://openai.com/index/introducing-o3-and-o4-mini/",
+        "result": "官方列为评测项目"
+      }
+    ]
+  },
+  {
+    "id": "collie",
+    "name": "COLLIE",
+    "category": "指令遵循",
+    "about": "系统化生成带字符、词或句子约束的写作任务，测试模型对形式要求的控制。",
+    "example": "用英语写一句至少含五个词的话，第一和最后一个词都以字母 s 开头。可答「Silent owls glide over seas」。",
+    "metric": "满足题设约束的输出比例，可按约束类别拆分。",
+    "method": "将生成文本交给与题目配套的规则函数，检查位置、计数与其他语言结构条件。",
+    "origin": "https://collie-benchmark.github.io/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.1",
+        "date": "2025-04-14",
+        "url": "https://openai.com/index/gpt-4-1/",
+        "result": "65.8%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5（high）",
+        "url": "https://openai.com/index/introducing-gpt-5-for-developers/",
+        "date": "2025-08-07",
+        "result": "99.0%"
+      }
+    ]
+  },
+  {
+    "id": "complexfuncbench",
+    "name": "ComplexFuncBench",
+    "category": "工具与智能体",
+    "about": "用 1,000 个多约束场景测试复杂函数调用，涵盖多步依赖、隐含参数及长输入。",
+    "example": "先调用日历函数查出明早第一场会，再查会前可用的 30 分钟时段。第二次调用需要使用第一次返回的开始时间。",
+    "metric": "项目用自动评分框架 ComplexEval 判定工具调用表现。OpenAI 以百分比报告总体成绩。",
+    "method": "模型接收工具定义、约束和用户要求，产生函数名与参数。评价程序按参考调用及依赖关系检查任务。",
+    "origin": "https://github.com/zai-org/ComplexFuncBench",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.1",
+        "date": "2025-04-14",
+        "url": "https://openai.com/index/gpt-4-1/",
+        "result": "65.5%（Function calling 表）"
+      }
+    ]
+  },
+  {
+    "id": "covost2",
+    "name": "CoVoST 2",
+    "category": "语言与阅读",
+    "about": "自然语音到另一种语言文本的翻译基准，提供语音、原文转写及参考译文。",
+    "example": "听到西语“Llegaremos mañana por la tarde”，将它直接译成英文，并保留将来时和时段。",
+    "metric": "BLEU，衡量生成译文与参考译文的词组匹配程度，越高越好。",
+    "method": "将输入语音译为英语，在报告列入的 20 个源语言上汇总。",
+    "origin": "https://github.com/facebookresearch/covost",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 1.5 Pro（2024 年 5 月版）",
+        "date": "2024-06-14",
+        "url": "https://arxiv.org/pdf/2403.05530v3",
+        "result": "39.4 BLEU（20 种语言译入英语）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.5 Flash",
+        "date": "2024-06-14",
+        "url": "https://arxiv.org/pdf/2403.05530v3",
+        "result": "36.1 BLEU（同口径）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash Experimental",
+        "date": "2024-12-11",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/google-gemini-ai-update-december-2024/",
+        "result": "39.2 BLEU（21 种语言）"
+      }
+    ]
+  },
+  {
+    "id": "cursorbench-4",
+    "name": "CursorBench 4.0",
+    "category": "编程与软件工程",
+    "about": "Cursor 根据真实编程会话设计的编码任务，要求理解不完全明确的需求并修改多个文件。",
+    "example": "用户说“新增报告也要出现在侧栏里”，请从仓库代码判断需修改哪些注册点与测试。",
+    "metric": "Cursor 所定义任务的得分（百分制）。",
+    "method": "在 Cursor 提供的代理框架中生成修改，由评估方按参考标准验收。不同提示与框架版本可能影响读数。",
+    "origin": "https://cursor.com/cursorbench",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 5.5",
+        "date": "2026-09-22",
+        "url": "https://www.anthropic.com/claude-opus-5-5",
+        "result": "57.8%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Sonnet 5.5",
+        "date": "2026-09-28",
+        "url": "https://www.anthropic.com/claude-sonnet-5-5",
+        "result": "55.5%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/document/claude-fable-5-2-mythos-5-2-system-card",
+        "result": "60.0%（max，Cursor 调整过提示与框架）"
+      }
+    ]
+  },
+  {
+    "id": "cursorbench-4-1",
+    "name": "CursorBench 4.1",
+    "category": "编程与软件工程",
+    "about": "Cursor 从真实使用场景抽取多文件任务，如编辑、重构与弄清含糊需求。",
+    "example": "历史需求只写“在侧栏恢复刚才的选择”。阅读现有状态管理和交互约定，完成符合上下文的修改。",
+    "metric": "CursorBench 得分，百分数越高代表任务完成度越好。",
+    "method": "在统一代码代理环境内执行多文件改动，以任务要求检查结果。4.1 更新了指令遵循题并放宽运行时限。",
+    "origin": "https://cursor.com/cursorbench",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Neon",
+        "date": "2026-11-18",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-neon/",
+        "result": "65.4%（报告引用 Cursor，Extra High 档）"
+      }
+    ]
+  },
+  {
+    "id": "cwe-bench-v2",
+    "name": "CWE-bench v2",
+    "category": "编程与软件工程",
+    "about": "Collinear AI 的安全代码审查与补丁评测，测试能否改进仓库中有缺陷的安全边界，同时保持功能。",
+    "example": "给定一段生成的应用代码，普通用户能读到不属于自己的模拟记录。请修正授权判断并验证原有合理访问仍然可用。",
+    "metric": "程序验证的 pass@1，平分时再参考 pass@4。",
+    "method": "在独立仓库中审查与修改代码，自动检查安全修复及原有行为。Neon 模型卡转引基准官方榜单。",
+    "origin": "https://cwe-bench.com/v2",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Neon",
+        "date": "2026-11-18",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-neon/",
+        "result": "70.7%（v2，程序判分）"
+      }
+    ]
+  },
+  {
+    "id": "deepsearchqa",
+    "name": "DeepSearchQA",
+    "category": "搜索与研究",
+    "about": "Google 发布的多步检索题，要求从网上整理完整答案集合，覆盖 17 个领域。",
+    "example": "按给定规则找出某届电影节所有符合条件的入围作品，并核对每部作品的导演。",
+    "metric": "答案集合 F1，平衡精确率与召回率。",
+    "method": "多轮查询、浏览资料后提交答案集合。漏项和多报都会扣分。",
+    "origin": "https://arxiv.org/abs/2601.20975",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.6",
+        "date": "2026-02-05",
+        "url": "https://www-cdn.anthropic.com/0dd865075ad3132672ee0ab40b05a53f14cf5288.pdf",
+        "result": "系统卡 §2.21.3 报告 F1。程序化搜索及上下文压缩，最高 1,000 万 token"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "93.1% F1。84.8% 的题目完整答对"
+      }
+    ]
+  },
+  {
+    "id": "eclektic",
+    "name": "ECLeKTic",
+    "category": "语言与阅读",
+    "about": "Google 的闭卷问答集，检验某种语言资料里的本地知识能否用于回答其他语言的问题。",
+    "example": "某地节庆的官方别称主要见于当地语言报道。先用当地语言提问，再用中文询问同一别称，比较两次回答。",
+    "metric": "跨语言知识迁移得分，检查源语言与目标语言作答的正确性。",
+    "method": "从具有语言特异性的资料选事实并形成对应的多语言问题。模型闭卷回答，再按基准规则比对。",
+    "origin": "https://research.google/blog/eclektic-a-novel-benchmark-for-evaluating-cross-lingual-knowledge-transfer-in-llms/",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Pro",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "46.8%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "33.6%"
+      }
+    ]
+  },
+  {
+    "id": "egoschema",
+    "name": "EgoSchema",
+    "category": "视觉与多模态",
+    "about": "长约三分钟的第一人称视频配五选一问题，常需整合较长时间内的活动。",
+    "example": "摄像者先称面粉、再开烤箱、后来取出烤盘。五种选项里哪项最能概括活动目的？可选“烘焙面包”。",
+    "metric": "五选一正确率。",
+    "method": "均匀抽取视频帧，结合题干给出一个选项。报告注明测试集的零样例成绩。",
+    "origin": "https://egoschema.github.io/",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 1.5 Pro（2024 年 5 月版）",
+        "date": "2024-06-14",
+        "url": "https://arxiv.org/pdf/2403.05530v3",
+        "result": "72.2%（测试集，0-shot）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.5 Flash",
+        "date": "2024-06-14",
+        "url": "https://arxiv.org/pdf/2403.05530v3",
+        "result": "65.7%（同口径）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash Experimental",
+        "date": "2024-12-11",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/google-gemini-ai-update-december-2024/",
+        "result": "71.5%（测试集）"
+      }
+    ]
+  },
+  {
+    "id": "facts-grounding",
+    "name": "FACTS Grounding",
+    "category": "可靠性与安全",
+    "about": "给定一份文档和一项写作或问答要求，检查输出是否忠于文档。",
+    "example": "材料只写“新展厅预计秋季开放”。请写一句进度说明。若增加具体日期或称已开放，会引入无依据陈述。",
+    "metric": "满足指令且得到文档充分支持的回答所占比例，按官方裁判集成规则汇总。",
+    "method": "先筛去没有完成用户要求的回答，再由评审模型检查各项事实有无文档依据。",
+    "origin": "https://www.kaggle.com/benchmarks/google/facts-grounding",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Pro",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "87.8%（报告引用 Kaggle）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "84.6%（同口径）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash Experimental",
+        "date": "2024-12-11",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/google-gemini-ai-update-december-2024/",
+        "result": "83.6%（发布日留出集）"
+      }
+    ]
+  },
+  {
+    "id": "factscore",
+    "name": "FActScore",
+    "category": "知识与推理",
+    "about": "将长文本拆成原子事实，再检查每条是否有资料支持，典型场景为人物传记。",
+    "example": "请根据附带的虚构人物档案写一段传记。若答复写「林某 1980 年获奖并在次年迁居」，档案仅支持获奖信息，评分时应把两个主张分别核查。",
+    "metric": "原指标是得到支持的原子事实占比。OpenAI 在这些提示上报告错误断言比例，越低越好。",
+    "method": "独立核查每个断言。OpenAI 的版本以可浏览的裁判核验无工具模型生成的回答。",
+    "origin": "https://aclanthology.org/2023.emnlp-main.741/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5（high）",
+        "date": "2025-08-07",
+        "url": "https://openai.com/index/introducing-gpt-5-for-developers/",
+        "result": "错误断言率 2.8%（无工具作答）"
+      }
+    ]
+  },
+  {
+    "id": "financeagent",
+    "name": "FinanceAgent v1.1",
+    "category": "专业与办公",
+    "about": "Vals AI 让模型使用检索和公司披露资料，完成具有客观短答案的金融研究问题。",
+    "example": "从两份年度报告取出同一分部的营收，按题目指定的币种计算同比增长率，并保留一位小数。",
+    "metric": "最终答案准确率。成本和运行时间作为独立指标。",
+    "method": "模型用网页与监管披露工具检索数据，由评分模型核对标准答案。v1.1 明确舍入规则并对多次评分取众数。",
+    "origin": "https://www.vals.ai/benchmarks/finance_agent",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.4",
+        "date": "2026-03-05",
+        "url": "https://openai.com/index/introducing-gpt-5-4/",
+        "result": "56.0%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.5",
+        "date": "2026-04-23",
+        "url": "https://openai.com/index/introducing-gpt-5-5/",
+        "result": "60.0%"
+      }
+    ]
+  },
+  {
+    "id": "frontiermath",
+    "name": "FrontierMath",
+    "category": "数学与科学",
+    "about": "Epoch AI 邀请研究数学家撰写原创难题，按层级划分，Tier 4 的难度最高。",
+    "example": "缩小版：计算群 S₄ 中阶恰为 4 的元素数目。程序可核验答案为 6。正式题可能需要数小时或更久。",
+    "metric": "答对题目的比例，需同时标注层级、版本、可用工具。",
+    "method": "专家设计可自动核验的最终结果。模型可能借助 Python 计算，隐藏参考答案或验证函数检查结果。",
+    "origin": "https://epoch.ai/frontiermath/tiers-1-4",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "Tier 1–3 为 40.3%，Tier 4 为 14.6%（Python）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.5",
+        "date": "2026-04-23",
+        "url": "https://openai.com/index/introducing-gpt-5-5/",
+        "result": "Tier 1–3 为 51.7%，Tier 4 为 35.4%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.6 Sol",
+        "date": "2026-07-09",
+        "url": "https://openai.com/index/gpt-5-6/",
+        "result": "v2：Tier 1–3 为 89.0%，Tier 4 为 83.0%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "date": "2026-09-03",
+        "url": "https://openai.com/index/gpt-6-astra/",
+        "result": "Tier 4 v2 为 97.6%"
+      }
+    ]
+  },
+  {
+    "id": "gaia",
+    "name": "GAIA",
+    "category": "工具与智能体",
+    "about": "通用助手评测，问题分三级，常要组合查网、读附件、解析表格或计算。",
+    "example": "附件列有五届展览及年份。查主办方档案，找出其中唯一改过场馆的一届，再从表中取其登记编号。",
+    "metric": "最终答案匹配准确率，另可报告单次作答与多次共识。",
+    "method": "让模型使用所配文件和工具完成整道题，再将简短答案按数据集规则归一化、比对。",
+    "origin": "https://huggingface.co/datasets/gaia-benchmark/GAIA",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "Deep Research（o3 系研究模型）",
+        "date": "2025-02-02",
+        "url": "https://openai.com/index/introducing-deep-research/",
+        "result": "67.36%（pass@1），72.57%（cons@64）"
+      }
+    ]
+  },
+  {
+    "id": "gdm-mrcr-v2",
+    "name": "GDM-MRCR v2（8 针）",
+    "category": "长上下文",
+    "about": "Google DeepMind 的多轮共指检索测试。在长对话中反复加入相似请求，测量模型能否按位置、主题和风格找回对应回答。",
+    "example": "对话中先后有八次写天气短诗的请求。请逐字复述第三次要求用古典语气写雨天时给出的回答。",
+    "metric": "生成与目标回答的字符串匹配得分。128K 汇总值与 1M 单点值分别报告。",
+    "method": "构造多轮对话并嵌入易混淆的目标，最后用指代表达要求复制其中一个回答，将输出同目标文本比对。",
+    "origin": "https://github.com/google-deepmind/eval_hub/tree/master/eval_hub/mrcr_v2",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Pro",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "58.0%（≤128K），16.4%（1M）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.1 Pro",
+        "date": "2026-02-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+        "result": "84.9%（≤128K），26.3%（1M）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.5 Flash",
+        "date": "2026-05-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-5-flash/",
+        "result": "77.3%（≤128K），26.6%（1M）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.7 Flash",
+        "date": "2026-08-13",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-7-flash/",
+        "result": "97.0%（8 针，≤128K 平均值）"
+      }
+    ]
+  },
+  {
+    "id": "gdp-pdf",
+    "name": "GDP.pdf",
+    "category": "视觉与多模态",
+    "about": "Surge AI 的专业长文档任务，材料以复杂的 PDF 表格、附注和跨页内容呈现。",
+    "example": "年报正文只给出总数，附录另列一次性项目。按附注重算某项经营指标，并指出表号及页码。",
+    "metric": "All-pass rate，满足该题所有评分项才算通过。",
+    "method": "读取一份或多份专业 PDF，按任务要求交付答案，以细粒度评分项逐条检查。",
+    "origin": "https://surgehq.ai/benchmarks/gdp-pdf",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 3.8 Flash",
+        "date": "2026-09-02",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-8-flash/",
+        "result": "35.0%（All-pass，Google 自测）"
+      }
+    ]
+  },
+  {
+    "id": "gdpval",
+    "name": "GDPval",
+    "category": "专业与办公",
+    "about": "OpenAI 邀请从业者根据 44 类职业构建知识工作任务，比较模型与专业人员实际产出的交付物。",
+    "example": "将三家供应商的报价、保修条款和交付周期汇总成采购建议书，并附可复核的成本比较表。",
+    "metric": "专家盲评中的胜率或胜加平比例，是否允许平局会改变数值。",
+    "method": "提供统一的任务和附件，让模型生成表格、文档等，由专业人员在隐藏作者身份的条件下作成对比较。",
+    "origin": "https://openai.com/index/gdpval/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "70.9%（胜或平）。49.8%（单计胜，允许判平）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.3-Codex",
+        "date": "2026-02-05",
+        "url": "https://openai.com/index/introducing-gpt-5-3-codex/",
+        "result": "70.9%（胜或平）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.4",
+        "date": "2026-03-05",
+        "url": "https://openai.com/index/introducing-gpt-5-4/",
+        "result": "83.0%（胜或平）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.5",
+        "date": "2026-04-23",
+        "url": "https://openai.com/index/introducing-gpt-5-5/",
+        "result": "84.9%（胜或平）"
+      }
+    ]
+  },
+  {
+    "id": "gdpval-v2",
+    "name": "GDPval v2（内部）",
+    "category": "专业与办公",
+    "about": "OpenAI 的内部后续评测，从实际项目中构建更长、更复杂的专业知识工作流程。",
+    "example": "给三轮客户访谈、原始销量和预算限制，产出可复算的估算工作簿、建议文稿及对应展示页。",
+    "metric": "2026 年 11 月发布页以模型之间的得分百分点差给出部分结果。",
+    "method": "模型根据项目材料完成长流程并交付专业产物。公开说明给出行业与结果差值，尚不足以重建完整评分器。",
+    "origin": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6.2 Astra",
+        "date": "2026-11-17",
+        "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+        "result": "比 GPT-6 Astra 高 6.2 个百分点"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6.2 Sol",
+        "date": "2026-11-17",
+        "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+        "result": "比 GPT-6.1 Sol 高 5.3 个百分点"
+      }
+    ]
+  },
+  {
+    "id": "gdpval-aa",
+    "name": "GDPval-AA",
+    "category": "专业与办公",
+    "about": "Artificial Analysis 基于 GDPval 工作任务另行运行的模型评测，比较不同系统的专业交付物。",
+    "example": "根据门店一周排班和客流记录制作排班建议表，附一页说明高峰时段如何补员。",
+    "metric": "Elo 相对评级。不同版本、对手池和日期的分数需分开理解。",
+    "method": "在统一环境交付作品，对同一任务的作品做成对比较，从相对偏好估计 Elo。",
+    "origin": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 3.1 Pro",
+        "date": "2026-02-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+        "result": "1317 Elo（引自 AA 榜单）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.5 Flash",
+        "date": "2026-05-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-5-flash/",
+        "result": "1656 Elo（当期 AA 榜单）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 3.8 Flash",
+        "date": "2026-09-02",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-8-flash/",
+        "result": "1545 Elo（v2，当期 AA 榜单）"
+      }
+    ]
+  },
+  {
+    "id": "gdpval-aa-v2-1",
+    "name": "GDPval-AA v2.1",
+    "category": "专业与办公",
+    "about": "Artificial Analysis 采用 OpenAI GDPval 的 220 项任务构建独立评测，跨 44 个职业、9 个行业。",
+    "example": "根据场地、人手、租金和预售数据，交付活动预算表及供运营主管阅读的一页说明。",
+    "metric": "成对盲评得到的 Elo 相对分，评分池与时点影响数值。",
+    "method": "代理使用工作环境生成职业交付物，评审对同题的匿名作品成对比较并拟合相对评分。",
+    "origin": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 5.5",
+        "date": "2026-09-22",
+        "url": "https://www.anthropic.com/claude-opus-5-5",
+        "result": "1846 Elo（9 月报告）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Sonnet 5.5",
+        "date": "2026-09-28",
+        "url": "https://www.anthropic.com/claude-sonnet-5-5",
+        "result": "1844 Elo（9 月报告）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/document/claude-fable-5-2-mythos-5-2-system-card",
+        "result": "1831 Elo（11 月系统卡）"
+      }
+    ]
+  },
+  {
+    "id": "global-mmlu-lite",
+    "name": "Global MMLU Lite",
+    "category": "语言与阅读",
+    "about": "跨语言的知识问答测试。在每种受测语言内均衡纳入文化相关题和相对文化中立的题目。",
+    "example": "对同一道“四季成因”选择题分别给出多种人工翻译，比较模型能否都选中地轴倾斜这一解释。",
+    "metric": "每种语言的选择题正确率及其汇总。",
+    "method": "Google 报告使用 15 种语言，每种 200 道文化敏感题与 200 道文化中立题。",
+    "origin": "https://huggingface.co/datasets/CohereLabs/Global-MMLU-Lite",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Pro",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "89.2%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "83.4%"
+      }
+    ]
+  },
+  {
+    "id": "global-mmlu",
+    "name": "Global-MMLU",
+    "category": "知识与推理",
+    "about": "用专业翻译和社群修订把 MMLU 扩展到 42 种语言，并关注题目涉及的文化背景。",
+    "example": "用不同语言询问同一个四选一问题，例如“哪一种量在国际单位制中用安培表示？”",
+    "metric": "按语言计算准确率，再汇总多语言平均。",
+    "method": "在每种语言中独立作答。需核查是否把拒答计错。Fable 5.2 报告排除被拦截或未回答的问题。",
+    "origin": "https://huggingface.co/datasets/CohereLabs/Global-MMLU",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/document/claude-fable-5-2-mythos-5-2-system-card",
+        "result": "96.0%（42 语种平均。排除未答或拦截题，无工具，单轮）"
+      }
+    ]
+  },
+  {
+    "id": "harvey-lab-aa",
+    "name": "Harvey LAB-AA v1.1",
+    "category": "专业与办公",
+    "about": "Harvey 与 Artificial Analysis 联合评价法律代理，任务是据卷宗完成符合委托要求的法律工作产品。",
+    "example": "给一套虚构的合同与补充协议，整理各自的续签通知期限，对材料没有说明的条款明确标注。",
+    "metric": "整题通过率。全部验收条目满足且没有实质性幻觉才通过。",
+    "method": "在统一代理环境读取来源文书并交付成果，由评分器检查要求与事实，并额外核验无依据的实质性陈述。",
+    "origin": "https://artificialanalysis.ai/articles/harvey-lab-aa-v1-1",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6.2 Astra",
+        "date": "2026-11-17",
+        "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+        "result": "通过率超过 Claude Fable 5.2 的两倍（OpenAI 发布页口径）"
+      }
+    ]
+  },
+  {
+    "id": "hiddenmath-hard",
+    "name": "HiddenMath-Hard",
+    "category": "数学与科学",
+    "about": "Google 保留的高难度竞赛数学题，由专家编写，采用类似 AIME 和 AMC 的问题形式。",
+    "example": "在 6×6 的方格中选两个格心，要求同行且其间正好隔两个格心。共有多少种选法？答案 18。",
+    "metric": "最终答案正确率。",
+    "method": "在留出集上生成解答，核对最终答案。技术报告表 3 给出各代模型成绩。",
+    "origin": "https://arxiv.org/pdf/2507.06261v1",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Pro",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "80.5%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "53.7%"
+      }
+    ]
+  },
+  {
+    "id": "hle-diamond",
+    "name": "HLE-Diamond",
+    "category": "知识与推理",
+    "about": "HLE 作者重新校订推出的 1,000 题子集，包含各 500 道推理题与知识题。",
+    "example": "给定图中三个标明方向的回路及符号图例，使用指定定理推导一个唯一的整数，并按题意只提交该值。",
+    "metric": "子集答对比例。须记录无工具设置、推理档位及出分方。",
+    "method": "核对回答与清洗后的标准答案，分别统计知识和推理部分，也可汇总全套表现。",
+    "origin": "https://www.lastexam.ai/blog/hle-diamond",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Hydrogen",
+        "date": "2026-11-12",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-hydrogen/",
+        "result": "58.8%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Neon",
+        "date": "2026-11-18",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-neon/",
+        "result": "71.3%（Google 引用 Artificial Analysis 榜单）"
+      }
+    ]
+  },
+  {
+    "id": "hle-verified",
+    "name": "HLE-Verified",
+    "category": "知识与推理",
+    "about": "对 Humanity’s Last Exam 中的题目和答案做专家复核，保留可确认题目并修订可修复项目。",
+    "example": "给出一个定义域清楚的闭合曲面及边界条件，要求计算唯一的积分值。题干中的方向约定也须明示。",
+    "metric": "指定复核版题集上的答案正确率。",
+    "method": "依据该版本的已验证参考答案评估。Google 3.8 使用 1,811 题的快照，包含 668 道原题与 1,143 道修订题。",
+    "origin": "https://arxiv.org/abs/2602.13964",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 3.8 Flash",
+        "date": "2026-09-02",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-8-flash/",
+        "result": "54.9%（Google 自测，1,811 题版本）"
+      }
+    ]
+  },
+  {
+    "id": "hmmt-2025",
+    "name": "HMMT February 2025",
+    "category": "数学与科学",
+    "about": "选取 2025 年 2 月 Harvard–MIT Mathematics Tournament 的竞赛数学题。",
+    "example": "抛三枚均匀硬币，已知至少一次为正面，恰有两次正面的概率是多少？答案为 3/7。",
+    "metric": "题目准确率。题目范围按赛事月份和报告设定。",
+    "method": "模型独立求解，解析最终的数值或符号回答，与比赛公布的答案核对。",
+    "origin": "https://www.hmmt.org/www/archive/282",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "99.4%（无工具）"
+      }
+    ]
+  },
+  {
+    "id": "ifeval",
+    "name": "IFEval",
+    "category": "指令遵循",
+    "about": "通过可以编程检查的文字指令测量格式、字数和内容约束的遵循程度。",
+    "example": "请恰好写三条英文建议，每条以同一个词开头，并且全文不能有问号。",
+    "metric": "按提示或按单条指令计通过率。原作者提供 strict 和 loose 两类匹配。",
+    "method": "用确定性验证器逐项检查输出，再按指定口径聚合。某提示中所有约束均满足才算严格整题通过。",
+    "origin": "https://arxiv.org/abs/2311.07911",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.1",
+        "date": "2025-04-14",
+        "url": "https://openai.com/index/gpt-4-1/",
+        "result": "87.4%（发布表口径）"
+      }
+    ]
+  },
+  {
+    "id": "infographicvqa",
+    "name": "InfographicVQA",
+    "category": "视觉与多模态",
+    "about": "在信息图中同时读取布局、图例和文字，回答较短的事实问题。",
+    "example": "信息图上左侧黄色钥匙代表“家庭”，右侧蓝色钥匙代表“商户”。问蓝色柱的类别？答案为商户。",
+    "metric": "ANLS，平均归一化编辑相似度。",
+    "method": "输入整张信息图，模型输出简短答案，与人工参考做字符级相似度比较。",
+    "origin": "https://www.docvqa.org/datasets/infographicvqa",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Ultra",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "80.3% ANLS（测试集）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.5 Pro（2024 年 5 月版）",
+        "date": "2024-06-14",
+        "url": "https://arxiv.org/pdf/2403.05530v3",
+        "result": "81.0% ANLS（测试集，0-shot）"
+      }
+    ]
+  },
+  {
+    "id": "lichess-puzzles",
+    "name": "Lichess 棋局谜题",
+    "category": "知识与推理",
+    "about": "OpenAI 的弱监督研究用 Lichess 实战残局，观察 GPT-4 系列研究模型能否从较弱模型的标注中学会找棋。",
+    "example": "对局依次走出 1.f3 e5 2.g4，现在轮到黑方。哪一步能立即将死？答案为 2…Qh4#，黑后沿斜线直接将军。",
+    "metric": "下一步棋与题库解答一致的比例。研究另外计算弱监督模型弥合了多少强弱模型之间的性能差距（PGR）。",
+    "method": "给模型一串前序棋步，让它预测谜题解的第一步。研究用 5,000 道保留题评估，并对照不同监督方式。",
+    "origin": "https://database.lichess.org/#puzzles",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4 系列（研究微调模型）",
+        "date": "2023-12-14",
+        "url": "https://cdn.openai.com/papers/weak-to-strong-generalization.pdf",
+        "result": "图 4 比较直接弱监督与经过中间规模模型逐级训练的结果，后者在较大的学生模型上弥合了更多差距。"
+      }
+    ]
+  },
+  {
+    "id": "lifeval",
+    "name": "LifeVal",
+    "category": "工具与智能体",
+    "about": "OpenAI 的 169 个个性化生活任务，将本人偏好、历史对话、文件和可操作应用组织在一起。",
+    "example": "一家四口换城市后想恢复周末羽毛球活动。根据历史日历、可步行距离和已有会员资格，找出合适场次并添加提醒。",
+    "metric": "逐任务评分表所得奖励的平均值。可同时报告成本和耗时。",
+    "method": "在离线网页和模拟应用中完成任务，裁判结合对话、文件、最终答复和后台状态差异逐项验收。",
+    "origin": "https://openai.com/index/lifeval/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6 Astra",
+        "url": "https://openai.com/index/lifeval/",
+        "date": "2026-11-02",
+        "result": "原始研究纳入 169 个个性化任务"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6.2 Sol",
+        "date": "2026-11-17",
+        "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+        "result": "得分高于 GPT-6 Astra，单任务成本约为其 1/7（同篇比较）"
+      }
+    ]
+  },
+  {
+    "id": "livecodebench",
+    "name": "LiveCodeBench",
+    "category": "编程与软件工程",
+    "about": "随时间收录编程竞赛新题，支持按题目发布日期选择测试窗口。",
+    "example": "输入一串城市温度，输出连续严格升温的最长天数。[2,3,4,1,3] 应输出 3。",
+    "metric": "通过全部隐藏测试的题目比例，常用 pass@1。",
+    "method": "给出题意与样例，执行生成程序，对齐标准输入输出并检查隐藏用例。不同日期区间的题目可能不同。",
+    "origin": "https://livecodebench.github.io/",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Pro",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "74.2%（表 3，榜单区间 2025-01-01 至 05-01）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "29.1%（同区间）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash Experimental",
+        "date": "2024-12-11",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/google-gemini-ai-update-december-2024/",
+        "result": "35.1%（代码生成，2024-06-01 至 10-05）"
+      }
+    ]
+  },
+  {
+    "id": "livecodebench-pro",
+    "name": "LiveCodeBench Pro",
+    "category": "编程与软件工程",
+    "about": "以 Codeforces、ICPC、IOI 等竞赛题区分高水平算法编程表现。",
+    "example": "给定一棵树和多组路径查询，要求在超时限制内为每组查询统计路径上不同的颜色数。",
+    "metric": "Elo 评级，体现基于竞赛表现的相对水平。",
+    "method": "在竞赛题上提交程序，经测试用例与资源限制判定，再换算评级。Google 引用项目排行榜。",
+    "origin": "https://arxiv.org/abs/2506.11928",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 3.1 Pro",
+        "date": "2026-02-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+        "result": "2887 Elo（官方榜单）"
+      }
+    ]
+  },
+  {
+    "id": "loft",
+    "name": "LOFT",
+    "category": "长上下文",
+    "about": "将检索和推理任务放入很长的上下文。Google 2.5 采用其中困难的多跳、多条目检索子集。",
+    "example": "从档案一找到“计划甲由乙组负责”，从档案二找到“乙组的新编号为 17”，回答计划甲现在归哪个编号管理。",
+    "metric": "困难检索子集的得分，按上下文长度报告。",
+    "method": "将文档集合与查询放入输入，核对返回证据。Google 在 300 个查询上分别报告 128K 以内汇总及 1M 单长度成绩。",
+    "origin": "https://github.com/google-deepmind/loft",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Pro",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "87.0%（≤128K），69.8%（1M）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "58.0%（≤128K），7.6%（1M）"
+      }
+    ]
+  },
+  {
+    "id": "longfact",
+    "name": "LongFact",
+    "category": "知识与推理",
+    "about": "Google DeepMind 用开放式长答问题引出多个可核实断言，分概念与具体对象两类。",
+    "example": "「介绍自行车变速器的发展。」把回答分解成发明年份、结构变化、首次商业化时间等可检验陈述。",
+    "metric": "原作有事实支持与覆盖指标。OpenAI 的发布表单列错误断言比例，越低越好。",
+    "method": "先生成回答，再将其拆成事实陈述。OpenAI 的裁判可联网查证，而生成模型在该项设置下无工具。",
+    "origin": "https://arxiv.org/abs/2403.18802",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5（high）",
+        "date": "2025-08-07",
+        "url": "https://openai.com/index/introducing-gpt-5-for-developers/",
+        "result": "错误率：概念 1.0%，对象 1.2%（无工具作答）"
+      }
+    ]
+  },
+  {
+    "id": "lvbench",
+    "name": "LVBench",
+    "category": "视觉与多模态",
+    "about": "小时级视频理解基准，涵盖事件定位、细节记忆和跨段推理。",
+    "example": "一场比赛开头介绍两名替补，后半场其中一人首次登场。根据球衣号选出其姓名。",
+    "metric": "视频问答整体正确率。",
+    "method": "从长视频取得帧序列并回答问题。是否只看图像、是否可以主动取帧及采样密度影响成绩。",
+    "origin": "https://lvbench.github.io/",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 3.8 Flash",
+        "date": "2026-09-02",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-8-flash/",
+        "result": "87.1%（静态输入），87.8%（agentic）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Neon",
+        "date": "2026-11-18",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-neon/",
+        "result": "89.0%（仅视觉、无工具，每秒 1 帧）"
+      }
+    ]
+  },
+  {
+    "id": "m3exam",
+    "name": "M3Exam",
+    "category": "语言与阅读",
+    "about": "从不同语言和教育阶段的正式考试中取题，部分题目含图，测量模型跨语言和跨模态解题能力。",
+    "example": "题图用西班牙语标注三角形的两内角为 50°、60°。第三个内角是多少？A 60°　B 70°　C 80°。答案 B。",
+    "metric": "选择题正确率，可按语言、教育阶段及是否含图拆分。",
+    "method": "按实验设置向模型呈现题目与选项，核对所选答案。GPT-4o 发布页列出零样例结果。",
+    "origin": "https://github.com/DAMO-NLP-SG/M3Exam",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4o",
+        "date": "2024-05-13",
+        "url": "https://openai.com/index/hello-gpt-4o/",
+        "result": "官方 Model evaluations 中列有 M3Exam Zero-Shot Results，按语言展示。"
+      }
+    ]
+  },
+  {
+    "id": "matharena-apex",
+    "name": "MathArena Apex",
+    "category": "数学与科学",
+    "about": "来自高水平数学竞赛的难题，用于区分常规奥赛测试上接近满分的系统。",
+    "example": "设数列满足非线性递推式，求满足所有项均为整数的起始值，并按题目指定形式给出结果。",
+    "metric": "特定竞赛集的平均得分，按 MathArena 该届题目的判分规则汇总。",
+    "method": "在规定题集上独立作答，由 MathArena 对照解答与评分方式评估。Google 使用 2025 年榜单快照。",
+    "origin": "https://matharena.ai/apex/",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 3 Pro",
+        "date": "2025-11-18",
+        "url": "https://blog.google/products-and-platforms/products/gemini/gemini-3/",
+        "result": "23.4%（MathArena 成绩）"
+      }
+    ]
+  },
+  {
+    "id": "mbpp",
+    "name": "MBPP",
+    "category": "编程与软件工程",
+    "about": "约一千道入门 Python 编程题，由文字描述和自动测试界定预期行为。",
+    "example": "输入一个非空整数列表，返回其中第二小的不同整数。若不足两个不同整数则返回空。",
+    "metric": "pass@1，单次生成程序通过所有断言的比例。",
+    "method": "用题目描述生成函数，在题目指定的测试输入上执行并校验输出。",
+    "origin": "https://github.com/google-research/google-research/tree/master/mbpp",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "86.4%（pass@1）"
+      }
+    ]
+  },
+  {
+    "id": "medmcqa",
+    "name": "MedMCQA",
+    "category": "专业与办公",
+    "about": "印度医学入学考试来源的多项选择题库，覆盖多门医学科目。",
+    "example": "在四种细胞结构中，选择储存绝大多数人类遗传信息的位置。答案为细胞核。",
+    "metric": "选项正确率，按数据集划分与示例数量报告。",
+    "method": "在指定划分上提供医学问题及四个答案，比较所选选项与参考标签。",
+    "origin": "https://proceedings.mlr.press/v174/pal22a.html",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4o",
+        "date": "2024-08-08",
+        "url": "https://openai.com/index/gpt-4o-system-card/",
+        "result": "77%（开发集，0-shot）。79%（5-shot）"
+      }
+    ]
+  },
+  {
+    "id": "medqa",
+    "name": "MedQA",
+    "category": "专业与办公",
+    "about": "以美国、中国大陆及台湾地区医学考试题构建的多语种医学知识选择题库。",
+    "example": "解剖学选择题：血液从右心室离开后首先进入主动脉、肺动脉、肺静脉还是上腔静脉？答案为肺动脉。",
+    "metric": "选择题准确率，按试卷、选项数与提示示例数分开。",
+    "method": "把试题作为纯文本交给模型，解析其选项，与题库答案键比对。",
+    "origin": "https://github.com/jind11/MedQA",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4o",
+        "date": "2024-08-08",
+        "url": "https://openai.com/index/gpt-4o-system-card/",
+        "result": "89.4%（美国 USMLE，四选项，0-shot）"
+      }
+    ]
+  },
+  {
+    "id": "milu",
+    "name": "MILU",
+    "category": "知识与推理",
+    "about": "以印度地区考试材料构建的 11 语言知识评测，既有通用学科，也考查本地文化与历史。",
+    "example": "用印地语给出四个节庆名称，询问哪一项通常被称为灯节。",
+    "metric": "所评语言上的平均准确率。",
+    "method": "使用各语言题目和本地文化语境，对照选项标注评分，依报告说明处理未回答题目。",
+    "origin": "https://aclanthology.org/2025.naacl-long.507/",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/document/claude-fable-5-2-mythos-5-2-system-card",
+        "result": "94.1%（11 语种平均，max）"
+      }
+    ]
+  },
+  {
+    "id": "mmlu-pro",
+    "name": "MMLU-Pro",
+    "category": "知识与推理",
+    "about": "重新筛选和扩展 MMLU 类知识题，减少只需记忆的项目，选择题最多有十个选项。",
+    "example": "一套传感器正负误差均值为零。给出十种采样与汇总策略，要求选出能降低随机误差的设计。",
+    "metric": "多选一正确率。",
+    "method": "对题目作答、提取选项，与审定答案匹配。不同演示数量、推理提示须分别注明。",
+    "origin": "https://github.com/TIGER-AI-Lab/MMLU-Pro",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash Experimental",
+        "date": "2024-12-11",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/google-gemini-ai-update-december-2024/",
+        "result": "76.4%（2024 年 12 月发布表）"
+      }
+    ]
+  },
+  {
+    "id": "multi-if",
+    "name": "Multi-IF",
+    "category": "指令遵循",
+    "about": "Meta 扩展可验证指令测试到多语言、多轮对话，后续轮次可能增加约束。",
+    "example": "第一轮要求用三句英语介绍企鹅。第二轮要求保留三句话，将每句话改成以 P 开头。",
+    "metric": "各轮或各语种的指令遵循准确率。",
+    "method": "按预先写好的多轮提示继续对话，用可执行检查器验证各轮文本，按实验设定汇总。",
+    "origin": "https://github.com/facebookresearch/Multi-IF",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.1",
+        "date": "2025-04-14",
+        "url": "https://openai.com/index/gpt-4-1/",
+        "result": "70.8%"
+      }
+    ]
+  },
+  {
+    "id": "multichallenge",
+    "name": "MultiChallenge",
+    "category": "指令遵循",
+    "about": "Scale 的多轮指令测验，检验模型能否延续早期要求、利用补充信息并作定向修改。",
+    "example": "上一轮要求菜单全为素食且保留价格。本轮只把第二道菜换成别的，系统检查原有素食和标价格要求。",
+    "metric": "满足评分要求的回答比例。评分模型版本会改变结果。",
+    "method": "把完整对话和最后的答复交给评分模型，按该轮对应的规则判定。OpenAI 同时报告两种裁判。",
+    "origin": "https://labs.scale.com/blog/multichallenge-update",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.1",
+        "date": "2025-04-14",
+        "url": "https://openai.com/index/gpt-4-1/",
+        "result": "默认 GPT-4o 裁判 38.3%，换用 o3-mini 裁判为 46.2%"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5（high）",
+        "url": "https://openai.com/index/introducing-gpt-5-for-developers/",
+        "date": "2025-08-07",
+        "result": "69.6%（o3-mini 裁判）"
+      }
+    ]
+  },
+  {
+    "id": "mka",
+    "name": "Multimodal Knowledge Agent（MKA）",
+    "category": "视觉与多模态",
+    "about": "Google DeepMind 的 200 项专业多模态工作任务，输入包含复杂图纸、图像和其他项目资料。",
+    "example": "对照三张楼层图与设备表，标记走廊内编号相互矛盾的灯具，并将每项差异写入交付表格。",
+    "metric": "Climb WSR，较难评分项的加权满足率，先逐题计分再取平均。",
+    "method": "代理处理工作区文件并提交文档或图表，评分代理依据专家编写的带权条目逐项判定。",
+    "origin": "https://arxiv.org/abs/2611.25228",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Hydrogen",
+        "date": "2026-11-12",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-hydrogen/",
+        "result": "53.4%（Climb WSR）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Neon",
+        "date": "2026-11-18",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-neon/",
+        "result": "56.5%（Climb WSR，Artificial Analysis）"
+      }
+    ]
+  },
+  {
+    "id": "natural2code",
+    "name": "Natural2Code",
+    "category": "编程与软件工程",
+    "about": "Gemini 团队设计的留出代码生成题，最初以 Python 为主，用新编提示检查从自然语言落实函数功能的能力。",
+    "example": "写一个函数，保持输入顺序并保留每个字符串最后一次出现的位置。如 [a,b,a] 输出 [b,a]。",
+    "metric": "生成代码通过功能测试的比例。",
+    "method": "提供功能描述，模型独立生成代码，运行测试核对输出。作者用来自非网络来源的保留题集减少数据重叠。",
+    "origin": "https://arxiv.org/pdf/2312.11805v1",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Ultra",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "74.9%（0-shot）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Pro",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "69.6%（0-shot）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash Experimental",
+        "date": "2024-12-11",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/google-gemini-ai-update-december-2024/",
+        "result": "92.9%（该次使用 Python、Java、C++、JavaScript、Go 的多语言设定）"
+      }
+    ]
+  },
+  {
+    "id": "niah",
+    "name": "Needle in a Haystack",
+    "category": "长上下文",
+    "about": "把一个人为设定的事实插入长文，测模型能否在不同文本长度和位置找回。",
+    "example": "在多页散文中插入一句“本季度图书馆的代号是蓝杉”，再问图书馆的代号。",
+    "metric": "正确找回目标信息的比例，通常按长度和插入深度拆分。",
+    "method": "改变长文长度和目标位置，逐一提问后与插入的事实核对。",
+    "origin": "https://github.com/gkamradt/LLMTest_NeedleInAHaystack",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www.anthropic.com/news/claude-3-family",
+        "result": "在官方所测条件下，召回准确率超过 99%"
+      }
+    ]
+  },
+  {
+    "id": "officeqa",
+    "name": "OfficeQA",
+    "category": "专业与办公",
+    "about": "Databricks 从历史美国财政公报设题，需要在多个文档定位表格并据此计算。另有较难的 Pro 子集。",
+    "example": "查两期公报中同一科目的年末余额，统一计量单位后求变化量。",
+    "metric": "准确率。该次评测采用精确匹配，Full 与 Pro 子集各自计分。",
+    "method": "报告使用解析后的文本、隔离环境和代码工具，答案与标准数值核对。与直接读原始 PDF 的设置有差异。",
+    "origin": "https://github.com/databricks/officeqa",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "Full 77.6%（解析文本，精确匹配）"
+      }
+    ]
+  },
+  {
+    "id": "mrcr",
+    "name": "OpenAI MRCR",
+    "category": "长上下文",
+    "about": "在长对话中放入多次相似请求，要求模型逐字找回指定序号的答复。",
+    "example": "长记录中三次请助手写海边明信片。请复制第二次回答的全文，开头加题目指定的校验串。",
+    "metric": "平均字符串匹配比例，须标注针数、长度区间及版本。",
+    "method": "将检索目标埋在不同位置。模型须输出校验前缀及指定回答，随后对比目标文本的相似度。",
+    "origin": "https://huggingface.co/datasets/openai/mrcr",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.1",
+        "date": "2025-04-14",
+        "url": "https://openai.com/index/gpt-4-1/",
+        "result": "57.2%（2 针，128K）。46.3%（2 针，1M）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5（high）",
+        "url": "https://openai.com/index/introducing-gpt-5-for-developers/",
+        "date": "2025-08-07",
+        "result": "95.2%（2 针，128K 档）"
+      }
+    ]
+  },
+  {
+    "id": "osworld",
+    "name": "OSWorld",
+    "category": "工具与智能体",
+    "about": "在真实桌面应用的虚拟机中，通过截图、鼠标和键盘完成操作。",
+    "example": "在电子表格中按日期排序、冻结首行并保存为指定文件。",
+    "metric": "达到任务验收条件的比例。",
+    "method": "从给定系统初态执行自然语言请求，再由程序检查应用数据或文件。最大步数和工具会影响结果。",
+    "origin": "https://os-world.github.io/",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3.5 Sonnet（10 月版）",
+        "date": "2024-10-22",
+        "url": "https://www.anthropic.com/news/3-5-models-and-computer-use",
+        "result": "14.9%（截图输入）。允许更多步骤时 22.0%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Sonnet 4.5",
+        "date": "2025-09-29",
+        "url": "https://www.anthropic.com/news/claude-sonnet-4-5",
+        "result": "61.4%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.5",
+        "date": "2025-11-24",
+        "url": "https://www-cdn.anthropic.com/bf10f64990cfda0ba858290be7b8cc6317685f47.pdf",
+        "result": "66.3%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.6",
+        "date": "2026-02-05",
+        "url": "https://www-cdn.anthropic.com/0dd865075ad3132672ee0ab40b05a53f14cf5288.pdf",
+        "result": "72.7%"
+      }
+    ]
+  },
+  {
+    "id": "personqa",
+    "name": "PersonQA",
+    "category": "可靠性与安全",
+    "about": "OpenAI 用可公开核对的人物事实检查模型是否编造传记信息。",
+    "example": "“《寂静的春天》的作者是谁？”参考答案是蕾切尔·卡森。评分时分别记录答对、答错和没有给出答案。",
+    "metric": "报告正确率和幻觉率两项指标。幻觉率越低越好，二者应分别读取。",
+    "method": "让模型回答关于真实人物的问题，再按公开事实核对回答，区分正确陈述、错误陈述与没有作答。",
+    "origin": "https://cdn.openai.com/gpt-4-5-system-card-2272025.pdf",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.5",
+        "date": "2025-02-27",
+        "url": "https://cdn.openai.com/gpt-4-5-system-card-2272025.pdf",
+        "result": "表 4：正确率 78%，幻觉率 19%。"
+      }
+    ]
+  },
+  {
+    "id": "physicianbench",
+    "name": "PhysicianBench",
+    "category": "专业与办公",
+    "about": "100 个在电子病历系统中完成的临床工作任务，可测试信息整合、工作流程和文书能力。",
+    "example": "从虚构病历查找最近一次随访日期和已登记的检查文件，为临床核查整理一份待补件清单。",
+    "metric": "按完成要求评判的尝试通过率。",
+    "method": "模型在电子病历环境读取材料并完成任务，评判器依医生核验的标准判断。该报告对每题运行五次。",
+    "origin": "https://arxiv.org/abs/2605.02240",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/document/claude-fable-5-2-mythos-5-2-system-card",
+        "result": "64.4%（100 题，每题五次，max）"
+      }
+    ]
+  },
+  {
+    "id": "pubmedqa",
+    "name": "PubMedQA",
+    "category": "知识与推理",
+    "about": "根据生物医学研究摘要判断研究问题，使用 yes、no 与 maybe 三类答案。",
+    "example": "摘要写道，两组听力测试结果没有显著差异。该研究是否观察到两组表现存在显著差异？",
+    "metric": "三分类准确率。",
+    "method": "给定研究问题和不含结论的摘要，由模型输出标签，与作者结论标注核对。",
+    "origin": "https://pubmedqa.github.io/",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "75.8%（5-shot）"
+      }
+    ]
+  },
+  {
+    "id": "quality",
+    "name": "QuALITY",
+    "category": "长上下文",
+    "about": "围绕英文长文和短篇故事设计深入理解题，部分题目针对快速略读难以解决的细节。",
+    "example": "故事开头人物称去看姐姐，结尾却透露姐姐此前已经搬走。哪条更早的线索暗示他另有目的？",
+    "metric": "选择题正确率。",
+    "method": "把完整故事和问题提供给模型，要求四选一，与人工答案对照。",
+    "origin": "https://aclanthology.org/2022.naacl-main.391/",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "90.5%（1-shot），89.2%（0-shot）"
+      }
+    ]
+  },
+  {
+    "id": "race-h",
+    "name": "RACE-H",
+    "category": "语言与阅读",
+    "about": "来自中国高中英语考试的英文篇章阅读选择题。",
+    "example": "文章中旅客两次推迟出发，第二次是因轮渡停航。若问最近一次延误的原因，四个选项应选哪个？",
+    "metric": "选项准确率，越高越好。",
+    "method": "读一篇文章及其问题，在四个选项中选一项。",
+    "origin": "https://www.cs.cmu.edu/~glai1/data/race/",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "92.9%（5-shot）"
+      }
+    ]
+  },
+  {
+    "id": "rli",
+    "name": "Remote Labor Index（RLI）",
+    "category": "专业与办公",
+    "about": "CAIS 与 Scale AI 收集 240 个真实自由职业项目，配有人类专业交付物供比对。",
+    "example": "收到品牌规范、图片和客户简报，完成一份可交付的活动宣传册。",
+    "metric": "自动化率，指代理交付物至少达到人类参考交付物水平的项目占比。",
+    "method": "由人工评审比较交付物及原项目要求，检查能否以专业质量完成整项工作。",
+    "origin": "https://arxiv.org/abs/2510.26787",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/document/claude-fable-5-2-mythos-5-2-system-card",
+        "result": "41.3%（99/240 项，high）"
+      }
+    ]
+  },
+  {
+    "id": "riemannbench",
+    "name": "Riemann-bench",
+    "category": "数学与科学",
+    "about": "数学研究者编写的高难问题，要求跨多步推导得到唯一、可核查的闭式答案。",
+    "example": "给定一个带参数的有限群作用，求满足指定稳定子条件的轨道数，并以参数的闭式表达式作答。",
+    "metric": "问题正确率，最终答案正确才得分。",
+    "method": "独立专家核验题目可解性与唯一答案。有多种等价表示时可用程序验证。Google 引用 Surge 榜单。",
+    "origin": "https://surgehq.ai/benchmarks/riemann-bench",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Carbon",
+        "date": "2026-11-10",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+        "result": "80.0%（采用 11 月 10 日 Carbon 专属模型卡的 Results 表）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Neon",
+        "date": "2026-11-18",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-neon/",
+        "result": "84.0%（Surge 榜单）"
+      }
+    ]
+  },
+  {
+    "id": "robodojo-sim",
+    "name": "RoboDojo Sim",
+    "category": "工具与智能体",
+    "about": "在仿真环境中检验通用机器人操纵能力，任务包括抓取、放置及多步骤物体操作。",
+    "example": "控制仿真机械臂，将三个形状不同的积木分别放入相应槽位。",
+    "metric": "在指定任务及回合上的平均成功率。",
+    "method": "从视觉或环境观测决定动作，在仿真平台按任务目标检查终局。Anthropic 结果来自内部运行。",
+    "origin": "https://github.com/robodojo-benchmark/RoboDojo",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+        "result": "64.9%（仿真、厂商内部运行）"
+      }
+    ]
+  },
+  {
+    "id": "scicode",
+    "name": "SciCode",
+    "category": "数学与科学",
+    "about": "由科学家编写的研究编程题，要求结合领域知识完成多个相连子问题。",
+    "example": "根据给定观测序列实现加权最小二乘拟合，再用拟合结果估计指定位置的预测误差。",
+    "metric": "解答通过数值或单元测试的比例。",
+    "method": "分解科学计算问题，按题目说明生成函数，执行检查数值误差和边界条件的测试。",
+    "origin": "https://github.com/scicode-bench/SciCode",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 3.1 Pro",
+        "date": "2026-02-19",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+        "result": "59%（报告引用 Artificial Analysis）"
+      }
+    ]
+  },
+  {
+    "id": "secureswe",
+    "name": "SecureSWE（内部）",
+    "category": "编程与软件工程",
+    "about": "OpenAI 的防御性代码编写评测，针对日常软件组件同时考查功能和安全属性。",
+    "example": "实现一段用于显示用户备注的页面代码：合法文本应正常显示，用户输入须始终按文本呈现。",
+    "metric": "同时满足功能与安全要求的表现，发布页提供对比图。",
+    "method": "模型按规格编写代码，评测核查实现能否提供所需功能并处理安全敏感边界。公开发布页未提供完整测试集。",
+    "origin": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-6.2 Astra / Sol",
+        "date": "2026-11-17",
+        "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+        "result": "官方发布图列入防御评测"
+      }
+    ]
+  },
+  {
+    "id": "simpleqa-verified",
+    "name": "SimpleQA Verified",
+    "category": "可靠性与安全",
+    "about": "对 SimpleQA 的来源、歧义和答案质量重新审查得到的事实短答集。",
+    "example": "问“以欧几里得命名、用于求最大公约数的算法叫什么”，并接受明确对应的不同译名。",
+    "metric": "F1，全部题目答对率与已尝试题目答对率的调和均值。",
+    "method": "判分器依据已审定的参考答案，将输出区分为正确、错误和未尝试，汇总为 F1。",
+    "origin": "https://www.kaggle.com/benchmarks/deepmind/simpleqa-verified",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 3 Pro",
+        "date": "2025-11-18",
+        "url": "https://blog.google/products-and-platforms/products/gemini/gemini-3/",
+        "result": "72.1% F1（官方发布文引用榜单）"
+      }
+    ]
+  },
+  {
+    "id": "swe-bench-multilingual",
+    "name": "SWE-bench Multilingual",
+    "category": "编程与软件工程",
+    "about": "选自 9 种编程语言、42 个仓库的 300 个真实软件问题。",
+    "example": "一段 Go 程序在读取空输入时返回错误状态。修改仓库，恢复正确结果并通过回归测试。",
+    "metric": "解决率，即交付的补丁成功完成验收的任务比例。",
+    "method": "智能体在仓库快照中读取需求和材料、生成补丁，再运行该题的可执行验收或回归测试。",
+    "origin": "https://www.swebench.com/multilingual.html",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.7",
+        "date": "2026-04-16",
+        "url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/037f06850df7fbe871e206dad004c3db5fd50340.pdf",
+        "result": "80.5%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "84.4%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/document/claude-fable-5-2-mythos-5-2-system-card",
+        "result": "96.6%"
+      }
+    ]
+  },
+  {
+    "id": "swe-bench-multimodal",
+    "name": "SWE-bench Multimodal",
+    "category": "编程与软件工程",
+    "about": "为软件工程 issue 补充截图、界面草图等视觉线索，考查界面缺陷定位与修复。",
+    "example": "一张截图显示窄屏的图例盖住曲线。结合截图和 issue 修改组件，使标签正确换行。",
+    "metric": "解决率，即交付的补丁成功完成验收的任务比例。",
+    "method": "智能体在仓库快照中读取需求和材料、生成补丁，再运行该题的可执行验收或回归测试。",
+    "origin": "https://arxiv.org/abs/2410.03859",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.7",
+        "date": "2026-04-16",
+        "url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/037f06850df7fbe871e206dad004c3db5fd50340.pdf",
+        "result": "34.5%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4.8",
+        "date": "2026-05-28",
+        "url": "https://www-cdn.anthropic.com/c886650a2e96fc0925c805a1a7ca77314ccbf4a6.pdf",
+        "result": "38.4%"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/document/claude-fable-5-2-mythos-5-2-system-card",
+        "result": "74.1%"
+      }
+    ]
+  },
+  {
+    "id": "swe-lancer",
+    "name": "SWE-Lancer",
+    "category": "编程与软件工程",
+    "about": "OpenAI 将真实自由职业软件项目整理为工程实现题（IC）和工程管理方案选择题。",
+    "example": "接单要求导出跨月报销数据并保留经手人字段。提交代码后，用隐藏的验收场景核对导出账单。",
+    "metric": "可用任务完成比例或完成任务对应的原始报酬衡量，需区分口径和题集。",
+    "method": "IC 题用端到端工程测试验收，管理题对照真实决策。模型在固定代码环境内完成任务。",
+    "origin": "https://openai.com/index/swe-lancer/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-4.1",
+        "date": "2025-04-14",
+        "url": "https://openai.com/index/gpt-4-1/",
+        "result": "总奖金口径 35.1%（约 17.6 万美元）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.2 Thinking",
+        "date": "2025-12-11",
+        "url": "https://openai.com/index/introducing-gpt-5-2/",
+        "result": "IC Diamond 74.6%（237 题中排除 40 道不能运行的题）"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5.3-Codex",
+        "url": "https://openai.com/index/introducing-gpt-5-3-codex/",
+        "date": "2026-02-05",
+        "result": "81.4%（IC Diamond）"
+      }
+    ]
+  },
+  {
+    "id": "swe-sweep",
+    "name": "SWE-sweep",
+    "category": "编程与软件工程",
+    "about": "以整个代码仓库为起点，衡量工程代理能否自主定位并修复潜在缺陷。",
+    "example": "日历库在跨月和闰年输入上偶有错位。请找出有问题的实现，并修正经测试能确认的缺陷。",
+    "metric": "子任务加权得分。须注明代理框架。",
+    "method": "代理遍历仓库并提交修复，按已解决的子问题计分。同一模型在不同执行框架下分别报告。",
+    "origin": "https://swesweep.com/",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Carbon",
+        "date": "2026-11-10",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+        "result": "9.6%（mini-swe-agent）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Hydrogen",
+        "date": "2026-11-12",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-hydrogen/",
+        "result": "13.5%"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Neon",
+        "date": "2026-11-18",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-neon/",
+        "result": "39.0%（Antigravity-CLI 1.5.9），12.8%（mini-swe）"
+      }
+    ]
+  },
+  {
+    "id": "terminal-bench-4-1",
+    "name": "Terminal-Bench 4.1",
+    "category": "编程与软件工程",
+    "about": "在复杂的终端工作环境内完成可验证目标。4.1 报告区分原始通过和经作弊调整的结果。",
+    "example": "有两个数学库在不同平台对齐结果失败。请找出差异原因，修正代码并提交基准测试输出。",
+    "metric": "经作弊调整的正确率（cheating-adjusted accuracy）。",
+    "method": "运行代理并验证交付物，对绕开任务意图获取奖励的轨迹做校正。需记录所用代理框架。",
+    "origin": "https://www.tbench.ai/",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Hydrogen",
+        "date": "2026-11-12",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-hydrogen/",
+        "result": "57.0%（经作弊调整）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Neon",
+        "date": "2026-11-18",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-neon/",
+        "result": "65.2%（经作弊调整，AA 使用 Antigravity-CLI 1.5.9）"
+      }
+    ]
+  },
+  {
+    "id": "terminal-bench",
+    "name": "Terminal-Bench（初版）",
+    "category": "编程与软件工程",
+    "about": "在命令行环境里完成可验证的多步任务，覆盖编码、系统操作、数据处理等工作。",
+    "example": "读取一批不同分隔符的日志，按天聚合后输出规定字段的 CSV。",
+    "metric": "任务成功率（pass@1）。多候选择优须另列。",
+    "method": "在隔离终端操作文件与程序，由每题的验证器检查最终产物。结果受智能体框架影响。",
+    "origin": "https://www.tbench.ai/benchmarks",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Opus 4",
+        "date": "2025-05-22",
+        "url": "https://www.anthropic.com/news/claude-4",
+        "result": "43.2%（Claude Code）。39.2%（与对照模型相同框架）"
+      },
+      {
+        "provider": "Anthropic",
+        "model": "Claude Sonnet 4",
+        "date": "2025-05-22",
+        "url": "https://www.anthropic.com/news/claude-4",
+        "result": "35.5%（Claude Code）。33.5%（统一框架）"
+      }
+    ]
+  },
+  {
+    "id": "vals-index-v2-2",
+    "name": "Vals Index v2.2",
+    "category": "工具与智能体",
+    "about": "Vals AI 按美国经济数据加权组合金融、编程、法律和税务评测。它本身是综合指数。",
+    "example": "金融子测验可要求从虚构报表核算费用。编程子测验可要求修复导出器。两个子项依规定权重计入指数。",
+    "metric": "依行业权重合成的综合得分，以百分数发布。",
+    "method": "先运行各成分基准，再用发布方法规定的权重组合。不同指数版本可更换成分或口径。",
+    "origin": "https://www.vals.ai/benchmarks/vals_index",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Carbon",
+        "date": "2026-11-10",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+        "result": "70.4%（v2.2，Vals AI）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 4 Neon",
+        "date": "2026-11-18",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-neon/",
+        "result": "70.9%（v2.2，Vals AI）"
+      }
+    ]
+  },
+  {
+    "id": "vibe-eval",
+    "name": "Vibe-Eval",
+    "category": "视觉与多模态",
+    "about": "Reka 构建的开放式图像理解评测，包含生活场景及难例，要求回答图片中特定细节。",
+    "example": "图上有一只玻璃杯横放、两只杯子倒扣。哪只还能继续装水？请结合摆放方向说明理由。",
+    "metric": "由评审模型比较回答与参考的图像理解得分。",
+    "method": "展示图片与开放式问题，以参考解答为依据用评分模型评估。Google 2.0 明确使用 Gemini Flash 判分。",
+    "origin": "https://github.com/reka-ai/reka-vibe-eval",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 2.0 Flash Experimental",
+        "date": "2024-12-11",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/google-gemini-ai-update-december-2024/",
+        "result": "56.3%（Gemini Flash 评分）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 2.5 Pro",
+        "date": "2025-07-07",
+        "url": "https://arxiv.org/pdf/2507.06261v1",
+        "result": "67.2%（Gemini 评分）"
+      }
+    ]
+  },
+  {
+    "id": "video-mme",
+    "name": "Video-MME",
+    "category": "视觉与多模态",
+    "about": "用不同时长、不同主题的视频测试叙事理解、时间推理、视觉信息与字幕的利用。",
+    "example": "长视频先出现无人月台，后面另一站才有乘客下车。问题要求选出第一次有乘客下车的站名，字幕中有相近地名。",
+    "metric": "多选题答案准确率，按视频时长与是否使用字幕拆分。",
+    "method": "向模型提供视频的帧或原视频和可选字幕，让它在给定选项中回答，按标注答案判定。",
+    "origin": "https://video-mme.github.io/",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "GPT-5（high）",
+        "date": "2025-08-07",
+        "url": "https://openai.com/index/introducing-gpt-5-for-developers/",
+        "result": "86.7%（长视频，有字幕）"
+      }
+    ]
+  },
+  {
+    "id": "wandr",
+    "name": "WANDR",
+    "category": "工具与智能体",
+    "about": "Perplexity 的 500 项广度和深度检索任务，需要返回多个实体、字段及逐条可验证证据。",
+    "example": "找出符合开放时间和藏品条件的博物馆，逐家提交展览名称、日期、官网链接和支持文字。",
+    "metric": "soft F1 对部分正确的信息给分。hard F1 要求实体全部必需字段正确。",
+    "method": "裁判重新读取引用来源，逐条核对证据。Anthropic 采用冻结索引和自有裁判，不能与原作者实时网页成绩直接对照。",
+    "origin": "https://github.com/perplexityai/wandr",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude Fable 5.2",
+        "date": "2026-11-09",
+        "url": "https://www.anthropic.com/document/claude-fable-5-2-mythos-5-2-system-card",
+        "result": "82.1%（relaxed / soft F1，冻结索引，98 万 token 预算）"
+      }
+    ]
+  },
+  {
+    "id": "winogrande",
+    "name": "WinoGrande",
+    "category": "知识与推理",
+    "about": "通过选择代词所指代的实体，测试句子中的常识推理。",
+    "example": "杯子放不进盒子，因为它太小了。“它”指哪个物体？",
+    "metric": "二选一准确率。",
+    "method": "将两个候选分别填入空位，依据模型判断的指代与正确实体核对。",
+    "origin": "https://arxiv.org/abs/1907.10641",
+    "uses": [
+      {
+        "provider": "Anthropic",
+        "model": "Claude 3 Opus",
+        "date": "2024-03-04",
+        "url": "https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model-Card-Claude-3.pdf",
+        "result": "88.5%（5-shot）"
+      }
+    ]
+  },
+  {
+    "id": "wmt23",
+    "name": "WMT23 General Machine Translation",
+    "category": "语言与阅读",
+    "about": "机器翻译共享任务，在指定语言方向把真实文本译成目标语言。",
+    "example": "将“末班列车比平常提前十分钟发车”译为英文，并保留提前的方向和分钟数。",
+    "metric": "Gemini 报告使用平均 BLEURT 分数，越高越好。",
+    "method": "为每个翻译方向给出一个示例，由学习得到的 BLEURT 评分器结合参考译文估计质量，再跨语言方向汇总。",
+    "origin": "https://www2.statmt.org/wmt23/translation-task.html",
+    "uses": [
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Ultra",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "74.4 BLEURT（所有方向，1-shot）"
+      },
+      {
+        "provider": "Google",
+        "model": "Gemini 1.0 Pro",
+        "date": "2023-12-19",
+        "url": "https://arxiv.org/pdf/2312.11805v1",
+        "result": "71.7 BLEURT（同口径）"
+      }
+    ]
+  },
+  {
+    "id": "xstest",
+    "name": "XSTest",
+    "category": "可靠性与安全",
+    "about": "检测模型会不会因为表面上敏感的措辞，错误拒绝一个正当请求。",
+    "example": "“这台相机会自动捕捉人脸”里的“捕捉”是什么意思？合适的回答应解释成像或对焦功能。",
+    "metric": "OpenAI 报告良性题上的正常作答率 not_overrefuse，越高越好。",
+    "method": "模型作答后，由自动评分器判断其是否对良性请求提供了有用回答。所列结果来自 XSTest 的良性子集。",
+    "origin": "https://github.com/paul-rottger/xstest",
+    "uses": [
+      {
+        "provider": "OpenAI",
+        "model": "o1-preview",
+        "date": "2024-09-12",
+        "url": "https://openai.com/index/learning-to-reason-with-llms/",
+        "result": "97.6% 正常响应良性请求"
+      },
+      {
+        "provider": "OpenAI",
+        "model": "o1",
+        "date": "2024-12-05",
+        "url": "https://cdn.openai.com/o1-system-card-20241205.pdf",
+        "result": "93.6%（附录表 20，250 道良性题）"
+      }
+    ]
+  }
+]

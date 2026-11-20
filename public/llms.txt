@@ -12,6 +12,8 @@
 
 ## Selected projects
 
+- A Chinese reference to benchmarks reported by OpenAI, Anthropic and Google across three years, with examples, metrics, methods and linked model results. [Benchmark Atlas](https://zhangmin.name/panoramas/model-benchmark-atlas/)
+
 - A Chinese interactive guide to twelve Mac mini workflows across six settings, including desktop work, home servers, and local AI. [Mac mini use cases](https://zhangmin.name/panoramas/mac-mini-use-cases/)
 - A Chinese interactive history of Grand Theft Auto traces the release timeline, the changing depictions of Liberty City, Vice City and Los Santos, and the series’ game design. [GTA series panorama](https://zhangmin.name/panoramas/gta-series/)
 - [RSI panorama](https://zhangmin.name/panoramas/recursive-self-improvement/): Chinese interactive field guide to recursive self-improvement, with six conceptual layers, twelve research references, four step-by-step instructional cases, and an illustrative feedback simulator.
