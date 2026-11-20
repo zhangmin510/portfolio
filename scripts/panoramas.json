@@ -17,6 +17,22 @@
   ],
   "pages": [
     {
+      "slug": "ai-infra-book",
+      "title": "AI Infra 交互读本",
+      "subtitle": "《深入理解 AI Infra》十二章交互阅读版",
+      "description": "阅读李博杰的完整中文书稿，逐章做自测，用参数实验计算模型所需的显存、推理时间和通信开销。",
+      "category": "行业与基础设施",
+      "tags": [
+        "AI Infra",
+        "推理与训练",
+        "系统设计"
+      ],
+      "source": "src/panoramas/ai-infra-book.html",
+      "chapterTemplateCount": 13,
+      "updatedAt": "2026-11-20",
+      "sourceSha256": "33f816c76face846df8b547aa49461de657b597d10433910d7b7e98ccc23ce4c"
+    },
+    {
       "slug": "deepseek-harness",
       "title": "DeepSeek Harness 全景图",
       "subtitle": "从一次文件读取看懂智能体运行时",

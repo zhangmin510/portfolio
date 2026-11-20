@@ -12,6 +12,8 @@
 
 ## Selected projects
 
+- A Chinese interactive edition of Bojie Li's AI infrastructure book with the full text, twelve chapter quizzes, and parameter experiments. [AI Infra Interactive Reader](https://zhangmin.name/panoramas/ai-infra-book/)
+
 - An interactive Chinese field guide to the DeepSeek Harness runtime, workflows, public cases and plugin ecosystem. [DeepSeek Harness Atlas](https://zhangmin.name/panoramas/deepseek-harness/)
 
 - A Chinese reference to benchmarks reported by OpenAI, Anthropic and Google across three years, with examples, metrics, methods and linked model results. [Benchmark Atlas](https://zhangmin.name/panoramas/model-benchmark-atlas/)

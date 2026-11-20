@@ -1,4 +1,5 @@
 import { decoratePanorama, stripNavigation, navigation, css } from './navigation/render.mjs'
+import { restoreReaderAssets, splitReaderAssets } from './reader-assets.mjs'
 import { createHash } from 'node:crypto'
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
@@ -6,7 +7,7 @@ import { fileURLToPath } from 'node:url'
 
 // Canonical sources are relative to portfolio/, never to a user Downloads folder.
 // A clean portfolio checkout can recover the originals from its published copies:
-// undoing only our vendor-src substitutions restores their recorded SHA-256.
+// undoing the publication transforms restores their recorded SHA-256.
 const projectDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const manifestPath = path.join(projectDir, 'scripts/panoramas.json')
 const manifestText = await readFile(manifestPath, 'utf8')
@@ -118,6 +119,9 @@ for (const page of manifest.pages) {
     source = restoreOriginal(await readFile(destination, 'utf8').catch(() => {
       throw new Error(`Both source and published snapshot are missing for ${page.slug}: ${sourcePath}`)
     }))
+    if (page.chapterTemplateCount !== undefined) {
+      source = await restoreReaderAssets(source, page.chapterTemplateCount, path.dirname(destination))
+    }
     if (!page.sourceSha256 || hash(source) !== page.sourceSha256) {
       throw new Error(`Published snapshot does not restore the recorded source for ${page.slug}`)
     }
@@ -128,6 +132,13 @@ for (const page of manifest.pages) {
     errors.push(`Source checksum changed for ${page.slug}; run the sync command`)
   }
   page.sourceSha256 = sourceSha256
+  if (page.chapterTemplateCount !== undefined) {
+    const reader = splitReaderAssets(source, page.chapterTemplateCount)
+    for (const [file, content] of reader.files) {
+      await saveOrCheck(path.join(path.dirname(destination), file), content)
+    }
+    source = reader.html
+  }
   await saveOrCheck(destination, decoratePanorama(localize(source), page, manifest.pages))
 }
 

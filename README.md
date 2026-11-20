@@ -9,7 +9,7 @@
 
 - 简洁的单栏终端主页，保留个人介绍、命令输入和轻量导航
 - 首页直接提供十一个网站入口，`sites` / `websites` 命令可查看介绍，`cd sites` 可按目录浏览
-- `panoramas` 命令与全景图入口，连接 23 张独立目录发布的交互图谱
+- `panoramas` 命令与全景图入口，连接 24 张独立目录发布的交互图谱
 - 评测探索局：12 关游戏式知识地图、24 道情境挑战、4 个实验与全书阅读，进度本地保存
 - 全景图目录支持主题筛选、关键词搜索与手机浏览
 - 真实表单驱动的命令行交互，兼容键盘、触屏与屏幕阅读器
@@ -71,6 +71,7 @@ Ctrl+L 清屏，Ctrl+A / E 移动到行首 / 行尾。页面内容以终端输�
 
 | 全景图 | 目录链接 |
 | --- | --- |
+| AI Infra 交互读本 | [ai-infra-book/](https://zhangmin.name/panoramas/ai-infra-book/) |
 | DeepSeek Harness 全景图 | [deepseek-harness/](https://zhangmin.name/panoramas/deepseek-harness/) |
 | 大模型评测图鉴 | [model-benchmark-atlas/](https://zhangmin.name/panoramas/model-benchmark-atlas/) |
 | Mac mini 使用场景全景图 | [mac-mini-use-cases/](https://zhangmin.name/panoramas/mac-mini-use-cases/) |
@@ -184,7 +185,7 @@ npx vercel --prod
 ```text
 public/panoramas/
   index.html                 # 可搜索、可筛选的目录页
-  <主题>/index.html          # 21 个独立页面的发布快照
+  <主题>/index.html          # 各主题的发布快照
   vendor/                    # 固定版本的 Chart.js 与 html-to-image
 public/cube-guide/           # 二阶魔方交互教程与高清图解
 scripts/panoramas.json       # 标题、分类、原始文件映射与校验值
@@ -203,6 +204,7 @@ worker/index.js              # Cloudflare 安全头、缓存与 404
 新克隆的仓库无需相邻的原始文件目录，也无需先运行同步命令，就能构建完整站点。
 
 DeepSeek Harness、大模型评测图鉴、Mac mini、GTA、RSI 与 Managed Agent 全景图的源码维护在 `src/panoramas/`，与发布快照一起保留在仓库中。
+AI Infra 交互读本的[完整 HTML](src/panoramas/ai-infra-book.html) 可直接离线打开。同步脚本将前言、十二章原文及搜索索引拆到 `public/panoramas/ai-infra-book/chapters/`，在线阅读时按需加载。
 RSI 的“逐轮案例”包含 Self-Refine、STaR、DGM、STOP 四组教学轨迹，支持阶段回放、自动播放、冻结改进器对照与轮次深链接；DGM 工具样例在浏览器内执行验证。
 
 需要更新内容时，可编辑清单映射的原始页面：它们默认位于仓库旁的
