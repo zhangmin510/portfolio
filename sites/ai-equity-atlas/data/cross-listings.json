@@ -1,0 +1,911 @@
+[
+  {
+    "market": "CN",
+    "ticker": "000039",
+    "name": "中集集团",
+    "venue": "SZSE",
+    "hkTicker": "02039",
+    "hkName": "中集集团",
+    "codeWithSuffix": "000039.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "000063",
+    "name": "中兴通讯",
+    "venue": "SZSE",
+    "hkTicker": "00763",
+    "hkName": "中兴通讯",
+    "codeWithSuffix": "000063.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "000157",
+    "name": "中联重科",
+    "venue": "SZSE",
+    "hkTicker": "01157",
+    "hkName": "中联重科",
+    "codeWithSuffix": "000157.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "000333",
+    "name": "美的集团",
+    "venue": "SZSE",
+    "hkTicker": "00300",
+    "hkName": "美的集团",
+    "codeWithSuffix": "000333.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "000338",
+    "name": "潍柴动力",
+    "venue": "SZSE",
+    "hkTicker": "02338",
+    "hkName": "潍柴动力",
+    "codeWithSuffix": "000338.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "000513",
+    "name": "丽珠集团",
+    "venue": "SZSE",
+    "hkTicker": "01513",
+    "hkName": "丽珠医药",
+    "codeWithSuffix": "000513.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "001389",
+    "name": "广合科技",
+    "venue": "SZSE",
+    "hkTicker": "01989",
+    "hkName": "广合科技",
+    "codeWithSuffix": "001389.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "002050",
+    "name": "三花智控",
+    "venue": "SZSE",
+    "hkTicker": "02050",
+    "hkName": "三花智控",
+    "codeWithSuffix": "002050.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "002130",
+    "name": "沃尔核材",
+    "venue": "SZSE",
+    "hkTicker": "09981",
+    "hkName": "沃尔核材",
+    "codeWithSuffix": "002130.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "002352",
+    "name": "顺丰控股",
+    "venue": "SZSE",
+    "hkTicker": "06936",
+    "hkName": "顺丰控股",
+    "codeWithSuffix": "002352.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "002384",
+    "name": "东山精密",
+    "venue": "SZSE",
+    "hkTicker": "02384",
+    "hkName": "东山精密",
+    "codeWithSuffix": "002384.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "002460",
+    "name": "赣锋锂业",
+    "venue": "SZSE",
+    "hkTicker": "01772",
+    "hkName": "赣锋锂业",
+    "codeWithSuffix": "002460.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "002475",
+    "name": "立讯精密",
+    "venue": "SZSE",
+    "hkTicker": "02475",
+    "hkName": "立讯精密",
+    "codeWithSuffix": "002475.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "002594",
+    "name": "比亚迪",
+    "venue": "SZSE",
+    "hkTicker": "01211",
+    "hkName": "比亚迪股份",
+    "codeWithSuffix": "002594.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "002600",
+    "name": "领益智造",
+    "venue": "SZSE",
+    "hkTicker": "01688",
+    "hkName": "领益智造",
+    "codeWithSuffix": "002600.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "002747",
+    "name": "埃斯顿",
+    "venue": "SZSE",
+    "hkTicker": "02715",
+    "hkName": "埃斯顿",
+    "codeWithSuffix": "002747.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "002768",
+    "name": "国恩股份",
+    "venue": "SZSE",
+    "hkTicker": "02768",
+    "hkName": "国恩科技",
+    "codeWithSuffix": "002768.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "002803",
+    "name": "吉宏股份",
+    "venue": "SZSE",
+    "hkTicker": "02603",
+    "hkName": "吉宏股份",
+    "codeWithSuffix": "002803.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "002881",
+    "name": "美格智能",
+    "venue": "SZSE",
+    "hkTicker": "03268",
+    "hkName": "美格智能",
+    "codeWithSuffix": "002881.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "003021",
+    "name": "兆威机电",
+    "venue": "SZSE",
+    "hkTicker": "02692",
+    "hkName": "兆威机电",
+    "codeWithSuffix": "003021.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "300077",
+    "name": "国民技术",
+    "venue": "SZSE",
+    "hkTicker": "02701",
+    "hkName": "国民技术",
+    "codeWithSuffix": "300077.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "300223",
+    "name": "君正股份",
+    "venue": "SZSE",
+    "hkTicker": "03223",
+    "hkName": "君正股份",
+    "codeWithSuffix": "300223.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "300308",
+    "name": "中际旭创",
+    "venue": "SZSE",
+    "hkTicker": "03308",
+    "hkName": "中际旭创",
+    "codeWithSuffix": "300308.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "300347",
+    "name": "泰格医药",
+    "venue": "SZSE",
+    "hkTicker": "03347",
+    "hkName": "泰格医药",
+    "codeWithSuffix": "300347.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "300408",
+    "name": "三环集团",
+    "venue": "SZSE",
+    "hkTicker": "06951",
+    "hkName": "三环集团",
+    "codeWithSuffix": "300408.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "300433",
+    "name": "蓝思科技",
+    "venue": "SZSE",
+    "hkTicker": "06613",
+    "hkName": "蓝思科技",
+    "codeWithSuffix": "300433.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "300450",
+    "name": "先导智能",
+    "venue": "SZSE",
+    "hkTicker": "00470",
+    "hkName": "先导智能",
+    "codeWithSuffix": "300450.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "300476",
+    "name": "胜宏科技",
+    "venue": "SZSE",
+    "hkTicker": "02476",
+    "hkName": "胜宏科技",
+    "codeWithSuffix": "300476.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "300568",
+    "name": "星源材质",
+    "venue": "SZSE",
+    "hkTicker": "06067",
+    "hkName": "星源材质",
+    "codeWithSuffix": "300568.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "300638",
+    "name": "广和通",
+    "venue": "SZSE",
+    "hkTicker": "00638",
+    "hkName": "广和通",
+    "codeWithSuffix": "300638.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "300661",
+    "name": "圣邦股份",
+    "venue": "SZSE",
+    "hkTicker": "03661",
+    "hkName": "圣邦股份",
+    "codeWithSuffix": "300661.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "300748",
+    "name": "金力永磁",
+    "venue": "SZSE",
+    "hkTicker": "06680",
+    "hkName": "金力永磁",
+    "codeWithSuffix": "300748.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "300757",
+    "name": "罗博特科",
+    "venue": "SZSE",
+    "hkTicker": "03757",
+    "hkName": "罗博特科",
+    "codeWithSuffix": "300757.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "300759",
+    "name": "康龙化成",
+    "venue": "SZSE",
+    "hkTicker": "03759",
+    "hkName": "康龙化成",
+    "codeWithSuffix": "300759.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "300866",
+    "name": "安克创新",
+    "venue": "SZSE",
+    "hkTicker": "00668",
+    "hkName": "安克创新",
+    "codeWithSuffix": "300866.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "301087",
+    "name": "可孚医疗",
+    "venue": "SZSE",
+    "hkTicker": "01187",
+    "hkName": "可孚医疗",
+    "codeWithSuffix": "301087.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "301200",
+    "name": "大族数控",
+    "venue": "SZSE",
+    "hkTicker": "03200",
+    "hkName": "大族数控",
+    "codeWithSuffix": "301200.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "301308",
+    "name": "江波龙",
+    "venue": "SZSE",
+    "hkTicker": "09976",
+    "hkName": "江波龙",
+    "codeWithSuffix": "301308.SZ"
+  },
+  {
+    "market": "CN",
+    "ticker": "600196",
+    "name": "复星医药",
+    "venue": "SSE",
+    "hkTicker": "02196",
+    "hkName": "复星医药",
+    "codeWithSuffix": "600196.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "600276",
+    "name": "恒瑞医药",
+    "venue": "SSE",
+    "hkTicker": "01276",
+    "hkName": "恒瑞医药",
+    "codeWithSuffix": "600276.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "600585",
+    "name": "海螺水泥",
+    "venue": "SSE",
+    "hkTicker": "00914",
+    "hkName": "海螺水泥",
+    "codeWithSuffix": "600585.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "600660",
+    "name": "福耀玻璃",
+    "venue": "SSE",
+    "hkTicker": "03606",
+    "hkName": "福耀玻璃",
+    "codeWithSuffix": "600660.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "600690",
+    "name": "海尔智家",
+    "venue": "SSE",
+    "hkTicker": "06690",
+    "hkName": "海尔智家",
+    "codeWithSuffix": "600690.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "600699",
+    "name": "均胜电子",
+    "venue": "SSE",
+    "hkTicker": "00699",
+    "hkName": "均胜电子",
+    "codeWithSuffix": "600699.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "600775",
+    "name": "南京熊猫",
+    "venue": "SSE",
+    "hkTicker": "00553",
+    "hkName": "南京熊猫电子股份",
+    "codeWithSuffix": "600775.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "600860",
+    "name": "京城股份",
+    "venue": "SSE",
+    "hkTicker": "00187",
+    "hkName": "京城机电股份",
+    "codeWithSuffix": "600860.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "600875",
+    "name": "东方电气",
+    "venue": "SSE",
+    "hkTicker": "01072",
+    "hkName": "东方电气",
+    "codeWithSuffix": "600875.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "600941",
+    "name": "中国移动",
+    "venue": "SSE",
+    "hkTicker": "00941",
+    "hkName": "中国移动",
+    "codeWithSuffix": "600941.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "601088",
+    "name": "中国神华",
+    "venue": "SSE",
+    "hkTicker": "01088",
+    "hkName": "中国神华",
+    "codeWithSuffix": "601088.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "601127",
+    "name": "赛力斯",
+    "venue": "SSE",
+    "hkTicker": "09927",
+    "hkName": "赛力斯",
+    "codeWithSuffix": "601127.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "601238",
+    "name": "广汽集团",
+    "venue": "SSE",
+    "hkTicker": "02238",
+    "hkName": "广汽集团",
+    "codeWithSuffix": "601238.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "601318",
+    "name": "中国平安",
+    "venue": "SSE",
+    "hkTicker": "02318",
+    "hkName": "中国平安",
+    "codeWithSuffix": "601318.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "601601",
+    "name": "中国太保",
+    "venue": "SSE",
+    "hkTicker": "02601",
+    "hkName": "中国太保",
+    "codeWithSuffix": "601601.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "601607",
+    "name": "上海医药",
+    "venue": "SSE",
+    "hkTicker": "02607",
+    "hkName": "上海医药",
+    "codeWithSuffix": "601607.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "601633",
+    "name": "长城汽车",
+    "venue": "SSE",
+    "hkTicker": "02333",
+    "hkName": "长城汽车",
+    "codeWithSuffix": "601633.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "601717",
+    "name": "中创智领",
+    "venue": "SSE",
+    "hkTicker": "00564",
+    "hkName": "中创智领",
+    "codeWithSuffix": "601717.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "601727",
+    "name": "上海电气",
+    "venue": "SSE",
+    "hkTicker": "02727",
+    "hkName": "上海电气",
+    "codeWithSuffix": "601727.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "601728",
+    "name": "中国电信",
+    "venue": "SSE",
+    "hkTicker": "00728",
+    "hkName": "中国电信",
+    "codeWithSuffix": "601728.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "601868",
+    "name": "中国能建",
+    "venue": "SSE",
+    "hkTicker": "03996",
+    "hkName": "中国能源建设",
+    "codeWithSuffix": "601868.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "601869",
+    "name": "长飞光纤",
+    "venue": "SSE",
+    "hkTicker": "06869",
+    "hkName": "长飞光纤光缆",
+    "codeWithSuffix": "601869.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "603083",
+    "name": "剑桥科技",
+    "venue": "SSE",
+    "hkTicker": "06166",
+    "hkName": "剑桥科技",
+    "codeWithSuffix": "603083.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "603228",
+    "name": "景旺电子",
+    "venue": "SSE",
+    "hkTicker": "03228",
+    "hkName": "景旺电子",
+    "codeWithSuffix": "603228.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "603296",
+    "name": "华勤技术",
+    "venue": "SSE",
+    "hkTicker": "03296",
+    "hkName": "华勤技术",
+    "codeWithSuffix": "603296.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "603341",
+    "name": "龙旗科技",
+    "venue": "SSE",
+    "hkTicker": "09611",
+    "hkName": "龙旗科技",
+    "codeWithSuffix": "603341.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "603501",
+    "name": "豪威集团",
+    "venue": "SSE",
+    "hkTicker": "00501",
+    "hkName": "豪威集团",
+    "codeWithSuffix": "603501.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "603906",
+    "name": "龙蟠科技",
+    "venue": "SSE",
+    "hkTicker": "02465",
+    "hkName": "龙蟠科技",
+    "codeWithSuffix": "603906.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "603986",
+    "name": "兆易创新",
+    "venue": "SSE",
+    "hkTicker": "03986",
+    "hkName": "兆易创新",
+    "codeWithSuffix": "603986.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "688008",
+    "name": "澜起科技",
+    "venue": "SSE",
+    "hkTicker": "06809",
+    "hkName": "澜起科技",
+    "codeWithSuffix": "688008.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "688031",
+    "name": "星环科技",
+    "venue": "SSE",
+    "hkTicker": "06727",
+    "hkName": "星环科技",
+    "codeWithSuffix": "688031.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "688036",
+    "name": "传音控股",
+    "venue": "SSE",
+    "hkTicker": "02636",
+    "hkName": "传音控股",
+    "codeWithSuffix": "688036.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "688052",
+    "name": "纳芯微",
+    "venue": "SSE",
+    "hkTicker": "02676",
+    "hkName": "纳芯微",
+    "codeWithSuffix": "688052.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "688062",
+    "name": "迈威生物",
+    "venue": "SSE",
+    "hkTicker": "02493",
+    "hkName": "迈威生物-B",
+    "codeWithSuffix": "688062.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "688187",
+    "name": "时代电气",
+    "venue": "SSE",
+    "hkTicker": "03898",
+    "hkName": "时代电气",
+    "codeWithSuffix": "688187.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "688234",
+    "name": "天岳先进",
+    "venue": "SSE",
+    "hkTicker": "02631",
+    "hkName": "天岳先进",
+    "codeWithSuffix": "688234.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "688236",
+    "name": "春立医疗",
+    "venue": "SSE",
+    "hkTicker": "01858",
+    "hkName": "春立医疗",
+    "codeWithSuffix": "688236.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "688249",
+    "name": "晶合集成",
+    "venue": "SSE",
+    "hkTicker": "02249",
+    "hkName": "晶合集成",
+    "codeWithSuffix": "688249.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "688279",
+    "name": "峰岹科技",
+    "venue": "SSE",
+    "hkTicker": "01304",
+    "hkName": "FORTIOR",
+    "codeWithSuffix": "688279.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "688337",
+    "name": "普源精电",
+    "venue": "SSE",
+    "hkTicker": "00537",
+    "hkName": "普源精电",
+    "codeWithSuffix": "688337.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "688347",
+    "name": "华虹宏力",
+    "venue": "SSE",
+    "hkTicker": "01347",
+    "hkName": "华虹宏力",
+    "codeWithSuffix": "688347.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "688385",
+    "name": "复旦微电",
+    "venue": "SSE",
+    "hkTicker": "01385",
+    "hkName": "上海复旦",
+    "codeWithSuffix": "688385.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "688630",
+    "name": "芯碁微装",
+    "venue": "SSE",
+    "hkTicker": "09630",
+    "hkName": "芯碁微装",
+    "codeWithSuffix": "688630.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "688796",
+    "name": "百奥赛图",
+    "venue": "SSE",
+    "hkTicker": "02315",
+    "hkName": "百奥赛图-B",
+    "codeWithSuffix": "688796.SH"
+  },
+  {
+    "market": "CN",
+    "ticker": "688981",
+    "name": "中芯国际",
+    "venue": "SSE",
+    "hkTicker": "00981",
+    "hkName": "中芯国际",
+    "codeWithSuffix": "688981.SH"
+  },
+  {
+    "market": "US",
+    "ticker": "WRD",
+    "name": "WeRide Inc.",
+    "venue": "Nasdaq",
+    "hkTicker": "00800",
+    "hkName": "文远知行-W",
+    "cik": "0001867729"
+  },
+  {
+    "market": "US",
+    "ticker": "LI",
+    "name": "Li Auto Inc.",
+    "venue": "Nasdaq",
+    "hkTicker": "02015",
+    "hkName": "理想汽车-W",
+    "cik": "0001791706"
+  },
+  {
+    "market": "US",
+    "ticker": "PONY",
+    "name": "Pony AI Inc.",
+    "venue": "Nasdaq",
+    "hkTicker": "02026",
+    "hkName": "小马智行-W",
+    "cik": "0001969302"
+  },
+  {
+    "market": "US",
+    "ticker": "TUYA",
+    "name": "Tuya Inc.",
+    "venue": "NYSE",
+    "hkTicker": "02391",
+    "hkName": "涂鸦智能-W",
+    "cik": "0001829118"
+  },
+  {
+    "market": "US",
+    "ticker": "ATHM",
+    "name": "Autohome Inc.",
+    "venue": "NYSE",
+    "hkTicker": "02518",
+    "hkName": "汽车之家-S",
+    "cik": "0001527636"
+  },
+  {
+    "market": "US",
+    "ticker": "KC",
+    "name": "Kingsoft Cloud Holdings Limited",
+    "venue": "Nasdaq",
+    "hkTicker": "03896",
+    "hkName": "金山云",
+    "cik": "0001795589"
+  },
+  {
+    "market": "US",
+    "ticker": "JD",
+    "name": "JD.com, Inc.",
+    "venue": "Nasdaq",
+    "hkTicker": "09618",
+    "hkName": "京东集团-SW",
+    "cik": "0001549802"
+  },
+  {
+    "market": "US",
+    "ticker": "BILI",
+    "name": "Bilibili Inc.",
+    "venue": "Nasdaq",
+    "hkTicker": "09626",
+    "hkName": "哔哩哔哩-W",
+    "cik": "0001723690"
+  },
+  {
+    "market": "US",
+    "ticker": "GDS",
+    "name": "GDS Holdings Limited",
+    "venue": "Nasdaq",
+    "hkTicker": "09698",
+    "hkName": "万国数据-SW",
+    "cik": "0001526125"
+  },
+  {
+    "market": "US",
+    "ticker": "NIO",
+    "name": "NIO Inc.",
+    "venue": "NYSE",
+    "hkTicker": "09866",
+    "hkName": "蔚来-SW",
+    "cik": "0001736541"
+  },
+  {
+    "market": "US",
+    "ticker": "XPEV",
+    "name": "XPeng Inc.",
+    "venue": "NYSE",
+    "hkTicker": "09868",
+    "hkName": "小鹏集团-W",
+    "cik": "0001810997"
+  },
+  {
+    "market": "US",
+    "ticker": "BIDU",
+    "name": "Baidu, Inc.",
+    "venue": "Nasdaq",
+    "hkTicker": "09888",
+    "hkName": "百度集团-W",
+    "cik": "0001329099"
+  },
+  {
+    "market": "US",
+    "ticker": "WB",
+    "name": "Weibo Corporation",
+    "venue": "Nasdaq",
+    "hkTicker": "09898",
+    "hkName": "微博-SW",
+    "cik": "0001595761"
+  },
+  {
+    "market": "US",
+    "ticker": "TCOM",
+    "name": "Trip.com Group Limited",
+    "venue": "Nasdaq",
+    "hkTicker": "09961",
+    "hkName": "携程集团-S",
+    "cik": "0001269238"
+  },
+  {
+    "market": "US",
+    "ticker": "BABA",
+    "name": "Alibaba Group Holding Limited",
+    "venue": "NYSE",
+    "hkTicker": "09988",
+    "hkName": "阿里巴巴-W",
+    "cik": "0001577552"
+  },
+  {
+    "market": "US",
+    "ticker": "NTES",
+    "name": "NetEase, Inc.",
+    "venue": "Nasdaq",
+    "hkTicker": "09999",
+    "hkName": "网易",
+    "cik": "0001110646"
+  },
+  {
+    "market": "US",
+    "ticker": "EDU",
+    "name": "New Oriental Education & Technology Group, Inc.",
+    "venue": "NYSE",
+    "hkTicker": "09901",
+    "hkName": "新东方-S",
+    "cik": "0001372920"
+  },
+  {
+    "market": "US",
+    "ticker": "HSAI",
+    "name": "Hesai Group",
+    "venue": "Nasdaq",
+    "hkTicker": "02525",
+    "hkName": "禾赛-W",
+    "cik": "0001861737"
+  }
+]

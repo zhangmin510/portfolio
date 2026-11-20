@@ -1,0 +1,991 @@
+[
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "AIQ",
+    "name": "Global X Artificial Intelligence & Technology ETF",
+    "provider": "Global X",
+    "venue": "Nasdaq",
+    "theme": "AI 与大数据",
+    "detail": "覆盖 AI 产品及服务、数据分析硬件，组合包含美股和海外股票。 可查阅该期持仓在三地名录中匹配的证券。",
+    "url": "https://www.globalxetfs.com/funds/aiq",
+    "asOf": "2026-11-19",
+    "benchmark": "Indxx Artificial Intelligence & Big Data Index",
+    "related": [
+      "IAIQ"
+    ],
+    "memberSources": [
+      "aiq"
+    ],
+    "holdingsUrl": "https://assets.globalxetfs.com/funds/holdings/aiq_full-holdings_20261119.csv"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "BOTZ",
+    "name": "Global X Robotics & Artificial Intelligence ETF",
+    "provider": "Global X",
+    "venue": "Nasdaq",
+    "theme": "机器人与自动化",
+    "detail": "聚焦工业机器人、自动化系统、自主设备与支持其运作的技术公司。 可查阅该期持仓在三地名录中匹配的证券。",
+    "url": "https://www.globalxetfs.com/funds/botz",
+    "asOf": "2026-11-19",
+    "benchmark": "Indxx Global Robotics & Artificial Intelligence Thematic Index",
+    "related": [
+      "IBOTZ"
+    ],
+    "memberSources": [
+      "botz"
+    ],
+    "holdingsUrl": "https://assets.globalxetfs.com/funds/holdings/botz_full-holdings_20261119.csv"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "ARTY",
+    "name": "iShares Future AI & Tech ETF",
+    "provider": "iShares / BlackRock",
+    "venue": "NYSE Arca",
+    "theme": "模型与 AI 基础设施",
+    "detail": "从全球的软件、基础设施和服务企业中，选择参与人工智能产业的公司。 名录关联该期持仓中已匹配的美股代码。",
+    "url": "https://www.ishares.com/us/products/297905/ishares-future-ai-tech-etf-arty",
+    "asOf": "2026-11-19",
+    "benchmark": "Morningstar Global Artificial Intelligence Select Index",
+    "related": [
+      "MSGAISNU"
+    ],
+    "memberSources": [
+      "arty"
+    ],
+    "holdingsUrl": "https://www.ishares.com/us/products/297905/ishares-future-ai-tech-etf/latest-holdings.csv?asOfDate=20261119"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "BAI",
+    "name": "iShares A.I. Innovation and Tech Active ETF",
+    "provider": "iShares / BlackRock",
+    "venue": "NYSE Arca",
+    "theme": "全产业链",
+    "detail": "主动管理，同时布局 AI 基础设施、智能技术与应用服务。基金可持有未上市公司。 名录关联该期持仓中已匹配的美股代码。",
+    "url": "https://www.ishares.com/us/products/339081/ishares-a-i-innovation-and-tech-active-etf-bai",
+    "asOf": "2026-11-19",
+    "memberSources": [
+      "bai"
+    ],
+    "holdingsUrl": "https://www.ishares.com/us/products/339081/ishares-a-i-innovation-and-tech-active-etf/latest-holdings.csv?asOfDate=20261119"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "CHAT",
+    "name": "Roundhill Generative AI & Technology ETF",
+    "provider": "Roundhill Investments",
+    "venue": "NYSE Arca",
+    "theme": "生成式 AI",
+    "detail": "主动管理，投资于生成式 AI 的模型、计算基础设施、应用与软件。 名录关联该期持仓中已匹配的美股代码。",
+    "url": "https://www.roundhillinvestments.com/etf/chat/",
+    "asOf": "2026-11-20",
+    "memberSources": [
+      "chat"
+    ],
+    "holdingsUrl": "https://www.roundhillinvestments.com/assets/data/FilepointRoundhill.40RU.RU_Holdings_11192026.csv"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "HUMN",
+    "name": "Roundhill Humanoid Robotics ETF",
+    "provider": "Roundhill Investments",
+    "venue": "Cboe BZX",
+    "theme": "人形机器人",
+    "detail": "主动管理，覆盖人形机器人整机、零部件以及提供感知与计算能力的企业。 可查阅该期持仓在三地名录中匹配的证券。",
+    "url": "https://www.roundhillinvestments.com/etf/humn/",
+    "asOf": "2026-11-20",
+    "memberSources": [
+      "humn"
+    ],
+    "holdingsUrl": "https://www.roundhillinvestments.com/assets/data/FilepointRoundhill.40RU.RU_Holdings_11192026.csv"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "AIPO",
+    "name": "Defiance AI & Power Infrastructure ETF",
+    "provider": "Defiance ETFs",
+    "venue": "Nasdaq",
+    "theme": "电力与数据中心",
+    "detail": "覆盖美国挂牌的电力、配套工程、数据中心与 AI 硬件企业，包含间接能源供应链。 名录关联该期持仓中已匹配的美股代码。",
+    "url": "https://www.defianceetfs.com/aipo/",
+    "asOf": "2026-11-20",
+    "benchmark": "MarketVector US Listed AI and Power Infrastructure Index",
+    "related": [
+      "MVAIPO"
+    ],
+    "memberSources": [
+      "aipo"
+    ],
+    "holdingsUrl": "https://www.defianceetfs.com/aipo-full-holdings/"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "AINF",
+    "name": "Defiance Inference AI Chip ETF",
+    "provider": "Defiance ETFs",
+    "venue": "Nasdaq",
+    "theme": "推理芯片",
+    "detail": "聚焦设计、制造或支持 AI 推理芯片的公司，持仓横跨多个市场。 名录关联该期持仓中已匹配的美股代码。",
+    "url": "https://www.defianceetfs.com/ainf/",
+    "asOf": "2026-11-20",
+    "benchmark": "BITA AI Inference Chip Select Index",
+    "related": [
+      "BAIICS"
+    ],
+    "memberSources": [
+      "ainf"
+    ],
+    "holdingsUrl": "https://www.defianceetfs.com/ainf-full-holdings/"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "ROBT",
+    "name": "First Trust Nasdaq Artificial Intelligence and Robotics ETF",
+    "provider": "First Trust",
+    "venue": "Nasdaq",
+    "theme": "AI 与机器人",
+    "detail": "跟踪 Nasdaq 与 CTA 分类的 AI、机器人相关企业，涵盖提供、采用和强化这些技术的公司。 名录关联该期持仓中已匹配的美股代码。",
+    "url": "https://www.ftportfolios.com/Retail/Etf/EtfSummary.aspx?Ticker=ROBT",
+    "asOf": "2026-11-19",
+    "benchmark": "Nasdaq CTA Artificial Intelligence and Robotics Index",
+    "related": [
+      "NQROBO"
+    ],
+    "memberSources": [
+      "robt"
+    ],
+    "holdingsUrl": "https://www.ftportfolios.com/Retail/Etf/EtfHoldings.aspx?Ticker=ROBT"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "FAI",
+    "name": "First Trust Bloomberg Artificial Intelligence ETF",
+    "provider": "First Trust",
+    "venue": "NYSE Arca",
+    "theme": "全产业链",
+    "detail": "投资开发、支持或使用人工智能解决方案的全球公司。 名录关联该期持仓中已匹配的美股代码。",
+    "url": "https://www.ftportfolios.com/Retail/Etf/EtfSummary.aspx?Ticker=FAI",
+    "asOf": "2026-11-19",
+    "benchmark": "Bloomberg Artificial Intelligence Index",
+    "related": [
+      "BAIT"
+    ],
+    "memberSources": [
+      "fai"
+    ],
+    "holdingsUrl": "https://www.ftportfolios.com/Retail/Etf/EtfHoldings.aspx?Ticker=FAI"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "THNQ",
+    "name": "ROBO Global Artificial Intelligence ETF",
+    "provider": "ROBO Global / Exchange Traded Concepts",
+    "venue": "NYSE Arca",
+    "theme": "数据、云与行业应用",
+    "detail": "覆盖 AI 计算、数据和云服务，以及应用这些技术的行业公司。 名录关联该期持仓中已匹配的美股代码。",
+    "url": "https://www.roboglobaletfs.com/thnq",
+    "asOf": "2026-11-19",
+    "benchmark": "ROBO Global Artificial Intelligence Index",
+    "related": [
+      "THNQTR"
+    ],
+    "memberSources": [
+      "thnq"
+    ],
+    "holdingsUrl": "https://www.roboglobaletfs.com/thnq"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "CHPX",
+    "name": "Global X AI Semiconductor & Quantum ETF",
+    "provider": "Global X",
+    "venue": "Nasdaq",
+    "theme": "AI 芯片与量子计算",
+    "detail": "覆盖服务于 AI 的半导体与量子计算产业链，组合也包含量子计算企业。",
+    "url": "https://www.globalxetfs.com/funds/chpx",
+    "asOf": "2026-11-20",
+    "benchmark": "Global X AI Semiconductor & Quantum Index",
+    "related": [
+      "GXCHPXUN"
+    ]
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "COOL",
+    "name": "VegaShares AI Thermal, Cooling & Power Management ETF",
+    "provider": "VegaShares",
+    "venue": "Nasdaq",
+    "theme": "散热与电源管理",
+    "detail": "主动管理，参考 BITA 相关行业指数，布局机房供电、功率调节、散热及液冷。 名录关联该期持仓中已匹配的美股代码。",
+    "url": "https://vegasharesetfs.com/public/COOL",
+    "asOf": "2026-11-20",
+    "memberSources": [
+      "cool"
+    ],
+    "holdingsUrl": "https://vegasharesetfs.com/download/holdings/COOL"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "LUMA",
+    "name": "KraneShares Photonic and Optical ETF",
+    "provider": "KraneShares",
+    "venue": "NYSE Arca",
+    "theme": "光通信与光互连",
+    "detail": "主动管理，投资光子与光学技术企业，组合可包括上市及非上市公司。",
+    "url": "https://kraneshares.com/etf/luma/",
+    "asOf": "2026-11-20"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "IGPT",
+    "name": "Invesco AI and Next Gen Software ETF",
+    "provider": "Invesco",
+    "venue": "NYSE Arca",
+    "theme": "AI 与软件开发",
+    "detail": "覆盖从下一代软件技术、数据处理或相关产品获得收入的公司。",
+    "url": "https://www.invesco.com/us/en/financial-products/etfs/invesco-ai-and-next-gen-software-etf.html",
+    "asOf": "2026-11-20",
+    "benchmark": "STOXX World AC NexGen Software Development Index",
+    "related": [
+      "STXSOFTV"
+    ]
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "WTAI",
+    "name": "WisdomTree Artificial Intelligence and Innovation Fund",
+    "provider": "WisdomTree",
+    "venue": "Cboe BZX",
+    "theme": "AI 与创新",
+    "detail": "通过指数配置参与人工智能与技术创新的上市公司。",
+    "url": "https://www.wisdomtree.com/us/products/megatrends/wtai",
+    "asOf": "2026-11-20",
+    "benchmark": "WisdomTree Artificial Intelligence & Innovation Index",
+    "related": []
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "KOID",
+    "name": "KraneShares Global Humanoid Robotics and Physical AI Index ETF",
+    "provider": "KraneShares",
+    "venue": "Nasdaq",
+    "theme": "人形机器人",
+    "detail": "全球股票组合，覆盖人形机器人和具身智能所需的技术与零部件。",
+    "url": "https://kraneshares.com/etf/koid/",
+    "asOf": "2026-11-20",
+    "benchmark": "MerQube Global Humanoid Robotics and Physical AI Index",
+    "related": []
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "HLTH",
+    "name": "Tema Healthcare AI ETF",
+    "provider": "Tema ETFs",
+    "venue": "Nasdaq",
+    "theme": "医疗 AI",
+    "detail": "主动管理，涵盖药物发现、诊断、临床和患者护理等使用 AI 的企业。",
+    "url": "https://temaetfs.com/hlth",
+    "asOf": "2026-11-20"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "AGIQ",
+    "name": "SoFi Agentic AI ETF",
+    "provider": "SoFi ETFs",
+    "venue": "NYSE Arca",
+    "theme": "AI 智能体",
+    "detail": "聚焦为智能体与自主决策技术提供软件、基础设施和服务的公司。",
+    "url": "https://www.sofi.com/invest/etfs/agiq/",
+    "asOf": "2026-11-20",
+    "benchmark": "BITA US Agentic AI Select Index",
+    "related": [
+      "BUAAIS"
+    ]
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "CAPA",
+    "name": "Defiance AI Capacitors & MLCC ETF",
+    "provider": "Defiance ETFs",
+    "venue": "Cboe BZX",
+    "theme": "电容与被动元件",
+    "detail": "覆盖应用于 AI 硬件基础设施的电容、多层陶瓷电容及其他被动电子元件。",
+    "url": "https://www.defianceetfs.com/capa/",
+    "asOf": "2026-11-20",
+    "benchmark": "BITA AI Capacitors & MLCC Index",
+    "related": [
+      "BAICLI"
+    ]
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "PRAM",
+    "name": "Defiance Memory & Photonics ETF",
+    "provider": "Defiance ETFs",
+    "venue": "Cboe BZX",
+    "theme": "存储与光子技术",
+    "detail": "覆盖存储芯片、数据存储设备与光子技术等全球供应链。",
+    "url": "https://www.defianceetfs.com/pram/",
+    "asOf": "2026-11-20",
+    "benchmark": "Solactive Memory and Photonics Index",
+    "related": []
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "AIBF",
+    "name": "iShares Future AI Beneficiaries ETF",
+    "provider": "iShares / BlackRock",
+    "venue": "NYSE Arca",
+    "theme": "行业应用",
+    "detail": "筛选美国市场中可能从采用 AI 获益的公司，侧重技术使用方。",
+    "url": "https://www.ishares.com/us/products/353593/ishares-future-ai-beneficiaries-etf",
+    "asOf": "2026-11-20",
+    "benchmark": "Morningstar US Artificial Intelligence Beneficiaries Select Index",
+    "related": [
+      "MSUAIBTU"
+    ]
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "TCAI",
+    "name": "Tortoise AI Infrastructure ETF",
+    "provider": "Tortoise Capital",
+    "venue": "NYSE",
+    "theme": "数据中心基础设施",
+    "detail": "主动管理，覆盖维持 AI 算力运行所需的电力、网络、制冷和其他基础设施。 名录关联该期持仓中已匹配的美股代码。",
+    "url": "https://tortoisecapital.com/etf/tortoise-ai-infrastructure-etf/",
+    "asOf": "2026-11-19",
+    "memberSources": [
+      "tcai"
+    ],
+    "holdingsUrl": "https://tortoisecapital.com/etf/tortoise-ai-infrastructure-etf/#holdings"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "DRGN",
+    "name": "Themes China Generative Artificial Intelligence ETF",
+    "provider": "Themes ETFs",
+    "venue": "Cboe BZX",
+    "theme": "中国生成式 AI",
+    "detail": "本基金在美国上市，主题配置可覆盖在港股、美股及互联互通市场挂牌的中国公司。",
+    "url": "https://themesetfs.com/documents/SummaryProspectus/Summary-Prospectus-Themes-China-Generative-Artificial-Intelligence-ETF.pdf",
+    "asOf": "2026-11-20",
+    "benchmark": "BITA China Generative AI Select Index",
+    "related": [
+      "BCGAIS"
+    ]
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "PBOT",
+    "name": "Pictet AI & Automation ETF",
+    "provider": "Pictet Asset Management",
+    "venue": "NYSE Arca",
+    "theme": "AI 与自动化",
+    "detail": "主动管理，将 AI、机器人及生产自动化作为股票投资主题。",
+    "url": "https://etf.am.pictet.com/",
+    "asOf": "2026-11-20"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "RACK",
+    "name": "VanEck Data Center Supply Chain ETF",
+    "provider": "VanEck",
+    "venue": "Cboe BZX",
+    "theme": "数据中心供应链",
+    "detail": "覆盖美国上市的数据中心运营商以及设备、工程与服务供应商。",
+    "url": "https://www.vaneck.com/us/en/investments/data-center-supply-chain-etf-rack/overview/",
+    "asOf": "2026-11-20",
+    "benchmark": "MarketVector Data Center Supply Chain Index",
+    "related": [
+      "MVRACK"
+    ]
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "AIS",
+    "name": "VistaShares Artificial Intelligence Supercycle ETF",
+    "provider": "VistaShares",
+    "venue": "NYSE Arca",
+    "theme": "全产业链",
+    "detail": "主动管理，投资与 AI 相关的高性能半导体、应用与数据中心企业。",
+    "url": "https://www.vistashares.com/wp-content/uploads/2026/11/AIS_Factsheet_9.30.26.pdf",
+    "asOf": "2026-11-20"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "ZDAY",
+    "name": "Bitwise AI Cyber Defense ETF",
+    "provider": "Bitwise Asset Management",
+    "venue": "NYSE Arca",
+    "theme": "AI 网络安全",
+    "detail": "主动管理，配置利用 AI 技术进行网络防御或帮助客户应对相关威胁的公司。",
+    "url": "https://bitwiseinvestments.com/newsroom/bitwise-launches-zday-an-etf-for-ai-cyber-defense",
+    "asOf": "2026-11-20"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "RBTX",
+    "name": "iShares Future Robotics and Related Technologies Active ETF",
+    "provider": "iShares / BlackRock",
+    "venue": "NYSE Arca",
+    "theme": "机器人与自动化",
+    "detail": "主动管理，投资机器人及配套技术企业。 可查阅该期持仓在三地名录中匹配的证券。",
+    "url": "https://www.ishares.com/us/products/354128/ishares-future-robotics-and-related-technologies-active-etf-rbtx",
+    "asOf": "2026-11-19",
+    "memberSources": [
+      "rbtx"
+    ],
+    "holdingsUrl": "https://www.ishares.com/us/products/354128/ishares-future-robotics-and-related-technologies-active-etf/latest-holdings.csv?asOfDate=20261119",
+    "memberListings": [
+      "CN-688017",
+      "HK-09880"
+    ],
+    "membershipBasis": "holdings"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "GCPU",
+    "name": "Grayscale AI Compute ETF",
+    "provider": "Grayscale",
+    "venue": "NYSE Arca",
+    "theme": "算力与 GPU 云",
+    "detail": "覆盖高性能计算、AI 云、计算基础设施及相关服务企业，前身为比特币矿企 ETF。",
+    "url": "https://etfs.grayscale.com/gcpu",
+    "asOf": "2026-11-20",
+    "benchmark": "Indxx High Performance Computing Index",
+    "related": [
+      "IBMIIT"
+    ]
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "AIVC",
+    "name": "Amplify Bloomberg AI Equal Weight ETF",
+    "provider": "Amplify ETFs",
+    "venue": "NYSE Arca",
+    "theme": "全产业链",
+    "detail": "以等权配置覆盖 AI 价值链中的相关企业。",
+    "url": "https://amplifyetfs.com/wp-content/uploads/files/Amplify_AIVC_FactSheet.pdf",
+    "asOf": "2026-11-20",
+    "benchmark": "Bloomberg AI Value Chain Equal Weight Total Return Index",
+    "related": [
+      "BAIVT"
+    ]
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "XAIX",
+    "name": "Xtrackers Artificial Intelligence and Big Data ETF",
+    "provider": "Xtrackers / DWS",
+    "venue": "Nasdaq",
+    "theme": "AI 与大数据",
+    "detail": "指数主题覆盖深度学习、语音图像识别、大数据、云计算及网络安全。",
+    "url": "https://etf.dws.com/en-us/XAIX-artificial-intelligence-and-big-data-etf/",
+    "asOf": "2026-11-20",
+    "benchmark": "Nasdaq Global Artificial Intelligence and Big Data Index",
+    "related": [
+      "NYGBIG"
+    ]
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "CGPT",
+    "name": "VegaShares AI Inference ETF",
+    "provider": "VegaShares",
+    "venue": "Nasdaq",
+    "theme": "推理基础设施",
+    "detail": "主动管理，聚焦模型推理所需的处理器、存储器、互连器件和基础设施。 可查阅该期持仓在三地名录中匹配的证券。",
+    "url": "https://vegasharesetfs.com/CGPT",
+    "asOf": "2026-11-20",
+    "memberSources": [
+      "cgpt"
+    ],
+    "holdingsUrl": "https://vegasharesetfs.com/download/holdings/CGPT",
+    "memberListings": [
+      "CN-688256",
+      "CN-688041",
+      "HK-09903",
+      "HK-06082",
+      "CN-688008",
+      "CN-688521"
+    ],
+    "membershipBasis": "holdings"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "AGIX",
+    "name": "KraneShares Public-Private AI & Technology ETF",
+    "provider": "KraneShares",
+    "venue": "Nasdaq",
+    "theme": "生成式 AI 与私募科技",
+    "detail": "主动管理，可同时持有公开上市股票与非上市 AI 科技企业。",
+    "url": "https://kraneshares.com/etf/agix/",
+    "asOf": "2026-11-20"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "JHAI",
+    "name": "Janus Henderson Global Artificial Intelligence ETF",
+    "provider": "Janus Henderson Investors",
+    "venue": "Nasdaq",
+    "theme": "全产业链",
+    "detail": "主动管理，在全球上市公司中选择开发人工智能技术或受益于其应用的企业。",
+    "url": "https://www.janushenderson.com/en-us/investor/product/global-artificial-intelligence-etf-jhai/",
+    "asOf": "2026-11-20"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "WISE",
+    "name": "Themes Generative Artificial Intelligence ETF",
+    "provider": "Themes ETFs",
+    "venue": "Nasdaq",
+    "theme": "生成式 AI",
+    "detail": "跟踪全球生成式 AI 公司，覆盖处理器、数据分析、语言处理及 AI 服务。",
+    "url": "https://themesetfs.com/documents/SummaryProspectus/Summary-Prospectus-Themes-Generative-Artificial-Intelligence-ETF.pdf",
+    "asOf": "2026-11-20",
+    "benchmark": "Solactive Generative Artificial Intelligence Index",
+    "related": []
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "ROBO",
+    "name": "ROBO Global Robotics and Automation Index ETF",
+    "provider": "ROBO Global / Exchange Traded Concepts",
+    "venue": "NYSE Arca",
+    "theme": "机器人与自动化",
+    "detail": "覆盖为机器人和自动化系统提供感知、处理、执行技术的公司，以及采用这些技术的企业。",
+    "url": "https://www.roboglobaletfs.com/robo",
+    "asOf": "2026-11-20",
+    "benchmark": "ROBO Global Robotics and Automation Index",
+    "related": []
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "DTCR",
+    "name": "Global X Data Center & Digital Infrastructure ETF",
+    "provider": "Global X",
+    "venue": "Nasdaq",
+    "theme": "数据中心与数字基建",
+    "detail": "覆盖数据中心、通信塔等数字基础设施，部分公司的业务也面向传统通信网络。",
+    "url": "https://www.globalxetfs.com/funds/dtcr",
+    "asOf": "2026-11-20",
+    "benchmark": "Solactive Data Center REITs & Digital Infrastructure Index",
+    "related": [
+      "SOLVPN"
+    ]
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "ARKQ",
+    "name": "ARK Autonomous Technology & Robotics ETF",
+    "provider": "ARK Investment Management",
+    "venue": "Cboe BZX",
+    "theme": "自主系统与机器人",
+    "detail": "主动管理，投资自动驾驶、机器人及其他自主技术的开发与应用企业。",
+    "url": "https://www.ark-funds.com/funds/arkq",
+    "asOf": "2026-11-20"
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "IBOT",
+    "name": "VanEck Robotics ETF",
+    "provider": "VanEck",
+    "venue": "Nasdaq",
+    "theme": "机器人与自动化",
+    "detail": "通过 BlueStar 机器人指数配置全球机器人产业中的上市公司。",
+    "url": "https://www.vaneck.com/us/en/investments/robotics-etf-ibot/",
+    "asOf": "2026-11-20",
+    "benchmark": "BlueStar Robotics Index",
+    "related": [
+      "BRBT"
+    ]
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "WDRN",
+    "name": "WisdomTree Physical AI, Humanoids and Drones Fund",
+    "provider": "WisdomTree",
+    "venue": "Cboe BZX",
+    "theme": "具身智能与无人机",
+    "detail": "覆盖实体环境中的 AI 技术，包括人形机器人和无人机产业。",
+    "url": "https://www.wisdomtree.com/us/products/megatrends/wdrn",
+    "asOf": "2026-11-20",
+    "benchmark": "WisdomTree Physical AI, Humanoids and Drones Index",
+    "related": []
+  },
+  {
+    "type": "etf",
+    "market": "US",
+    "code": "IVES",
+    "name": "Dan IVES Wedbush AI Revolution ETF",
+    "provider": "Wedbush Fund Advisers",
+    "venue": "NYSE Arca",
+    "theme": "全产业链",
+    "detail": "覆盖在美国挂牌、推动 AI 技术发展或将 AI 用于自身业务的公司。",
+    "url": "https://www.wedbushfunds.com/IVES",
+    "asOf": "2026-11-20",
+    "benchmark": "Solactive Dan IVES Wedbush AI Revolution Index",
+    "related": [
+      "SOLIVES"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "IAIQ",
+    "name": "Indxx Artificial Intelligence & Big Data Index",
+    "provider": "Indxx",
+    "venue": "指数编制",
+    "theme": "AI 与大数据",
+    "detail": "跟踪受益于 AI 技术在产品、服务和大数据分析硬件中应用的公司。",
+    "url": "https://www.indxx.com/index/indxx-artificial-intelligence-big-data-index",
+    "asOf": "2026-11-20",
+    "related": [
+      "AIQ"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "IBOTZ",
+    "name": "Indxx Global Robotics & Artificial Intelligence Thematic Index",
+    "provider": "Indxx",
+    "venue": "指数编制",
+    "theme": "机器人与自动化",
+    "detail": "覆盖可能受益于机器人和人工智能采用的全球公司，包括工业、非工业和自动驾驶场景。",
+    "url": "https://www.indxx.com/index/indxx-global-robotics-artificial-intelligence-thematic-index",
+    "asOf": "2026-11-20",
+    "related": [
+      "BOTZ"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "MSGAISNU",
+    "name": "Morningstar Global Artificial Intelligence Select Index",
+    "provider": "Morningstar Indexes",
+    "venue": "指数编制",
+    "theme": "全产业链",
+    "detail": "按 AI 技术发展中的角色筛选全球上市公司，所列代码为美元净回报版本。",
+    "url": "https://indexes.morningstar.com/docs/rulebook/morningstar-global-artificial-intelligence-select-FS0000IRMK",
+    "asOf": "2026-11-20",
+    "related": [
+      "ARTY"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "MVAIPO",
+    "name": "MarketVector US Listed AI and Power Infrastructure Index",
+    "provider": "MarketVector Indexes",
+    "venue": "指数编制",
+    "theme": "电力与数据中心",
+    "detail": "涵盖电网、发电设备、工程服务、数据中心运营与 AI 计算硬件等美国挂牌公司。",
+    "url": "https://www.marketvector.com/indexes/sector/marketvector-us-listed-ai-and-power-infrastructure",
+    "asOf": "2026-11-20",
+    "related": [
+      "AIPO"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "BAIICS",
+    "name": "BITA AI Inference Chip Select Index",
+    "provider": "BITA",
+    "venue": "指数编制",
+    "theme": "推理芯片",
+    "detail": "从全球上市公司中选取参与 AI 推理技术开发的企业。所列代码为净总回报指数。",
+    "url": "https://files.bita.io/BAIICS_MG_v1.0.pdf",
+    "asOf": "2026-11-20",
+    "related": [
+      "AINF"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "NQROBO",
+    "name": "Nasdaq CTA Artificial Intelligence and Robotics Index",
+    "provider": "Nasdaq / Consumer Technology Association",
+    "venue": "指数编制",
+    "theme": "AI 与机器人",
+    "detail": "横跨技术、工业、医疗等行业，追踪参与人工智能与机器人业务的公司。",
+    "url": "https://indexes.nasdaq.com/Index/Overview/NQROBO",
+    "asOf": "2026-11-20",
+    "related": [
+      "ROBT"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "BAIT",
+    "name": "Bloomberg Artificial Intelligence Index",
+    "provider": "Bloomberg Index Services",
+    "venue": "指数编制",
+    "theme": "全产业链",
+    "detail": "覆盖开发、支持和应用 AI 解决方案的公司。BAI 为价格指数，BAIT 为总回报版本。",
+    "url": "https://assets.bbhub.io/professional/sites/27/Bloomberg-Artificial-Intelligence-Index-Methodology.pdf",
+    "asOf": "2026-11-20",
+    "related": [
+      "FAI"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "THNQTR",
+    "name": "ROBO Global Artificial Intelligence Index",
+    "provider": "ROBO Global / VettaFi",
+    "venue": "指数编制",
+    "theme": "AI 基础设施与应用",
+    "detail": "追踪全球 AI 产业链；价格版本代码为 THNQ，净总回报版本为 THNQTR。",
+    "url": "https://www.vettafi.com/indexing/index/thnq",
+    "asOf": "2026-11-20",
+    "related": [
+      "THNQ"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "GXCHPXUN",
+    "name": "Global X AI Semiconductor & Quantum Index",
+    "provider": "Global X",
+    "venue": "指数编制",
+    "theme": "AI 芯片与量子计算",
+    "detail": "跟踪全球 AI 半导体与量子计算生态中的相关公司。",
+    "url": "https://assets.globalxetfs.com/funds/documents/chpx/Index-Methodology-Summary.pdf",
+    "asOf": "2026-11-20",
+    "related": [
+      "CHPX"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "STXSOFTV",
+    "name": "STOXX World AC NexGen Software Development Index",
+    "provider": "STOXX",
+    "venue": "指数编制",
+    "theme": "AI 与软件开发",
+    "detail": "以软件开发相关技术的业务收入作为选样依据，覆盖发达和新兴市场。",
+    "url": "https://stoxx.com/index/stxsoftv/",
+    "asOf": "2026-11-20",
+    "related": [
+      "IGPT"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "BUAAIS",
+    "name": "BITA US Agentic AI Select Index",
+    "provider": "BITA",
+    "venue": "指数编制",
+    "theme": "AI 智能体",
+    "detail": "覆盖美国挂牌且有重要收入来源于智能体及自主决策相关活动的公司。",
+    "url": "https://bita.io/index/BUAAIS",
+    "asOf": "2026-11-20",
+    "related": [
+      "AGIQ"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "BAICLI",
+    "name": "BITA AI Capacitors & MLCC Index",
+    "provider": "BITA",
+    "venue": "指数编制",
+    "theme": "电容与被动元件",
+    "detail": "聚焦 AI 基础设施电容、多层陶瓷电容和相关被动元件的供应商。",
+    "url": "https://files.bita.io/BAICLI_MG.pdf",
+    "asOf": "2026-11-20",
+    "related": [
+      "CAPA"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "MSUAIBTU",
+    "name": "Morningstar US Artificial Intelligence Beneficiaries Select Index",
+    "provider": "Morningstar Indexes",
+    "venue": "指数编制",
+    "theme": "行业应用",
+    "detail": "覆盖可能受益于采用 AI 技术的美国公司，重点在应用方。",
+    "url": "https://indexes.morningstar.com/indexes/details/morningstar-us-artificial-intelligence-beneficiaries-select-FS0000KXJ1",
+    "asOf": "2026-11-20",
+    "related": [
+      "AIBF"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "BCGAIS",
+    "name": "BITA China Generative AI Select Index",
+    "provider": "BITA",
+    "venue": "指数编制",
+    "theme": "中国生成式 AI",
+    "detail": "跟踪在美股、香港或可经互联互通交易的市场上市、参与生成式 AI 业务的中国公司。",
+    "url": "https://files.bita.io/BCGAIS_MG.pdf",
+    "asOf": "2026-11-20",
+    "related": [
+      "DRGN"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "MVRACK",
+    "name": "MarketVector Data Center Supply Chain Index",
+    "provider": "MarketVector Indexes",
+    "venue": "指数编制",
+    "theme": "数据中心供应链",
+    "detail": "覆盖参与数据中心建设与运营的美国挂牌企业，包括设备、基础设施与服务供应商。",
+    "url": "https://www.marketvector.com/indexes/sector/marketvector-data-center-supply-chain",
+    "asOf": "2026-11-20",
+    "related": [
+      "RACK"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "BAIVT",
+    "name": "Bloomberg AI Value Chain Equal Weight Total Return Index",
+    "provider": "Bloomberg Index Services",
+    "venue": "指数编制",
+    "theme": "全产业链",
+    "detail": "对 AI 价值链相关公司进行等权配置；所列代码为总回报版本。",
+    "url": "https://assets.bbhub.io/professional/sites/27/Bloomberg-AI-Value-Chain-Index-Methodology.pdf",
+    "asOf": "2026-11-20",
+    "related": [
+      "AIVC"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "NYGBIG",
+    "name": "Nasdaq Global Artificial Intelligence and Big Data Index",
+    "provider": "Nasdaq",
+    "venue": "指数编制",
+    "theme": "AI 与大数据",
+    "detail": "涵盖深度学习、自然语言处理、语音与图像识别、云计算、网络安全和大数据等主题。",
+    "url": "https://indexes.nasdaq.com/Index/Overview/NYGBIG",
+    "asOf": "2026-11-20",
+    "related": [
+      "XAIX"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "IBMIIT",
+    "name": "Indxx High Performance Computing Index",
+    "provider": "Indxx",
+    "venue": "指数编制",
+    "theme": "算力与 GPU 云",
+    "detail": "聚焦全球高性能计算、AI 云、加速计算基础设施及相关服务企业。",
+    "url": "https://www.indxx.com/index/indxx-high-performance-computing-index",
+    "asOf": "2026-11-20",
+    "related": [
+      "GCPU"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "SOLVPN",
+    "name": "Solactive Data Center REITs & Digital Infrastructure Index",
+    "provider": "Solactive",
+    "venue": "指数编制",
+    "theme": "数据中心与数字基建",
+    "detail": "覆盖数据中心房地产投资信托及通信网络等数字基础设施企业。",
+    "url": "https://www.globalxetfs.com/funds/dtcr",
+    "asOf": "2026-11-20",
+    "related": [
+      "DTCR"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "BRBT",
+    "name": "BlueStar Robotics Index",
+    "provider": "MarketVector Indexes",
+    "venue": "指数编制",
+    "theme": "机器人与自动化",
+    "detail": "选取全球机器人产业中规模与流动性符合规则的公司。",
+    "url": "https://files.marketvector.com/index-guide/BRBT_Index_Guide.pdf",
+    "asOf": "2026-11-20",
+    "related": [
+      "IBOT"
+    ]
+  },
+  {
+    "type": "index",
+    "market": "US",
+    "code": "SOLIVES",
+    "name": "Solactive Dan IVES Wedbush AI Revolution Index",
+    "provider": "Solactive",
+    "venue": "指数编制",
+    "theme": "全产业链",
+    "detail": "覆盖在美国挂牌的 AI 技术支持方和应用方。",
+    "url": "https://www.wedbushfunds.com/IVES",
+    "asOf": "2026-11-20",
+    "related": [
+      "IVES"
+    ]
+  }
+]

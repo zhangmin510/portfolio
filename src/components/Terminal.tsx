@@ -16,6 +16,7 @@ import {
   executeCommand,
   type CommandResult,
 } from '../commands'
+import { PANORAMA_FILES } from '../commands/filesystem'
 import { PROFILE, WEBSITES } from '../data/portfolio'
 import type { HistoryItem } from '../types'
 import CommandOutput from './CommandOutput'
@@ -495,6 +496,7 @@ export default function Terminal() {
           <div className="terminal-welcome">
             <p>{PROFILE.name} · {PROFILE.title}</p>
             <p className="dim">{PROFILE.motto}</p>
+            <p className="dim">最新全景图 · <a className="terminal-link" href={PANORAMA_FILES[0].href}>{PANORAMA_FILES[0].title}</a></p>
             <p className="dim">输入 <span className="accent">help</span> 查看命令，<span className="accent">projects</span> 查看项目，<span className="accent">panoramas</span> 浏览全景图，或<button type="button" className="terminal-link welcome-feedback" onClick={() => runCommand('留言')}>留言</button>。</p>
           </div>
         )}

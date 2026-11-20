@@ -17,6 +17,22 @@
   ],
   "pages": [
     {
+      "slug": "ai-equity-atlas",
+      "title": "AI 全产业链上市公司图谱",
+      "subtitle": "A 股、港股、美股的上市公司、ETF 与指数",
+      "description": "沿芯片、算力、模型与机器人查找三地上市公司，核对业务依据，探索主题 ETF、跟踪指数及关联成分。",
+      "category": "市场与产业链",
+      "tags": [
+        "AI 全产业链",
+        "上市公司",
+        "A 股 / 港股 / 美股",
+        "ETF 与指数"
+      ],
+      "source": "src/panoramas/ai-equity-atlas.html",
+      "updatedAt": "2026-11-20",
+      "sourceSha256": "4b225f1bca6efc989634b44176a431c5a592cbf79982676ab7ccd08e2f544757"
+    },
+    {
       "slug": "ai-infra-book",
       "title": "AI Infra 交互读本",
       "subtitle": "《深入理解 AI Infra》十二章交互阅读版",

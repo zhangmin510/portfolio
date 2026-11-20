@@ -1,0 +1,6919 @@
+{
+  "market": "US",
+  "asOf": "2026-11-20",
+  "methodology": "覆盖 15 只 AI、机器人、推理芯片及配套电力基础设施主题基金披露的美国挂牌股票，另据公司官方资料及 SEC 年报补录。年报补录检索 2025-11-21 至 2026-11-20 提交的 10-K / 20-F，按发行人 CIK 匹配挂牌记录，阅读涉及自有 AI 产品、模型、智能体、云和解决方案的上下文后收录。以 Nasdaq Trader 的两个上市目录核对挂牌代码，包括美国挂牌的外国公司存托股。基金成分只匹配美国挂牌证券；公司资料可补充美国挂牌的同一发行人。剔除现金、基金、衍生品及场外证券。电力、核能与机器人主题可能通过上游供应或自动化业务产生间接关联。产业标签为编辑归类。 同一发行人的合资格普通股股类按上市代码分列，并按 SEC CIK 关联。",
+  "sources": [
+    {
+      "id": "aiq",
+      "title": "Global X AIQ · 人工智能与科技",
+      "url": "https://assets.globalxetfs.com/funds/holdings/aiq_full-holdings_20261119.csv",
+      "asOf": "2026-11-19",
+      "scope": "逐行核对发行商完整持仓，匹配美国交易所挂牌证券 66 条。",
+      "kind": "fund"
+    },
+    {
+      "id": "botz",
+      "title": "Global X BOTZ · 机器人与人工智能",
+      "url": "https://assets.globalxetfs.com/funds/holdings/botz_full-holdings_20261119.csv",
+      "asOf": "2026-11-19",
+      "scope": "逐行核对发行商完整持仓，匹配美国交易所挂牌证券 26 条。",
+      "kind": "fund"
+    },
+    {
+      "id": "arty",
+      "title": "iShares ARTY · 未来 AI 与科技",
+      "url": "https://www.ishares.com/us/products/297905/ishares-future-ai-tech-etf/latest-holdings.csv?asOfDate=20261119",
+      "asOf": "2026-11-19",
+      "scope": "逐行核对发行商完整持仓，匹配美国交易所挂牌证券 29 条。",
+      "kind": "fund"
+    },
+    {
+      "id": "bai",
+      "title": "iShares BAI · AI 创新与科技",
+      "url": "https://www.ishares.com/us/products/339081/ishares-a-i-innovation-and-tech-active-etf/latest-holdings.csv?asOfDate=20261119",
+      "asOf": "2026-11-19",
+      "scope": "逐行核对发行商完整持仓，匹配美国交易所挂牌证券 40 条。",
+      "kind": "fund"
+    },
+    {
+      "id": "aipo",
+      "title": "Defiance AIPO · AI 与电力基础设施",
+      "url": "https://www.defianceetfs.com/aipo-full-holdings/",
+      "asOf": "2026-11-20",
+      "scope": "逐行核对发行商完整持仓，匹配美国交易所挂牌证券 85 条。",
+      "kind": "fund"
+    },
+    {
+      "id": "ainf",
+      "title": "Defiance AINF · AI 推理芯片",
+      "url": "https://www.defianceetfs.com/ainf-full-holdings/",
+      "asOf": "2026-11-20",
+      "scope": "逐行核对发行商完整持仓，匹配美国交易所挂牌证券 14 条。",
+      "kind": "fund"
+    },
+    {
+      "id": "robt",
+      "title": "First Trust ROBT · 人工智能与机器人",
+      "url": "https://www.ftportfolios.com/Retail/Etf/EtfHoldings.aspx?Ticker=ROBT",
+      "asOf": "2026-11-19",
+      "scope": "逐行核对发行商完整持仓，匹配美国交易所挂牌证券 72 条。",
+      "kind": "fund"
+    },
+    {
+      "id": "fai",
+      "title": "First Trust FAI · 彭博人工智能",
+      "url": "https://www.ftportfolios.com/Retail/Etf/EtfHoldings.aspx?Ticker=FAI",
+      "asOf": "2026-11-19",
+      "scope": "逐行核对发行商完整持仓，匹配美国交易所挂牌证券 40 条。",
+      "kind": "fund"
+    },
+    {
+      "id": "chat",
+      "title": "Roundhill CHAT · 生成式 AI",
+      "url": "https://www.roundhillinvestments.com/assets/data/FilepointRoundhill.40RU.RU_Holdings_11192026.csv",
+      "asOf": "2026-11-20",
+      "scope": "逐行核对发行商完整持仓，匹配美国交易所挂牌证券 30 条。",
+      "kind": "fund"
+    },
+    {
+      "id": "humn",
+      "title": "Roundhill HUMN · 人形机器人",
+      "url": "https://www.roundhillinvestments.com/assets/data/FilepointRoundhill.40RU.RU_Holdings_11192026.csv",
+      "asOf": "2026-11-20",
+      "scope": "逐行核对发行商完整持仓，匹配美国交易所挂牌证券 6 条。",
+      "kind": "fund"
+    },
+    {
+      "id": "thnq",
+      "title": "ROBO Global THNQ · 人工智能",
+      "url": "https://www.roboglobaletfs.com/thnq",
+      "asOf": "2026-11-19",
+      "scope": "逐行核对发行商完整持仓，匹配美国交易所挂牌证券 49 条。",
+      "kind": "fund"
+    },
+    {
+      "id": "nasdaq-listed",
+      "title": "Nasdaq Trader · 纳斯达克挂牌名录",
+      "url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+      "asOf": "2026-11-20",
+      "scope": "按代码核对证券名称、交易市场与证券类型。",
+      "kind": "exchange"
+    },
+    {
+      "id": "other-listed",
+      "title": "Nasdaq Trader · 其他美国交易所挂牌名录",
+      "url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+      "asOf": "2026-11-20",
+      "scope": "按代码核对纽约证交所等美国交易所的证券名称、市场与证券类型。",
+      "kind": "exchange"
+    },
+    {
+      "id": "product-aapl",
+      "title": "Apple Inc. · 官方产品与业务资料",
+      "url": "https://www.apple.com/apple-intelligence/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-absi",
+      "title": "Absci Corporation · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1672688/000167268826000068/absi-20251231.htm",
+      "asOf": "2026-03-24",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-adbe",
+      "title": "Adobe Inc. · 官方产品与业务资料",
+      "url": "https://www.adobe.com/products/firefly.html",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-aglt",
+      "title": "Agility Robotics, Inc. · 官方产品与业务资料",
+      "url": "https://www.agilityrobotics.com/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-ai",
+      "title": "C3.ai, Inc. · 官方产品与业务资料",
+      "url": "https://c3.ai/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-aiot",
+      "title": "PowerFleet, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1774170/000162828026043187/aiot-20260331.htm",
+      "asOf": "2026-06-15",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-aisp",
+      "title": "Airship AI Holdings, Inc · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1842566/000165495426001280/airsp_10k.htm",
+      "asOf": "2026-02-17",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-aixi",
+      "title": "XIAO-I Corporation · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1935172/000121390026057986/ea0290336-20f_xiao.htm",
+      "asOf": "2026-05-15",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-alab",
+      "title": "Astera Labs, Inc. · 官方产品与业务资料",
+      "url": "https://www.asteralabs.com/products/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-amat",
+      "title": "Applied Materials, Inc. · 官方产品与业务资料",
+      "url": "https://www.appliedmaterials.com/us/en/semiconductor/products.html",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-amba",
+      "title": "Ambarella, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1280263/000119312526119321/amba-20260131.htm",
+      "asOf": "2026-03-23",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-amd",
+      "title": "Advanced Micro Devices, Inc. · 官方产品与业务资料",
+      "url": "https://www.amd.com/en/products/accelerators/instinct.html",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-amd",
+      "title": "Advanced Micro Devices, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "asOf": "2026-02-04",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-amkr",
+      "title": "Amkor Technology, Inc. · 官方产品与业务资料",
+      "url": "https://amkor.com/technology/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-amzn",
+      "title": "Amazon.com, Inc. · 官方产品与业务资料",
+      "url": "https://aws.amazon.com/bedrock/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-anet",
+      "title": "Arista Networks, Inc. · 官方产品与业务资料",
+      "url": "https://www.arista.com/en/products/7800r4-series",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-ant",
+      "title": "Anthropic, PBC · 官方产品与业务资料",
+      "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-arm",
+      "title": "Arm Holdings plc · 官方产品与业务资料",
+      "url": "https://www.arm.com/markets/artificial-intelligence",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-asml",
+      "title": "ASML Holding N.V. · 官方产品与业务资料",
+      "url": "https://www.asml.com/en/products/euv-lithography-systems",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-asx",
+      "title": "ASE Technology Holding Co., Ltd. · 官方产品与业务资料",
+      "url": "https://ase.aseglobal.com/vipack/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-ats",
+      "title": "ATS Corporation · 官方产品与业务资料",
+      "url": "https://investors.atsautomation.com/overview/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-avgo",
+      "title": "Broadcom Inc. · 官方产品与业务资料",
+      "url": "https://www.broadcom.com/solutions/ai-solutions/ai-infrastructure",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-baba",
+      "title": "Alibaba Group Holding Limited · 官方产品与业务资料",
+      "url": "https://qwen.ai/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-bidu",
+      "title": "Baidu, Inc. · 官方产品与业务资料",
+      "url": "https://cloud.baidu.com/product/wenxinworkshop",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-bidu",
+      "title": "Baidu, Inc. · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1329099/000119312526109289/d38065d20f.htm",
+      "asOf": "2026-03-17",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-blkb",
+      "title": "Blackbaud, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1280058/000128005826000006/blkb-20251231.htm",
+      "asOf": "2026-02-18",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-bnai",
+      "title": "Brand Engagement Network Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1838163/000149315226016954/form10-k.htm",
+      "asOf": "2026-04-16",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-btdr",
+      "title": "Bitdeer Technologies Group · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1899123/000121390026049770/ea0282628-20f_bitdeer.htm",
+      "asOf": "2026-04-30",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-cai",
+      "title": "Caris Life Sciences, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/2019410/000201941026000016/cai-20251231.htm",
+      "asOf": "2026-03-03",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-camt",
+      "title": "Camtek Ltd. · 官方产品与业务资料",
+      "url": "https://www.camtek.com/news-and-events/camtek-receives-over-105-million-multi-system-orders-from-a-tier-1-osat-and-a-leading-hbm-manufacturer/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-carl",
+      "title": "Carlsmed, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1794546/000119312526071551/carl-20251231.htm",
+      "asOf": "2026-02-25",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-cbrs",
+      "title": "Cerebras Systems Inc. · 官方产品与业务资料",
+      "url": "https://www.cerebras.ai/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-cdns",
+      "title": "Cadence Design Systems, Inc. · 官方产品与业务资料",
+      "url": "https://www.cadence.com/en_US/home/tools/digital-design-and-signoff/soc-implementation-and-floorplanning/cerebrus-intelligent-chip-explorer.html",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-clvt",
+      "title": "Clarivate Plc · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1764046/000176404626000019/clvt-20251231.htm",
+      "asOf": "2026-02-24",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-cohr",
+      "title": "Coherent Corp. · 官方产品与业务资料",
+      "url": "https://www.coherent.com/networking/transceivers",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-crm",
+      "title": "Salesforce, Inc. · 官方产品与业务资料",
+      "url": "https://www.salesforce.com/agentforce/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-crto",
+      "title": "Criteo S.A. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1576427/000157642726000014/crto-20251231.htm",
+      "asOf": "2026-02-26",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-crwd",
+      "title": "CrowdStrike Holdings, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1535527/000153552726000010/crwd-20260131.htm",
+      "asOf": "2026-03-05",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-crwv",
+      "title": "CoreWeave, Inc. · 官方产品与业务资料",
+      "url": "https://www.coreweave.com/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-csco",
+      "title": "Cisco Systems, Inc. · 官方产品与业务资料",
+      "url": "https://www.cisco.com/site/us/en/solutions/artificial-intelligence/ai-networking-in-data-center/index.html",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-dao",
+      "title": "Youdao, Inc. · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1781753/000119312526155933/dao-20251231.htm",
+      "asOf": "2026-04-15",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-dell",
+      "title": "Dell Technologies Inc. · 官方产品与业务资料",
+      "url": "https://www.dell.com/en-us/infohub/articles/dell-ai-factory-with-nvidia-and-dell-networking",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-docu",
+      "title": "DocuSign, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1261333/000126133326000021/docu-20260131.htm",
+      "asOf": "2026-03-18",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-dtss",
+      "title": "Datasea Intelligent Technology Ltd. · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/2110423/000121390026106369/ea0306773-20f_datasea.htm",
+      "asOf": "2026-10-02",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-edu",
+      "title": "New Oriental Education & Technology Group, Inc. · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1372920/000119312526397192/d157159d20f.htm",
+      "asOf": "2026-09-22",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-estc",
+      "title": "Elastic N.V. · 官方产品与业务资料",
+      "url": "https://www.elastic.co/docs/solutions/search/vector",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-etn",
+      "title": "Eaton Corporation, PLC · 官方产品与业务资料",
+      "url": "https://www.eaton.com/us/en-us/markets/data-centers.html",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-frsh",
+      "title": "Freshworks Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1544522/000154452226000036/frsh-20251231.htm",
+      "asOf": "2026-02-26",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-fuse",
+      "title": "Fusemachines Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/2033383/000149315226013285/form10-k.htm",
+      "asOf": "2026-03-27",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-gddy",
+      "title": "GoDaddy Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1609711/000160971126000010/gddy-20251231.htm",
+      "asOf": "2026-02-25",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-gib",
+      "title": "CGI Inc. · 官方产品与业务资料",
+      "url": "https://www.cgi.com/us/en-us/solutions/cgi-pulse-ai",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-googl",
+      "title": "Alphabet Inc. · 官方产品与业务资料",
+      "url": "https://ai.google.dev/gemini-api/docs/models",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-grrr",
+      "title": "Gorilla Technology Group Inc. · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1903145/000143774926012385/grrr20241231_20f.htm",
+      "asOf": "2026-04-15",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-hpe",
+      "title": "Hewlett Packard Enterprise Company · 官方产品与业务资料",
+      "url": "https://www.hpe.com/us/en/solutions/ai-artificial-intelligence.html",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-hubs",
+      "title": "HubSpot, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1404655/000119312526046646/hubs-20251231.htm",
+      "asOf": "2026-02-11",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-hut",
+      "title": "Hut 8 Corp. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1964789/000110465926019392/hut-20251231x10k.htm",
+      "asOf": "2026-02-25",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-ibm",
+      "title": "International Business Machines Corporation · 官方产品与业务资料",
+      "url": "https://www.ibm.com/watsonx",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-infy",
+      "title": "Infosys Limited · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1067491/000119312526270520/infy-20260331.htm",
+      "asOf": "2026-06-15",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-inod",
+      "title": "Innodata Inc. · 官方产品与业务资料",
+      "url": "https://innodata.com/generative-ai/data-solutions/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-iot",
+      "title": "Samsara Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1642896/000162828026018167/iot-20260131.htm",
+      "asOf": "2026-03-16",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-iren",
+      "title": "IREN Limited · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884826000052/iren-20260630.htm",
+      "asOf": "2026-08-27",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-klac",
+      "title": "KLA Corporation · 官方产品与业务资料",
+      "url": "https://www.kla.com/products",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-law",
+      "title": "CS Disco, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1625641/000162564126000044/law-20251231.htm",
+      "asOf": "2026-02-25",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-lite",
+      "title": "Lumentum Holdings Inc. · 官方产品与业务资料",
+      "url": "https://www.lumentum.com/en/products/data-center",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-lrcx",
+      "title": "Lam Research Corporation · 官方产品与业务资料",
+      "url": "https://www.lamresearch.com/products/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-meta",
+      "title": "Meta Platforms, Inc. · 官方产品与业务资料",
+      "url": "https://dev.meta.ai/llama",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-mod",
+      "title": "Modexus Solutions, Inc. · 年度报告",
+      "url": "https://www.sec.gov/Archives/edgar/data/67347/000110465926066795/mod-20260331x10k.htm",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-move",
+      "title": "Corvex, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1734750/000121390026036609/ea0278320-10k_corvex.htm",
+      "asOf": "2026-03-31",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-mrvl",
+      "title": "Marvell Technology, Inc. · 官方产品与业务资料",
+      "url": "https://www.marvell.com/content/dam/marvell/en/company/assets/marvell-sustainability-report-fy25.pdf",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-msft",
+      "title": "Microsoft Corporation · 官方产品与业务资料",
+      "url": "https://azure.microsoft.com/en-us/products/ai-foundry",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-mu",
+      "title": "Micron Technology, Inc. · 官方产品与业务资料",
+      "url": "https://www.micron.com/products/memory/hbm",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-nbis",
+      "title": "Nebius Group N.V. · 官方产品与业务资料",
+      "url": "https://nebius.com/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-nbis",
+      "title": "Nebius Group N.V. · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1513845/000110465926052948/nbis-20251231x20f.htm",
+      "asOf": "2026-04-30",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-net",
+      "title": "Cloudflare, Inc. · 官方产品与业务资料",
+      "url": "https://developers.cloudflare.com/workers-ai/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-niq",
+      "title": "NIQ Global Intelligence plc · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/2054696/000162828026012572/niq-20251231.htm",
+      "asOf": "2026-02-27",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-nnox",
+      "title": "NANO-X IMAGING LTD · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1795251/000121390026050191/ea0282652-20f_nanox.htm",
+      "asOf": "2026-04-30",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-nrix",
+      "title": "Nurix Therapeutics, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1549595/000154959526000016/nrix-20251130.htm",
+      "asOf": "2026-01-28",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-ntap",
+      "title": "NetApp, Inc. · 官方产品与业务资料",
+      "url": "https://docs.netapp.com/us-en/netapp-solutions-ai/index.html",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-nvda",
+      "title": "NVIDIA Corporation · 官方产品与业务资料",
+      "url": "https://www.nvidia.com/en-us/data-center/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-odd",
+      "title": "ODDITY Tech Ltd. · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1907085/000110465926029490/odd-20251231x20f.htm",
+      "asOf": "2026-03-17",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-open",
+      "title": "Opendoor Technologies Inc · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801169/000180116926000010/open-20251231.htm",
+      "asOf": "2026-02-19",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-orcl",
+      "title": "Oracle Corporation · 官方产品与业务资料",
+      "url": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-pcor",
+      "title": "Procore Technologies, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1611052/000162828026011055/pcor-20251231.htm",
+      "asOf": "2026-02-24",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-pega",
+      "title": "Pegasystems Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1013857/000101385726000017/pega-20251231.htm",
+      "asOf": "2026-02-10",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-peri",
+      "title": "Perion Network Ltd · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1338940/000117891326000927/zk2634522.htm",
+      "asOf": "2026-03-16",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-pltr",
+      "title": "Palantir Technologies Inc. · 官方产品与业务资料",
+      "url": "https://www.palantir.com/platforms/aip/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-pltr",
+      "title": "Palantir Technologies Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1321655/000132165526000011/pltr-20251231.htm",
+      "asOf": "2026-02-17",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-poas",
+      "title": "Phaos Technology Holdings (Cayman) Limited · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/2024258/000149315226040828/form20-f.htm",
+      "asOf": "2026-08-31",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-pony",
+      "title": "Pony AI Inc. · 官方产品与业务资料",
+      "url": "https://www.pony.ai/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-qcom",
+      "title": "QUALCOMM Incorporated · 官方产品与业务资料",
+      "url": "https://www.qualcomm.com/artificial-intelligence",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-rddt",
+      "title": "Reddit, Inc. · 官方产品与业务资料",
+      "url": "https://redditinc.com/news/reddit-and-google-expand-partnership",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-rdzn",
+      "title": "Roadzen, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1868640/000149315226031069/form10-k.htm",
+      "asOf": "2026-06-29",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-rivn",
+      "title": "Rivian Automotive, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1874178/000187417826000008/rivn-20251231.htm",
+      "asOf": "2026-02-12",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-rxrx",
+      "title": "Recursion Pharmaceuticals, Inc. · 官方产品与业务资料",
+      "url": "https://www.recursion.com/platform",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-rzlv",
+      "title": "Rezolve AI PLC · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1920294/000119312526132456/rzlv-20251231.htm",
+      "asOf": "2026-03-30",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-skhy",
+      "title": "SK hynix Inc. · 官方产品与业务资料",
+      "url": "https://product.skhynix.com/products/dram/hbm.go",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-smci",
+      "title": "Super Micro Computer, Inc. · 官方产品与业务资料",
+      "url": "https://www.supermicro.com/en/products/GPU",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-snap",
+      "title": "Snap Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1564408/000156440826000013/snap-20251231.htm",
+      "asOf": "2026-02-05",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-snow",
+      "title": "Snowflake Inc. · 官方产品与业务资料",
+      "url": "https://www.snowflake.com/en/product/features/cortex/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-snps",
+      "title": "Synopsys, Inc. · 官方产品与业务资料",
+      "url": "https://www.synopsys.com/ai.html",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-sony",
+      "title": "Sony Group Corporation · 官方产品与业务资料",
+      "url": "https://www.aitrios.sony-semicon.com/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-soun",
+      "title": "SoundHound AI, Inc. · 官方产品与业务资料",
+      "url": "https://www.soundhound.com/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-spcx",
+      "title": "Space Exploration Technologies Corp. · 季度报告",
+      "url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066880/spcx-20260930.htm",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-srad",
+      "title": "Sportradar Group AG · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1836470/000110465926035485/srad-20251231x20f.htm",
+      "asOf": "2026-03-27",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-ssnc",
+      "title": "SS&C Technologies Holdings, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1402436/000119312526076745/ssnc-20251231.htm",
+      "asOf": "2026-02-26",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-sstk",
+      "title": "Shutterstock, Inc. · 官方产品与业务资料",
+      "url": "https://www.shutterstock.com/data-licensing",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-stem",
+      "title": "Stem, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1758766/000175876626000016/stem-20251231.htm",
+      "asOf": "2026-03-05",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-supx",
+      "title": "SuperX AI Technology Limited · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1897087/000121390026113814/ea0308507-20f_superx.htm",
+      "asOf": "2026-10-29",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-sym",
+      "title": "Symbotic Inc. · 官方产品与业务资料",
+      "url": "https://www.symbotic.com/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-tal",
+      "title": "TAL Education Group · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1499620/000110465926073410/tal-20260228x20f.htm",
+      "asOf": "2026-06-12",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-tem",
+      "title": "Tempus AI, Inc. · 官方产品与业务资料",
+      "url": "https://www.tempus.com/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-tenb",
+      "title": "Tenable Holdings, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1660280/000166028026000005/tenb-20251231.htm",
+      "asOf": "2026-02-27",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-tsla",
+      "title": "Tesla, Inc. · 官方产品与业务资料",
+      "url": "https://www.tesla.com/SI",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-tsm",
+      "title": "Taiwan Semiconductor Manufacturing Company Ltd. · 官方产品与业务资料",
+      "url": "https://www.tsmc.com/english/dedicatedFoundry/technology/cowos",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "product-ttmi",
+      "title": "TTM Technologies, Inc. · 官方产品与业务资料",
+      "url": "https://www.ttm.com/en/markets-we-serve/computing",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-tuya",
+      "title": "Tuya Inc. · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1829118/000110465926046399/tuya-20251231x20f.htm",
+      "asOf": "2026-04-22",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-upst",
+      "title": "Upstart Holdings, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1647639/000164763926000027/upst-20251231.htm",
+      "asOf": "2026-02-10",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-veev",
+      "title": "Veeva Systems Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1393052/000139305226000014/veev-20260131.htm",
+      "asOf": "2026-03-20",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-veri",
+      "title": "Veritone, Inc. · SEC 10-K 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1615165/000162828026025214/veri-20251231.htm",
+      "asOf": "2026-04-15",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-vrt",
+      "title": "Vertiv Holdings, LLC · 官方产品与业务资料",
+      "url": "https://www.vertiv.com/en-us/solutions/ai-hub/ai-solutions/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "filing-wdh",
+      "title": "Waterdrop Inc. · SEC 20-F 年报",
+      "url": "https://www.sec.gov/Archives/edgar/data/1823986/000110465926049772/wdh-20251231x20f.htm",
+      "asOf": "2026-04-28",
+      "scope": "发行人向 SEC 提交的年度报告，可查阅业务与产品披露。",
+      "kind": "company"
+    },
+    {
+      "id": "product-wrd",
+      "title": "WeRide Inc. · 官方产品与业务资料",
+      "url": "https://www.weride.ai/",
+      "asOf": "2026-11-20",
+      "scope": "产品资料或申报文件，核验日为所列日期。",
+      "kind": "company"
+    },
+    {
+      "id": "sec-issuers",
+      "kind": "exchange",
+      "title": "SEC · 公司 CIK 与交易代码表",
+      "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+      "asOf": "2026-11-20",
+      "scope": "按 CIK 识别同发行人的多个交易代码，以 Nasdaq Trader 核对具体证券类别。"
+    },
+    {
+      "id": "hkex-linked",
+      "kind": "exchange",
+      "title": "香港交易所 · 跨市场公司股份代码核对",
+      "url": "https://www.hkex.com.hk/eng/market/sec_tradinfo/ds20261120.htm",
+      "asOf": "2026-11-20",
+      "scope": "使用当日香港交易所证券清单核对港股简称和代码，仅用于已识别的双重上市发行人。"
+    },
+    {
+      "id": "rbtx",
+      "kind": "fund",
+      "title": "iShares RBTX · 机器人及相关技术",
+      "url": "https://www.ishares.com/us/products/354128/ishares-future-robotics-and-related-technologies-active-etf/latest-holdings.csv?asOfDate=20261119",
+      "asOf": "2026-11-19",
+      "scope": "从基金完整持仓逐行核对，匹配美国挂牌普通股或存托股 27 条；剔除境外股票、现金、基金与掉期合约。"
+    },
+    {
+      "id": "cool",
+      "kind": "fund",
+      "title": "VegaShares COOL · 热管理、冷却与供电",
+      "url": "https://vegasharesetfs.com/download/holdings/COOL",
+      "asOf": "2026-11-20",
+      "scope": "从基金完整持仓逐行核对，匹配美国挂牌普通股或存托股 8 条；剔除境外股票、现金、基金与掉期合约。"
+    },
+    {
+      "id": "cgpt",
+      "kind": "fund",
+      "title": "VegaShares CGPT · 推理基础设施",
+      "url": "https://vegasharesetfs.com/download/holdings/CGPT",
+      "asOf": "2026-11-20",
+      "scope": "从基金完整持仓逐行核对，匹配美国挂牌普通股或存托股 10 条；剔除境外股票、现金、基金与掉期合约。"
+    },
+    {
+      "id": "tcai",
+      "kind": "fund",
+      "title": "Tortoise TCAI · AI 基础设施",
+      "url": "https://tortoisecapital.com/etf/tortoise-ai-infrastructure-etf/#holdings",
+      "asOf": "2026-11-19",
+      "scope": "从基金完整持仓逐行核对，匹配美国挂牌普通股或存托股 39 条；剔除境外股票、现金、基金与掉期合约。"
+    }
+  ],
+  "companies": [
+    {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "venue": "Nasdaq",
+      "sector": "devices",
+      "detail": "Apple Intelligence 将写作、图像和语言能力集成到苹果设备。",
+      "sources": [
+        "product-aapl",
+        "aiq",
+        "robt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "端侧推理",
+        "消费电子"
+      ],
+      "aliases": [
+        "苹果"
+      ],
+      "companyId": "sec:0000320193"
+    },
+    {
+      "name": "Absci Corporation",
+      "ticker": "ABSI",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "在药物研发中使用生成式模型设计候选抗体。",
+      "sources": [
+        "filing-absi",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "药物研发",
+        "生成式 AI"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001672688"
+    },
+    {
+      "ticker": "ACCV",
+      "name": "Accelevation Holdings Corp.",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "segments": [
+        "数据中心设备"
+      ],
+      "detail": "业务归于数据中心设备环节。该公司股票出现在Tortoise TCAI · AI 基础设施的当期持仓中。",
+      "sources": [
+        "tcai",
+        "nasdaq-listed"
+      ],
+      "companyId": "sec:0002141406"
+    },
+    {
+      "name": "Accenture plc",
+      "ticker": "ACN",
+      "venue": "NYSE",
+      "sector": "services",
+      "detail": "业务归于信息技术服务环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "arty",
+        "other-listed"
+      ],
+      "segments": [
+        "信息技术服务"
+      ],
+      "aliases": [
+        "埃森哲"
+      ],
+      "companyId": "sec:0001467373"
+    },
+    {
+      "name": "Adobe Inc.",
+      "ticker": "ADBE",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "Firefly 为创意工作流提供生成式图像、视频等能力。",
+      "sources": [
+        "product-adbe",
+        "aiq",
+        "fai",
+        "robt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "生成式图像",
+        "创意工具"
+      ],
+      "aliases": [
+        "奥多比"
+      ],
+      "companyId": "sec:0000796343"
+    },
+    {
+      "name": "Analog Devices, Inc.",
+      "ticker": "ADI",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "业务归于半导体环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "半导体"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000006281"
+    },
+    {
+      "name": "Autodesk, Inc.",
+      "ticker": "ADSK",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000769397"
+    },
+    {
+      "ticker": "AEIS",
+      "name": "Advanced Energy Industries, Inc.",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "segments": [
+        "功率转换"
+      ],
+      "detail": "业务归于功率转换环节。该公司股票出现在VegaShares COOL · 热管理、冷却与供电的当期持仓中。",
+      "sources": [
+        "cool",
+        "nasdaq-listed"
+      ],
+      "companyId": "sec:0000927003"
+    },
+    {
+      "name": "The AES Corporation",
+      "ticker": "AES",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000874761"
+    },
+    {
+      "name": "Agility Robotics, Inc.",
+      "ticker": "AGLT",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "开发 Digit 人形机器人，面向仓储物流中的物料搬运任务。",
+      "sources": [
+        "product-aglt",
+        "humn",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "人形机器人",
+        "仓储物流"
+      ],
+      "aliases": [
+        "Agility Robotics"
+      ],
+      "companyId": "sec:0002074973"
+    },
+    {
+      "name": "Argan, Inc.",
+      "ticker": "AGX",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过基础设施建设环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "基础设施建设"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000100591"
+    },
+    {
+      "name": "C3.ai, Inc.",
+      "ticker": "AI",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "提供用于开发、部署和运营企业 AI 应用的平台。",
+      "sources": [
+        "product-ai",
+        "aiq",
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "企业 AI",
+        "行业软件"
+      ],
+      "aliases": [
+        "C3 AI"
+      ],
+      "companyId": "sec:0001577526"
+    },
+    {
+      "name": "PowerFleet, Inc.",
+      "ticker": "AIOT",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "使用运营数据训练模型，支持数据整合与分析。",
+      "sources": [
+        "filing-aiot",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "物联网",
+        "数据分析"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001774170"
+    },
+    {
+      "name": "Airship AI Holdings, Inc",
+      "ticker": "AISP",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "开发可为现有终端和信息系统增加 AI 能力的边缘软件。",
+      "sources": [
+        "filing-aisp",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "边缘推理",
+        "视频分析"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001842566"
+    },
+    {
+      "name": "XIAO-I Corporation",
+      "ticker": "AIXI",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "年报披露向多个行业客户提供企业 AI 解决方案及相关服务。",
+      "sources": [
+        "filing-aixi",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业 AI"
+      ],
+      "aliases": [
+        "小i机器人"
+      ],
+      "companyId": "sec:0001935172"
+    },
+    {
+      "name": "Akamai Technologies, Inc.",
+      "ticker": "AKAM",
+      "venue": "Nasdaq",
+      "sector": "compute",
+      "detail": "业务归于边缘计算环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "bai",
+        "robt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "边缘计算"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001086222"
+    },
+    {
+      "name": "Astera Labs, Inc.",
+      "ticker": "ALAB",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "为 AI 系统提供 PCIe、CXL 和以太网连接产品。",
+      "sources": [
+        "product-alab",
+        "aipo",
+        "arty",
+        "chat",
+        "fai",
+        "thnq",
+        "nasdaq-listed",
+        "rbtx",
+        "cgpt"
+      ],
+      "segments": [
+        "PCIe",
+        "服务器互连"
+      ],
+      "aliases": [
+        "Astera Labs"
+      ],
+      "companyId": "sec:0001736297"
+    },
+    {
+      "name": "Allient Inc.",
+      "ticker": "ALNT",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "业务归于工业自动化环节。Global X BOTZ 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "工业自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000046129"
+    },
+    {
+      "name": "Applied Materials, Inc.",
+      "ticker": "AMAT",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "提供半导体晶圆制造与先进封装设备，服务于先进逻辑和存储芯片生产。",
+      "sources": [
+        "product-amat",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "晶圆制造设备",
+        "先进封装"
+      ],
+      "aliases": [
+        "应用材料"
+      ],
+      "companyId": "sec:0000006951"
+    },
+    {
+      "name": "Ambarella, Inc.",
+      "ticker": "AMBA",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "视觉处理芯片使用算法执行物体检测、分类与跟踪。",
+      "sources": [
+        "filing-amba",
+        "ainf",
+        "aiq",
+        "fai",
+        "humn",
+        "robt",
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "机器视觉",
+        "端侧推理"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001280263"
+    },
+    {
+      "name": "Ambiq Micro, Inc.",
+      "ticker": "AMBQ",
+      "venue": "NYSE",
+      "sector": "chips",
+      "detail": "业务归于半导体环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "thnq",
+        "other-listed"
+      ],
+      "segments": [
+        "半导体"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001500412"
+    },
+    {
+      "name": "Advanced Micro Devices, Inc.",
+      "ticker": "AMD",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "Instinct 系列加速器面向数据中心 AI 训练、推理和高性能计算。",
+      "sources": [
+        "product-amd",
+        "ainf",
+        "aipo",
+        "aiq",
+        "arty",
+        "bai",
+        "chat",
+        "fai",
+        "robt",
+        "thnq",
+        "filing-amd",
+        "nasdaq-listed",
+        "rbtx",
+        "cgpt"
+      ],
+      "segments": [
+        "GPU",
+        "AI 加速器"
+      ],
+      "aliases": [
+        "AMD",
+        "超威",
+        "超威半导体"
+      ],
+      "companyId": "sec:0000002488"
+    },
+    {
+      "name": "Amkor Technology, Inc.",
+      "ticker": "AMKR",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "提供芯片封装与测试服务，先进封装支持多芯片系统的集成。",
+      "sources": [
+        "product-amkr",
+        "arty",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "先进封装",
+        "芯片测试"
+      ],
+      "aliases": [
+        "安靠科技"
+      ],
+      "companyId": "sec:0001047127"
+    },
+    {
+      "name": "American Superconductor Corporation",
+      "ticker": "AMSC",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000880807"
+    },
+    {
+      "name": "Amazon.com, Inc.",
+      "ticker": "AMZN",
+      "venue": "Nasdaq",
+      "sector": "compute",
+      "detail": "AWS Bedrock 提供基础模型的托管访问，以及构建生成式 AI 应用所需工具。",
+      "sources": [
+        "product-amzn",
+        "aiq",
+        "bai",
+        "chat",
+        "fai",
+        "robt",
+        "thnq",
+        "nasdaq-listed",
+        "rbtx"
+      ],
+      "segments": [
+        "云计算",
+        "模型托管",
+        "生成式 AI"
+      ],
+      "aliases": [
+        "亚马逊"
+      ],
+      "companyId": "sec:0001018724"
+    },
+    {
+      "name": "Arista Networks, Inc.",
+      "ticker": "ANET",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "Etherlink 交换平台面向 AI 集群内部的以太网通信。",
+      "sources": [
+        "product-anet",
+        "arty",
+        "bai",
+        "chat",
+        "fai",
+        "robt",
+        "thnq",
+        "other-listed",
+        "tcai"
+      ],
+      "segments": [
+        "以太网交换机",
+        "数据中心网络"
+      ],
+      "aliases": [
+        "Arista Networks"
+      ],
+      "companyId": "sec:0001596532"
+    },
+    {
+      "name": "Anthropic, PBC",
+      "ticker": "ANT",
+      "venue": "Nasdaq",
+      "sector": "models",
+      "detail": "开发 Claude 系列模型，并通过 API 提供文本、代码和工具调用等能力。",
+      "sources": [
+        "product-ant",
+        "bai",
+        "chat",
+        "nasdaq-listed",
+        "rbtx"
+      ],
+      "segments": [
+        "大语言模型",
+        "智能体",
+        "开发者 API"
+      ],
+      "aliases": [
+        "Anthropic",
+        "Claude"
+      ],
+      "companyId": "sec:0002130357"
+    },
+    {
+      "ticker": "APH",
+      "name": "Amphenol Corporation",
+      "venue": "NYSE",
+      "sector": "infra",
+      "segments": [
+        "高速连接器"
+      ],
+      "detail": "业务归于高速连接器环节。该公司股票出现在Tortoise TCAI · AI 基础设施的当期持仓中。",
+      "sources": [
+        "tcai",
+        "other-listed"
+      ],
+      "companyId": "sec:0000820313"
+    },
+    {
+      "name": "Applied Digital Corporation",
+      "ticker": "APLD",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过数据中心与托管环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed",
+        "tcai"
+      ],
+      "segments": [
+        "数据中心与托管"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001144879"
+    },
+    {
+      "name": "Applovin Corporation",
+      "ticker": "APP",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001751008"
+    },
+    {
+      "name": "Appian Corporation",
+      "ticker": "APPN",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001441683"
+    },
+    {
+      "name": "Aptiv PLC",
+      "ticker": "APTV",
+      "venue": "NYSE",
+      "sector": "robotics",
+      "detail": "业务归于自动驾驶与感知环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "自动驾驶与感知"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001521332"
+    },
+    {
+      "name": "Arm Holdings plc",
+      "ticker": "ARM",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "为其他芯片设计商提供处理器和计算平台 IP，应用于数据中心和终端 AI。",
+      "sources": [
+        "product-arm",
+        "ainf",
+        "aipo",
+        "chat",
+        "nasdaq-listed",
+        "rbtx"
+      ],
+      "segments": [
+        "处理器 IP",
+        "端侧推理"
+      ],
+      "aliases": [
+        "安谋"
+      ],
+      "companyId": "sec:0001973239"
+    },
+    {
+      "name": "ASML Holding N.V.",
+      "ticker": "ASML",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "EUV 光刻系统用于制造先进逻辑和存储芯片，位于 AI 芯片制造的设备环节。",
+      "sources": [
+        "product-asml",
+        "chat",
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "光刻设备",
+        "半导体设备"
+      ],
+      "aliases": [
+        "阿斯麦"
+      ],
+      "companyId": "sec:0000937966"
+    },
+    {
+      "name": "ASE Technology Holding Co., Ltd.",
+      "ticker": "ASX",
+      "venue": "NYSE",
+      "sector": "chips",
+      "detail": "旗下日月光推出 VIPack 先进封装平台，用于 AI、高性能计算与数据中心芯片。",
+      "sources": [
+        "product-asx",
+        "other-listed"
+      ],
+      "segments": [
+        "先进封装",
+        "芯片测试"
+      ],
+      "aliases": [
+        "日月光投控"
+      ],
+      "companyId": "sec:0001122411"
+    },
+    {
+      "name": "ATS Corporation",
+      "ticker": "ATS",
+      "venue": "NYSE",
+      "sector": "robotics",
+      "detail": "为制造业设计与安装定制自动化系统，其加拿大上市股票也进入机器人主题基金。",
+      "sources": [
+        "product-ats",
+        "other-listed"
+      ],
+      "segments": [
+        "工业自动化"
+      ],
+      "aliases": [
+        "ATS 自动化"
+      ],
+      "companyId": "sec:0001394832"
+    },
+    {
+      "name": "Aurora Innovation, Inc.",
+      "ticker": "AUR",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "业务归于自动驾驶与感知环节。Global X BOTZ 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "自动驾驶与感知"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001828108"
+    },
+    {
+      "name": "AeroVironment, Inc.",
+      "ticker": "AVAV",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "业务归于机器人与自动化环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "机器人与自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001368622"
+    },
+    {
+      "name": "AEVEX Corp.",
+      "ticker": "AVEX",
+      "venue": "NYSE",
+      "sector": "robotics",
+      "detail": "业务归于机器人与自动化环节。Global X BOTZ 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "other-listed"
+      ],
+      "segments": [
+        "机器人与自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0002096300"
+    },
+    {
+      "name": "Broadcom Inc.",
+      "ticker": "AVGO",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "为 AI 网络提供高速以太网芯片，并开发定制计算芯片。",
+      "sources": [
+        "product-avgo",
+        "ainf",
+        "aipo",
+        "aiq",
+        "arty",
+        "bai",
+        "chat",
+        "fai",
+        "robt",
+        "thnq",
+        "nasdaq-listed",
+        "cgpt"
+      ],
+      "segments": [
+        "定制 ASIC",
+        "以太网交换芯片"
+      ],
+      "aliases": [
+        "博通"
+      ],
+      "companyId": "sec:0001730168"
+    },
+    {
+      "name": "Alibaba Group Holding Limited",
+      "ticker": "BABA",
+      "venue": "NYSE",
+      "sector": "models",
+      "detail": "阿里巴巴旗下通义千问团队发布 Qwen 系列模型。",
+      "sources": [
+        "product-baba",
+        "aiq",
+        "robt",
+        "thnq",
+        "other-listed",
+        "hkex-linked"
+      ],
+      "segments": [
+        "大语言模型",
+        "多模态",
+        "云计算"
+      ],
+      "aliases": [
+        "阿里巴巴"
+      ],
+      "companyId": "sec:0001577552",
+      "hkTicker": "09988"
+    },
+    {
+      "name": "BigBear.ai, Inc.",
+      "ticker": "BBAI",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001836981"
+    },
+    {
+      "name": "Bloom Energy Corporation",
+      "ticker": "BE",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "业务归于能源供应环节。iShares ARTY 将其列入主题基金持仓。",
+      "sources": [
+        "aipo",
+        "arty",
+        "bai",
+        "other-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001664703"
+    },
+    {
+      "name": "Baidu, Inc.",
+      "ticker": "BIDU",
+      "venue": "Nasdaq",
+      "sector": "models",
+      "detail": "百度智能云千帆提供大模型开发、托管与应用服务。",
+      "sources": [
+        "product-bidu",
+        "aiq",
+        "botz",
+        "robt",
+        "filing-bidu",
+        "nasdaq-listed",
+        "hkex-linked"
+      ],
+      "segments": [
+        "大语言模型",
+        "云计算"
+      ],
+      "aliases": [
+        "百度"
+      ],
+      "companyId": "sec:0001329099",
+      "hkTicker": "09888"
+    },
+    {
+      "name": "BlackLine, Inc.",
+      "ticker": "BL",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001666134"
+    },
+    {
+      "name": "Blackbaud, Inc.",
+      "ticker": "BLKB",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "年报披露公司通过直销团队销售 AI 软件解决方案与相关服务。",
+      "sources": [
+        "filing-blkb",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件",
+        "非营利组织"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001280058"
+    },
+    {
+      "name": "Brand Engagement Network Inc.",
+      "ticker": "BNAI",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "开发可支持任务执行、流程自动化和决策辅助的 AI 智能体。",
+      "sources": [
+        "filing-bnai",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "智能体",
+        "工作流自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001838163"
+    },
+    {
+      "name": "Boost Run Inc.",
+      "ticker": "BRUN",
+      "venue": "Nasdaq",
+      "sector": "compute",
+      "detail": "业务归于计算基础设施环节。Defiance AIPO 将其列入主题基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "计算基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0002090646"
+    },
+    {
+      "name": "Bit Digital, Inc.",
+      "ticker": "BTBT",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过数据中心与托管环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "数据中心与托管"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001710350"
+    },
+    {
+      "name": "Bitdeer Technologies Group",
+      "ticker": "BTDR",
+      "venue": "Nasdaq",
+      "sector": "compute",
+      "detail": "通过 GPU 和服务器供应商支持其 AI 云服务。",
+      "sources": [
+        "filing-btdr",
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "GPU 云"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001899123"
+    },
+    {
+      "name": "BWX Technologies, Inc.",
+      "ticker": "BWXT",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001486957"
+    },
+    {
+      "name": "Blaize Holdings, Inc.",
+      "ticker": "BZAI",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "业务归于半导体环节。Defiance AINF 将其列入主题基金持仓。",
+      "sources": [
+        "ainf",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "半导体"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001871638"
+    },
+    {
+      "name": "Caris Life Sciences, Inc.",
+      "ticker": "CAI",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "以实验室开发检测产品形式提供 GPSai 等 AI 解决方案。",
+      "sources": [
+        "filing-cai",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "医疗 AI",
+        "精准医疗"
+      ],
+      "aliases": [],
+      "companyId": "sec:0002019410"
+    },
+    {
+      "name": "Camtek Ltd.",
+      "ticker": "CAMT",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "向先进封装和高带宽存储器生产商供应检测与量测设备。",
+      "sources": [
+        "product-camt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "晶圆检测",
+        "先进封装"
+      ],
+      "aliases": [
+        "康特科技"
+      ],
+      "companyId": "sec:0001109138"
+    },
+    {
+      "name": "Carlsmed, Inc.",
+      "ticker": "CARL",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "使用去标识化放射影像训练模型，构建患者解剖结构的三维模型。",
+      "sources": [
+        "filing-carl",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "医疗 AI",
+        "医学影像"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001794546"
+    },
+    {
+      "name": "Cerebras Systems Inc.",
+      "ticker": "CBRS",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "采用晶圆级处理器运行 AI 工作负载，并提供模型推理服务。",
+      "sources": [
+        "product-cbrs",
+        "aipo",
+        "chat",
+        "thnq",
+        "nasdaq-listed",
+        "cgpt"
+      ],
+      "segments": [
+        "晶圆级芯片",
+        "推理服务"
+      ],
+      "aliases": [
+        "Cerebras Systems"
+      ],
+      "companyId": "sec:0002021728"
+    },
+    {
+      "name": "CCC Intelligent Solutions Holdings Inc.",
+      "ticker": "CCC",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001818201"
+    },
+    {
+      "name": "Cameco Corporation",
+      "ticker": "CCJ",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001009001"
+    },
+    {
+      "name": "Cadence Design Systems, Inc.",
+      "ticker": "CDNS",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "Cerebrus 使用机器学习优化数字芯片设计。",
+      "sources": [
+        "product-cdns",
+        "aiq",
+        "fai",
+        "robt",
+        "nasdaq-listed",
+        "rbtx"
+      ],
+      "segments": [
+        "EDA",
+        "芯片设计"
+      ],
+      "aliases": [
+        "楷登电子"
+      ],
+      "companyId": "sec:0000813672"
+    },
+    {
+      "name": "Constellation Energy Corporation",
+      "ticker": "CEG",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "业务归于能源供应环节。iShares ARTY 将其列入主题基金持仓。",
+      "sources": [
+        "aipo",
+        "arty",
+        "nasdaq-listed",
+        "tcai"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [
+        "星座能源"
+      ],
+      "companyId": "sec:0001868275"
+    },
+    {
+      "name": "CEVA, Inc.",
+      "ticker": "CEVA",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "业务归于半导体环节。Defiance AINF 将其列入主题基金持仓。",
+      "sources": [
+        "ainf",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "半导体"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001173489"
+    },
+    {
+      "name": "Cognex Corporation",
+      "ticker": "CGNX",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "业务归于工业自动化环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "robt",
+        "thnq",
+        "nasdaq-listed",
+        "rbtx"
+      ],
+      "segments": [
+        "工业自动化"
+      ],
+      "aliases": [
+        "康耐视"
+      ],
+      "companyId": "sec:0000851205"
+    },
+    {
+      "ticker": "CIEN",
+      "name": "Ciena Corporation",
+      "venue": "NYSE",
+      "sector": "infra",
+      "segments": [
+        "光通信设备"
+      ],
+      "detail": "业务归于光通信设备环节。该公司股票出现在Tortoise TCAI · AI 基础设施的当期持仓中。",
+      "sources": [
+        "tcai",
+        "other-listed"
+      ],
+      "companyId": "sec:0000936395"
+    },
+    {
+      "name": "Cipher Digital Inc.",
+      "ticker": "CIFR",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过数据中心与托管环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed",
+        "tcai"
+      ],
+      "segments": [
+        "数据中心与托管"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001819989"
+    },
+    {
+      "name": "Celestica, Inc.",
+      "ticker": "CLS",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "业务归于电子制造环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "bai",
+        "chat",
+        "other-listed",
+        "tcai"
+      ],
+      "segments": [
+        "电子制造"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001030894"
+    },
+    {
+      "name": "CleanSpark, Inc.",
+      "ticker": "CLSK",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过数据中心与托管环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "数据中心与托管"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000827876"
+    },
+    {
+      "name": "Clarivate Plc",
+      "ticker": "CLVT",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "在信息服务中使用 AI 智能体辅助文献综述等工作流程。",
+      "sources": [
+        "filing-clvt",
+        "other-listed"
+      ],
+      "segments": [
+        "科研信息",
+        "智能体"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001764046"
+    },
+    {
+      "name": "Coherent Corp.",
+      "ticker": "COHR",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "提供数据中心光收发器与光通信器件，连接高速计算集群。",
+      "sources": [
+        "product-cohr",
+        "chat",
+        "other-listed",
+        "tcai"
+      ],
+      "segments": [
+        "光模块",
+        "光互连"
+      ],
+      "aliases": [
+        "相干公司"
+      ],
+      "companyId": "sec:0000820318"
+    },
+    {
+      "name": "Core Scientific, Inc.",
+      "ticker": "CORZ",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过数据中心与托管环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "数据中心与托管"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001839341"
+    },
+    {
+      "name": "Credo Technology Group Holding Ltd",
+      "ticker": "CRDO",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "业务归于高速互连芯片环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "arty",
+        "bai",
+        "thnq",
+        "nasdaq-listed",
+        "rbtx",
+        "cgpt",
+        "tcai"
+      ],
+      "segments": [
+        "高速互连芯片"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001807794"
+    },
+    {
+      "name": "Salesforce, Inc.",
+      "ticker": "CRM",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "Agentforce 面向客户服务、销售等业务构建 AI 智能体。",
+      "sources": [
+        "product-crm",
+        "aiq",
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "智能体",
+        "客户关系管理"
+      ],
+      "aliases": [
+        "赛富时"
+      ],
+      "companyId": "sec:0001108524"
+    },
+    {
+      "name": "Criteo S.A.",
+      "ticker": "CRTO",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "通过 AI 智能体帮助品牌建立受众、配置广告活动与分析投放数据。",
+      "sources": [
+        "filing-crto",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "广告科技",
+        "智能体"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001576427"
+    },
+    {
+      "name": "CrowdStrike Holdings, Inc.",
+      "ticker": "CRWD",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "利用安全云的数据训练模型，支持 Falcon 平台进行威胁检测与分析。",
+      "sources": [
+        "filing-crwd",
+        "bai",
+        "chat",
+        "fai",
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "网络安全",
+        "威胁检测"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001535527"
+    },
+    {
+      "name": "CoreWeave, Inc.",
+      "ticker": "CRWV",
+      "venue": "Nasdaq",
+      "sector": "compute",
+      "detail": "运营面向大规模模型训练与推理的 GPU 云。",
+      "sources": [
+        "product-crwv",
+        "ainf",
+        "aipo",
+        "aiq",
+        "arty",
+        "bai",
+        "fai",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "GPU 云",
+        "模型训练",
+        "推理服务"
+      ],
+      "aliases": [
+        "CoreWeave"
+      ],
+      "companyId": "sec:0001769628"
+    },
+    {
+      "name": "Cisco Systems, Inc.",
+      "ticker": "CSCO",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过数据中心交换机和 Silicon One 网络芯片连接高速 AI 计算集群。",
+      "sources": [
+        "product-csco",
+        "aiq",
+        "robt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "以太网交换机",
+        "数据中心网络"
+      ],
+      "aliases": [
+        "思科"
+      ],
+      "companyId": "sec:0000858877"
+    },
+    {
+      "name": "CoStar Group, Inc.",
+      "ticker": "CSGP",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于数据与分析环节。iShares ARTY 将其列入主题基金持仓。",
+      "sources": [
+        "arty",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "数据与分析"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001057352"
+    },
+    {
+      "name": "Csquare, Inc.",
+      "ticker": "CSQR",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0002105398"
+    },
+    {
+      "name": "Cognizant Technology Solutions Corporation",
+      "ticker": "CTSH",
+      "venue": "Nasdaq",
+      "sector": "services",
+      "detail": "业务归于信息技术服务环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "信息技术服务"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001058290"
+    },
+    {
+      "name": "Dominion Energy, Inc.",
+      "ticker": "D",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000715957"
+    },
+    {
+      "name": "Youdao, Inc.",
+      "ticker": "DAO",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "开发面向教育的“子曰”大语言模型，应用于学习产品。",
+      "sources": [
+        "filing-dao",
+        "other-listed"
+      ],
+      "segments": [
+        "教育 AI",
+        "大语言模型"
+      ],
+      "aliases": [
+        "网易有道",
+        "有道"
+      ],
+      "companyId": "sec:0001781753"
+    },
+    {
+      "name": "3D Systems Corporation",
+      "ticker": "DDD",
+      "venue": "NYSE",
+      "sector": "mixed",
+      "detail": "业务归于制造与工程环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "制造与工程"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000910638"
+    },
+    {
+      "name": "Datadog, Inc.",
+      "ticker": "DDOG",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "chat",
+        "fai",
+        "robt",
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001561550"
+    },
+    {
+      "name": "Deere & Company",
+      "ticker": "DE",
+      "venue": "NYSE",
+      "sector": "robotics",
+      "detail": "业务归于工业自动化环节。Global X BOTZ 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "工业自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000315189"
+    },
+    {
+      "name": "Dell Technologies Inc.",
+      "ticker": "DELL",
+      "venue": "NYSE",
+      "sector": "compute",
+      "detail": "Dell AI Factory 提供服务器、存储和网络等 AI 部署基础设施。",
+      "sources": [
+        "product-dell",
+        "chat",
+        "other-listed",
+        "tcai"
+      ],
+      "segments": [
+        "AI 服务器",
+        "集群部署"
+      ],
+      "aliases": [
+        "戴尔科技"
+      ],
+      "companyId": "sec:0001571996"
+    },
+    {
+      "name": "Digi Power X Inc.",
+      "ticker": "DGXX",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过数据中心与托管环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "数据中心与托管"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001854368"
+    },
+    {
+      "name": "Digital Realty Trust, Inc.",
+      "ticker": "DLR",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过数据中心与托管环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "数据中心与托管"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001297996"
+    },
+    {
+      "name": "Ginkgo Bioworks Holdings, Inc.",
+      "ticker": "DNA",
+      "venue": "NYSE",
+      "sector": "services",
+      "detail": "业务归于医疗与生命科学环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "thnq",
+        "other-listed"
+      ],
+      "segments": [
+        "医疗与生命科学"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001830214"
+    },
+    {
+      "name": "Denison Mines Corp",
+      "ticker": "DNN",
+      "venue": "NYSE American",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001063259"
+    },
+    {
+      "name": "DocuSign, Inc.",
+      "ticker": "DOCU",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "将 AI 模型用于大规模协议与合同管理。",
+      "sources": [
+        "filing-docu",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "合同管理",
+        "企业 AI"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001261333"
+    },
+    {
+      "name": "Dynatrace, Inc.",
+      "ticker": "DT",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "fai",
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001773383"
+    },
+    {
+      "ticker": "DTM",
+      "name": "DT Midstream, Inc.",
+      "venue": "NYSE",
+      "sector": "infra",
+      "segments": [
+        "天然气基础设施"
+      ],
+      "detail": "业务归于天然气基础设施环节。该公司股票出现在Tortoise TCAI · AI 基础设施的当期持仓中。",
+      "sources": [
+        "tcai",
+        "other-listed"
+      ],
+      "companyId": "sec:0001842022"
+    },
+    {
+      "name": "Datasea Intelligent Technology Ltd.",
+      "ticker": "DTSS",
+      "venue": "Nasdaq",
+      "sector": "services",
+      "detail": "披露面向企业的智能体产品，并提供其运行所需的计算和服务调用能力。",
+      "sources": [
+        "filing-dtss",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "智能体",
+        "企业 AI"
+      ],
+      "aliases": [],
+      "companyId": "sec:0002110423"
+    },
+    {
+      "name": "DXC Technology Company",
+      "ticker": "DXC",
+      "venue": "NYSE",
+      "sector": "services",
+      "detail": "业务归于信息技术服务环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "other-listed"
+      ],
+      "segments": [
+        "信息技术服务"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001688568"
+    },
+    {
+      "name": "Dycom Industries, Inc.",
+      "ticker": "DY",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed",
+        "tcai"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000067215"
+    },
+    {
+      "name": "New Oriental Education & Technology Group, Inc.",
+      "ticker": "EDU",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "向教育场景提供 AI 工具，支持学生学习与教师工作。",
+      "sources": [
+        "filing-edu",
+        "other-listed",
+        "hkex-linked"
+      ],
+      "segments": [
+        "教育 AI"
+      ],
+      "aliases": [
+        "新东方"
+      ],
+      "companyId": "sec:0001372920",
+      "hkTicker": "09901"
+    },
+    {
+      "name": "Equifax, Inc.",
+      "ticker": "EFX",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "业务归于数据与分析环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "other-listed"
+      ],
+      "segments": [
+        "数据与分析"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000033185"
+    },
+    {
+      "name": "EHang Holdings Limited",
+      "ticker": "EH",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "业务归于自动驾驶与感知环节。Global X BOTZ 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "自动驾驶与感知"
+      ],
+      "aliases": [
+        "亿航智能"
+      ],
+      "companyId": "sec:0001759783"
+    },
+    {
+      "name": "Emerson Electric Company",
+      "ticker": "EMR",
+      "venue": "NYSE",
+      "sector": "robotics",
+      "detail": "业务归于工业自动化环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "工业自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000032604"
+    },
+    {
+      "name": "EnerSys",
+      "ticker": "ENS",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001289308"
+    },
+    {
+      "name": "Entegris, Inc.",
+      "ticker": "ENTG",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "业务归于晶圆设备与材料环节。iShares ARTY 将其列入主题基金持仓。",
+      "sources": [
+        "arty",
+        "bai",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "晶圆设备与材料"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001101302"
+    },
+    {
+      "name": "Eos Energy Enterprises, Inc.",
+      "ticker": "EOSE",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过基础设施建设环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "基础设施建设"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001805077"
+    },
+    {
+      "name": "Equinix, Inc.",
+      "ticker": "EQIX",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过数据中心与托管环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "数据中心与托管"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001101239"
+    },
+    {
+      "name": "Ericsson",
+      "ticker": "ERIC",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "业务归于网络通信环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "网络通信"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000717826"
+    },
+    {
+      "name": "Elastic N.V.",
+      "ticker": "ESTC",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "Elasticsearch 支持向量、全文与混合检索，可用于面向应用的语义搜索。",
+      "sources": [
+        "product-estc",
+        "bai",
+        "robt",
+        "thnq",
+        "other-listed"
+      ],
+      "segments": [
+        "向量数据库",
+        "语义检索"
+      ],
+      "aliases": [
+        "Elastic"
+      ],
+      "companyId": "sec:0001707753"
+    },
+    {
+      "name": "Eaton Corporation, PLC",
+      "ticker": "ETN",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "向数据中心提供供配电、后备电源和相关基础设施。",
+      "sources": [
+        "product-etn",
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "配电",
+        "不间断电源"
+      ],
+      "aliases": [
+        "伊顿"
+      ],
+      "companyId": "sec:0001551182"
+    },
+    {
+      "ticker": "ETR",
+      "name": "Entergy Corporation",
+      "venue": "NYSE",
+      "sector": "infra",
+      "segments": [
+        "能源供应"
+      ],
+      "detail": "业务归于能源供应环节。该公司股票出现在Tortoise TCAI · AI 基础设施的当期持仓中。",
+      "sources": [
+        "tcai",
+        "other-listed"
+      ],
+      "companyId": "sec:0000065984"
+    },
+    {
+      "name": "enCore Energy Corp.",
+      "ticker": "EU",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001500881"
+    },
+    {
+      "name": "Evergy, Inc.",
+      "ticker": "EVRG",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed",
+        "tcai"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001711269"
+    },
+    {
+      "name": "FuelCell Energy, Inc.",
+      "ticker": "FCEL",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000886128"
+    },
+    {
+      "ticker": "FIX",
+      "name": "Comfort Systems USA, Inc.",
+      "venue": "NYSE",
+      "sector": "infra",
+      "segments": [
+        "机电与暖通工程"
+      ],
+      "detail": "业务归于机电与暖通工程环节。该公司股票出现在Tortoise TCAI · AI 基础设施的当期持仓中。",
+      "sources": [
+        "tcai",
+        "other-listed"
+      ],
+      "companyId": "sec:0001035983"
+    },
+    {
+      "name": "Flex Ltd.",
+      "ticker": "FLEX",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "业务归于电子制造环节。iShares BAI 将其列入主题基金持仓。",
+      "sources": [
+        "bai",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "电子制造"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000866374"
+    },
+    {
+      "name": "Fluence Energy, Inc.",
+      "ticker": "FLNC",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001868941"
+    },
+    {
+      "name": "Forgent Power Solutions, Inc.",
+      "ticker": "FPS",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed",
+        "tcai"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0002080126"
+    },
+    {
+      "name": "JFrog Ltd.",
+      "ticker": "FROG",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001800667"
+    },
+    {
+      "name": "Freshworks Inc.",
+      "ticker": "FRSH",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "Freddy AI 嵌入客户及员工服务软件，用于辅助、分析和自动化服务流程。",
+      "sources": [
+        "filing-frsh",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "客户服务",
+        "企业 AI"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001544522"
+    },
+    {
+      "name": "Fusemachines Inc.",
+      "ticker": "FUSE",
+      "venue": "Nasdaq",
+      "sector": "services",
+      "detail": "为企业提供 AI 解决方案，应用于销售预测、招聘流程与欺诈检测等业务。",
+      "sources": [
+        "filing-fuse",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业 AI",
+        "流程自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0002033383"
+    },
+    {
+      "name": "Genpact Limited",
+      "ticker": "G",
+      "venue": "NYSE",
+      "sector": "services",
+      "detail": "业务归于信息技术服务环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "other-listed"
+      ],
+      "segments": [
+        "信息技术服务"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001398659"
+    },
+    {
+      "name": "GoDaddy Inc.",
+      "ticker": "GDDY",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "Airo 平台提供站点设计及搜索优化等 AI 工具与托管服务。",
+      "sources": [
+        "filing-gddy",
+        "other-listed"
+      ],
+      "segments": [
+        "网站建设",
+        "生成式 AI"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001609711"
+    },
+    {
+      "name": "GDS Holdings Limited",
+      "ticker": "GDS",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过数据中心与托管环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed",
+        "hkex-linked"
+      ],
+      "segments": [
+        "数据中心与托管"
+      ],
+      "aliases": [
+        "万国数据"
+      ],
+      "companyId": "sec:0001526125",
+      "hkTicker": "09698"
+    },
+    {
+      "name": "GE HealthCare Technologies Inc.",
+      "ticker": "GEHC",
+      "venue": "Nasdaq",
+      "sector": "devices",
+      "detail": "业务归于医疗设备环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "医疗设备"
+      ],
+      "aliases": [
+        "通用电气医疗"
+      ],
+      "companyId": "sec:0001932393"
+    },
+    {
+      "name": "GE Vernova Inc.",
+      "ticker": "GEV",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed",
+        "tcai"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001996810"
+    },
+    {
+      "name": "CGI Inc.",
+      "ticker": "GIB",
+      "venue": "NYSE",
+      "sector": "services",
+      "detail": "面向客户提供人工智能咨询和实施服务，以及 PulseAI 自动化平台。",
+      "sources": [
+        "product-gib",
+        "other-listed"
+      ],
+      "segments": [
+        "企业 AI",
+        "工作流自动化"
+      ],
+      "aliases": [
+        "CGI"
+      ],
+      "companyId": "sec:0001061574"
+    },
+    {
+      "name": "Globant S.A.",
+      "ticker": "GLOB",
+      "venue": "NYSE",
+      "sector": "services",
+      "detail": "业务归于信息技术服务环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "other-listed"
+      ],
+      "segments": [
+        "信息技术服务"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001557860"
+    },
+    {
+      "name": "Generac Holdlings Inc.",
+      "ticker": "GNRC",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001474735"
+    },
+    {
+      "name": "Alphabet Inc.",
+      "ticker": "GOOG",
+      "venue": "Nasdaq",
+      "sector": "models",
+      "detail": "Google 的 Gemini 系列模型支持文本和多模态任务，可通过 API 接入应用。 本条为同一发行人的 C 类股份，主题持仓对应 A 类股份。",
+      "sources": [
+        "product-googl",
+        "nasdaq-listed",
+        "sec-issuers"
+      ],
+      "segments": [
+        "大语言模型",
+        "多模态",
+        "开发者 API"
+      ],
+      "aliases": [
+        "Alphabet",
+        "Google",
+        "GOOG",
+        "谷歌"
+      ],
+      "companyId": "sec:0001652044",
+      "excludedMemberSources": []
+    },
+    {
+      "name": "Alphabet Inc.",
+      "ticker": "GOOGL",
+      "venue": "Nasdaq",
+      "sector": "models",
+      "detail": "Google 的 Gemini 系列模型支持文本和多模态任务，可通过 API 接入应用。",
+      "sources": [
+        "product-googl",
+        "aipo",
+        "aiq",
+        "botz",
+        "chat",
+        "fai",
+        "robt",
+        "thnq",
+        "nasdaq-listed",
+        "sec-issuers",
+        "rbtx"
+      ],
+      "segments": [
+        "大语言模型",
+        "多模态",
+        "开发者 API"
+      ],
+      "aliases": [
+        "Alphabet",
+        "Google",
+        "GOOG",
+        "谷歌"
+      ],
+      "companyId": "sec:0001652044"
+    },
+    {
+      "name": "Gorilla Technology Group Inc.",
+      "ticker": "GRRR",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "其 AI 解决方案已部署于交通、城市管理等公共部门场景。",
+      "sources": [
+        "filing-grrr",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "智慧城市",
+        "视频分析"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001903145"
+    },
+    {
+      "name": "GSI Technology, Inc.",
+      "ticker": "GSIT",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "业务归于半导体环节。Defiance AINF 将其列入主题基金持仓。",
+      "sources": [
+        "ainf",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "半导体"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001126741"
+    },
+    {
+      "name": "GitLab Inc.",
+      "ticker": "GTLB",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。First Trust FAI 将其列入主题基金持仓。",
+      "sources": [
+        "fai",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001653482"
+    },
+    {
+      "name": "GXO Logistics, Inc.",
+      "ticker": "GXO",
+      "venue": "NYSE",
+      "sector": "robotics",
+      "detail": "业务归于机器人与自动化环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "机器人与自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001852244"
+    },
+    {
+      "name": "HIVE Digital Technologies Ltd",
+      "ticker": "HIVE",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过数据中心与托管环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "数据中心与托管"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001720424"
+    },
+    {
+      "name": "Robinhood Markets, Inc.",
+      "ticker": "HOOD",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于互联网应用环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "互联网应用"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001783879"
+    },
+    {
+      "name": "Hewlett Packard Enterprise Company",
+      "ticker": "HPE",
+      "venue": "NYSE",
+      "sector": "compute",
+      "detail": "HPE 的 AI 基础设施覆盖 GPU 服务器、网络、存储和软件。",
+      "sources": [
+        "product-hpe",
+        "aiq",
+        "other-listed",
+        "tcai"
+      ],
+      "segments": [
+        "AI 服务器",
+        "集群部署"
+      ],
+      "aliases": [
+        "慧与"
+      ],
+      "companyId": "sec:0001645590"
+    },
+    {
+      "name": "Hesai Group",
+      "ticker": "HSAI",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "业务归于自动驾驶与感知环节。Roundhill HUMN 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "humn",
+        "nasdaq-listed",
+        "hkex-linked"
+      ],
+      "segments": [
+        "自动驾驶与感知"
+      ],
+      "aliases": [
+        "禾赛科技"
+      ],
+      "companyId": "sec:0001861737",
+      "hkTicker": "02525"
+    },
+    {
+      "name": "Hubbell Inc",
+      "ticker": "HUBB",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000048898"
+    },
+    {
+      "name": "HubSpot, Inc.",
+      "ticker": "HUBS",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "其平台智能体可执行客户研究、数据补全、在线答疑和销售线索筛选。",
+      "sources": [
+        "filing-hubs",
+        "other-listed"
+      ],
+      "segments": [
+        "客户关系管理",
+        "智能体"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001404655"
+    },
+    {
+      "name": "Hut 8 Corp.",
+      "ticker": "HUT",
+      "venue": "Nasdaq",
+      "sector": "compute",
+      "detail": "通过子公司 Highrise AI 在托管数据中心部署 AI 云资产。",
+      "sources": [
+        "filing-hut",
+        "aipo",
+        "aiq",
+        "nasdaq-listed",
+        "tcai"
+      ],
+      "segments": [
+        "GPU 云",
+        "数据中心"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001964789"
+    },
+    {
+      "name": "International Business Machines Corporation",
+      "ticker": "IBM",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "watsonx 面向企业提供模型开发、数据管理与 AI 治理工具。",
+      "sources": [
+        "product-ibm",
+        "aiq",
+        "arty",
+        "robt",
+        "thnq",
+        "other-listed"
+      ],
+      "segments": [
+        "AI 开发平台",
+        "模型治理"
+      ],
+      "aliases": [
+        "国际商业机器"
+      ],
+      "companyId": "sec:0000051143"
+    },
+    {
+      "name": "Illumina, Inc.",
+      "ticker": "ILMN",
+      "venue": "Nasdaq",
+      "sector": "services",
+      "detail": "业务归于医疗与生命科学环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "医疗与生命科学"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001110803"
+    },
+    {
+      "name": "Infosys Limited",
+      "ticker": "INFY",
+      "venue": "NYSE",
+      "sector": "services",
+      "detail": "为客户开发和交付按业务场景定制的 AI 智能体。",
+      "sources": [
+        "filing-infy",
+        "other-listed"
+      ],
+      "segments": [
+        "企业 AI",
+        "智能体"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001067491"
+    },
+    {
+      "name": "INNIO N.V.",
+      "ticker": "INIO",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0002109150"
+    },
+    {
+      "name": "Innodata Inc.",
+      "ticker": "INOD",
+      "venue": "Nasdaq",
+      "sector": "services",
+      "detail": "提供用于训练、微调和评估生成式 AI 模型的数据与专家标注服务。",
+      "sources": [
+        "product-inod",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "训练数据",
+        "数据标注",
+        "模型评测"
+      ],
+      "aliases": [
+        "Innodata"
+      ],
+      "companyId": "sec:0000903651"
+    },
+    {
+      "name": "Intel Corporation",
+      "ticker": "INTC",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "业务归于半导体环节。Defiance AINF 将其列入主题基金持仓。",
+      "sources": [
+        "ainf",
+        "aiq",
+        "bai",
+        "chat",
+        "robt",
+        "nasdaq-listed",
+        "rbtx"
+      ],
+      "segments": [
+        "半导体"
+      ],
+      "aliases": [
+        "英特尔"
+      ],
+      "companyId": "sec:0000050863"
+    },
+    {
+      "name": "Intuit Inc.",
+      "ticker": "INTU",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。First Trust FAI 将其列入主题基金持仓。",
+      "sources": [
+        "fai",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000896878"
+    },
+    {
+      "name": "IonQ, Inc.",
+      "ticker": "IONQ",
+      "venue": "NYSE",
+      "sector": "compute",
+      "detail": "业务归于计算硬件环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "thnq",
+        "other-listed"
+      ],
+      "segments": [
+        "计算硬件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001824920"
+    },
+    {
+      "name": "Samsara Inc.",
+      "ticker": "IOT",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "以运营数据训练模型，使用智能体自动处理数据密集的运营任务。",
+      "sources": [
+        "filing-iot",
+        "thnq",
+        "other-listed"
+      ],
+      "segments": [
+        "企业 AI",
+        "物联网"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001642896"
+    },
+    {
+      "name": "IQVIA Holdings, Inc.",
+      "ticker": "IQV",
+      "venue": "NYSE",
+      "sector": "services",
+      "detail": "业务归于医疗与生命科学环节。iShares BAI 将其列入主题基金持仓。",
+      "sources": [
+        "bai",
+        "other-listed"
+      ],
+      "segments": [
+        "医疗与生命科学"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001478242"
+    },
+    {
+      "name": "IREN Limited",
+      "ticker": "IREN",
+      "venue": "Nasdaq",
+      "sector": "compute",
+      "detail": "提供 AI Cloud Services，基础设施包含数据中心、电力和冷却系统。",
+      "sources": [
+        "filing-iren",
+        "aipo",
+        "nasdaq-listed",
+        "tcai"
+      ],
+      "segments": [
+        "GPU 云",
+        "数据中心"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001878848"
+    },
+    {
+      "name": "Intuitive Surgical, Inc.",
+      "ticker": "ISRG",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "业务归于机器人与自动化环节。Global X BOTZ 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "robt",
+        "nasdaq-listed",
+        "rbtx"
+      ],
+      "segments": [
+        "机器人与自动化"
+      ],
+      "aliases": [
+        "直觉外科"
+      ],
+      "companyId": "sec:0001035267"
+    },
+    {
+      "name": "Itron, Inc.",
+      "ticker": "ITRI",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000780571"
+    },
+    {
+      "name": "JD.com, Inc.",
+      "ticker": "JD",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于互联网应用环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "thnq",
+        "nasdaq-listed",
+        "hkex-linked"
+      ],
+      "segments": [
+        "互联网应用"
+      ],
+      "aliases": [
+        "京东"
+      ],
+      "companyId": "sec:0001549802",
+      "hkTicker": "09618"
+    },
+    {
+      "name": "Johnson & Johnson",
+      "ticker": "JNJ",
+      "venue": "NYSE",
+      "sector": "devices",
+      "detail": "业务归于医疗设备环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "医疗设备"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000200406"
+    },
+    {
+      "name": "Kodiak AI, Inc.",
+      "ticker": "KDK",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "业务归于自动驾驶与感知环节。Global X BOTZ 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "自动驾驶与感知"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001853138"
+    },
+    {
+      "name": "Keel Infrastructure Corp.",
+      "ticker": "KEEL",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过数据中心与托管环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "数据中心与托管"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001812477"
+    },
+    {
+      "name": "KLA Corporation",
+      "ticker": "KLAC",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "向晶圆厂提供制程控制、缺陷检测与量测设备。",
+      "sources": [
+        "product-klac",
+        "robt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "晶圆检测",
+        "半导体设备"
+      ],
+      "aliases": [
+        "科磊"
+      ],
+      "companyId": "sec:0000319201"
+    },
+    {
+      "name": "CS Disco, Inc.",
+      "ticker": "LAW",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "在电子取证软件中使用 AI 模型，帮助客户发现证据并处理法律事务。",
+      "sources": [
+        "filing-law",
+        "other-listed"
+      ],
+      "segments": [
+        "法律科技"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001625641"
+    },
+    {
+      "ticker": "LECO",
+      "name": "Lincoln Electric Holdings, Inc.",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "segments": [
+        "工业自动化"
+      ],
+      "detail": "业务归于工业自动化环节。该公司股票出现在iShares RBTX · 机器人及相关技术的当期持仓中。",
+      "sources": [
+        "rbtx",
+        "nasdaq-listed"
+      ],
+      "companyId": "sec:0000059527"
+    },
+    {
+      "name": "Centrus Energy Corp.",
+      "ticker": "LEU",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001065059"
+    },
+    {
+      "name": "Lumentum Holdings Inc.",
+      "ticker": "LITE",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "提供数据中心光收发器和激光器，用于服务器与交换机之间的高速连接。",
+      "sources": [
+        "product-lite",
+        "bai",
+        "chat",
+        "thnq",
+        "nasdaq-listed",
+        "tcai"
+      ],
+      "segments": [
+        "光模块",
+        "光互连"
+      ],
+      "aliases": [
+        "朗美通",
+        "Lumentum"
+      ],
+      "companyId": "sec:0001633978"
+    },
+    {
+      "name": "Lam Research Corporation",
+      "ticker": "LRCX",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "为晶圆制造提供沉积、刻蚀和清洗设备，处于先进芯片生产上游。",
+      "sources": [
+        "product-lrcx",
+        "bai",
+        "robt",
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "晶圆制造设备"
+      ],
+      "aliases": [
+        "泛林集团"
+      ],
+      "companyId": "sec:0000707549"
+    },
+    {
+      "name": "Lattice Semiconductor Corporation",
+      "ticker": "LSCC",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "业务归于半导体环节。Defiance AINF 将其列入主题基金持仓。",
+      "sources": [
+        "ainf",
+        "aipo",
+        "nasdaq-listed",
+        "rbtx"
+      ],
+      "segments": [
+        "半导体"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000855658"
+    },
+    {
+      "name": "MARA Holdings, Inc.",
+      "ticker": "MARA",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过数据中心与托管环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "数据中心与托管"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001507605"
+    },
+    {
+      "name": "Mobileye Global Inc.",
+      "ticker": "MBLY",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "业务归于自动驾驶与感知环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "自动驾驶与感知"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001910139"
+    },
+    {
+      "ticker": "MCHP",
+      "name": "Microchip Technology Incorporated",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "segments": [
+        "半导体"
+      ],
+      "detail": "业务归于半导体环节。该公司股票出现在iShares RBTX · 机器人及相关技术的当期持仓中。",
+      "sources": [
+        "rbtx",
+        "nasdaq-listed"
+      ],
+      "companyId": "sec:0000827054"
+    },
+    {
+      "name": "MongoDB, Inc.",
+      "ticker": "MDB",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "arty",
+        "fai",
+        "robt",
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001441816"
+    },
+    {
+      "name": "Medtronic plc.",
+      "ticker": "MDT",
+      "venue": "NYSE",
+      "sector": "devices",
+      "detail": "业务归于医疗设备环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "医疗设备"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001613103"
+    },
+    {
+      "name": "MercadoLibre, Inc.",
+      "ticker": "MELI",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于互联网应用环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "互联网应用"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001099590"
+    },
+    {
+      "name": "Meta Platforms, Inc.",
+      "ticker": "META",
+      "venue": "Nasdaq",
+      "sector": "models",
+      "detail": "发布 Llama 系列基础模型，供开发者构建和部署 AI 应用。",
+      "sources": [
+        "product-meta",
+        "aiq",
+        "chat",
+        "fai",
+        "robt",
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "大语言模型",
+        "开放权重"
+      ],
+      "aliases": [
+        "Meta",
+        "脸书"
+      ],
+      "companyId": "sec:0001326801"
+    },
+    {
+      "name": "Magna International, Inc.",
+      "ticker": "MGA",
+      "venue": "NYSE",
+      "sector": "robotics",
+      "detail": "业务归于自动驾驶与感知环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "自动驾驶与感知"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000749098"
+    },
+    {
+      "name": "Modexus Solutions, Inc.",
+      "ticker": "MOD",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "旗下 Airedale 为数据中心提供冷却设备及工程解决方案。",
+      "sources": [
+        "product-mod",
+        "other-listed",
+        "tcai"
+      ],
+      "segments": [
+        "液冷",
+        "热管理"
+      ],
+      "aliases": [
+        "Modine",
+        "摩丁"
+      ],
+      "companyId": "sec:0000067347"
+    },
+    {
+      "name": "Moog Inc.",
+      "ticker": "MOG.A",
+      "venue": "NYSE",
+      "sector": "robotics",
+      "detail": "业务归于机器人与自动化环节。Global X BOTZ 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "other-listed",
+        "sec-issuers"
+      ],
+      "segments": [
+        "机器人与自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000067887"
+    },
+    {
+      "name": "Moog Inc.",
+      "ticker": "MOG.B",
+      "venue": "NYSE",
+      "sector": "robotics",
+      "detail": "业务归于机器人与自动化环节。Global X BOTZ 将其列入主题基金持仓。 本条为同一发行人的 B 类股份，主题持仓对应 A 类股份。",
+      "sources": [
+        "botz",
+        "other-listed",
+        "sec-issuers"
+      ],
+      "segments": [
+        "机器人与自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000067887",
+      "excludedMemberSources": [
+        "botz"
+      ]
+    },
+    {
+      "name": "Corvex, Inc.",
+      "ticker": "MOVE",
+      "venue": "Nasdaq",
+      "sector": "compute",
+      "detail": "公司披露已上线面向 AI 工作负载的 GPU 加速云平台并取得相关收入。",
+      "sources": [
+        "filing-move",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "GPU 云"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001734750"
+    },
+    {
+      "name": "Monolithic Power Systems, Inc.",
+      "ticker": "MPWR",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "业务归于半导体环节。First Trust FAI 将其列入主题基金持仓。",
+      "sources": [
+        "bai",
+        "fai",
+        "nasdaq-listed",
+        "rbtx",
+        "cool"
+      ],
+      "segments": [
+        "半导体"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001280452"
+    },
+    {
+      "name": "Marvell Technology, Inc.",
+      "ticker": "MRVL",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "面向 AI 数据中心提供定制计算、交换和电光互连芯片。",
+      "sources": [
+        "product-mrvl",
+        "aipo",
+        "aiq",
+        "arty",
+        "bai",
+        "chat",
+        "fai",
+        "robt",
+        "thnq",
+        "nasdaq-listed",
+        "rbtx",
+        "cgpt"
+      ],
+      "segments": [
+        "定制 ASIC",
+        "光互连"
+      ],
+      "aliases": [
+        "迈威尔"
+      ],
+      "companyId": "sec:0001835632"
+    },
+    {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "venue": "Nasdaq",
+      "sector": "compute",
+      "detail": "Azure AI 云平台提供模型目录和部署工具，支持构建企业 AI 应用。",
+      "sources": [
+        "product-msft",
+        "aiq",
+        "arty",
+        "bai",
+        "chat",
+        "fai",
+        "robt",
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "云计算",
+        "模型托管",
+        "企业应用"
+      ],
+      "aliases": [
+        "微软"
+      ],
+      "companyId": "sec:0000789019"
+    },
+    {
+      "name": "MACOM Technology Solutions Holdings, Inc.",
+      "ticker": "MTSI",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "业务归于半导体环节。iShares BAI 将其列入主题基金持仓。",
+      "sources": [
+        "bai",
+        "nasdaq-listed",
+        "rbtx"
+      ],
+      "segments": [
+        "半导体"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001493594"
+    },
+    {
+      "name": "MasTec, Inc.",
+      "ticker": "MTZ",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed",
+        "tcai"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000015615"
+    },
+    {
+      "name": "Micron Technology, Inc.",
+      "ticker": "MU",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "HBM 高带宽存储器为 AI 加速器提供紧邻处理器的高速数据访问。",
+      "sources": [
+        "product-mu",
+        "aiq",
+        "arty",
+        "bai",
+        "chat",
+        "fai",
+        "robt",
+        "nasdaq-listed",
+        "cgpt",
+        "tcai"
+      ],
+      "segments": [
+        "HBM",
+        "存储芯片"
+      ],
+      "aliases": [
+        "美光科技"
+      ],
+      "companyId": "sec:0000723125"
+    },
+    {
+      "name": "SOLV Energy, Inc.",
+      "ticker": "MWH",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过基础设施建设环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "基础设施建设"
+      ],
+      "aliases": [],
+      "companyId": "sec:0002065636"
+    },
+    {
+      "name": "MYR Group, Inc.",
+      "ticker": "MYRG",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed",
+        "tcai"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000700923"
+    },
+    {
+      "name": "Nebius Group N.V.",
+      "ticker": "NBIS",
+      "venue": "Nasdaq",
+      "sector": "compute",
+      "detail": "提供构建、训练和运行 AI 模型所需的 GPU 云基础设施。",
+      "sources": [
+        "product-nbis",
+        "ainf",
+        "aipo",
+        "chat",
+        "fai",
+        "thnq",
+        "filing-nbis",
+        "nasdaq-listed",
+        "tcai"
+      ],
+      "segments": [
+        "GPU 云",
+        "模型训练",
+        "推理服务"
+      ],
+      "aliases": [
+        "Nebius"
+      ],
+      "companyId": "sec:0001513845"
+    },
+    {
+      "name": "Cloudflare, Inc.",
+      "ticker": "NET",
+      "venue": "NYSE",
+      "sector": "compute",
+      "detail": "Workers AI 允许开发者在其分布式网络上调用并运行模型。",
+      "sources": [
+        "product-net",
+        "bai",
+        "chat",
+        "robt",
+        "thnq",
+        "other-listed"
+      ],
+      "segments": [
+        "边缘推理",
+        "模型托管"
+      ],
+      "aliases": [
+        "Cloudflare"
+      ],
+      "companyId": "sec:0001477333"
+    },
+    {
+      "name": "Netflix, Inc.",
+      "ticker": "NFLX",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于互联网应用环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "互联网应用"
+      ],
+      "aliases": [
+        "奈飞"
+      ],
+      "companyId": "sec:0001065280"
+    },
+    {
+      "name": "NICE Ltd",
+      "ticker": "NICE",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001003935"
+    },
+    {
+      "name": "NIQ Global Intelligence plc",
+      "ticker": "NIQ",
+      "venue": "NYSE",
+      "sector": "services",
+      "detail": "在数据服务中应用 AI，自动完成数据补充、匹配等环节。",
+      "sources": [
+        "filing-niq",
+        "other-listed"
+      ],
+      "segments": [
+        "消费者数据",
+        "数据分析"
+      ],
+      "aliases": [],
+      "companyId": "sec:0002054696"
+    },
+    {
+      "name": "Nano Nuclear Energy Inc.",
+      "ticker": "NNE",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001923891"
+    },
+    {
+      "name": "NANO-X IMAGING LTD",
+      "ticker": "NNOX",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "Nanox AI 分析 CT 图像，帮助医疗机构识别需进一步关注的检查结果。",
+      "sources": [
+        "filing-nnox",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "医学影像",
+        "医疗 AI"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001795251"
+    },
+    {
+      "name": "Northrop Grumman Corporation",
+      "ticker": "NOC",
+      "venue": "NYSE",
+      "sector": "robotics",
+      "detail": "业务归于机器人与自动化环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "机器人与自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001133421"
+    },
+    {
+      "name": "Nokia Corporation Sponsored",
+      "ticker": "NOK",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "业务归于网络通信环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "other-listed"
+      ],
+      "segments": [
+        "网络通信"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000924613"
+    },
+    {
+      "name": "Novanta Inc.",
+      "ticker": "NOVT",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "业务归于工业自动化环节。Roundhill HUMN 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "humn",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "工业自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001076930"
+    },
+    {
+      "name": "ServiceNow, Inc.",
+      "ticker": "NOW",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "fai",
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001373715"
+    },
+    {
+      "name": "NET Power Inc.",
+      "ticker": "NPWR",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001845437"
+    },
+    {
+      "name": "Energy Vault Holdings, Inc.",
+      "ticker": "NRGV",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001828536"
+    },
+    {
+      "name": "Nurix Therapeutics, Inc.",
+      "ticker": "NRIX",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "在研发中结合实验数据、深度学习和生成式设计，筛选与改进候选化合物。",
+      "sources": [
+        "filing-nrix",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "药物研发",
+        "机器学习"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001549595"
+    },
+    {
+      "name": "NetApp, Inc.",
+      "ticker": "NTAP",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "提供 AI 训练与推理所需的存储和数据管道方案。",
+      "sources": [
+        "product-ntap",
+        "fai",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "存储设备",
+        "数据管理"
+      ],
+      "aliases": [
+        "NetApp"
+      ],
+      "companyId": "sec:0001002047"
+    },
+    {
+      "name": "NVIDIA Corporation",
+      "ticker": "NVDA",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "提供面向数据中心的 GPU、加速计算系统和网络平台，用于模型训练与推理。",
+      "sources": [
+        "product-nvda",
+        "ainf",
+        "aipo",
+        "aiq",
+        "arty",
+        "bai",
+        "botz",
+        "chat",
+        "fai",
+        "robt",
+        "thnq",
+        "nasdaq-listed",
+        "rbtx",
+        "cgpt"
+      ],
+      "segments": [
+        "GPU",
+        "AI 加速器",
+        "服务器互连"
+      ],
+      "aliases": [
+        "英伟达"
+      ],
+      "companyId": "sec:0001045810"
+    },
+    {
+      "name": "nVent Electric plc",
+      "ticker": "NVT",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed",
+        "cool",
+        "tcai"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001720635"
+    },
+    {
+      "ticker": "NVTS",
+      "name": "Navitas Semiconductor Corporation",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "segments": [
+        "功率半导体"
+      ],
+      "detail": "业务归于功率半导体环节。该公司股票出现在VegaShares COOL · 热管理、冷却与供电的当期持仓中。",
+      "sources": [
+        "cool",
+        "nasdaq-listed"
+      ],
+      "companyId": "sec:0001821769"
+    },
+    {
+      "name": "Nexgen Energy Ltd.",
+      "ticker": "NXE",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001698535"
+    },
+    {
+      "name": "NXP Semiconductors N.V.",
+      "ticker": "NXPI",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "业务归于半导体环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "robt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "半导体"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001413447"
+    },
+    {
+      "name": "ODDITY Tech Ltd.",
+      "ticker": "ODD",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "用视觉等模型为消费者匹配产品。",
+      "sources": [
+        "filing-odd",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "消费应用",
+        "个性化推荐"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001907085"
+    },
+    {
+      "name": "Oklo Inc.",
+      "ticker": "OKLO",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001849056"
+    },
+    {
+      "name": "Okta, Inc.",
+      "ticker": "OKTA",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "bai",
+        "fai",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001660134"
+    },
+    {
+      "name": "Omnicell, Inc.",
+      "ticker": "OMCL",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "业务归于机器人与自动化环节。Global X BOTZ 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "robt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "机器人与自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000926326"
+    },
+    {
+      "ticker": "ON",
+      "name": "ON Semiconductor Corporation",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "segments": [
+        "功率半导体"
+      ],
+      "detail": "业务归于功率半导体环节。该公司股票出现在iShares RBTX · 机器人及相关技术的当期持仓中。",
+      "sources": [
+        "rbtx",
+        "nasdaq-listed",
+        "cool"
+      ],
+      "companyId": "sec:0001097864"
+    },
+    {
+      "name": "Onto Innovation Inc.",
+      "ticker": "ONTO",
+      "venue": "NYSE",
+      "sector": "chips",
+      "detail": "业务归于晶圆设备与材料环节。iShares ARTY 将其列入主题基金持仓。",
+      "sources": [
+        "arty",
+        "bai",
+        "other-listed"
+      ],
+      "segments": [
+        "晶圆设备与材料"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000704532"
+    },
+    {
+      "name": "Opendoor Technologies Inc",
+      "ticker": "OPEN",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "用计算机视觉和 AI 模型评估房屋状况，估算整备成本与工期。",
+      "sources": [
+        "filing-open",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "房地产科技",
+        "机器视觉"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001801169"
+    },
+    {
+      "name": "Oracle Corporation",
+      "ticker": "ORCL",
+      "venue": "NYSE",
+      "sector": "compute",
+      "detail": "OCI Generative AI 通过云服务提供基础模型的访问和应用集成。",
+      "sources": [
+        "product-orcl",
+        "aiq",
+        "arty",
+        "fai",
+        "other-listed"
+      ],
+      "segments": [
+        "云计算",
+        "模型托管"
+      ],
+      "aliases": [
+        "甲骨文"
+      ],
+      "companyId": "sec:0001341439"
+    },
+    {
+      "name": "Ouster, Inc.",
+      "ticker": "OUST",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "业务归于自动驾驶与感知环节。Global X BOTZ 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "自动驾驶与感知"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001816581"
+    },
+    {
+      "name": "Everpure, Inc.",
+      "ticker": "P",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "业务归于存储设备环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "thnq",
+        "other-listed"
+      ],
+      "segments": [
+        "存储设备"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001474432"
+    },
+    {
+      "name": "Palo Alto Networks, Inc.",
+      "ticker": "PANW",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于网络安全环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "bai",
+        "chat",
+        "robt",
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "网络安全"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001327567"
+    },
+    {
+      "name": "UiPath, Inc.",
+      "ticker": "PATH",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "fai",
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001734722"
+    },
+    {
+      "name": "Pacific Gas & Electric Co.",
+      "ticker": "PCG",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001004980"
+    },
+    {
+      "name": "Procore Technologies, Inc.",
+      "ticker": "PCOR",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "在建筑项目管理平台中提供 AI 解决方案，帮助用户分析自己的工程数据。",
+      "sources": [
+        "filing-pcor",
+        "other-listed"
+      ],
+      "segments": [
+        "建筑软件",
+        "数据分析"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001611052"
+    },
+    {
+      "name": "Public Service Enterprise Group Incorporated",
+      "ticker": "PEG",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000788784"
+    },
+    {
+      "name": "Pegasystems Inc.",
+      "ticker": "PEGA",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "年报披露公司 AI 产品的人工智能管理体系已取得 ISO/IEC 42001:2023 认证。",
+      "sources": [
+        "filing-pega",
+        "aiq",
+        "robt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业 AI",
+        "流程自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001013857"
+    },
+    {
+      "name": "Perion Network Ltd",
+      "ticker": "PERI",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "使用 Outmax 智能体自动执行广告投放节奏、预算分配与跨渠道优化。",
+      "sources": [
+        "filing-peri",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "广告科技",
+        "智能体"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001338940"
+    },
+    {
+      "name": "Preformed Line Products Company",
+      "ticker": "PLPC",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000080035"
+    },
+    {
+      "name": "Palantir Technologies Inc.",
+      "ticker": "PLTR",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "AIP 将大模型接入企业数据与操作流程，支持构建 AI 应用。",
+      "sources": [
+        "product-pltr",
+        "aiq",
+        "arty",
+        "fai",
+        "robt",
+        "filing-pltr",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业 AI",
+        "智能体"
+      ],
+      "aliases": [
+        "帕兰蒂尔"
+      ],
+      "companyId": "sec:0001321655"
+    },
+    {
+      "name": "Pinnacle West Capital Corporation",
+      "ticker": "PNW",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000764622"
+    },
+    {
+      "name": "Phaos Technology Holdings (Cayman) Limited",
+      "ticker": "POAS",
+      "venue": "NYSE American",
+      "sector": "devices",
+      "detail": "将 AI 模型及应用部署在为客户定制的质量检测设备上。",
+      "sources": [
+        "filing-poas",
+        "other-listed"
+      ],
+      "segments": [
+        "机器视觉",
+        "工业质检"
+      ],
+      "aliases": [],
+      "companyId": "sec:0002024258"
+    },
+    {
+      "name": "Pony AI Inc.",
+      "ticker": "PONY",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "开发自动驾驶系统，用于无人出租车和自动驾驶卡车。",
+      "sources": [
+        "product-pony",
+        "aiq",
+        "botz",
+        "nasdaq-listed",
+        "hkex-linked"
+      ],
+      "segments": [
+        "自动驾驶",
+        "Robotaxi"
+      ],
+      "aliases": [
+        "小马智行"
+      ],
+      "companyId": "sec:0001969302",
+      "hkTicker": "02026"
+    },
+    {
+      "name": "Portland General Electric Co",
+      "ticker": "POR",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000784977"
+    },
+    {
+      "ticker": "POWI",
+      "name": "Power Integrations, Inc.",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "segments": [
+        "功率半导体"
+      ],
+      "detail": "业务归于功率半导体环节。该公司股票出现在VegaShares COOL · 热管理、冷却与供电的当期持仓中。",
+      "sources": [
+        "cool",
+        "nasdaq-listed"
+      ],
+      "companyId": "sec:0000833640"
+    },
+    {
+      "name": "PROCEPT BioRobotics Corporation",
+      "ticker": "PRCT",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "业务归于机器人与自动化环节。Global X BOTZ 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "机器人与自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001588978"
+    },
+    {
+      "name": "Proto Labs, Inc.",
+      "ticker": "PRLB",
+      "venue": "NYSE",
+      "sector": "mixed",
+      "detail": "业务归于制造与工程环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "制造与工程"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001443669"
+    },
+    {
+      "name": "Power Solutions International, Inc.",
+      "ticker": "PSIX",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001137091"
+    },
+    {
+      "name": "PTC Inc.",
+      "ticker": "PTC",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000857005"
+    },
+    {
+      "name": "Quanta Services, Inc.",
+      "ticker": "PWR",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed",
+        "tcai"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001050915"
+    },
+    {
+      "name": "QUALCOMM Incorporated",
+      "ticker": "QCOM",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "面向移动和边缘设备提供本地运行 AI 模型的芯片与软件。",
+      "sources": [
+        "product-qcom",
+        "aiq",
+        "fai",
+        "robt",
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "端侧推理",
+        "移动芯片"
+      ],
+      "aliases": [
+        "高通"
+      ],
+      "companyId": "sec:0000804328"
+    },
+    {
+      "name": "Qualys, Inc.",
+      "ticker": "QLYS",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。First Trust FAI 将其列入主题基金持仓。",
+      "sources": [
+        "fai",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001107843"
+    },
+    {
+      "name": "Quantum Computing Inc.",
+      "ticker": "QUBT",
+      "venue": "Nasdaq",
+      "sector": "compute",
+      "detail": "业务归于计算硬件环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "计算硬件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001758009"
+    },
+    {
+      "name": "QuickLogic Corporation",
+      "ticker": "QUIK",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "业务归于半导体环节。Defiance AINF 将其列入主题基金持仓。",
+      "sources": [
+        "ainf",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "半导体"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000882508"
+    },
+    {
+      "name": "Reddit, Inc.",
+      "ticker": "RDDT",
+      "venue": "NYSE",
+      "sector": "services",
+      "detail": "向 Google 提供实时结构化的社区数据访问，供展示内容及训练模型使用。",
+      "sources": [
+        "product-rddt",
+        "other-listed"
+      ],
+      "segments": [
+        "数据授权",
+        "训练数据"
+      ],
+      "aliases": [
+        "红迪"
+      ],
+      "companyId": "sec:0001713445"
+    },
+    {
+      "name": "Roadzen, Inc.",
+      "ticker": "RDZN",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "在汽车保险相关服务中开发兼容多类硬件和软件基础设施的 AI 技术。",
+      "sources": [
+        "filing-rdzn",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "保险科技"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001868640"
+    },
+    {
+      "name": "Riot Platforms, Inc.",
+      "ticker": "RIOT",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过数据中心与托管环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed",
+        "tcai"
+      ],
+      "segments": [
+        "数据中心与托管"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001167419"
+    },
+    {
+      "name": "Rivian Automotive, Inc.",
+      "ticker": "RIVN",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "以 AI 平台支撑车辆软件与 Autonomy+ 辅助驾驶功能。",
+      "sources": [
+        "filing-rivn",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "自动驾驶",
+        "智能汽车"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001874178"
+    },
+    {
+      "name": "Rambus, Inc.",
+      "ticker": "RMBS",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "业务归于半导体环节。iShares ARTY 将其列入主题基金持仓。",
+      "sources": [
+        "arty",
+        "nasdaq-listed",
+        "cgpt"
+      ],
+      "segments": [
+        "半导体"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000917273"
+    },
+    {
+      "name": "Rockwell Automation, Inc.",
+      "ticker": "ROK",
+      "venue": "NYSE",
+      "sector": "robotics",
+      "detail": "业务归于工业自动化环节。Global X BOTZ 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "工业自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001024478"
+    },
+    {
+      "name": "Richtech Robotics Inc.",
+      "ticker": "RR",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "业务归于机器人与自动化环节。Global X BOTZ 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "机器人与自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001963685"
+    },
+    {
+      "name": "Recursion Pharmaceuticals, Inc.",
+      "ticker": "RXRX",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "将机器学习与实验数据结合，用于药物发现研发。",
+      "sources": [
+        "product-rxrx",
+        "robt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "药物研发",
+        "机器学习"
+      ],
+      "aliases": [
+        "Recursion"
+      ],
+      "companyId": "sec:0001601830"
+    },
+    {
+      "name": "Rezolve AI PLC",
+      "ticker": "RZLV",
+      "venue": "Nasdaq",
+      "sector": "models",
+      "detail": "以销售内容、交易和客户数据开发面向电商销售的专用大语言模型。",
+      "sources": [
+        "filing-rzlv",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "电商模型",
+        "智能销售"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001920294"
+    },
+    {
+      "name": "SentinelOne, Inc.",
+      "ticker": "S",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。First Trust FAI 将其列入主题基金持仓。",
+      "sources": [
+        "fai",
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001583708"
+    },
+    {
+      "name": "SAP SE",
+      "ticker": "SAP",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "other-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [
+        "思爱普"
+      ],
+      "companyId": "sec:0001000184"
+    },
+    {
+      "ticker": "SEI",
+      "name": "Solaris Energy Infrastructure, Inc.",
+      "venue": "NYSE",
+      "sector": "infra",
+      "segments": [
+        "能源供应"
+      ],
+      "detail": "业务归于能源供应环节。该公司股票出现在Tortoise TCAI · AI 基础设施的当期持仓中。",
+      "sources": [
+        "tcai",
+        "other-listed"
+      ],
+      "companyId": "sec:0001697500"
+    },
+    {
+      "name": "Serve Robotics Inc.",
+      "ticker": "SERV",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "业务归于机器人与自动化环节。Global X BOTZ 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "机器人与自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001832483"
+    },
+    {
+      "name": "Shoals Technologies Group, Inc.",
+      "ticker": "SHLS",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001831651"
+    },
+    {
+      "name": "Shopify Inc.",
+      "ticker": "SHOP",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于互联网应用环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "chat",
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "互联网应用"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001594805"
+    },
+    {
+      "ticker": "SITM",
+      "name": "SiTime Corporation",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "segments": [
+        "时钟芯片"
+      ],
+      "detail": "业务归于时钟芯片环节。该公司股票出现在iShares RBTX · 机器人及相关技术的当期持仓中。",
+      "sources": [
+        "rbtx",
+        "nasdaq-listed"
+      ],
+      "companyId": "sec:0001451809"
+    },
+    {
+      "name": "SK hynix Inc.",
+      "ticker": "SKHY",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "生产面向 AI 加速器的 HBM 高带宽存储器；在美国以存托股挂牌。",
+      "sources": [
+        "product-skhy",
+        "nasdaq-listed",
+        "cgpt",
+        "tcai"
+      ],
+      "segments": [
+        "HBM",
+        "存储芯片"
+      ],
+      "aliases": [
+        "SK 海力士"
+      ],
+      "companyId": "sec:0002120882"
+    },
+    {
+      "name": "Super Micro Computer, Inc.",
+      "ticker": "SMCI",
+      "venue": "Nasdaq",
+      "sector": "compute",
+      "detail": "为 AI 训练和推理提供 GPU 服务器和机架级系统。",
+      "sources": [
+        "product-smci",
+        "aiq",
+        "arty",
+        "bai",
+        "chat",
+        "fai",
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "GPU 服务器",
+        "机架",
+        "液冷"
+      ],
+      "aliases": [
+        "超微电脑"
+      ],
+      "companyId": "sec:0001375365"
+    },
+    {
+      "name": "NuScale Power Corporation",
+      "ticker": "SMR",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001822966"
+    },
+    {
+      "ticker": "SMTC",
+      "name": "Semtech Corporation",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "segments": [
+        "半导体"
+      ],
+      "detail": "业务归于半导体环节。该公司股票出现在iShares RBTX · 机器人及相关技术的当期持仓中。",
+      "sources": [
+        "rbtx",
+        "nasdaq-listed"
+      ],
+      "companyId": "sec:0000088941"
+    },
+    {
+      "name": "Snap Inc.",
+      "ticker": "SNAP",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "向合作伙伴开放 AI 平台，使其能够将 AI 功能接入 Snapchat。",
+      "sources": [
+        "filing-snap",
+        "aiq",
+        "other-listed"
+      ],
+      "segments": [
+        "消费应用",
+        "AI 平台"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001564408"
+    },
+    {
+      "name": "Sandisk Corporation",
+      "ticker": "SNDK",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "业务归于存储芯片环节。iShares BAI 将其列入主题基金持仓。",
+      "sources": [
+        "bai",
+        "nasdaq-listed",
+        "tcai"
+      ],
+      "segments": [
+        "存储芯片"
+      ],
+      "aliases": [
+        "闪迪"
+      ],
+      "companyId": "sec:0002023554"
+    },
+    {
+      "name": "Snowflake Inc.",
+      "ticker": "SNOW",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "Cortex AI 让企业在其数据平台上调用模型并构建 AI 应用。",
+      "sources": [
+        "product-snow",
+        "aiq",
+        "arty",
+        "bai",
+        "chat",
+        "fai",
+        "robt",
+        "thnq",
+        "other-listed"
+      ],
+      "segments": [
+        "数据平台",
+        "企业 AI"
+      ],
+      "aliases": [
+        "Snowflake"
+      ],
+      "companyId": "sec:0001640147"
+    },
+    {
+      "name": "Synopsys, Inc.",
+      "ticker": "SNPS",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "Synopsys.ai 将 AI 用于芯片设计、验证和测试流程。",
+      "sources": [
+        "product-snps",
+        "aiq",
+        "fai",
+        "robt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "EDA",
+        "芯片设计"
+      ],
+      "aliases": [
+        "新思科技"
+      ],
+      "companyId": "sec:0000883241"
+    },
+    {
+      "name": "Sony Group Corporation",
+      "ticker": "SONY",
+      "venue": "NYSE",
+      "sector": "devices",
+      "detail": "AITRIOS 平台利用 IMX500 智能视觉传感器，在终端设备上运行模型。",
+      "sources": [
+        "product-sony",
+        "other-listed"
+      ],
+      "segments": [
+        "智能传感器",
+        "机器视觉",
+        "端侧推理"
+      ],
+      "aliases": [
+        "索尼"
+      ],
+      "companyId": "sec:0000313838"
+    },
+    {
+      "name": "SoundHound AI, Inc.",
+      "ticker": "SOUN",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "向企业和终端厂商提供对话式语音 AI。",
+      "sources": [
+        "product-soun",
+        "aiq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "语音识别",
+        "对话 AI"
+      ],
+      "aliases": [
+        "SoundHound AI"
+      ],
+      "companyId": "sec:0001840856"
+    },
+    {
+      "name": "Space Exploration Technologies Corp.",
+      "ticker": "SPCX",
+      "venue": "Nasdaq",
+      "sector": "models",
+      "detail": "公司在季度报告中披露智能业务，旗下 xAI 开发 Grok 模型与相关服务。",
+      "sources": [
+        "product-spcx",
+        "aiq",
+        "arty",
+        "bai",
+        "chat",
+        "fai",
+        "robt",
+        "nasdaq-listed",
+        "rbtx"
+      ],
+      "segments": [
+        "大语言模型",
+        "开发工具"
+      ],
+      "aliases": [
+        "SpaceX",
+        "太空探索技术公司",
+        "xAI",
+        "Grok"
+      ],
+      "companyId": "sec:0001181412"
+    },
+    {
+      "name": "Spotify Technology S.A.",
+      "ticker": "SPOT",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "业务归于互联网应用环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "thnq",
+        "other-listed"
+      ],
+      "segments": [
+        "互联网应用"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001639920"
+    },
+    {
+      "name": "Sportradar Group AG",
+      "ticker": "SRAD",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "利用赛事数据驱动 AI 模型，提供比赛洞察与体育数据产品。",
+      "sources": [
+        "filing-srad",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "体育数据",
+        "数据分析"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001836470"
+    },
+    {
+      "name": "SS&C Technologies Holdings, Inc.",
+      "ticker": "SSNC",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "为用户提供可接入既有自动化流程的企业智能体及 AI 网关。",
+      "sources": [
+        "filing-ssnc",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业 AI",
+        "工作流自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001402436"
+    },
+    {
+      "name": "Shutterstock, Inc.",
+      "ticker": "SSTK",
+      "venue": "NYSE",
+      "sector": "services",
+      "detail": "为企业筛选、整理和许可多媒体数据集，用于 AI 模型训练等场景。",
+      "sources": [
+        "product-sstk",
+        "other-listed"
+      ],
+      "segments": [
+        "训练数据",
+        "内容授权"
+      ],
+      "aliases": [
+        "Shutterstock"
+      ],
+      "companyId": "sec:0001549346"
+    },
+    {
+      "name": "Stem, Inc.",
+      "ticker": "STEM",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "使用 AI 软件管理能源资产，覆盖多个电力市场。",
+      "sources": [
+        "filing-stem",
+        "other-listed"
+      ],
+      "segments": [
+        "能源管理"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001758766"
+    },
+    {
+      "name": "Sterling Infrastructure, Inc.",
+      "ticker": "STRL",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过基础设施建设环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "基础设施建设"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000874238"
+    },
+    {
+      "name": "Seagate Technology Holdings PLC",
+      "ticker": "STX",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "业务归于存储设备环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "arty",
+        "nasdaq-listed",
+        "tcai"
+      ],
+      "segments": [
+        "存储设备"
+      ],
+      "aliases": [
+        "希捷科技"
+      ],
+      "companyId": "sec:0001137789"
+    },
+    {
+      "name": "SuperX AI Technology Limited",
+      "ticker": "SUPX",
+      "venue": "Nasdaq",
+      "sector": "compute",
+      "detail": "年报披露公司的 AI 服务器集成 GPU、处理器、内存和供电组件。",
+      "sources": [
+        "filing-supx",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "AI 服务器"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001897087"
+    },
+    {
+      "name": "Stryker Corporation",
+      "ticker": "SYK",
+      "venue": "NYSE",
+      "sector": "devices",
+      "detail": "业务归于医疗设备环节。First Trust ROBT 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "医疗设备"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000310764"
+    },
+    {
+      "name": "Symbotic Inc.",
+      "ticker": "SYM",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "开发用于仓储分拣、存储和搬运的自动化机器人系统。",
+      "sources": [
+        "product-sym",
+        "botz",
+        "robt",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "仓储机器人",
+        "智能物流"
+      ],
+      "aliases": [
+        "Symbotic"
+      ],
+      "companyId": "sec:0001837240"
+    },
+    {
+      "name": "TAL Education Group",
+      "ticker": "TAL",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "在教育应用中开发大语言模型，并改进模型响应速度与准确性。",
+      "sources": [
+        "filing-tal",
+        "other-listed"
+      ],
+      "segments": [
+        "教育 AI",
+        "大语言模型"
+      ],
+      "aliases": [
+        "好未来"
+      ],
+      "companyId": "sec:0001499620"
+    },
+    {
+      "name": "Teradata Corporation",
+      "ticker": "TDC",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "业务归于数据与分析环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "other-listed"
+      ],
+      "segments": [
+        "数据与分析"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000816761"
+    },
+    {
+      "name": "Atlassian Corporation",
+      "ticker": "TEAM",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。Roundhill CHAT 将其列入主题基金持仓。",
+      "sources": [
+        "chat",
+        "fai",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001650372"
+    },
+    {
+      "name": "Tempus AI, Inc.",
+      "ticker": "TEM",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "开发利用临床和分子数据的精准医疗和诊断产品。",
+      "sources": [
+        "product-tem",
+        "arty",
+        "bai",
+        "robt",
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "医疗 AI",
+        "精准医疗"
+      ],
+      "aliases": [
+        "Tempus AI"
+      ],
+      "companyId": "sec:0001717115"
+    },
+    {
+      "name": "Tenable Holdings, Inc.",
+      "ticker": "TENB",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "Tenable One 使用 AI 支持安全风险暴露管理。",
+      "sources": [
+        "filing-tenb",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "网络安全"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001660280"
+    },
+    {
+      "name": "Teradyne, Inc.",
+      "ticker": "TER",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "业务归于晶圆设备与材料环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "robt",
+        "thnq",
+        "nasdaq-listed",
+        "rbtx"
+      ],
+      "segments": [
+        "晶圆设备与材料"
+      ],
+      "aliases": [
+        "泰瑞达"
+      ],
+      "companyId": "sec:0000097210"
+    },
+    {
+      "name": "Talen Energy Corporation",
+      "ticker": "TLN",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed",
+        "tcai"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001622536"
+    },
+    {
+      "name": "Thomson Reuters Corp",
+      "ticker": "TRI",
+      "venue": "Nasdaq",
+      "sector": "services",
+      "detail": "业务归于信息服务环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "信息服务"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001075124"
+    },
+    {
+      "name": "Tower Semiconductor Ltd.",
+      "ticker": "TSEM",
+      "venue": "Nasdaq",
+      "sector": "chips",
+      "detail": "业务归于半导体环节。iShares BAI 将其列入主题基金持仓。",
+      "sources": [
+        "bai",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "半导体"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000928876"
+    },
+    {
+      "name": "Tesla, Inc.",
+      "ticker": "TSLA",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "开发车辆自动驾驶能力和 Optimus 人形机器人，并训练相关模型。",
+      "sources": [
+        "product-tsla",
+        "aiq",
+        "bai",
+        "botz",
+        "humn",
+        "robt",
+        "thnq",
+        "nasdaq-listed",
+        "rbtx"
+      ],
+      "segments": [
+        "自动驾驶",
+        "人形机器人"
+      ],
+      "aliases": [
+        "特斯拉"
+      ],
+      "companyId": "sec:0001318605"
+    },
+    {
+      "name": "Taiwan Semiconductor Manufacturing Company Ltd.",
+      "ticker": "TSM",
+      "venue": "NYSE",
+      "sector": "chips",
+      "detail": "CoWoS 将逻辑芯片与高带宽存储器整合到同一封装，用于高性能计算。",
+      "sources": [
+        "product-tsm",
+        "ainf",
+        "aiq",
+        "bai",
+        "robt",
+        "other-listed"
+      ],
+      "segments": [
+        "晶圆代工",
+        "先进封装"
+      ],
+      "aliases": [
+        "台湾积体电路制造",
+        "台积电"
+      ],
+      "companyId": "sec:0001046179"
+    },
+    {
+      "name": "TTM Technologies, Inc.",
+      "ticker": "TTMI",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "为数据中心和计算设备制造高密度互连电路板，属于 AI 服务器的上游硬件环节。",
+      "sources": [
+        "product-ttmi",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "PCB",
+        "高速电路板"
+      ],
+      "aliases": [
+        "迅达科技"
+      ],
+      "companyId": "sec:0001116942"
+    },
+    {
+      "name": "Tuya Inc.",
+      "ticker": "TUYA",
+      "venue": "NYSE",
+      "sector": "compute",
+      "detail": "将设备开发平台与应用开发平台作为 AI 云和产品的技术基础。",
+      "sources": [
+        "filing-tuya",
+        "other-listed",
+        "hkex-linked"
+      ],
+      "segments": [
+        "物联网平台",
+        "AI 云"
+      ],
+      "aliases": [
+        "涂鸦智能"
+      ],
+      "companyId": "sec:0001829118",
+      "hkTicker": "02391"
+    },
+    {
+      "name": "Twilio Inc.",
+      "ticker": "TWLO",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "业务归于互联网应用环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "bai",
+        "other-listed"
+      ],
+      "segments": [
+        "互联网应用"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001447669"
+    },
+    {
+      "name": "Twist Bioscience Corporation",
+      "ticker": "TWST",
+      "venue": "Nasdaq",
+      "sector": "services",
+      "detail": "业务归于医疗与生命科学环节。iShares BAI 将其列入主题基金持仓。",
+      "sources": [
+        "bai",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "医疗与生命科学"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001581280"
+    },
+    {
+      "name": "TXNM Energy, Inc.",
+      "ticker": "TXNM",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001108426"
+    },
+    {
+      "name": "Uber Technologies, Inc.",
+      "ticker": "UBER",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "业务归于互联网应用环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "other-listed"
+      ],
+      "segments": [
+        "互联网应用"
+      ],
+      "aliases": [
+        "优步"
+      ],
+      "companyId": "sec:0001543151"
+    },
+    {
+      "name": "Uranium Energy Corp.",
+      "ticker": "UEC",
+      "venue": "NYSE American",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001334933"
+    },
+    {
+      "name": "Unusual Machines, Inc.",
+      "ticker": "UMAC",
+      "venue": "NYSE American",
+      "sector": "robotics",
+      "detail": "业务归于机器人与自动化环节。Global X BOTZ 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "other-listed"
+      ],
+      "segments": [
+        "机器人与自动化"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001956955"
+    },
+    {
+      "name": "Upstart Holdings, Inc.",
+      "ticker": "UPST",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "训练和更新信贷模型，以上线贷款的信用表现衡量模型效果。",
+      "sources": [
+        "filing-upst",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "金融科技",
+        "信贷风控"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001647639"
+    },
+    {
+      "name": "Ur Energy Inc",
+      "ticker": "URG",
+      "venue": "NYSE American",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001375205"
+    },
+    {
+      "name": "Energy Fuels Inc",
+      "ticker": "UUUU",
+      "venue": "NYSE American",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001385849"
+    },
+    {
+      "name": "Veracyte, Inc.",
+      "ticker": "VCYT",
+      "venue": "Nasdaq",
+      "sector": "services",
+      "detail": "业务归于医疗与生命科学环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "医疗与生命科学"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001384101"
+    },
+    {
+      "name": "Veeva Systems Inc.",
+      "ticker": "VEEV",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "面向生命科学行业的软件包含 AI 智能体，调用部署在云平台上的大语言模型。",
+      "sources": [
+        "filing-veev",
+        "other-listed"
+      ],
+      "segments": [
+        "生命科学软件",
+        "智能体"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001393052"
+    },
+    {
+      "name": "Veritone, Inc.",
+      "ticker": "VERI",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "通过 aiWARE 平台向企业和公共机构提供 AI 软件及相关服务。",
+      "sources": [
+        "filing-veri",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业 AI",
+        "音视频分析"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001615165"
+    },
+    {
+      "name": "Viavi Solutions Inc.",
+      "ticker": "VIAV",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "业务归于网络通信环节。First Trust FAI 将其列入主题基金持仓。",
+      "sources": [
+        "fai",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "网络通信"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000912093"
+    },
+    {
+      "ticker": "VICR",
+      "name": "Vicor Corporation",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "segments": [
+        "电源模块"
+      ],
+      "detail": "业务归于电源模块环节。该公司股票出现在VegaShares COOL · 热管理、冷却与供电的当期持仓中。",
+      "sources": [
+        "cool",
+        "nasdaq-listed"
+      ],
+      "companyId": "sec:0000751978"
+    },
+    {
+      "name": "Valmont Industries, Inc.",
+      "ticker": "VMI",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000102729"
+    },
+    {
+      "name": "VNET Group, Inc.",
+      "ticker": "VNET",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过数据中心与托管环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "数据中心与托管"
+      ],
+      "aliases": [
+        "世纪互联"
+      ],
+      "companyId": "sec:0001508475"
+    },
+    {
+      "name": "Verisk Analytics, Inc.",
+      "ticker": "VRSK",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于数据与分析环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "thnq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "数据与分析"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001442145"
+    },
+    {
+      "name": "Vertiv Holdings, LLC",
+      "ticker": "VRT",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "为 AI 数据中心提供供电与散热设备，包括液冷基础设施。",
+      "sources": [
+        "product-vrt",
+        "aipo",
+        "other-listed",
+        "cool",
+        "tcai"
+      ],
+      "segments": [
+        "配电",
+        "液冷",
+        "热管理"
+      ],
+      "aliases": [
+        "维谛技术"
+      ],
+      "companyId": "sec:0001674101"
+    },
+    {
+      "name": "Vistra Corp.",
+      "ticker": "VST",
+      "venue": "NYSE",
+      "sector": "infra",
+      "detail": "通过能源供应环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "other-listed"
+      ],
+      "segments": [
+        "能源供应"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001692819"
+    },
+    {
+      "name": "Workday, Inc.",
+      "ticker": "WDAY",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "arty",
+        "bai",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001327811"
+    },
+    {
+      "name": "Western Digital Corporation",
+      "ticker": "WDC",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "业务归于存储设备环节。iShares ARTY 将其列入主题基金持仓。",
+      "sources": [
+        "arty",
+        "bai",
+        "nasdaq-listed",
+        "tcai"
+      ],
+      "segments": [
+        "存储设备"
+      ],
+      "aliases": [
+        "西部数据"
+      ],
+      "companyId": "sec:0000106040"
+    },
+    {
+      "name": "Waterdrop Inc.",
+      "ticker": "WDH",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "推出保险客服智能体“保小慧”等 AI 产品。",
+      "sources": [
+        "filing-wdh",
+        "other-listed"
+      ],
+      "segments": [
+        "保险科技",
+        "智能客服"
+      ],
+      "aliases": [
+        "水滴"
+      ],
+      "companyId": "sec:0001823986"
+    },
+    {
+      "name": "Wix.com Ltd.",
+      "ticker": "WIX",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001576789"
+    },
+    {
+      "ticker": "WMB",
+      "name": "Williams Companies, Inc. (The)",
+      "venue": "NYSE",
+      "sector": "infra",
+      "segments": [
+        "天然气基础设施"
+      ],
+      "detail": "业务归于天然气基础设施环节。该公司股票出现在Tortoise TCAI · AI 基础设施的当期持仓中。",
+      "sources": [
+        "tcai",
+        "other-listed"
+      ],
+      "companyId": "sec:0000107263"
+    },
+    {
+      "name": "WeRide Inc.",
+      "ticker": "WRD",
+      "venue": "Nasdaq",
+      "sector": "robotics",
+      "detail": "开发自动驾驶技术，应用于无人出租车和其他无人驾驶车辆。",
+      "sources": [
+        "product-wrd",
+        "botz",
+        "nasdaq-listed",
+        "hkex-linked"
+      ],
+      "segments": [
+        "自动驾驶",
+        "Robotaxi"
+      ],
+      "aliases": [
+        "文远知行"
+      ],
+      "companyId": "sec:0001867729",
+      "hkTicker": "00800"
+    },
+    {
+      "name": "TeraWulf Inc.",
+      "ticker": "WULF",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过数据中心与托管环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed",
+        "tcai"
+      ],
+      "segments": [
+        "数据中心与托管"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001083301"
+    },
+    {
+      "name": "WhiteFiber, Inc.",
+      "ticker": "WYFI",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过数据中心与托管环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "数据中心与托管"
+      ],
+      "aliases": [],
+      "companyId": "sec:0002042022"
+    },
+    {
+      "name": "X-Energy, Inc.",
+      "ticker": "XE",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0002088896"
+    },
+    {
+      "name": "Xcel Energy Inc.",
+      "ticker": "XEL",
+      "venue": "Nasdaq",
+      "sector": "infra",
+      "detail": "通过电力基础设施环节纳入 Defiance AIPO 的 AI 与电力基础设施主题组合；关联依据为基金持仓。",
+      "sources": [
+        "aipo",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "电力基础设施"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000072903"
+    },
+    {
+      "ticker": "XMTR",
+      "name": "Xometry, Inc.",
+      "venue": "Nasdaq",
+      "sector": "services",
+      "segments": [
+        "数字制造"
+      ],
+      "detail": "业务归于数字制造环节。该公司股票出现在iShares RBTX · 机器人及相关技术的当期持仓中。",
+      "sources": [
+        "rbtx",
+        "nasdaq-listed"
+      ],
+      "companyId": "sec:0001657573"
+    },
+    {
+      "name": "XPeng Inc.",
+      "ticker": "XPEV",
+      "venue": "NYSE",
+      "sector": "robotics",
+      "detail": "业务归于自动驾驶与感知环节。Roundhill HUMN 将其列入主题基金持仓。",
+      "sources": [
+        "botz",
+        "humn",
+        "other-listed",
+        "hkex-linked",
+        "rbtx"
+      ],
+      "segments": [
+        "自动驾驶与感知"
+      ],
+      "aliases": [
+        "小鹏汽车"
+      ],
+      "companyId": "sec:0001810997",
+      "hkTicker": "09868"
+    },
+    {
+      "name": "Block, Inc.",
+      "ticker": "XYZ",
+      "venue": "NYSE",
+      "sector": "software",
+      "detail": "业务归于互联网应用环节。ROBO Global THNQ 将其列入主题基金持仓。",
+      "sources": [
+        "thnq",
+        "other-listed"
+      ],
+      "segments": [
+        "互联网应用"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001512673"
+    },
+    {
+      "name": "Zebra Technologies Corporation",
+      "ticker": "ZBRA",
+      "venue": "Nasdaq",
+      "sector": "devices",
+      "detail": "业务归于智能设备环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "nasdaq-listed",
+        "rbtx"
+      ],
+      "segments": [
+        "智能设备"
+      ],
+      "aliases": [],
+      "companyId": "sec:0000877212"
+    },
+    {
+      "name": "Zoom Communications, Inc.",
+      "ticker": "ZM",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。First Trust FAI 将其列入主题基金持仓。",
+      "sources": [
+        "fai",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001585521"
+    },
+    {
+      "name": "Zscaler, Inc.",
+      "ticker": "ZS",
+      "venue": "Nasdaq",
+      "sector": "software",
+      "detail": "业务归于企业软件环节。Global X AIQ 将其列入主题基金持仓。",
+      "sources": [
+        "aiq",
+        "fai",
+        "nasdaq-listed"
+      ],
+      "segments": [
+        "企业软件"
+      ],
+      "aliases": [],
+      "companyId": "sec:0001713683"
+    }
+  ]
+}

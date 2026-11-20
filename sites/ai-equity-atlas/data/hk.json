@@ -1,0 +1,7230 @@
+{
+  "market": "HK",
+  "asOf": "2026-11-20",
+  "methodology": "以港交所 2026-11-20 主板和 GEM 日报交叉核对常规港币股本证券代码，并按公司代码、国际证券识别码和公司资料排除无效及临时代码。在可匹配的 2,731 个代码中，扫描 2,727 份非空公司简介的人工智能、模型、机器人、智能驾驶、算力、数据中心及光互连等关键词，人工复核业务描述。同时收录香港交易所、恒生及中证公布的 15 个主题指数所含的全部香港上市成分，以及三个主题基金的港股持仓，并用发行人披露补录。指数、持仓和公司档案的日期各异，供应链延伸环节可能只占公司少部分业务，通用基础设施不等于已有 AI 订单。资料源和关键词仍可能遗漏未披露及新开展的业务。",
+  "sources": [
+    {
+      "id": "hk-main",
+      "kind": "exchange",
+      "title": "香港交易所 · 主板证券日报表",
+      "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261120e.htm",
+      "asOf": "2026-11-20",
+      "scope": "按当日主板交易记录核对代码与上市身份；包含停牌记录。"
+    },
+    {
+      "id": "hk-gem",
+      "kind": "exchange",
+      "title": "香港交易所 · GEM 证券日报表",
+      "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/GEM/e_G261120.htm",
+      "asOf": "2026-11-20",
+      "scope": "按当日 GEM 日报核对常规股本证券代码。"
+    },
+    {
+      "id": "hk-f10",
+      "kind": "theme",
+      "title": "东方财富 · 港股公司概况库",
+      "url": "https://datacenter-web.eastmoney.com/api/data/v1/get?reportName=RPT_HKF10_INFO_ORGPROFILE&columns=SECURITY_CODE,SECURITY_NAME_ABBR,ORG_PROFILE&pageNumber=1&pageSize=5",
+      "asOf": "2026-11-20",
+      "scope": "逐页取得 6,922 条公司档案后，按港交所股本类别、当日报价、代码及发行人信息筛选。每条记录可单独打开该公司的档案。日期为查阅日。"
+    },
+    {
+      "id": "hk-hkexai",
+      "kind": "index",
+      "title": "香港交易所人工智能指数 · 全部 40 股",
+      "url": "https://www.hkex.com.hk/-/media/HKEX_Common/Market/Indices/HKEXAI/FULL-Constituents-List/HKEXAI-full-cons_20261030.csv",
+      "asOf": "2026-10-30",
+      "scope": "完整 40 个港股样本；港交所涵盖 AI 芯片、基础设施、模型及应用。"
+    },
+    {
+      "id": "hk-hsait",
+      "kind": "index",
+      "title": "恒生人工智能主题指数 · 40 个港股样本",
+      "url": "https://www.hsi.com.hk/api/wsit-hsi-ddoc-ea-public-website-proxy/v1/content/gcs/download?resource=%2Fpublic-website%2Fwebapp%2Ffactsheets%2Fzh-cn%2Fhsait.pdf",
+      "asOf": "2026-10-30",
+      "scope": "取 2026 年 10 月单张完整港股成分。核心算力、算法、模型和机器人。"
+    },
+    {
+      "id": "hk-hscpt",
+      "kind": "index",
+      "title": "恒生算力主题指数 · 40 个港股样本",
+      "url": "https://www.hsi.com.hk/api/wsit-hsi-ddoc-ea-public-website-proxy/v1/content/gcs/download?resource=%2Fpublic-website%2Fwebapp%2Ffactsheets%2Fzh-cn%2Fhscpt.pdf",
+      "asOf": "2026-10-30",
+      "scope": "取 2026 年 10 月单张完整港股成分。涵盖运算、网络、存储与相关基础设施。"
+    },
+    {
+      "id": "hk-hsscaii",
+      "kind": "index",
+      "title": "恒生港股通人工智能基础设施指数 · 40 个港股样本",
+      "url": "https://www.hsi.com.hk/api/wsit-hsi-ddoc-ea-public-website-proxy/v1/content/gcs/download?resource=%2Fpublic-website%2Fwebapp%2Ffactsheets%2Fzh-cn%2Fhsscaii.pdf",
+      "asOf": "2026-10-30",
+      "scope": "取 2026 年 10 月单张完整港股成分。涉及半导体、计算设备与零部件等供应链环节。"
+    },
+    {
+      "id": "hk-hsusrt",
+      "kind": "index",
+      "title": "恒生港美机器人主题指数 · 20 个港股样本",
+      "url": "https://www.hsi.com.hk/api/wsit-hsi-ddoc-ea-public-website-proxy/v1/content/gcs/download?resource=%2Fpublic-website%2Fwebapp%2Ffactsheets%2Fzh-cn%2Fhsusrt.pdf",
+      "asOf": "2026-10-30",
+      "scope": "取 2026 年 10 月单张完整港股成分。指数共 40 股，港股组 20 股全部纳入。"
+    },
+    {
+      "id": "hk-hsami",
+      "kind": "index",
+      "title": "恒生港股通自动驾驶主题指数 · 30 个港股样本",
+      "url": "https://www.hsi.com.hk/api/wsit-hsi-ddoc-ea-public-website-proxy/v1/content/gcs/download?resource=%2Fpublic-website%2Fwebapp%2Ffactsheets%2Fzh-cn%2Fhsami.pdf",
+      "asOf": "2026-10-30",
+      "scope": "取 2026 年 10 月单张完整港股成分。包括整车、配套部件与自动驾驶技术供应商。"
+    },
+    {
+      "id": "hk-aiq",
+      "kind": "fund",
+      "title": "Global X AIQ · 港股持仓",
+      "url": "https://assets.globalxetfs.com/funds/holdings/aiq_full-holdings_20261119.csv",
+      "asOf": "2026-11-19",
+      "scope": "从人工智能与科技 ETF 完整持仓中提取全部 5 个港股代码。"
+    },
+    {
+      "id": "hk-botz",
+      "kind": "fund",
+      "title": "Global X BOTZ · 港股持仓",
+      "url": "https://assets.globalxetfs.com/funds/holdings/botz_full-holdings_20261119.csv",
+      "asOf": "2026-11-19",
+      "scope": "从机器人与人工智能 ETF 完整持仓中提取全部 12 个港股代码。"
+    },
+    {
+      "id": "hk-humn",
+      "kind": "fund",
+      "title": "Roundhill HUMN · 人形机器人港股持仓",
+      "url": "https://www.roundhillinvestments.com/assets/data/FilepointRoundhill.40RU.RU_Holdings_11192026.csv",
+      "asOf": "2026-11-20",
+      "scope": "取基金管理人文件中标记 11/20/2026、账户为 HUMN 的全部 8 个香港股票仓位。"
+    },
+    {
+      "id": "hk-pahealth",
+      "kind": "company",
+      "title": "平安健康 · 2026 中期业绩",
+      "url": "https://www.hkexnews.hk/listedco/listconews/sehk/2026/0818/2026081800784.pdf",
+      "asOf": "2026-08-18",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-pa",
+      "kind": "company",
+      "title": "中国平安 · 2026 半年报",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-21/1225487480.PDF",
+      "asOf": "2026-08-21",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-fuxi",
+      "kind": "company",
+      "title": "网易伏羲 · 有灵智能体与产品",
+      "url": "https://fuxi.netease.com/",
+      "asOf": "2026-11-20",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-trip",
+      "kind": "company",
+      "title": "携程 · 2024 年报",
+      "url": "https://www.hkexnews.hk/listedco/listconews/sehk/2025/0411/2025041101009.pdf",
+      "asOf": "2025-04-11",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-bili",
+      "kind": "company",
+      "title": "哔哩哔哩 · 2024 ESG 报告",
+      "url": "https://www.hkexnews.hk/listedco/listconews/sehk/2025/0409/2025040900587.pdf",
+      "asOf": "2025-04-09",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-writer",
+      "kind": "company",
+      "title": "阅文集团 · 2025 年报",
+      "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0423/2026042300390.pdf",
+      "asOf": "2026-04-23",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-hkrobotics",
+      "kind": "company",
+      "title": "港仔机器人 · 全年业绩",
+      "url": "https://www.hkexnews.hk/listedco/listconews/sehk/2026/0624/2026062401906.pdf",
+      "asOf": "2026-06-24",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-minth",
+      "kind": "company",
+      "title": "敏实集团 · 机器人关节模组框架协议",
+      "url": "https://www.hkexnews.hk/listedco/listconews/sehk/2026/0209/2026020900071.pdf",
+      "asOf": "2026-02-09",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-kling",
+      "kind": "company",
+      "title": "快手 · 2026 年第三季度业绩",
+      "url": "https://www.hkexnews.hk/listedco/listconews/sehk/2026/1119/2026111900311_c.pdf",
+      "asOf": "2026-11-19",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-cimc",
+      "kind": "company",
+      "title": "中集数字能源 · 数据中心集成业务",
+      "url": "https://www.cimcdigitalpower.com/cn/",
+      "asOf": "2026-11-20",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-alihealth",
+      "kind": "company",
+      "title": "阿里健康 · 2026 财年业绩",
+      "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0514/2026051400756_c.pdf",
+      "asOf": "2026-05-14",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-longcat",
+      "kind": "company",
+      "title": "美团 LongCat · 开源模型",
+      "url": "https://github.com/meituan-longcat",
+      "asOf": "2026-11-20",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-jd",
+      "kind": "company",
+      "title": "京东 · 2026 中期业绩",
+      "url": "https://www.hkexnews.hk/listedco/listconews/sehk/2026/0813/2026081300917.pdf",
+      "asOf": "2026-08-13",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-telecom",
+      "kind": "company",
+      "title": "中国电信 · 2026 上半年智能业务",
+      "url": "https://www.chinatelecom-h.com/sc/ir/faq.php",
+      "asOf": "2026-11-20",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-unicom",
+      "kind": "company",
+      "title": "中国联通 · 2025 年报",
+      "url": "https://www.hkexnews.hk/listedco/listconews/sehk/2026/0428/2026042801720_c.pdf",
+      "asOf": "2026-04-28",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-mobile",
+      "kind": "company",
+      "title": "中国移动 · 智算中心与九天模型",
+      "url": "https://www.hkexnews.hk/listedco/listconews/sehk/2024/0830/2024083000931.pdf",
+      "asOf": "2024-08-30",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-lenovo",
+      "kind": "company",
+      "title": "联想 · Neptune 数据中心液冷",
+      "url": "https://www.lenovo.com/tw/zh/servers-storage/neptune/",
+      "asOf": "2026-11-20",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-denglin",
+      "kind": "company",
+      "title": "登临科技 · 推理 GPU 业务公告",
+      "url": "https://www.hkexnews.hk/listedco/listconews/sehk/2026/1118/2026111800008_c.pdf",
+      "asOf": "2026-11-18",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-amicro",
+      "kind": "company",
+      "title": "一微科技 · 上市招股书",
+      "url": "https://www.hkexnews.hk/listedco/listconews/sehk/2026/1030/2026103002447.pdf",
+      "asOf": "2026-10-30",
+      "scope": "发行人、其集团或其产品团队的资料。日期为披露或查阅日期。"
+    },
+    {
+      "id": "hk-sense",
+      "kind": "company",
+      "title": "商汤 · 日日新与 SenseCore",
+      "url": "https://www.sensetime.com/cn/product-detail?categoryId=91",
+      "asOf": "2026-11-20",
+      "scope": "发行人或其产品团队的官方资料。日期为查阅日。"
+    },
+    {
+      "id": "hk-minimax",
+      "kind": "company",
+      "title": "MiniMax · 官方模型与 API 文档",
+      "url": "https://platform.minimax.io/docs/guides/models-intro",
+      "asOf": "2026-11-20",
+      "scope": "发行人或其产品团队的官方资料。日期为查阅日。"
+    },
+    {
+      "id": "hk-tencent",
+      "kind": "company",
+      "title": "腾讯云 · 混元大模型",
+      "url": "https://cloud.tencent.com/product/tclm",
+      "asOf": "2026-11-20",
+      "scope": "发行人或其产品团队的官方资料。日期为查阅日。"
+    },
+    {
+      "id": "hk-zai",
+      "kind": "company",
+      "title": "智谱 · GLM 模型与开放平台",
+      "url": "https://www.zhipuai.cn/en/about",
+      "asOf": "2026-11-20",
+      "scope": "发行人或其产品团队的官方资料。日期为查阅日。"
+    },
+    {
+      "id": "hk-ubtech",
+      "kind": "company",
+      "title": "优必选 · Walker S 工业人形机器人",
+      "url": "https://www.ubtrobot.com/en/humanoid/products/walker-s",
+      "asOf": "2026-11-20",
+      "scope": "发行人或其产品团队的官方资料。日期为查阅日。"
+    },
+    {
+      "id": "hk-qwen",
+      "kind": "company",
+      "title": "阿里云百炼 · 通义千问模型目录",
+      "url": "https://www.alibabacloud.com/help/en/model-studio/models",
+      "asOf": "2026-11-20",
+      "scope": "发行人或其产品团队的官方资料。日期为查阅日。"
+    },
+    {
+      "id": "hk-ernie",
+      "kind": "company",
+      "title": "百度飞桨 · 文心模型官方代码与权重",
+      "url": "https://github.com/PaddlePaddle/ERNIE",
+      "asOf": "2026-11-20",
+      "scope": "发行人或其产品团队的官方资料。日期为查阅日。"
+    },
+    {
+      "id": "hk-hssii",
+      "kind": "index",
+      "title": "恒生半导体产业指数 · 40 个港股样本",
+      "url": "https://www.hsi.com.hk/api/wsit-hsi-ddoc-ea-public-website-proxy/v1/content/gcs/download?resource=%2Fpublic-website%2Fwebapp%2Ffactsheets%2Fzh-cn%2Fhssii.pdf",
+      "asOf": "2026-10-30",
+      "scope": "取指数编制机构当期完整样本中的香港上市证券。跟踪香港上市芯片设计、制造、封装测试、集成解决方案及应用公司。"
+    },
+    {
+      "id": "hk-hssccpt",
+      "kind": "index",
+      "title": "恒生港股通算力主题指数 · 30 个港股样本",
+      "url": "https://www.hsi.com.hk/api/wsit-hsi-ddoc-ea-public-website-proxy/v1/content/gcs/download?resource=%2Fpublic-website%2Fwebapp%2Ffactsheets%2Fzh-cn%2Fhssccpt.pdf",
+      "asOf": "2026-10-30",
+      "scope": "取指数编制机构当期完整样本中的香港上市证券。覆盖可经港股通买卖的运算、网络、存储及相关基础设施公司。"
+    },
+    {
+      "id": "hk-hsscai",
+      "kind": "index",
+      "title": "恒生港股通人工智能主题指数 · 39 个港股样本",
+      "url": "https://www.hsi.com.hk/api/wsit-hsi-ddoc-ea-public-website-proxy/v1/content/gcs/download?resource=%2Fpublic-website%2Fwebapp%2Ffactsheets%2Fzh-cn%2Fhsscai.pdf",
+      "asOf": "2026-10-30",
+      "scope": "取指数编制机构当期完整样本中的香港上市证券。选取业务涉及人工智能主题、可经港股通交易的香港上市公司。"
+    },
+    {
+      "id": "hk-hkexsemi",
+      "kind": "index",
+      "title": "香港交易所半导体指数 · 30 个港股样本",
+      "url": "https://www.hkex.com.hk/-/media/HKEX_Common/Market/Indices/HKEXSEMI/FULL-Constituents-List/HKEXSEMI-full-cons_20261030.csv",
+      "asOf": "2026-10-30",
+      "scope": "取指数编制机构当期完整样本中的香港上市证券。跟踪香港上市半导体企业，覆盖芯片设计、制造及相关产业链。"
+    },
+    {
+      "id": "hk-hkexkrxs",
+      "kind": "index",
+      "title": "香港交易所韩国交易所半导体指数 · 15 个港股样本",
+      "url": "https://www.hkex.com.hk/-/media/HKEX_Common/Market/Indices/KRX/FULL-Constituent-list/HKEXKRXS-full-cons_20261030.csv",
+      "asOf": "2026-10-30",
+      "scope": "取指数编制机构当期完整样本中的香港上市证券。香港和韩国各 15 个半导体股票样本。在全景图中可查看其中的香港上市公司。"
+    },
+    {
+      "id": "hk-932493",
+      "kind": "index",
+      "title": "中证港股通人工智能主题指数 · 40 个港股样本",
+      "url": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/file/autofile/cons/932493cons.xls",
+      "asOf": "2026-11-20",
+      "scope": "取指数编制机构当期完整样本中的香港上市证券。从港股通中选取为 AI 提供基础资源、技术及应用的公司。"
+    },
+    {
+      "id": "hk-932587",
+      "kind": "index",
+      "title": "中证香港人工智能主题指数 · 40 个港股样本",
+      "url": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/file/autofile/cons/932587cons.xls",
+      "asOf": "2026-11-20",
+      "scope": "取指数编制机构当期完整样本中的香港上市证券。聚焦在香港上市、提供人工智能基础资源、技术或应用的公司。"
+    },
+    {
+      "id": "hk-932599",
+      "kind": "index",
+      "title": "中证港股通机器人主题指数 · 30 个港股样本",
+      "url": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/file/autofile/cons/932599cons.xls",
+      "asOf": "2026-11-20",
+      "scope": "取指数编制机构当期完整样本中的香港上市证券。选取港股通范围内从事机器人本体、感知决策、运动执行及相关算力业务的公司。"
+    },
+    {
+      "id": "hk-932775",
+      "kind": "index",
+      "title": "中证港股通人工智能应用指数 · 31 个港股样本",
+      "url": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/file/autofile/cons/932775cons.xls",
+      "asOf": "2026-11-20",
+      "scope": "取指数编制机构当期完整样本中的香港上市证券。选取可经港股通交易的人工智能技术平台、模型及应用公司。"
+    }
+  ],
+  "companies": [
+    {
+      "name": "商汤",
+      "ticker": "00020",
+      "venue": "HKEX",
+      "sector": "models",
+      "segments": [
+        "通用大模型",
+        "视觉模型"
+      ],
+      "detail": "商汤开发生成式 AI 与视觉模型，并提供模型训练和部署工具。",
+      "sources": [
+        "hk-sense",
+        "hk-hsait",
+        "hk-hsusrt",
+        "hk-hkexai",
+        "hk-hsscai",
+        "hk-932493",
+        "hk-932587",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "SenseTime",
+        "商汤科技",
+        "商汤-W",
+        "商汤集团股份有限公司",
+        "SenseTime Group Inc.",
+        "SENSETIME-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00020#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "群核科技",
+      "ticker": "00068",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "空间智能",
+        "设计软件"
+      ],
+      "detail": "群核的云端空间设计软件结合 GPU 集群与 AI，为室内与商业空间生成可视化方案。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hssccpt",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "Manycore",
+        "酷家乐",
+        "Manycore Tech Inc.",
+        "MANYCORE TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00068#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "疯狂体育",
+      "ticker": "00082",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "体育数据"
+      ],
+      "detail": "在数字体育服务中结合赛事数据库与人工智能分析。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "疯狂体育集团有限公司",
+        "Crazy Sports Group Limited",
+        "CRAZY SPORTS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00082#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "MiniMax",
+      "ticker": "00100",
+      "venue": "HKEX",
+      "sector": "models",
+      "segments": [
+        "通用大模型",
+        "多模态"
+      ],
+      "detail": "MiniMax 开发文本、语音与视频模型，通过 API 和面向用户的应用提供服务。",
+      "sources": [
+        "hk-minimax",
+        "hk-hsait",
+        "hk-hscpt",
+        "hk-hkexai",
+        "hk-aiq",
+        "hk-hssccpt",
+        "hk-hsscai",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "稀宇科技",
+        "MINIMAX-W",
+        "MiniMax Group Inc."
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00100#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "春雨医疗",
+      "ticker": "00108",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "医疗应用"
+      ],
+      "detail": "开发春雨慧问医疗大模型，用于在线问诊及健康档案服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "春雨医疗科技有限公司",
+        "SR Medical Technology Company Limited",
+        "SR MEDICAL"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00108#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "建滔集团",
+      "ticker": "00148",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "电路板",
+        "覆铜板"
+      ],
+      "detail": "生产覆铜板和印制电路板，属于服务器与电子设备的上游材料和板件环节。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hkexai",
+        "hk-hssii",
+        "hk-hssccpt",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "建滔集团有限公司",
+        "Kingboard Holdings Limited",
+        "KINGBOARD HLDG"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00148#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "吉利汽车",
+      "ticker": "00175",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "智能驾驶"
+      ],
+      "detail": "整车产品布局辅助驾驶；汽车业务也包括大量与 AI 无关的部分。",
+      "sources": [
+        "hk-hsami",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "吉利汽车控股有限公司",
+        "Geely Automobile Holdings Limited",
+        "GEELY AUTO"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00175#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "京城机电股份",
+      "ticker": "00187",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "工业自动化"
+      ],
+      "detail": "智能制造解决方案把实时协作系统与机器人、自动化设备和物流硬件集成。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "北京京城机电股份有限公司",
+        "BEIJING JINGCHENG MACHINERY ELECTRIC COMPANY LIMITED",
+        "JINGCHENG MAC"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00187#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "阿里健康",
+      "ticker": "00241",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "医学大模型"
+      ],
+      "detail": "阿里健康推出医学垂直大模型「氢离子」，支持循证问答与医学文献研读。",
+      "sources": [
+        "hk-alihealth",
+        "hk-932493",
+        "hk-932587",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "阿里健康信息技术有限公司",
+        "Alibaba Health Information Technology Limited",
+        "ALI HEALTH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00241#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "金蝶国际",
+      "ticker": "00268",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "企业软件"
+      ],
+      "detail": "金蝶在企业管理软件中提供面向财务、人力等业务的 AI 能力。",
+      "sources": [
+        "hk-hkexai",
+        "hk-932493",
+        "hk-932587",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "金蝶国际软件集团有限公司",
+        "Kingdee International Software Group Company Limited",
+        "KINGDEE INT'L"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00268#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "比亚迪电子",
+      "ticker": "00285",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "电子制造",
+        "智能终端"
+      ],
+      "detail": "为电子设备提供零部件、产品研发和整机制造，入选港交所人工智能指数。",
+      "sources": [
+        "hk-hsscaii",
+        "hk-hsami",
+        "hk-hkexai",
+        "hk-hssii",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "比亚迪电子(国际)有限公司",
+        "BYD Electronic (International) Company Limited",
+        "BYD ELECTRONIC"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00285#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "美的集团",
+      "ticker": "00300",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "工业机器人",
+        "自动化"
+      ],
+      "detail": "美的集团的机器人与自动化业务包括库卡工业机器人。",
+      "sources": [
+        "hk-hsusrt",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "美的集团股份有限公司",
+        "Midea Group Co., Ltd.",
+        "MIDEA GROUP"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00300#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "中国软件国际",
+      "ticker": "00354",
+      "venue": "HKEX",
+      "sector": "services",
+      "segments": [
+        "企业集成"
+      ],
+      "detail": "为政企客户集成 AI、云与数据技术，提供部署或行业数字化服务。",
+      "sources": [
+        "hk-932493",
+        "hk-932587",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "中软国际有限公司",
+        "Chinasoft International Ltd.",
+        "CHINASOFT INT'L"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00354#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "港仔机器人",
+      "ticker": "00370",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "机器人集成"
+      ],
+      "detail": "将具身智能控制系统集成到采购的机器人硬件，提供定制、部署与运营服务。",
+      "sources": [
+        "hk-hkrobotics",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "港仔机器人集团控股有限公司",
+        "Hong Kong Robotics Group Holding Limited",
+        "HK ROBOTICS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00370#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "硬蛋创新",
+      "ticker": "00400",
+      "venue": "HKEX",
+      "sector": "services",
+      "segments": [
+        "芯片分销",
+        "端侧硬件"
+      ],
+      "detail": "为芯片企业和智能硬件开发者提供技术整合、数据与 AIoT 服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "Ingdan, Inc.",
+        "INGDAN"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00400#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "山高控股",
+      "ticker": "00412",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "数据中心",
+        "产业投资"
+      ],
+      "detail": "通过持有数据中心运营商世纪互联股权参与算力基础设施。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "山高控股集团有限公司",
+        "Shandong Hi-Speed Holdings Group Limited",
+        "SDHG"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00412#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "AIROBO平台",
+      "ticker": "00419",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "机器人平台",
+        "医疗应用"
+      ],
+      "detail": "运营医疗信息系统，并拓展机器人平台 AIROBO。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "AIROBO平台集团有限公司",
+        "AIROBO Platform Group Limited",
+        "AIROBO PLATFORM"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00419#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "敏实集团",
+      "ticker": "00425",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "机器人关节"
+      ],
+      "detail": "敏实披露人形机器人关节模组合作框架，涉及设计、制造与商业化计划。",
+      "sources": [
+        "hk-minth",
+        "hk-humn",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "敏实集团有限公司",
+        "MINTH GROUP LIMITED",
+        "MINTH GROUP"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00425#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "瀚源控股",
+      "ticker": "00439",
+      "venue": "HKEX",
+      "sector": "services",
+      "segments": [
+        "企业集成",
+        "智能装备"
+      ],
+      "detail": "开发算法和数据分析平台，并向客户交付智能头盔等软硬件系统。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "瀚源控股有限公司",
+        "Genesis Scale Holdings Limited",
+        "GENESIS SCALE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00439#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "天大药业",
+      "ticker": "00455",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "医疗应用"
+      ],
+      "detail": "“云上天大馆”将大数据和人工智能用于中医健康服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "天大药业有限公司",
+        "Tianda Pharmaceuticals Limited",
+        "TIANDA PHARMA"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00455#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "富通科技",
+      "ticker": "00465",
+      "venue": "HKEX",
+      "sector": "services",
+      "segments": [
+        "企业集成"
+      ],
+      "detail": "为政企客户集成 AI、云与数据技术，提供部署或行业数字化服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "富通科技发展控股有限公司",
+        "Futong Technology Development Holdings Limited",
+        "FUTONG TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00465#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "豪威集团",
+      "ticker": "00501",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "图像传感器",
+        "机器视觉"
+      ],
+      "detail": "为机器视觉、汽车及消费电子等场景提供图像传感方案。",
+      "sources": [
+        "hk-hssii",
+        "hk-hkexsemi",
+        "hk-hkexkrxs",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "豪威集成电路(集团)股份有限公司",
+        "OmniVision Integrated Circuits Group, Inc.",
+        "OMNIVISION"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00501#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "ASMPT",
+      "ticker": "00522",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "半导体设备",
+        "先进封装"
+      ],
+      "detail": "供应半导体封装及电子装配设备，处于 AI 芯片制造的设备环节。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hssii",
+        "hk-hssccpt",
+        "hk-hkexsemi",
+        "hk-hkexkrxs",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "ASMPT Limited"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00522#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "中国通信服务",
+      "ticker": "00552",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "通信基础设施"
+      ],
+      "detail": "提供通信基础设施或工程服务，属于恒生港股通人工智能基础设施指数样本。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "中国通信服务股份有限公司",
+        "CHINA COMMUNICATIONS SERVICES CORPORATION LIMITED",
+        "CHINACOMSERVICE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00552#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "南京熊猫电子股份",
+      "ticker": "00553",
+      "venue": "HKEX",
+      "sector": "services",
+      "segments": [
+        "交通应用"
+      ],
+      "detail": "在智慧交通等系统中集成 AI、大数据与通信技术。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "南京熊猫电子股份有限公司",
+        "Nanjing Panda Electronics Company Limited",
+        "NANJING PANDA"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00553#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "爱芯元智",
+      "ticker": "00600",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "端侧推理",
+        "边缘计算"
+      ],
+      "detail": "设计用于边缘与终端设备的 AI 推理 SoC。",
+      "sources": [
+        "hk-hsait",
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hsami",
+        "hk-hssii",
+        "hk-hsscai",
+        "hk-hkexsemi",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "爱芯元智半导体股份有限公司",
+        "Axera Semiconductor Co., Ltd.",
+        "AXERA"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00600#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "通通AI社交",
+      "ticker": "00628",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "社交应用"
+      ],
+      "detail": "互联网业务包括使用人工智能技术的社交平台。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "通通AI社交集团有限公司",
+        "Tong Tong AI Social Group Limited",
+        "TONGTONG AI SOC"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00628#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "广和通",
+      "ticker": "00638",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "无线模组",
+        "边缘计算"
+      ],
+      "detail": "为联网终端提供无线通信与智能模组，服务端侧智能应用。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "深圳市广和通无线股份有限公司",
+        "Fibocom Wireless Inc.",
+        "FIBOCOM"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00638#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "中国高速传动",
+      "ticker": "00658",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "机器人零部件"
+      ],
+      "detail": "产品线包括供机器人传动机构使用的减速机。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "中国高速传动设备集团有限公司",
+        "China High Speed Transmission Equipment Group Co., Ltd.",
+        "C TRANSMISSION"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00658#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "北京能源国际",
+      "ticker": "00686",
+      "venue": "HKEX",
+      "sector": "compute",
+      "segments": [
+        "智算设施"
+      ],
+      "detail": "项目投资及运营范围涵盖智能计算与清洁能源设施。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "北京能源国际控股有限公司",
+        "Beijing Energy International Holding Co., Ltd.",
+        "BJ ENERGY INTL"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00686#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "均胜电子",
+      "ticker": "00699",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "智能座舱",
+        "智能驾驶"
+      ],
+      "detail": "开发汽车智能座舱或智能驾驶相关产品。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "宁波均胜电子股份有限公司",
+        "NINGBO JOYSON ELECTRONIC CORP.",
+        "JOYSON ELEC"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00699#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "腾讯控股",
+      "ticker": "00700",
+      "venue": "HKEX",
+      "sector": "models",
+      "segments": [
+        "通用大模型",
+        "云平台"
+      ],
+      "detail": "腾讯开发混元模型并通过腾讯云提供模型服务。",
+      "sources": [
+        "hk-tencent",
+        "hk-hkexai",
+        "hk-aiq",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "Tencent",
+        "腾讯",
+        "腾讯控股有限公司",
+        "Tencent Holdings Limited",
+        "TENCENT"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00700#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "筑友智造科技",
+      "ticker": "00726",
+      "venue": "HKEX",
+      "sector": "services",
+      "segments": [
+        "建筑应用"
+      ],
+      "detail": "在装配式建筑技术体系中结合建筑信息模型、物联网与人工智能。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "筑友智造科技集团有限公司",
+        "DIT Group Limited",
+        "DIT GROUP"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00726#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "中国电信",
+      "ticker": "00728",
+      "venue": "HKEX",
+      "sector": "compute",
+      "segments": [
+        "智算云",
+        "模型服务"
+      ],
+      "detail": "天翼云与息壤平台提供算力调度，并通过星辰体系提供模型服务。",
+      "sources": [
+        "hk-telecom",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "中国电信股份有限公司",
+        "China Telecom Corporation Limited",
+        "CHINA TELECOM"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00728#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "首惠产业金融",
+      "ticker": "00730",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "金融应用"
+      ],
+      "detail": "在智能客服与单据审核中部署大模型。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "首惠产业金融服务集团有限公司",
+        "Capital Industrial Financial Services Group Limited",
+        "CAPITAL IND FIN"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00730#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "中国联通",
+      "ticker": "00762",
+      "venue": "HKEX",
+      "sector": "compute",
+      "segments": [
+        "智算网络",
+        "行业大模型"
+      ],
+      "detail": "联通建设算力网络，并发布元景大模型体系。",
+      "sources": [
+        "hk-unicom",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "中国联合网络通信(香港)股份有限公司",
+        "China Unicom (Hong Kong) Limited",
+        "CHINA UNICOM"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00762#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "中兴通讯",
+      "ticker": "00763",
+      "venue": "HKEX",
+      "sector": "compute",
+      "segments": [
+        "服务器",
+        "网络设备"
+      ],
+      "detail": "提供服务器及网络系统，参与数据中心与智能计算建设。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hssii",
+        "hk-hssccpt",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "中兴通讯股份有限公司",
+        "ZTE Corporation",
+        "ZTE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00763#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "阅文集团",
+      "ticker": "00772",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "智能创作",
+        "机器翻译"
+      ],
+      "detail": "阅文在作家助手中集成妙笔通鉴引擎，并用于网络文学翻译。",
+      "sources": [
+        "hk-writer",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "China Literature Limited",
+        "CHINA LIT"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00772#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "网龙",
+      "ticker": "00777",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "教育应用"
+      ],
+      "detail": "在数字教育产品中结合 AI、虚拟现实及三维技术。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "网龙网络控股有限公司",
+        "NetDragon Websoft Holdings Limited",
+        "NETDRAGON"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00777#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "同程旅行",
+      "ticker": "00780",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "旅行推荐"
+      ],
+      "detail": "在旅游平台上以算法分析用户偏好，生成个性化产品推荐。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "同程旅行控股有限公司",
+        "Tongcheng Travel Holdings Limited",
+        "TONGCHENGTRAVEL"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00780#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "中国铁塔",
+      "ticker": "00788",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "通信基础设施"
+      ],
+      "detail": "提供通信基础设施或工程服务，属于恒生港股通人工智能基础设施指数样本。",
+      "sources": [
+        "hk-hsscaii",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "中国铁塔股份有限公司",
+        "China Tower Corporation Limited",
+        "CHINA TOWER"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00788#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "文远知行",
+      "ticker": "00800",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "自动驾驶"
+      ],
+      "detail": "开发自动驾驶系统，用于乘用车或作业车辆。",
+      "sources": [
+        "hk-hsait",
+        "hk-hsusrt",
+        "hk-hsami",
+        "hk-hkexai",
+        "hk-hsscai",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "WeRide",
+        "文远知行-W",
+        "WeRide Inc.",
+        "WERIDE-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00800#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案",
+      "usTicker": "WRD"
+    },
+    {
+      "name": "理士国际",
+      "ticker": "00842",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "数据中心供电"
+      ],
+      "detail": "向数据中心提供供电或动力环境管理方案。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "理士国际技术有限公司",
+        "Leoch International Technology Limited",
+        "LEOCH INT'L"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00842#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "微创医疗",
+      "ticker": "00853",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "医疗机器人"
+      ],
+      "detail": "业务涉及手术机器人、导航系统或相关器械。",
+      "sources": [
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "微创医疗科学有限公司",
+        "MicroPort Scientific Corporation",
+        "MICROPORT"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00853#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "伟仕佳杰",
+      "ticker": "00856",
+      "venue": "HKEX",
+      "sector": "services",
+      "segments": [
+        "企业集成"
+      ],
+      "detail": "为政企客户集成 AI、云与数据技术，提供部署或行业数字化服务。",
+      "sources": [
+        "hk-932493",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "伟仕佳杰控股有限公司",
+        "VSTECS Holdings Limited",
+        "VSTECS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00856#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "神州控股",
+      "ticker": "00861",
+      "venue": "HKEX",
+      "sector": "services",
+      "segments": [
+        "企业数据",
+        "系统集成"
+      ],
+      "detail": "通过数据技术与 AI 工具提供企业业务流程服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "神州数码控股有限公司",
+        "Digital China Holdings Limited",
+        "DC HOLDINGS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00861#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "明源云",
+      "ticker": "00909",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "不动产软件"
+      ],
+      "detail": "向不动产行业提供数字化管理服务，进入中证港股通人工智能应用指数。",
+      "sources": [
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "明源云集团控股有限公司",
+        "MING YUAN CLOUD"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00909#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "趣致集团",
+      "ticker": "00917",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "智能营销终端"
+      ],
+      "detail": "以线下智能交互终端和线上平台为品牌提供营销服务。",
+      "sources": [
+        "hk-932493",
+        "hk-932587",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "Qunabox Group Limited",
+        "QUNABOX GROUP"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00917#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "国际精密",
+      "ticker": "00929",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "机器人零部件"
+      ],
+      "detail": "精密工程业务覆盖人形机器人相关产品。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "国际精密集团有限公司",
+        "IPE GROUP LIMITED",
+        "IPE GROUP"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00929#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "中国移动",
+      "ticker": "00941",
+      "venue": "HKEX",
+      "sector": "compute",
+      "segments": [
+        "智算中心",
+        "行业大模型"
+      ],
+      "detail": "运营智能计算中心，开发九天大模型并面向行业提供服务。",
+      "sources": [
+        "hk-mobile",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "中国移动有限公司",
+        "China Mobile Limited",
+        "CHINA MOBILE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00941#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "中芯国际",
+      "ticker": "00981",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "晶圆制造"
+      ],
+      "detail": "为集成电路设计公司代工生产晶圆，处于算力芯片制造环节。",
+      "sources": [
+        "hk-hsait",
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hkexai",
+        "hk-hssii",
+        "hk-hssccpt",
+        "hk-hsscai",
+        "hk-hkexsemi",
+        "hk-hkexkrxs",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "SMIC",
+        "中芯国际集成电路制造有限公司",
+        "SEMICONDUCTOR MANUFACTURING INTERNATIONAL CORPORATION"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00981#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "联想集团",
+      "ticker": "00992",
+      "venue": "HKEX",
+      "sector": "compute",
+      "segments": [
+        "服务器",
+        "液冷散热"
+      ],
+      "detail": "联想的 AI 服务器支持模型训练和推理，海神 Neptune 为高密度计算设备提供液冷。",
+      "sources": [
+        "hk-lenovo",
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hkexai",
+        "hk-hssccpt",
+        "hk-hkexsemi",
+        "hk-hkexkrxs",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "Lenovo",
+        "联想集团有限公司",
+        "Lenovo Group Limited",
+        "LENOVO GROUP"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=00992#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "华沿机器人",
+      "ticker": "01021",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "协作机器人"
+      ],
+      "detail": "研发和生产协作机器人，用于工业自动化等场景。",
+      "sources": [
+        "hk-hsusrt",
+        "hk-botz",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "广东华沿机器人股份有限公司",
+        "Guangdong Huayan Robotics Co., Ltd.",
+        "HUAYAN ROBOTICS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01021#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "快手",
+      "ticker": "01024",
+      "venue": "HKEX",
+      "sector": "models",
+      "segments": [
+        "视频生成"
+      ],
+      "detail": "快手开发可灵视频生成模型，并向创作者开放生成工具。",
+      "sources": [
+        "hk-kling",
+        "hk-hkexai",
+        "hk-932493",
+        "hk-932587",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "Kuaishou",
+        "可灵",
+        "快手-W",
+        "快手科技",
+        "Kuaishou Technology",
+        "KUAISHOU-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01024#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "云智汇科技",
+      "ticker": "01037",
+      "venue": "HKEX",
+      "sector": "services",
+      "segments": [
+        "制造应用",
+        "工业自动化"
+      ],
+      "detail": "将云计算和机器人等技术集成到制造业自动化方案。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "云智汇科技服务有限公司",
+        "Maxnerva Technology Services Limited",
+        "MAXNERVA TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01037#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "亚太卫星",
+      "ticker": "01045",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "数据中心"
+      ],
+      "detail": "业务涉及数据中心的建设、运营、托管或租赁，为计算设备提供运行场所。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "亚太卫星控股有限公司",
+        "APT Satellite Holdings Ltd.",
+        "APT SATELLITE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01045#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "TCL电子",
+      "ticker": "01070",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "智能终端"
+      ],
+      "detail": "主营显示设备、智能物联等业务，入选中证港股通机器人主题指数。",
+      "sources": [
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "TCL电子控股有限公司",
+        "TCL ELECTRONICS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01070#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "东方电气",
+      "ticker": "01072",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "电力装备"
+      ],
+      "detail": "电力装备企业；被恒生指数公司纳入人工智能基础设施主题，反映间接供应链关联。",
+      "sources": [
+        "hk-hsscaii",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "东方电气股份有限公司",
+        "Dongfang Electric Corporation Limited",
+        "DONGFANG ELEC"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01072#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "中国神华",
+      "ticker": "01088",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "交通应用"
+      ],
+      "detail": "在重载铁路运输中应用智能驾驶技术。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "中国神华能源股份有限公司",
+        "China Shenhua Energy Company Limited",
+        "CHINA SHENHUA"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01088#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "华晨中国",
+      "ticker": "01114",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "智能汽车供应链"
+      ],
+      "detail": "恒生将其纳入自动驾驶价值链样本，包含车辆制造及配套部件等间接环节。",
+      "sources": [
+        "hk-hsami",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "BRILLIANCE CHI",
+        "华晨中国汽车控股有限公司",
+        "Brilliance China Automotive Holdings Ltd."
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01114#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "海光芯正",
+      "ticker": "01191",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "光互连",
+        "光模块"
+      ],
+      "detail": "面向 AI 数据中心供应光模块、有源光缆等高速互连产品。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hssii",
+        "hk-hssccpt",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "北京海光芯正科技股份有限公司",
+        "Crealights Technology Co., Ltd.",
+        "CREALIGHTS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01191#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "比亚迪股份",
+      "ticker": "01211",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "智能驾驶"
+      ],
+      "detail": "整车产品布局辅助驾驶；汽车业务也包括大量与 AI 无关的部分。",
+      "sources": [
+        "hk-hsami",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "比亚迪股份有限公司",
+        "BYD Company Limited",
+        "BYD COMPANY"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01211#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "乐动机器人",
+      "ticker": "01236",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "机器人感知"
+      ],
+      "detail": "为智能机器人提供感知技术和产品。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "深圳乐动机器人股份有限公司",
+        "SHENZHEN LDROBOT CO., LTD",
+        "LDROBOT"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01236#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "思路迪医药股份",
+      "ticker": "01244",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "医疗研发应用"
+      ],
+      "detail": "建设基于 AI 的药物与疫苗研发技术平台。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "思路迪医药股份有限公司",
+        "3D Medicines Inc.",
+        "3D MEDICINES"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01244#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "中国天瑞水泥",
+      "ticker": "01252",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "工业应用"
+      ],
+      "detail": "在水泥生产及工业互联网平台中结合云计算和人工智能技术。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "中国天瑞集团水泥有限公司",
+        "CHINA TIANRUI GROUP CEMENT COMPANY LIMITED",
+        "CHINA TIANRUI"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01252#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "奕斯伟计算",
+      "ticker": "01256",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "计算芯片",
+        "端侧推理"
+      ],
+      "detail": "计算芯片面向智能汽车、机器人与工业设备。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "北京奕斯伟计算技术股份有限公司",
+        "Beijing ESWIN Computing Technology Co., Ltd.",
+        "ESWIN COMPUTING"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01256#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "佳明集团控股",
+      "ticker": "01271",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "数据中心"
+      ],
+      "detail": "业务涉及数据中心的建设、运营、托管或租赁，为计算设备提供运行场所。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "佳明集团控股有限公司",
+        "GRAND MING GROUP HOLDINGS LIMITED",
+        "GRAND MING"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01271#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "知行科技",
+      "ticker": "01274",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "智能驾驶"
+      ],
+      "detail": "开发量产车型使用的智能驾驶软件与配套硬件。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "知行汽车科技(苏州)股份有限公司",
+        "iMotion Automotive Technology (Suzhou) Co., Ltd.",
+        "IMOTIONTECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01274#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "恒瑞医药",
+      "ticker": "01276",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "AI药物研发"
+      ],
+      "detail": "把人工智能用于药物研发流程。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "江苏恒瑞医药股份有限公司",
+        "Jiangsu Hengrui Pharmaceuticals Co.,Ltd.",
+        "HENGRUI PHARMA"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01276#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "峰岹科技",
+      "ticker": "01304",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "电机控制"
+      ],
+      "detail": "开发电机驱动控制芯片，入选恒生人工智能基础设施主题。",
+      "sources": [
+        "hk-hsscaii",
+        "hk-hssii",
+        "hk-hkexsemi",
+        "hk-hkexkrxs",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "FORTIOR",
+        "峰岹科技(深圳)股份有限公司",
+        "Fortior Technology(Shenzhen) Co., Ltd."
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01304#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "香港宽频",
+      "ticker": "01310",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "数据中心"
+      ],
+      "detail": "业务涉及数据中心的建设、运营、托管或租赁，为计算设备提供运行场所。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "香港宽频有限公司",
+        "HKBN Ltd.",
+        "HKBN"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01310#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "华润建材科技",
+      "ticker": "01313",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "工业应用"
+      ],
+      "detail": "在混凝土配合比设计中应用智能算法。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "华润建材科技控股有限公司",
+        "China Resources Building Materials Technology Holdings Limited",
+        "CR BLDG MAT TEC"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01313#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "耐世特",
+      "ticker": "01316",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "车辆运动控制"
+      ],
+      "detail": "开发车辆转向或线控运动控制系统，为智能驾驶提供执行能力。",
+      "sources": [
+        "hk-hsusrt",
+        "hk-hsami",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "耐世特汽车系统集团有限公司",
+        "Nexteer Automotive Group Limited",
+        "NEXTEER"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01316#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "华虹宏力",
+      "ticker": "01347",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "晶圆制造"
+      ],
+      "detail": "为集成电路设计公司代工生产晶圆，处于算力芯片制造环节。",
+      "sources": [
+        "hk-hsait",
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hkexai",
+        "hk-hssii",
+        "hk-hssccpt",
+        "hk-hsscai",
+        "hk-hkexsemi",
+        "hk-hkexkrxs",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "华虹半导体",
+        "Hua Hong",
+        "华虹宏力半导体有限公司",
+        "Hua Hong Grace Semiconductor Limited",
+        "HUA HONG GRACE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01347#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "辉煌明天",
+      "ticker": "01351",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "智能营销"
+      ],
+      "detail": "在广告、营销或用户匹配服务中使用算法与数据分析。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "辉煌明天(新)",
+        "辉煌明天科技控股有限公司",
+        "Bright Future Technology Holdings Limited",
+        "BRIGHT FUT-NEW"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01351#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "美图公司",
+      "ticker": "01357",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "图像生成",
+        "影像处理"
+      ],
+      "detail": "为影像编辑与设计提供 AI 图像处理及生成工具。",
+      "sources": [
+        "hk-hkexai",
+        "hk-932493",
+        "hk-932587",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "Meitu, Inc.",
+        "MEITU"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01357#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "滴普科技",
+      "ticker": "01384",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "企业智能体",
+        "数据管理"
+      ],
+      "detail": "为企业提供数据管理和智能体软件。",
+      "sources": [
+        "hk-hsait",
+        "hk-hsscai",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "滴普科技股份有限公司",
+        "Deepexi Technology Co., Ltd.",
+        "DEEPEXI TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01384#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "上海复旦",
+      "ticker": "01385",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "可编程芯片"
+      ],
+      "detail": "设计集成电路产品，包括可编程逻辑芯片，入选恒生算力主题。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hssii",
+        "hk-hkexsemi",
+        "hk-hkexkrxs",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "上海复旦微电子集团股份有限公司",
+        "Shanghai Fudan Microelectronics Group CO.,LTD.",
+        "SHANGHAI FUDAN"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01385#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "海清智元",
+      "ticker": "01392",
+      "venue": "HKEX",
+      "sector": "models",
+      "segments": [
+        "视觉模型",
+        "感知模组"
+      ],
+      "detail": "开发多光谱视觉模型及配套感知模组。",
+      "sources": [
+        "hk-hscpt",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "深圳海清智元科技股份有限公司",
+        "Shenzhen HQVT Technology Co., Ltd.",
+        "HQVT"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01392#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "粤港湾智算",
+      "ticker": "01396",
+      "venue": "HKEX",
+      "sector": "compute",
+      "segments": [
+        "算力服务"
+      ],
+      "detail": "面向计算工作负载提供智算中心、算力或边缘云服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "粤港湾智算科技有限公司",
+        "Greater Bay Area AI Computing Tech Co. , Ltd.",
+        "GBA AI COMP"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01396#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "高伟电子",
+      "ticker": "01415",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "光学模组",
+        "端侧感知"
+      ],
+      "detail": "生产摄像头或光学模组，处于智能设备和车辆感知的上游环节。",
+      "sources": [
+        "hk-hsami",
+        "hk-hkexai",
+        "hk-hkexsemi",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "高伟电子控股有限公司",
+        "Cowell e Holdings Inc.",
+        "COWELL"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01415#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "耀才证券金融",
+      "ticker": "01428",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "金融应用"
+      ],
+      "detail": "在证券应用中提供行为认证、新闻跟踪等智能功能。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "耀才证券金融集团有限公司",
+        "Bright Smart Securities & Commodities Group Limited",
+        "BRIGHT SMART"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01428#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "丘钛科技",
+      "ticker": "01478",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "光学模组",
+        "端侧感知"
+      ],
+      "detail": "生产摄像头或光学模组，处于智能设备和车辆感知的上游环节。",
+      "sources": [
+        "hk-hsami",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "丘钛科技(集团)有限公司",
+        "Q TECHNOLOGY (GROUP) COMPANY LIMITED",
+        "Q TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01478#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "欧科云链",
+      "ticker": "01499",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "链上数据"
+      ],
+      "detail": "将 AI 和数据分析用于链上数据处理与查询。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "欧科云链控股有限公司",
+        "OKG Technology Holdings Limited",
+        "OKG TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01499#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "驭势科技",
+      "ticker": "01511",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "自动驾驶"
+      ],
+      "detail": "开发自动驾驶系统，用于乘用车或作业车辆。",
+      "sources": [
+        "hk-hsusrt",
+        "hk-hsami",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "驭势科技(北京)股份有限公司",
+        "UISEE Technologies (Beijing) Co., Ltd.",
+        "UISEE TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01511#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "知行集团控股",
+      "ticker": "01539",
+      "venue": "HKEX",
+      "sector": "services",
+      "segments": [
+        "能源应用"
+      ],
+      "detail": "以机器学习与数据分析为客户设计能源方案。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "知行集团控股国际有限公司",
+        "Unity Group Holdings International Limited",
+        "UNITY GP HLDGS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01539#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "南方通信",
+      "ticker": "01617",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "光通信"
+      ],
+      "detail": "生产用于通信网络的光纤或光通信产品，属于算力网络上游。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "南方通信控股有限公司",
+        "Nanfang Communication Holdings Limited",
+        "NANFANG COMM"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01617#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "千循科技",
+      "ticker": "01640",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "零售应用"
+      ],
+      "detail": "通过 AI 与 SaaS 平台提供二手数码产品交易服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "千循科技有限公司",
+        "Qian Xun Technology Limited",
+        "QIAN XUN TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01640#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "亚信科技",
+      "ticker": "01675",
+      "venue": "HKEX",
+      "sector": "services",
+      "segments": [
+        "企业集成"
+      ],
+      "detail": "为政企客户集成 AI、云与数据技术，提供部署或行业数字化服务。",
+      "sources": [
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "亚信科技控股有限公司",
+        "AsiaInfo Technologies Limited",
+        "ASIAINFO TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01675#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "博耳电力",
+      "ticker": "01685",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "数据中心供电"
+      ],
+      "detail": "向数据中心提供供电或动力环境管理方案。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "博耳电力控股有限公司",
+        "BOER POWER HOLDINGS LIMITED",
+        "BOER POWER"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01685#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "新意网集团",
+      "ticker": "01686",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "数据中心"
+      ],
+      "detail": "业务涉及数据中心的建设、运营、托管或租赁，为计算设备提供运行场所。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hkexai",
+        "hk-hssccpt",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "新意网集团有限公司",
+        "Sunevision Holdings Ltd.",
+        "SUNEVISION"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01686#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "领益智造",
+      "ticker": "01688",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "终端部件"
+      ],
+      "detail": "为智能终端提供精密零部件、结构件或整机制造服务。",
+      "sources": [
+        "hk-hssii",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "广东领益智造股份有限公司",
+        "LINGYI iTECH (GUANGDONG) COMPANY",
+        "LINGYI ITECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01688#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "汇聚科技",
+      "ticker": "01729",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "互连线缆"
+      ],
+      "detail": "生产互连线缆或连接器，为电子与计算设备之间传输数据。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hssii",
+        "hk-hssccpt",
+        "hk-hkexsemi",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "汇聚科技有限公司",
+        "TIME INTERCONNECT TECHNOLOGY LIMITED",
+        "TIME INTERCON"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01729#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "爱康医疗",
+      "ticker": "01789",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "医疗机器人"
+      ],
+      "detail": "业务涉及手术机器人、导航系统或相关器械。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "爱康医疗控股有限公司",
+        "AK MEDICAL HOLDINGS LIMITED",
+        "AK MEDICAL"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01789#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "小米集团",
+      "ticker": "01810",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "端侧AI",
+        "智能驾驶"
+      ],
+      "detail": "小米将 AI 应用于手机等消费终端及汽车业务。",
+      "sources": [
+        "hk-hkexai",
+        "hk-botz",
+        "hk-humn",
+        "hk-hssii",
+        "hk-hkexsemi",
+        "hk-hkexkrxs",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "小米",
+        "Xiaomi",
+        "小米集团-W",
+        "XIAOMI CORPORATION",
+        "XIAOMI-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01810#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "平安好医生",
+      "ticker": "01833",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "医学大模型"
+      ],
+      "detail": "平安医疗健康业务将医疗模型用于辅助问诊等服务。",
+      "sources": [
+        "hk-pahealth",
+        "hk-932493",
+        "hk-932587",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "平安健康医疗科技有限公司",
+        "PING AN HEALTHCARE AND TECHNOLOGY COMPANY LIMITED",
+        "PA GOODDOCTOR"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01833#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "春立医疗",
+      "ticker": "01858",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "医疗机器人"
+      ],
+      "detail": "业务涉及手术机器人、导航系统或相关器械。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "北京市春立正达医疗器械股份有限公司",
+        "Beijing Chunlizhengda Medical Instruments Co.,Ltd.",
+        "CHUNLI MEDICAL"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01858#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "汇量科技",
+      "ticker": "01860",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "智能营销"
+      ],
+      "detail": "在广告、营销或用户匹配服务中使用算法与数据分析。",
+      "sources": [
+        "hk-hkexai",
+        "hk-932493",
+        "hk-932587",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "汇量科技有限公司",
+        "Mobvista Inc.",
+        "MOBVISTA"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01860#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "曦智科技",
+      "ticker": "01879",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "光计算",
+        "光互连"
+      ],
+      "detail": "研发光计算及光互连芯片和系统。",
+      "sources": [
+        "hk-hsait",
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hsusrt",
+        "hk-hkexai",
+        "hk-hssii",
+        "hk-hssccpt",
+        "hk-hsscai",
+        "hk-hkexsemi",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "曦智科技-P",
+        "上海曦智科技股份有限公司",
+        "Shanghai Xizhi Technology Co., Ltd.",
+        "XIZHI TECH-P"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01879#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "中信国际电讯",
+      "ticker": "01883",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "数据中心"
+      ],
+      "detail": "业务涉及数据中心的建设、运营、托管或租赁，为计算设备提供运行场所。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "中信国际电讯集团有限公司",
+        "Citic Telecom International Holdings Limited",
+        "CITIC TELECOM"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01883#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "建滔积层板",
+      "ticker": "01888",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "覆铜板"
+      ],
+      "detail": "生产印制电路板使用的覆铜板等基材，是电子硬件的上游供应商。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hkexai",
+        "hk-hssii",
+        "hk-hssccpt",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "建滔积层板控股有限公司",
+        "Kingboard Laminates Holdings Limited",
+        "KB LAMINATES"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01888#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "中科闻歌",
+      "ticker": "01956",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "企业智能体",
+        "决策应用"
+      ],
+      "detail": "为企业开发数据分析与智能决策工具。",
+      "sources": [
+        "hk-hsait",
+        "hk-hsscai",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "北京中科闻歌科技股份有限公司",
+        "Beijing Zhongke WengeAI Science and Technology Co., Ltd.",
+        "WENGE AI"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01956#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "安乐工程",
+      "ticker": "01977",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "数据中心工程"
+      ],
+      "detail": "机电业务涵盖企业数据中心的工程服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "安乐工程集团有限公司",
+        "ANALOGUE HOLDINGS LIMITED",
+        "ANALOGUE HLDGS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01977#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "美高域",
+      "ticker": "01985",
+      "venue": "HKEX",
+      "sector": "compute",
+      "segments": [
+        "算力服务"
+      ],
+      "detail": "面向计算工作负载提供智算中心、算力或边缘云服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "美高域集团有限公司",
+        "Microware Group Limited",
+        "MICROWARE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01985#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "广合科技",
+      "ticker": "01989",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "电路板"
+      ],
+      "detail": "生产印制电路板，用于服务器等设备的电气连接与信号传输。",
+      "sources": [
+        "hk-hssii",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "广州广合科技股份有限公司",
+        "Delton Technology (Guangzhou) Inc.",
+        "DELTON"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01989#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "大洋集团",
+      "ticker": "01991",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "机器人部件"
+      ],
+      "detail": "拓展仿生皮肤、柔性肌肉、精密骨骼等机器人部件业务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "大洋集团控股有限公司",
+        "Ta Yang Group Holdings Limited",
+        "TA YANG GROUP"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=01991#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "微盟集团",
+      "ticker": "02013",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "商业软件"
+      ],
+      "detail": "提供数字商业服务，进入中证港股通人工智能应用指数。",
+      "sources": [
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "微盟集团",
+        "WEIMOB INC"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02013#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "理想汽车",
+      "ticker": "02015",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "智能驾驶"
+      ],
+      "detail": "整车产品布局辅助驾驶；汽车业务也包括大量与 AI 无关的部分。",
+      "sources": [
+        "hk-hsami",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "理想汽车-W",
+        "Li Auto Inc.",
+        "LI AUTO-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02015#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案",
+      "usTicker": "LI"
+    },
+    {
+      "name": "瑞声科技",
+      "ticker": "02018",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "精密元件",
+        "智能终端"
+      ],
+      "detail": "为智能设备供应声学、光学等精密元件，入选港交所人工智能指数。",
+      "sources": [
+        "hk-hkexai",
+        "hk-hssii",
+        "hk-hkexsemi",
+        "hk-hkexkrxs",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "瑞声科技控股有限公司",
+        "AAC Technologies Holdings Inc.",
+        "AAC TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02018#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "小马智行",
+      "ticker": "02026",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "自动驾驶"
+      ],
+      "detail": "开发自动驾驶系统，用于乘用车或作业车辆。",
+      "sources": [
+        "hk-hsait",
+        "hk-hsusrt",
+        "hk-hsami",
+        "hk-hkexai",
+        "hk-hsscai",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "Pony.ai",
+        "小马智行-W",
+        "Pony AI Inc.",
+        "PONY-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02026#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案",
+      "usTicker": "PONY"
+    },
+    {
+      "name": "富智康集团",
+      "ticker": "02038",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "智能汽车供应链"
+      ],
+      "detail": "恒生将其纳入自动驾驶价值链样本，包含车辆制造及配套部件等间接环节。",
+      "sources": [
+        "hk-hsami",
+        "hk-hssii",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "富智康集团有限公司",
+        "FIH Mobile Limited",
+        "FIH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02038#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "中集集团",
+      "ticker": "02039",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "数据中心供电",
+        "散热系统"
+      ],
+      "detail": "中集数能为数据中心提供模块化供配电、机房与冷却设施。",
+      "sources": [
+        "hk-cimc",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "中国国际海运集装箱(集团)股份有限公司",
+        "China International Marine Containers (Group) Co., Ltd.",
+        "CIMC"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02039#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "三花智控",
+      "ticker": "02050",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "机器人供应链"
+      ],
+      "detail": "热管理与机电部件厂商，属于 Roundhill 人形机器人 ETF 的持仓。",
+      "sources": [
+        "hk-humn",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "浙江三花智能控制股份有限公司",
+        "Zhejiang Sanhua Intelligent Controls Co.,Ltd.",
+        "SANHUA"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02050#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "一微科技",
+      "ticker": "02065",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "机器人芯片"
+      ],
+      "detail": "为移动机器人提供芯片及智能移动解决方案。",
+      "sources": [
+        "hk-amicro",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "珠海一微科技股份有限公司",
+        "Amicro Technology Co., Ltd.",
+        "AMICRO"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02065#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "BOSS直聘",
+      "ticker": "02076",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "智能招聘"
+      ],
+      "detail": "在招聘平台中使用自有算法匹配职位与求职者。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "BOSS直聘-W",
+        "看准科技有限公司",
+        "KANZHUN LIMITED",
+        "BOSS ZHIPIN-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02076#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案",
+      "usTicker": "BZ"
+    },
+    {
+      "name": "卓尔智联",
+      "ticker": "02098",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "供应链应用"
+      ],
+      "detail": "在 B2B 交易服务平台中应用人工智能和大数据技术。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "卓尔智联集团有限公司",
+        "Zall Smart Commerce Group Ltd.",
+        "ZALL SMARTCOM"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02098#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "创新奇智",
+      "ticker": "02121",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "工业大模型"
+      ],
+      "detail": "开发 AInnoGC 工业大模型，为制造等行业提供企业 AI 方案。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "创新奇智科技集团股份有限公司",
+        "AInnovation Technology Group Co., Ltd",
+        "AINNOVATION"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02121#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "医渡科技",
+      "ticker": "02158",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "医疗数据"
+      ],
+      "detail": "将智能数据处理用于公共卫生、研究与诊疗。",
+      "sources": [
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "医渡科技有限公司",
+        "Yidu Tech Inc.",
+        "YIDU TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02158#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "芯智控股",
+      "ticker": "02166",
+      "venue": "HKEX",
+      "sector": "services",
+      "segments": [
+        "芯片分销",
+        "光通信"
+      ],
+      "detail": "分销和整合用于智能视觉、光通信等场景的芯片。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "芯智控股有限公司",
+        "SMART-CORE HOLDINGS LIMITED",
+        "SMART-CORE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02166#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "天润云",
+      "ticker": "02167",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "对话式智能体"
+      ],
+      "detail": "以 Zenava 对话式智能体提供企业客户交互服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "天润云股份有限公司",
+        "TI Cloud Inc.",
+        "TI CLOUD"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02167#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "医脉通",
+      "ticker": "02192",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "医疗信息服务"
+      ],
+      "detail": "经营数字医疗信息服务平台，进入中证港股通人工智能应用指数。",
+      "sources": [
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "医脉通科技有限公司",
+        "MEDLIVE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02192#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "堃博医疗",
+      "ticker": "02216",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "医疗影像"
+      ],
+      "detail": "在医疗图像导航和图像处理研发中应用 AI。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "堃博医疗-B",
+        "堃博医疗控股有限公司",
+        "Broncus Holding Corporation",
+        "BRONCUS-B"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02216#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "晶泰控股",
+      "ticker": "02228",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "药物研发",
+        "实验自动化"
+      ],
+      "detail": "晶泰将计算模型与自动化实验平台用于药物和材料研发。",
+      "sources": [
+        "hk-hsait",
+        "hk-hkexai",
+        "hk-hsscai",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "晶泰控股有限公司",
+        "XtalPi Holdings Limited",
+        "XTALPI"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02228#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "广汽集团",
+      "ticker": "02238",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "智能驾驶"
+      ],
+      "detail": "整车产品布局辅助驾驶；汽车业务也包括大量与 AI 无关的部分。",
+      "sources": [
+        "hk-hsami",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "广州汽车集团股份有限公司",
+        "GUANGZHOU AUTOMOBILE GROUP CO., LTD",
+        "GAC GROUP"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02238#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "国微控股",
+      "ticker": "02239",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "智能传感器"
+      ],
+      "detail": "布局激光雷达及柔性压力传感器，面向机器人和交通感知。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "国微控股有限公司",
+        "SMIT HOLDINGS LIMITED",
+        "SMIT"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02239#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "晶合集成",
+      "ticker": "02249",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "晶圆代工"
+      ],
+      "detail": "从事晶圆代工，属于香港交易所半导体指数成分。",
+      "sources": [
+        "hk-hkexsemi",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "合肥晶合集成电路股份有限公司",
+        "NEXCHIP"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02249#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "鹰瞳科技",
+      "ticker": "02251",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "医疗视觉模型"
+      ],
+      "detail": "开发医疗视觉与健康模型，为眼底影像等场景提供辅助分析。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "鹰瞳科技-B",
+        "北京鹰瞳科技发展股份有限公司",
+        "Beijing Airdoc Technology Co., Ltd.",
+        "AIRDOC-B"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02251#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "微创机器人",
+      "ticker": "02252",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "医疗机器人"
+      ],
+      "detail": "业务涉及手术机器人、导航系统或相关器械。",
+      "sources": [
+        "hk-hsait",
+        "hk-botz",
+        "hk-hsscai",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "微创机器人-B",
+        "上海微创医疗机器人(集团)股份有限公司",
+        "Shanghai MicroPort MedBot (Group) Co., Ltd.",
+        "MEDBOT-B"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02252#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "拿森科技",
+      "ticker": "02261",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "车辆运动控制"
+      ],
+      "detail": "开发车辆转向或线控运动控制系统，为智能驾驶提供执行能力。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "拿森智能科技(浙江)股份有限公司",
+        "NASN Intelligent Tech (Zhejiang) Co., Ltd.",
+        "NASN TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02261#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "科拓股份",
+      "ticker": "02272",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "交通应用"
+      ],
+      "detail": "在停车运营云平台中结合人工智能与自动化管理。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "厦门科拓通讯技术股份有限公司",
+        "KEYTOP PARKING INC.",
+        "KEYTOP PARKING"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02272#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "润迈德",
+      "ticker": "02297",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "医疗机器人"
+      ],
+      "detail": "业务涉及手术机器人、导航系统或相关器械。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "润迈德-B",
+        "润迈德医疗有限公司",
+        "Rainmed Medical Limited",
+        "RAINMED-B"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02297#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "中国平安",
+      "ticker": "02318",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "医学大模型"
+      ],
+      "detail": "平安医疗健康业务将医疗模型用于辅助问诊等服务。",
+      "sources": [
+        "hk-pa",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "中国平安保险(集团)股份有限公司",
+        "Ping An Insurance (Group) Company of China, Ltd.",
+        "PING AN"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02318#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "长城汽车",
+      "ticker": "02333",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "智能驾驶"
+      ],
+      "detail": "整车产品布局辅助驾驶；汽车业务也包括大量与 AI 无关的部分。",
+      "sources": [
+        "hk-hsami",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "长城汽车股份有限公司",
+        "Great Wall Motor Company Limited",
+        "GWMOTOR"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02333#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "舜宇光学科技",
+      "ticker": "02382",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "光学模组",
+        "端侧感知"
+      ],
+      "detail": "生产摄像头或光学模组，处于智能设备和车辆感知的上游环节。",
+      "sources": [
+        "hk-hsami",
+        "hk-hkexai",
+        "hk-hkexsemi",
+        "hk-hkexkrxs",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "舜宇光学科技(集团)有限公司",
+        "Sunny Optical Technology (Group) Company Limited",
+        "SUNNY OPTICAL"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02382#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "东山精密",
+      "ticker": "02384",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "光模块",
+        "电路板"
+      ],
+      "detail": "生产光模块与印制电路板，属于计算网络和硬件供应链。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "苏州东山精密制造股份有限公司",
+        "Suzhou Dongshan Precision Manufacturing Co.,Ltd.",
+        "DSBJ"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02384#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "读书郎",
+      "ticker": "02385",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "教育终端",
+        "教育模型"
+      ],
+      "detail": "将自主研发的教育大模型用于学习设备及相关服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "读书郎教育控股有限公司",
+        "Readboy Education Holding Company Limited",
+        "READBOY"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02385#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "涂鸦智能",
+      "ticker": "02391",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "端侧AI",
+        "云平台"
+      ],
+      "detail": "提供具备生成式 AI 能力的物联网云开发平台。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "涂鸦智能-W",
+        "Tuya Inc.",
+        "TUYA-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02391#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案",
+      "usTicker": "TUYA"
+    },
+    {
+      "name": "玄武云",
+      "ticker": "02392",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "客户管理"
+      ],
+      "detail": "将人工智能、通信与数据技术用于 CRM 软件。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "玄武云科技控股有限公司",
+        "Xuan Wu Cloud Technology Holdings Limited",
+        "XUANWU CLOUD"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02392#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "佑驾创新",
+      "ticker": "02431",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "智能驾驶"
+      ],
+      "detail": "开发量产车型使用的智能驾驶软件与配套硬件。",
+      "sources": [
+        "hk-botz",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "深圳佑驾创新科技股份有限公司",
+        "Minieye Technology Co., Ltd.",
+        "MINIEYE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02431#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "越疆",
+      "ticker": "02432",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "协作机器人"
+      ],
+      "detail": "研发和生产协作机器人，用于工业自动化等场景。",
+      "sources": [
+        "hk-hsait",
+        "hk-botz",
+        "hk-humn",
+        "hk-hsscai",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "深圳市越疆科技股份有限公司",
+        "SHENZHEN DOBOT CORP LTD",
+        "DOBOT"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02432#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "出门问问",
+      "ticker": "02438",
+      "venue": "HKEX",
+      "sector": "models",
+      "segments": [
+        "生成式AI",
+        "语音交互"
+      ],
+      "detail": "提供语音交互、内容生成软件和智能硬件。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "出门问问有限公司",
+        "Mobvoi Inc.",
+        "MOBVOI"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02438#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "美中嘉和",
+      "ticker": "02453",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "医疗影像"
+      ],
+      "detail": "在独立影像中心等医疗服务中应用 AI。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "美中嘉和医学技术发展集团股份有限公司",
+        "Concord Healthcare Group Co., Ltd.",
+        "CONCORD HC GP"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02453#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "望尘科技控股",
+      "ticker": "02458",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "游戏应用"
+      ],
+      "detail": "研发运动模拟及球类竞技 AI 等游戏技术。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "望尘科技控股有限公司",
+        "Gala Technology Holding Limited",
+        "GALA TECH HOLD"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02458#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "立讯精密",
+      "ticker": "02475",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "高速互连",
+        "电源散热"
+      ],
+      "detail": "企业通信产品包括高速互连、光模块、散热模块和电源。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "立讯精密工业股份有限公司",
+        "Luxshare Precision Industry Co., Ltd.",
+        "LUXSHARE ICT"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02475#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "胜宏科技",
+      "ticker": "02476",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "电路板"
+      ],
+      "detail": "生产印制电路板，用于服务器等设备的电气连接与信号传输。",
+      "sources": [
+        "hk-hsait",
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hkexai",
+        "hk-hssii",
+        "hk-hssccpt",
+        "hk-hsscai",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "胜宏科技(惠州)股份有限公司",
+        "Victory Giant Technology (HuiZhou)Co.,Ltd.",
+        "VGT"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02476#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "经纬天地",
+      "ticker": "02477",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "网络服务"
+      ],
+      "detail": "从事通信网络技术服务，入选恒生人工智能基础设施主题。",
+      "sources": [
+        "hk-hsscaii",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "经纬天地控股有限公司",
+        "WellCell Holdings Co., Limited",
+        "WELLCELL HOLD"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02477#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "声通科技",
+      "ticker": "02495",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "语音交互"
+      ],
+      "detail": "为企业提供交互式人工智能方案。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "声通科技股份有限公司",
+        "Voicecomm International Limited",
+        "VOICECOMM"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02495#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "速腾聚创",
+      "ticker": "02498",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "激光雷达"
+      ],
+      "detail": "开发激光雷达，为车辆或机器人提供空间感知。",
+      "sources": [
+        "hk-hsait",
+        "hk-hsusrt",
+        "hk-hsami",
+        "hk-botz",
+        "hk-humn",
+        "hk-hsscai",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "速腾聚创科技有限公司",
+        "ROBOSENSE TECHNOLOGY CO., LTD",
+        "ROBOSENSE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02498#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "迈越科技",
+      "ticker": "02501",
+      "venue": "HKEX",
+      "sector": "services",
+      "segments": [
+        "教育应用"
+      ],
+      "detail": "为智慧校园等项目提供结合人工智能的 IT 解决方案。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "迈越科技股份有限公司",
+        "MAIYUE TECHNOLOGY LIMITED",
+        "MAIYUE TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02501#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "讯飞医疗科技",
+      "ticker": "02506",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "医学大模型"
+      ],
+      "detail": "将讯飞星火医疗大模型用于基层医疗与辅助诊断服务。",
+      "sources": [
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "讯飞医疗科技股份有限公司",
+        "Xunfei Healthcare Technology Co., Ltd.",
+        "XUNFEIHEALTH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02506#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "云工场",
+      "ticker": "02512",
+      "venue": "HKEX",
+      "sector": "compute",
+      "segments": [
+        "算力服务"
+      ],
+      "detail": "面向计算工作负载提供智算中心、算力或边缘云服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "云工场科技控股有限公司",
+        "Cloud Factory Technology Holdings Limited",
+        "CLOUD FACTORY"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02512#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "智谱",
+      "ticker": "02513",
+      "venue": "HKEX",
+      "sector": "models",
+      "segments": [
+        "通用大模型",
+        "模型服务"
+      ],
+      "detail": "智谱开发 GLM 系列模型，通过开放平台等渠道提供模型服务。",
+      "sources": [
+        "hk-zai",
+        "hk-hsait",
+        "hk-hscpt",
+        "hk-hkexai",
+        "hk-aiq",
+        "hk-hssccpt",
+        "hk-hsscai",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "智谱华章",
+        "Z.ai",
+        "GLM",
+        "北京智谱华章科技股份有限公司",
+        "Z.AI Co., Ltd.",
+        "Z.AI"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02513#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "汽车之家",
+      "ticker": "02518",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "内容生成"
+      ],
+      "detail": "面向汽车用户的内容平台纳入 AI 创作内容。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "汽车之家-S",
+        "Autohome Inc.",
+        "AUTOHOME-S"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02518#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案",
+      "usTicker": "ATHM"
+    },
+    {
+      "name": "禾赛",
+      "ticker": "02525",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "激光雷达"
+      ],
+      "detail": "开发激光雷达，为车辆或机器人提供空间感知。",
+      "sources": [
+        "hk-hsait",
+        "hk-hsusrt",
+        "hk-hsami",
+        "hk-hsscai",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "Hesai",
+        "禾赛-W",
+        "禾赛科技",
+        "Hesai Group",
+        "HESAI-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02525#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案",
+      "usTicker": "HSAI"
+    },
+    {
+      "name": "德适",
+      "ticker": "02526",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "医学影像"
+      ],
+      "detail": "将人工智能用于医学影像分析及诊断辅助。",
+      "sources": [
+        "hk-hsait",
+        "hk-hkexai",
+        "hk-hsscai",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "德适-B",
+        "杭州德适生物科技股份有限公司",
+        "Hangzhou Diagens Biotechnology Co., Ltd.",
+        "DIAGENS-B"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02526#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "黑芝麻智能",
+      "ticker": "02533",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "车载计算"
+      ],
+      "detail": "研发面向智能驾驶的计算芯片与配套软件。",
+      "sources": [
+        "hk-hsait",
+        "hk-hsusrt",
+        "hk-hsami",
+        "hk-hkexai",
+        "hk-hsscai",
+        "hk-hkexsemi",
+        "hk-hkexkrxs",
+        "hk-932493",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "黑芝麻智能国际控股有限公司",
+        "Black Sesame International Holding Limited",
+        "BLACK SESAME"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02533#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "宜搜科技",
+      "ticker": "02550",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "推荐算法"
+      ],
+      "detail": "开发推荐引擎，用于数字阅读和内容分发等服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "宜搜科技控股有限公司",
+        "Easou Technology Holdings Limited",
+        "EASOU TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02550#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "迈富时",
+      "ticker": "02556",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "营销大模型",
+        "企业智能体"
+      ],
+      "detail": "以 Tforce 营销大模型和 GenOS AI 提供企业智能化产品。",
+      "sources": [
+        "hk-932493",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "迈富时管理有限公司",
+        "Marketingforce Management Ltd",
+        "MARKETINGFORCE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02556#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "狮腾控股",
+      "ticker": "02562",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "企业智能体"
+      ],
+      "detail": "推出面向企业的生成式 AI 平台 Geene。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "狮腾控股有限公司",
+        "Synagistics Limited",
+        "SYNAGISTICS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02562#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "七牛智能",
+      "ticker": "02567",
+      "venue": "HKEX",
+      "sector": "compute",
+      "segments": [
+        "音视频云"
+      ],
+      "detail": "提供音视频云与 AI 处理服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "七牛智能科技有限公司",
+        "Qiniu Limited",
+        "QINIU"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02567#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "英诺赛科",
+      "ticker": "02577",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "功率半导体"
+      ],
+      "detail": "生产氮化镓功率器件，属于高效电能转换所需的上游元件。",
+      "sources": [
+        "hk-hsait",
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hsusrt",
+        "hk-hkexai",
+        "hk-hssii",
+        "hk-hssccpt",
+        "hk-hsscai",
+        "hk-hkexsemi",
+        "hk-hkexkrxs",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "英诺赛科(苏州)科技股份有限公司",
+        "InnoScience (Suzhou) Technology Holding Co., Ltd.",
+        "INNOSCIENCE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02577#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "多点数智",
+      "ticker": "02586",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "零售软件"
+      ],
+      "detail": "为零售商提供数字化软件和服务，进入中证港股通人工智能应用指数。",
+      "sources": [
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "多点数智有限公司",
+        "DMALL"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02586#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "极智嘉",
+      "ticker": "02590",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "仓储机器人"
+      ],
+      "detail": "开发用于仓储搬运、拣选或分拣的机器人系统。",
+      "sources": [
+        "hk-hsait",
+        "hk-hsusrt",
+        "hk-botz",
+        "hk-hsscai",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "极智嘉-W",
+        "北京极智嘉科技股份有限公司",
+        "Beijing Geekplus Technology Co., Ltd.",
+        "GEEKPLUS-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02590#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "讯众通信",
+      "ticker": "02597",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "企业通信"
+      ],
+      "detail": "向企业和政府客户提供 AI 驱动的通信服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "北京讯众通信技术股份有限公司",
+        "Beijing Xunzhong Communication Technology Co., Ltd.",
+        "XUNZHONG"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02597#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "中国太保",
+      "ticker": "02601",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "保险应用"
+      ],
+      "detail": "在健康保险理赔等流程中应用大模型。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "中国太平洋保险(集团)股份有限公司",
+        "China Pacific Insurance (Group) Co., Ltd.",
+        "CPIC"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02601#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "京东物流",
+      "ticker": "02618",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "物流自动驾驶"
+      ],
+      "detail": "京东物流在末端配送等物流场景部署无人车辆。",
+      "sources": [
+        "hk-jd",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "京东物流股份有限公司",
+        "JD Logistics, Inc.",
+        "JD LOGISTICS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02618#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "天岳先进",
+      "ticker": "02631",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "半导体材料"
+      ],
+      "detail": "生产碳化硅相关半导体材料，入选恒生人工智能基础设施指数。",
+      "sources": [
+        "hk-hsscaii",
+        "hk-hssii",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "山东天岳先进科技股份有限公司",
+        "SICC CO., LTD.",
+        "SICC"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02631#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "泽景股份",
+      "ticker": "02632",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "智能座舱"
+      ],
+      "detail": "生产智能显示与车载抬头显示产品，纳入自动驾驶主题供应链。",
+      "sources": [
+        "hk-hsami",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "江苏泽景汽车电子股份有限公司",
+        "JIANGSU NEW VISION AUTOMOTIVE ELECTRONICS CO., LTD.",
+        "NEW VISION CO"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02632#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "诺比侃",
+      "ticker": "02635",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "工业智能"
+      ],
+      "detail": "为工业客户提供人工智能解决方案，入选恒生人工智能主题指数。",
+      "sources": [
+        "hk-hsait",
+        "hk-hsscai",
+        "hk-932493",
+        "hk-932587",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "诺比侃人工智能科技(成都)股份有限公司",
+        "Nuobikan Artificial Intelligence Technology (Chengdu) Co., Ltd.",
+        "NUOBIKAN"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02635#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "曹操出行",
+      "ticker": "02643",
+      "venue": "HKEX",
+      "sector": "services",
+      "segments": [
+        "自动驾驶出行"
+      ],
+      "detail": "出行平台在自动驾驶服务或相关数据业务中布局。",
+      "sources": [
+        "hk-hsusrt",
+        "hk-hsami",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "曹操出行有限公司",
+        "CaoCao Inc.",
+        "CAOCAO INC"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02643#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "挚达科技",
+      "ticker": "02650",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "充电机器人"
+      ],
+      "detail": "产品线包括自动充电机器人。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "上海挚达科技发展股份有限公司",
+        "Shanghai Zhida Technology Development Co., Ltd.",
+        "ZHIDA TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02650#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "果下科技",
+      "ticker": "02655",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "能源应用"
+      ],
+      "detail": "在新能源与储能产品中结合 AI 和软件控制技术。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "果下科技股份有限公司",
+        "Guoxia Technology Co., Ltd.",
+        "GUOXIA TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02655#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "图达通",
+      "ticker": "02665",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "激光雷达"
+      ],
+      "detail": "开发激光雷达，为车辆或机器人提供空间感知。",
+      "sources": [
+        "hk-hsusrt",
+        "hk-hsami",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "Seyond Holdings Ltd.",
+        "SEYOND"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02665#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "云迹",
+      "ticker": "02670",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "服务机器人"
+      ],
+      "detail": "研发配送、清洁或酒店服务等商用机器人。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "北京云迹科技股份有限公司",
+        "Beijing Yunji Technology Co., Ltd.",
+        "YUNJI"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02670#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "白鸽在线",
+      "ticker": "02672",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "保险应用"
+      ],
+      "detail": "将 AI 垂直模型用于保险保障方案与服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "白鸽在线(厦门)数字科技股份有限公司",
+        "Baige Online Digital Technology Co., Ltd.",
+        "BAIGE DIGITAL"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02672#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "精锋医疗",
+      "ticker": "02675",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "医疗机器人"
+      ],
+      "detail": "业务涉及手术机器人、导航系统或相关器械。",
+      "sources": [
+        "hk-hsait",
+        "hk-botz",
+        "hk-hsscai",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "精锋医疗-B",
+        "深圳市精锋医疗科技股份有限公司",
+        "Shenzhen Edge Medical Co., Ltd.",
+        "EDGE MEDICAL-B"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02675#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "纳芯微",
+      "ticker": "02676",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "模拟芯片"
+      ],
+      "detail": "设计模拟与混合信号芯片，属于恒生半导体产业指数成分。",
+      "sources": [
+        "hk-hssii",
+        "hk-hkexsemi",
+        "hk-hkexkrxs",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "苏州纳芯微电子股份有限公司",
+        "NOVOSENSE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02676#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "宏芯宇",
+      "ticker": "02681",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "存储芯片"
+      ],
+      "detail": "开发或供应存储产品，面向服务器、终端或其他电子设备。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "深圳宏芯宇电子股份有限公司",
+        "HOSIN Electronics Co., LTD.",
+        "HOSIN ELEC"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02681#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "兆威机电",
+      "ticker": "02692",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "传动部件"
+      ],
+      "detail": "提供微型传动或精密减速部件，服务机器人运动机构。",
+      "sources": [
+        "hk-humn",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "深圳市兆威机电股份有限公司",
+        "Shenzhen Zhaowei Machinery & Electronics Co., Ltd.",
+        "ZHAOWEI"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02692#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "真健康医疗",
+      "ticker": "02697",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "医疗机器人"
+      ],
+      "detail": "业务涉及手术机器人、导航系统或相关器械。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "真健康医疗-B",
+        "广东真健康医疗科技开发股份有限公司",
+        "Guangdong True Health Medical Technology Development Co., Ltd.",
+        "TH MEDICAL-B"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02697#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "国民技术",
+      "ticker": "02701",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "芯片设计"
+      ],
+      "detail": "开发集成电路产品，属于恒生半导体产业指数成分。",
+      "sources": [
+        "hk-hssii",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "国民技术股份有限公司",
+        "NSING TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02701#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "海致科技集团",
+      "ticker": "02706",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "知识图谱",
+        "企业智能体"
+      ],
+      "detail": "以知识图谱和人工智能技术向企业提供智能决策服务。",
+      "sources": [
+        "hk-hsait",
+        "hk-hsscai",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "北京海致科技集团股份有限公司",
+        "Beijing Haizhi Technology Group Co., Ltd.",
+        "HAIZHI TECH GP"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02706#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "埃斯顿",
+      "ticker": "02715",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "工业机器人"
+      ],
+      "detail": "研发、制造工业机器人，并提供自动化集成产品或服务。",
+      "sources": [
+        "hk-humn",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "南京埃斯顿自动化股份有限公司",
+        "ESTUN AUTOMATION CO., LTD",
+        "ESTUN"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02715#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "明略科技",
+      "ticker": "02718",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "营销分析"
+      ],
+      "detail": "面向企业开发数据智能与营销分析软件。",
+      "sources": [
+        "hk-hscpt",
+        "hk-aiq",
+        "hk-hssccpt",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "明略科技-W",
+        "Mininglamp Technology",
+        "MININGLAMP-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02718#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "深演智能",
+      "ticker": "02723",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "智能营销"
+      ],
+      "detail": "在广告、营销或用户匹配服务中使用算法与数据分析。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "深演智能(新)",
+        "北京深演智能科技股份有限公司",
+        "Beijing DeepZero Technology Co., Ltd.",
+        "DEEPZERO-NEW"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02723#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "瀚天天成",
+      "ticker": "02726",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "半导体材料"
+      ],
+      "detail": "生产碳化硅相关半导体材料，入选恒生人工智能基础设施指数。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hssii",
+        "hk-hkexsemi",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "瀚天天成电子科技(厦门)股份有限公司",
+        "EpiWorld International Co., Ltd.",
+        "EPIWORLD"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02726#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "上海电气",
+      "ticker": "02727",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "电力装备"
+      ],
+      "detail": "电力装备企业；被恒生指数公司纳入人工智能基础设施主题，反映间接供应链关联。",
+      "sources": [
+        "hk-hsscaii",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "上海电气集团股份有限公司",
+        "Shanghai Electric Group Company Limited",
+        "SH ELECTRIC"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02727#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "凯乐士科技",
+      "ticker": "02729",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "仓储机器人"
+      ],
+      "detail": "开发用于仓储搬运、拣选或分拣的机器人系统。",
+      "sources": [
+        "hk-hsait",
+        "hk-botz",
+        "hk-hsscai",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "浙江凯乐士科技集团股份有限公司",
+        "Zhejiang Galaxis Technology Group Co., Ltd.",
+        "GALAXIS TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02729#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "易鑫集团",
+      "ticker": "02858",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "金融应用"
+      ],
+      "detail": "将人工智能用于汽车金融平台与相关金融科技服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "易鑫集团有限公司",
+        "YIXIN GROUP LIMITED",
+        "YIXIN"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02858#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "博泰车联",
+      "ticker": "02889",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "智能座舱",
+        "智能驾驶"
+      ],
+      "detail": "开发汽车智能座舱或智能驾驶相关产品。",
+      "sources": [
+        "hk-hsami",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "博泰车联网科技(上海)股份有限公司",
+        "PATEO CONNECT Technology (Shanghai) Corporation",
+        "PATEO"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=02889#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "大族数控",
+      "ticker": "03200",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "电路板设备"
+      ],
+      "detail": "研发印制电路板制造设备，服务 AI 和通信设备等电子终端的板件供应链。",
+      "sources": [
+        "hk-hssii",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "深圳市大族数控科技股份有限公司",
+        "SHENZHEN HAN’S CNC TECHNOLOGY CO., LTD.",
+        "HANS CNC"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03200#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "君正股份",
+      "ticker": "03223",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "端侧计算"
+      ],
+      "detail": "研发处理器、多媒体与 AI 计算技术，用于智能视频等设备。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "北京君正集成电路股份有限公司",
+        "Ingenic Semiconductor Co., Ltd.",
+        "INGENIC"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03223#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "优地机器人",
+      "ticker": "03231",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "服务机器人"
+      ],
+      "detail": "研发配送、清洁或酒店服务等商用机器人。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "优地机器人(无锡)股份有限公司",
+        "Excelland Robotics (Wuxi) Co. Ltd.",
+        "EXCELLAND ROBOT"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03231#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "美格智能",
+      "ticker": "03268",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "无线模组",
+        "边缘计算"
+      ],
+      "detail": "为联网终端提供无线通信与智能模组，服务端侧智能应用。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "美格智能技术股份有限公司",
+        "MeiG Smart Technology Co., Ltd",
+        "MEIG"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03268#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "长光辰芯",
+      "ticker": "03277",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "图像传感器"
+      ],
+      "detail": "研发高性能 CMOS 图像传感器，应用于工业视觉等场景。",
+      "sources": [
+        "hk-hsait",
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hssii",
+        "hk-hssccpt",
+        "hk-hsscai",
+        "hk-hkexsemi",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "长春长光辰芯微电子股份有限公司",
+        "Gpixel Changchun Microelectronics Inc.",
+        "GPIXEL"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03277#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "华勤技术",
+      "ticker": "03296",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "终端制造",
+        "数据中心硬件"
+      ],
+      "detail": "为客户生产智能设备及数据中心产品。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "华勤技术股份有限公司",
+        "Huaqin Co., Ltd.",
+        "HUAQIN"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03296#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "中际旭创",
+      "ticker": "03308",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "光模块",
+        "光互连"
+      ],
+      "detail": "为通信网络或数据中心提供光模块等高速互连产品。",
+      "sources": [
+        "hk-hkexai",
+        "hk-hkexsemi",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "中际旭创股份有限公司",
+        "ZHONGJI INNOLIGHT CO., LTD.",
+        "ZJ INNOLIGHT"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03308#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "云英谷科技",
+      "ticker": "03310",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "显示芯片"
+      ],
+      "detail": "开发显示驱动芯片，入选恒生算力主题与人工智能基础设施指数。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hssii",
+        "hk-hkexsemi",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "云英谷科技股份有限公司",
+        "Viewtrix Technology Co., Ltd.",
+        "VIEWTRIX TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03310#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "迅策",
+      "ticker": "03317",
+      "venue": "HKEX",
+      "sector": "services",
+      "segments": [
+        "实时数据",
+        "分析平台"
+      ],
+      "detail": "迅策为资产管理等行业提供实时数据基础设施及分析服务。",
+      "sources": [
+        "hk-hsait",
+        "hk-hkexai",
+        "hk-hsscai",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "深圳迅策科技股份有限公司",
+        "Shenzhen Xunce Technology Co., Ltd.",
+        "XUNCE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03317#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "飞速创新",
+      "ticker": "03355",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "光互连",
+        "数据中心网络"
+      ],
+      "detail": "为数据中心和企业网络提供光互连与网络产品。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hssii",
+        "hk-hssccpt",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "深圳市飞速创新技术股份有限公司",
+        "FS.COM LIMITED",
+        "FS.COM"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03355#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "联想控股",
+      "ticker": "03396",
+      "venue": "HKEX",
+      "sector": "mixed",
+      "segments": [
+        "产业控股"
+      ],
+      "detail": "通过旗下企业参与计算设备产业；为恒生算力主题成分。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hssccpt",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "联想控股股份有限公司",
+        "Legend Holdings Corporation",
+        "LEGENDHOLDING"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03396#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "福耀玻璃",
+      "ticker": "03606",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "智能汽车供应链"
+      ],
+      "detail": "恒生将其纳入自动驾驶价值链样本，包含车辆制造及配套部件等间接环节。",
+      "sources": [
+        "hk-hsami",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "福耀玻璃工业集团股份有限公司",
+        "FUYAO GLASS INDUSTRY GROUP CO.,LTD.",
+        "FUYAO GLASS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03606#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "傅里叶半导体",
+      "ticker": "03625",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "智能音频",
+        "触觉反馈"
+      ],
+      "detail": "傅里叶半导体开发音频及触觉反馈芯片。",
+      "sources": [
+        "hk-hsscaii",
+        "hk-hssii",
+        "hk-hkexsemi",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "傅里叶",
+        "上海傅里叶半导体股份有限公司",
+        "Shanghai FourSemi Semiconductor Co., Ltd.",
+        "FOURSEMI"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03625#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "KEEP",
+      "ticker": "03650",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "健康应用"
+      ],
+      "detail": "Keep 利用人工智能辅助生成个性化训练计划。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "Keep Inc."
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03650#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "圣邦股份",
+      "ticker": "03661",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "模拟芯片"
+      ],
+      "detail": "模拟芯片应用场景包括服务器与机器视觉设备。",
+      "sources": [
+        "hk-hssii",
+        "hk-hkexsemi",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "圣邦微电子(北京)股份有限公司",
+        "SG Micro Corp",
+        "SG MICRO"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03661#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "瑞和数智",
+      "ticker": "03680",
+      "venue": "HKEX",
+      "sector": "services",
+      "segments": [
+        "金融应用"
+      ],
+      "detail": "面向政府、金融等客户提供人工智能与大数据决策服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "瑞和数智科技控股有限公司",
+        "Ruihe Data Technology Holdings Limited",
+        "RUIHE DATA"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03680#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "美团",
+      "ticker": "03690",
+      "venue": "HKEX",
+      "sector": "models",
+      "segments": [
+        "通用大模型",
+        "多模态"
+      ],
+      "detail": "美团 LongCat 团队发布对话、图像与视频等开源模型。",
+      "sources": [
+        "hk-longcat",
+        "hk-aiq",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "美团-W",
+        "Meituan",
+        "MEITUAN-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03690#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "英矽智能",
+      "ticker": "03696",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "AI药物研发"
+      ],
+      "detail": "英矽智能使用 Pharma.AI 平台发现和开发药物。",
+      "sources": [
+        "hk-932493",
+        "hk-932587",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "InSilico Medicine Cayman TopCo",
+        "INSILICO"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03696#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "映宇宙",
+      "ticker": "03700",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "图像生成",
+        "视频生成"
+      ],
+      "detail": "在数字内容业务中开展视频、绘图及数字人的 AI 应用。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "映宇宙集团有限公司",
+        "Inkeverse Group Limited",
+        "INKEVERSE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03700#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "珞石机器人",
+      "ticker": "03752",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "工业机器人"
+      ],
+      "detail": "研发、制造工业机器人，并提供自动化集成产品或服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "ROKAE",
+        "珞石(山东)机器人集团股份有限公司",
+        "ROKAE (SHANDONG) ROBOTICS GROUP INC.",
+        "ROKAE ROBOTICS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03752#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "希迪智驾",
+      "ticker": "03881",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "自动驾驶"
+      ],
+      "detail": "开发自动驾驶系统，用于乘用车或作业车辆。",
+      "sources": [
+        "hk-hsusrt",
+        "hk-hsami",
+        "hk-botz",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "希迪智驾科技股份有限公司",
+        "CiDi Inc.",
+        "CIDI"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03881#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "金山软件",
+      "ticker": "03888",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "办公应用"
+      ],
+      "detail": "金山软件的办公业务将 AI 用于文档、表格及演示等生产力工具。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hkexai",
+        "hk-hssccpt",
+        "hk-932493",
+        "hk-932587",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "金山软件有限公司",
+        "Kingsoft Corporation Limited",
+        "KINGSOFT"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03888#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "金山云",
+      "ticker": "03896",
+      "venue": "HKEX",
+      "sector": "compute",
+      "segments": [
+        "智算云"
+      ],
+      "detail": "向企业客户提供云计算及智能算力服务。",
+      "sources": [
+        "hk-hsait",
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hkexai",
+        "hk-hssccpt",
+        "hk-hsscai",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "Kingsoft Cloud",
+        "金山云控股有限公司",
+        "Kingsoft Cloud Holdings Limited",
+        "KINGSOFT CLOUD"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03896#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案",
+      "usTicker": "KC"
+    },
+    {
+      "name": "来福谐波",
+      "ticker": "03952",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "传动部件"
+      ],
+      "detail": "提供微型传动或精密减速部件，服务机器人运动机构。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "浙江来福谐波传动股份有限公司",
+        "Zhejiang Laifual Drive Co., Ltd.",
+        "LAIFUAL"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03952#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "兆易创新",
+      "ticker": "03986",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "存储芯片"
+      ],
+      "detail": "开发或供应存储产品，面向服务器、终端或其他电子设备。",
+      "sources": [
+        "hk-hsait",
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hssii",
+        "hk-hssccpt",
+        "hk-hsscai",
+        "hk-hkexsemi",
+        "hk-hkexkrxs",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "兆易创新科技集团股份有限公司",
+        "GigaDevice Semiconductor Inc.",
+        "GIGADEVICE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=03986#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "众安在线",
+      "ticker": "06060",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "保险科技"
+      ],
+      "detail": "经营互联网财产保险，进入中证港股通人工智能应用指数。",
+      "sources": [
+        "hk-932493",
+        "hk-932587",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "众安在线财产保险股份有限公司",
+        "ZA ONLINE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06060#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "盛业",
+      "ticker": "06069",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "供应链金融"
+      ],
+      "detail": "将模型与数据分析用于供应链金融的风控或运营流程。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "盛业控股集团有限公司",
+        "SY Holdings Group Limited",
+        "SY HOLDINGS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06069#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "壁仞科技",
+      "ticker": "06082",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "算力芯片",
+        "GPU"
+      ],
+      "detail": "研发面向智能计算的 GPU，用于模型训练或推理等工作负载。",
+      "sources": [
+        "hk-hsait",
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hkexai",
+        "hk-hssii",
+        "hk-hssccpt",
+        "hk-hsscai",
+        "hk-hkexsemi",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "Biren",
+        "上海壁仞科技股份有限公司",
+        "Shanghai Biren Technology Co., Ltd.",
+        "BIREN TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06082#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "鸿腾精密",
+      "ticker": "06088",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "互连线缆"
+      ],
+      "detail": "生产互连线缆或连接器，为电子与计算设备之间传输数据。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hkexai",
+        "hk-hssccpt",
+        "hk-hkexsemi",
+        "hk-hkexkrxs",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "FIT HON TENG",
+        "鸿腾六零八八精密科技股份有限公司",
+        "FIT Hon Teng Limited"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06088#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "仙工智能",
+      "ticker": "06106",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "工厂机器人",
+        "调度软件"
+      ],
+      "detail": "开发工厂移动机器人、控制器和调度软件。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "上海仙工智能科技股份有限公司",
+        "Shanghai Seer Intelligent Technology Co., Ltd.",
+        "SEER TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06106#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "剑桥科技",
+      "ticker": "06166",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "光模块",
+        "光互连"
+      ],
+      "detail": "为通信网络或数据中心提供光模块等高速互连产品。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hssii",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "上海剑桥科技股份有限公司",
+        "CIG SHANGHAI CO., LTD.",
+        "CIG"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06166#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "卧安机器人",
+      "ticker": "06600",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "家庭机器人"
+      ],
+      "detail": "研发面向家庭场景的机器人与配套设备。",
+      "sources": [
+        "hk-hsusrt",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "卧安机器人(深圳)股份有限公司",
+        "OneRobotics (Shenzhen) Co., Ltd.",
+        "ONEROBOTICS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06600#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "百融智能",
+      "ticker": "06608",
+      "venue": "HKEX",
+      "sector": "services",
+      "segments": [
+        "模型服务",
+        "金融应用"
+      ],
+      "detail": "百融面向机构提供模型及业务服务，技术包括自然语言处理和机器学习。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "百融云创",
+        "百融智能-W",
+        "Bairong AI Inc.",
+        "BAIRONG AI-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06608#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "飞天云动",
+      "ticker": "06610",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "数字内容"
+      ],
+      "detail": "在 AR/VR 内容及营销服务中结合 AI 行为算法。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "飞天云动科技有限公司",
+        "Flowing Cloud Technology Ltd",
+        "FLOWING CLOUD"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06610#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "蓝思科技",
+      "ticker": "06613",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "终端部件"
+      ],
+      "detail": "为智能终端提供精密零部件、结构件或整机制造服务。",
+      "sources": [
+        "hk-hsscaii",
+        "hk-hssii",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "蓝思科技股份有限公司",
+        "Lens Technology Co., Ltd.",
+        "LENS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06613#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "京东健康",
+      "ticker": "06618",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "医疗应用"
+      ],
+      "detail": "京东健康将人工智能部署于医疗服务业务。",
+      "sources": [
+        "hk-jd",
+        "hk-932493",
+        "hk-932587",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "京东健康股份有限公司",
+        "JD Health International Inc.",
+        "JD HEALTH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06618#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "极视角",
+      "ticker": "06636",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "视觉模型"
+      ],
+      "detail": "研发计算机视觉算法与视觉模型，为企业提供视觉识别服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "山东极视角科技股份有限公司",
+        "Shandong Extreme Vision Technology Co., Ltd.",
+        "EXTREME VISION"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06636#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "五一视界",
+      "ticker": "06651",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "训练数据",
+        "自动驾驶仿真"
+      ],
+      "detail": "为智能驾驶仿真测试和 AI 模型训练提供合成数据与仿真工具。",
+      "sources": [
+        "hk-hsait",
+        "hk-hsusrt",
+        "hk-hsami",
+        "hk-hsscai",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "北京五一视界数字孪生科技股份有限公司",
+        "Beijing 51WORLD Digital Twin Technology Co., Ltd.",
+        "51WORLD"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06651#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "思格新能",
+      "ticker": "06656",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "能源应用"
+      ],
+      "detail": "在新能源与储能产品中结合 AI 和软件控制技术。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "思格新能源股份有限公司",
+        "Sigenergy Technology Co., Ltd.",
+        "SIGENERGY"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06656#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "百望股份",
+      "ticker": "06657",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "企业智能体"
+      ],
+      "detail": "以智能体和数据平台向企业交付商业应用。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "百望股份有限公司",
+        "BAIWANG CO., LTD.",
+        "BAIWANG CO"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06657#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "琻捷电子",
+      "ticker": "06675",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "传感芯片"
+      ],
+      "detail": "研发无线传感 SoC，用于汽车等终端。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hssii",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "SENASIC",
+        "琻捷电子科技(江苏)股份有限公司",
+        "SENASIC Electronics Technology Co., Ltd."
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06675#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "找钢网",
+      "ticker": "06676",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "工业应用"
+      ],
+      "detail": "向钢铁交易客户提供语音助手及钢管、钢筋智能计数工具。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "找钢网-W",
+        "找钢网集团",
+        "ZG GROUP",
+        "ZG GROUP-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06676#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "金力永磁",
+      "ticker": "06680",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "机器人电机"
+      ],
+      "detail": "产品包括具身机器人电机转子及磁组件。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "江西金力永磁科技股份有限公司",
+        "JL MAG RARE-EARTH CO., LTD.",
+        "JLMAG"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06680#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "脑动极光",
+      "ticker": "06681",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "医疗应用"
+      ],
+      "detail": "结合脑科学与人工智能开发认知障碍数字疗法。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "脑动极光-B",
+        "脑动极光医疗科技有限公司",
+        "BrainAurora Medical Technology Limited",
+        "BRAINAURORA-B"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06681#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "范式智能",
+      "ticker": "06682",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "企业AI平台",
+        "算力调度"
+      ],
+      "detail": "第四范式提供企业建模、异构算力管理与智能体调用产品。",
+      "sources": [
+        "hk-hsait",
+        "hk-hscpt",
+        "hk-hssccpt",
+        "hk-hsscai",
+        "hk-932493",
+        "hk-932587",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "第四范式",
+        "4Paradigm",
+        "范式智能技术集团股份有限公司",
+        "Phancy Group Co., Ltd.",
+        "PHANCY"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06682#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "海尔智家",
+      "ticker": "06690",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "智能家电"
+      ],
+      "detail": "开发智能家电及智慧家庭场景解决方案，入选中证港股通机器人主题指数。",
+      "sources": [
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "海尔智家股份有限公司",
+        "HAIER SMARTHOME"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06690#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "星环科技",
+      "ticker": "06727",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "数据平台",
+        "模型运维"
+      ],
+      "detail": "星环科技为企业提供数据治理及大模型、机器学习运维平台。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "星环信息科技(上海)股份有限公司",
+        "Transwarp Technology (Shanghai) Co.,Ltd.",
+        "TRANSWARP"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06727#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "本末科技",
+      "ticker": "06731",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "机器人关节"
+      ],
+      "detail": "研发机器人直驱动力模组及关节部件。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "本末动力(北京)科技股份有限公司",
+        "Direct Drive Tech Limited",
+        "DIRECT DRIVE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06731#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "欢创科技",
+      "ticker": "06802",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "空间感知"
+      ],
+      "detail": "为清洁机器人等产品提供激光雷达和空间感知处理方案。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "深圳市欢创科技股份有限公司",
+        "SHENZHEN CAMSENSE TECHNOLOGIES CO., LTD.",
+        "CAMSENSE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06802#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "澜起科技",
+      "ticker": "06809",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "内存接口",
+        "高速互连"
+      ],
+      "detail": "开发服务器内存接口与高速互连芯片。",
+      "sources": [
+        "hk-hsait",
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hssii",
+        "hk-hssccpt",
+        "hk-hsscai",
+        "hk-hkexsemi",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "澜起科技股份有限公司",
+        "Montage Technology Co., Ltd.",
+        "MONTAGE TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06809#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "商米科技",
+      "ticker": "06810",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "智能商用终端"
+      ],
+      "detail": "提供商业物联网终端和配套软件，入选恒生算力主题指数。",
+      "sources": [
+        "hk-hscpt",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "商米科技-W",
+        "上海商米科技集团股份有限公司",
+        "Shanghai Sunmi Technology Co., Ltd.",
+        "SUNMI TECH-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06810#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "长飞光纤光缆",
+      "ticker": "06869",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "光通信"
+      ],
+      "detail": "生产光纤光缆等联网介质，为算力网络提供基础部件。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hssii",
+        "hk-hssccpt",
+        "hk-hkexsemi",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "长飞光纤光缆股份有限公司",
+        "Yangtze Optical Fibre and Cable Joint Stock Limited Company",
+        "YOFC"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06869#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "翼菲科技",
+      "ticker": "06871",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "工业机器人"
+      ],
+      "detail": "研发、制造工业机器人，并提供自动化集成产品或服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "浙江翼菲智能科技股份有限公司",
+        "ROBOTPHOENIX INTELLIGENT TECHNOLOGY CO., LTD.",
+        "ROBOTPHOENIX"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06871#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "Momenta",
+      "ticker": "06880",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "自动驾驶"
+      ],
+      "detail": "开发自动驾驶系统，用于乘用车或作业车辆。",
+      "sources": [
+        "hk-hsait",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "魔门塔",
+        "MOMENTA-W",
+        "MOMENTA GLOBAL LIMITED"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06880#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "东阳光药",
+      "ticker": "06887",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "AI药物研发"
+      ],
+      "detail": "把人工智能用于药物研发流程。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "广东东阳光药业股份有限公司",
+        "SUNSHINE LAKE PHARMA CO., LTD.",
+        "SUNSHINE PHARMA"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06887#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "三环集团",
+      "ticker": "06951",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "光通信材料"
+      ],
+      "detail": "提供光通信陶瓷插芯和半导体陶瓷封装基座等材料。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "潮州三环(集团)股份有限公司",
+        "CHAOZHOU THREE-CIRCLE (GROUP) CO.,LTD.",
+        "CCTC"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06951#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "乐享集团",
+      "ticker": "06988",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "内容生成"
+      ],
+      "detail": "移动互联网业务涵盖 AIGC 等数字娱乐内容服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "乐享集团有限公司",
+        "Joy Spreader Group Inc.",
+        "JOY SPREADER"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=06988#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "京东工业",
+      "ticker": "07618",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "工业大模型"
+      ],
+      "detail": "京东工业以 JoyIndustrial 大模型支持工业业务。",
+      "sources": [
+        "hk-jd",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "京东工业股份有限公司",
+        "JINGDONG Industrials, Inc.",
+        "JD INDUSTRIALS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=07618#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "瑞为技术",
+      "ticker": "07656",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "视觉模型"
+      ],
+      "detail": "研发计算机视觉算法与视觉模型，为企业提供视觉识别服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "厦门瑞为信息技术股份有限公司",
+        "Reconova Technologies Co., Ltd.",
+        "RECONOVA"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=07656#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "剂泰科技",
+      "ticker": "07666",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "AI药物研发"
+      ],
+      "detail": "用 AI 开发纳米材料和靶向药物递送方案。",
+      "sources": [
+        "hk-hsait",
+        "hk-hkexai",
+        "hk-hsscai",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "剂泰科技-P",
+        "剂泰科技(北京)股份有限公司",
+        "Metis TechBio Co., Ltd.",
+        "METIS TECHBIO-P"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=07666#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "拓璞数控",
+      "ticker": "07688",
+      "venue": "HKEX",
+      "sector": "mixed",
+      "segments": [
+        "智能制造"
+      ],
+      "detail": "生产五轴数控机床；恒生将其归入人工智能基础设施指数，属于间接关联。",
+      "sources": [
+        "hk-hsscaii",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "上海拓璞数控科技股份有限公司",
+        "Shanghai Top Numerical Control Technology Co., Ltd.",
+        "TOPNC"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=07688#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "世大控股",
+      "ticker": "08003",
+      "venue": "HKEX GEM",
+      "sector": "software",
+      "segments": [
+        "智能营销"
+      ],
+      "detail": "在广告、营销或用户匹配服务中使用算法与数据分析。",
+      "sources": [
+        "hk-f10",
+        "hk-gem"
+      ],
+      "aliases": [
+        "世大控股有限公司",
+        "Great World Company Holdings Ltd",
+        "GREAT WORLD"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=08003#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "裕兴科技",
+      "ticker": "08005",
+      "venue": "HKEX GEM",
+      "sector": "infra",
+      "segments": [
+        "数据中心"
+      ],
+      "detail": "业务涉及数据中心的建设、运营、托管或租赁，为计算设备提供运行场所。",
+      "sources": [
+        "hk-f10",
+        "hk-gem"
+      ],
+      "aliases": [
+        "裕兴科技投资控股有限公司",
+        "Yuxing InfoTech Investment Holdings Limited",
+        "YUXING INFOTECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=08005#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "时腾科技",
+      "ticker": "08113",
+      "venue": "HKEX GEM",
+      "sector": "devices",
+      "segments": [
+        "终端制造"
+      ],
+      "detail": "从事人脸识别支付终端和人工智能应用产品等电子设备的生产。",
+      "sources": [
+        "hk-f10",
+        "hk-gem"
+      ],
+      "aliases": [
+        "时腾科技控股有限公司",
+        "V&V Technology Holdings Limited",
+        "V&V TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=08113#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "超人智能",
+      "ticker": "08176",
+      "venue": "HKEX GEM",
+      "sector": "robotics",
+      "segments": [
+        "机器人集成"
+      ],
+      "detail": "提供机器人产品或自动化控制与集成服务。",
+      "sources": [
+        "hk-f10",
+        "hk-gem"
+      ],
+      "aliases": [
+        "超人智能控股有限公司",
+        "SuperRobotics Holdings Limited",
+        "SUPERROBOTICS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=08176#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "中国信息科技",
+      "ticker": "08178",
+      "venue": "HKEX GEM",
+      "sector": "software",
+      "segments": [
+        "智能营销"
+      ],
+      "detail": "在广告、营销或用户匹配服务中使用算法与数据分析。",
+      "sources": [
+        "hk-f10",
+        "hk-gem"
+      ],
+      "aliases": [
+        "中国信息科技发展有限公司",
+        "China Information Technology Development Limited",
+        "CHINA INFO TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=08178#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "加幂科技",
+      "ticker": "08198",
+      "venue": "HKEX GEM",
+      "sector": "software",
+      "segments": [
+        "链上数据"
+      ],
+      "detail": "将 AI 和数据分析用于链上数据处理与查询。",
+      "sources": [
+        "hk-f10",
+        "hk-gem"
+      ],
+      "aliases": [
+        "加幂科技有限公司",
+        "Crypto Flow Technology Limited",
+        "CRYPTO FLOW"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=08198#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "神通机器人教育",
+      "ticker": "08206",
+      "venue": "HKEX GEM",
+      "sector": "services",
+      "segments": [
+        "机器人教育"
+      ],
+      "detail": "提供机器人教育、赛事等配套服务。",
+      "sources": [
+        "hk-f10",
+        "hk-gem"
+      ],
+      "aliases": [
+        "神通机器人教育集团有限公司",
+        "Shentong Robot Education Group Company Limited",
+        "S ROBOT EDU"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=08206#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "瑞远智控",
+      "ticker": "08249",
+      "venue": "HKEX GEM",
+      "sector": "robotics",
+      "segments": [
+        "机器人集成"
+      ],
+      "detail": "提供机器人产品或自动化控制与集成服务。",
+      "sources": [
+        "hk-f10",
+        "hk-gem"
+      ],
+      "aliases": [
+        "浙江瑞远智控科技股份有限公司",
+        "Zhejiang Rui Yuan Intelligent Control Technology Company Limited",
+        "RUIYUAN IC TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=08249#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "智傲控股",
+      "ticker": "08282",
+      "venue": "HKEX GEM",
+      "sector": "software",
+      "segments": [
+        "游戏应用"
+      ],
+      "detail": "开展人工智能在游戏开发和运营中的应用。",
+      "sources": [
+        "hk-f10",
+        "hk-gem"
+      ],
+      "aliases": [
+        "智傲控股有限公司",
+        "Gameone Holdings Limited",
+        "GAMEONE"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=08282#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "思博系统",
+      "ticker": "08319",
+      "venue": "HKEX GEM",
+      "sector": "infra",
+      "segments": [
+        "数据中心集成"
+      ],
+      "detail": "提供软件定义数据中心、虚拟化及云基础设施集成。",
+      "sources": [
+        "hk-f10",
+        "hk-gem"
+      ],
+      "aliases": [
+        "思博系统控股有限公司",
+        "EXPERT SYSTEMS HOLDINGS LIMITED",
+        "EXPERT SYS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=08319#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "大象控股集团",
+      "ticker": "08635",
+      "venue": "HKEX GEM",
+      "sector": "services",
+      "segments": [
+        "企业集成"
+      ],
+      "detail": "在面向企业的软件中整合多模型工作流、数据分析和自动化功能。",
+      "sources": [
+        "hk-f10",
+        "hk-gem"
+      ],
+      "aliases": [
+        "大象控股集团有限公司",
+        "Elephant Holdings Group Limited",
+        "ELEPHANT HLDGS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=08635#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "新纽科技",
+      "ticker": "09600",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "流程自动化"
+      ],
+      "detail": "为金融及医疗等行业提供流程自动化、知识图谱与数据分析产品。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "新纽科技有限公司",
+        "NEWLINK TECHNOLOGY INC.",
+        "NEWLINK TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09600#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "龙旗科技",
+      "ticker": "09611",
+      "venue": "HKEX",
+      "sector": "devices",
+      "segments": [
+        "端侧AI"
+      ],
+      "detail": "在移动硬件研发中开展端侧 AI 技术开发。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "上海龙旗科技股份有限公司",
+        "Shanghai Longcheer Technology Co.,Ltd.",
+        "LONGCHEER"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09611#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "梅卡曼德机器人",
+      "ticker": "09615",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "机器视觉",
+        "工业机器人"
+      ],
+      "detail": "提供工业三维视觉感知与机器人组件，以深度学习指导机器操作。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "梅卡曼德(雄安)机器人科技股份有限公司",
+        "Mech-Mind Robotics Technologies Co., Ltd.",
+        "MECH-MIND ROBOT"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09615#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "京东集团",
+      "ticker": "09618",
+      "venue": "HKEX",
+      "sector": "models",
+      "segments": [
+        "行业大模型",
+        "终端AI"
+      ],
+      "detail": "京东开发 JoyAI 言犀大模型及 JoyInside 设备智能交互能力。",
+      "sources": [
+        "hk-jd",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "京东",
+        "京东集团-SW",
+        "京东集团股份有限公司",
+        "JD.com, Inc.",
+        "JD-SW"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09618#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案",
+      "usTicker": "JD"
+    },
+    {
+      "name": "哔哩哔哩",
+      "ticker": "09626",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "内容检索",
+        "视频摘要"
+      ],
+      "detail": "哔哩哔哩为用户提供 AI 搜索与视频摘要助手。",
+      "sources": [
+        "hk-bili",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "哔哩哔哩-W",
+        "哔哩哔哩股份有限公司",
+        "Bilibili Inc.",
+        "BILIBILI-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09626#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案",
+      "usTicker": "BILI"
+    },
+    {
+      "name": "九方智投控股",
+      "ticker": "09636",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "金融应用"
+      ],
+      "detail": "结合人工智能和大数据开发面向个人投资者的智能投顾工具。",
+      "sources": [
+        "hk-hsait",
+        "hk-hsscai",
+        "hk-932493",
+        "hk-932587",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "九方智投控股有限公司",
+        "JF SmartInvest Holdings Ltd",
+        "JF SMARTINVEST"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09636#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "地平线机器人",
+      "ticker": "09660",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "车载计算"
+      ],
+      "detail": "研发面向智能驾驶的计算芯片与配套软件。",
+      "sources": [
+        "hk-hsait",
+        "hk-hsusrt",
+        "hk-hsami",
+        "hk-hkexai",
+        "hk-botz",
+        "hk-hsscai",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "Horizon Robotics",
+        "地平线机器人-W",
+        "地平线",
+        "HORIZONROBOT-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09660#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "北森控股",
+      "ticker": "09669",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "人力资源"
+      ],
+      "detail": "向企业提供基于 AI 的人才管理工具。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "北森控股有限公司",
+        "Beisen Holding Limited",
+        "BEISEN HOLDING"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09669#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "云知声",
+      "ticker": "09678",
+      "venue": "HKEX",
+      "sector": "models",
+      "segments": [
+        "语音模型",
+        "行业应用"
+      ],
+      "detail": "研发语音识别及语言智能技术，并面向行业部署。",
+      "sources": [
+        "hk-hsait",
+        "hk-hscpt",
+        "hk-hssccpt",
+        "hk-hsscai",
+        "hk-932493",
+        "hk-932587",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "云知声智能科技股份有限公司",
+        "Unisound AI Technology Co., Ltd.",
+        "UNISOUND"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09678#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "如祺出行",
+      "ticker": "09680",
+      "venue": "HKEX",
+      "sector": "services",
+      "segments": [
+        "自动驾驶出行"
+      ],
+      "detail": "出行平台在自动驾驶服务或相关数据业务中布局。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "如祺出行科技有限公司",
+        "Chenqi Technology Limited",
+        "CHENQI TECH"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09680#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "万国数据",
+      "ticker": "09698",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "数据中心"
+      ],
+      "detail": "业务涉及数据中心的建设、运营、托管或租赁，为计算设备提供运行场所。",
+      "sources": [
+        "hk-hscpt",
+        "hk-hkexai",
+        "hk-hssii",
+        "hk-932587",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "万国数据-SW",
+        "万国数据控股有限公司",
+        "GDS Holdings Limited",
+        "GDS-SW"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09698#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案",
+      "usTicker": "GDS"
+    },
+    {
+      "name": "纳真科技",
+      "ticker": "09856",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "光模块",
+        "光互连"
+      ],
+      "detail": "为通信网络或数据中心提供光模块等高速互连产品。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "纳真科技公司",
+        "Ligent Technologies, Inc.",
+        "LIGENT"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09856#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "零跑汽车",
+      "ticker": "09863",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "智能驾驶"
+      ],
+      "detail": "整车产品布局辅助驾驶；汽车业务也包括大量与 AI 无关的部分。",
+      "sources": [
+        "hk-hsami",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "浙江零跑科技股份有限公司",
+        "ZHEJIANG LEAPMOTOR TECHNOLOGY CO., LTD.",
+        "LEAPMOTOR"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09863#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "蔚来",
+      "ticker": "09866",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "智能驾驶"
+      ],
+      "detail": "整车产品布局辅助驾驶；汽车业务也包括大量与 AI 无关的部分。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "蔚来-SW",
+        "蔚来集团",
+        "NIO Inc.",
+        "NIO-SW"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09866#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案",
+      "usTicker": "NIO"
+    },
+    {
+      "name": "小鹏集团",
+      "ticker": "09868",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "智能驾驶"
+      ],
+      "detail": "整车产品布局辅助驾驶；汽车业务也包括大量与 AI 无关的部分。",
+      "sources": [
+        "hk-hsami",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "小鹏集团-W",
+        "XPeng Inc.",
+        "XPENG-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09868#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案",
+      "usTicker": "XPEV"
+    },
+    {
+      "name": "汇通达网络",
+      "ticker": "09878",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "城市物流"
+      ],
+      "detail": "为乡镇零售商的供应链业务提供 AI 技术服务。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "汇通达网络股份有限公司",
+        "Huitongda Network Co., Ltd.",
+        "HUITONGDA NET"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09878#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "优必选",
+      "ticker": "09880",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "人形机器人"
+      ],
+      "detail": "研发人形机器人及商用智能服务机器人。",
+      "sources": [
+        "hk-ubtech",
+        "hk-hsait",
+        "hk-hsusrt",
+        "hk-hkexai",
+        "hk-botz",
+        "hk-humn",
+        "hk-hsscai",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "深圳市优必选科技股份有限公司",
+        "UBTECH ROBOTICS CORP LTD",
+        "UBTECH ROBOTICS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09880#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "维立志博",
+      "ticker": "09887",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "AI药物研发"
+      ],
+      "detail": "研发具有人工智能辅助能力的抗体工程平台。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "维立志博-B",
+        "南京维立志博生物科技股份有限公司",
+        "Nanjing Leads Biolabs Co., Ltd.",
+        "LEADS BIOLABS-B"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09887#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "百度集团",
+      "ticker": "09888",
+      "venue": "HKEX",
+      "sector": "models",
+      "segments": [
+        "通用大模型",
+        "智算云"
+      ],
+      "detail": "百度开发文心模型，并通过百度智能云向企业提供模型工具。",
+      "sources": [
+        "hk-ernie",
+        "hk-hkexai",
+        "hk-932587",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "百度",
+        "Baidu",
+        "百度集团-W",
+        "百度集团股份有限公司",
+        "Baidu, Inc.",
+        "BIDU-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09888#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案",
+      "usTicker": "BIDU"
+    },
+    {
+      "name": "微博",
+      "ticker": "09898",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "推荐算法"
+      ],
+      "detail": "利用社交兴趣图谱及推荐引擎分发内容并支持营销。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "微博-SW",
+        "微博股份有限公司",
+        "Weibo Corporation",
+        "WB-SW"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09898#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案",
+      "usTicker": "WB"
+    },
+    {
+      "name": "天数智芯",
+      "ticker": "09903",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "算力芯片",
+        "GPU"
+      ],
+      "detail": "研发面向智能计算的 GPU，用于模型训练或推理等工作负载。",
+      "sources": [
+        "hk-hsait",
+        "hk-hscpt",
+        "hk-hsscaii",
+        "hk-hkexai",
+        "hk-hssii",
+        "hk-hssccpt",
+        "hk-hsscai",
+        "hk-hkexsemi",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "上海天数智芯半导体股份有限公司",
+        "Shanghai Iluvatar CoreX Semiconductor Co., Ltd.",
+        "ILUVATAR COREX"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09903#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "登临科技",
+      "ticker": "09917",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "算力芯片",
+        "GPU"
+      ],
+      "detail": "研发面向智能计算的 GPU，用于模型训练或推理等工作负载。",
+      "sources": [
+        "hk-denglin",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "登临科技-P",
+        "苏州登临科技股份有限公司",
+        "Suzhou Denglin Technology Co., Ltd.",
+        "DENGLIN TECH-P"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09917#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "赛力斯",
+      "ticker": "09927",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "智能驾驶"
+      ],
+      "detail": "整车产品布局辅助驾驶；汽车业务也包括大量与 AI 无关的部分。",
+      "sources": [
+        "hk-hsami",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "赛力斯集团股份有限公司",
+        "Seres Group Co.,Ltd.",
+        "SERES"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09927#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "智云健康",
+      "ticker": "09955",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "医学大模型"
+      ],
+      "detail": "在慢病管理服务中提供智云医疗 AI 大模型。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "智云健康科技集团",
+        "ClouDr Group Limited",
+        "CLOUDR"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09955#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "联易融科技",
+      "ticker": "09959",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "供应链金融"
+      ],
+      "detail": "将模型与数据分析用于供应链金融的风控或运营流程。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "联易融科技-W",
+        "联易融科技集团",
+        "Linklogis Inc.",
+        "LINKLOGIS-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09959#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "携程集团",
+      "ticker": "09961",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "旅行助手"
+      ],
+      "detail": "携程 TripGenie 提供行程规划和旅游信息问答。",
+      "sources": [
+        "hk-trip",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "携程集团-S",
+        "携程集团有限公司",
+        "Trip.com Group Limited",
+        "TRIP.COM-S"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09961#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案",
+      "usTicker": "TCOM"
+    },
+    {
+      "name": "高科桥光导",
+      "ticker": "09963",
+      "venue": "HKEX",
+      "sector": "infra",
+      "segments": [
+        "光通信"
+      ],
+      "detail": "生产用于通信网络的光纤或光通信产品，属于算力网络上游。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "高科桥光导科技股份有限公司",
+        "Transtech Optelecom Science Holdings Limited",
+        "TRANSTECH OPTEL"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09963#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "奇瑞汽车",
+      "ticker": "09973",
+      "venue": "HKEX",
+      "sector": "robotics",
+      "segments": [
+        "智能驾驶"
+      ],
+      "detail": "整车产品布局辅助驾驶；汽车业务也包括大量与 AI 无关的部分。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "奇瑞汽车股份有限公司",
+        "Chery Automobile Co., Ltd.",
+        "CHERY AUTO"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09973#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "江波龙",
+      "ticker": "09976",
+      "venue": "HKEX",
+      "sector": "chips",
+      "segments": [
+        "存储芯片"
+      ],
+      "detail": "开发或供应存储产品，面向服务器、终端或其他电子设备。",
+      "sources": [
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "深圳市江波龙电子股份有限公司",
+        "Shenzhen Longsys Electronics Co., Ltd.",
+        "LONGSYS"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09976#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案"
+    },
+    {
+      "name": "阿里巴巴",
+      "ticker": "09988",
+      "venue": "HKEX",
+      "sector": "models",
+      "segments": [
+        "通用大模型",
+        "智算云"
+      ],
+      "detail": "阿里巴巴开发通义千问模型，并通过阿里云提供算力与模型服务。",
+      "sources": [
+        "hk-qwen",
+        "hk-hkexai",
+        "hk-932493",
+        "hk-932587",
+        "hk-932599",
+        "hk-932775",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "Alibaba",
+        "Qwen",
+        "阿里巴巴-W",
+        "阿里巴巴集团控股有限公司",
+        "Alibaba Group Holding Limited",
+        "BABA-W"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09988#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案",
+      "usTicker": "BABA"
+    },
+    {
+      "name": "网易",
+      "ticker": "09999",
+      "venue": "HKEX",
+      "sector": "software",
+      "segments": [
+        "游戏AI",
+        "智能体"
+      ],
+      "detail": "网易伏羲研发智能体平台，应用包括游戏、数据采标及工程作业。",
+      "sources": [
+        "hk-fuxi",
+        "hk-932587",
+        "hk-f10",
+        "hk-main"
+      ],
+      "aliases": [
+        "网易股份有限公司",
+        "NetEase, Inc.",
+        "NTES"
+      ],
+      "evidenceUrl": "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?type=web&color=w&code=09999#/CompanyProfile",
+      "evidenceLabel": "东方财富 · 该股公司档案",
+      "usTicker": "NTES"
+    }
+  ]
+}

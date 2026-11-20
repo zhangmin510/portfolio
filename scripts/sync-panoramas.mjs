@@ -1,5 +1,6 @@
 import { decoratePanorama, stripNavigation, navigation, css } from './navigation/render.mjs'
 import { restoreReaderAssets, splitReaderAssets } from './reader-assets.mjs'
+import { equitySnapshot } from '../sites/ai-equity-atlas/build.mjs'
 import { createHash } from 'node:crypto'
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
@@ -138,6 +139,9 @@ for (const page of manifest.pages) {
       await saveOrCheck(path.join(path.dirname(destination), file), content)
     }
     source = reader.html
+  }
+  if (page.slug === 'ai-equity-atlas') {
+    await saveOrCheck(path.join(path.dirname(destination), 'listings.json'), await equitySnapshot())
   }
   await saveOrCheck(destination, decoratePanorama(localize(source), page, manifest.pages))
 }
