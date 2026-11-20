@@ -17,6 +17,22 @@
   ],
   "pages": [
     {
+      "slug": "mac-mini-use-cases",
+      "title": "Mac mini 使用场景全景图",
+      "subtitle": "从桌面办公到家庭服务器",
+      "description": "从六个使用场景中挑选你想完成的任务，通过十二个案例了解 Mac mini 需要搭配哪些设备和软件、怎样操作、最后能得到什么。",
+      "category": "硬件与桌面",
+      "tags": [
+        "Mac mini",
+        "桌面工作流",
+        "家庭服务器",
+        "本地 AI"
+      ],
+      "source": "src/panoramas/mac-mini-use-cases.html",
+      "updatedAt": "2026-11-20",
+      "sourceSha256": "6a1a70721488d8736a41461d249daf1aacb09d9eceaf6f4faa8f9b6c04f8c3a6"
+    },
+    {
       "slug": "gta-series",
       "title": "GTA 系列全景图",
       "subtitle": "从俯视街区到开放世界",

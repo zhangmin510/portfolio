@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#102924">
+  <title>Mac mini 使用场景全景图 · 张敏的硬件手册</title>
+  <meta name="description" content="从桌面办公、影音创作和软件开发，到本地 AI、家庭服务与效率自动化。探索 12 个 Mac mini 实践案例、接口图解和真实使用现场。">
+  <link rel="canonical" href="https://zhangmin.name/panoramas/mac-mini-use-cases/">
+  <meta property="og:title" content="Mac mini 使用场景全景图">
+  <meta property="og:description" content="六类使用场景，十二个可以照做的 Mac mini 工作流。">
+  <meta property="og:url" content="https://zhangmin.name/panoramas/mac-mini-use-cases/">
+  <meta property="og:image" content="https://zhangmin.name/panoramas/mac-mini-use-cases/mac-mini-atlas.png">
+  <link rel="icon" href="/favicon-32.png">
+  <link rel="preload" as="image" href="/panoramas/mac-mini-use-cases/mac-mini.webp">
+  <link rel="stylesheet" href="/panoramas/mac-mini-use-cases/atlas.css">
+  <link rel="stylesheet" href="/panoramas/mac-mini-use-cases/figures.css">
+  <script type="module" src="/panoramas/mac-mini-use-cases/atlas.js"></script>
+</head>
+<body>
+<main>
+  <header class="cover">
+    <div class="cover-grid"></div>
+    <div class="wrap cover-in">
+      <div class="cover-copy">
+        <p class="kicker light"><span class="marks" aria-hidden="true"></span> HARDWARE FIELD GUIDE</p>
+        <h1><span lang="en">Mac mini</span><b>使用场景全景图</b></h1>
+        <p class="intro">把两台笔记本备份到家里的硬盘，在本机整理采访，或剪完一部旅行短片。看看这台小主机怎样接进你的日常工作。</p>
+        <div class="cover-actions">
+          <a class="primary" href="#explore"><span aria-hidden="true" class="grid-icon"></span>浏览 12 个案例</a>
+          <a class="quiet" href="/panoramas/mac-mini-use-cases/mac-mini-atlas.png" download="Mac-mini-使用场景全景图.png">下载全景图 <small>PNG</small></a>
+        </div>
+      </div>
+      <figure class="machine" aria-label="银色 Mac mini 机身示意，宽深均为 127 毫米，高 49.7 毫米">
+        <div class="orbit one"></div><div class="orbit two"></div><div class="orbit three"></div>
+        <span class="cross cross-a" aria-hidden="true"></span><span class="cross cross-b" aria-hidden="true"></span>
+        <div class="shadow"></div>
+        <img class="product" src="/panoramas/mac-mini-use-cases/mac-mini.webp" width="1080" height="647" fetchpriority="high" alt="银色 Mac mini 的立体视图">
+        <figcaption><span class="dimension top"><i></i>127 × 127 mm</span><span class="dimension bottom"><i></i>高 49.7 mm</span></figcaption>
+      </figure>
+    </div>
+    <div class="cover-base">
+      <div class="wrap base-in"><div class="model-note"><i aria-hidden="true"></i>M6 / M5 Pro <span>· 2026 年款</span></div>
+        <nav aria-label="本页章节"><a href="#explore">场景索引</a><a href="#hardware">接口图解</a><a href="#field">真实现场</a></nav></div>
+    </div>
+  </header>
+
+  <section id="explore" class="wrap section">
+    <div class="section-head">
+      <div><p class="kicker"><span class="marks" aria-hidden="true"></span> SCENARIO INDEX</p><h2>场景索引</h2>
+      <p class="section-intro">六种用途，每种两个实践案例。选一个，查看准备、步骤和完成标准。</p></div>
+      <div class="search-box"><label for="lookup" class="sr">搜索场景或案例</label><span class="search-icon"></span><input id="lookup" type="search" placeholder="搜索案例，如「备份」" autocomplete="off"></div>
+    </div>
+    <div id="case-grid" class="case-grid"></div>
+    <p id="search-info" class="sr" role="status"></p>
+    <div class="empty" hidden><h3>没有找到相关案例</h3><p>可以换一个软件名或任务关键词。</p><button type="button" id="reset-search">查看全部案例</button></div>
+    <noscript><p>案例涵盖视频会议、菜单轮播、旅行短片、播客、iPhone 应用测试、开发环境、本地会议纪要、录音转字幕、网络备份、家庭影音、批量缩图和文件整理。请启用 JavaScript 以展开操作步骤。</p></noscript>
+  </section>
+
+  <section id="hardware" class="hardware">
+    <div class="wrap section">
+      <div class="section-head"><div><p class="kicker"><span class="marks" aria-hidden="true"></span> CONNECTION GUIDE</p><h2>接口怎么接</h2><p class="section-intro">以 2026 年款为例，按手上的设备选择连接位置。</p></div>
+        <a class="source-link" href="https://www.apple.com.cn/mac-mini/specs/">Apple 技术规格</a>
+      </div>
+      <div class="hw-layout">
+        <div class="hw-figure">
+          <div class="seg" aria-label="选择机身视图"><button data-side="front" aria-pressed="true">正面</button><button data-side="back" aria-pressed="false">背面</button></div>
+          <img id="face" width="850" height="340" loading="lazy" src="/panoramas/mac-mini-use-cases/front.webp" alt="Mac mini 正面，左侧是两个 USB-C，右侧是耳机插孔">
+        </div>
+        <div id="port-notes" aria-live="polite">
+          <h3>把常插拔的设备放在前面</h3>
+          <dl><dt>USB-C × 2</dt><dd>接移动硬盘、读卡器或 USB 麦克风。两枚前置口均支持 USB 3，最高 10Gb/s。</dd><dt>3.5 毫米耳机插孔</dt><dd>接有线耳机监听录音，或在剪辑时核对人声和配乐。</dd></dl>
+        </div>
+      </div>
+      <p class="hw-foot">盒内含主机和电源线。首次布置桌面时，另备显示器、键盘和鼠标或触控板。</p>
+    </div>
+  </section>
+
+  <section id="field" class="wrap section field">
+    <div class="section-head"><div><p class="kicker"><span class="marks" aria-hidden="true"></span> FIELD NOTES</p><h2>真实现场</h2><p class="section-intro">两处有公开记录的部署，看看 Mac mini 离开书桌之后的工作。</p></div></div>
+    <div class="stories">
+      <article><img src="/panoramas/mac-mini-use-cases/backstage.webp" width="1050" height="650" loading="lazy" alt="巡演后台贴着香蕉贴纸的 Mac mini 与音频设备"><div><small>演出后台 / 2018</small><h3>让 18 把吉他的无线信号可见</h3><p>Dierks Bentley 巡演时，吉他技师 Carlos Gutierrez 用 Mac mini 监看乐队的无线接收器。乐手走入观众席时，他能从屏幕上察觉信号变弱，及时调整。</p><a class="source-link" href="https://www.apple.com/newsroom/2018/10/the-secret-world-of-mac-mini/">阅读 Apple 现场报道</a></div></article>
+      <article><img src="/panoramas/mac-mini-use-cases/server-room.webp" width="1050" height="650" loading="lazy" alt="MacStadium 拉斯维加斯机房，机柜中排列的 Mac mini"><div><small>托管机房 / macOS 构建</small><h3>把开发机放进机柜</h3><p>图中是 MacStadium 的拉斯维加斯机房。类似的用法也出现在 AWS，EC2 的 mac2.metal 以 2020 年款 M1 Mac mini 为主机，开发团队可远程构建、测试和签名 Apple 平台应用。</p><a class="source-link" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-mac-instances.html">查看 AWS 主机说明</a></div></article>
+    </div>
+  </section>
+</main>
+<footer class="end"><div class="wrap"><div><strong>Mac mini 使用场景全景图</strong><span>资料核对于 2026.11.20</span></div><p>主视觉依据 <a href="https://www.apple.com/mac-mini/">Apple 官方三维模型</a>渲染，现场照片来自 <a href="https://www.apple.com/newsroom/2018/10/the-secret-world-of-mac-mini/">Apple Newsroom</a>。</p></div></footer>
+<dialog id="case-dialog" aria-labelledby="case-title">
+  <div class="dialog-bar"><span id="case-group"></span><button id="dismiss" type="button" aria-label="关闭案例">×</button></div>
+  <div id="reader"></div>
+</dialog>
+</body>
+</html>

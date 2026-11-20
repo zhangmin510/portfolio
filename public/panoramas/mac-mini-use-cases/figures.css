@@ -1,0 +1,339 @@
+.miniature {
+  --ink: #4d6bb3;
+  --muted: #a7b9e3;
+  --paper: #f9fcff;
+  --wash: #e0eaff;
+  --depth: rgb(57 75 123 / 15%);
+  position: relative;
+  display: block;
+  width: 140px;
+  height: 90px;
+  flex: 0 0 140px;
+  isolation: isolate;
+  pointer-events: none;
+}
+
+.miniature i,
+.miniature i::before,
+.miniature i::after {
+  box-sizing: border-box;
+  position: absolute;
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+}
+
+.miniature i::before,
+.miniature i::after {
+  content: "";
+}
+
+.miniature.desk i:nth-child(-n+2),
+.miniature.studio i:first-child,
+.miniature.dev i:nth-child(-n+2),
+.miniature.ai i:nth-child(-n+2),
+.miniature.home i:nth-child(-n+3),
+.miniature.auto i:nth-child(n+2):nth-child(-n+5) {
+  border: 1.5px solid var(--ink);
+  background-color: var(--paper);
+  box-shadow: 2px 3px 0 var(--depth);
+}
+
+/* A document window behind a four-person call. */
+.miniature.desk i:first-child {
+  top: 12px;
+  left: 13px;
+  width: 88px;
+  height: 56px;
+  border-radius: 6px;
+  background: linear-gradient(to bottom, var(--wash) 9px, var(--ink) 9px 10px, var(--paper) 10px);
+  transform: rotate(-6deg);
+}
+
+.miniature.desk i:first-child::before,
+.miniature.studio i:first-child::before,
+.miniature.dev i:nth-child(2)::before {
+  top: 3px;
+  left: 5px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 5px 0 var(--muted), 10px 0 var(--muted);
+}
+
+.miniature.desk i:first-child::after {
+  inset: 17px auto auto 9px;
+  width: 26px;
+  height: 23px;
+  background:
+    linear-gradient(var(--ink), var(--ink)) 0 0 / 20px 3px no-repeat,
+    repeating-linear-gradient(to bottom, transparent 0 4px, var(--muted) 4px 6px) 0 4px / 100% 18px no-repeat;
+}
+
+.miniature.desk i:nth-child(2) {
+  top: 27px;
+  left: 51px;
+  width: 76px;
+  height: 50px;
+  border-radius: 6px;
+}
+
+.miniature.desk i:nth-child(n+3) {
+  width: 31px;
+  height: 18px;
+  border-radius: 3px;
+  background:
+    radial-gradient(circle at 50% 37%, var(--portrait) 0 3px, transparent 3.6px),
+    radial-gradient(ellipse 8px 6px at 50% 97%, var(--portrait) 95%, transparent),
+    var(--wash);
+}
+.miniature.desk i:nth-child(3) { top: 32px; left: 56px; --portrait: #748ad1; }
+.miniature.desk i:nth-child(4) { top: 32px; left: 91px; --portrait: #b17d6e; --wash: #f6e2d7; }
+.miniature.desk i:nth-child(5) { top: 54px; left: 56px; --portrait: #5d918a; --wash: #d7ebe6; }
+.miniature.desk i:nth-child(6) { top: 54px; left: 91px; --portrait: #9c79ad; --wash: #ebdff2; }
+
+/* Preview monitor, two clips and an audio waveform. */
+.miniature.studio { --ink: #765ba0; --muted: #b7a1d2; --paper: #fffaff; --wash: #ebe0f5; }
+.miniature.studio i:first-child {
+  inset: 11px auto auto 12px;
+  width: 115px;
+  height: 69px;
+  border-radius: 6px;
+  background: linear-gradient(to bottom, var(--wash) 9px, var(--ink) 9px 10px, var(--paper) 10px);
+}
+.miniature.studio i:nth-child(2) {
+  inset: 26px auto auto 18px;
+  width: 36px;
+  height: 45px;
+  border-radius: 3px;
+  background:
+    radial-gradient(circle at 72% 23%, #f5c9aa 0 4px, transparent 4.5px),
+    linear-gradient(145deg, transparent 49%, #b3a2d3 50%) 0 100% / 66% 53% no-repeat,
+    linear-gradient(35deg, #957daf 45%, transparent 46%) 100% 100% / 68% 60% no-repeat,
+    var(--wash);
+}
+.miniature.studio i:nth-child(3),
+.miniature.studio i:nth-child(4) {
+  left: 60px;
+  right: 20px;
+  height: 8px;
+  border-radius: 2px;
+}
+.miniature.studio i:nth-child(3) {
+  top: 28px;
+  background: linear-gradient(90deg, #947abb 0 43%, transparent 43% 47%, #bca6d2 47% 83%, transparent 83%);
+}
+.miniature.studio i:nth-child(4) {
+  top: 39px;
+  background: linear-gradient(90deg, #e7c7a9 0 25%, transparent 25% 29%, #c6b2df 29% 100%);
+}
+.miniature.studio i:nth-child(5) {
+  inset: 51px 20px auto 60px;
+  height: 18px;
+  background: repeating-linear-gradient(90deg, #886ea7 0 2px, transparent 2px 3px);
+  clip-path: polygon(0 44%, 8% 25%, 17% 40%, 25% 6%, 36% 35%, 42% 25%, 50% 46%, 58% 18%, 66% 5%, 77% 36%, 85% 25%, 100% 46%, 100% 57%, 85% 75%, 77% 67%, 66% 95%, 58% 82%, 50% 54%, 42% 75%, 36% 65%, 25% 94%, 17% 61%, 8% 76%, 0 57%);
+}
+.miniature.studio i:nth-child(6) {
+  inset: 25px auto auto 93px;
+  width: 1px;
+  height: 48px;
+  background: #ae5d79;
+}
+.miniature.studio i:nth-child(6)::before {
+  top: -1px;
+  left: -3px;
+  border: 3.5px solid transparent;
+  border-top: 5px solid #ae5d79;
+}
+
+/* Dark terminal in front of a source editor. */
+.miniature.dev { --ink: #38685f; --muted: #94b8a2; --paper: #eff9f1; --wash: #cce1d2; }
+.miniature.dev i:first-child {
+  inset: 11px auto auto 31px;
+  width: 91px;
+  height: 50px;
+  border-radius: 5px;
+  transform: rotate(5deg);
+  background: repeating-linear-gradient(to bottom, var(--wash) 0 2px, transparent 2px 6px) 8px 11px / 65px 29px no-repeat, var(--paper);
+}
+.miniature.dev i:nth-child(2) {
+  inset: 23px auto auto 14px;
+  width: 94px;
+  height: 57px;
+  border-radius: 5px;
+  background: linear-gradient(to bottom, #405f5b 10px, #2d4945 10px);
+}
+.miniature.dev i:nth-child(2)::before { --ink: #f0c4a1; --muted: #abd1bd; }
+.miniature.dev i:nth-child(3) {
+  top: 41px;
+  left: 23px;
+  width: 7px;
+  height: 7px;
+  border: solid #b7dac0;
+  border-width: 1.7px 1.7px 0 0;
+  transform: rotate(45deg);
+}
+.miniature.dev i:nth-child(4) {
+  inset: 41px auto auto 37px;
+  width: 55px;
+  height: 18px;
+  background:
+    linear-gradient(90deg, #d7cd9b 0 12px, transparent 12px 15px, #afcbbb 15px 38px, transparent 38px),
+    linear-gradient(90deg, #8eb6a7 0 17px, transparent 17px 20px, #d3ad94 20px 42px, transparent 42px),
+    linear-gradient(90deg, #a4c6b2 0 26px, transparent 26px);
+  background-position: 0 0, 3px 7px, 3px 14px;
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+}
+.miniature.dev i:nth-child(5) {
+  top: 65px;
+  left: 23px;
+  width: 5px;
+  height: 5px;
+  border: solid #b7dac0;
+  border-width: 1.5px 1.5px 0 0;
+  transform: rotate(45deg);
+}
+.miniature.dev i:nth-child(6) { inset: 69px auto auto 35px; width: 8px; height: 2px; background: #b7dac0; }
+
+/* Input text, local inference chip and the resulting text. */
+.miniature.ai { --ink: #a65f48; --muted: #d49c85; --paper: #fff8ef; --wash: #f6d9c6; }
+.miniature.ai i:nth-child(-n+2) { width: 41px; height: 23px; border-radius: 5px; z-index: 2; }
+.miniature.ai i:first-child { top: 12px; left: 12px; }
+.miniature.ai i:nth-child(2) { top: 56px; left: 88px; }
+.miniature.ai i:nth-child(-n+2)::before {
+  inset: 6px auto auto 5px;
+  width: 25px;
+  height: 8px;
+  background: linear-gradient(var(--muted), var(--muted)) 0 0 / 24px 2px no-repeat, linear-gradient(var(--muted), var(--muted)) 0 5px / 17px 2px no-repeat;
+}
+.miniature.ai i:nth-child(3),
+.miniature.ai i:nth-child(4) {
+  width: 31px;
+  height: 24px;
+  border: 1.5px dashed var(--ink);
+  border-width: 0 0 1.5px 1.5px;
+  border-bottom-left-radius: 7px;
+}
+.miniature.ai i:nth-child(3) { top: 22px; left: 31px; }
+.miniature.ai i:nth-child(4) { top: 43px; left: 80px; transform: rotate(180deg); }
+.miniature.ai i:nth-child(5) {
+  inset: 25px auto auto 51px;
+  width: 38px;
+  height: 37px;
+  border: 1.5px solid var(--ink);
+  border-radius: 7px;
+  background: var(--wash);
+  box-shadow: 2px 3px 0 var(--depth);
+}
+.miniature.ai i:nth-child(5)::before {
+  inset: -4px 7px;
+  z-index: -1;
+  background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 6px);
+}
+.miniature.ai i:nth-child(6) {
+  inset: 32px auto auto 58px;
+  width: 24px;
+  height: 23px;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  background:
+    radial-gradient(circle at 23% 50%, var(--ink) 0 2px, transparent 2.2px),
+    radial-gradient(circle at 69% 25%, var(--ink) 0 2px, transparent 2.2px),
+    radial-gradient(circle at 69% 75%, var(--ink) 0 2px, transparent 2.2px),
+    linear-gradient(26deg, transparent 45%, var(--muted) 47% 52%, transparent 54%) 50% 64% / 11px 6px no-repeat,
+    linear-gradient(-26deg, transparent 45%, var(--muted) 47% 52%, transparent 54%) 50% 34% / 11px 6px no-repeat, var(--paper);
+}
+
+/* Three disk bays on a three-client network. */
+.miniature.home { --ink: #477d82; --muted: #94bec0; --paper: #f1fbf8; --wash: #cee6df; }
+.miniature.home i:nth-child(-n+3) {
+  left: 29px;
+  width: 83px;
+  height: 17px;
+  border-radius: 5px;
+  background: linear-gradient(to bottom, var(--paper), var(--wash));
+}
+.miniature.home i:first-child { top: 12px; }
+.miniature.home i:nth-child(2) { top: 29px; }
+.miniature.home i:nth-child(3) { top: 46px; }
+.miniature.home i:nth-child(-n+3)::before {
+  inset: 5px auto auto 8px;
+  width: 28px;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--muted);
+}
+.miniature.home i:nth-child(-n+3)::after {
+  inset: 5px 9px auto auto;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #54908c;
+  box-shadow: -7px 0 #c1ae7a;
+}
+.miniature.home i:nth-child(4) {
+  inset: 71px auto auto 34px;
+  width: 70px;
+  height: 7px;
+  border: 1.5px solid var(--ink);
+  border-bottom: 0;
+  border-radius: 3px 3px 0 0;
+}
+.miniature.home i:nth-child(5) { inset: 62px auto auto 69px; height: 16px; border-left: 1.5px solid var(--ink); }
+.miniature.home i:nth-child(6) {
+  inset: 77px auto auto 32px;
+  width: 6px;
+  height: 5px;
+  border-radius: 2px;
+  background: var(--ink);
+  box-shadow: 35px 0 var(--ink), 69px 0 var(--ink);
+}
+
+/* A folder trigger branching to two actions, then a completed file. */
+.miniature.auto { --ink: #99783d; --muted: #ceb376; --paper: #fffbeb; --wash: #f8e9b5; }
+.miniature.auto i:first-child {
+  inset: 28px auto auto 29px;
+  width: 82px;
+  height: 33px;
+  border: 1.5px solid var(--muted);
+  border-radius: 8px;
+}
+.miniature.auto i:nth-child(n+2):nth-child(-n+5) { width: 27px; height: 26px; border-radius: 6px; }
+.miniature.auto i:nth-child(2) { top: 32px; left: 12px; }
+.miniature.auto i:nth-child(3) { top: 14px; left: 56px; }
+.miniature.auto i:nth-child(4) { top: 49px; left: 56px; }
+.miniature.auto i:nth-child(5) { top: 32px; left: 99px; }
+.miniature.auto i:nth-child(2)::before {
+  inset: 6px auto auto 5px;
+  width: 14px;
+  height: 11px;
+  background: var(--ink);
+  clip-path: polygon(0 0, 40% 0, 52% 23%, 100% 23%, 100% 100%, 0 100%);
+}
+.miniature.auto i:nth-child(3)::before {
+  inset: 5px auto auto 7px;
+  width: 10px;
+  height: 13px;
+  background: var(--ink);
+  clip-path: polygon(52% 0, 100% 0, 65% 43%, 100% 43%, 24% 100%, 39% 58%, 0 58%);
+}
+.miniature.auto i:nth-child(4)::before {
+  inset: 6px auto auto 5px;
+  width: 14px;
+  height: 10px;
+  border: 1.4px solid var(--ink);
+  border-radius: 2px;
+  background: linear-gradient(32deg, transparent 57%, var(--ink) 58% 66%, transparent 67%) 0 0 / 50% 100% no-repeat, linear-gradient(-32deg, transparent 57%, var(--ink) 58% 66%, transparent 67%) 100% 0 / 50% 100% no-repeat;
+}
+.miniature.auto i:nth-child(5)::before {
+  inset: 6px auto auto 5px;
+  width: 13px;
+  height: 7px;
+  border: solid var(--ink);
+  border-width: 0 0 2px 2px;
+  transform: rotate(-45deg);
+}
+.miniature.auto i:nth-child(6) { display: none; }
