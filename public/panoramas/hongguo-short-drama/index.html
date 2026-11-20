@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>红果短剧制作全景图 · 片场手册</title>
-  <meta name="description" content="跟着原创案例《底片未取》，学会选用豆包、即梦、剪映和字节 Seed 模型，从剧本、分镜走到送审和红果上线。含全流程长图与制片工作表。">
+  <meta name="description" content="从《底片未取》真人样片和《持械入宋》前五集看片作业，学会用豆包、即梦、剪映完成五集原创 AI 制作练习，准备红果审核与上线。">
   <link rel="canonical" href="https://zhangmin.name/panoramas/hongguo-short-drama/">
   <meta property="og:title" content="红果短剧制作全景图 · 片场手册">
   <meta property="og:image" content="https://zhangmin.name/panoramas/hongguo-short-drama/film-set.webp">
@@ -47,6 +47,35 @@ h1,h2,h3,h4,p,figure,ol,ul,dl,dd{margin:0}button,a,input,summary{touch-action:ma
 @media(max-width:430px){.brand-row{gap:7px}.page-nav{gap:8px}.page-nav a{font-size:11px}.ai-select button{padding:8px}.ai-select strong{font-size:13px}.ai-select span{font-size:11px}}
 @media print{.ai-select,.ai-shortcut,.ai-script-head button,.copy-status{display:none!important}article[data-ai-panel][hidden]{display:block!important}.ai-panel{margin:6px 0;border:0;border-top:1px solid #aaa;padding:10px 0}.ai-script{background:white}.ai-work{display:block}.ai-script{margin:8px 0}.ai-panel header,.ai-script{break-inside:avoid}.ai-panel header{break-after:avoid}}
 .ai-compare{margin-top:16px;padding:13px 18px;background:var(--ink-wash);font-size:14px}.ai-compare ul{padding:0 0 0 1.2em}.ai-compare li{margin-top:5px}.skip:not(:focus){clip-path:inset(50%);width:1px;height:1px;overflow:hidden;white-space:nowrap;padding:0}
+.song-beats{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;margin:.55rem 0}
+.song-beats button[data-beat]{flex:1 1 6rem;min-width:0;min-height:38px;margin:0;padding:.24rem .45rem;border:1px solid var(--border,#c8c3b5);border-radius:4px;background:var(--surface,#fffaf2);color:var(--text,#272823);font-size:.85rem;line-height:1.35;font-weight:600;text-align:center;overflow-wrap:anywhere}
+.song-beats button[data-beat][aria-pressed="true"]{border-color:var(--accent,#a63328);background:var(--wash,#f3e6d9);color:var(--accent,#a63328);box-shadow:inset 0 -3px var(--accent,#a63328)}
+[data-song-panel] [data-beat-play]{min-height:38px;padding:.32rem .8rem;border:1px solid var(--accent,#a63328);border-radius:4px;background:var(--surface,#fffaf2);color:var(--accent,#a63328);font-weight:650;font-size:.88rem;line-height:1.35}
+[data-song-panel] [data-beat-time]{width:clamp(6rem,28vw,17rem);min-width:0;max-width:100%;height:32px;vertical-align:middle;accent-color:var(--accent,#a63328);cursor:pointer}
+[data-song-panel] [data-beat-clock]{display:inline-block;font:600 .8rem/1.4 ui-monospace,monospace;font-variant-numeric:tabular-nums;color:var(--text-secondary,#565a50);white-space:nowrap}
+[data-song-panel] [data-beat-label]{display:block;margin-top:.5rem;color:var(--accent,#a63328);font-size:.92rem;font-weight:700}
+[data-song-panel] p[data-beat-action],[data-song-panel] p[data-beat-audio]{margin:.18rem 0;line-height:1.55;overflow-wrap:anywhere}
+[data-song-panel] p[data-beat-audio]{color:var(--text-secondary,#565a50);font-size:.9rem}
+[data-song-panel] :is([data-beat],[data-beat-play],[data-beat-time]):focus-visible{outline:3px solid var(--accent,#a63328);outline-offset:3px}
+@media(max-width:540px){.song-beats button[data-beat]{flex-basis:calc(50% - .4rem);min-height:44px}[data-song-panel] [data-beat-play]{min-height:44px}[data-song-panel] [data-beat-time]{height:44px;width:min(42%,12rem)}}
+@media print{
+  [data-song-panel] :is(.song-beats,[data-beat-play],[data-beat-time],[data-beat-clock],[data-beat-label],[data-beat-action],[data-beat-audio]){display:none!important}
+  [data-song-panel] details::details-content{display:block!important;content-visibility:visible!important}
+}
+
+.song-cover{padding:clamp(22px,3.6vw,44px);background:#23372f;color:#faf4e4;border-radius:6px;display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(18px,5vw,70px);align-items:center}
+.song-cover .eyebrow{color:#e0ba85}.song-cover h2{font-size:clamp(33px,4vw,57px);line-height:1.16;margin:10px 0 16px;letter-spacing:-.048em}.song-cover p{font-size:15px;color:#edecdd}.song-cover h3{color:#faf4e4;font-size:20px}.song-process{border-left:1px solid #61746a;padding-left:24px}.song-process ol{list-style:none;counter-reset:songflow;padding:0;margin:10px 0}.song-process li{position:relative;counter-increment:songflow;padding-left:33px;margin:8px 0}.song-process li:before{content:"0" counter(songflow);position:absolute;left:0;top:3px;font:12px/1.6 monospace;color:#e0ba85}.song-process b,.song-process span{display:block}.song-process span{font-size:13px;color:#d4dace}.song-process a{color:#f2d097;font-size:13px}
+.song-facts{font-size:14px;padding:15px 0;color:var(--text-secondary)}.song-facts a,.song-ep a,.song-deliver a{display:inline-block;font-weight:650}
+.song-subhead{margin:18px 0 10px}.song-subhead h3,.song-watch h3,.song-lab h3{font-size:clamp(21px,2.05vw,29px);line-height:1.35;letter-spacing:-.035em}.song-subhead p,.song-download p,.song-muted,.song-deliver{color:var(--text-secondary);font-size:14px}
+.song-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:13px 0 12px}.song-tabs button{line-height:1.45;text-align:left;padding:10px 13px;min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:4px}.song-tabs span,.song-tabs strong{display:block}.song-tabs span{font-size:12px;color:var(--text-secondary)}.song-tabs strong{font-size:15px}.song-tabs button[aria-pressed="true"]{background:var(--text);border-color:var(--text);color:var(--bg)}.song-tabs button[aria-pressed="true"] span{color:var(--bg)}
+.song-ep{border:1px solid var(--border);border-radius:4px;background:var(--surface)}.song-watch{padding:clamp(17px,2.5vw,28px);background:var(--ink-wash);display:grid;grid-template-columns:1.25fr .75fr;gap:24px}.song-watch h3,.song-lab h3{margin:5px 0 7px}.song-watch p:not(.kicker){font-size:14px;margin-top:5px}.song-note{font-size:14px;font-weight:700}.song-note small{margin-left:5px;color:var(--text-secondary);font-weight:400}.song-note textarea{display:block;width:100%;resize:vertical;border:1px solid var(--border);border-radius:4px;background:var(--surface);color:var(--text);font-family:inherit;font-size:14px;line-height:1.6;padding:9px;margin-top:5px}.song-saved{font-size:12px;color:var(--positive)}
+.song-lab{padding:clamp(17px,2.5vw,28px)}.song-lab>p:not(.kicker){font-size:15px;color:var(--text-secondary)}.song-reader{margin:15px 0;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:4px}.song-reader h4{font-size:18px;line-height:1.5}.song-clockbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px}.song-screen{padding:9px 0 0;min-height:6em}.song-screen p{font-size:15px}.song-shotlist{margin:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.song-shotlist summary{cursor:pointer;padding:10px 0;font-size:14px;font-weight:700}.song-shotlist table{border-collapse:collapse;width:100%;font-size:14px;text-align:left}.song-shotlist td,.song-shotlist th{padding:6px 9px;border-bottom:1px solid var(--border);vertical-align:top}.song-shotlist td:first-child{white-space:nowrap}.song-shotlist p{font-size:14px;padding:10px 0}.song-lab .ai-script{margin-top:12px}
+.song-chain{padding:0 18px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.song-chain>div{background:var(--bg);padding:13px}.song-chain small,.song-chain strong{display:block}.song-chain small{color:var(--accent);font-weight:650;font-size:12px}.song-chain strong{font-size:16px}.song-chain p{color:var(--text-secondary);font-size:13px;margin-top:6px}.song-deliver{padding:12px 19px 17px}.song-download{display:flex;flex-wrap:wrap;align-items:center;gap:14px;justify-content:space-between;padding:16px 21px;margin-top:15px;background:var(--ink-wash);border-radius:4px}.song-download strong{font-size:19px}
+@media(max-width:830px){.song-chain{grid-template-columns:repeat(2,minmax(0,1fr))}.song-tabs{gap:4px}.song-tabs button{padding:7px}.song-tabs strong{font-size:13px}}
+@media(max-width:680px){.page-nav .nav-live-case{display:none}.song-cover,.song-watch{grid-template-columns:1fr;gap:15px}.song-process{border-left:0;border-top:1px solid #61746a;padding:12px 0 0}.song-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}.song-shotlist td,.song-shotlist th{padding:4px;font-size:12px}.song-shotlist td:first-child{white-space:normal}.song-note small{display:inline-block}.song-chain{padding:0 11px;gap:6px}.song-chain>div{padding:9px}.song-reader{padding:10px}.hero-actions{gap:12px}}@media(max-width:375px){.hero-actions .btn.quiet{font-size:12px}.hero-actions{gap:9px}}
+@media print{.song-tabs,.song-clockbar,.song-reader,.song-saved,.song-download .btn{display:none!important}.song-ep[hidden]{display:block!important}.song-cover,.song-watch,.song-lab,.song-process{background:white!important;color:black!important;padding:8px 0;border:0}.song-process p,.song-process span,.song-cover h2,.song-cover h3,.song-cover p,.song-process a{color:black}.song-note{display:none}.song-ep{border:0;border-top:1px solid #aaa}.song-chain{display:block}.song-chain>div{break-inside:avoid}.song-shotlist tr{break-inside:avoid}}
+
+.song-tabs small{display:block;color:var(--text-secondary);font-size:11px;margin-top:4px}.song-tabs button[aria-pressed="true"] small{color:var(--bg)}
   </style>
 <!-- portfolio-nav:start --><style>
 .portfolio-navigation{box-sizing:border-box;padding:0;border:0;overflow:visible;background:transparent;display:flex;align-items:center;gap:12px;flex-shrink:0;font:12px/1.5 system-ui,sans-serif;color:inherit;isolation:isolate}
@@ -72,7 +101,7 @@ body:has(>.portfolio-navigation[data-placement="page"]) .topbar,body:has(>.portf
 <a class="skip" href="#main-content">跳到制片手册正文</a>
 <header class="brand-strip"><div class="frame brand-row">
 <a class="wordmark" href="#main-content"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8 16-5 1.5 5L4.5 13zM4 12h16v9H4z"/><path d="m7 7 4 3m1-5 4 3M7 16h6"/></svg>片场手册</a>
-<nav class="page-nav" aria-label="手册目录"><a href="#workflow">制作路线</a><a href="#ai-tools">AI 选型</a><a href="#case">案例拆解</a><a href="#release">红果上线</a></nav>
+<nav class="page-nav" aria-label="手册目录"><a href="#workflow">制作路线</a><a href="#ai-tools">AI 选型</a><a class="nav-live-case" href="#case">真人案例</a><a href="#song-case">纯 AI 五集</a><a href="#release">红果上线</a></nav>
 <div class="tools-wrap"><button class="tool-toggle" id="tools-toggle" aria-label="阅读工具" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/><path d="M8 3v6m9 0v6M9 15v6" stroke-width="3"/></svg><span>工具</span></button>
 <div id="tools-menu" class="tools-menu" hidden><button id="theme-toggle"><span data-theme-label>切换为深色</span></button><a href="/panoramas/hongguo-short-drama/field-map.png" download="红果短剧制作全景图.png">保存完整流程长图</a><button id="export-map">导出当前进度图</button><button id="print-guide">打印完整手册</button><p id="tool-status" aria-live="polite"></p></div></div></div></header>
 <main id="main-content"><noscript><div class="frame"><a href="/panoramas/hongguo-short-drama/field-map.html">阅读八步全流程打印版</a> · <a href="/panoramas/hongguo-short-drama/production-kit.md" download>下载制片资料包</a></div></noscript>
@@ -80,7 +109,7 @@ body:has(>.portfolio-navigation[data-placement="page"]) .topbar,body:has(>.portf
 <p class="eyebrow"><i class="red-line"></i> 真人竖屏短剧 · 新手实作指南</p>
 <h1 id="page-title">红果短剧<span>制作全景图</span></h1>
 <p class="intro">用一间照相馆、两位演员，先练拍 75 秒的第一集。沿着八步路线选用豆包、即梦和剪映，把剧本做成可以送审、在红果播出的作品。</p>
-<div class="hero-actions"><a class="btn primary" href="#step-1">从第一步开始 <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h17m-7-7 7 7-7 7"/></svg></a><a class="btn quiet" href="#case">先看案例 ↘</a></div></div>
+<div class="hero-actions"><a class="btn primary" href="#step-1">从第一步开始 <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h17m-7-7 7 7-7 7"/></svg></a><a class="btn quiet" href="#case">真人案例 ↘</a><a class="btn quiet" href="#song-case">纯 AI 五集 ↘</a></div></div>
 <figure class="film"><div class="viewfinder"><img src="/panoramas/hongguo-short-drama/film-set.webp" width="1250" height="833" alt="照相馆柜台两侧的演员在灯下查看底片，摄影机记录她们的对话" fetchpriority="high"></div>
 <figcaption class="shot-caption"><b>INT. 照相馆 · 傍晚</b><span>《底片未取》 · AI 片场示意</span></figcaption></figure></section>
 <section id="workflow" class="sec"><div class="frame"><div id="map-sheet">
@@ -241,6 +270,57 @@ body:has(>.portfolio-navigation[data-placement="page"]) .topbar,body:has(>.portf
 </aside>
 
 </div></section>
+<section id="song-case" class="sec song-section" aria-labelledby="song-title"><div class="frame">
+<header class="song-cover"><div><p class="eyebrow">纯 AI 制片课　/　红果作品观察</p><h2 id="song-title">从《持械入宋》<br>学做五集 AI 短剧</h2><p>红果第一季共 100 集。这里选前五集练看片，再用独立原创故事《渡口第五船》走一遍从角色图、生成镜头、合成配音到五集交片的流程。</p></div>
+<aside class="song-process"><h3>原剧团队怎样统一画面？</h3><ol><li><b>前两集先做样片</b><span>总导演带人做出尺度和风格，给后续制作者对照。</span></li><li><b>共用一套参考图</b><span>把角色、场景和道具集中管理，分章制作时沿用。</span></li><li><b>分头做片，统一审片</b><span>每位成员负责自己的章节，从改编做到成片，再交回审看。</span></li></ol><p><a href="https://www.yicai.com/video/103431899.html" target="_blank" rel="noopener noreferrer">总策划张汉生专访 ↗</a></p></aside></header>
+<div class="song-facts"><p>原剧讲一支现代五人小队意外来到大宋。看片时可以先问一个简单的问题：没有姓名字幕，还能认出是谁吗？总导演何秀山也谈到，选择原著时，他看重人物如何置身于具体的历史制度中。<a href="https://hongguoduanju.com/detail?series_id=7671966197985856536" target="_blank" rel="noopener noreferrer">红果作品页 ↗</a>　<a href="https://www.xinhuanet.com/ent/20261111/44f56a0c5c8a4079973989a9eadc891e/c.html" target="_blank" rel="noopener noreferrer">主创访谈 ↗</a></p></div>
+<header class="song-subhead"><h3>第一季 · 前五集看片与实作</h3><p>各集先看原剧，再试做一集《渡口第五船》。网页端可能提示登录，第四、五集请在红果 App 选集。</p></header>
+<div class="song-tabs" role="group" aria-label="选择原剧第一季的学习集数"><button data-song="1" aria-controls="song-1" aria-pressed="true"><span>第 1 集</span><strong>人物辨识</strong><small>原创练习 · 错印</small></button><button data-song="2" aria-controls="song-2" aria-pressed="false"><span>第 2 集</span><strong>两集怎样定调</strong><small>原创练习 · 双签</small></button><button data-song="3" aria-controls="song-3" aria-pressed="false"><span>第 3 集</span><strong>镜头怎么接</strong><small>原创练习 · 空船</small></button><button data-song="4" aria-controls="song-4" aria-pressed="false"><span>第 4 集</span><strong>声音怎么交代空间</strong><small>原创练习 · 倒章</small></button><button data-song="5" aria-controls="song-5" aria-pressed="false"><span>第 5 集</span><strong>怎样让观众看下一集</strong><small>原创练习 · 回条</small></button></div>
+<article id="song-1" class="song-ep" data-song-panel="1">
+<div class="song-watch"><div><p class="kicker">原剧看片作业　/　第一季 · 第 1 集</p><h3>人物辨识</h3><p>第一次见到小队成员时，先遮住字幕。记下你靠哪个外观、动作或声音认出其中两人，再回放验证。</p><p><b>看完留下</b>　一张角色卡。给每人留一个远景也看得出的特征。</p><p><a href="https://hongguoduanju.com/player/7671966197985856536" target="_blank" rel="noopener noreferrer">红果第一季 · 第 1 集 ↗</a></p></div>
+<label class="song-note">我的看片记录 <small>仅保存在这个浏览器</small><textarea data-song-note="1" rows="3" maxlength="1200" placeholder="例如：时间码、看到或听到的细节、我想试的做法"></textarea><span aria-live="polite" class="song-saved"></span></label></div>
+<div class="song-lab"><p class="kicker">独立原创练习　/　《渡口第五船》</p><h3>第 1 集 · 错印</h3><p>现代博物馆的修复灯一黑，再亮起来，灯下的修复师和木机已经到了北宋渡口。一个女账房正为五船赈粮封账。阿棠从湿透的货签里捡出两张“第三船”。新签边上的半月缺口帮沈禾认住它；两张签上的数字相同，谁也不能先丢。</p>
+<div class="song-reader"><h4>60 秒分镜读本</h4><p class="song-muted">点镜号或拖时间线，按剪辑节奏阅读画面与声音设计。</p><div class="song-beats"><button type="button" data-beat="0" data-start="0" data-end="13" data-framing="手部特写转半身" data-action="现代博物馆闭馆。沈禾用浅木双框对齐两张印样，合上左侧铜销。修复灯灭，电灯的余辉接成油灯火苗；她仍穿工作褂，手下已是潮湿木桌。" data-audio="现代闭馆广播渐弱；铜销咔嗒、窗外摇橹声。沈禾：“我的修复台呢？”"><b>镜 01</b>　0–13s</button><button type="button" data-beat="1" data-start="13" data-end="28" data-framing="竖幅双人中景" data-action="镜头从雨帘拉回宋代济川渡的船棚。沈禾留在画左，阿棠从右把账簿拽离漏雨处。沈禾捞起木机。字幕交代“北宋·济川渡（虚构）”。" data-audio="阿棠：“先替我压住这些签，五船赈粮，还等着封账呢。” 沈禾：“我帮你看印。” 雨打篷布。"><b>镜 02</b>　13–28s</button><button type="button" data-beat="2" data-start="28" data-end="45" data-framing="俯拍近景" data-action="阿棠在右侧分开两张黏连的票纸；纸角一松，左张上缘的半月缺口和右张完整的边缘同时露出。用吸水纸垫底，指腹按在干燥边缘。" data-audio="纸张分开的轻响。阿棠念左张：“第三船。” 看到右张，停住。"><b>镜 03</b>　28–45s</button><button type="button" data-beat="3" data-start="45" data-end="60" data-framing="票面特写转沈禾反应" data-action="不碰湿墨，将票并排放在浅木框外。两张签各有一个“第三船”；镜头停在不同的纸边，桌上其余票保持虚焦。" data-audio="沈禾：“这张是三，那张也是。三号怎么有两张？” 雨声盖住渡口的催促，留两秒。"><b>镜 04</b>　45–60s</button></div>
+<div class="song-clockbar"><button type="button" data-beat-play>播放预览</button><input type="range" data-beat-time min="0" max="60" value="0" step="1" aria-label="第1集分镜时间"><output data-beat-clock>00:00 / 01:00</output></div>
+<div class="song-screen"><span data-beat-label>镜 01 · 手部特写转半身</span><p data-beat-action>现代博物馆闭馆。沈禾用浅木双框对齐两张印样，合上左侧铜销。修复灯灭，电灯的余辉接成油灯火苗；她仍穿工作褂，手下已是潮湿木桌。</p><p data-beat-audio>现代闭馆广播渐弱；铜销咔嗒、窗外摇橹声。沈禾：“我的修复台呢？”</p></div></div>
+<details class="song-shotlist"><summary>展开四镜全表与连戏要点</summary><div class="table-wrap"><table><thead><tr><th>时间</th><th>景别</th><th>画面</th><th>对白与声音</th></tr></thead><tbody><tr><td>0–13 秒</td><td>手部特写转半身</td><td>现代博物馆闭馆。沈禾用浅木双框对齐两张印样，合上左侧铜销。修复灯灭，电灯的余辉接成油灯火苗；她仍穿工作褂，手下已是潮湿木桌。</td><td>现代闭馆广播渐弱；铜销咔嗒、窗外摇橹声。沈禾：“我的修复台呢？”</td></tr><tr><td>13–28 秒</td><td>竖幅双人中景</td><td>镜头从雨帘拉回宋代济川渡的船棚。沈禾留在画左，阿棠从右把账簿拽离漏雨处。沈禾捞起木机。字幕交代“北宋·济川渡（虚构）”。</td><td>阿棠：“先替我压住这些签，五船赈粮，还等着封账呢。” 沈禾：“我帮你看印。” 雨打篷布。</td></tr><tr><td>28–45 秒</td><td>俯拍近景</td><td>阿棠在右侧分开两张黏连的票纸；纸角一松，左张上缘的半月缺口和右张完整的边缘同时露出。用吸水纸垫底，指腹按在干燥边缘。</td><td>纸张分开的轻响。阿棠念左张：“第三船。” 看到右张，停住。</td></tr><tr><td>45–60 秒</td><td>票面特写转沈禾反应</td><td>不碰湿墨，将票并排放在浅木框外。两张签各有一个“第三船”；镜头停在不同的纸边，桌上其余票保持虚焦。</td><td>沈禾：“这张是三，那张也是。三号怎么有两张？” 雨声盖住渡口的催促，留两秒。</td></tr></tbody></table></div><p><b>承接设定</b>　起点是现代修复室。穿越以后，沈禾在桌左，灰蓝工作褂、短发；阿棠在桌右，赭褐短褙子、低髻。浅木双框验印机在桌心，铜销在左。结尾新签在左、缺口朝上，旧签在右。</p></details>
+<div class="ai-script"><div class="ai-script-head"><strong>即梦 Seedance · 五秒生成练习</strong><button type="button" data-copy="song-prompt-1">复制本集提示词</button></div><p id="song-prompt-1" class="ai-prompt">做第 1 集镜 03 中的 5 秒竖屏预演，9:16，固定俯拍，北宋虚构渡口，油灯侧光。旧木桌中心有浅色双框木制验印机，左铜销。右边赭褐衣袖的成年女子轻轻分开两张湿润的长方纸签，左张上缘有一个半月缺口，右张边缘完整，分开后停住。灰蓝衣袖留在左缘。纸面留字区，后期分别配同样的“第三船”。只生成手、签与木框，保持纸角不跳动。</p><span class="copy-status" aria-live="polite"></span><p class="ai-accept"><strong>本集验收</strong>开头能看懂从现代修复室穿越到宋代；木机跟着沈禾移动。最后一镜，两张票必须同时读出“第三船”，缺口只在左张上缘。</p></div></div></article><article id="song-2" class="song-ep" data-song-panel="2" hidden>
+<div class="song-watch"><div><p class="kicker">原剧看片作业　/　第一季 · 第 2 集</p><h3>两集怎样定调</h3><p>找第二集中一个也在第一集出现的人物。比较两次出场的衣装、声音、景别，记下哪一项始终稳定。</p><p><b>看完留下</b>　一张样片标准表。挑出下一位制作者必须继承的两项设定。</p><p><a href="https://hongguoduanju.com/player/7671966197985856536/7671977933363235864" target="_blank" rel="noopener noreferrer">红果第一季 · 第 2 集 ↗</a></p></div>
+<label class="song-note">我的看片记录 <small>仅保存在这个浏览器</small><textarea data-song-note="2" rows="3" maxlength="1200" placeholder="例如：时间码、看到或听到的细节、我想试的做法"></textarea><span aria-live="polite" class="song-saved"></span></label></div>
+<div class="song-lab"><p class="kicker">独立原创练习　/　《渡口第五船》</p><h3>第 2 集 · 双签</h3><p>墨色一样，纸却不同。阿棠认得自己裁的新签，那张带缺口的纸里有斜斜一根长纤维。右张纸背有两个旧绳眼，后面压着一段褪色的蓝绳。阿棠想起昨夜系备用船时，从旧签匣里抓了一张当泊位牌。</p>
+<div class="song-reader"><h4>60 秒分镜读本</h4><p class="song-muted">点镜号或拖时间线，按剪辑节奏阅读画面与声音设计。</p><div class="song-beats"><button type="button" data-beat="0" data-start="0" data-end="14" data-framing="台面近景" data-action="天快亮，湿签已吸去浮水。沈禾从桌左把两张票分放在木框的两个纸窗上，灯从下方照亮纸纹。" data-audio="竹尺轻碰框边。沈禾：“先别认那个三。你裁的签，用哪张纸？”"><b>镜 01</b>　0–14s</button><button type="button" data-beat="1" data-start="14" data-end="28" data-framing="透光特写" data-action="阿棠把裁签剩下的一条麻纸放到左窗。缺口签和余纸的长纤维走向相似；右签的横纹更密。阿棠以指甲沿纹路比过去。" data-audio="阿棠：“今天这批纸，丝长。右边这张倒像我从前用的。”"><b>镜 02</b>　14–28s</button><button type="button" data-beat="2" data-start="28" data-end="45" data-framing="右手与旧签微距" data-action="阿棠揭开右签背面蜷起的纸角。两个旧绳眼中，一个还挂着半截褪蓝绳。她从桌下托出旧签匣，匣内有同样系法的泊位牌。" data-audio="阿棠：“这绳是拴备用船的。昨夜雨急，我顺手从这匣里抽了一张。”"><b>镜 03</b>　28–45s</button><button type="button" data-beat="3" data-start="45" data-end="60" data-framing="双人中景转账簿" data-action="沈禾把左张新签留在木框左侧，旧签放在右侧蓝绳旁。阿棠打开到泊簿，指尖停在当日第五行，页上暂不显具体名单。" data-audio="沈禾：“所以有两张签，还不知有几船粮。” 阿棠：“对，到泊页上，一条一条看。” 翻页声。"><b>镜 04</b>　45–60s</button></div>
+<div class="song-clockbar"><button type="button" data-beat-play>播放预览</button><input type="range" data-beat-time min="0" max="60" value="0" step="1" aria-label="第2集分镜时间"><output data-beat-clock>00:00 / 01:00</output></div>
+<div class="song-screen"><span data-beat-label>镜 01 · 台面近景</span><p data-beat-action>天快亮，湿签已吸去浮水。沈禾从桌左把两张票分放在木框的两个纸窗上，灯从下方照亮纸纹。</p><p data-beat-audio>竹尺轻碰框边。沈禾：“先别认那个三。你裁的签，用哪张纸？”</p></div></div>
+<details class="song-shotlist"><summary>展开四镜全表与连戏要点</summary><div class="table-wrap"><table><thead><tr><th>时间</th><th>景别</th><th>画面</th><th>对白与声音</th></tr></thead><tbody><tr><td>0–14 秒</td><td>台面近景</td><td>天快亮，湿签已吸去浮水。沈禾从桌左把两张票分放在木框的两个纸窗上，灯从下方照亮纸纹。</td><td>竹尺轻碰框边。沈禾：“先别认那个三。你裁的签，用哪张纸？”</td></tr><tr><td>14–28 秒</td><td>透光特写</td><td>阿棠把裁签剩下的一条麻纸放到左窗。缺口签和余纸的长纤维走向相似；右签的横纹更密。阿棠以指甲沿纹路比过去。</td><td>阿棠：“今天这批纸，丝长。右边这张倒像我从前用的。”</td></tr><tr><td>28–45 秒</td><td>右手与旧签微距</td><td>阿棠揭开右签背面蜷起的纸角。两个旧绳眼中，一个还挂着半截褪蓝绳。她从桌下托出旧签匣，匣内有同样系法的泊位牌。</td><td>阿棠：“这绳是拴备用船的。昨夜雨急，我顺手从这匣里抽了一张。”</td></tr><tr><td>45–60 秒</td><td>双人中景转账簿</td><td>沈禾把左张新签留在木框左侧，旧签放在右侧蓝绳旁。阿棠打开到泊簿，指尖停在当日第五行，页上暂不显具体名单。</td><td>沈禾：“所以有两张签，还不知有几船粮。” 阿棠：“对，到泊页上，一条一条看。” 翻页声。</td></tr></tbody></table></div><p><b>承接设定</b>　承接两张三号签的左右位置。左张缺口新签配本趟裁签余纸，右张完整旧签有双绳眼、褪色蓝绳。木机只固定透光纸框。下集从摊开的到泊页接起。</p></details>
+<div class="ai-script"><div class="ai-script-head"><strong>即梦 Seedance · 五秒生成练习</strong><button type="button" data-copy="song-prompt-2">复制本集提示词</button></div><p id="song-prompt-2" class="ai-prompt">做第 2 集镜 03 中的 5 秒，9:16，固定微距。右方赭褐衣袖的一只手从旧木桌上翻起右侧完整旧货签的边角，露出两个旧绳眼和一小段褪蓝麻绳；左侧上缘带半月缺口的新签原地不动，桌心浅木双框、铜销在左。透窗晨光照出粗纤维，不生成可读文字，不加其他绳或纸，最后定住绳眼供观众看清。</p><span class="copy-status" aria-live="polite"></span><p class="ai-accept"><strong>本集验收</strong>纤维差异只引出调查，蓝绳和阿棠的记忆再提供旧签回用线索。两处旧绳眼在完整旧签上；本集还没有证明备用船装过什么。</p></div></div></article><article id="song-3" class="song-ep" data-song-panel="3" hidden>
+<div class="song-watch"><div><p class="kicker">原剧看片作业　/　第一季 · 第 3 集</p><h3>镜头怎么接</h3><p>找一个动作从一个镜头接到另一个镜头的地方。暂停两次，画出人物和道具在画面里的相对位置。</p><p><b>看完留下</b>　一张前后帧对照表。检查手、视线与物件是否接得上。</p><p><a href="https://hongguoduanju.com/player/7671966197985856536/7671977930024553496" target="_blank" rel="noopener noreferrer">红果第一季 · 第 3 集 ↗</a></p></div>
+<label class="song-note">我的看片记录 <small>仅保存在这个浏览器</small><textarea data-song-note="3" rows="3" maxlength="1200" placeholder="例如：时间码、看到或听到的细节、我想试的做法"></textarea><span aria-live="polite" class="song-saved"></span></label></div>
+<div class="song-lab"><p class="kicker">独立原创练习　/　《渡口第五船》</p><h3>第 3 集 · 空船</h3><p>到泊页上果然有五行。可它记的是过了几条船，阿棠真正得答的是到了几船粮。五行对应一号、二号、三号、备用船、四号。备用船没有卸粮记录；正渡的秤单只与一至四号相符。运单上应到的第五船至今没在正渡交粮。</p>
+<div class="song-reader"><h4>60 秒分镜读本</h4><p class="song-muted">点镜号或拖时间线，按剪辑节奏阅读画面与声音设计。</p><div class="song-beats"><button type="button" data-beat="0" data-start="0" data-end="13" data-framing="账页俯拍" data-action="接上集翻开的到泊页，阿棠逐行放五枚木筹，一、二、三、备用、四；桌角另置一张出发运单，五艘载粮船编号一至五。字样逐项后期排入。" data-audio="阿棠：“发船单上五船。昨夜这页也记了五条，我就以为齐了。”"><b>镜 01</b>　0–13s</button><button type="button" data-beat="1" data-start="13" data-end="30" data-framing="双人侧中景" data-action="沈禾让她把对应的卸粮秤单压在每枚筹下。一、二、三、四都有，唯独备用那行只夹着系泊蓝绳。阿棠推窗，空船还拴在棚下。" data-audio="沈禾：“第四行卸了多少？” 阿棠：“这条昨夜给人换缆绳用，舱里空着。” 木船轻撞桩。"><b>镜 02</b>　13–30s</button><button type="button" data-beat="2" data-start="30" data-end="45" data-framing="木筹与运单近景" data-action="阿棠把备用筹挪到蓝绳一旁。桌上留下四枚，每枚压着一张正渡秤单。沈禾顺着发船单找到五号一行，将那一行露出来。" data-audio="阿棠：“一到四都在正渡过了秤。少的是五号。” 沈禾：“少在这张桌上。它最后在哪儿靠的？”"><b>镜 03</b>　30–45s</button><button type="button" data-beat="3" data-start="45" data-end="60" data-framing="页背特写" data-action="为找上夜记录，阿棠翻回前页。纸背角的淡红半印歪向相反方向。沈禾移开油灯，侧光显出页背没有朱砂堆起的笔触。" data-audio="阿棠：“这不是我盖的章。” 沈禾：“像是另一张湿纸蹭上去的。昨天，里面夹过什么？” 屋外传来搅粥声。"><b>镜 04</b>　45–60s</button></div>
+<div class="song-clockbar"><button type="button" data-beat-play>播放预览</button><input type="range" data-beat-time min="0" max="60" value="0" step="1" aria-label="第3集分镜时间"><output data-beat-clock>00:00 / 01:00</output></div>
+<div class="song-screen"><span data-beat-label>镜 01 · 账页俯拍</span><p data-beat-action>接上集翻开的到泊页，阿棠逐行放五枚木筹，一、二、三、备用、四；桌角另置一张出发运单，五艘载粮船编号一至五。字样逐项后期排入。</p><p data-beat-audio>阿棠：“发船单上五船。昨夜这页也记了五条，我就以为齐了。”</p></div></div>
+<details class="song-shotlist"><summary>展开四镜全表与连戏要点</summary><div class="table-wrap"><table><thead><tr><th>时间</th><th>景别</th><th>画面</th><th>对白与声音</th></tr></thead><tbody><tr><td>0–13 秒</td><td>账页俯拍</td><td>接上集翻开的到泊页，阿棠逐行放五枚木筹，一、二、三、备用、四；桌角另置一张出发运单，五艘载粮船编号一至五。字样逐项后期排入。</td><td>阿棠：“发船单上五船。昨夜这页也记了五条，我就以为齐了。”</td></tr><tr><td>13–30 秒</td><td>双人侧中景</td><td>沈禾让她把对应的卸粮秤单压在每枚筹下。一、二、三、四都有，唯独备用那行只夹着系泊蓝绳。阿棠推窗，空船还拴在棚下。</td><td>沈禾：“第四行卸了多少？” 阿棠：“这条昨夜给人换缆绳用，舱里空着。” 木船轻撞桩。</td></tr><tr><td>30–45 秒</td><td>木筹与运单近景</td><td>阿棠把备用筹挪到蓝绳一旁。桌上留下四枚，每枚压着一张正渡秤单。沈禾顺着发船单找到五号一行，将那一行露出来。</td><td>阿棠：“一到四都在正渡过了秤。少的是五号。” 沈禾：“少在这张桌上。它最后在哪儿靠的？”</td></tr><tr><td>45–60 秒</td><td>页背特写</td><td>为找上夜记录，阿棠翻回前页。纸背角的淡红半印歪向相反方向。沈禾移开油灯，侧光显出页背没有朱砂堆起的笔触。</td><td>阿棠：“这不是我盖的章。” 沈禾：“像是另一张湿纸蹭上去的。昨天，里面夹过什么？” 屋外传来搅粥声。</td></tr></tbody></table></div><p><b>承接设定</b>　仍用新三号签、蓝绳旧签作参照。桌心木机旁新增五枚木筹，代表五艘到泊船；抽走备用筹后留四枚。账册页背露出淡淡倒印，下一集查来源。</p></details>
+<div class="ai-script"><div class="ai-script-head"><strong>即梦 Seedance · 五秒生成练习</strong><button type="button" data-copy="song-prompt-3">复制本集提示词</button></div><p id="song-prompt-3" class="ai-prompt">做第 3 集镜 03 中的 5 秒竖版俯拍。旧木桌上五枚形状一致的木筹并排，四枚各压一张米白秤单，第四行那枚紧挨褪蓝绳。右方赭褐衣袖把蓝绳旁这一枚平移到上方，原位露出空桌；其余四枚和各自纸片始终静止。灰蓝袖口在画面左缘，浅木双框铜销向左。锁定机位，最后静止两拍。签号另行排字。</p><span class="copy-status" aria-live="polite"></span><p class="ai-accept"><strong>本集验收</strong>移动前明确五艘到泊，移动后桌面四枚对应四条正渡卸粮记录。备用空船是另一艘；真正的五号船仍待查。</p></div></div></article><article id="song-4" class="song-ep" data-song-panel="4" hidden>
+<div class="song-watch"><div><p class="kicker">原剧看片作业　/　第一季 · 第 4 集</p><h3>声音怎么交代空间</h3><p>选一句对白和它后面的停顿。闭眼只听，标记谁在说话、背景里能听见什么，再开画面对照。</p><p><b>看完留下</b>　一张三轨声音表。把对白、环境声和单独的音效分别记下。</p><p>在红果 App 搜「持械入宋」，进入第一季，选第 4 集。</p><p><a href="https://hongguoduanju.com/detail?series_id=7671966197985856536" target="_blank" rel="noopener noreferrer">打开红果第一季目录 ↗</a></p></div>
+<label class="song-note">我的看片记录 <small>仅保存在这个浏览器</small><textarea data-song-note="4" rows="3" maxlength="1200" placeholder="例如：时间码、看到或听到的细节、我想试的做法"></textarea><span aria-live="polite" class="song-saved"></span></label></div>
+<div class="song-lab"><p class="kicker">独立原创练习　/　《渡口第五船》</p><h3>第 4 集 · 倒章</h3><p>账页上的章为何左右颠倒？沈禾借木框翻看印样，阿棠认出北仓的印边缺了一角。昨夜的回执夹里存着北仓卸仓回执，与倒印破角吻合。北仓入仓簿也记着五号船趁暴雨前改泊，卸下与发船单相同袋数。</p>
+<div class="song-reader"><h4>60 秒分镜读本</h4><p class="song-muted">点镜号或拖时间线，按剪辑节奏阅读画面与声音设计。</p><div class="song-beats"><button type="button" data-beat="0" data-start="0" data-end="14" data-framing="木框俯拍特写" data-action="沿着上一集那半枚转印，沈禾在透明薄纸上描下外边线，夹入木框翻面。阿棠用指尖点出右上缺角，只认作可能的北仓印，收起木机去查。" data-audio="沈禾：“翻过来看，这个缺角眼熟吗？” 阿棠：“像北仓用的那枚。咱找原件。”"><b>镜 01</b>　0–14s</button><button type="button" data-beat="1" data-start="14" data-end="29" data-framing="北仓门内双人中景" data-action="转到北仓门内的账桌。两人仍左沈右棠。阿棠翻昨夜卸仓回执夹，抽出写有五号船的原件，后面夹着卸仓时收下的五号船签。沈禾将描样与正印叠合，缺角对上。" data-audio="纸夹滑动。阿棠：“昨夜送到渡口登记，今早归回仓里了。我还当页背是洇了水。”"><b>镜 02</b>　14–29s</button><button type="button" data-beat="2" data-start="29" data-end="46" data-framing="单据交替近景" data-action="北仓入仓簿另记五号船实收二十袋。阿棠对过发船单上的二十袋和卸仓回执日期，另取一枚新筹放到北仓回执旁，与早先的四张正渡秤单隔开。" data-audio="阿棠：“雨下来前卸的。五号没去正渡，停在北仓。” 沈禾：“船找到了。这批粮后来呢？”"><b>镜 03</b>　29–46s</button><button type="button" data-beat="3" data-start="46" data-end="60" data-framing="阿棠近景转领用栏" data-action="阿棠看到分发栏写着‘北巷’，供渡口归档的领粮回条栏仍空。她摸到自己以前往北巷送粥的木勺，提起回执出门。" data-audio="阿棠：“北巷昨夜来领过。仓里的数对了，他们手里的那联呢？” 檐下已不滴雨。"><b>镜 04</b>　46–60s</button></div>
+<div class="song-clockbar"><button type="button" data-beat-play>播放预览</button><input type="range" data-beat-time min="0" max="60" value="0" step="1" aria-label="第4集分镜时间"><output data-beat-clock>00:00 / 01:00</output></div>
+<div class="song-screen"><span data-beat-label>镜 01 · 木框俯拍特写</span><p data-beat-action>沿着上一集那半枚转印，沈禾在透明薄纸上描下外边线，夹入木框翻面。阿棠用指尖点出右上缺角，只认作可能的北仓印，收起木机去查。</p><p data-beat-audio>沈禾：“翻过来看，这个缺角眼熟吗？” 阿棠：“像北仓用的那枚。咱找原件。”</p></div></div>
+<details class="song-shotlist"><summary>展开四镜全表与连戏要点</summary><div class="table-wrap"><table><thead><tr><th>时间</th><th>景别</th><th>画面</th><th>对白与声音</th></tr></thead><tbody><tr><td>0–14 秒</td><td>木框俯拍特写</td><td>沿着上一集那半枚转印，沈禾在透明薄纸上描下外边线，夹入木框翻面。阿棠用指尖点出右上缺角，只认作可能的北仓印，收起木机去查。</td><td>沈禾：“翻过来看，这个缺角眼熟吗？” 阿棠：“像北仓用的那枚。咱找原件。”</td></tr><tr><td>14–29 秒</td><td>北仓门内双人中景</td><td>转到北仓门内的账桌。两人仍左沈右棠。阿棠翻昨夜卸仓回执夹，抽出写有五号船的原件，后面夹着卸仓时收下的五号船签。沈禾将描样与正印叠合，缺角对上。</td><td>纸夹滑动。阿棠：“昨夜送到渡口登记，今早归回仓里了。我还当页背是洇了水。”</td></tr><tr><td>29–46 秒</td><td>单据交替近景</td><td>北仓入仓簿另记五号船实收二十袋。阿棠对过发船单上的二十袋和卸仓回执日期，另取一枚新筹放到北仓回执旁，与早先的四张正渡秤单隔开。</td><td>阿棠：“雨下来前卸的。五号没去正渡，停在北仓。” 沈禾：“船找到了。这批粮后来呢？”</td></tr><tr><td>46–60 秒</td><td>阿棠近景转领用栏</td><td>阿棠看到分发栏写着‘北巷’，供渡口归档的领粮回条栏仍空。她摸到自己以前往北巷送粥的木勺，提起回执出门。</td><td>阿棠：“北巷昨夜来领过。仓里的数对了，他们手里的那联呢？” 檐下已不滴雨。</td></tr></tbody></table></div><p><b>承接设定</b>　页背是湿墨接触留下的淡倒印，回执上才有正向原印。正渡四张秤单在左；右边增添北仓五号卸仓回执和夹在回执后的五号船签。回执底端的‘北巷’分发记号引到第五集。</p></details>
+<div class="ai-script"><div class="ai-script-head"><strong>即梦 Seedance · 五秒生成练习</strong><button type="button" data-copy="song-prompt-4">复制本集提示词</button></div><p id="song-prompt-4" class="ai-prompt">做第 4 集镜 01 中的 5 秒插镜，竖屏固定俯拍。桌左灰蓝工作褂的成年女子捏住一片描有半枚非文字几何印边的半透明薄纸，用浅木双框以竖轴翻面。就一次翻动；右侧赭褐衣袖的食指在翻面完成后停在印边缺角外，避免遮挡。台面保留原账页，倒印始终不动。无文字、无幻光，动作有清晰起止。</p><span class="copy-status" aria-live="polite"></span><p class="ai-accept"><strong>本集验收</strong>只翻描样，原账页留在原处。印边负责找到线索，确认第五船靠北仓靠的是回执、入仓簿与运单互相印证。领粮回条仍未补齐。</p></div></div></article><article id="song-5" class="song-ep" data-song-panel="5" hidden>
+<div class="song-watch"><div><p class="kicker">原剧看片作业　/　第一季 · 第 5 集</p><h3>怎样让观众看下一集</h3><p>从结尾向前回看十秒，再回到本集开头。记下这一集解答了哪个问题，结尾又留下了什么。</p><p><b>看完留下</b>　一张五集衔接表。为每集各写一句“本集回答了什么”。</p><p>在红果 App 搜「持械入宋」，进入第一季，选第 5 集。</p><p><a href="https://hongguoduanju.com/detail?series_id=7671966197985856536" target="_blank" rel="noopener noreferrer">打开红果第一季目录 ↗</a></p></div>
+<label class="song-note">我的看片记录 <small>仅保存在这个浏览器</small><textarea data-song-note="5" rows="3" maxlength="1200" placeholder="例如：时间码、看到或听到的细节、我想试的做法"></textarea><span aria-live="polite" class="song-saved"></span></label></div>
+<div class="song-lab"><p class="kicker">独立原创练习　/　《渡口第五船》</p><h3>第 5 集 · 回条</h3><p>北巷粥棚的领粮人带着存联来到渡棚。沈禾把木框推开，空出一块让他们自己看得清的桌面。北巷领粮人把自己的存联与五号船签、北仓入仓数逐项核对，确认实领，在新回条写上今天的核对日期。阿棠把补回条和存联编号一并登簿。</p>
+<div class="song-reader"><h4>60 秒分镜读本</h4><p class="song-muted">点镜号或拖时间线，按剪辑节奏阅读画面与声音设计。</p><div class="song-beats"><button type="button" data-beat="0" data-start="0" data-end="13" data-framing="渡棚外转桌边中景" data-action="雨过天亮。阿棠按北巷分发记号请来昨夜经手领粮的人。第三人的青布袖从桌前方伸入，将叠好的存联主动展平；沈禾在左，阿棠在右。" data-audio="领粮人：“昨夜顾着盖粮袋，这一联在我这里。” 阿棠：“您自己对，我们把簿子摊开。”"><b>镜 01</b>　0–13s</button><button type="button" data-beat="1" data-start="13" data-end="29" data-framing="桌面俯拍，连续三次点指" data-action="青布袖先把五号船签放在存联对应的签号旁，再指北仓入仓簿上的二十袋，点回存联上的实领二十袋。三处近景用同色后期标注引导目光。" data-audio="领粮人：“五号船。北仓卸的。二十袋，我昨夜在粥棚点了两遍。” 谷粒轻落在木桌上。"><b>镜 02</b>　13–29s</button><button type="button" data-beat="2" data-start="29" data-end="45" data-framing="近景转账页全貌" data-action="领粮人在新回条上留下今天的核对日期和实领数，自留原存联。阿棠将回条归在五号名下，注明补收日期。镜头扫过左边一至四号正渡秤单、右边五号北仓回执。" data-audio="阿棠：“一、二、三、四，正渡。第五船，北仓收到、北巷领走。备用船，我另写一行。” 落笔声。"><b>镜 03</b>　29–45s</button><button type="button" data-beat="3" data-start="45" data-end="60" data-framing="桌心特写渐退到双人中景" data-action="旧三号签重新挂上标为‘备用’的钩。沈禾将双框木机留在矮柜台上，把验印纸夹放在人人够得着的位置。领粮人收走自己的存联，阿棠把柜台前的凳子扶正。" data-audio="阿棠：“这木机你舍得留下？” 沈禾：“留着吧。下回来领粮，让人自己看。” 与首集呼应的一声铜销咔嗒，切黑。"><b>镜 04</b>　45–60s</button></div>
+<div class="song-clockbar"><button type="button" data-beat-play>播放预览</button><input type="range" data-beat-time min="0" max="60" value="0" step="1" aria-label="第5集分镜时间"><output data-beat-clock>00:00 / 01:00</output></div>
+<div class="song-screen"><span data-beat-label>镜 01 · 渡棚外转桌边中景</span><p data-beat-action>雨过天亮。阿棠按北巷分发记号请来昨夜经手领粮的人。第三人的青布袖从桌前方伸入，将叠好的存联主动展平；沈禾在左，阿棠在右。</p><p data-beat-audio>领粮人：“昨夜顾着盖粮袋，这一联在我这里。” 阿棠：“您自己对，我们把簿子摊开。”</p></div></div>
+<details class="song-shotlist"><summary>展开四镜全表与连戏要点</summary><div class="table-wrap"><table><thead><tr><th>时间</th><th>景别</th><th>画面</th><th>对白与声音</th></tr></thead><tbody><tr><td>0–13 秒</td><td>渡棚外转桌边中景</td><td>雨过天亮。阿棠按北巷分发记号请来昨夜经手领粮的人。第三人的青布袖从桌前方伸入，将叠好的存联主动展平；沈禾在左，阿棠在右。</td><td>领粮人：“昨夜顾着盖粮袋，这一联在我这里。” 阿棠：“您自己对，我们把簿子摊开。”</td></tr><tr><td>13–29 秒</td><td>桌面俯拍，连续三次点指</td><td>青布袖先把五号船签放在存联对应的签号旁，再指北仓入仓簿上的二十袋，点回存联上的实领二十袋。三处近景用同色后期标注引导目光。</td><td>领粮人：“五号船。北仓卸的。二十袋，我昨夜在粥棚点了两遍。” 谷粒轻落在木桌上。</td></tr><tr><td>29–45 秒</td><td>近景转账页全貌</td><td>领粮人在新回条上留下今天的核对日期和实领数，自留原存联。阿棠将回条归在五号名下，注明补收日期。镜头扫过左边一至四号正渡秤单、右边五号北仓回执。</td><td>阿棠：“一、二、三、四，正渡。第五船，北仓收到、北巷领走。备用船，我另写一行。” 落笔声。</td></tr><tr><td>45–60 秒</td><td>桌心特写渐退到双人中景</td><td>旧三号签重新挂上标为‘备用’的钩。沈禾将双框木机留在矮柜台上，把验印纸夹放在人人够得着的位置。领粮人收走自己的存联，阿棠把柜台前的凳子扶正。</td><td>阿棠：“这木机你舍得留下？” 沈禾：“留着吧。下回来领粮，让人自己看。” 与首集呼应的一声铜销咔嗒，切黑。</td></tr></tbody></table></div><p><b>承接设定</b>　左侧保留正渡一至四号秤单，右侧是五号船签、北仓回执、入仓簿和领粮存联。旧三号签挂回备用船钩。收尾木机留在桌心，左铜销朝向与首集相同。</p></details>
+<div class="ai-script"><div class="ai-script-head"><strong>即梦 Seedance · 五秒生成练习</strong><button type="button" data-copy="song-prompt-5">复制本集提示词</button></div><p id="song-prompt-5" class="ai-prompt">做第 5 集镜 04 末尾的 5 秒，9:16。雨后北宋渡棚，镜头缓缓从木桌中心拉开，灰蓝工作褂的修复师在画左松开浅色双框木制验印机，铜销固定在框左侧；画右赭褐短褙子的女账房伸手把桌前矮凳扶正。四张正渡单在桌左，一小叠北仓单在右，单据保持原位。自然晨光，人物只做这两个动作，无现代设备，最后一拍静止。</p><span class="copy-status" aria-live="polite"></span><p class="ai-accept"><strong>本集验收</strong>让领粮人亲自核对并保留自己的存联，补回条按今天日期留痕。结局只数五艘载粮船，路线是正渡四、北仓一，空备用船另列；木机留在渡口。</p></div></div></article>
+<details class="rules song-pipeline" id="song-pipeline" open><summary>从第一张角色图到五集交片，用哪些字节工具？</summary><div class="song-chain"><div><small>豆包</small><strong>拆故事</strong><p>为五集各写一个观众要追问的问题，用豆包检查线索有没有提前泄露，编剧确认每集结尾。</p></div><div><small>即梦 · Seedream</small><strong>定妆与资产</strong><p>先做沈禾、阿棠、木制验印机、渡口账房的参考图。人脸、服装、铜销方位锁定后，才同时做五集。</p></div><div><small>即梦 · Seedance</small><strong>逐镜生成</strong><p>将定稿竖图作为首帧，每条只描述一个动作。先验收两集样片的光线、动作方向和纸签形状，再开后三集。</p></div><div><small>豆包语音＋剪映</small><strong>配音与合成</strong><p>固定两位角色的授权预设音色。用剪映叠加票号和印文，用剪映 AI 音效生成木框合拢和纸张摩擦声，将对白、音效、环境声分轨，逐集回听。</p></div><div><small>版权方＋红果</small><strong>送审与验收</strong><p>逐集登记生成素材及时间码，核对权利、类别、编号和 AI 标识。先确认项目接收条件，再提交成片，排期后回到观众端点播。</p></div></div>
+<p class="song-deliver">本练习的画面、配音与音效均按生成流程设计，创作者负责定稿、选镜和剪辑。先交一条 10 秒试片，确认两位角色、两种音色和纸签的可读性。五集成片计 300 秒，预算按实际生成秒数、重试、语音用量、人工和授权分别记账。正式送红果前，由版权方确认 AI 剧品类、集数、时长及合作权限。<a href="#ai-rights">核对 AI 标识</a>　<a href="#route-owner">成片合作入口</a></p></details>
+<div class="song-download"><div><strong>带走五集制作稿</strong><p>五张看片记录、20 段分镜、逐集生成提示词、权属与交付登记。</p></div><a class="btn primary" href="/panoramas/hongguo-short-drama/song-workbook.md" download="持械入宋看片与渡口第五船制作手册.md">下载五集工作簿 ↓</a></div>
+</div></section>
 <section id="release" class="sec"><div class="frame"><header class="section-head"><div><p class="eyebrow">RELEASE DESK</p><h2>怎样发布到红果？</h2><p class="sub">先看自己手上有什么，再选对应的合作身份。具体准入和交付规格以登录后的项目要求为准。</p></div></header>
 <div class="choices" role="group" aria-label="按手上已有的材料选路线"><button data-route="writer" aria-controls="route-writer" aria-pressed="true">我有剧本</button><button data-route="director" aria-controls="route-director" aria-pressed="false">我能承制</button><button data-route="owner" aria-controls="route-owner" aria-pressed="false">我已有成片</button></div>
 <article class="route-panel" data-route-panel="writer" id="route-writer">
@@ -284,11 +364,104 @@ body:has(>.portfolio-navigation[data-placement="page"]) .topbar,body:has(>.portf
 <footer class="foot"><div class="frame"><span>真人微短剧独立制作指南 · 平台与规则核对于 2026 年 11 月 20 日</span><a href="#main-content">回到开头 ↑</a></div></footer>
 <script>
 (() => {
+  function install() {
+    let active = null;
+
+    for (const panel of document.querySelectorAll('article[data-song-panel]')) {
+      const buttons = Array.from(panel.querySelectorAll('.song-beats button[data-beat]'));
+      const play = panel.querySelector('[data-beat-play]');
+      const range = panel.querySelector('[data-beat-time]');
+      const clock = panel.querySelector('[data-beat-clock]');
+      const label = panel.querySelector('[data-beat-label]');
+      const action = panel.querySelector('[data-beat-action]');
+      const audio = panel.querySelector('[data-beat-audio]');
+      if (!buttons.length || !play || !range || !clock || !label || !action || !audio) continue;
+
+      const duration = Number(range.max) || 60;
+      let position = 0;
+      let started = 0;
+      let timer = null;
+      let selected = null;
+
+      function stamp(seconds) {
+        return String(Math.floor(seconds / 60)).padStart(2, '0') + ':' + String(seconds % 60).padStart(2, '0');
+      }
+
+      function render() {
+        const seconds = Math.min(duration, Math.floor(position));
+        const beat = buttons.find(button => seconds >= Number(button.dataset.start) && seconds < Number(button.dataset.end)) || buttons[buttons.length - 1];
+        if (selected !== beat) {
+          selected = beat;
+          for (const button of buttons) button.setAttribute('aria-pressed', String(button === beat));
+          label.textContent = '分镜 ' + (Number(beat.dataset.beat) + 1) + ' · ' + beat.dataset.framing;
+          action.textContent = beat.dataset.action;
+          audio.textContent = beat.dataset.audio;
+        }
+        range.value = String(seconds);
+        range.setAttribute('aria-valuetext', seconds + ' 秒，共 ' + duration + ' 秒');
+        clock.textContent = stamp(seconds) + ' / ' + stamp(duration);
+        play.textContent = timer !== null ? '暂停预览' : seconds === duration ? '重新播放' : '播放预览';
+      }
+
+      function pause() {
+        if (timer === null) return;
+        position = Math.min(duration, (performance.now() - started) / 1000);
+        clearInterval(timer);
+        timer = null;
+        active = null;
+        render();
+      }
+
+      function seek(seconds) {
+        pause();
+        position = Math.max(0, Math.min(duration, seconds));
+        render();
+      }
+
+      function tick() {
+        if (document.hidden || !panel.getClientRects().length) return pause();
+        position = Math.min(duration, (performance.now() - started) / 1000);
+        if (position >= duration) return pause();
+        if (Math.floor(position) !== Number(range.value)) render();
+      }
+
+      play.addEventListener('click', () => {
+        if (timer !== null) return pause();
+        if (active) active();
+        if (position >= duration) position = 0;
+        active = pause;
+        started = performance.now() - position * 1000;
+        timer = setInterval(tick, 150);
+        render();
+      });
+      for (const button of buttons) {
+        button.type = 'button';
+        button.addEventListener('click', () => seek(Number(button.dataset.start)));
+      }
+      play.type = 'button';
+      range.setAttribute('aria-label', '预览播放位置');
+      clock.setAttribute('aria-live', 'off');
+      range.addEventListener('input', () => seek(Number(range.value)));
+      new MutationObserver(() => {
+        if (timer !== null && !panel.getClientRects().length) pause();
+      }).observe(panel, { attributes: true, attributeFilter: ['hidden', 'class', 'style'] });
+      render();
+    }
+
+    document.addEventListener('visibilitychange', () => { if (document.hidden && active) active(); });
+    window.addEventListener('pagehide', () => { if (active) active(); });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', install, { once: true });
+  else install();
+})();
+
+(() => {
   'use strict';
 
   function init() {
     const byId = id => document.getElementById(id);
-    const kinds = ['step', 'case', 'route', 'ai'];
+    const kinds = ['step', 'case', 'route', 'ai', 'song'];
     const groups = new Map();
     const selected = {};
     for (const kind of kinds) {
@@ -323,7 +496,7 @@ body:has(>.portfolio-navigation[data-placement="page"]) .topbar,body:has(>.portf
     }
     function showTarget(id, shouldScroll) {
       if (!id) return;
-      const match = /^(step|case|route|ai)-(.+)$/.exec(id);
+      const match = /^(step|case|route|ai|song)-(.+)$/.exec(id);
       let target = byId(id);
       if (match && groups.get(match[1]).panels.has(match[2])) {
         const [, kind, key] = match;
@@ -417,6 +590,19 @@ body:has(>.portfolio-navigation[data-placement="page"]) .topbar,body:has(>.portf
       } catch { return new Set(); }
     }
 
+    document.querySelectorAll('[data-song-note]').forEach(field => {
+      const key = 'hongguo:song-case:watch:v1:' + field.dataset.songNote;
+      const message = field.parentElement.querySelector('.song-saved');
+      field.value = stored(key) || '';
+      field.addEventListener('input', () => {
+        try {
+          localStorage.setItem(key, field.value);
+          message.textContent = '已保存在此浏览器';
+        } catch {
+          message.textContent = '当前浏览器无法保存，可复制到工作簿';
+        }
+      });
+    });
     const checks = [...document.querySelectorAll('input[type="checkbox"][data-done]')];
     let done = readDone(stored(doneKey));
     function renderDone() {

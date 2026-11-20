@@ -20,17 +20,17 @@
       "slug": "hongguo-short-drama",
       "title": "红果短剧制作全景图",
       "subtitle": "从第一行剧本到红果上线",
-      "description": "跟着《底片未取》练拍 75 秒短剧，选择豆包、即梦、剪映与字节 Seed 模型，走完制作、审核和红果上线。",
+      "description": "跟拍《底片未取》，拆解《持械入宋》主创方法与首季前五集，使用字节工具制作五集原创 AI 短剧，准备送审与上线。",
       "category": "影视与创作",
       "tags": [
         "红果短剧",
+        "持械入宋",
         "字节系 AI 工具",
-        "Seedream / Seedance",
         "发行上线"
       ],
       "source": "src/panoramas/hongguo-short-drama.html",
       "updatedAt": "2026-11-20",
-      "sourceSha256": "dc38e705708941c42e5d898c67112e53fb91ac78532e9cc4295efe0c00b66fd4"
+      "sourceSha256": "4bd0bfe282ff26522026a17506d43bd1c8e718a5de4b65fed6ec012e0f32e2c1"
     },
     {
       "slug": "ai-equity-atlas",
