@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>红果短剧制作全景图 · 片场手册</title>
-  <meta name="description" content="跟着原创案例《底片未取》，从剧本、分镜、拍摄走到版权合作、审核和红果上线。含可下载的全流程长图与制片工作表。">
+  <meta name="description" content="跟着原创案例《底片未取》，学会选用豆包、即梦、剪映和字节 Seed 模型，从剧本、分镜走到送审和红果上线。含全流程长图与制片工作表。">
   <link rel="canonical" href="https://zhangmin.name/panoramas/hongguo-short-drama/">
   <meta property="og:title" content="红果短剧制作全景图 · 片场手册">
   <meta property="og:image" content="https://zhangmin.name/panoramas/hongguo-short-drama/film-set.webp">
@@ -31,6 +31,22 @@ h1,h2,h3,h4,p,figure,ol,ul,dl,dd{margin:0}button,a,input,summary{touch-action:ma
 @media print{html{color-scheme:light!important}body,main{background:white!important;color:#111!important}.frame{width:100%;max-width:none}.brand-strip,.portfolio-navigation,.hero-actions,.choices,.step-foot,.tools-wrap,.progress-info,.kit .btn,.foot,.section-head .btn{display:none!important}.hero{padding:10px 0;grid-template-columns:1fr 1fr}.hero h1{font-size:40px}.sec{padding:15px 0}.film,.sequence{max-width:450px}.phase-grid{grid-template-columns:repeat(4,1fr)}.step-detail[hidden],article[data-case-panel][hidden],article[data-route-panel][hidden]{display:block!important}.step-detail,.case-panel-body,.route-panel{break-inside:avoid;padding:14px 6px;background:white}.step-cols{gap:10px}.step-detail+.step-detail{border-top:1px solid #ddd}.reader{border:0}.step-note{padding:8px}.section-head,.step-head{break-after:avoid}.class-grid{grid-template-columns:1fr}.step-detail,.case-panel-body,.route-panel,.rules-body{color:black}.case-panel-body .small,.realcase,.kit{break-inside:avoid}a{color:#333}h1,h2,h3,p,li,dt,dd{color:#111!important}}
 
 .kit-links{display:flex;flex-wrap:wrap;gap:8px;flex-shrink:0}#tool-status:not(:empty){padding:4px 10px;font-size:12px;color:var(--text-secondary)}.case-intro .eyebrow{margin-bottom:8px}
+
+.ai-select{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;margin-bottom:12px}
+.ai-select button{padding:12px 10px;text-align:left;border:1px solid var(--border);background:var(--surface);border-radius:4px;line-height:1.4}
+.ai-select strong,.ai-select span{display:block}.ai-select strong{font-size:15px}.ai-select span{font-size:12px;color:var(--text-secondary);margin-top:3px}
+.ai-select button[aria-pressed="true"]{background:var(--text);border-color:var(--text);color:var(--bg)}.ai-select button[aria-pressed="true"] span{color:var(--bg)}.ai-select button:hover{border-color:var(--accent)}
+.ai-panel{background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:clamp(18px,3vw,36px)}
+.ai-panel header h3{font-size:clamp(22px,2.1vw,31px);line-height:1.35;margin:6px 0 8px;letter-spacing:-.025em}
+.ai-panel header p:not(.kicker),.ai-panel footer p,.ai-stamp{font-size:14px;color:var(--text-secondary)}.ai-panel .ai-model{display:inline-block;font-weight:750;color:var(--accent-secondary)!important;border-bottom:2px solid var(--accent-secondary);margin-bottom:6px}
+.ai-work{display:grid;grid-template-columns:1.05fr 1fr;gap:26px;align-items:start;margin-top:20px}.ai-script{background:var(--bg);border-left:3px solid var(--accent-secondary);border-radius:2px;padding:15px 17px;min-width:0}.ai-script-head{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.ai-script-head strong,.ai-accept strong,.ai-panel footer strong{font-size:14px;color:var(--text)}.ai-script-head button{border:1px solid var(--border);background:var(--surface);border-radius:3px;color:var(--accent);font-weight:650;font-size:12px;padding:6px 9px}
+.ai-prompt{white-space:pre-wrap;overflow-wrap:anywhere;margin:9px 0 0;font-size:14px}.copy-status{color:var(--positive);font-size:12px}.copy-status:empty{display:none}.ai-accept{margin-top:12px;padding-top:11px;border-top:1px solid var(--border);font-size:14px;color:var(--text-secondary)}.ai-accept strong{display:block}
+.ai-panel footer{border-top:1px solid var(--border);padding-top:12px;margin-top:19px}.ai-source,.ai-stamp{margin-top:9px}.ai-source a,.ai-stamp a{display:inline-block;font-weight:650}.ai-shortcut{margin-top:5px}.ai-stamp{font-size:13px}
+@media(max-width:780px){.ai-select{grid-template-columns:repeat(3,minmax(0,1fr))}.ai-work{grid-template-columns:1fr;gap:16px}}
+@media(max-width:430px){.brand-row{gap:7px}.page-nav{gap:8px}.page-nav a{font-size:11px}.ai-select button{padding:8px}.ai-select strong{font-size:13px}.ai-select span{font-size:11px}}
+@media print{.ai-select,.ai-shortcut,.ai-script-head button,.copy-status{display:none!important}article[data-ai-panel][hidden]{display:block!important}.ai-panel{margin:6px 0;border:0;border-top:1px solid #aaa;padding:10px 0}.ai-script{background:white}.ai-work{display:block}.ai-script{margin:8px 0}.ai-panel header,.ai-script{break-inside:avoid}.ai-panel header{break-after:avoid}}
+.ai-compare{margin-top:16px;padding:13px 18px;background:var(--ink-wash);font-size:14px}.ai-compare ul{padding:0 0 0 1.2em}.ai-compare li{margin-top:5px}.skip:not(:focus){clip-path:inset(50%);width:1px;height:1px;overflow:hidden;white-space:nowrap;padding:0}
   </style>
 <!-- portfolio-nav:start --><style>
 .portfolio-navigation{box-sizing:border-box;padding:0;border:0;overflow:visible;background:transparent;display:flex;align-items:center;gap:12px;flex-shrink:0;font:12px/1.5 system-ui,sans-serif;color:inherit;isolation:isolate}
@@ -56,14 +72,14 @@ body:has(>.portfolio-navigation[data-placement="page"]) .topbar,body:has(>.portf
 <a class="skip" href="#main-content">跳到制片手册正文</a>
 <header class="brand-strip"><div class="frame brand-row">
 <a class="wordmark" href="#main-content"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8 16-5 1.5 5L4.5 13zM4 12h16v9H4z"/><path d="m7 7 4 3m1-5 4 3M7 16h6"/></svg>片场手册</a>
-<nav class="page-nav" aria-label="手册目录"><a href="#workflow">制作路线</a><a href="#case">案例拆解</a><a href="#release">红果上线</a></nav>
+<nav class="page-nav" aria-label="手册目录"><a href="#workflow">制作路线</a><a href="#ai-tools">AI 选型</a><a href="#case">案例拆解</a><a href="#release">红果上线</a></nav>
 <div class="tools-wrap"><button class="tool-toggle" id="tools-toggle" aria-label="阅读工具" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/><path d="M8 3v6m9 0v6M9 15v6" stroke-width="3"/></svg><span>工具</span></button>
 <div id="tools-menu" class="tools-menu" hidden><button id="theme-toggle"><span data-theme-label>切换为深色</span></button><a href="/panoramas/hongguo-short-drama/field-map.png" download="红果短剧制作全景图.png">保存完整流程长图</a><button id="export-map">导出当前进度图</button><button id="print-guide">打印完整手册</button><p id="tool-status" aria-live="polite"></p></div></div></div></header>
 <main id="main-content"><noscript><div class="frame"><a href="/panoramas/hongguo-short-drama/field-map.html">阅读八步全流程打印版</a> · <a href="/panoramas/hongguo-short-drama/production-kit.md" download>下载制片资料包</a></div></noscript>
 <section class="hero frame" aria-labelledby="page-title"><div class="hero-copy">
 <p class="eyebrow"><i class="red-line"></i> 真人竖屏短剧 · 新手实作指南</p>
 <h1 id="page-title">红果短剧<span>制作全景图</span></h1>
-<p class="intro">用一间照相馆、两位演员，先练拍 75 秒的第一集。再沿着八个步骤，把剧本做成可以送审、在红果播出的作品。</p>
+<p class="intro">用一间照相馆、两位演员，先练拍 75 秒的第一集。沿着八步路线选用豆包、即梦和剪映，把剧本做成可以送审、在红果播出的作品。</p>
 <div class="hero-actions"><a class="btn primary" href="#step-1">从第一步开始 <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h17m-7-7 7 7-7 7"/></svg></a><a class="btn quiet" href="#case">先看案例 ↘</a></div></div>
 <figure class="film"><div class="viewfinder"><img src="/panoramas/hongguo-short-drama/film-set.webp" width="1250" height="833" alt="照相馆柜台两侧的演员在灯下查看底片，摄影机记录她们的对话" fetchpriority="high"></div>
 <figcaption class="shot-caption"><b>INT. 照相馆 · 傍晚</b><span>《底片未取》 · AI 片场示意</span></figcaption></figure></section>
@@ -74,35 +90,35 @@ body:has(>.portfolio-navigation[data-placement="page"]) .topbar,body:has(>.portf
 <div class="reader" id="step-reader"><article class="step-detail" id="step-1" data-step-panel="1">
   <header class="step-head"><p class="kicker">步骤 01 / 08　·　选题与路线</p><h3>把故事写成一句能拍的话</h3></header>
   <div class="step-cols"><ol class="actions"><li><strong>先写一句话</strong>用“谁想做什么，却遇到什么阻碍”写梗概。讲给一个朋友听，请他复述主角在争取什么。</li><li><strong>盘一下手上的资源</strong>写下能联系到的演员、能取得使用同意的场地、可支配时间，以及你最愿意讲的一件小事。</li><li><strong>选合作身份</strong>有剧本可以走编剧投稿；能带团队拍摄可以接导演项目；已有完整发行权和成片可以洽谈版权合作。</li></ol>
-  <aside class="step-note"><strong>这一步交什么</strong><p>一页项目卡：暂定剧名、观众、梗概、资源和目标合作身份。</p><strong>《底片未取》怎么做</strong><p>照相馆打烊前，唐宁想清空母亲留下的抽屉，一张迟到多年的取件票让她停了手。</p><a href="#release">看三种合作身份 ↗</a></aside></div>
+  <aside class="step-note"><strong>这一步交什么</strong><p>一页项目卡：暂定剧名、观众、梗概、资源和目标合作身份。</p><strong>《底片未取》怎么做</strong><p>照相馆打烊前，唐宁想清空母亲留下的抽屉，一张迟到多年的取件票让她停了手。</p><a href="#release">看三种合作身份 ↗</a><div class="ai-shortcut"><a href="#ai-story">用豆包核对故事线索 ↗</a></div></aside></div>
   <footer class="step-foot"><label><input type="checkbox" data-done="1">我已完成这一步</label><a href="#step-2">下一步 · 剧本与分集 →</a></footer></article><article class="step-detail" id="step-2" data-step-panel="2" hidden>
   <header class="step-head"><p class="kicker">步骤 02 / 08　·　剧本与分集</p><h3>把转折写成角色能做的动作</h3></header>
   <div class="step-cols"><ol class="actions"><li><strong>给每集留一个问题</strong>每集写三行：人物这次想得到什么，什么事情打乱了计划，结尾让观众想知道什么。先想好最后一集怎样回答。</li><li><strong>按场次写正文</strong>标明内外景、地点、日夜、出场人。把“她很怀念母亲”改写成演员可以完成的动作，再写对手的回应。</li><li><strong>拿手机计时读一遍</strong>两个人把台词读出声，在取物、沉默、转身处留出时间。在稿上圈出删掉仍然看得懂的重复信息。</li></ol>
-  <aside class="step-note"><strong>这一步交什么</strong><p>一句话梗概、分集大纲、带场次与版本日期的剧本。</p><strong>《底片未取》怎么做</strong><p>第一集用一把空椅子制造疑问，第二集找到母亲，第三集用一次定时合影回答“谁按了快门”。</p><a href="#case-story">读分集和对白 ↗</a></aside></div>
+  <aside class="step-note"><strong>这一步交什么</strong><p>一句话梗概、分集大纲、带场次与版本日期的剧本。</p><strong>《底片未取》怎么做</strong><p>第一集用一把空椅子制造疑问，第二集找到母亲，第三集用一次定时合影回答“谁按了快门”。</p><a href="#case-story">读分集和对白 ↗</a><div class="ai-shortcut"><a href="#ai-story">用豆包检查连戏 ↗</a></div></aside></div>
   <footer class="step-foot"><label><input type="checkbox" data-done="2">我已完成这一步</label><a href="#step-3">下一步 · 立项与权属 →</a></footer></article><article class="step-detail" id="step-3" data-step-panel="3" hidden>
   <header class="step-head"><p class="kicker">步骤 03 / 08　·　立项与权属</p><h3>开拍前把谁负责、谁有权写清楚</h3></header>
   <div class="step-cols"><ol class="actions"><li><strong>确定主责和投资</strong>制片人列资金、人员与物料，核算全剧总投资，写下题材和拟播平台。按分类确认拍前手续与申报主体。</li><li><strong>清点每一项权利</strong>原著改编、剧本、演员肖像与表演、剧照、音乐、字体、场地分别记录权利人、授权方式、渠道、地域和期限。</li><li><strong>把合作写进文件</strong>确认谁持有成片权利、谁有权向红果交付、谁签合同及承担返修。先补齐过期或缺失的授权再使用相应素材。</li></ol>
-  <aside class="step-note"><strong>这一步交什么</strong><p>分类确认记录、主创分工、合同和素材权利台账。</p><strong>《底片未取》怎么做</strong><p>旧照片和取件票可以专门做道具。拍入母亲照片的人像也要取得相应授权，并记录这些照片能否用于剧集宣传。</p><a href="#rules">核对真人剧分类 ↗</a></aside></div>
+  <aside class="step-note"><strong>这一步交什么</strong><p>分类确认记录、主创分工、合同和素材权利台账。</p><strong>《底片未取》怎么做</strong><p>旧照片和取件票可以专门做道具。拍入母亲照片的人像也要取得相应授权，并记录这些照片能否用于剧集宣传。</p><a href="#rules">核对真人剧分类 ↗</a><div class="ai-shortcut"><a href="#ai-rights">登记 AI 素材和权利 ↗</a></div></aside></div>
   <footer class="step-foot"><label><input type="checkbox" data-done="3">我已完成这一步</label><a href="#step-4">下一步 · 筹备与分镜 →</a></footer></article><article class="step-detail" id="step-4" data-step-panel="4" hidden>
   <header class="step-head"><p class="kicker">步骤 04 / 08　·　筹备与分镜</p><h3>让所有人在开机前知道要拍什么</h3></header>
   <div class="step-cols"><ol class="actions"><li><strong>拆解每一场</strong>从剧本逐行列人物、服装、道具和声音。把场次编成镜号，写上景别（画面取多近）、动作、台词和预计秒数。</li><li><strong>排一张通告单</strong>写集合时间、地址、联系人、每场的演员和道具。相同机位集中拍，单独留出补镜、收声与备份的时间。</li><li><strong>去场地试拍</strong>让演员站到预定位置，按计划画幅试拍并戴耳机听。看脸上光线、玻璃反光、对白清晰度，现场修改分镜。</li></ol>
-  <aside class="step-note"><strong>这一步交什么</strong><p>分镜表、通告单、道具清单、预算和试拍片。</p><strong>《底片未取》怎么做</strong><p>照相馆柜台会反光。先让唐宁举起底片套试拍，挪灯或调整站位，直到能同时看清她的眼神和道具。</p><a href="#case-shots">打开首集分镜 ↗</a></aside></div>
+  <aside class="step-note"><strong>这一步交什么</strong><p>分镜表、通告单、道具清单、预算和试拍片。</p><strong>《底片未取》怎么做</strong><p>照相馆柜台会反光。先让唐宁举起底片套试拍，挪灯或调整站位，直到能同时看清她的眼神和道具。</p><a href="#case-shots">打开首集分镜 ↗</a><div class="ai-shortcut"><a href="#ai-frames">用 Seedream 试构图 ↗</a></div></aside></div>
   <footer class="step-foot"><label><input type="checkbox" data-done="4">我已完成这一步</label><a href="#step-5">下一步 · 现场拍摄 →</a></footer></article><article class="step-detail" id="step-5" data-step-panel="5" hidden>
   <header class="step-head"><p class="kicker">步骤 05 / 08　·　现场拍摄</p><h3>拍齐能接在一起的画面和声音</h3></header>
   <div class="step-cols"><ol class="actions"><li><strong>每条开头报镜号</strong>开拍前说出集、场、镜、条次，用击掌给分开录制的声音对齐点；先完整拍两人对话，再补手部和反应。</li><li><strong>记住上一条的状态</strong>记录谁用哪只手递票、票朝哪边、底片袋放哪，换机位前拍一张连续性参考照；每条完成后记下可用条次。</li><li><strong>离场前回放和备份</strong>戴耳机查关键对白，录一段全员安静的现场环境声。把素材复制到两处，分别打开抽查后再收工。</li></ol>
-  <aside class="step-note"><strong>这一步交什么</strong><p>按集场镜整理的双份素材、场记表、单独的现场声。</p><strong>《底片未取》怎么做</strong><p>取件票从秀姨手里推向唐宁。补特写时保留同一只手、同一方向，让两条素材剪在一起看得懂。</p><a href="#case-shots">对照镜头表 ↗</a></aside></div>
+  <aside class="step-note"><strong>这一步交什么</strong><p>按集场镜整理的双份素材、场记表、单独的现场声。</p><strong>《底片未取》怎么做</strong><p>取件票从秀姨手里推向唐宁。补特写时保留同一只手、同一方向，让两条素材剪在一起看得懂。</p><a href="#case-shots">对照镜头表 ↗</a><div class="ai-shortcut"><a href="#ai-motion">用 Seedance 预演动作 ↗</a></div></aside></div>
   <footer class="step-foot"><label><input type="checkbox" data-done="5">我已完成这一步</label><a href="#step-6">下一步 · 剪辑与质检 →</a></footer></article><article class="step-detail" id="step-6" data-step-panel="6" hidden>
   <header class="step-head"><p class="kicker">步骤 06 / 08　·　剪辑与质检</p><h3>先剪出故事，再做能交的母版</h3></header>
   <div class="step-cols"><ol class="actions"><li><strong>先剪信息顺序</strong>用人物的目标、动作和反应粗剪，再补特写。对白突然断开时，用现场环境声平滑衔接，记录后续要补录的台词。</li><li><strong>按项目要求输出</strong>确认画幅、尺寸、编码、帧率、音频、字幕和命名。保留干净母版、字幕及工程，交付版本按合同与最新后台规格制作。</li><li><strong>换一部手机验收</strong>戴耳机听一遍，再静音看字幕；检查黑帧、爆音、错字、遮挡、串集、剧名和署名。编号由相应主体确认后再按要求标注。</li></ol>
-  <aside class="step-note"><strong>这一步交什么</strong><p>逐集母版、字幕、封面、交付版号和逐集质检记录。</p><strong>《底片未取》怎么做</strong><p>第一集压住“你只看了第一格”后的停顿。让没看过剧本的人试映，问他下集想知道什么，再决定这一刀落在哪。</p><a href="#case-shots">看首集时间轴 ↗</a></aside></div>
+  <aside class="step-note"><strong>这一步交什么</strong><p>逐集母版、字幕、封面、交付版号和逐集质检记录。</p><strong>《底片未取》怎么做</strong><p>第一集压住“你只看了第一格”后的停顿。让没看过剧本的人试映，问他下集想知道什么，再决定这一刀落在哪。</p><a href="#case-shots">看首集时间轴 ↗</a><div class="ai-shortcut"><a href="#ai-edit">用剪映识别与校对字幕 ↗</a></div></aside></div>
   <footer class="step-foot"><label><input type="checkbox" data-done="6">我已完成这一步</label><a href="#step-7">下一步 · 提报与审核 →</a></footer></article><article class="step-detail" id="step-7" data-step-panel="7" hidden>
   <header class="step-head"><p class="kicker">步骤 07 / 08　·　提报与审核</p><h3>把可追溯的一套文件交给约定主体</h3></header>
   <div class="step-cols"><ol class="actions"><li><strong>编一张交付目录</strong>列剧名、集序、时长、文件名、版本、授权文件与责任人，逐集点开核对；海报、简介和成片剧名保持一致。</li><li><strong>从相应身份进入</strong>已有成片由版权方或获授权主体走成品合作；承制团队按约给项目方交片。确认合作渠道包含红果，并按当期要求提交。</li><li><strong>一条意见对应一处修改</strong>把反馈抄成“集号＋时间码＋问题＋责任人”，保留旧版，导出新版本并复核相邻镜头，按原项目要求重新提交。</li></ol>
-  <aside class="step-note"><strong>这一步交什么</strong><p>送审版本、项目回执、权属材料、审批材料和返修记录。</p><strong>《底片未取》怎么做</strong><p>练习写一条返修单：EP01 取件票特写反光，补清晰近景；剪辑替换后，制片复核前后镜头的票面方向。</p><a href="#route-owner">看成片提交路线 ↗</a></aside></div>
+  <aside class="step-note"><strong>这一步交什么</strong><p>送审版本、项目回执、权属材料、审批材料和返修记录。</p><strong>《底片未取》怎么做</strong><p>练习写一条返修单：EP01 取件票特写反光，补清晰近景；剪辑替换后，制片复核前后镜头的票面方向。</p><a href="#route-owner">看成片提交路线 ↗</a><div class="ai-shortcut"><a href="#ai-rights">核对入片 AI 素材 ↗</a></div></aside></div>
   <footer class="step-foot"><label><input type="checkbox" data-done="7">我已完成这一步</label><a href="#step-8">下一步 · 上线与复盘 →</a></footer></article><article class="step-detail" id="step-8" data-step-panel="8" hidden>
   <header class="step-head"><p class="kicker">步骤 08 / 08　·　上线与复盘</p><h3>用观众的手机把上线走完一遍</h3></header>
   <div class="step-cols"><ol class="actions"><li><strong>先核发行通知</strong>确认审核结果、红果渠道、最终剧名、首发时间、开放集数及更新安排，记下发行对接人。</li><li><strong>在红果验收</strong>在红果观众端搜剧名，核对封面与集序，播放本轮首集和末集，检查片头、音画、字幕。归档详情链接、截图和验收时间。</li><li><strong>用数据改下一版</strong>如后台提供，记录同一观察窗口的首集播放、看完人数与次集观看情况，注明各指标口径；结合观众留言找一个值得复查的时间点。</li></ol>
-  <aside class="step-note"><strong>这一步交什么</strong><p>红果上线验收记录、问题追踪单与一页复盘。</p><strong>《底片未取》怎么做</strong><p>如果试映观众误以为秀姨拿的是一张欠条，先回看取件票的特写和对白，再考虑是否补拍。正式上线数据由项目方按权限查看。</p><a href="#verify">看上线验收清单 ↗</a></aside></div>
+  <aside class="step-note"><strong>这一步交什么</strong><p>红果上线验收记录、问题追踪单与一页复盘。</p><strong>《底片未取》怎么做</strong><p>如果试映观众误以为秀姨拿的是一张欠条，先回看取件票的特写和对白，再考虑是否补拍。正式上线数据由项目方按权限查看。</p><a href="#verify">看上线验收清单 ↗</a><div class="ai-shortcut"><a href="#ai-batch">多集项目的版本记录 ↗</a></div></aside></div>
   <footer class="step-foot"><label><input type="checkbox" data-done="8">我已完成这一步</label><a href="#workflow">回到路线图 ↑</a></footer></article></div>
 <details class="rules" id="rules"><summary>开机前查清楚 · 我的真人剧走哪一类审核？</summary><div class="rules-body"><div class="class-grid">
   <article>
@@ -124,6 +140,58 @@ body:has(>.portfolio-navigation[data-placement="page"]) .topbar,body:has(>.portf
 <p>以上按境内真人微短剧的总投资和主要剧情判断。片头醒目标注剧名及相应的节目编号、批准文件编号或许可证号。编剧、导演等署名放在首集片头或末集片尾的醒目位置。</p>
 <p><a href="https://www.nrta.gov.cn/art/2026/7/31/art_113_73785.html" target="_blank" rel="noopener noreferrer">广电总局《微短剧发展管理办法》</a> · <a href="https://wlj.nanjing.gov.cn/whyw/202609/t20260902_5904082.html" target="_blank" rel="noopener noreferrer">南京市文旅局刊载的分类金额说明</a></p>
 </div></details></div></section>
+<section class="sec ai-section" id="ai-tools" aria-labelledby="ai-heading"><div class="frame">
+<header class="section-head"><div><p class="eyebrow">片场工具箱　/　字节系 AI</p><h2 id="ai-heading">这一步，用哪个 AI？</h2><p class="sub">第一次拍，用豆包检查自己的剧本，用剪映校字幕。只有机位或动作拿不准时，再打开即梦试一镜。</p></div></header>
+<div class="ai-select" role="group" aria-label="选择要做的事"><button data-ai="story" aria-controls="ai-story" aria-pressed="true"><strong>审剧本</strong><span>豆包</span></button><button data-ai="frames" aria-controls="ai-frames" aria-pressed="false"><strong>画分镜</strong><span>即梦 AI</span></button><button data-ai="motion" aria-controls="ai-motion" aria-pressed="false"><strong>试运镜</strong><span>即梦 AI</span></button><button data-ai="sound" aria-controls="ai-sound" aria-pressed="false"><strong>试配声音</strong><span>剪映</span></button><button data-ai="edit" aria-controls="ai-edit" aria-pressed="false"><strong>校字幕</strong><span>剪映</span></button><button data-ai="batch" aria-controls="ai-batch" aria-pressed="false"><strong>多集批量处理</strong><span>火山方舟</span></button></div>
+<article class="ai-panel" data-ai-panel="story" id="ai-story">
+<header><p class="kicker">文本　/　豆包</p><h3>拿着自己的稿子，让豆包当一次场记</h3><p class="ai-model">豆包 Seed 2.1 系列</p><p>只有梗概或一场戏，先用豆包对话。多集交叉审稿时，可以在方舟选 Seed 2.1 Pro 做一轮复核。</p></header>
+<div class="ai-work"><div><ol class="actions"><li><strong>给它一小段</strong>粘贴自己写的场戏，交代两位演员、一个场地、关键道具，以及不能提前揭晓的信息。</li><li><strong>让它只找问题</strong>要求逐条引用原句，列出观众此刻知道什么、还不知道什么。让编剧自己决定怎样修改。</li><li><strong>读给人听</strong>一人演唐宁，一人演秀姨，把找底片和看照片的停顿也计时，锁定新版剧本。</li></ol></div>
+<div class="ai-script"><div class="ai-script-head"><strong>《底片未取》操作示例</strong><button type="button" data-copy="prompt-story">复制审稿提示词</button></div><p id="prompt-story" class="ai-prompt">你是场记，请检查下面这段戏的叙事连续性。第一集限两人一景。镜04（32–45秒）只让空椅样片滑出，底片仍留在袋中；镜05唐宁核对票号；镜06秀姨说“你只看了第一格”。第二集才揭晓母亲也在照片里。请按“镜号｜观众此刻能看见什么｜可能穿帮之处｜片场怎么检查”列三行。不续写台词，缺少的信息写“待确认”。</p><span class="copy-status" aria-live="polite"></span><p class="ai-accept"><strong>怎样算做对了</strong>镜04｜观众只看见空椅｜袋口若露出第二格，会抢先泄露线索｜演员抽出样片后，场记从手机画面检查袋口。</p></div></div>
+<footer><p><strong>交付前</strong>　交付带日期的人工定稿和一张连戏问题表。豆包用户协议第 2.2 条将输出限定为参考，商用稿由编剧完成，并核对征稿方的创作要求。</p><p class="ai-source"><a href="https://www.doubao.com/chat/" target="_blank" rel="noopener noreferrer">打开豆包 ↗</a>　<a href="https://seed.bytedance.com/zh/blog/seed2-1-officially-released-advancing-ai-productivity" target="_blank" rel="noopener noreferrer">Seed 2.1 官方说明 ↗</a>　<a href="https://www.doubao.com/legal/terms" target="_blank" rel="noopener noreferrer">豆包用户协议 ↗</a></p></footer>
+</article><article class="ai-panel" data-ai-panel="frames" id="ai-frames" hidden>
+<header><p class="kicker">图片　/　即梦 AI</p><h3>用一张竖图决定空椅子该占多大</h3><p class="ai-model">Seedream 5.5</p><p>需要定构图、反光和字幕位置，先生成静帧。已经有道具样片时，用有权使用的照片作参考，局部修改比反复重画更容易比较。</p></header>
+<div class="ai-work"><div><ol class="actions"><li><strong>画第一版</strong>在即梦的图片生成或画布中，选择可用的 Seedream，设置 9:16，输入镜04提示词。</li><li><strong>只改一个变量</strong>保留同一张参考，分别试“更靠近照片”和“镜头稍高”，比较空椅轮廓和纸袋边缘。</li><li><strong>带到实景验证</strong>选一张给摄影看，在柜台用手机复拍同样构图；判断反光会不会吃掉椅背。</li></ol></div>
+<div class="ai-script"><div class="ai-script-head"><strong>《底片未取》操作示例</strong><button type="button" data-copy="prompt-frames">复制静帧提示词</button></div><p id="prompt-frames" class="ai-prompt">竖屏9:16，老照相馆木柜台，俯拍近景。傍晚暖灯从左侧打来，一张哑光黑白样片从牛皮纸袋中滑出一半，照片上只有一把空椅子，椅背清晰。纸袋靠右，底片藏在袋内。画面下方留出字幕空间，不出现人脸、招牌或叠加文字。</p><span class="copy-status" aria-live="polite"></span><p class="ai-accept"><strong>怎样算做对了</strong>镜04-A 是近景，椅子容易看清；镜04-B 拉远后，纸袋和取件动作更清楚。让第一次看的人在两秒内指出照片上的线索，再定机位。</p></div></div>
+<footer><p><strong>交付前</strong>　交付一张导演确认的参考图，文件名可写 EP01_S04_构图_A。把创作参考和拟入片素材分目录保存。</p><p class="ai-source"><a href="https://jimeng.jianying.com/" target="_blank" rel="noopener noreferrer">打开即梦 ↗</a>　<a href="https://jimeng.jianying.com/tutorials/drama-studio/canvas" target="_blank" rel="noopener noreferrer">即梦画布操作手册 ↗</a>　<a href="https://docs.volcengine.com/docs/ark/seedream-5-5?lang=zh" target="_blank" rel="noopener noreferrer">Seedream 5.5 教程 ↗</a></p></footer>
+</article><article class="ai-panel" data-ai-panel="motion" id="ai-motion" hidden>
+<header><p class="kicker">视频　/　即梦 AI</p><h3>用五秒钟验证递票动作接不接得上</h3><p class="ai-model">Seedance 2.5</p><p>分镜已定，只有动作或镜头方向拿不准时，再生成短视频预演。手机能直接试拍的镜头，可以现场排练。</p></header>
+<div class="ai-work"><div><ol class="actions"><li><strong>先定首帧</strong>准备镜01的竖屏首帧：翻到一半的营业牌在画面左下，右边给秀姨伸手的位置留白。</li><li><strong>只试一次动作</strong>在即梦视频生成里放入首帧，选可用的 Seedance 模型和短时长。先试固定机位，第二版再改运动。</li><li><strong>接到时间线上</strong>把预演放入剪映草稿，紧接双人中景。看票的移动方向、压牌时手指的位置，再决定实拍动作。</li></ol></div>
+<div class="ai-script"><div class="ai-script-head"><strong>《底片未取》操作示例</strong><button type="button" data-copy="prompt-motion">复制动镜提示词</button></div><p id="prompt-motion" class="ai-prompt">以首帧为准，9:16竖屏，5秒，一镜到底，镜头固定。0–2秒，穿深红袖子的手从画面右侧将一张旧取件票推向左侧的营业牌。2–4秒，票压住牌角。最后1秒手指停住。保持同一只手、同一张票和原有灯光，画面不切换，不加对白或字幕。</p><span class="copy-status" aria-live="polite"></span><p class="ai-accept"><strong>怎样算做对了</strong>在五秒预演的末帧暂停：票若穿过牌角、两只手变成同一只，或移动方向和下一镜相反，就在分镜上改动作，再用实物排演。</p></div></div>
+<footer><p><strong>交付前</strong>　交付一段标记“内部预演”的小样和一个实拍决定。五秒只占镜01的一部分；全镜七秒还要留门铃和反应。</p><p class="ai-source"><a href="https://jimeng.jianying.com/" target="_blank" rel="noopener noreferrer">打开即梦 ↗</a>　<a href="https://seed.bytedance.com/zh/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5" target="_blank" rel="noopener noreferrer">Seedance 2.5 官方说明 ↗</a></p></footer>
+</article><article class="ai-panel" data-ai-panel="sound" id="ai-sound" hidden>
+<header><p class="kicker">声音　/　剪映</p><h3>演员到场前，先试听台词的停顿</h3><p class="ai-model">进阶可选 · 豆包语音合成模型 2.0</p><p>单条临时对白用剪映文本朗读就够了。已有演员清晰的同期声时直接用原录音；团队需要成批生成试读才考虑豆包语音。</p></header>
+<div class="ai-work"><div><ol class="actions"><li><strong>加一条临时音轨</strong>在剪映草稿加入试读台词，每句分一段，选文本朗读和可用的预设音色，标注“试读”。将第二句放到末镜。</li><li><strong>和空镜一起听</strong>把台词摆到秀姨推回照片之后，尾音落下再留两秒。听起来太赶就先调停顿。</li><li><strong>用实录验收</strong>粗剪定节奏后换回演员实录，检查口型、呼吸和尾音。进入正片的合成声音另登记音色许可和标识。</li></ol></div>
+<div class="ai-script"><div class="ai-script-head"><strong>《底片未取》操作示例</strong><button type="button" data-copy="prompt-sound">复制试读台词</button></div><p id="prompt-sound" class="ai-prompt">二十七号，还能取吗？
+你只看了第一格。</p><span class="copy-status" aria-live="polite"></span><p class="ai-accept"><strong>怎样算做对了</strong>同一条试读做两个剪辑版本：说完就切黑，或静候两秒再切。让同伴选更想点开第二集的那一版。</p></div></div>
+<footer><p><strong>交付前</strong>　交付带临时音轨的内部粗剪和替换记录。试读用预设音色；如需模仿特定真人声音，先取得针对声音使用方式的授权。</p><p class="ai-source"><a href="https://www.capcut.cn/" target="_blank" rel="noopener noreferrer">打开剪映 ↗</a>　<a href="https://docs.volcengine.com/docs/doubao-voice/model-list?lang=zh" target="_blank" rel="noopener noreferrer">豆包语音产品与模型 ↗</a></p></footer>
+</article><article class="ai-panel" data-ai-panel="edit" id="ai-edit" hidden>
+<header><p class="kicker">后期　/　剪映</p><h3>让剪映先听写，再逐句对回演员原声</h3><p class="ai-model">软件内置字幕识别</p><p>已经拍到真人对白，就在剪映中处理。现场只有环境声的镜头保留安静，字幕根据实际发音和交付要求调整。</p></header>
+<div class="ai-work"><div><ol class="actions"><li><strong>识别这段对白</strong>导入首集粗剪并选对白音轨，在字幕或文本工具中运行识别字幕，设置与实录匹配的语言。</li><li><strong>先查会改错剧情的字</strong>戴耳机核对“二十七号”和“第一格”。播放镜04看有没有把纸袋摩擦声识别成台词。</li><li><strong>再查观众能否读完</strong>逐句移动字幕起止点，静音看一遍，检查字幕是否盖住空椅和袋口。按项目要求导出字幕或带字幕审看版。</li></ol></div>
+<div class="ai-script"><div class="ai-script-head"><strong>《底片未取》操作示例</strong><button type="button" data-copy="prompt-edit">复制校对清单</button></div><p id="prompt-edit" class="ai-prompt">EP01字幕校对：镜01，听清“二十七号，还能取吗？”；镜04，只有相纸摩擦声，检查是否误生对白；镜06，对照原声确认是“你只看了第一格”，不是“第一个”。校完后检查断句、时间和道具遮挡，登记需导演确认的听不清片段。</p><span class="copy-status" aria-live="polite"></span><p class="ai-accept"><strong>怎样算做对了</strong>假设字幕写成“你只看了第一个”，回听原音后改回“第一格”。如果现场演员改了词，以录音和导演确认稿为准。</p></div></div>
+<footer><p><strong>交付前</strong>　交付校过的字幕、逐集审看版和质检记录。“秀姨”“唐宁”等专名保留在项目词表里，下一集继续使用。</p><p class="ai-source"><a href="https://www.capcut.cn/" target="_blank" rel="noopener noreferrer">剪映中国官网 ↗</a>　<a href="https://www.jianying.com/web/professional" target="_blank" rel="noopener noreferrer">剪映专业版 ↗</a></p></footer>
+</article><article class="ai-panel" data-ai-panel="batch" id="ai-batch" hidden>
+<header><p class="kicker">团队 API　/　火山方舟</p><h3>先跑通一镜，再批量处理同类任务</h3><p class="ai-model">Seed 2.1 · Seedream 5.5 · Seedance 2.5</p><p>需要重复做多集场记检查、大批分镜图或同类预演时再接 API。个人练第一集，直接在前面的软件卡片里操作。</p></header>
+<div class="ai-work"><div><ol class="actions"><li><strong>选一个任务试跑</strong>从有权处理的一场戏开始。文本检查选 Seed 2.1，静态分镜选 Seedream，运动预演选 Seedance；在方舟模型目录确认可用版本与价格。</li><li><strong>固定输入输出</strong>给每个镜头一个 ID，保存输入、模型版本、参数、输出地址及人工确认状态。视频任务提交后保存任务 ID，查询成功再下载。</li><li><strong>先对样再放量</strong>让导演抽查两条，记录可用率和单个通过镜头的成本。只重做失败或人工退回的镜头，给同批任务设定预算上限。</li></ol></div>
+<div class="ai-script"><div class="ai-script-head"><strong>《底片未取》操作示例</strong><button type="button" data-copy="prompt-batch">复制批处理输入样例</button></div><p id="prompt-batch" class="ai-prompt">镜号：EP01_S04
+目标：空椅样片的竖屏静帧参考
+输入：一处柜台、一只纸袋、一张只有椅子的照片；已确认参考图使用权
+预期输出：一张9:16参考图，底片仍在袋中
+记录：实际模型ID｜参考文件版本｜生成次数与费用｜成品位置｜导演通过或退回原因</p><span class="copy-status" aria-live="polite"></span><p class="ai-accept"><strong>怎样算做对了</strong>EP01_S04 先交给图片模型。导演通过后才把图片作为镜头参考转到下一环节。模型版本、费用、生成时间和权利证明随该镜号归档。</p></div></div>
+<div class="ai-compare"><h4>同一镜头怎样比选型号？</h4>
+<ul><li><strong>文本。</strong>把同一场戏交给 Seed 2.1 Lite 和 Pro，各查一次道具连续性。用已知的三处问题对照漏报、误报和费用，再决定批量用哪款。</li>
+<li><strong>视频。</strong>首轮可用 Seedance 2.5 Flash 试跑低分辨率预演。需要更高画质时，再用同一张首帧和同一提示词试 Seedance 2.5，重点看递票方向与手指是否稳定。</li>
+<li><strong>记账。</strong>用这批实际费用除以人工通过的镜头数。例如 6 镜各试 2 版就是 12 次生成；若全部退回，先改提示词或改实拍，再追加预算。</li></ul></div>
+<footer><p><strong>交付前</strong>　先确认火山方舟账号的开通状态、权限与计费。应用会员和云端调用分别核对。把 API 密钥保存在团队服务端。</p><p class="ai-source"><a href="https://docs.volcengine.com/docs/ark/model-list?lang=zh" target="_blank" rel="noopener noreferrer">火山方舟模型列表 ↗</a>　<a href="https://console.volcengine.com/ark/region%3Acn-beijing/docs/create-video-generation-task-api" target="_blank" rel="noopener noreferrer">视频生成任务 API ↗</a>　<a href="https://seed.bytedance.com/zh/models" target="_blank" rel="noopener noreferrer">字节 Seed 模型目录 ↗</a></p></footer>
+</article>
+<details class="rules" id="ai-rights"><summary>正式交片前，怎样处理 AI 画面、声音和标识？</summary>
+<div class="rules-body"><div class="class-grid">
+<article><h3>内部预演</h3><p>把参考图、动镜和试读单独存放。交给剪辑时写清是否入片，用演员实录替换临时轨。保留使用的工具、模型、提示词和版本。</p></article>
+<article><h3>成片含生成素材</h3><p>逐集记录生成片段的时间码和来源，核对肖像、音色、参考图、音乐及输出的使用许可。向发行方说明制作方式，确认申报类别、每集标识位置和平台声明方式。</p></article>
+<article><h3>AI 剧或特定征稿</h3><p>全剧主要由 AI 生成时，按 AI 剧的投资分类向合作方核对。征稿另有人工创作要求的，先读当期规则，再决定能把 AI 用在哪一步。</p></article></div>
+<p>《微短剧发展管理办法》第三十四条要求使用 AI 生成、制作的微短剧在每集明显位置添加提示标识。公开发布生成合成内容时，主动声明并使用平台标识功能，保留已有标识。</p>
+<p><a href="https://www.nrta.gov.cn/art/2026/7/31/art_113_73785.html" target="_blank" rel="noopener noreferrer">广电总局第16号令 ↗</a>　<a href="https://www.cac.gov.cn/2025-03/14/c_1743654684782215.htm" target="_blank" rel="noopener noreferrer">网信办等四部门标识办法 ↗</a>　<a href="https://wlj.nanjing.gov.cn/whyw/202609/t20260902_5904082.html" target="_blank" rel="noopener noreferrer">真人与 AI 剧分类金额 ↗</a>　<a href="https://video.caixin.com/shortdramas/" target="_blank" rel="noopener noreferrer">定向征稿的人工创作要求示例 ↗</a></p></div></details>
+<p class="ai-stamp">工具与模型核对于 2026 年 11 月 20 日。卡片按公开产品能力编写，账号内可选版本和用量以相应入口为准。<a href="/panoramas/hongguo-short-drama/production-kit.md" download="红果短剧制作练习资料包.md">下载含 AI 练习的工作表 ↓</a></p>
+</div></section>
 <section id="case" class="sec"><div class="frame">
 <div class="case-intro"><div><p class="eyebrow">CASE STUDY　/　原创教学案例</p><h2>《底片未取》</h2><p class="sub">照相馆的最后一个客人，来取一张等了多年的照片。</p></div><div class="case-meta"><span><b>03</b> 集练习</span><span><b>02</b> 位演员</span><span><b>01</b> 处场景</span></div></div>
 <figure class="sequence"><img src="/panoramas/hongguo-short-drama/shot-study.webp" alt="连续三个教学画面：手压取件票、唐宁端详底片、秀姨抬眼回应" width="1320" height="563" loading="lazy">
@@ -211,7 +279,7 @@ body:has(>.portfolio-navigation[data-placement="page"]) .topbar,body:has(>.portf
   </ol>
 </section>
 
-<div class="kit" id="kit"><div><h3>把手册带到片场</h3><p class="sub">保存八步流程长图，或下载可填写的项目卡、分镜、预算和上线验收表。<a href="/panoramas/hongguo-short-drama/field-map.html">A4 单页打印版 ↗</a></p></div><div class="kit-links"><a class="btn" href="/panoramas/hongguo-short-drama/field-map.png" download="红果短剧制作全景图.png"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m-5-5 5 5 5-5M4 16v5h16v-5"/></svg> 流程长图</a><a class="btn primary" href="/panoramas/hongguo-short-drama/production-kit.md" download="红果短剧制作练习资料包.md"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m-5-5 5 5 5-5M4 16v5h16v-5"/></svg> 制片工作表</a></div></div>
+<div class="kit" id="kit"><div><h3>把手册带到片场</h3><p class="sub">保存八步流程长图，或下载可填写的项目卡、分镜、预算、AI 提示词及上线验收表。<a href="/panoramas/hongguo-short-drama/field-map.html">A4 单页打印版 ↗</a></p></div><div class="kit-links"><a class="btn" href="/panoramas/hongguo-short-drama/field-map.png" download="红果短剧制作全景图.png"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m-5-5 5 5 5-5M4 16v5h16v-5"/></svg> 流程长图</a><a class="btn primary" href="/panoramas/hongguo-short-drama/production-kit.md" download="红果短剧制作练习资料包.md"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m-5-5 5 5 5-5M4 16v5h16v-5"/></svg> 制片工作表</a></div></div>
 </div></section></main>
 <footer class="foot"><div class="frame"><span>真人微短剧独立制作指南 · 平台与规则核对于 2026 年 11 月 20 日</span><a href="#main-content">回到开头 ↑</a></div></footer>
 <script>
@@ -220,7 +288,7 @@ body:has(>.portfolio-navigation[data-placement="page"]) .topbar,body:has(>.portf
 
   function init() {
     const byId = id => document.getElementById(id);
-    const kinds = ['step', 'case', 'route'];
+    const kinds = ['step', 'case', 'route', 'ai'];
     const groups = new Map();
     const selected = {};
     for (const kind of kinds) {
@@ -255,7 +323,7 @@ body:has(>.portfolio-navigation[data-placement="page"]) .topbar,body:has(>.portf
     }
     function showTarget(id, shouldScroll) {
       if (!id) return;
-      const match = /^(step|case|route)-(.+)$/.exec(id);
+      const match = /^(step|case|route|ai)-(.+)$/.exec(id);
       let target = byId(id);
       if (match && groups.get(match[1]).panels.has(match[2])) {
         const [, kind, key] = match;
@@ -315,6 +383,24 @@ body:has(>.portfolio-navigation[data-placement="page"]) .topbar,body:has(>.portf
       event.preventDefault();
       navigate(id, true);
     });
+
+    for (const button of document.querySelectorAll('button[data-copy]')) {
+      button.addEventListener('click', async () => {
+        const source = byId(button.dataset.copy);
+        const status = button.closest('.ai-script').querySelector('.copy-status');
+        try {
+          await navigator.clipboard.writeText(source.textContent.trim());
+          status.textContent = '已复制，可以粘贴使用。';
+        } catch {
+          const range = document.createRange();
+          range.selectNodeContents(source);
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+          status.textContent = '已选中这段文字，可使用系统复制。';
+        }
+      });
+    }
 
     const doneKey = 'hongguo-short-drama:completed:v1';
     const themeKey = 'hongguo-short-drama:theme:v1';

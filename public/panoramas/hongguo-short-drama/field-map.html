@@ -36,6 +36,9 @@
     .section-line span{font-size:13px;color:var(--muted)}
     .routes dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:15px}
     .routes dt{font-weight:750;color:var(--red)}
+    .ai-note{display:grid;grid-template-columns:auto 1fr;gap:15px;align-items:baseline;padding:12px 0 3px}
+    .ai-note strong{color:var(--red);font-size:16px;white-space:nowrap}
+    .ai-note p{font-size:15px;line-height:1.47}
     .verify{background:var(--ink);color:var(--paper);padding:15px 18px;margin-top:10px}
     .verify h2{margin-bottom:5px}.verify p{font-size:16px;line-height:1.5}
     footer{display:flex;gap:14px;align-items:center;margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
@@ -52,14 +55,17 @@
     }
     @media(max-width:490px){
       .pair{grid-template-columns:1fr;gap:11px}.step,.step+.step{padding-left:32px;border:0}.step+.step .step-id{left:0}
-      .routes dl{gap:6px 9px}.routes,.verify{padding:12px}.section-line{display:block}
+      .ai-note{grid-template-columns:1fr;gap:3px}.routes dl{gap:6px 9px}.routes,.verify{padding:12px}.section-line{display:block}
       .section-line span{display:block;margin-top:4px}footer img{width:61px;height:61px}
     }
     @page{size:A4 portrait;margin:0}
     @media print{
       html,body{background:var(--paper);print-color-adjust:exact;-webkit-print-color-adjust:exact}
       .sheet{width:210mm;max-width:none;padding:7mm 10mm 5mm;margin:0}
-      h1{font-size:43px;margin-top:13px}.dek{margin-bottom:12px}
+      h1{font-size:41px;margin-top:11px}.dek{margin-bottom:9px}
+      .mast{padding-bottom:9px}
+      .step p,.verify p{font-size:15px;line-height:1.37}.step .out{font-size:14px}
+      .ai-note{padding:7px 0 1px}.ai-note p{font-size:14px;line-height:1.38}
       .phase{padding:9px 0}.phase-head{margin-bottom:5px}
       .routes,.verify{margin-top:5px;padding-top:9px;padding-bottom:9px}
       footer{margin-top:8px;padding-top:7px}footer img{width:52px;height:52px}
@@ -77,27 +83,27 @@
       <div class="phase-head"><span class="phase-id">阶段 1 / 4</span><h2>故事开发</h2></div>
       <div class="pair">
         <div class="step"><span class="step-id">01</span><h3>选题与路线</h3><p>写清谁想做什么、遇到什么阻碍，盘点手头的演员与场地。</p><p class="out"><b>交付</b>一页项目卡、合作身份</p></div>
-        <div class="step"><span class="step-id">02</span><h3>剧本与分集</h3><p>给每集一个转折，两人读出对白，计入动作和停顿的时间。</p><p class="out"><b>交付</b>分集大纲、带场次的剧本</p></div>
+        <div class="step"><span class="step-id">02</span><h3>剧本与分集</h3><p>写好转折，可让豆包审稿找跳步。自己改稿，两人读对白，实测时长。</p><p class="out"><b>交付</b>分集大纲、带场次的剧本</p></div>
       </div>
     </section>
     <section class="phase">
       <div class="phase-head"><span class="phase-id">阶段 2 / 4</span><h2>开机准备</h2></div>
       <div class="pair">
         <div class="step"><span class="step-id">03</span><h3>立项与权属</h3><p>按投资、题材和播出安排核对分类，确认谁申报、谁有权交片。</p><p class="out"><b>交付</b>分类确认、合同与授权台账</p></div>
-        <div class="step"><span class="step-id">04</span><h3>筹备与分镜</h3><p>逐场拆出镜头、台词、道具与时长，去实景拍一条并听回放。</p><p class="out"><b>交付</b>分镜、通告、预算和试拍片</p></div>
+        <div class="step"><span class="step-id">04</span><h3>筹备与分镜</h3><p>可用即梦 Seedream 画分镜，复杂运镜用 Seedance 预演，再到现场试拍。</p><p class="out"><b>交付</b>分镜、通告、预算和试拍片</p></div>
       </div>
     </section>
     <section class="phase">
       <div class="phase-head"><span class="phase-id">阶段 3 / 4</span><h2>影像制作</h2></div>
       <div class="pair">
         <div class="step"><span class="step-id">05</span><h3>现场拍摄</h3><p>先拍完整表演，再补反应和特写，录环境声并检查双份备份。</p><p class="out"><b>交付</b>场记表、两份可播放的素材</p></div>
-        <div class="step"><span class="step-id">06</span><h3>剪辑与质检</h3><p>按约定规格导出，换部手机听对白，再静音检查字幕与集序。</p><p class="out"><b>交付</b>逐集母版、字幕、封面、质检表</p></div>
+        <div class="step"><span class="step-id">06</span><h3>剪辑与质检</h3><p>用剪映识别字幕，逐句对原声改错字。按约导出，用手机检查对白与集序。</p><p class="out"><b>交付</b>逐集母版、字幕、封面、质检表</p></div>
       </div>
     </section>
     <section class="phase">
       <div class="phase-head"><span class="phase-id">阶段 4 / 4</span><h2>发行上线</h2></div>
       <div class="pair">
-        <div class="step"><span class="step-id">07</span><h3>提报与审核</h3><p>有权主体按约交片，保存回执；按集号、时间码记录并复交修改版。</p><p class="out"><b>交付</b>送审版、回执、权属与审批材料</p></div>
+        <div class="step"><span class="step-id">07</span><h3>提报与审核</h3><p>有权主体按约交片，保存回执。收到修改意见，按集号和时间码复交。</p><p class="out"><b>交付</b>送审版、回执、权属与审批材料</p></div>
         <div class="step"><span class="step-id">08</span><h3>上线与复盘</h3><p>核实红果排期和开放集数，逐项验收播放页，再记录观众反馈。</p><p class="out"><b>交付</b>上线记录、问题单、一页复盘</p></div>
       </div>
     </section>
@@ -109,9 +115,13 @@
         <dt>版权方</dt><dd>持成片及发行授权申请合作，核实主体资质和合同约定的红果渠道。</dd>
       </dl>
     </section>
+    <aside class="ai-note">
+      <strong>AI 素材怎么交</strong>
+      <p>内部分镜、运镜预演单独存。若生成画面或声音进入正片，记下集号、时间码和授权，交平台确认分类和每集的显著提示。发布时主动使用平台标识功能。<a href="https://www.nrta.gov.cn/art/2026/7/31/art_113_73785.html">广电规定</a> · <a href="https://www.cac.gov.cn/2025-03/14/c_1743654684782215.htm">标识办法</a></p>
+    </aside>
     <section class="verify">
       <h2>怎样确认真的上线了？</h2>
-      <p>到约定时间，在红果短剧 App 搜最终剧名，核对封面、集序和开放集数。点播首集及本轮最后一集，检查片头标注、声音和字幕；留存详情页链接、截图和核验时间。</p>
+      <p>到约定时间，在红果短剧 App 搜最终剧名，核对封面、集序和开放集数。点播首集及本轮最后一集，检查片头标注、声音和字幕，留存详情页链接、截图和核验时间。</p>
     </section>
     <footer>
       <a href="https://zhangmin.name/panoramas/hongguo-short-drama/" aria-label="打开交互全景图"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAAAXNSR0IArs4c6QAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAI6ADAAQAAAABAAAAIwAAAACbdGGdAAACzUlEQVRYCc3WWXLbQAwE0CiV+1/ZYZN5kyY8tPyXTBWFpReAtCTr9XGcH//J+ZU9Xq/X4zq9K156yWH6TBr/ioefGM25jKLB5D1kl3evPfQTLcx71j3nJ5JmDJjB1NNo1nh0wWfvqznryTD4TrREBhmoF/1T/s779mTekQ1yt71Ievrts+s13vntyfQdNSn5V5iBOGq61DC9xHnWMm0wSeppqp4x/Azfee56y/8Qvf2eYdADZr4Mj6ewO98Yc320+86mUUwYNc+C+LDUO376U9Pc5OsN3EQLtGnIfWCJvUg4vHZYcNrkOfivA/hQEF+U63UKifWndno81d3ntZ6MIYlAggx0BXd6kfTo4InhPPWDN7aWSdOF1EZEFsBJdILR4MN47/R6axmNiJPnioGYPsPkOTTiboGLeb3yah7t6XcA50db84nYpvLmnmZ1A6kbn/4WE8NfTyZFnybFlLEYrgEiPU76E8Ohxz3ro1hfehGmnLENmCSWdGmaOxfh/aS9PZk2b0FMGVs0ePfUuM3ji28pdbQ55/8mwgY7Z3ZJ7q+txaOF3RXXTfRCdOeTUXRMro6pATHuITj6iXoirbq5nZ/LIBuS6Ao5p41St4auOclxwncmRz9xvWcYihERtrE+LCbyaF3p5/CTJ+LPfC0TAmFiTtcMGjtJf3hyvK756HXd+fpx1cTkTVI3x/LpWUDE75oWP/5y2Kdl2sBC3SNklloeHs3k4Yg8m3/+hCB8igwa78EMJ283MB7Nb5/1PdODOg95mhrKaPK7xk3PEo0n57/+TBpNZCROLJpeqPMeQtczeIrB1jIRAJ6MgjcneUwMgXWdfOp2y6V3WwbpXTQsPAsk78HJmwdPpBFh314mQubTpAdYSK+XosPhF27ObZkJXpS/d9y1PNGi4tMw/pbC57WWQQB0bIyBXgbshuu1j9xSqfmd+QGsH1fI/yr+BiGq12sw97zuAAAAAElFTkSuQmCC" width="69" height="69" alt="交互全景图二维码"></a>
