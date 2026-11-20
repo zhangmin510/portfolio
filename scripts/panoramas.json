@@ -1,7 +1,7 @@
 {
   "version": 1,
   "basePath": "/panoramas/",
-  "updatedAt": "2026-11-13",
+  "updatedAt": "2026-11-20",
   "vendors": [
     {
       "file": "chart.umd.min.js",
@@ -16,6 +16,21 @@
     }
   ],
   "pages": [
+    {
+      "slug": "gta-series",
+      "title": "GTA 系列全景图",
+      "subtitle": "从俯视街区到开放世界",
+      "description": "沿发行年表浏览 Grand Theft Auto 系列，追踪自由城、罪城与洛圣都在不同作品中的面貌，看视角、叙事和在线玩法如何演变。",
+      "category": "游戏与文化",
+      "tags": [
+        "GTA",
+        "侠盗猎车手",
+        "开放世界"
+      ],
+      "source": "src/panoramas/gta-series.html",
+      "updatedAt": "2026-11-20",
+      "sourceSha256": "a0476d7027d10d0afef2237e06aaa3c3e9dc30770bbd6e0b0ee3641e3647c4e0"
+    },
     {
       "slug": "recursive-self-improvement",
       "title": "RSI · 递归自我改进全景图",

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#211a29">
+  <title>GTA 系列全景图 · Grand Theft Auto 城市与作品档案</title>
+  <meta name="description" content="从 1997 年初代到 GTA VI，探索 17 个作品条目、五组城市与地区，以及 GTA 开放世界的设计演变。">
+  <link rel="canonical" href="https://zhangmin.name/panoramas/gta-series/">
+  <meta property="og:title" content="GTA 系列全景图">
+  <meta property="og:description" content="沿发行年表、城市谱系与玩法对照，重访 Grand Theft Auto。">
+  <meta property="og:image" content="https://zhangmin.name/panoramas/gta-series/sunset.webp">
+  <meta property="og:url" content="https://zhangmin.name/panoramas/gta-series/">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/favicon-32.png">
+  <link rel="preload" as="image" href="/panoramas/gta-series/sunset.webp">
+  <link rel="stylesheet" href="/panoramas/gta-series/atlas.css">
+  <script type="module" src="/panoramas/gta-series/atlas.js"></script>
+</head>
+<body>
+  <header class="cover">
+    <img class="cover-art" src="/panoramas/gta-series/sunset.webp" alt="" width="1920" height="640" fetchpriority="high">
+    <div class="cover-shade"></div>
+    <div class="wrap cover-content">
+      <div class="cover-kicker"><span class="stripes" aria-hidden="true"></span> GRAND THEFT AUTO <span class="dash"></span> 1997–2026</div>
+      <h1><span class="gta-word" lang="en">GTA</span><span class="zh-title">系列全景图</span></h1>
+      <p>从俯视街区到霓虹海岸，沿着发行年表重访每一座城，看看 GTA 怎样一步步打开它的世界。</p>
+      <div class="cover-actions"><a class="primary" href="#archive">探索作品年表</a><a class="secondary" href="#cities">查看城市谱系</a></div>
+    </div>
+    <small class="art-caption">城市意象 · 原创插画</small>
+  </header>
+  <main>
+    <section class="mainline" aria-label="主系列快速导航">
+      <div class="wrap mainline-wrap">
+        <div class="mainline-label"><span class="micro">MAINLINE</span><b>主系列沿革</b></div>
+        <nav class="mainline-route" aria-label="按首发年份跳转到主系列作品">
+          <a href="#game-gta1"><strong>1997</strong><span>GTA</span></a>
+          <a href="#game-gta2"><strong>1999</strong><span>GTA 2</span></a>
+          <a href="#game-gta3"><strong>2001</strong><span>GTA III</span></a>
+          <a href="#game-vice"><strong>2002</strong><span>Vice City</span></a>
+          <a href="#game-san"><strong>2004</strong><span>San Andreas</span></a>
+          <a href="#game-gta4"><strong>2008</strong><span>GTA IV</span></a>
+          <a href="#game-gta5"><strong>2013</strong><span>GTA V</span></a>
+          <a href="#game-gta6"><strong>2026</strong><span>GTA VI</span></a>
+        </nav>
+      </div>
+    </section>
+    <section id="archive" class="wrap paper-section">
+      <div class="section-intro">
+        <div><span class="kicker">RELEASE TIMELINE</span><h2>作品年表</h2></div>
+        <p>按首发年份浏览 17 个条目。选中作品，查看它的舞台、人物和玩法。</p>
+      </div>
+      <div class="era-buttons" aria-label="按作品世代筛选">
+        <button type="button" data-era="all" aria-pressed="true">全部作品</button>
+        <button type="button" data-era="2d" aria-pressed="false"><i></i>2D 时代</button>
+        <button type="button" data-era="3d" aria-pressed="false"><i></i>3D 时代</button>
+        <button type="button" data-era="hd" aria-pressed="false"><i></i>HD 时代</button>
+      </div>
+      <div class="archive-grid">
+        <div class="directory">
+          <div class="directory-head"><b>档案目录</b><span id="archive-count">17 项</span></div>
+          <div id="game-list" aria-label="作品列表"></div>
+        </div>
+        <article class="dossier" id="dossier" aria-label="当前作品档案" tabindex="-1">
+          <div id="game-detail" aria-live="polite"></div>
+          <nav class="dossier-nav" aria-label="切换作品"><button id="previous" type="button">上一篇</button><span id="record-position"></span><button id="next" type="button">下一篇</button></nav>
+        </article>
+      </div>
+      <noscript><p>启用 JavaScript 可翻阅完整档案。主系列始于 1997 年，2001 年的《GTA III》将自由城带入三维，2013 年的《GTA V》采用三主角叙事，2026 年的《GTA VI》重返罪恶城。可在页尾查阅发行资料。</p></noscript>
+    </section>
+    <section id="cities" class="city-section">
+      <div class="wrap">
+        <div class="section-intro"><div><span class="kicker">CITY CONNECTIONS</span><h2>城市谱系</h2></div><p>同一个地名，在不同作品里会有不同的街道和故事。选择一处地点，追踪它的历次登场。</p></div>
+        <div class="postcards" aria-label="选择代表性城市">
+          <button type="button" data-city="liberty" aria-pressed="true"><img src="/panoramas/gta-series/cities/liberty.webp" alt="《GTA IV》里的码头、轿车与跨河钢桥" loading="lazy"><span class="postcard-title"><small>LIBERTY CITY</small><b>自由城</b></span></button>
+          <button type="button" data-city="vice" aria-pressed="false"><img src="/panoramas/gta-series/cities/vice.webp" alt="《罪恶都市》沿海岸延伸的高楼、棕榈与沙滩" loading="lazy"><span class="postcard-title"><small>VICE CITY</small><b>罪恶城</b></span></button>
+          <button type="button" data-city="san" aria-pressed="false"><img src="/panoramas/gta-series/cities/san.webp" alt="《GTA V》里从好麦坞山牌背后俯瞰洛圣都" loading="lazy"><span class="postcard-title"><small>SAN ANDREAS</small><b>圣安地列斯</b></span></button>
+        </div>
+        <div class="other-cities"><span>其他舞台</span><button type="button" data-city="london" aria-pressed="false">伦敦</button><button type="button" data-city="anywhere" aria-pressed="false">Anywhere City</button></div>
+        <article class="city-file" id="city-detail" aria-live="polite"></article>
+      </div>
+    </section>
+    <section id="design" class="wrap paper-section design-section">
+      <div class="section-intro"><div><span class="kicker">DESIGN IN FOCUS</span><h2>玩法如何演变</h2></div><p>挑一个设计问题，看两部作品各自怎样回答。</p></div>
+      <div id="design-choices" class="compare-choices" aria-label="选择对照主题"></div>
+      <div id="comparison" aria-live="polite"></div>
+    </section>
+    <section class="sources wrap" aria-label="资料来源与收录范围">
+      <details><summary>资料来源与收录范围</summary>
+        <p>年表以各作最早发行年份排序。两部伦敦任务包、两部《GTA IV》剧情扩展和 GTA Online 均单独收录。移植与合辑沿用原作条目。2021 年的《GTA 三部曲》决定版收录 III、Vice City 与 San Andreas。</p>
+        <p>2D、3D、HD 用于区分作品世代。《Advance》与《血战唐人街》均采用俯视视角，分别归入 3D 和 HD 世代。同名城市在各世代有各自的地图。</p>
+        <p>作品档案附有逐项出处。封面横幅为 AI 辅助创作的城市意象插画。作品图像与城市游戏画面的权利归各自权利人所有。</p>
+        <div class="source-links"><a href="https://www.rockstargames.com/games">Rockstar 游戏目录</a><a href="https://www.rockstargames.com/downloads?collection=3&amp;series=21">失落与诅咒封面</a><a href="https://store.playstation.com/store/api/chihiro/00_09_000/container/US/en/999/UP1017-BLUS30127_00-RCKBALLADGAYTONY/image">夜生活之曲图标</a><a href="https://www.xbox.com/en-us/games/store/grand-theft-auto-vi/9np019g7nzxt">GTA VI 封面</a><a href="https://www.rockstargames.com/GTATrilogy">三部曲决定版</a><a href="https://www.take2games.com/ir/news/rockstar-games-announces-grand-theft-auto-vi-now-available">GTA VI 发售公告</a><a href="https://store.steampowered.com/app/12210/">自由城实机图</a><a href="https://store.steampowered.com/app/12110/">罪恶城实机图</a><a href="https://store.steampowered.com/app/271590/">圣安地列斯实机图</a></div>
+      </details>
+    </section>
+  </main>
+  <footer class="page-footer"><div class="wrap"><span>GTA 系列全景图 <i>/</i> 更新于 2026.11.20</span><a href="/panoramas/">全部知识地图</a></div></footer>
+</body>
+</html>
