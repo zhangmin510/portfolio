@@ -1,7 +1,7 @@
 {
   "version": 1,
   "basePath": "/panoramas/",
-  "updatedAt": "2026-11-20",
+  "updatedAt": "2026-11-26",
   "vendors": [
     {
       "file": "chart.umd.min.js",
@@ -16,6 +16,22 @@
     }
   ],
   "pages": [
+    {
+      "slug": "riemann-hypothesis",
+      "title": "黎曼猜想全景图",
+      "subtitle": "从素数的分布到最新形式化证明",
+      "description": "沿欧拉、黎曼与 Hardy 等人的论证探索零点，用显式公式重建素数幂的分布，查阅 Alpöge 与 Claude 的形式化证明和缩短版的独立核验记录。",
+      "category": "数学与科学",
+      "tags": [
+        "黎曼猜想",
+        "素数分布",
+        "ζ 函数",
+        "形式化证明"
+      ],
+      "source": "src/panoramas/riemann-hypothesis.html",
+      "updatedAt": "2026-11-26",
+      "sourceSha256": "8c4d856f253b9a9e67813bfc26bd5ae1f58d6f587ebf683ac423e4da2b311b4b"
+    },
     {
       "slug": "hongguo-short-drama",
       "title": "红果短剧制作全景图",
