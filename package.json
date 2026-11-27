@@ -4,8 +4,9 @@
   "version": "1.1.3",
   "type": "module",
   "scripts": {
+    "predev": "node sites/china-civ/build.mjs",
     "dev": "vite",
-    "build": "npm run sync:navigation && node scripts/clean-build.mjs && npm run build:eval-quest && node scripts/sync-panoramas.mjs && tsc && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "build": "npm run sync:navigation && node scripts/clean-build.mjs && node sites/china-civ/build.mjs && npm run build:eval-quest && node scripts/sync-panoramas.mjs && tsc && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "build:eval-quest": "node sites/eval-quest/build.mjs",
     "build:sites": "npm run build && node scripts/prepare-sites-build.mjs",
     "sync:panoramas": "node scripts/sync-panoramas.mjs",

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#152c32">
+  <meta name="description" content="在一张文明风格的六角地图上探索中国真实的地形、城市、世界遗产和区域统计。">
+  <title>中华舆图 · 中国文明地图</title>
+  <link rel="icon" href="./compass.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://zhangmin.name/china-civ/">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header>
+  <button class="brand" id="home-view" title="返回全国视图"><img src="./compass.svg" alt=""><span>中华舆图<small>CHINA CIV</small></span></button>
+  <nav class="yields" aria-label="全国指标">
+    <button data-report="population" title="市民产出 · 全国年末人口"><i data-icon="people"></i><span>人口<b>14.08 亿</b></span></button>
+    <button data-report="gdp" title="金币产出 · 全国国内生产总值"><i data-icon="coins"></i><span>金币 · GDP<b>134.91 万亿元</b></span></button>
+    <button data-report="grain" title="粮食产出 · 全国粮食总产量"><i data-icon="grain"></i><span>粮食<b>7.07 亿吨</b></span></button>
+  </nav>
+  <div class="header-tools">
+    <div id="search-box"><i data-icon="search"></i><input id="search" type="search" placeholder="搜索城市、省区、遗产…" autocomplete="off" role="combobox" aria-label="搜索地图" aria-expanded="false" aria-controls="matches" aria-autocomplete="list"><kbd>/</kbd><div id="matches" class="panel" role="listbox" hidden></div></div>
+    <button id="open-atlas" class="tool" title="图鉴与数据来源"><i data-icon="book"></i><span>图鉴</span></button>
+    <button id="share" class="tool" title="分享当前视图" aria-label="分享当前视图"><i data-icon="share"></i></button>
+  </div>
+</header>
+<main>
+  <canvas id="map" tabindex="0" aria-label="中国六角地图。方向键移动，加减键缩放；也可使用搜索或数据探索器选择地点。"></canvas>
+  <div class="map-shadow" aria-hidden="true"></div>
+  <div class="location"><b id="view-title">全国视图</b><span id="coordinates">104° E · 36° N</span></div>
+  <div class="map-tools">
+    <button id="plus" title="放大" aria-label="放大">＋</button><button id="minus" title="缩小" aria-label="缩小">−</button><button id="reset" title="返回全国" aria-label="返回全国"><i data-icon="fit"></i></button>
+  </div>
+  <div id="tooltip" class="panel" hidden></div>
+  <article id="detail" class="panel detail" hidden aria-label="地点详情"></article>
+  <section id="mini-wrap" class="panel">
+    <div class="mini-heading"><span>舆图总览</span><button id="mini-hide" aria-label="收起小地图">−</button></div>
+    <canvas id="mini" width="366" height="206" tabindex="0" aria-label="全国小地图，点击定位，按回车返回全国"></canvas>
+  </section>
+  <button id="mini-show" class="panel tool" hidden aria-label="展开小地图"><i data-icon="map"></i></button>
+  <div class="dock-wrap">
+    <div id="legend" class="panel" hidden></div>
+    <div id="picker" class="panel" hidden aria-label="选择地图透镜"></div>
+    <div class="dock panel" role="toolbar" aria-label="地图透镜">
+      <button data-lens="terrain"><i data-icon="mountain"></i><span>地形</span></button>
+      <button data-lens="population"><i data-icon="people"></i><span>人口</span></button>
+      <button data-lens="gdp"><i data-icon="coins"></i><span>经济</span></button>
+      <button data-lens="grain"><i data-icon="grain"></i><span>粮食</span></button>
+      <button id="more" aria-expanded="false"><i data-icon="layers"></i><span>透镜</span>⌃</button>
+      <button id="explore"><i data-icon="chart"></i><span>探索器</span></button>
+    </div>
+  </div>
+  <div id="loading" role="status"><img src="./compass.svg" alt="">正在展开舆图…</div>
+</main>
+<footer><span class="foot-brand">中华舆图</span><span>六角格距 25 km</span><span class="foot-date">统计回合 2024</span><span id="zoom-level"></span><button id="help">操作指南</button><a href="/">个人主页 ↗</a></footer>
+<dialog id="dialog"><div class="dialog-bar"><span><img src="./compass.svg" alt="">中华舆图</span><button id="close-dialog" aria-label="关闭窗口">×</button></div><div id="dialog-body"></div></dialog>
+<div id="toast" role="status" hidden></div>
+<script type="module" src="./app.js"></script>
+</body></html>

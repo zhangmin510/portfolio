@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
 
+# Generated from sites/china-civ by dev and production builds
+/public/china-civ/
+
 # Build output
 dist/
 

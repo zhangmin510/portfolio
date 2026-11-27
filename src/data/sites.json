@@ -12,6 +12,18 @@
     ]
   },
   {
+    "slug": "china-civ",
+    "name": "中华舆图",
+    "label": "中国文明地图",
+    "summary": "在 25 公里六角地图上探索真实的中国地形、城市、世界遗产与县域人口。",
+    "href": "https://zhangmin.name/china-civ/",
+    "related": [
+      "panoramas",
+      "policy-radar",
+      "eval-quest"
+    ]
+  },
+  {
     "slug": "eval-quest",
     "name": "评测探索局",
     "label": "游戏式评测学习",
