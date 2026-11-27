@@ -7,13 +7,13 @@ SITE = Path(__file__).resolve().parents[1]
 BASE = 'https://www.stats.gov.cn/sj/ndsj/2025/html/'
 GRAIN = 'https://www.stats.gov.cn/sj/zxfb/202412/t20241213_1957744.html'
 META = [
-    ('gdp', '地区生产总值', '亿元', '经济', 'C03-09', '按当年价格计算的地区生产总值。'),
+    ('gdp', '地区生产总值', '亿元人民币', '经济', 'C03-09', '按当年价格计算的地区生产总值。'),
     ('gdpPerCapita', '人均地区生产总值', '元/人', '经济', '按当年价格计算的地区生产总值除以年平均常住人口。'),
     ('gdpGrowth', '地区生产总值增速', '%', '经济', '按不变价格计算，以表中上年为 100 的生产总值指数减 100。'),
     ('primary', '第一产业增加值', '亿元', '经济', '第一产业按当年价格计算的增加值。'),
     ('secondary', '第二产业增加值', '亿元', '经济', '第二产业按当年价格计算的增加值。'),
     ('tertiary', '第三产业增加值', '亿元', '经济', '第三产业按当年价格计算的增加值。'),
-    ('population', '年末常住人口', '万人', '人口', 'C02-07', '年末常住人口，含城镇与乡村。'),
+    ('population', '年末人口', '万人', '人口', 'C02-07', '大陆各地区为年末常住人口。台湾为 12 月底户籍登记人口。'),
     ('urban', '常住人口城镇化率', '%', '人口', '年末城镇人口占常住人口的比重。'),
     ('birthRate', '出生率', '‰', '人口', '每千人中的全年出生人数。'),
     ('deathRate', '死亡率', '‰', '人口', '每千人中的全年死亡人数。'),
@@ -74,7 +74,21 @@ def build():
     assert sum(d.get('universities', 0) for d in regions.values()) == 2870
     assert abs(sum(d.get('expressway', 0) for d in regions.values()) - 190678) <= 5
     assert all(-10 < v['temperature'] < 30 and 100 < v['precipitation'] < 4000 for v in climate.values())
-    return dict(year=2024, regions=regions, metrics=metrics, climate=climate, climateSources={
+    # Retain the original series and units alongside the two comparable display values.
+    population = json.loads((SITE / 'data/tw-localities.json').read_text())
+    gdp = json.loads((SITE / 'source-taiwan/gdp.json').read_text())
+    grain = json.loads((SITE / 'source-taiwan/grain.json').read_text())
+    assert population['year'] == grain['year'] == gdp['year'] == 2024
+    localities = {r['code'] for r in population['localities']}
+    assert len(localities) == 22 and localities == {r['code'] for r in grain['counties']}
+    people = population['totals']['population']
+    assert sum(r['population'] for r in population['localities']) == people
+    assert round(gdp['gdpTwdMillion'] / gdp['twdPerCny'] / 100, 1) == gdp['gdp']
+    regions['台湾'].update(population=people / 10000, gdp=gdp['gdp'])
+    taiwan = dict(gdp=gdp, population=people, cerealsT=grain['total']['cerealsT'],
+                  paddyT=grain['total']['paddyT'], populationSource=population['source'],
+                  cerealsSource=grain['sources']['cereals'], paddySource=grain['sources']['crops'])
+    return dict(year=2024, regions=regions, taiwan=taiwan, metrics=metrics, climate=climate, climateSources={
         'temperature': BASE + 'C08-04.jpg', 'precipitation': BASE + 'C08-06.jpg'})
 
 

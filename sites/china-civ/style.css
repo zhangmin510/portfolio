@@ -1051,3 +1051,9 @@ td button:hover {
 .legend-source a {
   color: #d5c7a6;
 }
+
+@media (max-width: 700px) {
+  .detail:not([hidden]) ~ .dock-wrap #legend {
+    display: none;
+  }
+}

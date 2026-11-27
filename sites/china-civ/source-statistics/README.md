@@ -21,3 +21,7 @@
 `transport-resources-education.csv` 按原表省级顺序转录六项指标。用电量取 [表 9-14](https://www.stats.gov.cn/sj/ndsj/2025/html/C09-14.jpg) 的 2024 年列，铁路营业里程与高速公路里程取 [表 16-3](https://www.stats.gov.cn/sj/ndsj/2025/html/C16-03.jpg)，货运量取 [表 16-13](https://www.stats.gov.cn/sj/ndsj/2025/html/C16-13.jpg) 合计列。普通、职业高等学校数来自 [表 21-15](https://www.stats.gov.cn/sj/ndsj/2025/html/C21-15.jpg)。森林覆盖率来自 [表 8-21](https://www.stats.gov.cn/sj/ndsj/2025/html/C08-21.jpg)，统计期为第九次全国森林资源清查（2014—2018 年），年份单列在指标元数据中。
 
 广东高速公路里程 11,743 公里和全社会用电量 9,121 亿千瓦时（取整）经 [广东省统计局公报](https://stats.gd.gov.cn/attachment/0/576/576336/4686764.pdf) 交叉核对。31 地高校合计 2,870 所，与 [教育部公报](https://www.moe.gov.cn/jyb_sjzl/sjzl_fztjgb/202506/t20250611_1193760.html) 的普通本科、本科层次职业学校及高职（专科）三项之和相符。
+
+## 台湾地区
+
+2024 年年底人口按户籍登记，现价 GDP 保留原币及全年平均汇率折算值。台湾谷类的米按糙米计，地图使用专门颜色，单列在大陆粮食五分位之外。县市页面提供年底户籍、全年稻作及原表链接。[人口和地理范围](../source-taiwan/population/README.md) · [GDP 换算](../source-taiwan/GDP.md) · [粮食口径](../source-taiwan/GRAIN.md)

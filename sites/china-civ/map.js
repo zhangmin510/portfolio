@@ -301,6 +301,7 @@ function loadImage(url) {
     img.src = url
   })
 }
+const isTaiwanLens = (id) => id === 'twPopulation' || id === 'twPaddy'
 const isPointLens = (id) => id === 'campus' || id === 'aviation'
 const geoName = (text) =>
   String(text || '').replace(/(?:壮族自治区|回族自治区|维吾尔自治区|自治区|特别行政区|省|市)$/u, '')
@@ -431,7 +432,7 @@ function makeOverview(cells) {
 }
 export async function createMap(
   canvas,
-  { places = [], provinces = [], onSelect, onHover, onView, onReady } = {}
+  { places = [], provinces = [], twLocalities = [], onSelect, onHover, onView, onReady } = {}
 ) {
   const [geo, img] = await Promise.all([
     fetch(new URL('./data/geography.json', import.meta.url)).then((r) => {
@@ -450,6 +451,21 @@ export async function createMap(
       return { p, x, y, order: i, rank: p.rank ?? 3, landmark: p.kind === 'landmark' }
     })
     .sort((a, b) => a.rank - b.rank || (b.p.population || 0) - (a.p.population || 0) || a.order - b.order)
+  const hitContext = canvas2d(1, 1)
+  const twAreas = twLocalities.map((place) => {
+    const rings = place.rings || []
+    const bounds = [Infinity, Infinity, -Infinity, -Infinity]
+    for (const ring of rings)
+      for (const [lon, lat] of ring) {
+        bounds[0] = Math.min(bounds[0], lon)
+        bounds[1] = Math.min(bounds[1], lat)
+        bounds[2] = Math.max(bounds[2], lon)
+        bounds[3] = Math.max(bounds[3], lat)
+      }
+    return { place, path: pathFromLines(rings, true), bounds, anchor: project(place.lon, place.lat) }
+  })
+  const taiwanOutline = new Path2D()
+  for (const area of twAreas) taiwanOutline.addPath(area.path)
   const pointsByLens = {}
   for (const kind of ['campus', 'aviation']) {
     const points = locations.filter((o) => o.p.kind === kind)
@@ -640,11 +656,17 @@ export async function createMap(
           fillCell(c, lens === 'elevation' ? elevationColors[elevationBand(c.elevation)] : colors[c.type])
       })
       ctx.globalAlpha = 1
+    } else if (isTaiwanLens(lens)) {
+      for (const area of twAreas) {
+        ctx.fillStyle = lensColors[area.place.id] || '#8d9085'
+        ctx.fill(area.path, 'evenodd')
+      }
     } else if (lens !== 'terrain' && lens !== 'cities' && !isPointLens(lens)) {
       ctx.globalAlpha = 0.83
       for (const a of atlas.areas) {
         ctx.fillStyle = lensColors[a.code] || lensColors[a.name] || lensColors[a.zh] || '#918f7e'
-        ctx.fill(a.path, 'evenodd')
+        const path = a.code === 'CN-TW' && twAreas.length ? taiwanOutline : a.path
+        ctx.fill(path, 'evenodd')
       }
       ctx.globalAlpha = 1
     }
@@ -674,8 +696,10 @@ export async function createMap(
     }
     if (layers.boundaries) {
       ctx.lineJoin = 'round'
-      strokePath(atlas.country, 'rgba(52,58,42,.84)', clamp(1.8 * Math.sqrt(zoom), 1.7, 3))
-      strokePath(atlas.country, '#d7c078', clamp(0.95 * Math.sqrt(zoom), 0.8, 1.7))
+      if (!isTaiwanLens(lens)) {
+        strokePath(atlas.country, 'rgba(52,58,42,.84)', clamp(1.8 * Math.sqrt(zoom), 1.7, 3))
+        strokePath(atlas.country, '#d7c078', clamp(0.95 * Math.sqrt(zoom), 0.8, 1.7))
+      }
       strokePath(
         atlas.borders,
         'rgba(61,60,43,.8)',
@@ -683,13 +707,26 @@ export async function createMap(
         zoom > 1.7 ? [3, 1.4] : []
       )
     }
+    if (isTaiwanLens(lens)) {
+      const pointed = hovered?.place?.id
+      const active = selected?.place?.id
+      for (const area of twAreas) {
+        if (layers.boundaries) strokePath(area.path, 'rgba(44,56,51,.86)', 0.85)
+      }
+      for (const area of twAreas) {
+        if (area.place.id === active || area.place.id === pointed) {
+          strokePath(area.path, '#394543', 3)
+          strokePath(area.path, area.place.id === active ? '#fee197' : '#fff2cd', 1.5)
+        }
+      }
+    }
     if (highlight) {
       ctx.fillStyle = 'rgba(255,228,144,.19)'
       ctx.fill(highlight, 'evenodd')
       strokePath(highlight, 'rgba(49,48,34,.95)', 3.8)
       strokePath(highlight, '#ffe19a', 2)
     }
-    if (selected?.cell) {
+    if (selected?.cell && !isTaiwanLens(lens)) {
       const c = selected.cell
       ctx.save()
       ctx.translate(c.x, c.y)
@@ -794,8 +831,86 @@ export async function createMap(
     }
     ctx.textBaseline = 'alphabetic'
   }
+  function drawTaiwanLabels() {
+    const anchors = twAreas
+      .map(({ place, anchor }) => {
+        const [x, y] = toScreen(...anchor)
+        return { place, x, y }
+      })
+      .filter(({ x, y }) => x >= -8 && y >= -8 && x <= width + 8 && y <= height + 8)
+    const occupied = anchors.map(({ x, y }) => ({ l: x - 3, t: y - 3, r: x + 3, b: y + 3 }))
+    const selectedId = selected?.place?.id
+    anchors.sort(
+      (a, b) =>
+        Number(b.place.id === selectedId) - Number(a.place.id === selectedId) ||
+        (b.place.population || 0) - (a.place.population || 0)
+    )
+    for (const { place, x, y } of anchors) {
+      ctx.fillStyle = '#293d41'
+      ctx.strokeStyle = '#f7e7bf'
+      ctx.lineWidth = 0.85
+      ctx.beginPath()
+      ctx.arc(x, y, 2.5, 0, 2 * Math.PI)
+      ctx.fill()
+      ctx.stroke()
+      hits.push({ p: place, l: x - 3, t: y - 3, r: x + 3, b: y + 3 })
+    }
+    if (!layers.labels) return
+    const h = 16
+    ctx.font = '600 12px ' + labelFont
+    ctx.textBaseline = 'middle'
+    ctx.textAlign = 'left'
+    for (const { place, x, y } of anchors) {
+      const w = ctx.measureText(place.name).width + 8
+      const positions = [
+        [4, -h / 2],
+        [-w - 4, -h / 2],
+        [-w / 2, -h - 4],
+        [-w / 2, 4],
+        [6, -h - 7],
+        [-w - 6, 7],
+        [12, 9],
+        [-w - 12, -h - 9]
+      ]
+      const offset = positions.find(([dx, dy]) => {
+        const l = x + dx,
+          t = y + dy
+        return (
+          l >= 1 &&
+          t >= 1 &&
+          l + w < width &&
+          t + h < height &&
+          !occupied.some((a) => l < a.r && l + w > a.l && t < a.b && t + h > a.t)
+        )
+      })
+      if (!offset) continue
+      const l = x + offset[0],
+        t = y + offset[1]
+      ctx.beginPath()
+      ctx.moveTo(x, y)
+      ctx.lineTo(clamp(x, l, l + w), clamp(y, t, t + h))
+      ctx.lineWidth = 1
+      ctx.strokeStyle = '#4e584c'
+      ctx.stroke()
+      ctx.beginPath()
+      ctx.roundRect(l + 0.5, t + 0.5, w - 1, h - 1, 2.5)
+      ctx.fillStyle = 'rgba(37,51,48,.88)'
+      ctx.fill()
+      ctx.strokeStyle = place.id === selectedId ? '#ffe197' : '#b6b69b'
+      ctx.stroke()
+      ctx.fillStyle = '#fff4d3'
+      ctx.fillText(place.name, l + 4, t + h / 2)
+      occupied.push({ l: l - 2, t: t - 1, r: l + w + 2, b: t + h + 1 })
+      hits.push({ p: place, l, r: l + w, t, b: t + h })
+    }
+    ctx.textBaseline = 'alphabetic'
+  }
   function drawMarks() {
     hits = []
+    if (isTaiwanLens(lens)) {
+      drawTaiwanLabels()
+      return
+    }
     if (isPointLens(lens)) {
       drawPointLens()
       return
@@ -871,9 +986,10 @@ export async function createMap(
       const fontSize = o.rank === 0 ? 15 : cap ? 13 : 12
       const font = '600 ' + fontSize + 'px ' + labelFont
       ctx.font = font
+      const bannerPopulation = p.registryLocality?.population ?? p.population
       const badge =
-        !o.landmark && width >= 600 && p.population >= 900000
-          ? Math.round(p.population / 10000) + '万'
+        !o.landmark && width >= 600 && bannerPopulation >= 900000
+          ? Math.round(bannerPopulation / 10000) + '万'
           : rankBadge(o.rank, o.landmark)
       const badgeWidth = badge.length > 1 ? badge.length * 6.6 + 7 : 17
       const h = cap ? 20 : 16,
@@ -1016,6 +1132,16 @@ export async function createMap(
       }
     const world = place ? project(place.lon, place.lat) : fromScreen(x, y)
     const [lon, lat] = place ? [place.lon, place.lat] : unproject(...world)
+    const trueArea = twAreas.find(
+      ({ bounds, path }) =>
+        lon >= bounds[0] &&
+        lat >= bounds[1] &&
+        lon <= bounds[2] &&
+        lat <= bounds[3] &&
+        hitContext.isPointInPath(path, world[0], world[1], 'evenodd')
+    )
+    if (!place && isTaiwanLens(lens) && !onlyTerrain) place = trueArea?.place
+    const inTaiwan = trueArea || place?.kind === 'tw-locality'
     const cell = nearestCell(...world)
     if (!cell && !place) return null
     return {
@@ -1023,8 +1149,9 @@ export async function createMap(
       lat,
       terrain: cell?.isLake ? '湖泊' : terrainNames[cell?.type ?? 0],
       elevation: cell && (cell.type || cell.isLake) ? cell.elevation : null,
-      province: cell?.area?.zh || null,
-      provinceCode: cell?.area?.code || null,
+      province: inTaiwan ? '台湾' : cell?.area?.zh || null,
+      twLocality: trueArea?.place,
+      provinceCode: inTaiwan ? 'CN-TW' : cell?.area?.code || null,
       place: place || null,
       x: rect.left + x,
       y: rect.top + y,
@@ -1047,6 +1174,7 @@ export async function createMap(
   }
   function clearHover() {
     if (hovered || onHover) {
+      if (isTaiwanLens(lens) && hovered?.place) queue()
       hovered = null
       onHover?.(null)
     }
@@ -1071,7 +1199,9 @@ export async function createMap(
     const [x, y] = local(e)
     if (!pointers.has(e.pointerId)) {
       if (e.pointerType === 'touch') return
+      const previous = hovered?.place?.id
       hovered = resultAt(x, y)
+      if (isTaiwanLens(lens) && previous !== hovered?.place?.id) queue()
       canvas.style.cursor = hovered?.place ? 'pointer' : 'grab'
       onHover?.(hovered)
       return

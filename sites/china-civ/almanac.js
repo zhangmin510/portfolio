@@ -2,6 +2,14 @@ import { esc, fmt, icon, link } from './ui.js'
 
 const COMMUNIQUE = 'https://www.stats.gov.cn/sj/zxfb/202502/t20250228_1958817.html'
 const LOCAL_DOCS = './'
+const TW_POPULATION = 'https://data.gov.tw/dataset/32973'
+const TW_BOUNDARIES = 'https://data.gov.tw/dataset/7442'
+const TW_GDP = 'https://eng.dgbas.gov.tw/News_Content.aspx?n=4438&s=235533'
+const TW_EXCHANGE = 'https://www.cbc.gov.tw/dl-215894-79640e6e357b4ff2b682704ea7f46bb5.html'
+const TW_CEREALS = 'https://agrstat.moa.gov.tw/moasdweb/book/Book_File.ashx?chapter_id=1433_11_2'
+const TW_PADDY = 'https://agrstat.moa.gov.tw/moasdweb/book/Book_File.ashx?chapter_id=1427_10_2'
+const TAIWAN_ID = 'CN-TW'
+const twLink = (source, fallback, label) => link(source?.url || source || fallback, label)
 const reports = {
   population: {
     title: '年末人口',
@@ -80,35 +88,37 @@ function options(metrics, selected, label) {
   )
 }
 
-function ranking(rows, unit) {
+function ranking(rows, unit, pinnedId) {
   const ordered = rows.filter((r) => Number.isFinite(r.value)).sort((a, b) => b.value - a.value)
   if (!ordered.length) return '<p>该指标尚无可用记录。</p>'
   const limit = Math.max(...ordered.map((r) => Math.abs(r.value)), 1)
-  return ordered
-    .slice(0, 8)
-    .map(
-      ({ place, value }) =>
-        '<button type="button" class="rank" data-book-place="' +
-        esc(place.id) +
-        '"><span>' +
-        esc(place.name) +
-        '</span><i aria-hidden="true" data-book-width="' +
-        ((Math.abs(value) / limit) * 45).toFixed(2) +
-        '"></i><b>' +
-        fmt(value) +
-        ' ' +
-        esc(unit) +
-        '</b></button>'
+  function row({ place, value }) {
+    return (
+      '<button type="button" class="rank" data-book-place="' +
+      esc(place.id) +
+      '"><span>' +
+      esc(place.name) +
+      '</span><i aria-hidden="true" data-book-width="' +
+      ((Math.abs(value) / limit) * 45).toFixed(2) +
+      '"></i><b>' +
+      fmt(value) +
+      ' ' +
+      esc(unit) +
+      '</b></button>'
     )
-    .join('')
+  }
+  const shown = ordered.slice(0, 8).map(row).join('')
+  const pinned = pinnedId ? ordered.findIndex((r) => r.place.id === pinnedId) : -1
+  return pinned >= 8 ? shown + '<p>第 ' + (pinned + 1) + ' 位</p>' + row(ordered[pinned]) : shown
 }
 
 function sourceList(stats, places) {
+  const tw = stats.taiwan || {}
   const yearbook = 'https://www.stats.gov.cn/sj/ndsj/2025/indexch.htm'
   const county = 'https://github.com/leiii/census/tree/0ba0f1efae092f4aa6569ef38e53b3bb4d2f0087'
   return (
     '<h1>数据从哪里来</h1><h2>人口、产业与气象</h2><ul>' +
-    '<li>国家统计局。全国三项总量取 2024 年统计公报公布值，省级比较取《中国统计年鉴2025》与粮食产量公告。各指标原表列在专题图鉴中。 ' +
+    '<li>国家统计局。全国三项总量沿用 2024 年统计公报的大陆范围。内地省区市比较取《中国统计年鉴2025》与粮食产量公告。各指标原表列在专题图鉴中。 ' +
     link(COMMUNIQUE, '全国公报') +
     ' · ' +
     link(yearbook, '统计年鉴') +
@@ -126,6 +136,21 @@ function sourceList(stats, places) {
     link(county, '研究数据') +
     ' · ' +
     link(LOCAL_DOCS + 'COUNTIES.md', '县域口径与许可') +
+    '</li></ul>' +
+    '<h2>台湾地区与 22 县市</h2><ul><li>内政部户政司的 2024 年 12 月底户籍登记记录按 22 县市汇总，包括金门、连江及澎湖。地图使用国土测绘中心 2020 年 8 月县市界线与区域内代表点。 ' +
+    twLink(tw.populationSource, TW_POPULATION, '户政司人口资料') +
+    ' · ' +
+    link(TW_BOUNDARIES, '国土测绘中心县市界线') +
+    '</li>' +
+    '<li>主计总处公布 2024 年现价 GDP（新台币），以台湾央行全年平均汇率折为人民币，供地区规模比较。 ' +
+    twLink(tw.gdp?.source, TW_GDP, '主计总处国民所得统计') +
+    ' · ' +
+    twLink(tw.gdp?.exchangeSource, TW_EXCHANGE, '央行年报汇率表') +
+    '</li>' +
+    '<li>农业部粮食供需年报列示谷类生产量，米按糙米计。县市稻谷产量则来自农业统计年报，以带壳重量计。 ' +
+    twLink(tw.cerealsSource, TW_CEREALS, '粮食供需年报') +
+    ' · ' +
+    twLink(tw.paddySource, TW_PADDY, '农业统计年报') +
     '</li></ul>' +
     '<h2>城镇与世界遗产</h2><ul><li>© GeoNames，CC BY 4.0。使用 ' +
     esc(places.snapshot) +
@@ -185,25 +210,81 @@ export function renderAlmanac(
     )
   }
 
+  function taiwanComparison(id) {
+    const tw = stats.taiwan
+    if (!tw || !allPlaces.has(TAIWAN_ID)) return ''
+    let text
+    if (id === 'population' && Number.isFinite(tw.population)) {
+      text =
+        '台湾 22 县市合计登记 ' +
+        fmt(tw.population) +
+        ' 人，统计时点为 2024 年 12 月底。大陆各地区采用年末常住人口。 ' +
+        twLink(tw.populationSource, TW_POPULATION, '户政原表')
+    } else if (id === 'gdp' && Number.isFinite(tw.gdp?.gdp)) {
+      text =
+        '主计总处公布的当年价格 GDP 为 ' +
+        fmt(tw.gdp.gdpTwdMillion) +
+        ' 百万新台币。按全年平均汇率 1 元人民币兑 ' +
+        Number(tw.gdp.twdPerCny).toFixed(4) +
+        ' 元新台币折算，约为 ' +
+        fmt(tw.gdp.gdp) +
+        ' 亿元人民币。 ' +
+        twLink(tw.gdp.source, TW_GDP, 'GDP 原表') +
+        ' · ' +
+        twLink(tw.gdp.exchangeSource, TW_EXCHANGE, '年平均汇率')
+    } else if (id === 'grain' && Number.isFinite(tw.cerealsT)) {
+      text =
+        '台湾谷类生产量为 ' +
+        fmt(tw.cerealsT) +
+        ' 吨，包含米、小麦、玉米、高粱等，米按糙米计。' +
+        (Number.isFinite(tw.paddyT)
+          ? '另表公布带壳稻谷产量 ' + fmt(tw.paddyT) + ' 吨，同一批稻米按不同加工状态计量。'
+          : '') +
+        '大陆粮食总产量另含豆类和薯类，两组数据分别展示。 ' +
+        twLink(tw.cerealsSource, TW_CEREALS, '谷类生产原表') +
+        ' · ' +
+        twLink(tw.paddySource, TW_PADDY, '稻作原表')
+    } else return ''
+    return (
+      '<h2>台湾 · ' +
+      (id === 'grain' ? '谷类与稻谷' : id === 'gdp' ? '现价 GDP 换算' : '年末户籍人口') +
+      '</h2><p>' +
+      text +
+      '</p><div class="cta"><button class="action" data-book-place="CN-TW">' +
+      icon('pin') +
+      '打开台湾地区档案</button></div>'
+    )
+  }
+
   function provinceComparison(m) {
-    const rows = provinces.map((place) => ({ place, value: stats.regions[place.name]?.[m.id] }))
+    const hasTaiwan = m.id === 'population' || m.id === 'gdp'
+    const rows = provinces
+      .filter((place) => !(place.id === TAIWAN_ID && m.id === 'grain'))
+      .map((place) => ({ place, value: stats.regions[place.name]?.[m.id] }))
     const count = rows.filter((r) => Number.isFinite(r.value)).length
+    const unit = m.id === 'gdp' ? '亿元人民币' : m.unit
+    const desc =
+      m.id === 'population' && stats.taiwan
+        ? '大陆采用年末常住人口，台湾采用户籍登记人数；图中均以万人显示。'
+        : m.description
     return (
       '<h2>' +
       m.year +
       ' 年 · ' +
-      esc(m.name) +
+      esc(m.id === 'grain' ? '大陆粮食总产量' : m.name) +
       '</h2><p>' +
-      esc(m.description) +
+      esc(desc) +
+      (m.id === 'gdp' && stats.taiwan ? ' 台湾数值按年平均汇率折为人民币。' : '') +
       ' 下列为 ' +
       count +
       ' 个有值地区中的前八位，点击地名可定位。</p>' +
-      ranking(rows, m.unit) +
+      ranking(rows, unit, hasTaiwan ? TAIWAN_ID : undefined) +
       '<p>' +
-      link(m.source, '原始数据表') +
+      link(m.source, hasTaiwan || m.id === 'grain' ? '大陆原始数据表' : '原始数据表') +
       '</p><div class="cta">' +
       lensButton(m.id) +
-      '</div>'
+      '</div>' +
+      taiwanComparison(m.id)
     )
   }
 
@@ -321,7 +402,7 @@ export function renderAlmanac(
       ) +
       '<h2>' +
       esc(r.title) +
-      '</h2><h1>' +
+      ' · 大陆公报口径</h2><h1>' +
       esc(r.value) +
       '</h1><p>' +
       esc(r.text) +
@@ -336,7 +417,8 @@ export function renderAlmanac(
     const routes = [
       ['whc-1414', '看天山的高差'],
       ['gn-1809858', '查看广州的产业'],
-      ['whc-438', '定位八达岭长城']
+      ['whc-438', '定位八达岭长城'],
+      [TAIWAN_ID, '探索台湾县市']
     ]
     return (
       '<h1>读懂这张六角地图</h1><p>从一个地点开始，或选一项统计，观察颜色如何随地区改变。</p><div class="cta">' +
@@ -349,7 +431,7 @@ export function renderAlmanac(
         .join('') +
       '</div>' +
       '<h2>读文明产出</h2><p>顶部的市民、金币和麦穗分别对应年末人口、国内生产总值和粮食产量。点击图标可打开当年的全国报告；点击城市中的“学院”或“工业区”可查看它获得标签所依据的统计门槛。</p><h2>在地图上移动</h2><ul><li>拖动地图平移，滚轮、双指或 ＋／− 改变比例。小地图可直接定位。</li><li>点击城镇、遗产或六角格查看档案。按 / 搜索中文名或城市拼音。</li></ul>' +
-      '<h2>比较地区</h2><p>底部的“透镜”可切换统计指标，图例标明单位和颜色范围。“探索器”可以筛选、比较县域的普查数据；有边界调整的县区按可比单元展示。</p>' +
+      '<h2>比较地区</h2><p>底部的“透镜”可切换统计指标，图例标明单位和颜色范围。“探索器”提供大陆县域 2020 年普查资料和台湾 22 县市 2024 年户籍统计，可在相应地区内筛选和比较。</p>' +
       '<div class="cta"><button class="action" data-book-page="atlas">' +
       icon('chart') +
       '打开专题图鉴</button>' +

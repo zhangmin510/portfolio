@@ -1,0 +1,18 @@
+{
+  "region": "台湾",
+  "year": 2024,
+  "name": "当年价格地区生产总值",
+  "gdp": 57693.5,
+  "unit": "亿元人民币",
+  "gdpTwdMillion": 25737088,
+  "twdPerCny": 4.4610,
+  "revisionDate": "2025-11-28",
+  "source": "https://eng.dgbas.gov.tw/News_Content.aspx?n=4438&s=235533",
+  "table": "https://ws.dgbas.gov.tw/001/Upload/464/relfile/10854/235533/t3-1e.ods",
+  "observation": "表 3-1，第 17 行 2024(r)，B 列 GDP，单位为百万新台币。",
+  "exchangeSource": "https://www.cbc.gov.tw/dl-215894-79640e6e357b4ff2b682704ea7f46bb5.html",
+  "exchangeObservation": "2024 年报第 50 页，主要货币汇率表，NTD/CNY 列的 2024 年平均汇率。",
+  "formula": "round(gdpTwdMillion / twdPerCny / 100, 1)",
+  "scope": "人民币值是按全年平均汇率折算的名义金额，供地区比较。内地总量沿用国家统计局公报范围。",
+  "countyGdpSource": "https://www.stat.gov.tw/News_Content.aspx?n=3945&s=103078"
+}

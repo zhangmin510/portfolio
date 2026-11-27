@@ -1,3 +1,4 @@
+import { joinLocalities, localityCard, regionalCard, taiwanLenses } from './taiwan.js'
 import { createMap } from './map.js'
 import { renderAlmanac } from './almanac.js'
 import { renderExplorer } from './explorer.js'
@@ -71,7 +72,8 @@ let map,
   searchItems,
   metrics,
   countyPromise,
-  shapesPromise
+  shapesPromise,
+  taiwan
 let lens = 'terrain',
   active = null,
   searchResults = [],
@@ -96,17 +98,19 @@ const visible = (el, show) => {
   el.hidden = !show
 }
 const kind = (p) =>
-  p.kind === 'landmark'
-    ? '世界遗产'
-    : p.kind === 'province'
-      ? '省级地区'
-      : p.kind === 'county'
-        ? '县级统计单元'
-        : p.kind === 'campus'
-          ? '学府城市'
-          : p.kind === 'aviation'
-            ? '民航城市'
-            : '城市与聚落'
+  p.kind === 'tw-locality'
+    ? '台湾县市'
+    : p.kind === 'landmark'
+      ? '世界遗产'
+      : p.kind === 'province'
+        ? '省级地区'
+        : p.kind === 'county'
+          ? '县级统计单元'
+          : p.kind === 'campus'
+            ? '学府城市'
+            : p.kind === 'aviation'
+              ? '民航城市'
+              : '城市与聚落'
 const kv = (label, value) => '<div class="kv"><span>' + esc(label) + '</span><b>' + value + '</b></div>'
 const provinceOf = (p) => places.provinces.find((a) => a.id === p?.province)
 const metric = (id) => metrics.get(id)
@@ -150,6 +154,7 @@ function drawPicker() {
   }
   picker.innerHTML =
     group('地图底图', themes) +
+    group('台湾县市', taiwanLenses) +
     Array.from(groups, ([name, items]) => group(name, items)).join('') +
     '<div class="checks">' +
     Object.entries(layerLabels)
@@ -178,8 +183,23 @@ function swatches(items) {
   }
   return block
 }
+function quantileLegend(pairs, pal) {
+  const values = pairs.map(([, value]) => value).sort((a, b) => a - b)
+  const stops = [0.2, 0.4, 0.6, 0.8].map((f) => values[Math.ceil(f * values.length) - 1])
+  const colors = Object.fromEntries(
+    pairs.map(([id, v]) => [id, pal[stops.filter((stop) => v > stop).length]])
+  )
+  const items = pal.map((color, i) => [color, i === 4 ? '>' + fmt(stops[3]) : '≤' + fmt(stops[i])])
+  return { colors, items }
+}
+const countyLens = (id) => taiwanLenses.find((t) => t.id === id)
 function updateLens(next, updateUrl = true) {
-  if (!themes.some((t) => t.id === next) && !metrics.has(next)) next = 'terrain'
+  const localMetric = countyLens(next)
+  if (!themes.some((t) => t.id === next) && !metrics.has(next) && !localMetric) next = 'terrain'
+  if (localMetric && !countyLens(lens) && updateUrl) {
+    closeDetail()
+    map.flyTo(120.5, 24.13, innerWidth < 700 ? 11 : 7)
+  }
   lens = next
   let colors = {},
     legendItems = [],
@@ -187,15 +207,29 @@ function updateLens(next, updateUrl = true) {
   const m = metric(next)
   if (m) {
     const pairs = Object.entries(stats.regions).filter(([, r]) => Number.isFinite(r[next]))
-    const values = pairs.map(([, r]) => r[next]).sort((a, b) => a - b)
-    const stops = [0.2, 0.4, 0.6, 0.8].map((f) => values[Math.ceil(f * values.length) - 1])
-    const pal = palettes[m.group] || palettes['人口']
-    for (const [name, r] of pairs) colors[name] = pal[stops.filter((stop) => r[next] > stop).length]
-    // Use an explicit missing-data color for polygons outside this table's scope.
+    const scale = quantileLegend(
+      pairs.map(([name, r]) => [name, r[next]]),
+      palettes[m.group] || palettes['人口']
+    )
+    colors = scale.colors
+    legendItems = scale.items
     for (const p of places.provinces) colors[p.name] ??= '#83908b'
-    legendItems = pal.map((color, i) => [color, i === 4 ? '>' + fmt(stops[3]) : '≤' + fmt(stops[i])])
+    if (next === 'grain') {
+      colors['台湾'] = '#b49cb7'
+      legendItems.push([colors['台湾'], '台湾谷类 · 单列'])
+    }
     legendItems.push(['#83908b', '缺数'])
     info = m.name + ' · ' + m.unit + ' · ' + m.year + ' 年'
+  } else if (localMetric) {
+    const pairs = taiwan.localities
+      .filter((p) => Number.isFinite(p[localMetric.field]))
+      .map((p) => [p.id, p[localMetric.field]])
+    const scale = quantileLegend(pairs, next === 'twPopulation' ? palettes['人口'] : palettes['农业'])
+    colors = scale.colors
+    legendItems = scale.items
+    if (pairs.length < taiwan.localities.length) legendItems.push(['#83908b', '原表「—」'])
+    for (const p of taiwan.localities) colors[p.id] ??= '#83908b'
+    info = '台湾' + localMetric.name + ' · ' + localMetric.unit + ' · 2024 年'
   } else if (next === 'elevation') {
     legendItems = elevationLegend
     info = '六角格海拔 · 米'
@@ -220,16 +254,28 @@ function updateLens(next, updateUrl = true) {
     title.textContent = info
     legend.append(title, swatches(legendItems))
   }
-  if (m) {
-    const source = document.createElement('small')
-    source.className = 'legend-source'
-    const a = document.createElement('a')
-    a.href = m.source
-    a.target = '_blank'
-    a.rel = 'noopener noreferrer'
-    a.textContent = '指标原表 ↗'
-    source.append('省级五分位 · ', a)
-    legend.append(source)
+  if (m || localMetric) {
+    const note = document.createElement('small')
+    note.className = 'legend-source'
+    if (localMetric) {
+      note.innerHTML =
+        (next === 'twPaddy' ? '18 个县市有稻谷数值，按带壳重量计。' : '22 个县市，12 月底户籍登记人口。') +
+        link(next === 'twPaddy' ? taiwan.grainSource : taiwan.source, '县市原表')
+    } else {
+      const t = stats.taiwan
+      const twNotes = {
+        population: ['台湾按年底户籍登记，其他有值地区按常住人口。', t.populationSource],
+        gdp: ['台湾按年均汇率折算人民币。', t.gdp.source],
+        grain: [
+          '台湾谷类 ' + fmt(t.cerealsT / 10000) + ' 万吨，米按糙米计，单列于五分位之外。',
+          t.cerealsSource
+        ]
+      }
+      note.innerHTML = '省级五分位 · ' + link(m.source, '指标原表')
+      if (twNotes[next])
+        note.innerHTML += '<br>' + esc(twNotes[next][0]) + ' ' + link(twNotes[next][1], '台湾原表')
+    }
+    legend.append(note)
   }
   document.querySelectorAll('.dock [data-lens]').forEach((b) => {
     const selected = b.dataset.lens === next
@@ -336,6 +382,7 @@ function detailSelect(data) {
   }
   active = data
   map?.highlightArea()
+  if (data.place?.kind === 'tw-locality') map.highlightArea(data.place.rings)
   if (data.place?.kind === 'county') {
     const id = data.place.id
     readShapes()
@@ -355,7 +402,10 @@ function drawDetail(data) {
     sub = p?.en || '',
     group = p ? kind(p) : '地形格',
     body = ''
-  if (p?.kind === 'county') {
+  if (p?.kind === 'tw-locality') {
+    sub = p.level + ' · ' + p.code
+    body = localityCard(p, taiwan, stats.taiwan.gdp)
+  } else if (p?.kind === 'county') {
     sub = p.province + ' · ' + p.city
     body =
       '<section><h3>第七次人口普查 · 2020</h3>' +
@@ -410,7 +460,18 @@ function drawDetail(data) {
     const d = cityData.cities[p.id],
       weather = stats.climate[p.name]
     body = '<p>' + esc(p.description || '') + '</p>'
-    if (p.population)
+    const local = p.registryLocality || data.twLocality
+    if (local) {
+      body +=
+        '<section><h3>' +
+        esc(local.name) +
+        ' · 2024 年底户籍登记</h3>' +
+        kv('登记人口', metricValue(local.population, '人')) +
+        '<button class="action" data-pick="' +
+        esc(local.id) +
+        '">打开县市档案 ↗</button></section>'
+    }
+    if (p.population && !p.registryLocality)
       body +=
         '<section>' +
         kv('GeoNames 收录人口', metricValue(p.population, '人')) +
@@ -455,7 +516,9 @@ function drawDetail(data) {
     kv('地形格近似海拔', metricValue(data.elevation, 'm')) +
     kv('坐标', esc(coord(data.lon, data.lat))) +
     '</section>'
-  if (region && p?.kind !== 'county') {
+  if (region?.id === 'CN-TW' && p?.kind !== 'tw-locality') {
+    body += regionalCard(stats.taiwan, lens, metric(lens), stats.regions['台湾'][lens])
+  } else if (region && p?.kind !== 'county' && p?.kind !== 'tw-locality') {
     const row = stats.regions[region.name] || {},
       fields = [...new Set([...(metric(lens) ? [lens] : []), 'population', 'gdp', 'grain'])]
     body +=
@@ -495,6 +558,16 @@ function hover(data) {
   const m = metric(lens),
     r = stats.regions[data.province]
   if (m && Number.isFinite(r?.[lens])) info = fmt(r[lens]) + ' ' + m.unit + ' · 省级'
+  const twRegion =
+    data.place?.province === 'CN-TW' || (!data.place?.province && data.provinceCode === 'CN-TW')
+  if (twRegion && lens === 'grain') info = fmt(stats.taiwan.cerealsT / 10000) + ' 万吨 · 谷类（米按糙米计）'
+  if (twRegion && lens === 'population') info = fmt(stats.taiwan.population) + ' 人 · 户籍登记'
+  if (twRegion && lens === 'gdp') info = fmt(stats.taiwan.gdp.gdp) + ' 亿元人民币 · 汇率折算'
+  if (data.place?.kind === 'tw-locality' && countyLens(lens)) {
+    const m = countyLens(lens),
+      v = data.place[m.field]
+    info = Number.isFinite(v) ? fmt(v) + ' ' + m.unit + ' · ' + m.name : '原表列为「—」'
+  }
   if (data.place?.kind === 'campus') info = fmt(data.place.count) + ' 所直属高校'
   if (data.place?.kind === 'aviation') info = fmt(data.place.count) + ' 旅客人次'
   tooltip.innerHTML =
@@ -507,13 +580,29 @@ function pick(p, fly = true) {
   if (dialog.open) dialog.close()
   closeSearch()
   setPicker(false)
+  if (fly && p.kind === 'tw-locality' && !countyLens(lens)) updateLens('twPopulation')
+  else if (fly && p.kind !== 'tw-locality' && countyLens(lens)) updateLens('terrain')
   if (fly && (p.kind === 'campus' || p.kind === 'aviation') && lens !== p.kind) updateLens(p.kind)
   else if (fly && (lens === 'campus' || lens === 'aviation') && p.kind !== lens) updateLens('terrain')
-  if (fly) map.flyTo(p.lon, p.lat, p.kind === 'province' ? 2.7 : p.kind === 'county' ? 8 : 5)
+  if (fly)
+    map.flyTo(
+      p.lon,
+      p.lat,
+      p.id === 'CN-TW'
+        ? 7
+        : p.kind === 'tw-locality'
+          ? 12
+          : p.kind === 'province'
+            ? 2.7
+            : p.kind === 'county'
+              ? 8
+              : 5
+    )
   map.selectPlace(p)
 }
 function resetView() {
   closeDetail()
+  if (countyLens(lens)) updateLens('terrain')
   map.reset()
   closeSearch()
   setPicker(false)
@@ -599,16 +688,16 @@ function atlas(section = 'guide', id = 'gdp') {
     }
   })
 }
-function explorer() {
+function explorer(initialLevel = 'province') {
   openDialog()
-  renderExplorer($('dialog-body'), { stats, places, onPick: pick, initialLevel: 'province' }).catch((e) => {
+  renderExplorer($('dialog-body'), { stats, places, taiwan, onPick: pick, initialLevel }).catch((e) => {
     $('dialog-body').textContent = e.message
   })
 }
 function help() {
   openDialog()
   $('dialog-body').innerHTML =
-    '<div class="article"><h1>操作指南</h1><p>拖动地图平移，滚轮或双指缩放。点击城市旗标、遗产徽章或六角格，查看该位置的真实记录。城市特色标签可展开查看判定依据。</p><h2>键盘与触控</h2><ul><li><kbd>/</kbd> 或 <kbd>Ctrl / ⌘ K</kbd> 搜索；用上下键选中结果，回车定位。</li><li>方向键平移，<kbd>+</kbd>／<kbd>−</kbd> 缩放，<kbd>0</kbd> 返回全国。</li><li><kbd>L</kbd> 切换透镜菜单，<kbd>?</kbd> 查看指南，<kbd>Esc</kbd> 关闭面板。</li></ul><h2>如何读图</h2><p>旗标数字采用 GeoNames 收录人口，统计年份与范围因城市而异。金色圆章标记 UNESCO 世界遗产。省级透镜按有值地区的五分位着色；探索器可以比较省级指标和县级人口普查数据。</p></div>'
+    '<div class="article"><h1>操作指南</h1><p>拖动地图平移，滚轮或双指缩放。点击城市旗标、遗产徽章或六角格，查看该位置的真实记录。城市特色标签可展开查看判定依据。</p><h2>键盘与触控</h2><ul><li><kbd>/</kbd> 或 <kbd>Ctrl / ⌘ K</kbd> 搜索；用上下键选中结果，回车定位。</li><li>方向键平移，<kbd>+</kbd>／<kbd>−</kbd> 缩放，<kbd>0</kbd> 返回全国。</li><li><kbd>L</kbd> 切换透镜菜单，<kbd>?</kbd> 查看指南，<kbd>Esc</kbd> 关闭面板。</li></ul><h2>如何读图</h2><p>已匹配的台湾行政市旗标采用 2024 年底户籍人口；其他城市旗标采用 GeoNames 收录人口，统计年份与范围因地而异。金色圆章标记 UNESCO 世界遗产。省级透镜按有值地区的五分位着色；探索器可以比较省级指标和县级人口普查数据。</p></div>'
 }
 function share() {
   syncHash()
@@ -640,7 +729,8 @@ function share() {
     ctx.fillStyle = '#e2cc99'
     ctx.font = 'bold ' + Math.round(bar * 0.48) + 'px serif'
     ctx.fillText(
-      '中华舆图  /  ' + (metric(lens)?.name || themes.find((t) => t.id === lens).name),
+      '中华舆图  /  ' +
+        (metric(lens)?.name || countyLens(lens)?.name || themes.find((t) => t.id === lens).name),
       bar * 0.4,
       bar * 0.67
     )
@@ -665,7 +755,8 @@ async function restore(initial) {
   closeDetail()
   const params = new URLSearchParams(initial.slice(1))
   const nums = (params.get('at') || '').split(',').map(Number)
-  if (nums.length === 3 && nums.every(Number.isFinite)) map.flyTo(...nums, false)
+  const hasCamera = nums.length === 3 && nums.every(Number.isFinite)
+  if (hasCamera) map.flyTo(...nums, false)
   for (const k of Object.keys(layers)) layers[k] = defaultLayers[k]
   for (const k of (params.get('layers') || '').split(','))
     if (Object.hasOwn(defaultLayers, k)) layers[k] = !defaultLayers[k]
@@ -677,7 +768,8 @@ async function restore(initial) {
     const record = (await readCounties()).items.find((r) => r.id === id)
     if (record) p = { ...record, kind: 'county' }
   }
-  if (p) pick(p, false)
+  if (p) pick(p, !hasCamera)
+  else if (!hasCamera && countyLens(lens)) map.flyTo(120.5, 24.13, innerWidth < 700 ? 11 : 7, false)
   else if (params.has('tile')) {
     const t = params.get('tile').split(',').map(Number)
     if (t.length === 2 && t.every(Number.isFinite)) map.selectTile(...t)
@@ -689,6 +781,7 @@ function bind() {
   document.addEventListener('click', (e) => {
     const b = e.target.closest('button')
     if (b?.dataset.lens) updateLens(b.dataset.lens)
+    else if (b?.hasAttribute('data-tw-explorer')) explorer('taiwan')
     else if (b?.dataset.report) atlas('report', b.dataset.report)
     else if (b?.dataset.pick) pick(placeIndex.get(b.dataset.pick))
     else if (b?.dataset.detailReport) atlas('atlas', b.dataset.detailReport)
@@ -745,7 +838,7 @@ function bind() {
   }
   $('share').onclick = share
   $('open-atlas').onclick = () => atlas()
-  $('explore').onclick = explorer
+  $('explore').onclick = () => explorer()
   $('help').onclick = help
   $('close-dialog').onclick = () => dialog.close()
   dialog.onclick = (e) => {
@@ -785,17 +878,29 @@ function bind() {
 }
 async function init() {
   const initial = location.hash
-  ;[places, stats, cityData, geo, campus, aviation] = await Promise.all(
+  let registry, crops
+  ;[places, stats, cityData, geo, campus, aviation, registry, crops] = await Promise.all(
     [
       'places.json',
       'statistics.json',
       'city-indicators.json',
       'data/geography.json',
       'campus.json',
-      'air-traffic.json'
+      'air-traffic.json',
+      'data/tw-localities.json',
+      'source-taiwan/grain.json'
     ].map(json)
   )
+  taiwan = joinLocalities(registry, crops)
   metrics = new Map(stats.metrics.map((m) => [m.id, m]))
+  // An administrative city has an official year-end count. Other settlements keep their own place record.
+  const registryCities = new Map(
+    taiwan.localities.filter((p) => p.level.endsWith('市')).map((p) => [p.name, p])
+  )
+  for (const city of places.cities) {
+    if (city.province === 'CN-TW')
+      city.registryLocality = registryCities.get(city.name) || registryCities.get(city.name + '市')
+  }
   const cities = new Map(places.cities.map((p) => [p.id, p]))
   const schoolsByCity = new Map()
   for (const school of campus.items) {
@@ -830,7 +935,11 @@ async function init() {
     })
   )
   const mapPoints = [...places.cities, ...places.landmarks, ...schoolPoints, ...airportPoints]
-  const all = [...mapPoints, ...places.provinces.map((p) => ({ ...p, kind: 'province' }))]
+  const all = [
+    ...taiwan.localities,
+    ...mapPoints,
+    ...places.provinces.map((p) => ({ ...p, kind: 'province' }))
+  ]
   placeIndex = new Map(all.map((p) => [p.id, p]))
   searchItems = all.map((p) => ({
     p,
@@ -840,6 +949,7 @@ async function init() {
   setMini(innerWidth > 700)
   map = await createMap(mainMap, {
     places: mapPoints,
+    twLocalities: taiwan.localities,
     provinces: places.provinces,
     onSelect: detailSelect,
     onHover: hover,

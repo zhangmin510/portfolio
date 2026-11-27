@@ -11,6 +11,26 @@ const countyMetrics = [
   ['schoolYears', '平均受教育年限', '年']
 ].map(([id, name, unit]) => ({ id, name, unit }))
 
+const taiwanMetrics = [
+  ['population', '年末户籍人口', '人'],
+  ['households', '户数', '户'],
+  ['male', '男性人口', '人'],
+  ['female', '女性人口', '人'],
+  ['age0to14', '0–14 岁人口', '人'],
+  ['age15to64', '15–64 岁人口', '人'],
+  ['age65plus', '65 岁及以上人口', '人'],
+  ['seniorShare', '65 岁及以上人口占比', '%'],
+  ['paddyTonnes', '全年稻谷产量', '吨']
+].map(([id, name, unit]) => ({ id, name, unit }))
+
+const gdpRelease = 'https://eng.dgbas.gov.tw/News_Content.aspx?n=4438&s=235533'
+const countyGdpNote = 'https://www.stat.gov.tw/News_Content.aspx?n=3945&s=103078'
+const riceYearbook = 'https://agrstat.moa.gov.tw/moasdweb/book/Book.aspx?bookID=1427'
+
+function searchKey(text) {
+  return String(text).toLowerCase().replaceAll('臺', '台').replaceAll('縣', '县')
+}
+
 const pageSize = 15
 const collator = new Intl.Collator('zh-CN', { numeric: true })
 let cachedCounties
@@ -104,11 +124,16 @@ function chart(canvas, rows, xMetric, yMetric) {
   })
 }
 
-export async function renderExplorer(container, { stats, places, onPick, initialLevel = 'province' }) {
+export async function renderExplorer(
+  container,
+  { stats, places, taiwan, onPick, initialLevel = 'province' }
+) {
   const root = document.createElement('section')
   root.className = 'explorer'
   root.innerHTML =
-    '<h1>数据探索器</h1><div class="tabs" aria-label="统计层级"><button data-level="province">省级地区</button><button data-level="county">县域人口</button></div><div data-content></div>'
+    '<h1>数据探索器</h1><div class="tabs" aria-label="统计层级"><button data-level="province">省级地区</button><button data-level="county">县域人口</button>' +
+    (taiwan?.localities?.length ? '<button data-level="taiwan">台湾县市</button>' : '') +
+    '</div><div data-content></div>'
   container.replaceChildren(root)
   const content = root.querySelector('[data-content]')
   let level, metrics, records, xId, yId, sortId, descending, page, visible, sorted, points, observer
@@ -119,7 +144,11 @@ export async function renderExplorer(container, { stats, places, onPick, initial
   }
 
   function choose(row) {
-    if (row) onPick({ ...row.place, kind: level === 'county' ? 'county' : 'province' })
+    if (row)
+      onPick({
+        ...row.place,
+        kind: level === 'taiwan' ? 'tw-locality' : level === 'county' ? 'county' : 'province'
+      })
   }
 
   function draw() {
@@ -183,7 +212,7 @@ export async function renderExplorer(container, { stats, places, onPick, initial
   }
 
   function filter() {
-    const query = content.querySelector('input[type=search]').value.trim().toLowerCase()
+    const query = searchKey(content.querySelector('input[type=search]').value.trim())
     const province = content.querySelector('[data-province]')?.value
     visible = records.filter(
       (row) => (!province || row.place.province === province) && row.search.includes(query)
@@ -366,8 +395,39 @@ export async function renderExplorer(container, { stats, places, onPick, initial
       xId = 'population'
       yId = 'growth'
       sortId = xId
+    } else if (level === 'taiwan' && taiwan?.localities?.length) {
+      metrics = taiwanMetrics
+      records = taiwan.localities.map((place) => ({
+        place,
+        values: {
+          ...place,
+          seniorShare:
+            place.population > 0 && Number.isFinite(place.age65plus)
+              ? (100 * place.age65plus) / place.population
+              : null
+        },
+        search: searchKey(
+          [place.name, place.officialName, place.en, place.id, place.code, ...(place.aliases || [])].join(
+            ' '
+          )
+        )
+      }))
+      xId = 'population'
+      yId = 'seniorShare'
+      sortId = xId
+      coverage =
+        '2024 年底 ' +
+        records.length +
+        ' 个县市的户籍人口、户数及年龄结构。稻谷产量按全年收获量计，原表缺项显示为 —。主计总处未编制县市别 GDP。'
+      source = [
+        link(taiwan.source?.url || taiwan.source, '户政人口资料'),
+        link(taiwan.grainSource?.url || taiwan.grainSource || riceYearbook, '农业统计年报'),
+        link(countyGdpNote, '县市 GDP 口径说明')
+      ].join(' · ')
     } else {
-      metrics = stats.metrics
+      metrics = stats.metrics.map((metric) =>
+        metric.id === 'population' ? { ...metric, name: '年末人口' } : metric
+      )
       records = places.provinces.map((place) => ({
         place,
         values: stats.regions[place.name] || {},
@@ -380,12 +440,21 @@ export async function renderExplorer(container, { stats, places, onPick, initial
         stats.year +
         ' 年分省指标，森林覆盖率为 2014—2018 年清查值。可浏览 ' +
         records.length +
-        ' 个省级地区，港澳台按来源覆盖显示。'
-      source = link('https://www.stats.gov.cn/sj/ndsj/2025/indexch.htm', '中国统计年鉴 2025')
+        ' 个省级地区。内地人口采用常住口径，台湾采用年末户籍人口。台湾现价 GDP 按 2024 年平均汇率折算为人民币。台湾稻谷单列于县市页，省级粮食总产量按内地公报范围展示。'
+      source =
+        link('https://www.stats.gov.cn/sj/ndsj/2025/indexch.htm', '中国统计年鉴 2025') +
+        ' · ' +
+        link(gdpRelease, '台湾 GDP 年度修订')
     }
     descending = true
     controls(coverage, source)
   }
   for (const b of root.querySelectorAll('[data-level]')) b.onclick = () => switchLevel(b.dataset.level)
-  await switchLevel(initialLevel === 'county' ? 'county' : 'province')
+  await switchLevel(
+    initialLevel === 'taiwan' && taiwan?.localities?.length
+      ? 'taiwan'
+      : initialLevel === 'county'
+        ? 'county'
+        : 'province'
+  )
 }
