@@ -112,7 +112,7 @@ function ranking(rows, unit, pinnedId) {
   return pinned >= 8 ? shown + '<p>第 ' + (pinned + 1) + ' 位</p>' + row(ordered[pinned]) : shown
 }
 
-function sourceList(stats, places) {
+function sourceList(stats, places, territories) {
   const tw = stats.taiwan || {}
   const yearbook = 'https://www.stats.gov.cn/sj/ndsj/2025/indexch.htm'
   const county = 'https://github.com/leiii/census/tree/0ba0f1efae092f4aa6569ef38e53b3bb4d2f0087'
@@ -137,6 +137,29 @@ function sourceList(stats, places) {
     ' · ' +
     link(LOCAL_DOCS + 'COUNTIES.md', '县域口径与许可') +
     '</li></ul>' +
+    '<h2>香港与澳门</h2>' +
+    Object.values(territories)
+      .map(
+        (r) =>
+          '<h3>' +
+          esc(r.name) +
+          '</h3><p>' +
+          esc(r.populationNote) +
+          ' ' +
+          link(r.populationSource, '年底人口') +
+          ' · ' +
+          link(r.gdpSource, '现价 GDP') +
+          ' · ' +
+          link(r.exchangeSource, '年均汇率') +
+          '</p><p>' +
+          esc(r.districtNote + ' ' + r.boundaryNote) +
+          ' ' +
+          link(r.districtSource, '分区原表') +
+          ' · ' +
+          link(r.boundarySource, '边界来源') +
+          '</p>'
+      )
+      .join('') +
     '<h2>台湾地区与 22 县市</h2><ul><li>内政部户政司的 2024 年 12 月底户籍登记记录按 22 县市汇总，包括金门、连江及澎湖。地图使用国土测绘中心 2020 年 8 月县市界线与区域内代表点。 ' +
     twLink(tw.populationSource, TW_POPULATION, '户政司人口资料') +
     ' · ' +
@@ -189,7 +212,7 @@ function sourceList(stats, places) {
 
 export function renderAlmanac(
   container,
-  { stats, places, cityData, onLens, onPick, section = 'guide', metric = 'population' }
+  { stats, places, cityData, territories, onLens, onPick, section = 'guide', metric = 'population' }
 ) {
   let page = Object.hasOwn(pages, section) ? section : 'atlas'
   let reportId = Object.hasOwn(reports, metric) ? metric : 'population'
@@ -206,7 +229,11 @@ export function renderAlmanac(
 
   function lensButton(id) {
     return (
-      '<button class="action" data-book-lens="' + esc(id) + '">' + icon('layers') + '在地图上着色</button>'
+      '<button class="action" data-book-lens="' +
+      esc(id) +
+      '">' +
+      icon('layers') +
+      '在地图上着色</button>'
     )
   }
 
@@ -265,7 +292,7 @@ export function renderAlmanac(
     const unit = m.id === 'gdp' ? '亿元人民币' : m.unit
     const desc =
       m.id === 'population' && stats.taiwan
-        ? '大陆采用年末常住人口，台湾采用户籍登记人数；图中均以万人显示。'
+        ? '大陆采用年末常住人口，台湾采用年底户籍登记人口，香港和澳门采用各自的年底人口估计，单位均为万人。'
         : m.description
     return (
       '<h2>' +
@@ -274,7 +301,7 @@ export function renderAlmanac(
       esc(m.id === 'grain' ? '大陆粮食总产量' : m.name) +
       '</h2><p>' +
       esc(desc) +
-      (m.id === 'gdp' && stats.taiwan ? ' 台湾数值按年平均汇率折为人民币。' : '') +
+      (m.id === 'gdp' && stats.taiwan ? ' 香港、澳门和台湾的数值按各自年平均汇率折为人民币。' : '') +
       ' 下列为 ' +
       count +
       ' 个有值地区中的前八位，点击地名可定位。</p>' +
@@ -284,7 +311,36 @@ export function renderAlmanac(
       '</p><div class="cta">' +
       lensButton(m.id) +
       '</div>' +
-      taiwanComparison(m.id)
+      taiwanComparison(m.id) +
+      (hasTaiwan
+        ? '<h2>香港与澳门 · ' +
+          (m.id === 'gdp' ? '全年现价 GDP' : '年底人口') +
+          '</h2>' +
+          Object.values(territories)
+            .map(
+              (r) =>
+                '<p><button class="action" data-book-place="' +
+                esc(r.code) +
+                '">' +
+                esc(r.name) +
+                ' ↗</button> ' +
+                (m.id === 'gdp'
+                  ? fmt(r.gdpMillion / 100) +
+                    ' 亿' +
+                    esc(r.currency) +
+                    '，约 ' +
+                    fmt(stats.regions[r.name].gdp) +
+                    ' 亿元人民币。 ' +
+                    link(r.gdpSource, 'GDP 原表')
+                  : fmt(r.population) +
+                    ' 人。' +
+                    esc(r.populationNote) +
+                    ' ' +
+                    link(r.populationSource, '人口原表')) +
+                '</p>'
+            )
+            .join('')
+        : '')
     )
   }
 
@@ -418,7 +474,9 @@ export function renderAlmanac(
       ['whc-1414', '看天山的高差'],
       ['gn-1809858', '查看广州的产业'],
       ['whc-438', '定位八达岭长城'],
-      [TAIWAN_ID, '探索台湾县市']
+      [TAIWAN_ID, '探索台湾县市'],
+      ['CN-HK', '探索香港分区'],
+      ['CN-MO', '探索澳门分区']
     ]
     return (
       '<h1>读懂这张六角地图</h1><p>从一个地点开始，或选一项统计，观察颜色如何随地区改变。</p><div class="cta">' +
@@ -426,12 +484,17 @@ export function renderAlmanac(
         .filter(([id]) => allPlaces.has(id))
         .map(
           ([id, text]) =>
-            '<button class="action" data-book-place="' + id + '">' + icon('pin') + esc(text) + '</button>'
+            '<button class="action" data-book-place="' +
+            id +
+            '">' +
+            icon('pin') +
+            esc(text) +
+            '</button>'
         )
         .join('') +
       '</div>' +
       '<h2>读文明产出</h2><p>顶部的市民、金币和麦穗分别对应年末人口、国内生产总值和粮食产量。点击图标可打开当年的全国报告；点击城市中的“学院”或“工业区”可查看它获得标签所依据的统计门槛。</p><h2>在地图上移动</h2><ul><li>拖动地图平移，滚轮、双指或 ＋／− 改变比例。小地图可直接定位。</li><li>点击城镇、遗产或六角格查看档案。按 / 搜索中文名或城市拼音。</li></ul>' +
-      '<h2>比较地区</h2><p>底部的“透镜”可切换统计指标，图例标明单位和颜色范围。“探索器”提供大陆县域 2020 年普查资料和台湾 22 县市 2024 年户籍统计，可在相应地区内筛选和比较。</p>' +
+      '<h2>比较地区</h2><p>底部的“透镜”可切换统计指标，图例标明单位和颜色范围。“探索器”提供大陆县域 2020 年普查资料，以及台湾县市、香港区议会分区和澳门统计分区的 2024 年资料，可在相应地区内筛选和比较。</p>' +
       '<div class="cta"><button class="action" data-book-page="atlas">' +
       icon('chart') +
       '打开专题图鉴</button>' +
@@ -446,7 +509,7 @@ export function renderAlmanac(
       '<article class="article">' +
       menu(Object.entries(pages), 'page', page) +
       (page === 'sources'
-        ? sourceList(stats, places)
+        ? sourceList(stats, places, territories)
         : page === 'report'
           ? report()
           : page === 'atlas'

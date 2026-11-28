@@ -13,7 +13,7 @@ META = [
     ('primary', '第一产业增加值', '亿元', '经济', '第一产业按当年价格计算的增加值。'),
     ('secondary', '第二产业增加值', '亿元', '经济', '第二产业按当年价格计算的增加值。'),
     ('tertiary', '第三产业增加值', '亿元', '经济', '第三产业按当年价格计算的增加值。'),
-    ('population', '年末人口', '万人', '人口', 'C02-07', '大陆各地区为年末常住人口。台湾为 12 月底户籍登记人口。'),
+    ('population', '年末人口', '万人', '人口', 'C02-07', '大陆为年末常住人口，香港和澳门采用各自年底人口估计，台湾为年底户籍登记人口。'),
     ('urban', '常住人口城镇化率', '%', '人口', '年末城镇人口占常住人口的比重。'),
     ('birthRate', '出生率', '‰', '人口', '每千人中的全年出生人数。'),
     ('deathRate', '死亡率', '‰', '人口', '每千人中的全年死亡人数。'),
@@ -88,6 +88,14 @@ def build():
     taiwan = dict(gdp=gdp, population=people, cerealsT=grain['total']['cerealsT'],
                   paddyT=grain['total']['paddyT'], populationSource=population['source'],
                   cerealsSource=grain['sources']['cereals'], paddySource=grain['sources']['crops'])
+    for key, name, count in [('hk', '香港', 18), ('mo', '澳门', 23)]:
+        dataset = json.loads((SITE / 'source-hkmo' / key / 'dataset.json').read_text())
+        regional = dataset['region']
+        assert regional['year'] == 2024 and regional['name'] == name
+        assert len({p['code'] for p in dataset['districts']}) == count
+        assert regional['population'] > 0 and regional['gdpMillion'] > 0 and regional['currencyPerCny'] > 0
+        comparable = round(regional['gdpMillion'] / regional['currencyPerCny'] / 100, 1)
+        regions[name].update(population=regional['population'] / 10000, gdp=comparable)
     return dict(year=2024, regions=regions, taiwan=taiwan, metrics=metrics, climate=climate, climateSources={
         'temperature': BASE + 'C08-04.jpg', 'precipitation': BASE + 'C08-06.jpg'})
 

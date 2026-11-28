@@ -126,13 +126,16 @@ function chart(canvas, rows, xMetric, yMetric) {
 
 export async function renderExplorer(
   container,
-  { stats, places, taiwan, onPick, initialLevel = 'province' }
+  { stats, places, taiwan, territories, onPick, initialLevel = 'province' }
 ) {
   const root = document.createElement('section')
   root.className = 'explorer'
   root.innerHTML =
     '<h1>数据探索器</h1><div class="tabs" aria-label="统计层级"><button data-level="province">省级地区</button><button data-level="county">县域人口</button>' +
     (taiwan?.localities?.length ? '<button data-level="taiwan">台湾县市</button>' : '') +
+    Object.values(territories)
+      .map((r) => '<button data-level="' + r.key + '">' + esc(r.name) + '分区</button>')
+      .join('') +
     '</div><div data-content></div>'
   container.replaceChildren(root)
   const content = root.querySelector('[data-content]')
@@ -147,7 +150,13 @@ export async function renderExplorer(
     if (row)
       onPick({
         ...row.place,
-        kind: level === 'taiwan' ? 'tw-locality' : level === 'county' ? 'county' : 'province'
+        kind: territories[level]
+          ? 'district'
+          : level === 'taiwan'
+            ? 'tw-locality'
+            : level === 'county'
+              ? 'county'
+              : 'province'
       })
   }
 
@@ -395,6 +404,33 @@ export async function renderExplorer(
       xId = 'population'
       yId = 'growth'
       sortId = xId
+    } else if (territories[level]) {
+      const r = territories[level]
+      metrics = r.metrics
+      records = r.districts.map((place) => ({
+        place,
+        values: place,
+        search: searchKey(
+          [place.name, place.officialName, place.en, place.code, ...(place.aliases || [])].join(' ')
+        )
+      }))
+      xId = 'population'
+      yId = (metrics.find((m) => m.id !== xId) || metrics[0]).id
+      sortId = xId
+      coverage =
+        r.districtYear +
+        ' 年 · ' +
+        records.length +
+        ' 个' +
+        r.districtLabel +
+        '。' +
+        r.districtNote +
+        ' ' +
+        r.districtGdpNote
+      const links = new Map([[r.districtSource, '分区统计原表']])
+      for (const m of metrics) if (m.source && !links.has(m.source)) links.set(m.source, m.name + '原表')
+      links.set(r.boundarySource, '分区界线')
+      source = [...links].map(([url, name]) => link(url, name)).join(' · ')
     } else if (level === 'taiwan' && taiwan?.localities?.length) {
       metrics = taiwanMetrics
       records = taiwan.localities.map((place) => ({
@@ -407,9 +443,14 @@ export async function renderExplorer(
               : null
         },
         search: searchKey(
-          [place.name, place.officialName, place.en, place.id, place.code, ...(place.aliases || [])].join(
-            ' '
-          )
+          [
+            place.name,
+            place.officialName,
+            place.en,
+            place.id,
+            place.code,
+            ...(place.aliases || [])
+          ].join(' ')
         )
       }))
       xId = 'population'
@@ -440,21 +481,21 @@ export async function renderExplorer(
         stats.year +
         ' 年分省指标，森林覆盖率为 2014—2018 年清查值。可浏览 ' +
         records.length +
-        ' 个省级地区。内地人口采用常住口径，台湾采用年末户籍人口。台湾现价 GDP 按 2024 年平均汇率折算为人民币。台湾稻谷单列于县市页，省级粮食总产量按内地公报范围展示。'
+        ' 个省级地区。内地人口采用常住口径，台湾采用年末户籍人口。香港及澳门采用各自年底人口估计。港澳台现价 GDP 按各自 2024 年平均汇率折算为人民币。台湾稻谷单列于县市页，省级粮食总产量按内地公报范围展示。'
       source =
         link('https://www.stats.gov.cn/sj/ndsj/2025/indexch.htm', '中国统计年鉴 2025') +
         ' · ' +
-        link(gdpRelease, '台湾 GDP 年度修订')
+        link(gdpRelease, '台湾 GDP 年度修订') +
+        ' · ' +
+        Object.values(territories)
+          .map((r) => link(r.gdpSource, r.name + ' GDP'))
+          .join(' · ')
     }
     descending = true
     controls(coverage, source)
   }
   for (const b of root.querySelectorAll('[data-level]')) b.onclick = () => switchLevel(b.dataset.level)
   await switchLevel(
-    initialLevel === 'taiwan' && taiwan?.localities?.length
-      ? 'taiwan'
-      : initialLevel === 'county'
-        ? 'county'
-        : 'province'
+    territories[initialLevel] || ['taiwan', 'county'].includes(initialLevel) ? initialLevel : 'province'
   )
 }

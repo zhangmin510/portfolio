@@ -301,7 +301,13 @@ function loadImage(url) {
     img.src = url
   })
 }
-const isTaiwanLens = (id) => id === 'twPopulation' || id === 'twPaddy'
+const defaultDistrictLenses = {
+  twPopulation: 'CN-TW',
+  twPaddy: 'CN-TW',
+  hkPopulation: 'CN-HK',
+  moPopulation: 'CN-MO'
+}
+const detailedZoomLimit = 2400
 const isPointLens = (id) => id === 'campus' || id === 'aviation'
 const geoName = (text) =>
   String(text || '').replace(/(?:壮族自治区|回族自治区|维吾尔自治区|自治区|特别行政区|省|市)$/u, '')
@@ -432,7 +438,17 @@ function makeOverview(cells) {
 }
 export async function createMap(
   canvas,
-  { places = [], provinces = [], twLocalities = [], onSelect, onHover, onView, onReady } = {}
+  {
+    places = [],
+    provinces = [],
+    twLocalities = [],
+    districts = [],
+    districtLenses = {},
+    onSelect,
+    onHover,
+    onView,
+    onReady
+  } = {}
 ) {
   const [geo, img] = await Promise.all([
     fetch(new URL('./data/geography.json', import.meta.url)).then((r) => {
@@ -452,20 +468,38 @@ export async function createMap(
     })
     .sort((a, b) => a.rank - b.rank || (b.p.population || 0) - (a.p.population || 0) || a.order - b.order)
   const hitContext = canvas2d(1, 1)
-  const twAreas = twLocalities.map((place) => {
-    const rings = place.rings || []
-    const bounds = [Infinity, Infinity, -Infinity, -Infinity]
-    for (const ring of rings)
-      for (const [lon, lat] of ring) {
-        bounds[0] = Math.min(bounds[0], lon)
-        bounds[1] = Math.min(bounds[1], lat)
-        bounds[2] = Math.max(bounds[2], lon)
-        bounds[3] = Math.max(bounds[3], lat)
+  const localProvinces = { ...defaultDistrictLenses, ...districtLenses }
+  const localAreas = new Map()
+  const areaById = new Map()
+  const outlines = new Map()
+  function addArea(place, province) {
+    const anchor = project(place.lon, place.lat)
+    const path = new Path2D()
+    const bounds = [anchor[0], anchor[1], anchor[0], anchor[1]]
+    for (const ring of place.rings || []) {
+      for (const [i, point] of ring.entries()) {
+        const [x, y] = project(...point)
+        if (i) path.lineTo(x, y)
+        else path.moveTo(x, y)
+        bounds[0] = Math.min(bounds[0], x)
+        bounds[1] = Math.min(bounds[1], y)
+        bounds[2] = Math.max(bounds[2], x)
+        bounds[3] = Math.max(bounds[3], y)
       }
-    return { place, path: pathFromLines(rings, true), bounds, anchor: project(place.lon, place.lat) }
-  })
-  const taiwanOutline = new Path2D()
-  for (const area of twAreas) taiwanOutline.addPath(area.path)
+      path.closePath()
+    }
+    if (!localAreas.has(province)) localAreas.set(province, [])
+    const area = { place, province, path, bounds, anchor }
+    areaById.set(place.id, area)
+    localAreas.get(province).push(area)
+    if (place.rings?.length) {
+      if (!outlines.has(province)) outlines.set(province, new Path2D())
+      outlines.get(province).addPath(path)
+    }
+  }
+  for (const place of twLocalities) addArea(place, 'CN-TW')
+  for (const place of districts) addArea(place, place.province)
+  const allAreas = [...areaById.values()]
   const pointsByLens = {}
   for (const kind of ['campus', 'aviation']) {
     const points = locations.filter((o) => o.p.kind === kind)
@@ -507,6 +541,9 @@ export async function createMap(
   const initialTouchAction = canvas.style.touchAction
   canvas.style.touchAction = 'none'
   const scale = () => fit * zoom
+  const activeAreas = () => localAreas.get(localProvinces[lens])
+  const isDistrictLens = () => localProvinces[lens] === 'CN-HK' || localProvinces[lens] === 'CN-MO'
+  const userZoomLimit = () => (isDistrictLens() ? detailedZoomLimit : Math.max(24, zoom))
   function toScreen(x, y) {
     const s = scale()
     return [(x - cx) * s + width / 2, (y - cy) * s + height / 2]
@@ -541,7 +578,7 @@ export async function createMap(
     if (!frame) frame = requestAnimationFrame(render)
   }
   function setCamera(x, y, z) {
-    const level = clamp(z, 0.8, 24)
+    const level = clamp(z, 0.8, detailedZoomLimit)
     // Keep the centre inside the map, including when a gesture ends beyond an edge.
     const [lon, lat] = unproject(clamp(x, LEFT + 100, RIGHT - 100), clamp(y, TOP + 100, BOTTOM - 100))
     const b = geo.bounds
@@ -560,7 +597,7 @@ export async function createMap(
       clamp(lon, geo.bounds[0], geo.bounds[2]),
       clamp(lat, geo.bounds[1], geo.bounds[3])
     )
-    const target = clamp(z, 0.8, 24)
+    const target = clamp(z, 0.8, detailedZoomLimit)
     if (!animate || reducedMotion()) {
       setCamera(x, y, target)
       return
@@ -581,9 +618,36 @@ export async function createMap(
   function zoomAt(multiplier, x = width / 2, y = height / 2) {
     stopMotion()
     const before = fromScreen(x, y),
-      target = clamp(zoom * multiplier, 0.8, 24),
+      target = clamp(zoom * multiplier, 0.8, userZoomLimit()),
       s = target * fit
     setCamera(before[0] - (x - width / 2) / s, before[1] - (y - height / 2) / s, target)
+  }
+  function fitAreas(areas, animate, panel) {
+    if (!areas?.length || !width || !height) return
+    const x0 = Math.min(...areas.map(({ bounds }) => bounds[0]))
+    const y0 = Math.min(...areas.map(({ bounds }) => bounds[1]))
+    const x1 = Math.max(...areas.map(({ bounds }) => bounds[2]))
+    const y1 = Math.max(...areas.map(({ bounds }) => bounds[3]))
+    const mapRect = canvas.getBoundingClientRect()
+    const legend = canvas.parentElement?.querySelector('#legend:not([hidden])')?.getBoundingClientRect()
+    const bottomInset = width < 700 && legend?.height ? height - (legend.top - mapRect.top) : 65
+    let frame = [16, 48, width - 16, Math.max(72, height - bottomInset - 10)]
+    const dx = Math.max(x1 - x0, 0.7)
+    const dy = Math.max(y1 - y0, 0.7)
+    const frameScale = ([l, t, r, b]) => Math.min((r - l) / dx, (b - t) / dy)
+    if (panel && !panel.hidden) {
+      const rect = panel.getBoundingClientRect()
+      const [l, t, r, b] = frame
+      const right = [Math.max(l, rect.right - mapRect.left + 12), t, r, b]
+      const below = [l, Math.max(t, rect.bottom - mapRect.top + 12), r, b]
+      const available = frameScale(right) > frameScale(below) ? right : below
+      if (frameScale(available) > 0) frame = available
+    }
+    const level = clamp((frameScale(frame) * 0.84) / fit, 0.8, detailedZoomLimit)
+    const s = fit * level
+    const x = (x0 + x1) / 2 - (frame[0] + frame[2] - width) / 2 / s
+    const y = (y0 + y1) / 2 - (frame[1] + frame[3] - height) / 2 / s
+    flyTo(...unproject(x, y), level, animate)
   }
   function reset(animate = true) {
     const [lon, lat] = unproject(-85, -45)
@@ -639,9 +703,16 @@ export async function createMap(
   }
   function paintWorld() {
     worldTransform()
-    if (scale() < 0.48 || !layers.terrain) ctx.drawImage(base, LEFT, TOP, RIGHT - LEFT, BOTTOM - TOP)
+    const districtDetail = isDistrictLens() && scale() > 1.8
+    if (districtDetail) {
+      // The national shoreline is generalized at 1:50m. At district scale the
+      // neutral surround keeps the survey polygons readable down to small islands.
+      ctx.fillStyle = '#344c54'
+      const [x0, y0] = fromScreen(0, 0)
+      ctx.fillRect(x0, y0, width / scale(), height / scale())
+    } else if (scale() < 0.48 || !layers.terrain) ctx.drawImage(base, LEFT, TOP, RIGHT - LEFT, BOTTOM - TOP)
     else visibleCells((c) => paintCell(ctx, c, true))
-    if (!layers.terrain) {
+    if (!layers.terrain && !districtDetail) {
       ctx.fillStyle = '#819382'
       ctx.fill(atlas.land, 'evenodd')
       ctx.fillStyle = '#babc94'
@@ -656,8 +727,8 @@ export async function createMap(
           fillCell(c, lens === 'elevation' ? elevationColors[elevationBand(c.elevation)] : colors[c.type])
       })
       ctx.globalAlpha = 1
-    } else if (isTaiwanLens(lens)) {
-      for (const area of twAreas) {
+    } else if (activeAreas()) {
+      for (const area of activeAreas()) {
         ctx.fillStyle = lensColors[area.place.id] || '#8d9085'
         ctx.fill(area.path, 'evenodd')
       }
@@ -665,12 +736,11 @@ export async function createMap(
       ctx.globalAlpha = 0.83
       for (const a of atlas.areas) {
         ctx.fillStyle = lensColors[a.code] || lensColors[a.name] || lensColors[a.zh] || '#918f7e'
-        const path = a.code === 'CN-TW' && twAreas.length ? taiwanOutline : a.path
-        ctx.fill(path, 'evenodd')
+        ctx.fill(outlines.get(a.code) || a.path, 'evenodd')
       }
       ctx.globalAlpha = 1
     }
-    if (layers.grid || scale() > 0.95) {
+    if (layers.grid || (scale() > 0.95 && !districtDetail)) {
       const gridPath = new Path2D()
       visibleCells((c) => {
         if (c.fade > 0.45) return
@@ -687,16 +757,16 @@ export async function createMap(
         layers.grid ? 0.65 : 0.5
       )
     }
-    if (layers.rivers) {
+    if (layers.rivers && !districtDetail) {
       ctx.lineJoin = 'round'
       ctx.lineCap = 'round'
       strokePath(atlas.rivers, 'rgba(28,78,88,.76)', clamp(0.65 * Math.sqrt(zoom), 0.65, 2.25))
       if (zoom > 2.5)
         strokePath(atlas.rivers, 'rgba(116,175,182,.85)', clamp(0.35 * Math.sqrt(zoom), 0.4, 1.2))
     }
-    if (layers.boundaries) {
+    if (layers.boundaries && !districtDetail) {
       ctx.lineJoin = 'round'
-      if (!isTaiwanLens(lens)) {
+      if (!activeAreas()) {
         strokePath(atlas.country, 'rgba(52,58,42,.84)', clamp(1.8 * Math.sqrt(zoom), 1.7, 3))
         strokePath(atlas.country, '#d7c078', clamp(0.95 * Math.sqrt(zoom), 0.8, 1.7))
       }
@@ -707,13 +777,13 @@ export async function createMap(
         zoom > 1.7 ? [3, 1.4] : []
       )
     }
-    if (isTaiwanLens(lens)) {
+    if (activeAreas()) {
       const pointed = hovered?.place?.id
       const active = selected?.place?.id
-      for (const area of twAreas) {
+      for (const area of activeAreas()) {
         if (layers.boundaries) strokePath(area.path, 'rgba(44,56,51,.86)', 0.85)
       }
-      for (const area of twAreas) {
+      for (const area of activeAreas()) {
         if (area.place.id === active || area.place.id === pointed) {
           strokePath(area.path, '#394543', 3)
           strokePath(area.path, area.place.id === active ? '#fee197' : '#fff2cd', 1.5)
@@ -726,7 +796,7 @@ export async function createMap(
       strokePath(highlight, 'rgba(49,48,34,.95)', 3.8)
       strokePath(highlight, '#ffe19a', 2)
     }
-    if (selected?.cell && !isTaiwanLens(lens)) {
+    if (selected?.cell && !activeAreas()) {
       const c = selected.cell
       ctx.save()
       ctx.translate(c.x, c.y)
@@ -831,8 +901,8 @@ export async function createMap(
     }
     ctx.textBaseline = 'alphabetic'
   }
-  function drawTaiwanLabels() {
-    const anchors = twAreas
+  function drawDivisionLabels(areas) {
+    const anchors = areas
       .map(({ place, anchor }) => {
         const [x, y] = toScreen(...anchor)
         return { place, x, y }
@@ -907,8 +977,8 @@ export async function createMap(
   }
   function drawMarks() {
     hits = []
-    if (isTaiwanLens(lens)) {
-      drawTaiwanLabels()
+    if (activeAreas()) {
+      drawDivisionLabels(activeAreas())
       return
     }
     if (isPointLens(lens)) {
@@ -986,7 +1056,7 @@ export async function createMap(
       const fontSize = o.rank === 0 ? 15 : cap ? 13 : 12
       const font = '600 ' + fontSize + 'px ' + labelFont
       ctx.font = font
-      const bannerPopulation = p.registryLocality?.population ?? p.population
+      const bannerPopulation = p.registryLocality?.population ?? p.regionalPopulation ?? p.population
       const badge =
         !o.landmark && width >= 600 && bannerPopulation >= 900000
           ? Math.round(bannerPopulation / 10000) + '万'
@@ -1132,26 +1202,33 @@ export async function createMap(
       }
     const world = place ? project(place.lon, place.lat) : fromScreen(x, y)
     const [lon, lat] = place ? [place.lon, place.lat] : unproject(...world)
-    const trueArea = twAreas.find(
-      ({ bounds, path }) =>
-        lon >= bounds[0] &&
-        lat >= bounds[1] &&
-        lon <= bounds[2] &&
-        lat <= bounds[3] &&
-        hitContext.isPointInPath(path, world[0], world[1], 'evenodd')
-    )
-    if (!place && isTaiwanLens(lens) && !onlyTerrain) place = trueArea?.place
-    const inTaiwan = trueArea || place?.kind === 'tw-locality'
+    const trueArea =
+      areaById.get(place?.id) ||
+      allAreas.find(
+        ({ bounds, path }) =>
+          world[0] >= bounds[0] &&
+          world[1] >= bounds[1] &&
+          world[0] <= bounds[2] &&
+          world[1] <= bounds[3] &&
+          hitContext.isPointInPath(path, ...world, 'evenodd')
+      )
+    if (!place && trueArea && trueArea.province === localProvinces[lens] && !onlyTerrain)
+      place = trueArea.place
+    if (!place && !onlyTerrain && isDistrictLens()) return null
     const cell = nearestCell(...world)
+    const placeCode = place?.kind === 'province' ? place.id : place?.province
+    const provinceCode =
+      trueArea?.province || (areaNameByCode[placeCode] && placeCode) || cell?.area?.code || null
     if (!cell && !place) return null
     return {
       lon,
       lat,
       terrain: cell?.isLake ? '湖泊' : terrainNames[cell?.type ?? 0],
       elevation: cell && (cell.type || cell.isLake) ? cell.elevation : null,
-      province: inTaiwan ? '台湾' : cell?.area?.zh || null,
-      twLocality: trueArea?.place,
-      provinceCode: inTaiwan ? 'CN-TW' : cell?.area?.code || null,
+      province: areaNameByCode[provinceCode] || cell?.area?.zh || null,
+      twLocality: trueArea?.province === 'CN-TW' ? trueArea.place : undefined,
+      district: trueArea && trueArea.province !== 'CN-TW' ? trueArea.place : undefined,
+      provinceCode,
       place: place || null,
       x: rect.left + x,
       y: rect.top + y,
@@ -1174,7 +1251,7 @@ export async function createMap(
   }
   function clearHover() {
     if (hovered || onHover) {
-      if (isTaiwanLens(lens) && hovered?.place) queue()
+      if (activeAreas() && hovered?.place) queue()
       hovered = null
       onHover?.(null)
     }
@@ -1201,7 +1278,7 @@ export async function createMap(
       if (e.pointerType === 'touch') return
       const previous = hovered?.place?.id
       hovered = resultAt(x, y)
-      if (isTaiwanLens(lens) && previous !== hovered?.place?.id) queue()
+      if (activeAreas() && previous !== hovered?.place?.id) queue()
       canvas.style.cursor = hovered?.place ? 'pointer' : 'grab'
       onHover?.(hovered)
       return
@@ -1210,7 +1287,7 @@ export async function createMap(
     if (pointers.size >= 2 && oldPinch) {
       const current = pinchInfo(),
         before = fromScreen(oldPinch.x, oldPinch.y),
-        z = clamp((zoom * current.d) / oldPinch.d, 0.8, 24)
+        z = clamp((zoom * current.d) / oldPinch.d, 0.8, userZoomLimit())
       setCamera(
         before[0] - (current.x - width / 2) / (z * fit),
         before[1] - (current.y - height / 2) / (z * fit),
@@ -1273,6 +1350,13 @@ export async function createMap(
   const api = {
     getView,
     getBounds,
+    fitDistricts(code, animate = true) {
+      fitAreas(localAreas.get(code), animate)
+    },
+    fitDistrict(place, animate = true) {
+      const area = areaById.get(place?.id)
+      if (area) fitAreas([area], animate, canvas.parentElement?.querySelector('#detail'))
+    },
     flyTo,
     reset,
     setZoom: (factor) => zoomAt(factor),

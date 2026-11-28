@@ -941,6 +941,9 @@ td button:hover {
     max-height: calc(100% - 115px);
     padding: 13px 14px;
   }
+  .detail:has([data-explorer]) {
+    max-height: 48%;
+  }
   .detail h2 {
     font-size: 22px;
   }
